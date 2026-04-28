@@ -1,4 +1,8 @@
-# Quran AI App Agent Guide
+# HAKAI Agent Guide
+
+## Product
+HAKAI
+Hakikate yönlendiren yapay zekâ
 
 ## Project Overview
 This repository contains a Quran-based AI guidance app with a Flutter frontend and a Node.js backend. The backend handles chat routing, Quran guidance, ilmihal knowledge, logging, and validation. The app is designed to keep Quran guidance, practical Islamic knowledge, and casual conversation in separate, controlled paths.

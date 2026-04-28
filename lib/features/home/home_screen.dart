@@ -1,6 +1,7 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_routes.dart';
 import '../../data/models/ayah_model.dart';
 import '../../data/repositories/ayah_repository.dart';
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
           NavigationDestination(
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book_rounded),
-            label: 'Rehber',
+            label: 'Rehberlik',
           ),
           NavigationDestination(
             icon: Icon(Icons.chat_bubble_outline_rounded),
@@ -69,9 +70,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const AppGradientBackground(
-              child: LoadingView(
-                message: 'Bugünün ayeti hazırlanıyor...',
-              ),
+              child: LoadingView(message: 'Bugünün ayeti hazırlanıyor...'),
             );
           }
 
@@ -82,13 +81,22 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 4),
                 const AppLogo(),
+                const SizedBox(height: 10),
+                Text(
+                  AppConstants.appTagline,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.textSecondary,
+                    height: 1.45,
+                  ),
+                ),
                 const SizedBox(height: 20),
                 Text(
                   'Bugünün Ayeti',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 AyahCard(ayah: ayah),
@@ -96,8 +104,10 @@ class HomeScreen extends StatelessWidget {
                 const _MenuGrid(),
                 const SizedBox(height: AppSpacing.large),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.surface,
                     borderRadius: BorderRadius.circular(AppRadius.large),
@@ -117,10 +127,8 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Hazır. Sohbete geçebilir, ezberini takip edebilir veya favorileri açabilirsin.',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(color: AppColors.textSecondary),
                         ),
                       ),
                     ],

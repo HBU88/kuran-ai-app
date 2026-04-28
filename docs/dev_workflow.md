@@ -1,4 +1,4 @@
-# Development Workflow
+# HAKAI Development Workflow
 
 ## Start the backend
 ```powershell

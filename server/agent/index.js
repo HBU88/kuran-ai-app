@@ -207,8 +207,8 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
   const route_mode = targetModule === "ilmihal" ? "ilmihal_knowledge" : "quran_guidance";
   const assistant_text =
     targetModule === "ilmihal"
-      ? "Bu soru İlmihal Rehberi kapsamına giriyor. Lütfen İlmihal Rehberi modülünü kullan."
-      : "Bu soru Ayet Rehberi kapsamına giriyor. Lütfen Ayet Rehberi modülünü kullan.";
+      ? "Bu soru HAKAI içindeki Dinî Bilgiler kapsamına giriyor. Lütfen Dinî Bilgiler modülünü kullan."
+      : "Bu soru HAKAI içindeki Rehberlik kapsamına giriyor. Lütfen Rehberlik modülünü kullan.";
   const decision_meta = {
     module,
     route_mode,

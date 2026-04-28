@@ -6,8 +6,8 @@ class ChatAgentService {
   ChatAgentService({
     http.Client? client,
     String baseUrl = 'http://10.0.2.2:3000',
-  })  : _client = client ?? http.Client(),
-        _baseUrl = baseUrl;
+  }) : _client = client ?? http.Client(),
+       _baseUrl = baseUrl;
 
   final http.Client _client;
   final String _baseUrl;
@@ -17,10 +17,7 @@ class ChatAgentService {
     List<Map<String, dynamic>> history = const [],
   }) async {
     final target = Uri.parse('$_baseUrl/chat');
-    final requestBody = {
-      'message': message,
-      'history': history,
-    };
+    final requestBody = {'message': message, 'history': history};
     final response = await _client.post(
       target,
       headers: const {
@@ -34,7 +31,7 @@ class ChatAgentService {
     if (response.statusCode < 200 || response.statusCode >= 300) {
       final parsedError = _readParsedError(decodedBody);
       throw ChatAgentException(
-        'Chat agent request failed with status ${response.statusCode}. '
+        'HAKAI request failed with status ${response.statusCode}. '
         'Body: $decodedBody',
         statusCode: response.statusCode,
         responseBody: decodedBody,
@@ -45,7 +42,7 @@ class ChatAgentService {
     final decoded = jsonDecode(decodedBody);
     if (decoded is! Map<String, dynamic>) {
       throw ChatAgentException(
-        'Chat agent response was not a JSON object.',
+        'HAKAI response was not a JSON object.',
         statusCode: response.statusCode,
         responseBody: decodedBody,
       );

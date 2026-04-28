@@ -26,7 +26,7 @@ process.on("unhandledRejection", (error) => {
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.type("text/plain").send("Ayet Rehberi backend is running");
+  res.type("text/plain").send("HAKAI backend is running");
 });
 
 app.get("/health", (req, res) => {
@@ -321,7 +321,7 @@ function sanitizeHistory(history) {
 }
 
 const server = app.listen(port, () => {
-  console.log(`Ayet Rehberi chat agent listening on port ${port}`);
+  console.log(`HAKAI chat agent listening on port ${port}`);
 });
 
 server.on("error", (error) => {

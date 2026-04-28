@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,44 +17,11 @@ class SituationAyahScreen extends StatefulWidget {
 
 class _SituationAyahScreenState extends State<SituationAyahScreen> {
   final _controller = TextEditingController();
-  String _debugRawInput = '';
-  String _debugNormalizedInput = '';
-
-  static const _testInputs = [
-    'iyi değilim',
-    'çok hastayım',
-    'içim daralıyor',
-    'çok bunaldım',
-    'çok yalnızım',
-    'Allah beni affeder mi',
-    'çok korkuyorum',
-    'ne yapacağımı bilmiyorum',
-    'alkolü bıraktım ama zorlanıyorum',
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(_syncInputDebug);
-  }
 
   @override
   void dispose() {
-    _controller.removeListener(_syncInputDebug);
     _controller.dispose();
     super.dispose();
-  }
-
-  void _syncInputDebug() {
-    if (!kDebugMode) {
-      return;
-    }
-    setState(() {
-      _debugRawInput = _controller.text;
-      _debugNormalizedInput = SituationTagMapper.normalizeForMatching(
-        _controller.text,
-      );
-    });
   }
 
   @override
@@ -74,8 +40,8 @@ class _SituationAyahScreenState extends State<SituationAyahScreen> {
                     Text(
                       'Bugün nasılsın?',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     TextField(
@@ -92,13 +58,6 @@ class _SituationAyahScreenState extends State<SituationAyahScreen> {
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    if (kDebugMode) ...[
-                      const SizedBox(height: 10),
-                      _SituationInputDebugCard(
-                        rawInput: _debugRawInput,
-                        normalizedInput: _debugNormalizedInput,
-                      ),
-                    ],
                     const SizedBox(height: 12),
                     Wrap(
                       spacing: 8,
@@ -119,35 +78,6 @@ class _SituationAyahScreenState extends State<SituationAyahScreen> {
                       onPressed: () => controller.search(_controller.text),
                       icon: const Icon(Icons.search_rounded),
                       label: const Text('Ayet öner'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 14),
-              AppCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Geçici test modu',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                    ),
-                    const SizedBox(height: 8),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final input in _testInputs)
-                          ActionChip(
-                            label: Text(input),
-                            onPressed: () {
-                              _controller.text = input;
-                              controller.search(input);
-                            },
-                          ),
-                      ],
                     ),
                   ],
                 ),
@@ -186,9 +116,7 @@ class _SituationResult extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Chip(
-          label: Text('Tema: ${controller.selectedTag ?? ayah.tags.first}'),
-        ),
+        Chip(label: Text('Tema: ${controller.selectedTag ?? ayah.tags.first}')),
         AyahCard(
           ayah: ayah,
           trailing: Consumer<FavoritesController>(
@@ -213,130 +141,34 @@ class _SituationResult extends StatelessWidget {
             children: [
               Text(
                 'Kısa açıklama',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 8),
               Text(support.explanation),
               const SizedBox(height: 16),
               Text(
                 'Kısa dua',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 8),
               Text(support.dua),
               const SizedBox(height: 16),
               Text(
                 'Bugün için küçük adım',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 8),
               Text(support.actionSuggestion),
             ],
           ),
         ),
-        if (kDebugMode) _SituationDebugPanel(controller: controller),
       ],
     );
-  }
-}
-
-class _SituationInputDebugCard extends StatelessWidget {
-  const _SituationInputDebugCard({
-    required this.rawInput,
-    required this.normalizedInput,
-  });
-
-  final String rawInput;
-  final String normalizedInput;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.black12,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: DefaultTextStyle.merge(
-        style: Theme.of(context).textTheme.bodySmall,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'INPUT DEBUG',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text('Raw input: $rawInput'),
-            Text('Normalized input: $normalizedInput'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SituationDebugPanel extends StatelessWidget {
-  const _SituationDebugPanel({required this.controller});
-
-  final SituationAyahController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 16),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.black12,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'DEBUG MODE',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text('Raw input: ${controller.userInput}'),
-          Text('Normalized input: ${controller.normalizedInput}'),
-          Text('AI enabled: ${controller.aiEnabled}'),
-          Text('Primary theme: ${controller.primaryTag}'),
-          Text('Secondary themes: ${_formatList(controller.secondaryTags)}'),
-          Text('Emotion: ${controller.emotion}'),
-          Text('Severity: ${controller.severity}'),
-          Text('Confidence: ${controller.confidence.toStringAsFixed(2)}'),
-          Text('Input hash: ${controller.inputHash}'),
-          Text('Candidate count: ${controller.candidateCount}'),
-          Text('Detected themes: ${_formatList(controller.detectedTags)}'),
-          Text('Keywords: ${_formatList(controller.matchedKeywords)}'),
-          Text(
-            'Primary candidates: ${_formatList(controller.primaryCandidateAyahIds)}',
-          ),
-          Text(
-            'Top candidate ayah ids: ${_formatList(controller.candidateAyahIds)}',
-          ),
-          Text(
-            'Shown history: ${_formatList(controller.shownHistoryAyahIds)}',
-          ),
-          Text(
-            'History after selection: ${_formatList(controller.updatedShownHistoryAyahIds)}',
-          ),
-          Text('Selected index: ${controller.selectedIndex}'),
-          Text('Selected: ${controller.selectedAyahId ?? '-'}'),
-          Text('History reset: ${controller.resetHistoryForTheme}'),
-          Text('Source: ${controller.explanationSource}'),
-        ],
-      ),
-    );
-  }
-
-  String _formatList(Iterable<Object> values) {
-    return values.isEmpty ? '-' : values.join(', ');
   }
 }

@@ -7,9 +7,8 @@ import '../../data/models/chat_message_model.dart';
 import '../../data/sources/remote/chat_agent_service.dart';
 
 class ChatController extends ChangeNotifier {
-  ChatController({
-    ChatAgentService? service,
-  }) : _service = service ?? ChatAgentService();
+  ChatController({ChatAgentService? service})
+    : _service = service ?? ChatAgentService();
 
   final ChatAgentService _service;
 
@@ -56,11 +55,7 @@ class ChatController extends ChangeNotifier {
       "yalnız hissediyorum",
       "endişeliyim",
     ],
-    "casual": [
-      "merhaba",
-      "nasılsın",
-      "bugün biraz konuşabilir miyiz",
-    ],
+    "casual": ["merhaba", "nasılsın", "bugün biraz konuşabilir miyiz"],
   };
 
   List<ChatMessageModel> get messages => List.unmodifiable(_messages);
@@ -219,14 +214,12 @@ class ChatController extends ChangeNotifier {
       debug: debugJson is Map<String, dynamic>
           ? ChatDebugInfo.fromJson(debugJson)
           : debugJson is Map
-              ? ChatDebugInfo.fromJson(
-                  Map<String, dynamic>.from(
-                    debugJson.map(
-                      (key, value) => MapEntry(key.toString(), value),
-                    ),
-                  ),
-                )
-              : null,
+          ? ChatDebugInfo.fromJson(
+              Map<String, dynamic>.from(
+                debugJson.map((key, value) => MapEntry(key.toString(), value)),
+              ),
+            )
+          : null,
     );
   }
 
@@ -244,7 +237,7 @@ class ChatController extends ChangeNotifier {
     }
     if (missing.isNotEmpty) {
       throw ChatAgentException(
-        'Chat agent response missing required fields: ${missing.join(', ')}.',
+        'HAKAI response missing required fields: ${missing.join(', ')}.',
         responseBody: json.toString(),
       );
     }

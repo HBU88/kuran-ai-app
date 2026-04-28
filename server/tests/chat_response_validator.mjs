@@ -362,7 +362,7 @@ async function runModuleEndpointSmokeTests() {
       expectedModule: "ayah",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectAssistantContains: "İlmihal Rehberi",
+      expectAssistantContains: "HAKAI",
       maxAyahRankerMs: 20,
     },
     {
@@ -391,7 +391,7 @@ async function runModuleEndpointSmokeTests() {
       expectedModule: "ilmihal",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectAssistantContains: "Ayet Rehberi",
+        expectAssistantContains: "HAKAI",
       maxAyahRankerMs: 0,
     },
   ];

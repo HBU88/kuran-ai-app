@@ -67,6 +67,12 @@ server/logs/
 *.pid
 *.err.txt
 *.out.txt
+ui*.xml
+window_dump*.xml
+flutter_run_*.err.txt
+flutter_run_*.out.txt
+flutter_run_theme.err
+flutter_run_theme.pid
 chat_backend_log.txt
 flutter_run_*.txt
 *_log.txt

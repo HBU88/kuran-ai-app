@@ -62,7 +62,7 @@ async function planChatWithOpenAI(message, history = []) {
     response = await client.responses.create({
       model: process.env.OPENAI_PLANNER_MODEL || "gpt-4o-mini",
       instructions: [
-        "You are the routing planner for Ayet Rehberi.",
+        "You are the routing planner for HAKAI.",
         "You do not generate the final user-facing answer.",
         "Be cautious in religious matters.",
         "Do not act as a fatwa engine.",

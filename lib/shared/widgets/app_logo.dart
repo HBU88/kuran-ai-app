@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_radius.dart';
 
 class AppLogo extends StatelessWidget {
-  const AppLogo({
-    super.key,
-    this.compact = false,
-  });
+  const AppLogo({super.key, this.compact = false});
 
   final bool compact;
 
@@ -15,9 +13,9 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconSize = compact ? 34.0 : 42.0;
     final labelStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
-          color: AppColors.textPrimary,
-          fontWeight: FontWeight.w600,
-        );
+      color: AppColors.textPrimary,
+      fontWeight: FontWeight.w600,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -33,12 +31,10 @@ class AppLogo extends StatelessWidget {
               width: 0.7,
             ),
           ),
-          child: CustomPaint(
-            painter: _LogoPainter(),
-          ),
+          child: CustomPaint(painter: _LogoPainter()),
         ),
         const SizedBox(width: 12),
-        Text('Ayet Rehberi', style: labelStyle),
+        Text(AppConstants.appName, style: labelStyle),
       ],
     );
   }

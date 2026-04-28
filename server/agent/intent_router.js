@@ -111,7 +111,7 @@ async function analyzeUserMessage(message, history = []) {
       {
         role: "system",
         content: [
-          "You are the intent analyzer for Ayet Rehberi, a Turkish ayah-centered spiritual guide.",
+          "You are the intent analyzer for HAKAI, a Turkish ayah-centered spiritual guide.",
           "Return structured JSON only.",
           "Do not give fatwas or scholarly rulings.",
           `intent must be one of: ${INTENTS.join(", ")}.`,

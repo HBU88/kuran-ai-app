@@ -1,9 +1,9 @@
 class AppConstants {
   const AppConstants._();
 
-  static const appName = 'Ayet Rehberi';
-  static const appTagline = 'Ayet merkezli manevi rehber';
-  static const logoAssetPlaceholder = 'assets/branding/ayet_rehberi_logo.png';
+  static const appName = 'HAKAI';
+  static const appTagline = 'Hakikate yönlendiren yapay zekâ';
+  static const logoAssetPlaceholder = 'assets/app/launcher_icon.png';
   static const defaultCity = 'Istanbul';
   static const defaultCountry = '';
   static const countryCode = defaultCountry;

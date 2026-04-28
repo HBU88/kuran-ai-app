@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +15,6 @@ import 'chat_controller.dart';
 import 'widgets/assistant_message.dart';
 import 'widgets/ayah_card.dart';
 import 'widgets/user_bubble.dart';
-
-const bool AUTO_RUN_CHAT_SMOKE_TEST = false;
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -42,7 +39,6 @@ class _ChatViewState extends State<_ChatView> {
   final _textController = TextEditingController();
   final _scrollController = ScrollController();
   final Set<String> _loggedAssistantMessageIds = <String>{};
-  bool _autoSmokeTestTriggered = false;
 
   @override
   void dispose() {
@@ -98,11 +94,6 @@ class _ChatViewState extends State<_ChatView> {
     final controller = context.read<ChatController>();
     final text = prompt ?? _textController.text;
     _textController.clear();
-    if (kDebugMode && text.trim() == '/chat_smoke_test') {
-      await controller.runDebugSmokeTest();
-      _scrollToBottomSoon();
-      return;
-    }
     await controller.send(text);
     _scrollToBottomSoon();
   }
@@ -125,15 +116,12 @@ class _ChatViewState extends State<_ChatView> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text('Sohbet'),
+        title: const Text('HAKAI'),
         actions: [
           IconButton(
             tooltip: 'Sohbeti temizle',
             onPressed: () => _confirmAndClearChat(context),
-            icon: const Icon(
-              Icons.delete_outline,
-              color: Colors.redAccent,
-            ),
+            icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
           ),
           const SizedBox(width: 6),
         ],
@@ -141,12 +129,9 @@ class _ChatViewState extends State<_ChatView> {
       body: AppGradientBackground(
         child: Consumer<ChatController>(
           builder: (context, controller, _) {
-            _maybeAutoRunSmokeTest(controller);
             _scheduleRuntimeLogging(controller.messages);
-            final shouldShowDebugMock = _shouldShowDebugMock(controller);
             return Column(
               children: [
-                if (shouldShowDebugMock) const _DebugMockThread(),
                 Expanded(
                   child: controller.isEmpty
                       ? const _EmptyChatIntro()
@@ -182,26 +167,6 @@ class _ChatViewState extends State<_ChatView> {
     );
   }
 
-  bool _shouldShowDebugMock(ChatController controller) {
-    if (!kDebugMode || controller.messages.isEmpty) {
-      return false;
-    }
-
-    final messages = controller.messages;
-    final hasSuccessfulAssistant = messages.any(
-      (message) => !message.isUser && message.technicalError == null,
-    );
-    if (hasSuccessfulAssistant) {
-      return false;
-    }
-
-    final lastAssistant = messages.lastWhere(
-      (message) => !message.isUser,
-      orElse: () => messages.last,
-    );
-    return lastAssistant.technicalError != null;
-  }
-
   void _scheduleRuntimeLogging(List<ChatMessageModel> messages) {
     if (messages.isEmpty) {
       return;
@@ -226,23 +191,6 @@ class _ChatViewState extends State<_ChatView> {
           unawaited(logChatTurn(message));
         }
       }
-    });
-  }
-
-  void _maybeAutoRunSmokeTest(ChatController controller) {
-    if (!kDebugMode || !AUTO_RUN_CHAT_SMOKE_TEST || _autoSmokeTestTriggered) {
-      return;
-    }
-    if (controller.loading || controller.runningSmokeTest) {
-      return;
-    }
-
-    _autoSmokeTestTriggered = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || !kDebugMode || !AUTO_RUN_CHAT_SMOKE_TEST) {
-        return;
-      }
-      unawaited(controller.runDebugSmokeTest());
     });
   }
 }
@@ -270,15 +218,13 @@ class _EmptyChatIntro extends StatelessWidget {
         ),
         const SizedBox(height: 22),
         Text(
-          'Ayet merkezli sakin bir sohbet',
+          'HAKAI ile sakin bir sohbet',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 12),
         Text(
           '\u0130\u00e7inden ge\u00e7eni yaz. Cevaplar, uygulaman\u0131n ayet havuzundan se\u00e7ilen i\u00e7eriklerle sakin ve \u00f6l\u00e7\u00fcl\u00fc bir rehberlik sunar.',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                height: 1.75,
-              ),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.75),
         ),
       ],
     );
@@ -292,12 +238,13 @@ class _ChatMessageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode && message.technicalError != null) {
+    if (message.technicalError != null) {
       return const SizedBox.shrink();
     }
     return Column(
-      crossAxisAlignment:
-          message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: message.isUser
+          ? CrossAxisAlignment.end
+          : CrossAxisAlignment.start,
       children: [
         if (message.isUser)
           UserBubble(text: message.text.trim())
@@ -377,9 +324,7 @@ class _ChatComposer extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.surfaceSoft,
             borderRadius: BorderRadius.circular(AppRadius.xLarge),
-            border: Border.all(
-              color: AppColors.divider.withValues(alpha: 0.8),
-            ),
+            border: Border.all(color: AppColors.divider.withValues(alpha: 0.8)),
           ),
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Row(
@@ -428,40 +373,6 @@ class _ChatComposer extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _DebugMockThread extends StatelessWidget {
-  const _DebugMockThread();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(20, 16, 20, 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          UserBubble(text: 'Backend kapalıyken debug mock görünümü'),
-          SizedBox(height: 14),
-          AssistantMessage(
-            text:
-                'Bu yalnızca debug modda görünen örnek bloktur. Gerçek akış backend yanıtı geldiğinde burası otomatik olarak normal sohbet mesajlarıyla yer değiştirir.',
-          ),
-          ChatAyahCard(
-            ayah: ChatSelectedAyah(
-              id: 1,
-              surah: 'surah',
-              surahNumber: 94,
-              ayah: 5,
-              surahNameTr: 'İnşirah',
-              textAr: 'فَإِنَّ مَعَ الْعُسْرِ يُسْرًا',
-              textTr: 'Şüphesiz zorlukla beraber bir kolaylık vardır.',
-              tags: ['umut', 'sabır'],
-            ),
-          ),
-        ],
       ),
     );
   }

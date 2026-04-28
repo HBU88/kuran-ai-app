@@ -54,14 +54,14 @@ class SettingsScreen extends StatelessWidget {
                     Text(
                       AppConstants.appName,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     const Text(AppConstants.appTagline),
                     const SizedBox(height: 10),
                     const Text(
-                      'Ayet Rehberi; sohbet, duruma göre ayet önerisi, favoriler, namaz vakitleri ve temel ezber takibini sakin bir deneyimde bir araya getirir.',
+                      'Rehberlik, duruma göre ayet önerisi, favoriler, namaz vakitleri ve temel ezber takibini sakin bir deneyimde bir araya getirir.',
                     ),
                     const SizedBox(height: 10),
                     const Text(
@@ -69,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Logo hazırlığı: hilal, açık Kur’an/kitap ve sade geometrik İslami motif; koyu yeşil, sıcak altın ve bej paleti.',
+                      'Logo hazırlığı: açık Kur’an/kitap ve sade geometrik motif; koyu yeşil, sıcak altın ve bej paleti.',
                     ),
                   ],
                 ),

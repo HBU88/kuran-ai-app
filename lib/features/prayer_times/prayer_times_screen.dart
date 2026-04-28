@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -38,8 +37,8 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
                     return;
                   }
                   if (value) {
-                    final notificationHelper =
-                        context.read<NotificationHelper>();
+                    final notificationHelper = context
+                        .read<NotificationHelper>();
                     await notificationHelper.showPrayerTogglePreview();
                   }
                 },
@@ -53,13 +52,7 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
               else if (controller.errorMessage != null)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    AppCard(child: Text(controller.errorMessage!)),
-                    if (kDebugMode) ...[
-                      const SizedBox(height: 14),
-                      _PrayerErrorDebugCard(controller: controller),
-                    ],
-                  ],
+                  children: [AppCard(child: Text(controller.errorMessage!))],
                 )
               else if (controller.prayerTimes != null)
                 _PrayerTimesContent(controller: controller)
@@ -86,9 +79,9 @@ class _LocationPickerCard extends StatelessWidget {
         children: [
           Text(
             'Konum seçimi',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 12),
           DropdownButtonFormField<int>(
@@ -101,10 +94,7 @@ class _LocationPickerCard extends StatelessWidget {
             ),
             items: [
               for (final country in controller.countries)
-                DropdownMenuItem(
-                  value: country.id,
-                  child: Text(country.name),
-                ),
+                DropdownMenuItem(value: country.id, child: Text(country.name)),
             ],
             onChanged: controller.countriesLoading
                 ? null
@@ -117,7 +107,8 @@ class _LocationPickerCard extends StatelessWidget {
           const SizedBox(height: 12),
           DropdownButtonFormField<int>(
             key: ValueKey(
-                'state-${controller.selectedCountryId}-$_validStateValue'),
+              'state-${controller.selectedCountryId}-$_validStateValue',
+            ),
             initialValue: _validStateValue,
             isExpanded: true,
             decoration: const InputDecoration(
@@ -126,15 +117,12 @@ class _LocationPickerCard extends StatelessWidget {
             ),
             items: [
               for (final state in controller.states)
-                DropdownMenuItem(
-                  value: state.id,
-                  child: Text(state.name),
-                ),
+                DropdownMenuItem(value: state.id, child: Text(state.name)),
             ],
             onChanged:
                 controller.selectedCountryId == null || controller.statesLoading
-                    ? null
-                    : (value) => controller.selectState(value),
+                ? null
+                : (value) => controller.selectState(value),
           ),
           if (controller.statesLoading) ...[
             const SizedBox(height: 8),
@@ -142,8 +130,9 @@ class _LocationPickerCard extends StatelessWidget {
           ],
           const SizedBox(height: 12),
           DropdownButtonFormField<int>(
-            key:
-                ValueKey('city-${controller.selectedStateId}-$_validCityValue'),
+            key: ValueKey(
+              'city-${controller.selectedStateId}-$_validCityValue',
+            ),
             initialValue: _validCityValue,
             isExpanded: true,
             decoration: const InputDecoration(
@@ -152,15 +141,12 @@ class _LocationPickerCard extends StatelessWidget {
             ),
             items: [
               for (final city in controller.cities)
-                DropdownMenuItem(
-                  value: city.id,
-                  child: Text(city.name),
-                ),
+                DropdownMenuItem(value: city.id, child: Text(city.name)),
             ],
             onChanged:
                 controller.selectedStateId == null || controller.citiesLoading
-                    ? null
-                    : (value) => controller.selectCity(value),
+                ? null
+                : (value) => controller.selectCity(value),
           ),
           if (controller.citiesLoading) ...[
             const SizedBox(height: 8),
@@ -215,52 +201,6 @@ class _LocationPickerCard extends StatelessWidget {
   }
 }
 
-class _PrayerErrorDebugCard extends StatelessWidget {
-  const _PrayerErrorDebugCard({required this.controller});
-
-  final PrayerTimesController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCard(
-      child: DefaultTextStyle.merge(
-        style: Theme.of(context).textTheme.bodySmall,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'DIYANET ERROR DEBUG',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Login status: ${controller.debugLoginStatusCode ?? '-'}',
-            ),
-            Text(
-              'Prayer status: ${controller.debugPrayerStatusCode ?? '-'}',
-            ),
-            Text('Source: ${controller.debugSource}'),
-            Text('Selected country name: ${controller.selectedCountryName}'),
-            Text('Selected state name: ${controller.selectedStateName}'),
-            Text('Selected city name: ${controller.selectedCityName}'),
-            Text('Selected city id: ${controller.selectedCityId ?? '-'}'),
-            Text(
-              'Prayer endpoint URL: ${controller.debugPrayerEndpointUrl ?? '-'}',
-            ),
-            Text(
-              'NEW CITY SELECTED: ${controller.debugNewCitySelectedId ?? '-'} ${controller.debugNewCitySelectedName}',
-            ),
-            Text(
-              'NEW PRAYER ENDPOINT: ${controller.debugPrayerEndpointUrl ?? '-'}',
-            ),
-            const SizedBox(height: 8),
-            Text('Raw error: ${controller.debugErrorMessage ?? '-'}'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _PrayerTimesContent extends StatelessWidget {
   const _PrayerTimesContent({required this.controller});
 
@@ -282,8 +222,8 @@ class _PrayerTimesContent extends StatelessWidget {
                 child: Text(
                   controller.selectedLocationLabel,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
             ],
@@ -300,11 +240,10 @@ class _PrayerTimesContent extends StatelessWidget {
                 ),
               ),
               Text(
-                DateFormat(kDebugMode ? 'HH:mm:ss' : 'HH:mm')
-                    .format(effectiveNow),
+                DateFormat('HH:mm').format(effectiveNow),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                  fontWeight: FontWeight.w800,
+                ),
               ),
             ],
           ),
@@ -324,10 +263,8 @@ class _PrayerTimesContent extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       times.nextPrayerName,
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.w800),
                     ),
                   ],
                 ),
@@ -335,9 +272,9 @@ class _PrayerTimesContent extends StatelessWidget {
               Text(
                 DateFormat('HH:mm').format(times.nextPrayerTime),
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                  fontWeight: FontWeight.w800,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ],
           ),
@@ -355,9 +292,9 @@ class _PrayerTimesContent extends StatelessWidget {
               Text(
                 times.formattedRemainingDuration,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                  fontWeight: FontWeight.w800,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ],
           ),
@@ -369,9 +306,9 @@ class _PrayerTimesContent extends StatelessWidget {
             children: [
               Text(
                 '${times.city}, ${times.country} · ${DateFormat('dd.MM.yyyy').format(times.gregorianDate)}',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 4),
               Text(
@@ -421,82 +358,7 @@ class _PrayerTimesContent extends StatelessWidget {
             ],
           ),
         ),
-        if (kDebugMode) ...[
-          const SizedBox(height: 14),
-          _PrayerDebugPanel(controller: controller),
-        ],
       ],
-    );
-  }
-}
-
-class _PrayerDebugPanel extends StatelessWidget {
-  const _PrayerDebugPanel({required this.controller});
-
-  final PrayerTimesController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    final dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    final nextDateTime = controller.nextPrayerDateTime;
-
-    return AppCard(
-      child: DefaultTextStyle.merge(
-        style: Theme.of(context).textTheme.bodySmall,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'DEBUG MODE',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Device local now: ${dateFormat.format(controller.deviceLocalNow)}',
-            ),
-            Text('UTC now: ${dateFormat.format(controller.utcNow)}'),
-            Text(
-              'Effective now: ${dateFormat.format(controller.effectiveNow)}',
-            ),
-            Text('Device timezone offset: ${controller.timezoneOffset}'),
-            Text(
-              'greenwichMeanTimeZone: ${controller.greenwichMeanTimeZone ?? '-'}',
-            ),
-            Text('Timezone source: ${controller.timezoneSource}'),
-            Text('Selected country id: ${controller.selectedCountryId ?? '-'}'),
-            Text('Selected country name: ${controller.selectedCountryName}'),
-            Text('Selected state id: ${controller.selectedStateId ?? '-'}'),
-            Text('Selected state name: ${controller.selectedStateName}'),
-            Text('Selected city id: ${controller.selectedCityId ?? '-'}'),
-            Text('Selected city name: ${controller.selectedCityName}'),
-            Text(
-              'Prayer endpoint URL: ${controller.debugPrayerEndpointUrl ?? '-'}',
-            ),
-            Text(
-              'NEW CITY SELECTED: ${controller.debugNewCitySelectedId ?? '-'} ${controller.debugNewCitySelectedName}',
-            ),
-            Text(
-              'NEW PRAYER ENDPOINT: ${controller.debugPrayerEndpointUrl ?? '-'}',
-            ),
-            Text('Source: ${controller.sourceType}'),
-            const SizedBox(height: 8),
-            const Text('API raw prayer strings:'),
-            for (final entry in controller.rawPrayerTimeStrings.entries)
-              Text('${entry.key}: ${entry.value}'),
-            const SizedBox(height: 8),
-            const Text('Parsed effective prayer DateTimes:'),
-            for (final entry in controller.parsedPrayerDateTimes.entries)
-              Text('${entry.key}: ${dateFormat.format(entry.value)}'),
-            const SizedBox(height: 8),
-            Text('Next prayer name: ${controller.nextPrayerName}'),
-            Text(
-              'Next prayer time: ${nextDateTime == null ? '-' : dateFormat.format(nextDateTime)}',
-            ),
-            Text(
-              'remainingDurationRaw: ${controller.remainingDuration ?? '-'}',
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
