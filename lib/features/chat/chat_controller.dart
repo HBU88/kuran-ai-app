@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_single_quotes
 
 import 'package:flutter/foundation.dart';
-import 'dart:math';
 
 import '../../data/models/chat_message_model.dart';
 import '../../data/sources/remote/chat_agent_service.dart';
@@ -21,46 +20,6 @@ class ChatController extends ChangeNotifier {
   bool runningSmokeTest = false;
   String? errorMessage;
   String? debugErrorMessage;
-
-  static const starterPrompts = [
-    "iyi değilim",
-    "çok yalnızım",
-    "Allah beni affeder mi",
-    "içim daralıyor",
-    "çok hastayım",
-    "ne yapacağımı bilmiyorum",
-  ];
-
-  static const _smokeTestPools = {
-    "ayah": [
-      "sabır ile ilgili ayet var mı",
-      "korku hakkında ayet paylaş",
-      "umut veren bir ayet söyler misin",
-      "tövbe ile ilgili ayet var mı",
-      "yalnızlıkla ilgili ayet var mı",
-    ],
-    "knowledge": [
-      "akşam namazı kaç rekat",
-      "abdest nasıl alınır",
-      "orucu bozan şeyler nelerdir",
-      "zekât kimlere verilir",
-      "dua nasıl edilir",
-    ],
-    "prophet": [
-      "Hz Muhammed nasıl biriydi",
-      "peygamberimizin ahlakı nasıldı",
-      "peygamberimiz hakkında Kur'an'da ne geçiyor",
-      "Resulullah insanlara nasıl davranırdı",
-    ],
-    "support": [
-      "çok korkuyorum",
-      "içim daralıyor",
-      "moralim bozuk",
-      "yalnız hissediyorum",
-      "endişeliyim",
-    ],
-    "casual": ["merhaba", "nasılsın", "bugün biraz konuşabilir miyiz"],
-  };
 
   List<ChatMessageModel> get messages => List.unmodifiable(_messages);
   bool get isEmpty => _messages.isEmpty;
@@ -150,48 +109,6 @@ class ChatController extends ChangeNotifier {
     }
   }
 
-  Future<void> runDebugSmokeTest({Random? random}) async {
-    if (!kDebugMode || runningSmokeTest || loading) {
-      return;
-    }
-
-    runningSmokeTest = true;
-    notifyListeners();
-
-    try {
-      final rng = random ?? Random();
-      final prompts = [
-        _pickOne(_smokeTestPools['ayah']!, rng),
-        _pickOne(_smokeTestPools['knowledge']!, rng),
-        _pickOne(_smokeTestPools['prophet']!, rng),
-        _pickOne(_smokeTestPools['support']!, rng),
-        _pickOne(_smokeTestPools['casual']!, rng),
-      ];
-
-      for (final prompt in prompts) {
-        await _sendSmokePrompt(prompt);
-        await Future<void>.delayed(const Duration(milliseconds: 500));
-      }
-    } finally {
-      runningSmokeTest = false;
-      notifyListeners();
-    }
-  }
-
-  Future<void> _sendSmokePrompt(String prompt) async {
-    final beforeCount = _messages.length;
-    await send(prompt);
-    await _waitForMessageGrowth(beforeCount + 2);
-  }
-
-  Future<void> _waitForMessageGrowth(int targetLength) async {
-    var attempts = 0;
-    while (_messages.length < targetLength && attempts < 100) {
-      await Future<void>.delayed(const Duration(milliseconds: 25));
-      attempts += 1;
-    }
-  }
-
   ChatMessageModel _assistantMessageFromResponse(
     Map<String, dynamic> json, {
     required String sourceUserText,
@@ -212,6 +129,7 @@ class ChatController extends ChangeNotifier {
       intent: json['intent']?.toString(),
       primaryTheme: json['primary_theme']?.toString(),
       responseType: json['response_type']?.toString(),
+      redirectModule: json['redirect_module']?.toString(),
       contextTopic: json['context_topic']?.toString(),
       ayahUsed: json['ayah_used'] == true,
       topAyahIds: _readIntList(json['top_ayah_ids']),
@@ -314,11 +232,4 @@ List<String> _readStringList(Object? value) {
     return const [];
   }
   return value.map((item) => item.toString()).toList();
-}
-
-T _pickOne<T>(List<T> values, Random rng) {
-  if (values.isEmpty) {
-    throw StateError('Cannot pick from an empty list.');
-  }
-  return values[rng.nextInt(values.length)];
 }

@@ -362,17 +362,18 @@ async function runModuleEndpointSmokeTests() {
       expectedModule: "ayah",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectAssistantContains: "HAKAI",
+      expectedRedirectModule: "ilmihal",
+      expectAssistantContains: "Dinî Bilgiler bölümüne daha uygundur",
       maxAyahRankerMs: 20,
     },
     {
       path: "/ilmihal-chat",
-      prompt: "abdest nasıl alınır",
+      prompt: "sabır ile ilgili ayet",
       expectedModule: "ilmihal",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectAssistantContains: "abdest",
-      expectedKnowledgeHit: true,
+      expectedRedirectModule: "ayah",
+      expectAssistantContains: "Rehberlik bölümüne daha uygundur",
       maxAyahRankerMs: 0,
     },
     {
@@ -391,7 +392,8 @@ async function runModuleEndpointSmokeTests() {
       expectedModule: "ilmihal",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-        expectAssistantContains: "HAKAI",
+      expectedRedirectModule: "ayah",
+      expectAssistantContains: "Rehberlik bölümüne daha uygundur",
       maxAyahRankerMs: 0,
     },
   ];
@@ -413,6 +415,12 @@ async function runModuleEndpointSmokeTests() {
     }
     if (test.expectedKnowledgeHit === true && !payload?.decision_meta?.knowledge_hit_id) {
       failures.push("knowledge_hit_id missing");
+    }
+    if (Object.prototype.hasOwnProperty.call(test, "expectedRedirectModule")) {
+      const redirectModule = payload?.redirect_module || null;
+      if (redirectModule !== test.expectedRedirectModule) {
+        failures.push(`redirect_module=${redirectModule}`);
+      }
     }
     if (Object.prototype.hasOwnProperty.call(test, "expectedSelectedAyah")) {
       const selectedAyahId = payload?.selected_ayah?.id ?? null;

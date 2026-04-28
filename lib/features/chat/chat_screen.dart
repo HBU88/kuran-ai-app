@@ -158,11 +158,6 @@ class _ChatViewState extends State<_ChatView> {
                           },
                         ),
                 ),
-                if (controller.isEmpty)
-                  _StarterPromptStrip(
-                    prompts: ChatController.starterPrompts,
-                    onPromptSelected: (prompt) => _send(context, prompt),
-                  ),
                 _ChatComposer(
                   controller: _textController,
                   sending: controller.loading,
@@ -264,6 +259,8 @@ class _ChatMessageItem extends StatelessWidget {
           AssistantMessage(text: _displayAssistantText(message)),
         if (!message.isUser && message.selectedAyah != null)
           ChatAyahCard(ayah: message.selectedAyah!),
+        if (!message.isUser && message.redirectModule != null)
+          _ModuleRedirectAction(targetModule: message.redirectModule!),
       ],
     );
   }
@@ -286,30 +283,34 @@ class _ChatMessageItem extends StatelessWidget {
   }
 }
 
-class _StarterPromptStrip extends StatelessWidget {
-  const _StarterPromptStrip({
-    required this.prompts,
-    required this.onPromptSelected,
-  });
+class _ModuleRedirectAction extends StatelessWidget {
+  const _ModuleRedirectAction({required this.targetModule});
 
-  final List<String> prompts;
-  final ValueChanged<String> onPromptSelected;
+  final String targetModule;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
-      child: Row(
-        children: [
-          for (final prompt in prompts) ...[
-            ActionChip(
-              label: Text(prompt),
-              onPressed: () => onPromptSelected(prompt),
-            ),
-            const SizedBox(width: 10),
-          ],
-        ],
+    final isIlmihal = targetModule == 'ilmihal';
+    final label = isIlmihal ? "Dinî Bilgiler'e git" : "Rehberlik'e git";
+    final mode = isIlmihal ? ChatMode.ilmihal : ChatMode.ayah;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: FilledButton.tonalIcon(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => ChatScreen(mode: mode),
+              ),
+            );
+          },
+          icon: Icon(
+            isIlmihal ? Icons.menu_book_rounded : Icons.auto_stories_rounded,
+          ),
+          label: Text(label),
+        ),
       ),
     );
   }

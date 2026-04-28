@@ -87,6 +87,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       top_ayah_ids: response.top_ayah_ids || [],
       selected_ayah: response.selected_ayah || null,
       assistant_text: response.assistant_text || "",
+      ...(response.redirect_module ? { redirect_module: response.redirect_module } : {}),
     };
     const decisionMeta = response.decision_meta || {};
     const moduleResponse =
@@ -108,6 +109,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       response_type: normalizedResponse.response_type,
       route_mode: decisionMeta.route_mode || null,
       planner_source: decisionMeta.planner_source || "fallback",
+      redirect_module: normalizedResponse.redirect_module || null,
       knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
       selected_ayah_id: normalizedResponse.selected_ayah
         ? normalizedResponse.selected_ayah.id || null
@@ -190,6 +192,7 @@ app.get("/debug/resolve", async (req, res) => {
       route_mode: decisionMeta.route_mode || null,
       module: decisionMeta.module || module,
       planner_source: decisionMeta.planner_source || "fallback",
+      redirect_module: response.redirect_module || null,
       current_message_cluster: currentMessageCluster,
       history_context_used: false,
       matched_override_cluster: matchedOverrideCluster,

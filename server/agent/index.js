@@ -105,6 +105,49 @@ function normalizeModuleMode(module) {
 function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) {
   const moduleMode = normalizeModuleMode(options.module);
   const normalizedMessage = normalize(message);
+  const guidanceSignals = [
+    "korku",
+    "korkuyorum",
+    "çok korkuyorum",
+    "cok korkuyorum",
+    "endişe",
+    "endise",
+    "kaygı",
+    "kaygi",
+    "gelecek için endişeliyim",
+    "gelecek icin endiseliyim",
+    "maddi sıkıntı",
+    "maddi sikinti",
+    "maddi sıkıntı yaşıyorum",
+    "maddi sikinti yasiyorum",
+    "haksızlık",
+    "haksizlik",
+    "haksızlığa uğradım",
+    "haksizliga ugradim",
+    "zulüm",
+    "zulum",
+    "yalnız",
+    "yalniz",
+    "çok yalnız hissediyorum",
+    "cok yalniz hissediyorum",
+    "yalnız hissediyorum",
+    "yalniz hissediyorum",
+    "hasta",
+    "hastayım",
+    "hastayim",
+    "şifa",
+    "sifa",
+    "ölüm",
+    "olum",
+    "sabır",
+    "sabir",
+    "sabretmekte zorlanıyorum",
+    "sabretmekte zorlaniyorum",
+    "içim daralıyor",
+    "icim daraliyor",
+    "içim sıkılıyor",
+    "icim sikiliyor",
+  ];
 
   if (isSimpleCasualConversation(message)) {
     return {
@@ -140,33 +183,7 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) 
   const overrideTopic = resolveCurrentMessageOverrideTopic(message);
   const explicitTopic = resolveExplicitTopic(message);
   const shouldUseGuidanceFastPath =
-    Boolean(overrideTopic || explicitTopic) ||
-    (baseAnalysis.intent === "emotional_spiritual_support" &&
-      containsAnyNormalized(normalizedMessage, [
-        "korku",
-        "korkuyorum",
-        "endişe",
-        "endise",
-        "kaygı",
-        "kaygi",
-        "maddi sıkıntı",
-        "maddi sikinti",
-        "haksızlık",
-        "haksizlik",
-        "zulüm",
-        "zulum",
-        "yalnız",
-        "yalniz",
-        "hasta",
-        "hastayım",
-        "hastayim",
-        "şifa",
-        "sifa",
-        "ölüm",
-        "olum",
-        "sabır",
-        "sabir",
-      ]));
+    Boolean(overrideTopic || explicitTopic || containsAnyNormalized(normalizedMessage, guidanceSignals));
 
   if (shouldUseGuidanceFastPath) {
     const topic = canonicalTopic(overrideTopic || explicitTopic || baseAnalysis.context_topic || baseAnalysis.primary_theme || null);
@@ -207,8 +224,8 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
   const route_mode = targetModule === "ilmihal" ? "ilmihal_knowledge" : "quran_guidance";
   const assistant_text =
     targetModule === "ilmihal"
-      ? "Bu soru HAKAI içindeki Dinî Bilgiler kapsamına giriyor. Lütfen Dinî Bilgiler modülünü kullan."
-      : "Bu soru HAKAI içindeki Rehberlik kapsamına giriyor. Lütfen Rehberlik modülünü kullan.";
+      ? "Bu soru Dinî Bilgiler bölümüne daha uygundur. Lütfen Dinî Bilgiler modülünü kullanın."
+      : "Bu soru Rehberlik bölümüne daha uygundur. Lütfen Rehberlik modülünü kullanın.";
   const decision_meta = {
     module,
     route_mode,
@@ -230,6 +247,7 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
     selected_ayah: null,
     decision_meta,
     assistant_text,
+    redirect_module: targetModule,
   });
 }
 

@@ -9,6 +9,7 @@ class ChatMessageModel {
     this.intent,
     this.primaryTheme,
     this.responseType,
+    this.redirectModule,
     this.contextTopic,
     this.ayahUsed,
     this.topAyahIds,
@@ -32,6 +33,7 @@ class ChatMessageModel {
   final String? intent;
   final String? primaryTheme;
   final String? responseType;
+  final String? redirectModule;
   final String? contextTopic;
   final bool? ayahUsed;
   final List<int>? topAyahIds;
