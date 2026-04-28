@@ -1541,6 +1541,7 @@ module.exports = {
   rankAyahs,
   shouldUseAyahFor,
   datasetTagsForTheme,
+  resolveCurrentMessageOverrideTopic,
 };
 
 

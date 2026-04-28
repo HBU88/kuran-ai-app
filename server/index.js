@@ -6,6 +6,8 @@ require("dotenv").config({
 
 const express = require("express");
 const { buildChatResponse } = require("./agent/index");
+const { detectExplicitTopic, normalize } = require("./agent/context_resolver");
+const { resolveCurrentMessageOverrideTopic } = require("./agent/ayah_ranker");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -132,6 +134,52 @@ app.post("/chat", async (req, res) => {
   }
 });
 
+app.get("/debug/resolve", async (req, res) => {
+  if (!isDebugChatEngineEnabled()) {
+    return sendUtf8Json(res, 404, { ok: false, error: "not found" });
+  }
+
+  const startedAt = Date.now();
+  const inputMessage = typeof req.query?.q === "string" ? req.query.q : "";
+  if (!inputMessage.trim()) {
+    return sendUtf8Json(res, 400, { ok: false, error: "q is required" });
+  }
+
+  try {
+    const response = await buildChatResponse(inputMessage, []);
+    const decisionMeta = response.decision_meta || {};
+    const currentMessageCluster =
+      resolveCurrentMessageOverrideTopic(inputMessage) ||
+      detectExplicitTopic(inputMessage) ||
+      response.context_topic ||
+      response.primary_theme ||
+      null;
+    const matchedOverrideCluster =
+      decisionMeta.ranker_source === "override" ? currentMessageCluster : null;
+
+    return sendUtf8Json(res, 200, {
+      input_message: inputMessage,
+      normalized_message: normalize(inputMessage),
+      intent: response.intent || null,
+      response_type: response.response_type || null,
+      route_mode: decisionMeta.route_mode || null,
+      current_message_cluster: currentMessageCluster,
+      history_context_used: false,
+      matched_override_cluster: matchedOverrideCluster,
+      selected_ayah_id: response.selected_ayah ? response.selected_ayah.id || null : null,
+      top_ayah_ids: Array.isArray(response.top_ayah_ids) ? response.top_ayah_ids : [],
+      ranker_source: decisionMeta.ranker_source || "fallback",
+      semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
+      knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
+      timing_ms: {
+        total: Date.now() - startedAt,
+      },
+    });
+  } catch (error) {
+    return sendUtf8Json(res, 500, { ok: false, error: error.message });
+  }
+});
+
 app.use((error, req, res, next) => {
   const errorResponse = {
     ok: false,
@@ -144,6 +192,10 @@ function sendUtf8Json(res, statusCode, body) {
   res.status(statusCode);
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   return res.json(body);
+}
+
+function isDebugChatEngineEnabled() {
+  return String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true";
 }
 
 function buildChatDecisionLog(entry) {

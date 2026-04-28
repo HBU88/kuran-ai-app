@@ -127,6 +127,9 @@ async function main() {
   }
 
   await assertEndpointReachable();
+  if (isDebugChatEngineEnabled()) {
+    await runDebugResolveSmokeTest();
+  }
 
   const fixedResults = [];
   for (const test of fixedTests) {
@@ -232,6 +235,40 @@ async function assertEndpointReachable() {
   } catch (error) {
     console.error(`FAIL [setup] backend unavailable -> ${error.message}`);
     process.exit(1);
+  }
+}
+
+async function runDebugResolveSmokeTest() {
+  const cases = [
+    {
+      q: "haksızlığa uğradım",
+      expectedCluster: "adalet",
+      expectedRankerSource: "override",
+    },
+    {
+      q: "maddi sıkıntı yaşıyorum",
+      expectedCluster: "rızık",
+      expectedRankerSource: "override",
+    },
+  ];
+
+  for (const test of cases) {
+    const payload = await postDebugResolve(test.q);
+    const failures = [];
+    if (payload?.matched_override_cluster !== test.expectedCluster) {
+      failures.push(`matched_override_cluster=${payload?.matched_override_cluster}`);
+    }
+    if (payload?.ranker_source !== test.expectedRankerSource) {
+      failures.push(`ranker_source=${payload?.ranker_source}`);
+    }
+    if (!payload?.selected_ayah_id) {
+      failures.push("selected_ayah_id missing");
+    }
+    if (failures.length > 0) {
+      console.error(`FAIL [debug] ${test.q} -> ${failures.join("; ")}`);
+      process.exit(1);
+    }
+    console.log(`PASS [debug] ${test.q} -> ${payload.matched_override_cluster}:${payload.selected_ayah_id}`);
   }
 }
 
@@ -400,6 +437,23 @@ async function postChat(message, history = []) {
   }
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${payload?.error || text}`);
   return payload;
+}
+
+async function postDebugResolve(q) {
+  const response = await fetch(`http://localhost:3000/debug/resolve?q=${encodeURIComponent(q)}`);
+  const text = await response.text();
+  let payload;
+  try {
+    payload = JSON.parse(text);
+  } catch (error) {
+    throw new Error(`invalid debug JSON response: ${error.message}`);
+  }
+  if (!response.ok) throw new Error(`HTTP ${response.status}: ${payload?.error || text}`);
+  return payload;
+}
+
+function isDebugChatEngineEnabled() {
+  return String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true";
 }
 
 function assistantTextIncludesAyah(assistantText, ayah) {
