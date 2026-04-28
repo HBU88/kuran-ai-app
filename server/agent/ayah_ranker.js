@@ -54,6 +54,203 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 3, ayahNumber: 139 },
     { surahNumber: 12, ayahNumber: 87 },
   ],
+  [normalizeThemeKey("korku")]: [
+    { surahNumber: 3, ayahNumber: 173 },
+    { surahNumber: 3, ayahNumber: 175 },
+    { surahNumber: 9, ayahNumber: 51 },
+    { surahNumber: 65, ayahNumber: 2 },
+  ],
+  [normalizeThemeKey("kaygı")]: [
+    { surahNumber: 28, ayahNumber: 7 },
+    { surahNumber: 94, ayahNumber: 5 },
+    { surahNumber: 94, ayahNumber: 6 },
+    { surahNumber: 13, ayahNumber: 28 },
+  ],
+  [normalizeThemeKey("şifa")]: [
+    { surahNumber: 26, ayahNumber: 80 },
+    { surahNumber: 17, ayahNumber: 82 },
+    { surahNumber: 10, ayahNumber: 57 },
+    { surahNumber: 41, ayahNumber: 44 },
+  ],
+  [normalizeThemeKey("imtihan")]: [
+    { surahNumber: 2, ayahNumber: 155 },
+    { surahNumber: 2, ayahNumber: 286 },
+    { surahNumber: 3, ayahNumber: 200 },
+    { surahNumber: 103, ayahNumber: 3 },
+  ],
+  [normalizeThemeKey("adalet")]: [
+    { surahNumber: 4, ayahNumber: 135 },
+    { surahNumber: 5, ayahNumber: 8 },
+    { surahNumber: 16, ayahNumber: 90 },
+    { surahNumber: 42, ayahNumber: 41 },
+  ],
+  [normalizeThemeKey("rızık")]: [
+    { surahNumber: 11, ayahNumber: 6 },
+    { surahNumber: 65, ayahNumber: 2 },
+    { surahNumber: 65, ayahNumber: 3 },
+    { surahNumber: 51, ayahNumber: 58 },
+  ],
+  [normalizeThemeKey("ölüm korkusu")]: [
+    { surahNumber: 3, ayahNumber: 185 },
+    { surahNumber: 39, ayahNumber: 30 },
+    { surahNumber: 62, ayahNumber: 8 },
+    { surahNumber: 21, ayahNumber: 35 },
+  ],
+  [normalizeThemeKey("sabır_sıkıntı")]: [
+    { surahNumber: 2, ayahNumber: 153 },
+    { surahNumber: 2, ayahNumber: 155 },
+    { surahNumber: 16, ayahNumber: 127 },
+    { surahNumber: 103, ayahNumber: 3 },
+  ],
+  [normalizeThemeKey("umut_sonrasi_zorluk")]: [
+    { surahNumber: 94, ayahNumber: 5 },
+    { surahNumber: 94, ayahNumber: 6 },
+    { surahNumber: 39, ayahNumber: 53 },
+    { surahNumber: 13, ayahNumber: 28 },
+  ],
+};
+
+const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
+  {
+    topic: normalizeThemeKey("tövbe"),
+    list: [
+      "tövbe",
+      "tevbe",
+      "günah",
+      "gunah",
+      "pişman",
+      "pisman",
+      "affeder",
+      "bağışlar",
+      "bagislar",
+      "bağışlan",
+      "bagislan",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz_muhammed"),
+    list: [
+      "muhammed peygamber",
+      "hz muhammed",
+      "peygamberimiz",
+      "resulullah",
+      "resul",
+      "rasul",
+      "peygamber",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("rızık"),
+    list: [
+      "rızık",
+      "rizik",
+      "geçim",
+      "gecim",
+      "iş bulamıyorum",
+      "is bulamiyorum",
+      "maddi sıkıntı",
+      "maddi sikinti",
+      "geçim derdi",
+      "gecim derdi",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("adalet"),
+    list: [
+      "adalet",
+      "zulüm",
+      "zulum",
+      "haksızlık",
+      "haksizlik",
+      "hakkım yeniyor",
+      "hakkim yeniyor",
+      "zulüm görüyorum",
+      "zulum goruyorum",
+      "haksızlığa uğradım",
+      "haksizliga ugradim",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("şifa"),
+    list: ["hasta", "hastalık", "hastalik", "şifa", "sifa", "hastayım", "hastayim", "iyileş", "iyiles"],
+  },
+  {
+    topic: normalizeThemeKey("ölüm korkusu"),
+    list: ["ölüm korkusu", "olum korkusu", "ölmekten korkuyorum", "olmekten korkuyorum", "kabir", "vefat", "ölümden korkuyorum", "olumden korkuyorum"],
+  },
+  {
+    topic: normalizeThemeKey("korku"),
+    list: ["korku", "korkuyorum", "çok korkuyorum", "cok korkuyorum", "ölüm korkusu", "olum korkusu", "ölümden korkuyorum", "olumden korkuyorum", "endişe", "endise"],
+  },
+  {
+    topic: normalizeThemeKey("kaygı"),
+    list: [
+      "kaygı",
+      "kaygi",
+      "gelecek kaygısı",
+      "gelecek kaygisi",
+      "kaygım",
+      "kaygim",
+      "gelecek kaygım",
+      "gelecek kaygim",
+      "kaygım arttı",
+      "kaygim artti",
+      "gelecekten korkuyorum",
+      "yarın ne olacak",
+      "yarin ne olacak",
+      "endişe",
+      "endise",
+      "gelecek için endişeliyim",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("sabır_sıkıntı"),
+    list: [
+      "sabır",
+      "sabir",
+      "sabretmek",
+      "dayanmak",
+      "zor zamanlar",
+      "sıkıntı",
+      "sikinti",
+      "sabrımı",
+      "sabrimi",
+      "zor zamanlarda sabır",
+      "zor zamanlarda sabir",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("imtihan"),
+    list: ["imtihan", "zorluk", "sıkıntı", "sikinti", "musibet", "darlık", "darlik", "denenme", "sıkıntıdayım", "sikintidayim"],
+  },
+  {
+    topic: normalizeThemeKey("umut_sonrasi_zorluk"),
+    list: ["umut", "ümit", "umit", "zor zamanlarda", "zor zamanlardan sonra", "kolaylık", "kolaylik", "ferahlık", "ferahlik", "çıkış", "cikis", "darda kaldım", "darda kaldim"],
+  },
+  {
+    topic: normalizeThemeKey("umut"),
+    list: ["umut", "ümit", "umit", "motive", "motivasyon", "moral", "teselli"],
+  },
+  {
+    topic: normalizeThemeKey("sabır"),
+    list: ["sabır", "sabir", "sebat", "sabredenler"],
+  },
+];
+
+const CURATED_OVERRIDE_SIGNAL_KEYS = {
+  [normalizeThemeKey("tövbe")]: ["tövbe", "tevbe", "günah", "gunah", "pişman", "pisman", "affeder", "bağışlar", "bagislar", "bağışlan", "bagislan"],
+  [normalizeThemeKey("hz_muhammed")]: ["muhammed", "muhammed peygamber", "hz muhammed", "peygamberimiz", "resulullah", "resul", "rasul", "peygamber"],
+  [normalizeThemeKey("rızık")]: ["rızık", "rizik", "geçim", "gecim", "iş bulamıyorum", "is bulamiyorum", "maddi sıkıntı", "maddi sikinti", "geçim derdi", "gecim derdi"],
+  [normalizeThemeKey("adalet")]: ["adalet", "zulüm", "zulum", "haksızlık", "haksizlik", "hakkım yeniyor", "hakkim yeniyor", "zulüm görüyorum", "zulum goruyorum", "haksızlığa uğradım", "haksizliga ugradim"],
+  [normalizeThemeKey("şifa")]: ["hasta", "hastalık", "hastalik", "şifa", "sifa", "hastayım", "hastayim", "iyileş", "iyiles"],
+  [normalizeThemeKey("ölüm korkusu")]: ["ölüm korkusu", "olum korkusu", "ölmekten korkuyorum", "olmekten korkuyorum", "kabir", "vefat", "ölümden korkuyorum", "olumden korkuyorum"],
+  [normalizeThemeKey("korku")]: ["korku", "korkuyorum", "çok korkuyorum", "cok korkuyorum", "ölüm korkusu", "olum korkusu", "ölümden korkuyorum", "olumden korkuyorum", "endişe", "endise"],
+  [normalizeThemeKey("kaygı")]: ["kaygı", "kaygi", "gelecek kaygısı", "gelecek kaygisi", "kaygım", "kaygim", "gelecek kaygım", "gelecek kaygim", "kaygım arttı", "kaygim artti", "gelecekten korkuyorum", "yarın ne olacak", "yarin ne olacak", "endişe", "endise", "gelecek için endişeliyim"],
+  [normalizeThemeKey("sabır_sıkıntı")]: ["sabır", "sabir", "sabretmek", "dayanmak", "zor zamanlar", "sıkıntı", "sikinti", "sabrımı", "sabrimi", "zor zamanlarda sabır", "zor zamanlarda sabir"],
+  [normalizeThemeKey("imtihan")]: ["imtihan", "zorluk", "sıkıntı", "sikinti", "musibet", "darlık", "darlik", "denenme", "sıkıntıdayım", "sikintidayim"],
+  [normalizeThemeKey("umut_sonrasi_zorluk")]: ["umut", "ümit", "umit", "zor zamanlarda", "zor zamanlardan sonra", "kolaylık", "kolaylik", "ferahlık", "ferahlik", "çıkış", "cikis", "darda kaldım", "darda kaldim"],
+  [normalizeThemeKey("umut")]: ["umut", "ümit", "umit", "motive", "motivasyon", "moral", "teselli"],
+  [normalizeThemeKey("sabır")]: ["sabır", "sabir", "sebat", "sabredenler"],
 };
 
 function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
@@ -70,13 +267,22 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
   );
   const usedAyahIdSet = new Set(previouslyUsedAyahIds);
   const emotionalRankingEnabled = shouldApplyEmotionalSupportRanking(messageAnalysis, options);
-  const semanticContext = buildSemanticContext(
+  const overrideTopic = resolveCuratedOverrideTopic(
     messageAnalysis,
-    options,
     currentMessage,
     explicitTopic,
     topicConstraint,
     preferredTopic
+  );
+  const effectiveExplicitTopic = explicitTopic || overrideTopic;
+  const semanticContext = buildSemanticContext(
+    messageAnalysis,
+    options,
+    currentMessage,
+    effectiveExplicitTopic,
+    topicConstraint,
+    preferredTopic,
+    overrideTopic
   );
 
   const scored = sourceAyahs.map((ayah) => {
@@ -107,7 +313,7 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
     const emotionScore = emotionBoost(messageAnalysis.emotion, tags, searchable);
     const contextScore = contextTopicBoost(messageAnalysis.context_topic, tags, searchable);
     const severityScore = severityBoost(messageAnalysis.severity, tags);
-    const explicitTopicMeta = explicitTopicScore(explicitTopic, tags, searchable);
+    const explicitTopicMeta = explicitTopicScore(effectiveExplicitTopic, tags, searchable);
     const semanticMeta = scoreSemanticMatch(ayah, semanticContext);
     const preferredTopicScore = usePreferredTopicHint
       ? contextTopicBoost(preferredTopic, tags, searchable)
@@ -180,7 +386,7 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
         emotional_anti_pattern_matches: emotionalBoostMeta.anti_pattern_matches,
         emotion_compatibility_blocked: compatibilityMeta.blocked,
         emotion_compatibility_penalty: compatibilityMeta.penalty,
-        explicit_topic: explicitTopic,
+        explicit_topic: effectiveExplicitTopic,
         explicit_topic_matched: explicitTopicMeta.matched,
         explicit_topic_bonus: explicitTopicMeta.bonus,
         explicit_topic_penalty: explicitTopicMeta.penalty,
@@ -297,8 +503,8 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
 
   const topItems = ranked.slice(0, 3);
   const topResults = topItems.map(toRankedAyahResult);
-  const curatedTopicItem = shouldForceCuratedTopicSelection(options.current_message, explicitTopic, explicitAyahRequest)
-    ? selectCuratedTopicAyah(sourceAyahs, explicitTopic, usedAyahIdSet)
+  const curatedTopicItem = shouldForceCuratedTopicSelection(options.current_message, effectiveExplicitTopic, explicitAyahRequest)
+    ? selectCuratedTopicAyah(sourceAyahs, effectiveExplicitTopic, usedAyahIdSet)
     : null;
   if (curatedTopicItem) {
     return [
@@ -306,8 +512,8 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
       ...topResults.filter((item) => item.id !== curatedTopicItem.id),
     ].slice(0, 3);
   }
-  if (options.force_topic_match === true && explicitTopic) {
-    const forcedItem = selectForcedTopicAyah(sourceAyahs, explicitTopic, usedAyahIdSet);
+  if (options.force_topic_match === true && effectiveExplicitTopic) {
+    const forcedItem = selectForcedTopicAyah(sourceAyahs, effectiveExplicitTopic, usedAyahIdSet);
     if (forcedItem) {
       const mergedItems = [
         forcedItem,
@@ -746,6 +952,10 @@ function datasetTagsForTheme(theme) {
     [normalizeThemeKey("aile")]: ["sabır", "affetmek", "tevekkül"],
     [normalizeThemeKey("rızık")]: ["tevekkül", "şükür", "umut"],
     [normalizeThemeKey("imtihan")]: ["sabır", "sebat", "tevekkül"],
+    [normalizeThemeKey("adalet")]: ["adalet", "zulüm", "haksızlık", "adalet arayışı"],
+    [normalizeThemeKey("korku")]: ["korku", "havf", "tehdit", "endişe"],
+    [normalizeThemeKey("sabır_sıkıntı")]: ["sabır", "dayanmak", "zorluk", "imtihan"],
+    [normalizeThemeKey("umut_sonrasi_zorluk")]: ["umut", "ferahlık", "kolaylık", "çıkış"],
   };
   return aliases[normalizedTheme] || [theme, "umut"];
 }
@@ -800,6 +1010,7 @@ function explicitTopicScore(explicitTopic, tags, searchable) {
     [normalizeThemeKey("dua")]: ["dua", "yakarma", "niyaz"],
     [normalizeThemeKey("zikir")]: ["zikir", "tesbih", "Allah'ı anmak", "Allahı anmak"],
     [normalizeThemeKey("sabır")]: ["sabır", "sabr", "sebat"],
+    [normalizeThemeKey("sabır_sıkıntı")]: ["sabır", "sabretmek", "dayanmak", "sıkıntı", "imtihan"],
     [normalizeThemeKey("hz_muhammed")]: [
       "muhammed",
       "peygamber",
@@ -815,6 +1026,12 @@ function explicitTopicScore(explicitTopic, tags, searchable) {
     [normalizeThemeKey("korku")]: ["korku", "korkmayın", "korkmayin", "havf"],
     [normalizeThemeKey("kaygı")]: ["kaygı", "kaygi", "endişe", "endise", "tedirgin", "panik"],
     [normalizeThemeKey("yalnızlık")]: ["yalnızlık", "yalnizlik", "yalnız", "yalniz", "kimsesiz", "kimsem yok"],
+    [normalizeThemeKey("adalet")]: ["adalet", "zulüm", "zulum", "haksızlık", "haksizlik"],
+    [normalizeThemeKey("rızık")]: ["rızık", "rizik", "geçim", "gecim", "maddi sıkıntı", "maddi sikinti"],
+    [normalizeThemeKey("ölüm korkusu")]: ["ölüm korkusu", "olum korkusu", "ölmekten", "olmekten", "kabir", "vefat"],
+    [normalizeThemeKey("imtihan")]: ["imtihan", "sıkıntı", "sikinti", "zorluk", "musibet"],
+    [normalizeThemeKey("şifa")]: ["şifa", "sifa", "hasta", "hastalık", "hastalik"],
+    [normalizeThemeKey("umut_sonrasi_zorluk")]: ["umut", "ümit", "umit", "ferahlık", "ferahlik", "kolaylık", "kolaylik", "çıkış", "cikis"],
   };
 
   const normalizedTopic = normalizeThemeKey(explicitTopic);
@@ -837,6 +1054,7 @@ function topicConstraintAliases(topic) {
     [normalizeThemeKey("dua")]: ["dua", "yakarma", "niyaz"],
     [normalizeThemeKey("zikir")]: ["zikir", "tesbih", "Allah'ı anmak", "Allahı anmak"],
     [normalizeThemeKey("sabır")]: ["sabır", "sabr", "sebat", "sabredenler"],
+    [normalizeThemeKey("sabır_sıkıntı")]: ["sabır", "sabretmek", "dayanmak", "sıkıntı", "imtihan"],
     [normalizeThemeKey("hz_muhammed")]: [
       "muhammed",
       "peygamber",
@@ -852,6 +1070,13 @@ function topicConstraintAliases(topic) {
     [normalizeThemeKey("korku")]: ["korku", "korkmayın", "korkmayin", "havf"],
     [normalizeThemeKey("kaygı")]: ["kaygı", "kaygi", "endişe", "endise", "tedirgin", "panik", "korku"],
     [normalizeThemeKey("yalnızlık")]: ["yalnızlık", "yalnizlik", "yalnız", "yalniz", "kimsesiz", "kimsem yok"],
+    [normalizeThemeKey("korku")]: ["korku", "korkuyorum", "ölüm korkusu", "olum korkusu", "endişe"],
+    [normalizeThemeKey("şifa")]: ["şifa", "sifa", "hasta", "hastalık", "hastalik"],
+    [normalizeThemeKey("imtihan")]: ["imtihan", "zorluk", "sıkıntı", "sikinti", "musibet", "darlık", "darlik"],
+    [normalizeThemeKey("adalet")]: ["adalet", "zulüm", "zulum", "haksızlık", "haksizlik"],
+    [normalizeThemeKey("rızık")]: ["rızık", "rizik", "geçim", "gecim", "iş", "is", "maddi sıkıntı", "maddi sikinti"],
+    [normalizeThemeKey("ölüm korkusu")]: ["ölüm korkusu", "olum korkusu", "kabir", "vefat"],
+    [normalizeThemeKey("umut_sonrasi_zorluk")]: ["umut", "ümit", "umit", "ferahlık", "ferahlik", "kolaylık", "kolaylik", "çıkış", "cikis"],
   };
 
   return (aliases[normalizeThemeKey(topic)] || [topic]).map((item) => normalize(item));
@@ -894,44 +1119,36 @@ function shouldForceCuratedTopicSelection(message, explicitTopic, explicitAyahRe
   if (explicitAyahRequest) return true;
 
   const normalizedMessage = normalize(message);
-  const topicSignals = {
-    [normalizeThemeKey("hz_muhammed")]: [
-      "muhammed",
-      "muhammed peygamber",
-      "hz muhammed",
-      "peygamberimiz",
-      "peygamber",
-      "resulullah",
-      "resul",
-      "rasul",
-    ],
-    [normalizeThemeKey("tövbe")]: [
-      "tövbe",
-      "tevbe",
-      "günah",
-      "gunah",
-      "pişman",
-      "pisman",
-      "affeder",
-      "bağışlar",
-      "bagislar",
-      "bağışlan",
-      "bagislan",
-    ],
-    [normalizeThemeKey("sabır")]: [
-      "sabır",
-      "sabir",
-      "sabretmek",
-      "sabır ayeti",
-      "sabir ayeti",
-      "zor zamanlarda sabır",
-    ],
-  };
-
-  const signals = topicSignals[normalizeThemeKey(explicitTopic)];
+  const signals = CURATED_OVERRIDE_SIGNAL_KEYS[normalizeThemeKey(explicitTopic)];
   return Array.isArray(signals)
     ? signals.some((signal) => normalizedMessage.includes(normalize(signal)))
     : false;
+}
+
+function resolveCuratedOverrideTopic(messageAnalysis, currentMessage, explicitTopic, topicConstraint, preferredTopic) {
+  const normalizedMessage = normalize(currentMessage);
+  for (const matcher of CURATED_OVERRIDE_MESSAGE_MATCHERS) {
+    if (matcher.list.some((phrase) => normalizedMessage.includes(normalize(phrase)))) {
+      return matcher.topic;
+    }
+  }
+
+  const candidates = [
+    topicConstraint,
+    explicitTopic,
+    preferredTopic,
+    messageAnalysis?.context_topic,
+    messageAnalysis?.primary_theme,
+    messageAnalysis?.emotion,
+  ];
+
+  for (const candidate of candidates) {
+    const normalized = normalizeThemeKey(candidate);
+    if (!normalized) continue;
+    if (CURATED_TOPIC_CLUSTERS[normalized]) return normalized;
+  }
+
+  return null;
 }
 
 function selectForcedTopicAyah(sourceAyahs, topicConstraint, usedAyahIdSet) {
@@ -1057,7 +1274,7 @@ function normalizeSemanticSources(value) {
   });
 }
 
-function buildSemanticContext(messageAnalysis, options, currentMessage, explicitTopic, topicConstraint, preferredTopic) {
+function buildSemanticContext(messageAnalysis, options, currentMessage, explicitTopic, topicConstraint, preferredTopic, overrideTopic) {
   const semanticTagsConsidered = [];
   const queryTerms = new Set();
   const candidateValues = [
@@ -1069,6 +1286,7 @@ function buildSemanticContext(messageAnalysis, options, currentMessage, explicit
     explicitTopic,
     topicConstraint,
     preferredTopic,
+    overrideTopic,
     options?.current_message,
   ];
 
@@ -1095,7 +1313,8 @@ function buildSemanticContext(messageAnalysis, options, currentMessage, explicit
     currentMessage,
     explicitTopic,
     topicConstraint,
-    preferredTopic
+    preferredTopic,
+    overrideTopic
   );
 
   if (overrideUseCase) {
@@ -1113,7 +1332,7 @@ function buildSemanticContext(messageAnalysis, options, currentMessage, explicit
   };
 }
 
-function resolveSemanticUseCase(messageAnalysis, currentMessage, explicitTopic, topicConstraint, preferredTopic) {
+function resolveSemanticUseCase(messageAnalysis, currentMessage, explicitTopic, topicConstraint, preferredTopic, overrideTopic) {
   const normalizedMessage = normalizeLoose(currentMessage);
   const candidates = [
     topicConstraint,
@@ -1122,6 +1341,7 @@ function resolveSemanticUseCase(messageAnalysis, currentMessage, explicitTopic, 
     messageAnalysis?.primary_theme,
     messageAnalysis?.emotion,
     preferredTopic,
+    overrideTopic,
   ];
 
   for (const candidate of candidates) {

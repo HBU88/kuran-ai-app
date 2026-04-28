@@ -17,14 +17,18 @@ const fixedTests = [
   { kind: "fixed", group: "fear", prompt: "korku ile ilgili ayet", explicitTopic: true },
   { kind: "fixed", group: "casual", prompt: "nasılsın", explicitTopic: false },
   { kind: "fixed", group: "casual", prompt: "merhaba", explicitTopic: false },
-  { kind: "fixed", group: "fear", prompt: "çok korkuyorum", explicitTopic: false },
+  { kind: "fixed", group: "fear", prompt: "çok korkuyorum", explicitTopic: false, expectedSurahSet: [3, 9, 65] },
   { kind: "fixed", group: "fear", prompt: "içim daralıyor", explicitTopic: false },
+  { kind: "fixed", group: "fear", prompt: "gelecek için endişeliyim", explicitTopic: false, expectedSurahSet: [28, 94, 13] },
   { kind: "fixed", group: "loneliness", prompt: "çok yalnız hissediyorum", explicitTopic: false },
   { kind: "fixed", group: "loneliness", prompt: "kimsem yok gibi hissediyorum", explicitTopic: false },
-  { kind: "fixed", group: "repentance", prompt: "günah işledim", explicitTopic: false },
-  { kind: "fixed", group: "repentance", prompt: "Allah beni affeder mi", explicitTopic: false },
+  { kind: "fixed", group: "repentance", prompt: "günah işledim", explicitTopic: false, expectedSurahSet: [39, 2] },
+  { kind: "fixed", group: "repentance", prompt: "Allah beni affeder mi", explicitTopic: false, expectedSurahSet: [39, 2] },
+  { kind: "fixed", group: "repentance", prompt: "çok pişmanım", explicitTopic: false, expectedSurahSet: [39, 2] },
   { kind: "fixed", group: "sabir", prompt: "sabır hakkında Kur'an'dan bir şey söyle", explicitTopic: true },
   { kind: "fixed", group: "prophet", prompt: "peygamberimizle ilgili ayet göster", explicitTopic: true },
+  { kind: "fixed", group: "fear", prompt: "maddi sıkıntı yaşıyorum", explicitTopic: false, expectedSurahSet: [11, 65, 51] },
+  { kind: "fixed", group: "fear", prompt: "haksızlığa uğradım", explicitTopic: false, expectedSurahSet: [4, 5, 16, 42] },
   { kind: "fixed", group: "prayer", prompt: "akşam namazı kaç rekat?", expectedRakats: 5 },
   { kind: "fixed", group: "prayer", prompt: "sabah namazı kaç rekat?", expectedRakats: 4 },
   { kind: "fixed", group: "prayer", prompt: "öğle namazı kaç rekat?", expectedRakats: 10 },
@@ -278,6 +282,7 @@ function validatePayload(test, payload) {
     failures.push("direct_answer returned selected_ayah");
   }
 
+
   if (test.group === "casual") {
     if (payload?.ayah_used !== false) failures.push(`unexpected ayah_used=${payload?.ayah_used}`);
     if (payload?.selected_ayah !== null) failures.push("casual flow returned selected_ayah");
@@ -310,6 +315,15 @@ function validatePayload(test, payload) {
     const surahNumber = payload?.selected_ayah?.surahNumber;
     if (!payload?.selected_ayah) failures.push("explicit topic request returned null selected_ayah");
     else if (!alignmentRule.has(Number(surahNumber))) failures.push(`surahNumber ${surahNumber} not in allowed set ${Array.from(alignmentRule).join(",")}`);
+  }
+
+  if (Array.isArray(test.expectedSurahSet) && test.expectedSurahSet.length > 0) {
+    const surahNumber = Number(payload?.selected_ayah?.surahNumber);
+    if (!payload?.selected_ayah) {
+      failures.push("expected selected_ayah for ranked override prompt");
+    } else if (!test.expectedSurahSet.includes(surahNumber)) {
+      failures.push(`surahNumber ${surahNumber} not in expected set ${test.expectedSurahSet.join(",")}`);
+    }
   }
 
   return failures;

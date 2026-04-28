@@ -162,6 +162,21 @@ const TOPIC_PATTERNS = [
     ],
   },
   {
+    topic: "adalet",
+    phrases: [
+      "adalet",
+      "haks?zl?k",
+      "haksizl?k",
+      "haksizlik",
+      "zul?m",
+      "zulum",
+      "hakk?m yeniyor",
+      "hakkim yeniyor",
+      "haks?zl??a u?rad?m",
+      "haksizliga ugradim",
+    ],
+  },
+  {
     topic: "daralma",
     phrases: [
       "içim daralıyor",
@@ -471,6 +486,7 @@ function canonicalTopic(value) {
     tovbe: "tövbe",
     sukur: "şükür",
     kaygi: "kaygı",
+    adalet: "adalet",
     yalnizlik: "yalnızlık",
     caresizlik: "çaresizlik",
     muhammed: "hz_muhammed",
@@ -502,6 +518,7 @@ function themeForContextTopic(topic) {
     sure: "ibadet",
     korku: "korku",
     kaygi: "kaygı",
+    adalet: "adalet",
     daralma: "daralma",
     çaresizlik: "çaresizlik",
   };
