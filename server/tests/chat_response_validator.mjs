@@ -127,6 +127,7 @@ async function main() {
   }
 
   await assertEndpointReachable();
+  await runModuleEndpointSmokeTests();
   if (isDebugChatEngineEnabled()) {
     await runDebugResolveSmokeTest();
   }
@@ -333,6 +334,114 @@ async function runDebugResolveSmokeTest() {
   }
 }
 
+async function runModuleEndpointSmokeTests() {
+  const ayahTests = [
+    {
+      path: "/ayah-chat",
+      prompt: "çok korkuyorum",
+      expectedModule: "ayah",
+      expectedRouteMode: "quran_guidance",
+      expectedRankerSource: "override",
+      expectSelectedAyah: true,
+      expectedSurahSet: [3, 9, 65],
+      maxAyahRankerMs: 100,
+    },
+    {
+      path: "/ayah-chat",
+      prompt: "haksızlığa uğradım",
+      expectedModule: "ayah",
+      expectedRouteMode: "quran_guidance",
+      expectedRankerSource: "override",
+      expectSelectedAyah: true,
+      expectedSurahSet: [4, 5, 16, 42],
+      maxAyahRankerMs: 100,
+    },
+    {
+      path: "/ayah-chat",
+      prompt: "abdest nasıl alınır",
+      expectedModule: "ayah",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectAssistantContains: "İlmihal Rehberi",
+      maxAyahRankerMs: 20,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "abdest nasıl alınır",
+      expectedModule: "ilmihal",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectAssistantContains: "abdest",
+      expectedKnowledgeHit: true,
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "namaz kaç rekat",
+      expectedModule: "ilmihal",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectAssistantContains: "rekat",
+      expectedKnowledgeHit: true,
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "çok korkuyorum",
+      expectedModule: "ilmihal",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectAssistantContains: "Ayet Rehberi",
+      maxAyahRankerMs: 0,
+    },
+  ];
+
+  for (const test of ayahTests) {
+    const payload = await postModuleChat(test.path, test.prompt);
+    const failures = [];
+    if ((payload?.decision_meta?.module || null) !== test.expectedModule) {
+      failures.push(`decision_meta.module=${payload?.decision_meta?.module}`);
+    }
+    if (test.expectedRouteMode && payload?.decision_meta?.route_mode !== test.expectedRouteMode) {
+      failures.push(`route_mode=${payload?.decision_meta?.route_mode}`);
+    }
+    if (test.expectedRankerSource && payload?.decision_meta?.ranker_source !== test.expectedRankerSource) {
+      failures.push(`ranker_source=${payload?.decision_meta?.ranker_source}`);
+    }
+    if (typeof test.expectedResponseType === "string" && payload?.response_type !== test.expectedResponseType) {
+      failures.push(`response_type=${payload?.response_type}`);
+    }
+    if (test.expectedKnowledgeHit === true && !payload?.decision_meta?.knowledge_hit_id) {
+      failures.push("knowledge_hit_id missing");
+    }
+    if (Object.prototype.hasOwnProperty.call(test, "expectedSelectedAyah")) {
+      const selectedAyahId = payload?.selected_ayah?.id ?? null;
+      if (selectedAyahId !== test.expectedSelectedAyah) {
+        failures.push(`selected_ayah_id=${selectedAyahId}`);
+      }
+    } else if (test.expectSelectedAyah && !payload?.selected_ayah) {
+      failures.push("selected_ayah missing");
+    }
+    if (typeof test.maxAyahRankerMs === "number") {
+      const rankerMs = Number(payload?.decision_meta?.timing_ms?.ayah_ranker_ms || 0);
+      if (rankerMs > test.maxAyahRankerMs) {
+        failures.push(`ayah_ranker_ms=${rankerMs}`);
+      }
+    }
+    if (typeof test.expectAssistantContains === "string") {
+      const expected = normalizeForMatch(test.expectAssistantContains);
+      if (!normalizeForMatch(payload?.assistant_text || "").includes(expected)) {
+        failures.push(`assistant_text missing ${expected}`);
+      }
+    }
+    if (failures.length > 0) {
+      console.error(`FAIL [module] ${test.path} ${test.prompt} -> ${failures.join("; ")}`);
+      process.exit(1);
+    }
+    console.log(`PASS [module] ${test.path} ${test.prompt} -> ${payload?.decision_meta?.module}:${payload?.response_type}:${payload?.selected_ayah?.id ?? "null"}`);
+  }
+}
+
 async function runTest(test) {
   try {
     if (test.kind === "context") return await runContextTest(test);
@@ -495,6 +604,23 @@ async function postChat(message, history = []) {
     payload = JSON.parse(text);
   } catch (error) {
     throw new Error(`invalid JSON response: ${error.message}`);
+  }
+  if (!response.ok) throw new Error(`HTTP ${response.status}: ${payload?.error || text}`);
+  return payload;
+}
+
+async function postModuleChat(path, message, history = []) {
+  const response = await fetch(`http://localhost:3000${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    body: JSON.stringify({ message, history }),
+  });
+  const text = await response.text();
+  let payload;
+  try {
+    payload = JSON.parse(text);
+  } catch (error) {
+    throw new Error(`invalid module JSON response: ${error.message}`);
   }
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${payload?.error || text}`);
   return payload;

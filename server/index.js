@@ -40,7 +40,11 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.post("/chat", async (req, res) => {
+app.post("/chat", (req, res) => handleChatModuleRequest(req, res, "chat"));
+app.post("/ayah-chat", (req, res) => handleChatModuleRequest(req, res, "ayah"));
+app.post("/ilmihal-chat", (req, res) => handleChatModuleRequest(req, res, "ilmihal"));
+
+async function handleChatModuleRequest(req, res, module = "chat") {
   let logEntry = null;
   try {
     const message = req.body?.message;
@@ -51,6 +55,7 @@ app.post("/chat", async (req, res) => {
       };
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
+        module,
         user_message: typeof message === "string" ? message : "",
         intent: null,
         response_type: null,
@@ -69,7 +74,7 @@ app.post("/chat", async (req, res) => {
     }
 
     const history = sanitizeHistory(req.body?.history);
-    const response = await buildChatResponse(message, history);
+    const response = await buildChatResponse(message, history, { module });
     const normalizedResponse = {
       intent: response.intent,
       primary_theme: response.primary_theme,
@@ -84,8 +89,20 @@ app.post("/chat", async (req, res) => {
       assistant_text: response.assistant_text || "",
     };
     const decisionMeta = response.decision_meta || {};
+    const moduleResponse =
+      module === "chat"
+        ? normalizedResponse
+        : {
+            ...normalizedResponse,
+            decision_meta: {
+              ...decisionMeta,
+              module: decisionMeta.module || module,
+            },
+            timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms),
+          };
     logEntry = buildChatDecisionLog({
       timestamp: new Date().toISOString(),
+      module: decisionMeta.module || module,
       user_message: message,
       intent: normalizedResponse.intent,
       response_type: normalizedResponse.response_type,
@@ -108,7 +125,7 @@ app.post("/chat", async (req, res) => {
       error: null,
     });
     appendChatDecisionLog(logEntry);
-    return sendUtf8Json(res, 200, normalizedResponse);
+    return sendUtf8Json(res, 200, moduleResponse);
   } catch (error) {
     const errorResponse = {
       ok: false,
@@ -117,6 +134,7 @@ app.post("/chat", async (req, res) => {
     if (!logEntry) {
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
+        module,
         user_message: typeof req.body?.message === "string" ? req.body.message : "",
         intent: null,
         response_type: null,
@@ -138,7 +156,7 @@ app.post("/chat", async (req, res) => {
     }
     return sendUtf8Json(res, 500, errorResponse);
   }
-});
+}
 
 app.get("/debug/resolve", async (req, res) => {
   if (!isDebugChatEngineEnabled()) {
@@ -146,13 +164,14 @@ app.get("/debug/resolve", async (req, res) => {
   }
 
   const startedAt = Date.now();
+  const module = typeof req.query?.module === "string" ? req.query.module : "chat";
   const inputMessage = typeof req.query?.q === "string" ? req.query.q : "";
   if (!inputMessage.trim()) {
     return sendUtf8Json(res, 400, { ok: false, error: "q is required" });
   }
 
   try {
-    const response = await buildChatResponse(inputMessage, []);
+    const response = await buildChatResponse(inputMessage, [], { module });
     const decisionMeta = response.decision_meta || {};
     const currentMessageCluster =
       resolveCurrentMessageOverrideTopic(inputMessage) ||
@@ -169,6 +188,7 @@ app.get("/debug/resolve", async (req, res) => {
       intent: response.intent || null,
       response_type: response.response_type || null,
       route_mode: decisionMeta.route_mode || null,
+      module: decisionMeta.module || module,
       planner_source: decisionMeta.planner_source || "fallback",
       current_message_cluster: currentMessageCluster,
       history_context_used: false,
@@ -206,6 +226,7 @@ function isDebugChatEngineEnabled() {
 function buildChatDecisionLog(entry) {
   return JSON.stringify({
     timestamp: entry.timestamp || new Date().toISOString(),
+    module: entry.module || "chat",
     user_message: typeof entry.user_message === "string" ? entry.user_message : "",
     intent: entry.intent || null,
     response_type: entry.response_type || null,

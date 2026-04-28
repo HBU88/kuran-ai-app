@@ -94,7 +94,16 @@ function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
   };
 }
 
-function resolveLocalFastPathPlan(message, history, baseAnalysis) {
+function normalizeModuleMode(module) {
+  const normalized = String(module || "chat").trim().toLowerCase();
+  if (normalized === "ayah" || normalized === "ilmihal" || normalized === "chat") {
+    return normalized;
+  }
+  return "chat";
+}
+
+function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) {
+  const moduleMode = normalizeModuleMode(options.module);
   const normalizedMessage = normalize(message);
 
   if (isSimpleCasualConversation(message)) {
@@ -111,19 +120,21 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis) {
     };
   }
 
-  const localKnowledgeResult = lookupKnowledgeAnswer(message, baseAnalysis, null, history);
-  if (localKnowledgeResult) {
-    return {
-      intent: baseAnalysis.intent === "worship_practice_question" ? "worship_practice_question" : "general_islamic_question",
-      sub_intent: "general_information",
-      needs_ayah: false,
-      needs_knowledge: true,
-      knowledge_topic: localKnowledgeResult.topic || baseAnalysis.context_topic || null,
-      ayah_topic: null,
-      response_type: "direct_answer",
-      reasoning_note: "local fast path: ilmihal knowledge",
-      planner_source: "local_fast_path",
-    };
+  if (moduleMode !== "ayah") {
+    const localKnowledgeResult = lookupKnowledgeAnswer(message, baseAnalysis, null, history);
+    if (localKnowledgeResult) {
+      return {
+        intent: baseAnalysis.intent === "worship_practice_question" ? "worship_practice_question" : "general_islamic_question",
+        sub_intent: "general_information",
+        needs_ayah: false,
+        needs_knowledge: true,
+        knowledge_topic: localKnowledgeResult.topic || baseAnalysis.context_topic || null,
+        ayah_topic: null,
+        response_type: "direct_answer",
+        reasoning_note: "local fast path: ilmihal knowledge",
+        planner_source: "local_fast_path",
+      };
+    }
   }
 
   const overrideTopic = resolveCurrentMessageOverrideTopic(message);
@@ -184,14 +195,113 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis) {
   return null;
 }
 
-async function buildChatResponse(message, history = []) {
+function isIlmihalModuleQuestion(message, analysis = {}, history = []) {
+  return (
+    isLocalKnowledgeQuery(message, analysis, null, history) ||
+    analysis.intent === "worship_practice_question"
+  );
+}
+
+function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targetModule) {
+  const response_type = "direct_answer";
+  const route_mode = targetModule === "ilmihal" ? "ilmihal_knowledge" : "quran_guidance";
+  const assistant_text =
+    targetModule === "ilmihal"
+      ? "Bu soru İlmihal Rehberi kapsamına giriyor. Lütfen İlmihal Rehberi modülünü kullan."
+      : "Bu soru Ayet Rehberi kapsamına giriyor. Lütfen Ayet Rehberi modülünü kullan.";
+  const decision_meta = {
+    module,
+    route_mode,
+    planner_source: "local_fast_path",
+    knowledge_hit_id: null,
+    ranker_source: "fallback",
+    semantic_candidates_count: 0,
+    semantic_tags_considered: [],
+    semantic_score: 0,
+    selected_ayah_id: null,
+    timing_ms: normalizeTimingBreakdown(timing?.snapshot ? timing.snapshot() : null),
+  };
+
+  return applySafetyGuard({
+    ...baseAnalysis,
+    response_type,
+    ayah_used: false,
+    top_ayah_ids: [],
+    selected_ayah: null,
+    decision_meta,
+    assistant_text,
+  });
+}
+
+function buildIlmihalModuleResponse(message, history, baseAnalysis, timing) {
+  const knowledgeResult = timing.measureSync("knowledge_router_ms", () =>
+    lookupKnowledgeAnswer(message, baseAnalysis, null, history)
+  );
+
+  if (!knowledgeResult) {
+    return buildModuleRedirectResponse("ilmihal", message, baseAnalysis, timing, "ayah");
+  }
+
+  const subIntent = resolveSubIntent(message, baseAnalysis, null);
+  const responseStrategy = responseStrategyForSubIntent(subIntent);
+  const analysis = {
+    ...baseAnalysis,
+    response_type: "direct_answer",
+  };
+  const assistantText = timing.measureSync("response_composer_ms", () =>
+    buildAssistantText(analysis, null, message, {
+      subIntent,
+      responseStrategy,
+      knowledgeResult,
+      knowledgeTopic: knowledgeResult.topic || null,
+      recent_assistant_texts: recentAssistantTextsFromHistory(history),
+    })
+  );
+  const decisionMeta = buildDecisionMeta(
+    [],
+    {
+      responseType: "direct_answer",
+      ayahUsed: false,
+      selectedAyah: null,
+      topAyahIds: [],
+    },
+    false,
+    knowledgeResult.route_mode || "ilmihal_knowledge",
+    knowledgeResult,
+    timing.snapshot(),
+    "local_fast_path",
+    "ilmihal"
+  );
+
+  return applySafetyGuard({
+    ...analysis,
+    response_type: "direct_answer",
+    ayah_used: false,
+    top_ayah_ids: [],
+    selected_ayah: null,
+    decision_meta: decisionMeta,
+    assistant_text: assistantText,
+  });
+}
+
+async function buildChatResponse(message, history = [], options = {}) {
+  const moduleMode = normalizeModuleMode(options.module);
   const timing = createTimingTracker();
 
   const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
     analyzeUserMessageFallback(message, history)
   );
+  if (moduleMode === "ilmihal") {
+    if (!isIlmihalModuleQuestion(message, baseAnalysis, history)) {
+      return buildModuleRedirectResponse("ilmihal", message, baseAnalysis, timing, "ayah");
+    }
+    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing);
+  }
+  if (moduleMode === "ayah" && isIlmihalModuleQuestion(message, baseAnalysis, history)) {
+    return buildModuleRedirectResponse("ayah", message, baseAnalysis, timing, "ilmihal");
+  }
   const localFastPathPlan = timing.measureSync("context_resolver_ms", () =>
-    resolveLocalFastPathPlan(message, history, baseAnalysis)
+    resolveLocalFastPathPlan(message, history, baseAnalysis, { module: moduleMode })
   );
   const plannerResult = localFastPathPlan
     ? localFastPathPlan
@@ -228,12 +338,17 @@ async function buildChatResponse(message, history = []) {
       }))
     : normalizedMergedAnalysis;
 
-  const localKnowledgeIntent = timing.measureSync("knowledge_router_ms", () =>
-    isLocalKnowledgeQuery(message, analysis, plannerResult, history)
-  );
-  const knowledgeIntentQuestion = timing.measureSync("knowledge_router_ms", () =>
-    isKnowledgeIntentQuestion(message, analysis, plannerResult, history)
-  );
+  const allowKnowledgeRouting = moduleMode !== "ayah";
+  const localKnowledgeIntent = allowKnowledgeRouting
+    ? timing.measureSync("knowledge_router_ms", () =>
+        isLocalKnowledgeQuery(message, analysis, plannerResult, history)
+      )
+    : false;
+  const knowledgeIntentQuestion = allowKnowledgeRouting
+    ? timing.measureSync("knowledge_router_ms", () =>
+        isKnowledgeIntentQuestion(message, analysis, plannerResult, history)
+      )
+    : false;
 
   const subIntent = resolveSubIntent(message, analysis, plannerResult);
   const responseStrategy = responseStrategyForSubIntent(subIntent);
@@ -242,7 +357,7 @@ async function buildChatResponse(message, history = []) {
   const shouldUseAyah = localKnowledgeIntent
     ? false
     : shouldUseAyahForRouting(message, analysis, subIntent, plannerResult);
-  const knowledgeResult = !isCasualConversation
+  const knowledgeResult = allowKnowledgeRouting && !isCasualConversation
     ? timing.measureSync("knowledge_router_ms", () =>
         shouldLookupKnowledge(message, analysis, subIntent, plannerResult)
           ? lookupKnowledgeAnswer(message, analysis, plannerResult, history)
@@ -275,13 +390,14 @@ async function buildChatResponse(message, history = []) {
     ? rankingResult
     : rankingResult.ayahs || [];
   const topRankedAyah = shouldUseAyah && !shouldBypassAyahSelection ? rankedAyahs[0] || null : null;
-  const knowledgeDrivenAnswer =
+  const knowledgeDrivenAnswer = allowKnowledgeRouting &&
     (Boolean(knowledgeResult) || localKnowledgeIntent || knowledgeIntentQuestion) &&
     !explicitAyahRequest &&
     !normalize(message).includes(normalize("ayet"));
   const ayahUsed = knowledgeDrivenAnswer ? false : resolveAyahUsage(message, analysis, rankedAyahs, topRankedAyah);
   const selectedAyah = ayahUsed ? stripRankingFields(topRankedAyah) : null;
   const knowledgeOnlyResponse =
+    allowKnowledgeRouting &&
     Boolean(knowledgeResult) &&
     ["wudu.json", "prophets.json", "dua.json"].includes(knowledgeResult.file) &&
     !explicitAyahRequest &&
@@ -336,7 +452,8 @@ async function buildChatResponse(message, history = []) {
     routeMode,
     knowledgeResult,
     timing.snapshot(),
-    plannerDebugMeta.planner_source || "fallback"
+    plannerDebugMeta.planner_source || "fallback",
+    moduleMode
   );
   return applySafetyGuard({
     ...analysis,
@@ -356,7 +473,8 @@ function buildDecisionMeta(
   routeMode,
   knowledgeResult,
   timingMs = null,
-  plannerSource = "fallback"
+  plannerSource = "fallback",
+  module = "chat"
 ) {
   const top = Array.isArray(rankedAyahs) && rankedAyahs.length > 0 ? rankedAyahs[0] : null;
   const topDebug = top?.debug || {};
@@ -364,6 +482,7 @@ function buildDecisionMeta(
     route_mode: knowledgeResult?.knowledge_hit_id ? routeMode || "ilmihal_knowledge" : routeMode,
     knowledge_hit_id: knowledgeResult?.knowledge_hit_id || null,
     planner_source: plannerSource || "fallback",
+    module,
     ranker_source:
       top?.ranker_source ||
       topDebug.ranker_source ||
