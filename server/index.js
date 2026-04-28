@@ -90,6 +90,7 @@ app.post("/chat", async (req, res) => {
       intent: normalizedResponse.intent,
       response_type: normalizedResponse.response_type,
       route_mode: decisionMeta.route_mode || null,
+      planner_source: decisionMeta.planner_source || "fallback",
       knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
       selected_ayah_id: normalizedResponse.selected_ayah
         ? normalizedResponse.selected_ayah.id || null
@@ -106,37 +107,7 @@ app.post("/chat", async (req, res) => {
       timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms),
       error: null,
     });
-    const appendStartedAt = Date.now();
     appendChatDecisionLog(logEntry);
-    if (isDebugChatEngineEnabled()) {
-      const writeDuration = Date.now() - appendStartedAt;
-      const timingLogEntry = buildChatDecisionLog({
-        timestamp: new Date().toISOString(),
-        user_message: message,
-        intent: normalizedResponse.intent,
-        response_type: normalizedResponse.response_type,
-        route_mode: decisionMeta.route_mode || null,
-        knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
-        selected_ayah_id: normalizedResponse.selected_ayah
-          ? normalizedResponse.selected_ayah.id || null
-          : null,
-        top_ayah_ids: normalizedResponse.top_ayah_ids || [],
-        ranker_source: decisionMeta.ranker_source || "fallback",
-        semantic_candidates_count: Number.isInteger(decisionMeta.semantic_candidates_count)
-          ? decisionMeta.semantic_candidates_count
-          : 0,
-        semantic_tags_considered: Array.isArray(decisionMeta.semantic_tags_considered)
-          ? decisionMeta.semantic_tags_considered
-          : [],
-        semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
-        timing_ms: {
-          ...normalizeTimingBreakdown(decisionMeta.timing_ms),
-          log_write_ms: writeDuration,
-        },
-        error: null,
-      });
-      appendChatDecisionLog(timingLogEntry);
-    }
     return sendUtf8Json(res, 200, normalizedResponse);
   } catch (error) {
     const errorResponse = {
@@ -150,6 +121,7 @@ app.post("/chat", async (req, res) => {
         intent: null,
         response_type: null,
         route_mode: null,
+        planner_source: null,
         knowledge_hit_id: null,
         selected_ayah_id: null,
         top_ayah_ids: [],
@@ -197,6 +169,7 @@ app.get("/debug/resolve", async (req, res) => {
       intent: response.intent || null,
       response_type: response.response_type || null,
       route_mode: decisionMeta.route_mode || null,
+      planner_source: decisionMeta.planner_source || "fallback",
       current_message_cluster: currentMessageCluster,
       history_context_used: false,
       matched_override_cluster: matchedOverrideCluster,
@@ -237,6 +210,7 @@ function buildChatDecisionLog(entry) {
     intent: entry.intent || null,
     response_type: entry.response_type || null,
     route_mode: entry.route_mode || null,
+    planner_source: entry.planner_source || "fallback",
     knowledge_hit_id: entry.knowledge_hit_id || null,
     selected_ayah_id:
       typeof entry.selected_ayah_id === "number" ? entry.selected_ayah_id : null,

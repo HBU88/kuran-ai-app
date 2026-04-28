@@ -20,14 +20,18 @@ const {
   secondaryThemesForContextTopic,
   themeForContextTopic,
 } = require("./context_resolver");
-const { rankAyahs: rankAyahsFromSource, shouldUseAyahFor } = require("./ayah_ranker");
+const {
+  rankAyahs: rankAyahsFromSource,
+  resolveCurrentMessageOverrideTopic,
+  shouldUseAyahFor,
+} = require("./ayah_ranker");
 const {
   hasKnowledgeMatch,
   isLocalKnowledgeQuery,
   isKnowledgeIntentQuestion,
   lookupKnowledgeAnswer,
 } = require("./knowledge_base");
-const { planChatWithOpenAI } = require("./openai_planner");
+const { getPlannerDebugMeta, planChatWithOpenAI } = require("./openai_planner");
 const { buildAssistantText } = require("./response_composer");
 const { applySafetyGuard } = require("./safety_guard");
 const { loadAyahDataset } = require("../utils/load_ayah_dataset");
@@ -90,71 +94,114 @@ function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
   };
 }
 
+function resolveLocalFastPathPlan(message, history, baseAnalysis) {
+  const normalizedMessage = normalize(message);
+
+  if (isSimpleCasualConversation(message)) {
+    return {
+      intent: "casual_conversation",
+      sub_intent: "casual_conversation",
+      needs_ayah: false,
+      needs_knowledge: false,
+      knowledge_topic: null,
+      ayah_topic: null,
+      response_type: "direct_answer",
+      reasoning_note: "local fast path: casual conversation",
+      planner_source: "local_fast_path",
+    };
+  }
+
+  const localKnowledgeResult = lookupKnowledgeAnswer(message, baseAnalysis, null, history);
+  if (localKnowledgeResult) {
+    return {
+      intent: baseAnalysis.intent === "worship_practice_question" ? "worship_practice_question" : "general_islamic_question",
+      sub_intent: "general_information",
+      needs_ayah: false,
+      needs_knowledge: true,
+      knowledge_topic: localKnowledgeResult.topic || baseAnalysis.context_topic || null,
+      ayah_topic: null,
+      response_type: "direct_answer",
+      reasoning_note: "local fast path: ilmihal knowledge",
+      planner_source: "local_fast_path",
+    };
+  }
+
+  const overrideTopic = resolveCurrentMessageOverrideTopic(message);
+  const explicitTopic = resolveExplicitTopic(message);
+  const shouldUseGuidanceFastPath =
+    Boolean(overrideTopic || explicitTopic) ||
+    (baseAnalysis.intent === "emotional_spiritual_support" &&
+      containsAnyNormalized(normalizedMessage, [
+        "korku",
+        "korkuyorum",
+        "endişe",
+        "endise",
+        "kaygı",
+        "kaygi",
+        "maddi sıkıntı",
+        "maddi sikinti",
+        "haksızlık",
+        "haksizlik",
+        "zulüm",
+        "zulum",
+        "yalnız",
+        "yalniz",
+        "hasta",
+        "hastayım",
+        "hastayim",
+        "şifa",
+        "sifa",
+        "ölüm",
+        "olum",
+        "sabır",
+        "sabir",
+      ]));
+
+  if (shouldUseGuidanceFastPath) {
+    const topic = canonicalTopic(overrideTopic || explicitTopic || baseAnalysis.context_topic || baseAnalysis.primary_theme || null);
+    const explicitAyahRequest = isExplicitAyahRequest(message, baseAnalysis, null, null) ||
+      normalizedMessage.includes(normalize("ayet"));
+    const responseType = explicitAyahRequest
+      ? "direct_ayah"
+      : baseAnalysis.intent === "high_risk_sensitive"
+        ? "sensitive_support"
+        : baseAnalysis.intent === "emotional_spiritual_support"
+          ? "supportive_ayah"
+          : "direct_ayah";
+    return {
+      intent: explicitAyahRequest ? "ayah_request" : (baseAnalysis.intent || "emotional_spiritual_support"),
+      sub_intent: explicitAyahRequest ? "ayah_request" : (baseAnalysis.sub_intent || inferSubIntent(message, baseAnalysis)),
+      needs_ayah: true,
+      needs_knowledge: false,
+      knowledge_topic: null,
+      ayah_topic: topic,
+      response_type: responseType,
+      reasoning_note: "local fast path: quran guidance",
+      planner_source: "local_fast_path",
+    };
+  }
+
+  return null;
+}
+
 async function buildChatResponse(message, history = []) {
   const timing = createTimingTracker();
 
   const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
     analyzeUserMessageFallback(message, history)
   );
-  const preliminaryKnowledgeResult = timing.measureSync("knowledge_router_ms", () =>
-    lookupKnowledgeAnswer(message, baseAnalysis, null, history)
+  const localFastPathPlan = timing.measureSync("context_resolver_ms", () =>
+    resolveLocalFastPathPlan(message, history, baseAnalysis)
   );
-  const preliminaryKnowledgeIntent = timing.measureSync("context_resolver_ms", () =>
-    Boolean(preliminaryKnowledgeResult) &&
-    !isExplicitAyahRequest(message, baseAnalysis, null, null) &&
-    (baseAnalysis.intent === "worship_practice_question" ||
-      isKnowledgeIntentQuestion(message, baseAnalysis, null, history) ||
-      isLocalKnowledgeQuery(message, baseAnalysis, null, history))
-  );
-
-  if (preliminaryKnowledgeIntent) {
-    const resolvedAnalysis = {
-      ...baseAnalysis,
-      response_type: "direct_answer",
-    };
-    const knowledgeDecisionMeta = buildDecisionMeta(
-      [],
-      {
-        responseType: "direct_answer",
-        ayahUsed: false,
-        selectedAyah: null,
-        topAyahIds: [],
-      },
-      false,
-      preliminaryKnowledgeResult.route_mode || "ilmihal_knowledge",
-      preliminaryKnowledgeResult,
-      timing.snapshot()
-    );
-    const assistantText = timing.measureSync("response_composer_ms", () =>
-      buildAssistantText(resolvedAnalysis, null, message, {
-        knowledgeResult: preliminaryKnowledgeResult,
-        knowledgeTopic: preliminaryKnowledgeResult.topic || null,
-        recent_assistant_texts: recentAssistantTextsFromHistory(history),
-      })
-    );
-    const finalDecisionMeta = {
-      ...knowledgeDecisionMeta,
-      timing_ms: normalizeTimingBreakdown({
-        ...knowledgeDecisionMeta.timing_ms,
-        ...timing.snapshot(),
-      }),
-    };
-    return applySafetyGuard({
-      ...resolvedAnalysis,
-      ayah_used: false,
-      top_ayah_ids: [],
-      selected_ayah: null,
-      decision_meta: finalDecisionMeta,
-      assistant_text: assistantText,
-    });
-  }
-
-  const plannerResult = await timing.measureAsync("intent_planner_ms", () =>
-    planChatWithOpenAI(message, history)
-  );
+  const plannerResult = localFastPathPlan
+    ? localFastPathPlan
+    : await timing.measureAsync("intent_planner_ms", () => planChatWithOpenAI(message, history));
   const mergedAnalysis = timing.measureSync("context_resolver_ms", () =>
     mergePlannerIntoAnalysis(baseAnalysis, plannerResult, message)
   );
+  const plannerDebugMeta = localFastPathPlan
+    ? { planner_source: "local_fast_path" }
+    : getPlannerDebugMeta();
   const shouldForceStructuredAyahIntent = timing.measureSync("context_resolver_ms", () =>
     shouldForceExplicitTopicAyahIntent(message, mergedAnalysis, plannerResult)
   );
@@ -288,7 +335,8 @@ async function buildChatResponse(message, history = []) {
     ayahUsed,
     routeMode,
     knowledgeResult,
-    timing.snapshot()
+    timing.snapshot(),
+    plannerDebugMeta.planner_source || "fallback"
   );
   return applySafetyGuard({
     ...analysis,
@@ -301,12 +349,21 @@ async function buildChatResponse(message, history = []) {
   });
 }
 
-function buildDecisionMeta(rankedAyahs, consistencyGuard, ayahUsed, routeMode, knowledgeResult, timingMs = null) {
+function buildDecisionMeta(
+  rankedAyahs,
+  consistencyGuard,
+  ayahUsed,
+  routeMode,
+  knowledgeResult,
+  timingMs = null,
+  plannerSource = "fallback"
+) {
   const top = Array.isArray(rankedAyahs) && rankedAyahs.length > 0 ? rankedAyahs[0] : null;
   const topDebug = top?.debug || {};
   return {
     route_mode: knowledgeResult?.knowledge_hit_id ? routeMode || "ilmihal_knowledge" : routeMode,
     knowledge_hit_id: knowledgeResult?.knowledge_hit_id || null,
+    planner_source: plannerSource || "fallback",
     ranker_source:
       top?.ranker_source ||
       topDebug.ranker_source ||

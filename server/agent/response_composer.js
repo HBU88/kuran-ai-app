@@ -13,17 +13,17 @@ function buildAssistantText(analysis, ayah, message, routing = {}) {
     text = buildPrayerRakatsAnswer(message, routing);
   } else if (routing.knowledgeResult) {
     text = composeKnowledgeFirstAnswer(routing.knowledgeResult, ayah);
-  } else if (shouldUseGeneralIslamicAnswer(message, routing)) {
-    text = buildGeneralIslamicAnswer(message, routing);
-  } else if (analysis.intent === "casual_conversation") {
-    text = buildCasualConversationAnswer(message);
-  } else if (ayah) {
+  } else if (ayah && isAyahPreferredResponseType(analysis.response_type)) {
     text = composeAssistantText({
       response_type: analysis.response_type,
       selected_ayah: ayah,
       messageAnalysis: analysis,
       recent_assistant_texts: routing.recent_assistant_texts || [],
     });
+  } else if (shouldUseGeneralIslamicAnswer(message, routing)) {
+    text = buildGeneralIslamicAnswer(message, routing);
+  } else if (analysis.intent === "casual_conversation") {
+    text = buildCasualConversationAnswer(message);
   } else if (routing.subIntent === "dua_request") {
     text = buildDuaRequestAnswer(message);
   } else if (routing.subIntent === "zikir_request") {
@@ -108,6 +108,10 @@ function composeAssistantText({
     default:
       return buildAyahCenteredAnswer(messageAnalysis, selected_ayah, recent_assistant_texts);
   }
+}
+
+function isAyahPreferredResponseType(responseType) {
+  return ["direct_ayah", "supportive_ayah", "explanation_with_ayah", "sensitive_support"].includes(responseType);
 }
 
 function composeKnowledgeFirstAnswer(knowledgeResult, selectedAyah) {

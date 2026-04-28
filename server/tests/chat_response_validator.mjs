@@ -244,31 +244,70 @@ async function runDebugResolveSmokeTest() {
       q: "haksızlığa uğradım",
       expectedCluster: "adalet",
       expectedRankerSource: "override",
+      expectedPlannerSource: "local_fast_path",
+      maxIntentPlannerMs: 20,
     },
     {
       q: "maddi sıkıntı yaşıyorum",
       expectedCluster: "rızık",
       expectedRankerSource: "override",
+      expectedPlannerSource: "local_fast_path",
+      maxIntentPlannerMs: 20,
+    },
+    {
+      q: "abdest nasıl alınır",
+      expectedPlannerSource: "local_fast_path",
+      expectedKnowledgeHit: true,
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      maxIntentPlannerMs: 20,
+    },
+    {
+      q: "merhaba",
+      expectedPlannerSource: "local_fast_path",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      maxIntentPlannerMs: 20,
     },
   ];
 
   for (const test of cases) {
     const payload = await postDebugResolve(test.q);
     const failures = [];
-    if (payload?.matched_override_cluster !== test.expectedCluster) {
+    if (test.expectedCluster && payload?.matched_override_cluster !== test.expectedCluster) {
       failures.push(`matched_override_cluster=${payload?.matched_override_cluster}`);
     }
-    if (payload?.ranker_source !== test.expectedRankerSource) {
+    if (test.expectedRankerSource && payload?.ranker_source !== test.expectedRankerSource) {
       failures.push(`ranker_source=${payload?.ranker_source}`);
     }
-    if (!payload?.selected_ayah_id) {
+    if (test.expectedPlannerSource && payload?.planner_source !== test.expectedPlannerSource) {
+      failures.push(`planner_source=${payload?.planner_source}`);
+    }
+    if (typeof test.expectedResponseType === "string" && payload?.response_type !== test.expectedResponseType) {
+      failures.push(`response_type=${payload?.response_type}`);
+    }
+    if (test.expectedKnowledgeHit === true && !payload?.knowledge_hit_id) {
+      failures.push("knowledge_hit_id missing");
+    }
+    if (Object.prototype.hasOwnProperty.call(test, "expectedSelectedAyah")) {
+      const selectedAyahId = payload?.selected_ayah_id ?? null;
+      if (selectedAyahId !== test.expectedSelectedAyah) {
+        failures.push(`selected_ayah_id=${selectedAyahId}`);
+      }
+    } else if (!payload?.selected_ayah_id) {
       failures.push("selected_ayah_id missing");
+    }
+    if (typeof test.maxIntentPlannerMs === "number") {
+      const plannerMs = Number(payload?.timing_ms?.intent_planner_ms || 0);
+      if (plannerMs > test.maxIntentPlannerMs) {
+        failures.push(`intent_planner_ms=${plannerMs}`);
+      }
     }
     if (failures.length > 0) {
       console.error(`FAIL [debug] ${test.q} -> ${failures.join("; ")}`);
       process.exit(1);
     }
-    console.log(`PASS [debug] ${test.q} -> ${payload.matched_override_cluster}:${payload.selected_ayah_id}`);
+    console.log(`PASS [debug] ${test.q} -> ${payload.planner_source}:${payload.matched_override_cluster || payload.route_mode}:${payload.selected_ayah_id ?? "null"}`);
   }
 }
 
