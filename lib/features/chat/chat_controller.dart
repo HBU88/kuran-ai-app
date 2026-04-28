@@ -5,12 +5,16 @@ import 'dart:math';
 
 import '../../data/models/chat_message_model.dart';
 import '../../data/sources/remote/chat_agent_service.dart';
+import 'chat_mode.dart';
 
 class ChatController extends ChangeNotifier {
-  ChatController({ChatAgentService? service})
-    : _service = service ?? ChatAgentService();
+  ChatController({
+    ChatAgentService? service,
+    this.mode = ChatMode.chat,
+  }) : _service = service ?? ChatAgentService();
 
   final ChatAgentService _service;
+  final ChatMode mode;
 
   final List<ChatMessageModel> _messages = [];
   bool loading = false;
@@ -97,7 +101,11 @@ class ChatController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await _service.sendMessage(message, history: history);
+      final response = await _service.sendMessage(
+        message,
+        history: history,
+        mode: mode,
+      );
       _messages.add(
         _assistantMessageFromResponse(
           response,
@@ -214,12 +222,13 @@ class ChatController extends ChangeNotifier {
       debug: debugJson is Map<String, dynamic>
           ? ChatDebugInfo.fromJson(debugJson)
           : debugJson is Map
-          ? ChatDebugInfo.fromJson(
-              Map<String, dynamic>.from(
-                debugJson.map((key, value) => MapEntry(key.toString(), value)),
-              ),
-            )
-          : null,
+              ? ChatDebugInfo.fromJson(
+                  Map<String, dynamic>.from(
+                    debugJson
+                        .map((key, value) => MapEntry(key.toString(), value)),
+                  ),
+                )
+              : null,
     );
   }
 

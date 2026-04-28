@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import '../../../features/chat/chat_mode.dart';
+
 class ChatAgentService {
   ChatAgentService({
     http.Client? client,
     String baseUrl = 'http://10.0.2.2:3000',
-  }) : _client = client ?? http.Client(),
-       _baseUrl = baseUrl;
+  })  : _client = client ?? http.Client(),
+        _baseUrl = baseUrl;
 
   final http.Client _client;
   final String _baseUrl;
@@ -15,8 +17,9 @@ class ChatAgentService {
   Future<Map<String, dynamic>> sendMessage(
     String message, {
     List<Map<String, dynamic>> history = const [],
+    ChatMode mode = ChatMode.chat,
   }) async {
-    final target = Uri.parse('$_baseUrl/chat');
+    final target = Uri.parse('$_baseUrl${mode.endpointPath}');
     final requestBody = {'message': message, 'history': history};
     final response = await _client.post(
       target,

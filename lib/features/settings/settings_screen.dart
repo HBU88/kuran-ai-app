@@ -54,8 +54,8 @@ class SettingsScreen extends StatelessWidget {
                     Text(
                       AppConstants.appName,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                            fontWeight: FontWeight.w800,
+                          ),
                     ),
                     const SizedBox(height: 6),
                     const Text(AppConstants.appTagline),

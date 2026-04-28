@@ -37,8 +37,8 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
                     return;
                   }
                   if (value) {
-                    final notificationHelper = context
-                        .read<NotificationHelper>();
+                    final notificationHelper =
+                        context.read<NotificationHelper>();
                     await notificationHelper.showPrayerTogglePreview();
                   }
                 },
@@ -121,8 +121,8 @@ class _LocationPickerCard extends StatelessWidget {
             ],
             onChanged:
                 controller.selectedCountryId == null || controller.statesLoading
-                ? null
-                : (value) => controller.selectState(value),
+                    ? null
+                    : (value) => controller.selectState(value),
           ),
           if (controller.statesLoading) ...[
             const SizedBox(height: 8),
@@ -145,8 +145,8 @@ class _LocationPickerCard extends StatelessWidget {
             ],
             onChanged:
                 controller.selectedStateId == null || controller.citiesLoading
-                ? null
-                : (value) => controller.selectCity(value),
+                    ? null
+                    : (value) => controller.selectCity(value),
           ),
           if (controller.citiesLoading) ...[
             const SizedBox(height: 8),
@@ -222,8 +222,8 @@ class _PrayerTimesContent extends StatelessWidget {
                 child: Text(
                   controller.selectedLocationLabel,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+                        fontWeight: FontWeight.w800,
+                      ),
                 ),
               ),
             ],
@@ -242,8 +242,8 @@ class _PrayerTimesContent extends StatelessWidget {
               Text(
                 DateFormat('HH:mm').format(effectiveNow),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+                      fontWeight: FontWeight.w800,
+                    ),
               ),
             ],
           ),
@@ -263,7 +263,9 @@ class _PrayerTimesContent extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       times.nextPrayerName,
-                      style: Theme.of(context).textTheme.headlineSmall
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
                           ?.copyWith(fontWeight: FontWeight.w800),
                     ),
                   ],
@@ -272,9 +274,9 @@ class _PrayerTimesContent extends StatelessWidget {
               Text(
                 DateFormat('HH:mm').format(times.nextPrayerTime),
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                      fontWeight: FontWeight.w800,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
               ),
             ],
           ),
@@ -292,9 +294,9 @@ class _PrayerTimesContent extends StatelessWidget {
               Text(
                 times.formattedRemainingDuration,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                      fontWeight: FontWeight.w800,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
               ),
             ],
           ),

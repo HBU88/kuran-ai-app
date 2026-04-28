@@ -40,8 +40,8 @@ class _SituationAyahScreenState extends State<SituationAyahScreen> {
                     Text(
                       'Bugün nasılsın?',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                            fontWeight: FontWeight.w800,
+                          ),
                     ),
                     const SizedBox(height: 12),
                     TextField(

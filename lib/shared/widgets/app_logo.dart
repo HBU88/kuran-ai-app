@@ -13,9 +13,9 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconSize = compact ? 34.0 : 42.0;
     final labelStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
-      color: AppColors.textPrimary,
-      fontWeight: FontWeight.w600,
-    );
+          color: AppColors.textPrimary,
+          fontWeight: FontWeight.w600,
+        );
 
     return Row(
       mainAxisSize: MainAxisSize.min,

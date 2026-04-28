@@ -12,6 +12,8 @@ import '../../shared/widgets/loading_view.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_radius.dart';
 import '../../theme/app_spacing.dart';
+import '../chat/chat_mode.dart';
+import '../chat/chat_screen.dart';
 import 'widgets/home_menu_item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,39 +40,14 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 0,
-        onDestinationSelected: (index) {
-          if (index == 1) {
-            Navigator.pushNamed(context, AppRoutes.chat);
-          } else if (index == 2) {
-            Navigator.pushNamed(context, AppRoutes.settings);
-          }
-        },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book_rounded),
-            label: 'Rehberlik',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.chat_bubble_outline_rounded),
-            selectedIcon: Icon(Icons.chat_bubble_rounded),
-            label: 'Sohbet',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.tune_rounded),
-            selectedIcon: Icon(Icons.tune_rounded),
-            label: 'Ayarlar',
-          ),
-        ],
-      ),
       body: FutureBuilder<AyahModel>(
         future: repository.getTodayAyah(DateTime.now()),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const AppGradientBackground(
-              child: LoadingView(message: 'Bugünün ayeti hazırlanıyor...'),
+              child: LoadingView(
+                message: 'Bugünün ayeti hazırlanıyor...',
+              ),
             );
           }
 
@@ -86,22 +63,22 @@ class HomeScreen extends StatelessWidget {
                   AppConstants.appTagline,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                    height: 1.45,
-                  ),
+                        color: AppColors.textSecondary,
+                        height: 1.45,
+                      ),
                 ),
                 const SizedBox(height: 20),
                 Text(
                   'Bugünün Ayeti',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w600,
-                  ),
+                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: 12),
                 AyahCard(ayah: ayah),
                 const SizedBox(height: AppSpacing.large),
-                const _MenuGrid(),
+                const _ModuleGrid(),
                 const SizedBox(height: AppSpacing.large),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -126,9 +103,11 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          'Hazır. Sohbete geçebilir, ezberini takip edebilir veya favorileri açabilirsin.',
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: AppColors.textSecondary),
+                          'Hazır. Rehberlik ve Dinî Bilgiler modüllerinden birini açabilirsin.',
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
                         ),
                       ),
                     ],
@@ -143,13 +122,13 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _MenuGrid extends StatelessWidget {
-  const _MenuGrid();
+class _ModuleGrid extends StatelessWidget {
+  const _ModuleGrid();
 
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: MediaQuery.sizeOf(context).width > 420 ? 3 : 2,
+      crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 12,
@@ -157,29 +136,22 @@ class _MenuGrid extends StatelessWidget {
       childAspectRatio: 1.08,
       children: [
         HomeMenuItem(
-          label: 'Sohbet',
-          icon: Icons.chat_bubble_outline_rounded,
-          onTap: () => Navigator.pushNamed(context, AppRoutes.chat),
-        ),
-        HomeMenuItem(
-          label: 'Ezber',
+          label: 'Rehberlik',
           icon: Icons.menu_book_outlined,
-          onTap: () => Navigator.pushNamed(context, AppRoutes.memorization),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const ChatScreen(mode: ChatMode.ayah),
+            ),
+          ),
         ),
         HomeMenuItem(
-          label: 'Kıble',
-          icon: Icons.explore_outlined,
-          onTap: () => Navigator.pushNamed(context, AppRoutes.settings),
-        ),
-        HomeMenuItem(
-          label: 'Namaz Vakitleri',
-          icon: Icons.schedule_outlined,
-          onTap: () => Navigator.pushNamed(context, AppRoutes.prayerTimes),
-        ),
-        HomeMenuItem(
-          label: 'Favoriler',
-          icon: Icons.favorite_border_rounded,
-          onTap: () => Navigator.pushNamed(context, AppRoutes.favorites),
+          label: 'Dinî Bilgiler',
+          icon: Icons.library_books_outlined,
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const ChatScreen(mode: ChatMode.ilmihal),
+            ),
+          ),
         ),
       ],
     );

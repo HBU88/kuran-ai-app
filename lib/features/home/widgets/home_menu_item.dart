@@ -148,6 +148,20 @@ class _MenuGlyphPainter extends CustomPainter {
       );
     }
 
+    void drawLibraryBook() {
+      drawBook();
+      canvas.drawLine(
+        Offset(size.width * 0.36, size.height * 0.60),
+        Offset(size.width * 0.64, size.height * 0.60),
+        cream,
+      );
+      canvas.drawLine(
+        Offset(size.width * 0.39, size.height * 0.66),
+        Offset(size.width * 0.61, size.height * 0.66),
+        accent,
+      );
+    }
+
     void drawCompass() {
       canvas.drawCircle(
         Offset(size.width * 0.5, size.height * 0.5),
@@ -213,6 +227,8 @@ class _MenuGlyphPainter extends CustomPainter {
       drawChat();
     } else if (icon == Icons.menu_book_outlined) {
       drawBook();
+    } else if (icon == Icons.library_books_outlined) {
+      drawLibraryBook();
     } else if (icon == Icons.explore_outlined) {
       drawCompass();
     } else if (icon == Icons.schedule_outlined) {

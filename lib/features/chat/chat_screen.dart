@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -12,24 +10,32 @@ import '../../theme/app_radius.dart';
 import '../../theme/app_spacing.dart';
 import '../../utils/chat_logger.dart';
 import 'chat_controller.dart';
+import 'chat_mode.dart';
 import 'widgets/assistant_message.dart';
 import 'widgets/ayah_card.dart';
 import 'widgets/user_bubble.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+  const ChatScreen({
+    super.key,
+    this.mode = ChatMode.chat,
+  });
+
+  final ChatMode mode;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ChatController(),
-      child: const _ChatView(),
+      create: (_) => ChatController(mode: mode),
+      child: _ChatView(mode: mode),
     );
   }
 }
 
 class _ChatView extends StatefulWidget {
-  const _ChatView();
+  const _ChatView({required this.mode});
+
+  final ChatMode mode;
 
   @override
   State<_ChatView> createState() => _ChatViewState();
@@ -116,12 +122,15 @@ class _ChatViewState extends State<_ChatView> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text('HAKAI'),
+        title: Text(widget.mode.title),
         actions: [
           IconButton(
             tooltip: 'Sohbeti temizle',
             onPressed: () => _confirmAndClearChat(context),
-            icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
+            icon: const Icon(
+              Icons.delete_outline,
+              color: Colors.redAccent,
+            ),
           ),
           const SizedBox(width: 6),
         ],
@@ -134,7 +143,7 @@ class _ChatViewState extends State<_ChatView> {
               children: [
                 Expanded(
                   child: controller.isEmpty
-                      ? const _EmptyChatIntro()
+                      ? _EmptyChatIntro(mode: widget.mode)
                       : ListView.builder(
                           controller: _scrollController,
                           padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
@@ -196,7 +205,9 @@ class _ChatViewState extends State<_ChatView> {
 }
 
 class _EmptyChatIntro extends StatelessWidget {
-  const _EmptyChatIntro();
+  const _EmptyChatIntro({required this.mode});
+
+  final ChatMode mode;
 
   @override
   Widget build(BuildContext context) {
@@ -218,13 +229,15 @@ class _EmptyChatIntro extends StatelessWidget {
         ),
         const SizedBox(height: 22),
         Text(
-          'HAKAI ile sakin bir sohbet',
+          mode.introTitle,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 12),
         Text(
-          '\u0130\u00e7inden ge\u00e7eni yaz. Cevaplar, uygulaman\u0131n ayet havuzundan se\u00e7ilen i\u00e7eriklerle sakin ve \u00f6l\u00e7\u00fcl\u00fc bir rehberlik sunar.',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.75),
+          'İçinden geçeni yaz. Cevaplar, uygulamanın ayet havuzundan veya dinî bilgi havuzundan seçilen içeriklerle sakin ve ölçülü bir rehberlik sunar.',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                height: 1.75,
+              ),
         ),
       ],
     );
@@ -242,9 +255,8 @@ class _ChatMessageItem extends StatelessWidget {
       return const SizedBox.shrink();
     }
     return Column(
-      crossAxisAlignment: message.isUser
-          ? CrossAxisAlignment.end
-          : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         if (message.isUser)
           UserBubble(text: message.text.trim())
@@ -324,7 +336,9 @@ class _ChatComposer extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.surfaceSoft,
             borderRadius: BorderRadius.circular(AppRadius.xLarge),
-            border: Border.all(color: AppColors.divider.withValues(alpha: 0.8)),
+            border: Border.all(
+              color: AppColors.divider.withValues(alpha: 0.8),
+            ),
           ),
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Row(
@@ -339,7 +353,7 @@ class _ChatComposer extends StatelessWidget {
                   textInputAction: TextInputAction.newline,
                   style: Theme.of(context).textTheme.bodyLarge,
                   decoration: const InputDecoration(
-                    hintText: '\u0130\u00e7inden ge\u00e7eni yaz...',
+                    hintText: 'İçinden geçeni yaz...',
                     filled: false,
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
