@@ -60,6 +60,7 @@ server/.env.*
 # Runtime logs / generated logs
 logs/
 server/logs/
+*.pid
 *.err.txt
 *.out.txt
 chat_backend_log.txt

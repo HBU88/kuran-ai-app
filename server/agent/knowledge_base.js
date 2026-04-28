@@ -125,6 +125,9 @@ function isKnowledgeIntentQuestion(message, analysis = {}, plannerPlan = null, h
 function matchesLocalKnowledgeCue(normalizedMessage) {
   const cues = [
     "abdest",
+    "gusul",
+    "gusül",
+    "seferi",
     "wudu",
     "namaz",
     "teravih",
@@ -139,6 +142,7 @@ function matchesLocalKnowledgeCue(normalizedMessage) {
     "dua",
     "sahur",
     "vitir",
+    "namaz vakitleri",
   ];
   return cues.some((cue) => normalizedMessage.includes(normalize(cue)));
 }
@@ -157,11 +161,16 @@ function matchesKnowledgeQuestionCue(normalizedMessage) {
     "nasildi",
     "nasıl biriydi",
     "nasil biriydi",
+    "nasıl alınır",
+    "nasil alinir",
     "nedir",
     "nelerdir",
     "kimlere verilir",
     "şart mı",
     "sart mi",
+    "farz mı",
+    "farz mi",
+    "vacip mi",
     "kaç rekat",
     "kac rekat",
     "kaç rekât",
@@ -318,6 +327,10 @@ function matchesLocalKnowledgeCue(normalizedMessage) {
     "tövbe",
     "sahur",
     "vitir",
+    "gusul",
+    "gusül",
+    "seferi",
+    "namaz vakitleri",
   ];
   return cues.some((cue) => normalizedMessage.includes(normalize(cue)));
 }
@@ -336,11 +349,16 @@ function matchesKnowledgeQuestionCue(normalizedMessage) {
     "nasildi",
     "nasıl biriydi",
     "nasil biriydi",
+    "nasıl alınır",
+    "nasil alinir",
     "nedir",
     "nelerdir",
     "kimlere verilir",
     "şart mı",
     "sart mi",
+    "farz mı",
+    "farz mi",
+    "vacip mi",
     "kaç rekat",
     "kac rekat",
     "kaç rekât",

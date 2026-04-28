@@ -276,4 +276,121 @@
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   }
+  ,
+  {
+    "id": "gusul_howto",
+    "type": "worship_practice",
+    "topic": "gusul_abdesti",
+    "triggers": [
+      "gusül abdesti nasıl alınır",
+      "gusul abdesti nasil alinir",
+      "gusül nasıl alınır",
+      "gusul nasıl alınır",
+      "gusul nasil alinir",
+      "gusül",
+      "gusul"
+    ],
+    "answer_tr": "Gusül abdesti genel olarak niyet, ağza su verme, burna su verme ve tüm bedeni yıkama adımlarından oluşur. Ayrıntılı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "seferi_namazi_rakah",
+    "type": "worship_practice",
+    "topic": "seferi_namazi",
+    "triggers": [
+      "seferi namaz kaç rekat",
+      "seferi namaz kac rekat",
+      "seferi namaz kaç rekât",
+      "seferi namaz kac rekât",
+      "seferi namaz",
+      "seferi"
+    ],
+    "answer_tr": "Seferî olan kişi dört rekâtlı farz namazları iki rekât kılar; ayrıntı mezhebe göre değişebilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "vitir_vacip",
+    "type": "worship_practice",
+    "topic": "vitir_vacip",
+    "triggers": [
+      "vitir namazı vacip mi",
+      "vitir namazi vacip mi",
+      "vitir vacip mi",
+      "vitir farz mı",
+      "vitir farz mi",
+      "vitir namazı farz mı",
+      "vitir namazı farz mi"
+    ],
+    "answer_tr": "Hanefî mezhebinde vitir vaciptir; diğer mezheplerde farklı değerlendirmeler vardır.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "bayram_howto",
+    "type": "worship_practice",
+    "topic": "bayram_namazi",
+    "triggers": [
+      "bayram namazı nasıl kılınır",
+      "bayram namazi nasil kilinir",
+      "bayram nasıl kılınır",
+      "bayram nasil kilinir",
+      "bayram namazı nasıl",
+      "bayram namazi nasil"
+    ],
+    "answer_tr": "Bayram namazı iki rekât kılınır ve tekbirlerle eda edilir. Ayrıntılar için güvenilir bir ilmihal kaynağına danışılabilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "oruc_farz",
+    "type": "worship_practice",
+    "topic": "oruc_farz",
+    "triggers": [
+      "oruç kimlere farzdır",
+      "oruc kimlere farzdir",
+      "oruç kimlere farzdir",
+      "ramazan orucu kimlere farzdır",
+      "ramazan orucu kimlere farzdir",
+      "oruç farz mı",
+      "oruc farz mi"
+    ],
+    "answer_tr": "Ramazan orucu, akıl sağlığı yerinde, ergen ve mazereti olmayan Müslümanlara farzdır; hastalık ve yolculuk gibi durumlarda ruhsatlar vardır.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "oruc_not_farz",
+    "type": "worship_practice",
+    "topic": "oruc_farz_degildir",
+    "triggers": [
+      "oruç kimlere farz değildir",
+      "oruc kimlere farz degildir",
+      "oruç kimlere farz degildir",
+      "oruç farz değildir",
+      "oruc farz degildir",
+      "oruç kime farz değildir",
+      "oruç kime farz degildir"
+    ],
+    "answer_tr": "Çocuklar, akıl sağlığı yerinde olmayanlar ve bazı mazeret sahipleri için hüküm farklı olabilir; ayrıntı için ilmihal bilgisine bakılmalıdır.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "namaz_vakitleri",
+    "type": "worship_practice",
+    "topic": "namaz_vakitleri",
+    "triggers": [
+      "namaz vakitleri nelerdir",
+      "namaz vakitleri",
+      "beş vakit namaz hangileri",
+      "vakit namazları",
+      "namaz vakti",
+      "namaz vakitleri kaç tane"
+    ],
+    "answer_tr": "Günlük beş namaz vakti sabah, öğle, ikindi, akşam ve yatsıdır.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  }
 ]

@@ -38,7 +38,11 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     { match: /aksam/i, topic: "aksam_namazi" },
     { match: /yatsi/i, topic: "yatsi_namazi" },
   ];
+  const hasCountCue = /kaç|kac|rekat|rekât/.test(normalizedMessage);
   for (const rule of hardMatches) {
+    if (rule.topic === "vitir_namazi" && (!hasCountCue || /vacip|farz/.test(normalizedMessage))) {
+      continue;
+    }
     if (rule.match.test(normalizedMessage) && (rule.topic !== "cuma_namazi" || normalizedMessage.includes("namaz"))) {
       const hardEntry = entries.find((entry) => topicKey(entry.topic || "") === topicKey(rule.topic));
       if (hardEntry) {
@@ -59,22 +63,6 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
 
   const isIncompleteFollowup = isFollowupPrompt(normalizedMessage);
   const recoveredHistoryTopic = isIncompleteFollowup ? recoverTopicFromRawHistory(history) : null;
-  if (recoveredHistoryTopic) {
-    const recoveredEntry = entries.find((entry) => topicKey(entry.topic || "") === topicKey(recoveredHistoryTopic));
-    if (recoveredEntry) {
-      return {
-        id: recoveredEntry.id || null,
-        file: "ilmihal_knowledge_base.json",
-        type: recoveredEntry.type || "worship_practice",
-        topic: recoveredEntry.topic || null,
-        answer_text: recoveredEntry.answer_tr || "",
-        source_note: recoveredEntry.source_note || "Diyanet-based curated internal knowledge.",
-        requires_ayah: recoveredEntry.requires_ayah === true,
-        route_mode: "ilmihal_knowledge",
-        knowledge_hit_id: recoveredEntry.id || null,
-      };
-    }
-  }
   const candidateText = isIncompleteFollowup && normalizedHistory ? `${normalizedHistory} ${normalizedMessage}` : normalizedMessage;
 
   let bestEntry = null;
@@ -87,8 +75,16 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     const exactTriggerScore = scoreTriggers(candidateText, normalizedMessage, entryTriggers);
     const contextScore =
       isIncompleteFollowup && normalizedHistory && entryTopic && normalizedHistory.includes(entryTopic) ? 2 : 0;
+    const recoveredTopicScore =
+      isIncompleteFollowup && recoveredHistoryTopic && entryTopic && topicKey(entryTopic) === topicKey(recoveredHistoryTopic)
+        ? 2
+        : 0;
     const topicScore = topicHint && entryTopic && topicHint === entryTopic ? 3 : 0;
-    const totalScore = exactTriggerScore + contextScore + (exactTriggerScore > 0 || contextScore > 0 ? topicScore : 0);
+    const totalScore =
+      exactTriggerScore +
+      contextScore +
+      recoveredTopicScore +
+      (exactTriggerScore > 0 || contextScore > 0 || recoveredTopicScore > 0 ? topicScore : 0);
 
     if (totalScore > bestScore) {
       bestScore = totalScore;
@@ -119,10 +115,15 @@ function isFollowupPrompt(normalizedMessage) {
     "kac rekat",
     "farzı kaç",
     "farzi kac",
+    "farz mı",
+    "farz mi",
+    "vacip mi",
     "sünneti var mı",
     "sunneti var mi",
     "nasıl kılınır",
     "nasil kilinir",
+    "nasıl alınır",
+    "nasil alinir",
   ];
   return prompts.some((prompt) => normalizedMessage.includes(normalizeLoose(prompt)));
 }
@@ -156,6 +157,10 @@ function recoverTopicFromRawHistory(history) {
     if (!item || typeof item.text !== "string") continue;
     const raw = normalizeRawText(item.text);
     if (!raw) continue;
+    if (raw.includes("abdest")) return "abdest";
+    if (raw.includes("gusül") || raw.includes("gusul")) return "gusul_abdesti";
+    if (raw.includes("seferi")) return "seferi_namazi";
+    if (raw.includes("oruc") || raw.includes("oruç")) return "oruc";
     if (raw.includes("teravih") || raw.includes("teravi")) return "teravih_namazi";
     if (raw.includes("cuma")) return "cuma_namazi";
     if (raw.includes("bayram")) return "bayram_namazi";
