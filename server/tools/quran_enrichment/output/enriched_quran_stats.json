@@ -1,0 +1,97 @@
+{
+  "total_ayahs": 6236,
+  "externally_tagged_count": 3672,
+  "override_tagged_count": 14,
+  "missing_external_tags_count": 2564,
+  "matched_percentage": 58.88,
+  "sample_matched_records": [
+    {
+      "reference": "1:1",
+      "tags": [
+        "الحمد لله مفتتح بعض سور القرآن",
+        "الرحمن",
+        "الرحيم",
+        "الرحمن، الرحيم، الرءوف، الغفور"
+      ],
+      "emotion_tags": [],
+      "context_tags": [],
+      "use_cases": [
+        "الحمد لله مفتتح بعض سور القرآن",
+        "الرحمن",
+        "الرحيم",
+        "الرحمن، الرحيم، الرءوف، الغفور"
+      ]
+    },
+    {
+      "reference": "1:2",
+      "tags": [
+        "ربّ العالمين"
+      ],
+      "emotion_tags": [],
+      "context_tags": [],
+      "use_cases": [
+        "ربّ العالمين"
+      ]
+    },
+    {
+      "reference": "1:3",
+      "tags": [
+        "الرحمن",
+        "الرحيم",
+        "الرحمن، الرحيم، الرءوف، الغفور"
+      ],
+      "emotion_tags": [],
+      "context_tags": [],
+      "use_cases": [
+        "الرحمن",
+        "الرحيم",
+        "الرحمن، الرحيم، الرءوف، الغفور"
+      ]
+    },
+    {
+      "reference": "1:4",
+      "tags": [
+        "يوم الدين",
+        "يوم الجزاء في الآخرة"
+      ],
+      "emotion_tags": [],
+      "context_tags": [],
+      "use_cases": [
+        "يوم الدين",
+        "يوم الجزاء في الآخرة"
+      ]
+    },
+    {
+      "reference": "1:5",
+      "tags": [
+        "الأدعية الواردة في القرآن الكريم",
+        "بالله تكون الاستعانة",
+        "وجوب إفراده وحده بالعبادة"
+      ],
+      "emotion_tags": [],
+      "context_tags": [],
+      "use_cases": [
+        "الأدعية الواردة في القرآن الكريم",
+        "بالله تكون الاستعانة",
+        "وجوب إفراده وحده بالعبادة"
+      ]
+    }
+  ],
+  "sample_missing_records": [
+    "1:6",
+    "1:7",
+    "2:12",
+    "2:15",
+    "2:66"
+  ],
+  "external_dataset_detected_fields": [
+    "category",
+    "context",
+    "emotion",
+    "tags",
+    "theme",
+    "use_cases"
+  ],
+  "external_dataset_total_records": 3672,
+  "unmatched_external_records_count": 0
+}

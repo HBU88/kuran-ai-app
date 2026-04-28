@@ -1,0 +1,27 @@
+POST http://127.0.0.1:3000/chat
+Content-Type: application/json
+
+{
+  "message": "zikir nasıl çekilir",
+  "history": []
+}
+
+###
+
+POST http://127.0.0.1:3000/chat
+Content-Type: application/json
+
+{
+  "message": "namazla ilgili ayet var mı",
+  "history": []
+}
+
+###
+
+POST http://127.0.0.1:3000/chat
+Content-Type: application/json
+
+{
+  "message": "çok korkuyorum",
+  "history": []
+}

@@ -1,0 +1,82 @@
+{
+  "allowlisted_concepts_count": 24,
+  "fetched_concepts_count": 7,
+  "skipped_concepts": [
+    "mercy",
+    "forgiveness",
+    "repentance",
+    "patience",
+    "prayer",
+    "guidance",
+    "faith",
+    "belief",
+    "disbelief",
+    "hypocrites",
+    "prophets",
+    "moses",
+    "abraham",
+    "afterlife",
+    "justice",
+    "charity",
+    "fasting"
+  ],
+  "total_records": 261,
+  "verse_level_matches": 261,
+  "coverage_percentage_against_6236": 4.19,
+  "top_concepts_by_verse_count": [
+    {
+      "concept": "Hell",
+      "concept_id": "hell",
+      "verse_count": 50
+    },
+    {
+      "concept": "Paradise",
+      "concept_id": "paradise",
+      "verse_count": 50
+    },
+    {
+      "concept": "Quran",
+      "concept_id": "quran",
+      "verse_count": 49
+    },
+    {
+      "concept": "Islam",
+      "concept_id": "islam",
+      "verse_count": 48
+    },
+    {
+      "concept": "Allah",
+      "concept_id": "allah",
+      "verse_count": 39
+    },
+    {
+      "concept": "Jesus",
+      "concept_id": "jesus",
+      "verse_count": 25
+    },
+    {
+      "concept": "Muhammad",
+      "concept_id": "muhammad",
+      "verse_count": 5
+    }
+  ],
+  "warnings": [
+    "No verse references found for mercy",
+    "No verse references found for forgiveness",
+    "No verse references found for repentance",
+    "No verse references found for patience",
+    "No verse references found for prayer",
+    "No verse references found for guidance",
+    "No verse references found for faith",
+    "No verse references found for belief",
+    "No verse references found for disbelief",
+    "No verse references found for hypocrites",
+    "No verse references found for prophets",
+    "No verse references found for moses",
+    "No verse references found for abraham",
+    "No verse references found for afterlife",
+    "No verse references found for justice",
+    "No verse references found for charity",
+    "No verse references found for fasting"
+  ]
+}

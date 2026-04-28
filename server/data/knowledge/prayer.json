@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "topic": "namaz",
+      "keywords": ["sabah namazı kaç rekat", "sabah namazı kaç rekât", "sabah kaç rekat", "sabah kaç rekât"],
+      "answer_text": "Sabah namazı 4 rekattır: 2 sünnet + 2 farz.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "namaz",
+      "keywords": ["öğle namazı kaç rekat", "ogle namazı kaç rekat", "öğle kaç rekat", "ogle kaç rekat"],
+      "answer_text": "Öğle namazı 10 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "namaz",
+      "keywords": ["ikindi namazı kaç rekat", "ikindi kaç rekat"],
+      "answer_text": "İkindi namazı 8 rekattır: 4 sünnet + 4 farz.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "namaz",
+      "keywords": ["akşam namazı kaç rekat", "akşam kaç rekat"],
+      "answer_text": "Akşam namazı 5 rekattır: 3 farz + 2 sünnet.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "namaz",
+      "keywords": ["yatsı namazı kaç rekat", "yatsı kaç rekat"],
+      "answer_text": "Yatsı namazı 13 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet + 3 vitir.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "namaz",
+      "keywords": ["vitir kaç rekat", "vitir namazı kaç rekat"],
+      "answer_text": "Vitir namazı 3 rekattır.",
+      "source_type": "curated_internal"
+    }
+  ]
+}

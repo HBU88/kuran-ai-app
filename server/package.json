@@ -1,0 +1,23 @@
+{
+  "name": "ayet-rehberi-agent",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "smoke": "node agent.js \"çok yalnız hissediyorum\"",
+    "test:chat": "node tests/chat_response_validator.mjs"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.1",
+    "openai": "^4.104.0"
+  },
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

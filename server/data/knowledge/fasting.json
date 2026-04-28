@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "topic": "oruç",
+      "keywords": ["oruç nedir", "oruç nedir kısaca", "oruc nedir"],
+      "answer_text": "Oruç, niyet ederek yeme-içme ve orucu bozan durumlardan uzak durarak tutulan ibadettir. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "oruç",
+      "keywords": ["orucu bozan şeyler", "orucu bozan seyler", "orucu bozan temel şeyler"],
+      "answer_text": "Orucu bozan temel şeyler hakkında ayrıntılar olabilir; genel olarak yeme, içme ve orucu bilinçli biçimde bozma sayılan durumlar buna girer. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "oruç",
+      "keywords": ["sahur şart mı", "sahur sart mi"],
+      "answer_text": "Sahur oruç için çok kıymetlidir; genel kabulde şart değil, fakat bereketli bir sünnet olarak görülür. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    }
+  ]
+}

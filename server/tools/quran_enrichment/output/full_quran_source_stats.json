@@ -1,0 +1,14 @@
+{
+  "detected_ar_schema_type": "surah-level",
+  "detected_tr_schema_type": "ayah-level",
+  "total_ar_records": 114,
+  "total_tr_records": 6236,
+  "flattened_ar_records": 6236,
+  "flattened_tr_records": 6236,
+  "merged_records": 6236,
+  "missing_ar_count": 0,
+  "missing_tr_count": 0,
+  "duplicate_key_count": 0,
+  "sample_missing_keys": [],
+  "sample_duplicate_keys": []
+}

@@ -1,0 +1,69 @@
+[
+  {
+    "source_name": "Quranpedia topics API",
+    "source_url": "https://api.quranpedia.net/v1/topics",
+    "license": null,
+    "available_format": "REST JSON",
+    "verse_level_references": true,
+    "reference_format": "surah:ayah string in ayahs field",
+    "useful_fields": [
+      "name",
+      "parent_id",
+      "ayahs"
+    ],
+    "merge_safety": "safe",
+    "reason": "Direct verse-linked topics are exposed via ayahs strings, so this can be normalized safely to surahNumber:ayahNumber.",
+    "source_status": "usable"
+  },
+  {
+    "source_name": "Quran Analysis (karimouda/qurananalysis)",
+    "source_url": "https://github.com/karimouda/qurananalysis",
+    "license": "GPL-3.0",
+    "available_format": "GitHub repository with ontology/data files and website resources",
+    "verse_level_references": true,
+    "reference_format": "Concept pages expose verse lists; repo also references ontology resources",
+    "useful_fields": [
+      "ontology concepts",
+      "verse list",
+      "concept relations",
+      "topic index"
+    ],
+    "merge_safety": "partial",
+    "reason": "The project contains a Quran ontology and verse-list references, but the public repo does not expose a clean machine-readable verse-topic export to import safely without a dedicated parser.",
+    "source_status": "discovery-only"
+  },
+  {
+    "source_name": "Quran Foundation Content API",
+    "source_url": "https://api-docs.quran.com/docs/content_apis_versioned/",
+    "license": "Not clearly stated in docs",
+    "available_format": "REST JSON / SDK",
+    "verse_level_references": true,
+    "reference_format": "verseKey chapter:verse for verse endpoints",
+    "useful_fields": [
+      "verseKey",
+      "translations",
+      "tafsirs",
+      "word metadata"
+    ],
+    "merge_safety": "unsafe",
+    "reason": "The docs provide verse-level content APIs, but no safe semantic topic mapping endpoint was identified in the candidate scope.",
+    "source_status": "discovery-only"
+  },
+  {
+    "source_name": "Quranic Arabic Corpus ontology",
+    "source_url": "https://corpus.quran.com/concept.jsp?id=quran",
+    "license": "GNU Public License",
+    "available_format": "HTML concept pages / ontology concept index",
+    "verse_level_references": true,
+    "reference_format": "Verse List links and concept pages with chapter:verse references",
+    "useful_fields": [
+      "concept names",
+      "verse list",
+      "concept map",
+      "ontology relations"
+    ],
+    "merge_safety": "partial",
+    "reason": "Concept pages include verse references, but they are HTML/ontology pages rather than a stable thematic JSON export. Safe import would require a dedicated parser and curation step.",
+    "source_status": "discovery-only"
+  }
+]

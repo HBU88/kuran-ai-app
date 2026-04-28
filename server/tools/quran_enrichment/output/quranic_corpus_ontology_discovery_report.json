@@ -1,0 +1,98 @@
+{
+  "source_name": "Quranic Arabic Corpus ontology",
+  "source_url": "https://corpus.quran.com/ontology.jsp",
+  "license_or_terms_found": [
+    "GNU public license",
+    "terms of use",
+    "open source project"
+  ],
+  "concept_links_found_count": 24,
+  "sampled_concepts": [
+    {
+      "id": "quran",
+      "title": "Quran (<span class=\"ax\">القرآن)</span>",
+      "category": "Holy Book",
+      "verseCountClaimed": null,
+      "sampleVerseRefs": [
+        "2:185",
+        "4:82",
+        "5:101",
+        "6:19",
+        "7:204",
+        "9:111",
+        "10:15",
+        "10:37",
+        "10:61",
+        "12:2"
+      ],
+      "conceptUrl": "https://corpus.quran.com/concept.jsp?id=quran",
+      "verseListUrl": "https://corpus.quran.com/search.jsp?q=con%3Aquran"
+    },
+    {
+      "id": "allah",
+      "title": "Allah (<span class=\"ax\">الله)</span>",
+      "category": "Concept",
+      "verseCountClaimed": null,
+      "sampleVerseRefs": [
+        "1:1",
+        "1:2",
+        "1:5",
+        "1:6",
+        "1:7",
+        "2:7",
+        "2:8",
+        "2:9",
+        "2:10",
+        "2:15"
+      ],
+      "conceptUrl": "https://corpus.quran.com/concept.jsp?id=allah",
+      "verseListUrl": "https://corpus.quran.com/search.jsp?q=con%3Aallah"
+    },
+    {
+      "id": "islam",
+      "title": "Islam (<span class=\"ax\">الإسلام)</span>",
+      "category": "Religion",
+      "verseCountClaimed": null,
+      "sampleVerseRefs": [
+        "2:128",
+        "2:132",
+        "2:133",
+        "2:136",
+        "2:208",
+        "3:19",
+        "3:52",
+        "3:64",
+        "3:67",
+        "3:80"
+      ],
+      "conceptUrl": "https://corpus.quran.com/concept.jsp?id=islam",
+      "verseListUrl": "https://corpus.quran.com/search.jsp?q=con%3Aislam"
+    }
+  ],
+  "verse_references_found_count": 136,
+  "sample_verse_references": [
+    "2:185",
+    "4:82",
+    "5:101",
+    "6:19",
+    "7:204",
+    "9:111",
+    "10:15",
+    "10:37",
+    "10:61",
+    "12:2",
+    "12:3",
+    "13:31",
+    "15:1",
+    "15:87",
+    "15:91",
+    "16:98",
+    "17:9",
+    "17:41",
+    "17:45",
+    "17:46"
+  ],
+  "parser_feasibility": "partial",
+  "recommended_next_step": "A conservative parser is feasible for pilot concepts. Build an offline extractor that walks only vetted concept ids and normalizes verse-list search results.",
+  "warnings": []
+}

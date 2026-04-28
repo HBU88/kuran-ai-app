@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "topic": "abdest",
+      "keywords": ["abdest nasıl alınır", "abdest nasil alinir"],
+      "answer_text": "Abdest genel olarak niyet, ağız-burun temizliği, yüzü yıkama, kolları yıkama, başı mesh etme ve ayakları yıkama adımlarından oluşur. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "abdest",
+      "keywords": ["abdestin farzları", "abdestin farzlari", "abdestin farzları nelerdir", "abdestin farzlari nelerdir"],
+      "answer_text": "Abdestin farzları mezhebe göre ayrıntı gösterebilir; genel olarak yüzü yıkamak, kolları dirseklere kadar yıkamak, başı mesh etmek ve ayakları topuklara kadar yıkamak sayılır. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "abdest",
+      "keywords": ["abdesti bozan şeyler", "abdesti bozan seyler", "abdest bozan şeyler nelerdir"],
+      "answer_text": "Abdesti bozan durumlar konusunda bazı ayrıntılar mezhebe göre değişebilir; genel olarak tuvalet ihtiyacı, akıntı ve bayılma gibi haller buna girer. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    }
+  ]
+}

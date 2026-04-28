@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "topic": "zekat",
+      "keywords": ["zekât nedir", "zekat nedir"],
+      "answer_text": "Zekât, malı arındırmaya yönelik bir ibadettir; belirli şartları olan mala dair verilir. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "zekat",
+      "keywords": ["zekât oranı nedir", "zekat orani nedir", "zekât oranı", "zekat oranı"],
+      "answer_text": "Zekât oranı malın türüne göre değişebilir; genel anlatımda nisap ve oran detayları vardır. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "zekat",
+      "keywords": ["zekât kimlere verilir", "zekat kimlere verilir"],
+      "answer_text": "Zekât, Kur'an ve fıkıh kaynaklarında belirtilen uygun sınıflara verilir. Ayrıntıda durum değişebileceği için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    }
+  ]
+}

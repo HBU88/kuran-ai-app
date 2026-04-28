@@ -1,0 +1,279 @@
+[
+  {
+    "id": "prayer_sabah_rakah",
+    "type": "worship_practice",
+    "topic": "sabah_namazi",
+    "triggers": [
+      "sabah namazı kaç rekat",
+      "sabah namazi kac rekat",
+      "sabah namazı kaç rekât",
+      "sabah namazi kac rekât",
+      "sabah kaç rekat",
+      "sabah kac rekat"
+    ],
+    "answer_tr": "Sabah namazı 4 rekattır: 2 sünnet + 2 farz.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_ogle_rakah",
+    "type": "worship_practice",
+    "topic": "ogle_namazi",
+    "triggers": [
+      "öğle namazı kaç rekat",
+      "ogle namazi kac rekat",
+      "öğle namazı kaç rekât",
+      "ogle namazi kac rekât",
+      "öğle kaç rekat",
+      "ogle kaç rekat"
+    ],
+    "answer_tr": "Öğle namazı 10 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_ikindi_rakah",
+    "type": "worship_practice",
+    "topic": "ikindi_namazi",
+    "triggers": [
+      "ikindi namazı kaç rekat",
+      "ikindi namazi kac rekat",
+      "ikindi namazı kaç rekât",
+      "ikindi namazi kac rekât",
+      "ikindi kaç rekat"
+    ],
+    "answer_tr": "İkindi namazı 8 rekattır: 4 sünnet + 4 farz.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_aksam_rakah",
+    "type": "worship_practice",
+    "topic": "aksam_namazi",
+    "triggers": [
+      "akşam namazı kaç rekat",
+      "aksam namazi kac rekat",
+      "akşam namazı kaç rekât",
+      "aksam namazi kac rekât",
+      "akşam kaç rekat",
+      "aksam kaç rekat"
+    ],
+    "answer_tr": "Akşam namazı 5 rekattır: 3 farz + 2 sünnet.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_yatsi_rakah",
+    "type": "worship_practice",
+    "topic": "yatsi_namazi",
+    "triggers": [
+      "yatsı namazı kaç rekat",
+      "yatsi namazi kac rekat",
+      "yatsı namazı kaç rekât",
+      "yatsi namazi kac rekât",
+      "yatsı kaç rekat",
+      "yatsi kaç rekat"
+    ],
+    "answer_tr": "Yatsı namazı 13 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet + 3 vitir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_vitir_rakah",
+    "type": "worship_practice",
+    "topic": "vitir_namazi",
+    "triggers": [
+      "vitir kaç rekat",
+      "vitir namazı kaç rekat",
+      "vitir kaç rekât",
+      "vitir namazı kaç rekât",
+      "vitir namazi kac rekat"
+    ],
+    "answer_tr": "Vitir namazı 3 rekattır.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_teravih_rakah",
+    "type": "worship_practice",
+    "topic": "teravih_namazi",
+    "triggers": [
+      "teravih namazı kaç rekat",
+      "teravi namazi kac rekat",
+      "ramazanda teravi namazi kac rekat",
+      "teravih kaç rekât",
+      "teravi kaç rekat"
+    ],
+    "answer_tr": "Teravih namazı Ramazan ayında yatsı namazından sonra kılınır. Uygulamada 20 rekât olarak yaygındır; bazı uygulamalarda 8 rekât da kılınır. Genellikle 2'şer rekât hâlinde kılınması tavsiye edilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_cuma_rakah",
+    "type": "worship_practice",
+    "topic": "cuma_namazi",
+    "triggers": [
+      "cuma namazı",
+      "cuma namazi",
+      "cuma namazı kaç rekat",
+      "cuma namazi kac rekat",
+      "cuma namazı kaç rekât",
+      "cuma namazi kac rekât"
+    ],
+    "answer_tr": "Cuma namazının farzı 2 rekattır; sünnetlerle birlikte uygulama mezhebe ve yerel geleneğe göre değişebilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_bayram_rakah",
+    "type": "worship_practice",
+    "topic": "bayram_namazi",
+    "triggers": [
+      "bayram namazı kaç rekat",
+      "bayram namazi kac rekat",
+      "bayram namazı kaç rekât",
+      "bayram namazi kac rekât",
+      "bayram namazı",
+      "bayram namazi"
+    ],
+    "answer_tr": "Bayram namazı 2 rekattır. Uygulama ayrıntıları için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "prayer_cenaze_howto",
+    "type": "worship_practice",
+    "topic": "cenaze_namazi",
+    "triggers": [
+      "cenaze namazı nasıl kılınır",
+      "cenaze namazi nasil kilinir",
+      "cenaze namazı",
+      "cenaze namazi"
+    ],
+    "answer_tr": "Cenaze namazı kısa bir niyetle, tekbirlerle ve dua ile kılınır. Uygulama ayrıntıları mezhebe göre değişebileceği için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "abdest_howto",
+    "type": "worship_practice",
+    "topic": "abdest",
+    "triggers": [
+      "abdest nasıl alınır",
+      "abdest nasil alinir",
+      "nasıl abdest alınır",
+      "wudu"
+    ],
+    "answer_tr": "Abdest genel olarak niyet, ağız-burun temizliği, yüzü yıkama, kolları yıkama, başı mesh etme ve ayakları yıkama adımlarından oluşur. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "abdest_farz",
+    "type": "worship_practice",
+    "topic": "abdest",
+    "triggers": [
+      "abdestin farzları",
+      "abdestin farzlari",
+      "abdestin farzları nelerdir",
+      "abdestin farzlari nelerdir"
+    ],
+    "answer_tr": "Abdestin farzları mezhebe göre ayrıntı gösterebilir; genel olarak yüzü yıkamak, kolları dirseklere kadar yıkamak, başı mesh etmek ve ayakları topuklara kadar yıkamak sayılır. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "abdest_bozen",
+    "type": "worship_practice",
+    "topic": "abdest",
+    "triggers": [
+      "abdesti bozan şeyler",
+      "abdesti bozan seyler",
+      "abdest bozan şeyler nelerdir",
+      "abdest bozan seyler nelerdir"
+    ],
+    "answer_tr": "Abdesti bozan durumlar konusunda bazı ayrıntılar mezhebe göre değişebilir; genel olarak tuvalet ihtiyacı, akıntı ve bayılma gibi haller buna girer. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "oruc_bozan",
+    "type": "worship_practice",
+    "topic": "oruc",
+    "triggers": [
+      "orucu bozan şeyler",
+      "orucu bozan seyler",
+      "orucu bozan temel şeyler",
+      "orucu bozan temel seyler"
+    ],
+    "answer_tr": "Oruçta bilerek yeme, içme ve orucu bozacak davranışlardan kaçınmak esastır. Ayrıntılar için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "sahur_sart",
+    "type": "worship_practice",
+    "topic": "oruc",
+    "triggers": [
+      "sahur şart mı",
+      "sahur sart mi",
+      "sahur gerekli mi"
+    ],
+    "answer_tr": "Sahur yapmak orucu kolaylaştıran ve teşvik edilen bir uygulamadır; ayrıntılı hüküm için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "zakat_orani",
+    "type": "worship_practice",
+    "topic": "zekat",
+    "triggers": [
+      "zekât oranı",
+      "zekat oranı",
+      "zekât oranı nedir",
+      "zekat oranı nedir"
+    ],
+    "answer_tr": "Zekât oranı malın türüne göre değişebilir; temel hesaplama ve nisap ayrıntıları için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "zakat_kimler",
+    "type": "worship_practice",
+    "topic": "zekat",
+    "triggers": [
+      "zekât kimlere verilir",
+      "zekat kimlere verilir"
+    ],
+    "answer_tr": "Zekâtın verileceği kimseler konusunda ayrıntılar bulunmaktadır; genel ölçüler için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "dua_nasil",
+    "type": "worship_practice",
+    "topic": "dua",
+    "triggers": [
+      "dua nasıl edilir",
+      "dua nasil edilir",
+      "nasıl dua edilir"
+    ],
+    "answer_tr": "Dua, samimi şekilde Allah'a yönelip ihtiyacını ve isteğini açıkça dile getirmektir. Kısa, içten ve düzenli dua etmek uygundur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "tovbe_nasil",
+    "type": "worship_practice",
+    "topic": "tovbe",
+    "triggers": [
+      "tövbe nasıl edilir",
+      "tevbe nasıl edilir",
+      "nasıl tövbe edilir",
+      "nasıl tevbe edilir"
+    ],
+    "answer_tr": "Tövbe, pişmanlık duymak, hatayı bırakmak ve bir daha dönmemeye niyet etmektir. Kısa ve içten bir istiğfarla başlanabilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "topic": "dua",
+      "keywords": ["dua nasıl edilir", "dua nasil edilir"],
+      "answer_text": "Dua, samimi şekilde Allah'a yönelip ihtiyacını ve isteğini açıkça dile getirmektir. Kısa, içten ve düzenli dua etmek uygundur.",
+      "source_type": "curated_internal"
+    },
+    {
+      "topic": "tövbe",
+      "keywords": ["tövbe nasıl edilir", "tevbe nasıl edilir", "tovbe nasil edilir"],
+      "answer_text": "Tövbe, hatayı fark edip pişmanlık duymak, bağışlanma istemek ve aynı yola dönmemeye niyet etmektir. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+      "source_type": "curated_internal"
+    }
+  ]
+}
