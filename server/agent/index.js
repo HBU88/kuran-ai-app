@@ -35,15 +35,77 @@ const { loadAyahDataset } = require("../utils/load_ayah_dataset");
 const dataset = loadAyahDataset();
 const ayahs = dataset.ayahs;
 
+function createTimingTracker() {
+  const startedAt = Date.now();
+  const timings = {
+    context_resolver_ms: 0,
+    intent_planner_ms: 0,
+    knowledge_router_ms: 0,
+    ayah_ranker_ms: 0,
+    response_composer_ms: 0,
+  };
+
+  function measureSync(name, fn) {
+    const phaseStartedAt = Date.now();
+    try {
+      return fn();
+    } finally {
+      if (Object.prototype.hasOwnProperty.call(timings, name)) {
+        timings[name] += Date.now() - phaseStartedAt;
+      }
+    }
+  }
+
+  async function measureAsync(name, fn) {
+    const phaseStartedAt = Date.now();
+    try {
+      return await fn();
+    } finally {
+      if (Object.prototype.hasOwnProperty.call(timings, name)) {
+        timings[name] += Date.now() - phaseStartedAt;
+      }
+    }
+  }
+
+  function snapshot() {
+    return {
+      ...timings,
+      total: Date.now() - startedAt,
+    };
+  }
+
+  return { measureSync, measureAsync, snapshot };
+}
+
+function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
+  const safe = timingMs && typeof timingMs === "object" ? timingMs : {};
+  return {
+    context_resolver_ms: Number.isFinite(safe.context_resolver_ms) ? safe.context_resolver_ms : 0,
+    intent_planner_ms: Number.isFinite(safe.intent_planner_ms) ? safe.intent_planner_ms : 0,
+    knowledge_router_ms: Number.isFinite(safe.knowledge_router_ms) ? safe.knowledge_router_ms : 0,
+    ayah_ranker_ms: Number.isFinite(safe.ayah_ranker_ms) ? safe.ayah_ranker_ms : 0,
+    response_composer_ms: Number.isFinite(safe.response_composer_ms) ? safe.response_composer_ms : 0,
+    log_write_ms: Number.isFinite(safe.log_write_ms) ? safe.log_write_ms : 0,
+    total: Number.isFinite(safe.total) ? safe.total : Number.isFinite(fallbackTotal) ? fallbackTotal : 0,
+  };
+}
+
 async function buildChatResponse(message, history = []) {
-  const baseAnalysis = analyzeUserMessageFallback(message, history);
-  const preliminaryKnowledgeResult = lookupKnowledgeAnswer(message, baseAnalysis, null, history);
-  const preliminaryKnowledgeIntent =
+  const timing = createTimingTracker();
+
+  const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
+    analyzeUserMessageFallback(message, history)
+  );
+  const preliminaryKnowledgeResult = timing.measureSync("knowledge_router_ms", () =>
+    lookupKnowledgeAnswer(message, baseAnalysis, null, history)
+  );
+  const preliminaryKnowledgeIntent = timing.measureSync("context_resolver_ms", () =>
     Boolean(preliminaryKnowledgeResult) &&
     !isExplicitAyahRequest(message, baseAnalysis, null, null) &&
     (baseAnalysis.intent === "worship_practice_question" ||
       isKnowledgeIntentQuestion(message, baseAnalysis, null, history) ||
-      isLocalKnowledgeQuery(message, baseAnalysis, null, history));
+      isLocalKnowledgeQuery(message, baseAnalysis, null, history))
+  );
 
   if (preliminaryKnowledgeIntent) {
     const resolvedAnalysis = {
@@ -60,41 +122,55 @@ async function buildChatResponse(message, history = []) {
       },
       false,
       preliminaryKnowledgeResult.route_mode || "ilmihal_knowledge",
-      preliminaryKnowledgeResult
+      preliminaryKnowledgeResult,
+      timing.snapshot()
     );
+    const assistantText = timing.measureSync("response_composer_ms", () =>
+      buildAssistantText(resolvedAnalysis, null, message, {
+        knowledgeResult: preliminaryKnowledgeResult,
+        knowledgeTopic: preliminaryKnowledgeResult.topic || null,
+        recent_assistant_texts: recentAssistantTextsFromHistory(history),
+      })
+    );
+    const finalDecisionMeta = {
+      ...knowledgeDecisionMeta,
+      timing_ms: normalizeTimingBreakdown({
+        ...knowledgeDecisionMeta.timing_ms,
+        ...timing.snapshot(),
+      }),
+    };
     return applySafetyGuard({
       ...resolvedAnalysis,
       ayah_used: false,
       top_ayah_ids: [],
       selected_ayah: null,
-      decision_meta: knowledgeDecisionMeta,
-      assistant_text: buildAssistantText(resolvedAnalysis, null, message, {
-        knowledgeResult: preliminaryKnowledgeResult,
-        knowledgeTopic: preliminaryKnowledgeResult.topic || null,
-        recent_assistant_texts: recentAssistantTextsFromHistory(history),
-      }),
+      decision_meta: finalDecisionMeta,
+      assistant_text: assistantText,
     });
   }
 
-  const plannerResult = await planChatWithOpenAI(message, history);
-  const mergedAnalysis = mergePlannerIntoAnalysis(baseAnalysis, plannerResult, message);
-  const shouldForceStructuredAyahIntent = shouldForceExplicitTopicAyahIntent(
-    message,
-    mergedAnalysis,
-    plannerResult
+  const plannerResult = await timing.measureAsync("intent_planner_ms", () =>
+    planChatWithOpenAI(message, history)
+  );
+  const mergedAnalysis = timing.measureSync("context_resolver_ms", () =>
+    mergePlannerIntoAnalysis(baseAnalysis, plannerResult, message)
+  );
+  const shouldForceStructuredAyahIntent = timing.measureSync("context_resolver_ms", () =>
+    shouldForceExplicitTopicAyahIntent(message, mergedAnalysis, plannerResult)
   );
   const normalizedMergedAnalysis = shouldForceStructuredAyahIntent
-    ? {
+    ? timing.measureSync("context_resolver_ms", () => ({
         ...mergedAnalysis,
         intent: "ayah_request",
         response_type: "direct_ayah",
-      }
+      }))
     : mergedAnalysis;
-  const shouldForceCasualConversation =
+  const shouldForceCasualConversation = timing.measureSync("context_resolver_ms", () =>
     isSimpleCasualConversation(message) &&
-    !isExplicitAyahRequest(message, normalizedMergedAnalysis, null, plannerResult);
+    !isExplicitAyahRequest(message, normalizedMergedAnalysis, null, plannerResult)
+  );
   const analysis = shouldForceCasualConversation
-    ? {
+    ? timing.measureSync("context_resolver_ms", () => ({
         ...normalizedMergedAnalysis,
         intent: "casual_conversation",
         response_type: "direct_answer",
@@ -102,11 +178,15 @@ async function buildChatResponse(message, history = []) {
         context_topic: "casual",
         emotion: normalizedMergedAnalysis.emotion || "sakin",
         severity: normalizedMergedAnalysis.severity || "low",
-      }
+      }))
     : normalizedMergedAnalysis;
 
-  const localKnowledgeIntent = isLocalKnowledgeQuery(message, analysis, plannerResult, history);
-  const knowledgeIntentQuestion = isKnowledgeIntentQuestion(message, analysis, plannerResult, history);
+  const localKnowledgeIntent = timing.measureSync("knowledge_router_ms", () =>
+    isLocalKnowledgeQuery(message, analysis, plannerResult, history)
+  );
+  const knowledgeIntentQuestion = timing.measureSync("knowledge_router_ms", () =>
+    isKnowledgeIntentQuestion(message, analysis, plannerResult, history)
+  );
 
   const subIntent = resolveSubIntent(message, analysis, plannerResult);
   const responseStrategy = responseStrategyForSubIntent(subIntent);
@@ -115,8 +195,12 @@ async function buildChatResponse(message, history = []) {
   const shouldUseAyah = localKnowledgeIntent
     ? false
     : shouldUseAyahForRouting(message, analysis, subIntent, plannerResult);
-  const knowledgeResult = !isCasualConversation && shouldLookupKnowledge(message, analysis, subIntent, plannerResult)
-    ? lookupKnowledgeAnswer(message, analysis, plannerResult, history)
+  const knowledgeResult = !isCasualConversation
+    ? timing.measureSync("knowledge_router_ms", () =>
+        shouldLookupKnowledge(message, analysis, subIntent, plannerResult)
+          ? lookupKnowledgeAnswer(message, analysis, plannerResult, history)
+          : null
+      )
     : null;
   const routeMode = knowledgeResult && knowledgeResult.knowledge_hit_id
     ? knowledgeResult.route_mode || "ilmihal_knowledge"
@@ -127,16 +211,18 @@ async function buildChatResponse(message, history = []) {
   const topicConstraint = plannerAyahTopicConstraint(message, analysis, plannerResult);
   const previouslyUsedAyahIds = previouslyUsedAyahIdsFromHistory(history);
   const rankingResult = shouldUseAyah && !shouldBypassAyahSelection
-    ? rankAyahs(analysis, ayahs, {
-        previously_used_ayah_ids: previouslyUsedAyahIds,
-        history,
-        current_message: message,
-        preferred_topic: plannerPreferredTopic(message, plannerResult),
-        topic_constraint: topicConstraint,
-        force_topic_match: plannerResult?.needs_ayah === true && Boolean(topicConstraint),
-        explicit_ayah_request: explicitAyahRequest,
-        planner_response_type: plannerResult?.response_type || null,
-      })
+    ? timing.measureSync("ayah_ranker_ms", () =>
+        rankAyahs(analysis, ayahs, {
+          previously_used_ayah_ids: previouslyUsedAyahIds,
+          history,
+          current_message: message,
+          preferred_topic: plannerPreferredTopic(message, plannerResult),
+          topic_constraint: topicConstraint,
+          force_topic_match: plannerResult?.needs_ayah === true && Boolean(topicConstraint),
+          explicit_ayah_request: explicitAyahRequest,
+          planner_response_type: plannerResult?.response_type || null,
+        })
+      )
     : [];
   const rankedAyahs = Array.isArray(rankingResult)
     ? rankingResult
@@ -179,28 +265,43 @@ async function buildChatResponse(message, history = []) {
     topAyahIds: finalTopAyahIds,
     knowledgeDrivenAnswer,
   });
-  const decisionMeta = buildDecisionMeta(rankedAyahs, consistencyGuard, ayahUsed, routeMode, knowledgeResult);
-  const resolvedAnalysis = {
+  const assistantText = timing.measureSync("response_composer_ms", () =>
+    buildAssistantText(
+      {
+        ...analysis,
+        response_type: consistencyGuard.responseType,
+      },
+      selectedAyah,
+      message,
+      {
+        subIntent,
+        responseStrategy,
+        knowledgeResult: effectiveKnowledgeResult,
+        knowledgeTopic: plannerResult?.knowledge_topic || null,
+        recent_assistant_texts: recentAssistantTextsFromHistory(history),
+      }
+    )
+  );
+  const decisionMeta = buildDecisionMeta(
+    rankedAyahs,
+    consistencyGuard,
+    ayahUsed,
+    routeMode,
+    knowledgeResult,
+    timing.snapshot()
+  );
+  return applySafetyGuard({
     ...analysis,
     response_type: consistencyGuard.responseType,
-  };
-  return applySafetyGuard({
-    ...resolvedAnalysis,
     ayah_used: consistencyGuard.ayahUsed,
     top_ayah_ids: consistencyGuard.topAyahIds,
     selected_ayah: consistencyGuard.selectedAyah,
     decision_meta: decisionMeta,
-    assistant_text: buildAssistantText(resolvedAnalysis, selectedAyah, message, {
-      subIntent,
-      responseStrategy,
-      knowledgeResult: effectiveKnowledgeResult,
-      knowledgeTopic: plannerResult?.knowledge_topic || null,
-      recent_assistant_texts: recentAssistantTextsFromHistory(history),
-    }),
+    assistant_text: assistantText,
   });
 }
 
-function buildDecisionMeta(rankedAyahs, consistencyGuard, ayahUsed, routeMode, knowledgeResult) {
+function buildDecisionMeta(rankedAyahs, consistencyGuard, ayahUsed, routeMode, knowledgeResult, timingMs = null) {
   const top = Array.isArray(rankedAyahs) && rankedAyahs.length > 0 ? rankedAyahs[0] : null;
   const topDebug = top?.debug || {};
   return {
@@ -220,6 +321,7 @@ function buildDecisionMeta(rankedAyahs, consistencyGuard, ayahUsed, routeMode, k
       : [],
     semantic_score: typeof topDebug.semantic_score === "number" ? topDebug.semantic_score : 0,
     selected_ayah_id: consistencyGuard.selectedAyah ? consistencyGuard.selectedAyah.id : null,
+    timing_ms: normalizeTimingBreakdown(timingMs),
   };
 }
 

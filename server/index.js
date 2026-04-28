@@ -103,9 +103,40 @@ app.post("/chat", async (req, res) => {
         ? decisionMeta.semantic_tags_considered
         : [],
       semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
+      timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms),
       error: null,
     });
+    const appendStartedAt = Date.now();
     appendChatDecisionLog(logEntry);
+    if (isDebugChatEngineEnabled()) {
+      const writeDuration = Date.now() - appendStartedAt;
+      const timingLogEntry = buildChatDecisionLog({
+        timestamp: new Date().toISOString(),
+        user_message: message,
+        intent: normalizedResponse.intent,
+        response_type: normalizedResponse.response_type,
+        route_mode: decisionMeta.route_mode || null,
+        knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
+        selected_ayah_id: normalizedResponse.selected_ayah
+          ? normalizedResponse.selected_ayah.id || null
+          : null,
+        top_ayah_ids: normalizedResponse.top_ayah_ids || [],
+        ranker_source: decisionMeta.ranker_source || "fallback",
+        semantic_candidates_count: Number.isInteger(decisionMeta.semantic_candidates_count)
+          ? decisionMeta.semantic_candidates_count
+          : 0,
+        semantic_tags_considered: Array.isArray(decisionMeta.semantic_tags_considered)
+          ? decisionMeta.semantic_tags_considered
+          : [],
+        semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
+        timing_ms: {
+          ...normalizeTimingBreakdown(decisionMeta.timing_ms),
+          log_write_ms: writeDuration,
+        },
+        error: null,
+      });
+      appendChatDecisionLog(timingLogEntry);
+    }
     return sendUtf8Json(res, 200, normalizedResponse);
   } catch (error) {
     const errorResponse = {
@@ -126,6 +157,9 @@ app.post("/chat", async (req, res) => {
         semantic_candidates_count: 0,
         semantic_tags_considered: [],
         semantic_score: 0,
+        timing_ms: {
+          total: 0,
+        },
         error: error.message,
       });
       appendChatDecisionLog(logEntry);
@@ -171,9 +205,7 @@ app.get("/debug/resolve", async (req, res) => {
       ranker_source: decisionMeta.ranker_source || "fallback",
       semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
       knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
-      timing_ms: {
-        total: Date.now() - startedAt,
-      },
+      timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms, Date.now() - startedAt),
     });
   } catch (error) {
     return sendUtf8Json(res, 500, { ok: false, error: error.message });
@@ -216,8 +248,22 @@ function buildChatDecisionLog(entry) {
       ? entry.semantic_tags_considered
       : [],
     semantic_score: typeof entry.semantic_score === "number" ? entry.semantic_score : 0,
+    timing_ms: normalizeTimingBreakdown(entry.timing_ms),
     error: typeof entry.error === "string" && entry.error.trim() ? entry.error.trim() : null,
   });
+}
+
+function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
+  const safe = timingMs && typeof timingMs === "object" ? timingMs : {};
+  return {
+    context_resolver_ms: Number.isFinite(safe.context_resolver_ms) ? safe.context_resolver_ms : 0,
+    intent_planner_ms: Number.isFinite(safe.intent_planner_ms) ? safe.intent_planner_ms : 0,
+    knowledge_router_ms: Number.isFinite(safe.knowledge_router_ms) ? safe.knowledge_router_ms : 0,
+    ayah_ranker_ms: Number.isFinite(safe.ayah_ranker_ms) ? safe.ayah_ranker_ms : 0,
+    response_composer_ms: Number.isFinite(safe.response_composer_ms) ? safe.response_composer_ms : 0,
+    log_write_ms: Number.isFinite(safe.log_write_ms) ? safe.log_write_ms : 0,
+    total: Number.isFinite(safe.total) ? safe.total : Number.isFinite(fallbackTotal) ? fallbackTotal : 0,
+  };
 }
 
 function appendChatDecisionLog(line) {
