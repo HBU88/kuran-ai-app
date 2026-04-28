@@ -19,6 +19,7 @@ const SEMANTIC_OVERRIDE_USE_CASES = {
 };
 
 const SEMANTIC_ENRICHMENT_INDEX = loadSemanticEnrichmentIndex();
+const SOURCE_AYAH_INDEX_CACHE = new WeakMap();
 
 const CURATED_TOPIC_CLUSTERS = {
   [normalizeThemeKey("sabır")]: [
@@ -37,6 +38,12 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 21, ayahNumber: 107 },
     { surahNumber: 48, ayahNumber: 29 },
     { surahNumber: 47, ayahNumber: 7 },
+  ],
+  [normalizeThemeKey("yalnızlık")]: [
+    { surahNumber: 2, ayahNumber: 186 },
+    { surahNumber: 50, ayahNumber: 16 },
+    { surahNumber: 57, ayahNumber: 4 },
+    { surahNumber: 13, ayahNumber: 28 },
   ],
   [normalizeThemeKey("tövbe")]: [
     { surahNumber: 39, ayahNumber: 53 },
@@ -111,6 +118,23 @@ const CURATED_TOPIC_CLUSTERS = {
 };
 
 const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
+  {
+    topic: normalizeThemeKey("yalnızlık"),
+    list: [
+      "yalnızlık",
+      "yalnizlik",
+      "yalnız",
+      "yalniz",
+      "yalnız hissediyorum",
+      "yalniz hissediyorum",
+      "çok yalnız",
+      "cok yalniz",
+      "kimsem yok",
+      "kimse yok",
+      "tek başımayım",
+      "tek basimayim",
+    ],
+  },
   {
     topic: normalizeThemeKey("tövbe"),
     list: [
@@ -197,6 +221,27 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "endişe",
       "endise",
       "gelecek için endişeliyim",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("kaygı"),
+    list: [
+      "içim daralıyor",
+      "icim daraliyor",
+      "içim sıkılıyor",
+      "icim sikiliyor",
+      "bunaldım",
+      "bunaldim",
+      "bunalıyorum",
+      "bunalıyorum",
+      "sıkışıyorum",
+      "sikisiyorum",
+      "boğuluyorum",
+      "boguluyorum",
+      "iç sıkıntısı",
+      "ic sikintisi",
+      "daralıyorum",
+      "daraliyorum",
     ],
   },
   {
@@ -644,12 +689,10 @@ function selectLonelinessTopItem(messageAnalysis, sourceAyahs, usedAyahIdSet, cu
   ];
 
   for (const target of preferredOrder) {
-    const preferred = sourceAyahs.find(
-      (ayah) =>
-        ayah.surahNumber === target.surahNumber &&
-        ayah.ayahNumber === target.ayahNumber &&
-        !usedAyahIdSet.has(ayah.id)
-    );
+    const preferred = getSourceAyahIndex(sourceAyahs).get(ayahKey(target.surahNumber, target.ayahNumber));
+    if (!preferred || usedAyahIdSet.has(preferred.id)) {
+      continue;
+    }
     if (preferred) {
       return {
         ayah: preferred,
@@ -1105,12 +1148,7 @@ function selectCuratedTopicAyah(sourceAyahs, topicConstraint, usedAyahIdSet) {
   const cluster = CURATED_TOPIC_CLUSTERS[normalizeThemeKey(normalizedTopic)];
   if (!Array.isArray(cluster) || cluster.length === 0) return null;
 
-  const ayahIndex = new Map(
-    (Array.isArray(sourceAyahs) ? sourceAyahs : []).map((ayah) => [
-      ayahKey(ayah.surahNumber, ayah.ayahNumber || ayah.ayah),
-      ayah,
-    ])
-  );
+  const ayahIndex = getSourceAyahIndex(sourceAyahs);
 
   const available = cluster
     .map((reference, index) => {
@@ -1137,12 +1175,7 @@ function selectCuratedTopicTopResults(sourceAyahs, topicConstraint, usedAyahIdSe
   const cluster = CURATED_TOPIC_CLUSTERS[normalizeThemeKey(normalizedTopic)];
   if (!Array.isArray(cluster) || cluster.length === 0) return [];
 
-  const ayahIndex = new Map(
-    (Array.isArray(sourceAyahs) ? sourceAyahs : []).map((ayah) => [
-      ayahKey(ayah.surahNumber, ayah.ayahNumber || ayah.ayah),
-      ayah,
-    ])
-  );
+  const ayahIndex = getSourceAyahIndex(sourceAyahs);
 
   return cluster
     .map((reference, index) => {
@@ -1206,6 +1239,25 @@ function resolveCurrentMessageOverrideTopic(currentMessage) {
   }
 
   return null;
+}
+
+function getSourceAyahIndex(sourceAyahs) {
+  if (!Array.isArray(sourceAyahs)) {
+    return new Map();
+  }
+
+  const cached = SOURCE_AYAH_INDEX_CACHE.get(sourceAyahs);
+  if (cached) {
+    return cached;
+  }
+
+  const index = new Map();
+  for (const ayah of sourceAyahs) {
+    if (!ayah) continue;
+    index.set(ayahKey(ayah.surahNumber, ayah.ayahNumber || ayah.ayah), ayah);
+  }
+  SOURCE_AYAH_INDEX_CACHE.set(sourceAyahs, index);
+  return index;
 }
 
 function selectForcedTopicAyah(sourceAyahs, topicConstraint, usedAyahIdSet) {

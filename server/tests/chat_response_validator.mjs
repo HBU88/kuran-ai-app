@@ -241,6 +241,22 @@ async function assertEndpointReachable() {
 async function runDebugResolveSmokeTest() {
   const cases = [
     {
+      q: "çok yalnız hissediyorum",
+      expectedCluster: "yalnızlık",
+      expectedRankerSource: "override",
+      expectedPlannerSource: "local_fast_path",
+      maxIntentPlannerMs: 20,
+      maxAyahRankerMs: 100,
+    },
+    {
+      q: "içim daralıyor",
+      expectedCluster: "kaygı",
+      expectedRankerSource: "override",
+      expectedPlannerSource: "local_fast_path",
+      maxIntentPlannerMs: 20,
+      maxAyahRankerMs: 100,
+    },
+    {
       q: "haksızlığa uğradım",
       expectedCluster: "adalet",
       expectedRankerSource: "override",
@@ -301,6 +317,12 @@ async function runDebugResolveSmokeTest() {
       const plannerMs = Number(payload?.timing_ms?.intent_planner_ms || 0);
       if (plannerMs > test.maxIntentPlannerMs) {
         failures.push(`intent_planner_ms=${plannerMs}`);
+      }
+    }
+    if (typeof test.maxAyahRankerMs === "number") {
+      const rankerMs = Number(payload?.timing_ms?.ayah_ranker_ms || 0);
+      if (rankerMs > test.maxAyahRankerMs) {
+        failures.push(`ayah_ranker_ms=${rankerMs}`);
       }
     }
     if (failures.length > 0) {
