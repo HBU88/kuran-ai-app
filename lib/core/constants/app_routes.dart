@@ -7,6 +7,7 @@ class AppRoutes {
   static const situationAyah = '/situation-ayah';
   static const favorites = '/favorites';
   static const prayerTimes = '/prayer-times';
+  static const qibla = '/qibla';
   static const memorization = '/memorization';
   static const settings = '/settings';
 }

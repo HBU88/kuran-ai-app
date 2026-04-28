@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
     final repository = context.read<AyahRepository>();
 
     return Scaffold(
-      extendBody: true,
       appBar: AppBar(
         title: const AppLogo(compact: true),
         actions: [
@@ -103,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          'Hazır. Rehberlik ve Dinî Bilgiler modüllerinden birini açabilirsin.',
+                          'Hazır. Rehberlik, Dinî Bilgiler, Namaz Vakitleri, Kıble ve Ezber modüllerinden birini açabilirsin.',
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: AppColors.textSecondary,
@@ -128,7 +127,7 @@ class _ModuleGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 2,
+      crossAxisCount: MediaQuery.sizeOf(context).width > 420 ? 3 : 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 12,
@@ -152,6 +151,21 @@ class _ModuleGrid extends StatelessWidget {
               builder: (_) => const ChatScreen(mode: ChatMode.ilmihal),
             ),
           ),
+        ),
+        HomeMenuItem(
+          label: 'Namaz Vakitleri',
+          icon: Icons.schedule_outlined,
+          onTap: () => Navigator.pushNamed(context, AppRoutes.prayerTimes),
+        ),
+        HomeMenuItem(
+          label: 'Kıble',
+          icon: Icons.explore_outlined,
+          onTap: () => Navigator.pushNamed(context, AppRoutes.qibla),
+        ),
+        HomeMenuItem(
+          label: 'Ezber',
+          icon: Icons.menu_book_rounded,
+          onTap: () => Navigator.pushNamed(context, AppRoutes.memorization),
         ),
       ],
     );
