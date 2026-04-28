@@ -243,7 +243,7 @@ function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
 function appendChatDecisionLog(line) {
   try {
     fs.mkdirSync(path.dirname(CHAT_RUNTIME_LOG_PATH), { recursive: true });
-    fs.appendFileSync(CHAT_RUNTIME_LOG_PATH, `${line}\n`, "utf8");
+    fs.appendFileSync(CHAT_RUNTIME_LOG_PATH, Buffer.from(`${line}\n`, "utf8"));
   } catch (error) {
     console.error("Failed to append chat runtime log:", error && error.stack ? error.stack : error);
   }

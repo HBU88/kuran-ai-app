@@ -22,6 +22,12 @@ When testing from an Android emulator, use:
 Get-Content C:\kuran_app\logs\chat_runtime_log.txt -Wait -Tail 40
 ```
 
+If Turkish characters look corrupted in PowerShell, switch the console output to UTF-8 first:
+```powershell
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Get-Content C:\kuran_app\logs\chat_runtime_log.txt -Encoding UTF8 -Wait -Tail 40
+```
+
 ## Use the debug resolve endpoint
 When `DEBUG_CHAT_ENGINE=true`:
 
