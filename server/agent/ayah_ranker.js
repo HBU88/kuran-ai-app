@@ -179,10 +179,6 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
     list: ["ölüm korkusu", "olum korkusu", "ölmekten korkuyorum", "olmekten korkuyorum", "kabir", "vefat", "ölümden korkuyorum", "olumden korkuyorum"],
   },
   {
-    topic: normalizeThemeKey("korku"),
-    list: ["korku", "korkuyorum", "çok korkuyorum", "cok korkuyorum", "ölüm korkusu", "olum korkusu", "ölümden korkuyorum", "olumden korkuyorum", "endişe", "endise"],
-  },
-  {
     topic: normalizeThemeKey("kaygı"),
     list: [
       "kaygı",
@@ -202,6 +198,10 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "endise",
       "gelecek için endişeliyim",
     ],
+  },
+  {
+    topic: normalizeThemeKey("korku"),
+    list: ["korku", "korkuyorum", "çok korkuyorum", "cok korkuyorum", "ölüm korkusu", "olum korkusu", "ölümden korkuyorum", "olumden korkuyorum", "endişe", "endise"],
   },
   {
     topic: normalizeThemeKey("sabır_sıkıntı"),
@@ -257,11 +257,12 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
   const currentMessage = normalize(options.current_message || "");
   const isFollowupAnotherAyahRequest = detectAnotherAyahFollowup(options.current_message);
   const topicConstraint = resolveTopicConstraint(options.topic_constraint);
-  const explicitTopic = topicConstraint || detectExplicitTopic(options.current_message);
+  const currentMessageOverrideTopic = resolveCurrentMessageOverrideTopic(options.current_message);
+  const explicitTopic = topicConstraint || detectExplicitTopic(options.current_message) || currentMessageOverrideTopic;
   const explicitAyahRequest = options.explicit_ayah_request === true;
   const preferredTopic = normalizePreferredTopic(options.preferred_topic);
-  const usePreferredTopicHint = !explicitTopic && isWeakTopicSignal(messageAnalysis.context_topic);
-  const sameThemeFollowup = detectSameThemeFollowup(messageAnalysis, options);
+  const usePreferredTopicHint = !explicitTopic && !currentMessageOverrideTopic && isWeakTopicSignal(messageAnalysis.context_topic);
+  const sameThemeFollowup = !currentMessageOverrideTopic && detectSameThemeFollowup(messageAnalysis, options);
   const previouslyUsedAyahIds = normalizePreviouslyUsedAyahIds(
     options.previously_used_ayah_ids || messageAnalysis.previously_used_ayah_ids
   );
@@ -284,6 +285,17 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
     preferredTopic,
     overrideTopic
   );
+
+  if (currentMessageOverrideTopic) {
+    const currentMessageOverrideResults = selectCuratedTopicTopResults(
+      sourceAyahs,
+      currentMessageOverrideTopic,
+      usedAyahIdSet
+    );
+    if (currentMessageOverrideResults.length > 0) {
+      return currentMessageOverrideResults;
+    }
+  }
 
   const scored = sourceAyahs.map((ayah) => {
     const tags = Array.isArray(ayah.tags) ? ayah.tags : [];
@@ -503,7 +515,11 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
 
   const topItems = ranked.slice(0, 3);
   const topResults = topItems.map(toRankedAyahResult);
-  const curatedTopicItem = shouldForceCuratedTopicSelection(options.current_message, effectiveExplicitTopic, explicitAyahRequest)
+  const curatedTopicItem = shouldForceCuratedTopicSelection(
+    options.current_message,
+    effectiveExplicitTopic,
+    explicitAyahRequest
+  )
     ? selectCuratedTopicAyah(sourceAyahs, effectiveExplicitTopic, usedAyahIdSet)
     : null;
   if (curatedTopicItem) {
@@ -1114,6 +1130,34 @@ function selectCuratedTopicAyah(sourceAyahs, topicConstraint, usedAyahIdSet) {
   };
 }
 
+function selectCuratedTopicTopResults(sourceAyahs, topicConstraint, usedAyahIdSet) {
+  const normalizedTopic = resolveTopicConstraint(topicConstraint);
+  if (!normalizedTopic) return [];
+
+  const cluster = CURATED_TOPIC_CLUSTERS[normalizeThemeKey(normalizedTopic)];
+  if (!Array.isArray(cluster) || cluster.length === 0) return [];
+
+  const ayahIndex = new Map(
+    (Array.isArray(sourceAyahs) ? sourceAyahs : []).map((ayah) => [
+      ayahKey(ayah.surahNumber, ayah.ayahNumber || ayah.ayah),
+      ayah,
+    ])
+  );
+
+  return cluster
+    .map((reference, index) => {
+      const ayah = ayahIndex.get(ayahKey(reference.surahNumber, reference.ayahNumber));
+      if (!ayah) return null;
+      return {
+        ...ayah,
+        final_score: 10000 - index * 100,
+        ranker_source: "override",
+      };
+    })
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
 function shouldForceCuratedTopicSelection(message, explicitTopic, explicitAyahRequest) {
   if (!explicitTopic) return false;
   if (explicitAyahRequest) return true;
@@ -1146,6 +1190,19 @@ function resolveCuratedOverrideTopic(messageAnalysis, currentMessage, explicitTo
     const normalized = normalizeThemeKey(candidate);
     if (!normalized) continue;
     if (CURATED_TOPIC_CLUSTERS[normalized]) return normalized;
+  }
+
+  return null;
+}
+
+function resolveCurrentMessageOverrideTopic(currentMessage) {
+  const normalizedMessage = normalize(currentMessage);
+  if (!normalizedMessage) return null;
+
+  for (const matcher of CURATED_OVERRIDE_MESSAGE_MATCHERS) {
+    if (matcher.list.some((phrase) => normalizedMessage.includes(normalize(phrase)))) {
+      return matcher.topic;
+    }
   }
 
   return null;
@@ -1485,6 +1542,7 @@ module.exports = {
   shouldUseAyahFor,
   datasetTagsForTheme,
 };
+
 
 
 

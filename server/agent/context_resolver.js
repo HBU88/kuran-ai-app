@@ -177,6 +177,23 @@ const TOPIC_PATTERNS = [
     ],
   },
   {
+    topic: "r?z?k",
+    phrases: [
+      "r?z?k",
+      "rizik",
+      "ge?im",
+      "gecim",
+      "i? bulam?yorum",
+      "is bulamiyorum",
+      "maddi s?k?nt?",
+      "maddi sikinti",
+      "ge?im derdi",
+      "gecim derdi",
+      "maddi s?k?nt? ya??yorum",
+      "maddi sikinti yasiyorum",
+    ],
+  },
+  {
     topic: "daralma",
     phrases: [
       "içim daralıyor",
@@ -480,15 +497,16 @@ function canonicalTopic(value) {
 
   const normalizedTopic = normalize(value);
   const aliases = {
-    sabir: "sabır",
-    sabr: "sabır",
-    tevekkul: "tevekkül",
-    tovbe: "tövbe",
-    sukur: "şükür",
-    kaygi: "kaygı",
+    sabir: "sab?r",
+    sabr: "sab?r",
+    tevekkul: "tevekk?l",
+    tovbe: "t?vbe",
+    sukur: "??k?r",
+    kaygi: "kayg?",
     adalet: "adalet",
-    yalnizlik: "yalnızlık",
-    caresizlik: "çaresizlik",
+    rizik: "r?z?k",
+    yalnizlik: "yaln?zl?k",
+    caresizlik: "?aresizlik",
     muhammed: "hz_muhammed",
     peygamber: "hz_muhammed",
     peygamberimiz: "hz_muhammed",

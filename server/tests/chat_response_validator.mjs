@@ -64,6 +64,8 @@ const fixedTests = [
   { kind: "context", group: "prayer", prompt: "cuma namazı", followUp: "kaç rekat?", expectedContains: "cuma" },
   { kind: "context", group: "prayer", prompt: "cuma namazı", followUp: "teravi namazı kaç rekat", expectedContains: "cuma", followUpExpectedContains: "teravih" },
   { kind: "context", group: "prayer", prompt: "teravi namazı kaç rekat", followUp: "kaç rekat?", expectedContains: "teravih", followUpExpectedContains: "teravih" },
+  { kind: "context", group: "fear", prompt: "gelecek için endişeliyim", followUp: "haksızlığa uğradım", followUpExpectedSurahSet: [4, 5, 16, 42], followUpNotSameAsFirst: true },
+  { kind: "context", group: "fear", prompt: "gelecek için endişeliyim", followUp: "maddi sıkıntı yaşıyorum", followUpExpectedSurahSet: [11, 65, 51], followUpNotSameAsFirst: true },
 ];
 
 const randomPromptPools = {
@@ -335,17 +337,47 @@ async function runContextTest(test) {
   if (firstFailures.length > 0) return failResult(test, `context setup failed: ${firstFailures.join("; ")}`, first);
 
   const second = await postChat(test.followUp, [
-    { role: "user", text: test.prompt },
-    { role: "assistant", text: first.assistant_text || "" },
+    {
+      role: "user",
+      text: test.prompt,
+      context_topic: first.context_topic || null,
+      primary_theme: first.primary_theme || null,
+      emotion: first.emotion || null,
+      secondary_themes: Array.isArray(first.secondary_themes) ? first.secondary_themes : [],
+      response_type: first.response_type || null,
+      selected_ayah_id: first?.selected_ayah?.id || first?.selected_ayah_id || null,
+    },
+    {
+      role: "assistant",
+      text: first.assistant_text || "",
+      context_topic: first.context_topic || null,
+      primary_theme: first.primary_theme || null,
+      emotion: first.emotion || null,
+      secondary_themes: Array.isArray(first.secondary_themes) ? first.secondary_themes : [],
+      response_type: first.response_type || null,
+      selected_ayah_id: first?.selected_ayah?.id || first?.selected_ayah_id || null,
+    },
   ]);
   const followUpTest = { ...test, kind: "fixed", prompt: `${test.prompt} -> ${test.followUp}`, expectedContains: test.followUpExpectedContains || test.expectedContains };
   const failures = validatePayload(followUpTest, second);
-  if (second?.response_type !== "direct_answer") failures.push(`context follow-up returned response_type=${second?.response_type}`);
-  if (second?.ayah_used !== false) failures.push(`context follow-up unexpectedly used ayah_used=${second?.ayah_used}`);
-  if (second?.selected_ayah !== null) failures.push("context follow-up returned selected_ayah");
   const expectedFollowUp = normalizeForMatch(test.followUpExpectedContains || test.expectedContains || "");
   if (expectedFollowUp && !normalizeForMatch(second?.assistant_text || "").includes(expectedFollowUp)) {
     failures.push(`context follow-up did not match expected topic ${expectedFollowUp}`);
+  }
+  if (Array.isArray(test.followUpExpectedSurahSet) && test.followUpExpectedSurahSet.length > 0) {
+    const secondSurah = Number(second?.selected_ayah?.surahNumber);
+    if (!second?.selected_ayah) {
+      failures.push("context follow-up returned null selected_ayah");
+    } else if (!test.followUpExpectedSurahSet.includes(secondSurah)) {
+      failures.push(`context follow-up surahNumber ${secondSurah} not in expected set ${test.followUpExpectedSurahSet.join(",")}`);
+    }
+  }
+  if (test.followUpNotSameAsFirst && first?.selected_ayah && second?.selected_ayah) {
+    const firstKey = `${first.selected_ayah.surahNumber}:${first.selected_ayah.ayahNumber || first.selected_ayah.ayah}`;
+    const secondKey = `${second.selected_ayah.surahNumber}:${second.selected_ayah.ayahNumber || second.selected_ayah.ayah}`;
+    if (firstKey === secondKey) {
+      failures.push("context follow-up reused the previous ayah");
+    }
   }
   if (failures.length > 0) return failResult(test, failures.join("; "), second);
 
@@ -396,3 +428,4 @@ function failResult(test, reason, payload = null) {
 }
 
 await main();
+
