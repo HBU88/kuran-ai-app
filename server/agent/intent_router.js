@@ -56,6 +56,24 @@ const PRACTICAL_WORSHIP_PATTERNS = [
   "ne okuyayım",
 ];
 
+const WORSHIP_INVALIDATION_PATTERNS = [
+  "bozan şeyler",
+  "bozan seyler",
+  "namazı bozan",
+  "namazi bozan",
+  "namaz bozan",
+  "abdesti bozan",
+  "abdesti bozulan",
+  "orucu bozan",
+  "oruçu bozan",
+  "geçersiz kılan",
+  "gecersiz kılan",
+  "hangi durumlarda bozulur",
+  "hangi durumda bozulur",
+  "hangi hallerde bozulur",
+  "ne zaman bozulur",
+];
+
 const ZIKIR_PRACTICE_PATTERNS = [
   "zikir nasil cekilir",
   "zikir nasıl çekilir",
@@ -80,6 +98,52 @@ const DUA_GUIDANCE_PATTERNS = [
   "hangi duayı",
   "nasil dua edeyim",
   "nasıl dua edeyim",
+];
+
+
+const DAILY_ISLAMIC_KNOWLEDGE_PATTERNS = [
+  "yemin nedir",
+  "yemin kefareti",
+  "adak nedir",
+  "adak kurbani",
+  "adak kurbani nedir",
+  "kefaret nedir",
+  "tovbe nasil edilir",
+  "tevbe nasil edilir",
+  "dua nedir",
+  "dua nasil edilir",
+  "helal haram nedir",
+  "faiz nedir",
+  "kul hakki nedir",
+  "anne baba hakki nedir",
+  "anne baba hakki",
+  "giybet nedir",
+  "giybet",
+  "israf nedir",
+  "selamlasma adabi",
+  "selamlasma adabi nedir",
+  "komsuluk hakki nedir",
+  "komsuluk hakki",
+  "zekat kime verilir",
+  "zekat kimlere verilir",
+  "zekat kimlere verilmez",
+  "zekat nisap nedir",
+  "fitre nedir",
+  "fitre kime verilir",
+  "fitre ne zaman verilir",
+  "niyet nasil edilir",
+  "niyet nasıl edilir",
+  "nasıl niyet edilir",
+  "nasil niyet edilir",
+  "kandil geceleri nedir",
+  "kandil geceleri",
+  "mirac kandili",
+  "miraç kandili",
+  "isra ve mirac",
+  "isra mirac gecesi",
+  "berat kandili",
+  "regaip kandili",
+  "mevlid kandili",
 ];
 
 const CASUAL_CONVERSATION_PATTERNS = [
@@ -421,6 +485,27 @@ function inferIntent(normalized, context = {}) {
   if (matchesPracticalWorshipQuestion(normalized)) {
     return "worship_practice_question";
   }
+  if (matchesWorshipInvalidationQuestion(normalized)) {
+    return "general_islamic_question";
+  }
+  if (matchesDailyIslamicKnowledgeQuestion(normalized)) {
+    return "general_islamic_question";
+  }
+  if (
+    [
+      "kandil",
+      "kandil geceleri",
+      "mirac",
+      "miraç",
+      "berat",
+      "regaip",
+      "mevlid",
+      "zekat",
+      "fitre",
+    ].some((phrase) => includesNormalized(normalized, phrase))
+  ) {
+    return "general_islamic_question";
+  }
   if (
     context.contextDependent &&
     context.contextTopic &&
@@ -455,6 +540,15 @@ function inferIntent(normalized, context = {}) {
       "sevap mı",
       "gerekli mi",
       "farz mı",
+      "farz mi",
+      "oruç farz mı",
+      "oruc farz mi",
+      "oruç nedir",
+      "oruc nedir",
+      "oruç nasıl tutulur",
+      "oruc nasil tutulur",
+      "orucu bozan",
+      "orucu bozmayan",
       "zikir çekmek",
       "dua etmek",
       "tesbih çekmek",
@@ -464,7 +558,28 @@ function inferIntent(normalized, context = {}) {
   ) {
     return "general_islamic_question";
   }
+  if (matchesFastingFactualQuestion(normalized)) {
+    return "general_islamic_question";
+  }
   return "emotional_spiritual_support";
+}
+
+function matchesFastingFactualQuestion(normalized) {
+  if (!/[oö]ru[çc]/i.test(normalized)) return false;
+  const factualMarkers = [
+    "farz mı",
+    "farz mi",
+    "nedir",
+    "nasıl tutulur",
+    "nasil tutulur",
+    "orucu bozan",
+    "orucu bozmayan",
+    "bozan şeyler",
+    "bozan seyler",
+    "hangi durumlarda bozulur",
+    "hangi durumlarda bozulmaz",
+  ];
+  return factualMarkers.some((marker) => includesNormalized(normalized, marker));
 }
 
 function includesNormalized(normalizedText, phrase) {
@@ -503,6 +618,9 @@ function inferSubIntent(message, analysis = {}) {
   }
   if (matchesZikirPracticeRequest(normalized)) {
     return "zikir_request";
+  }
+  if (matchesDailyIslamicKnowledgeQuestion(normalized)) {
+    return "general_information";
   }
   if (matchesPracticalWorshipQuestion(normalized)) {
     return "practical_guidance";
@@ -617,12 +735,36 @@ function matchesPracticalWorshipQuestion(normalized) {
   return PRACTICAL_WORSHIP_PATTERNS.some((phrase) => includesNormalized(normalized, phrase));
 }
 
+function matchesWorshipInvalidationQuestion(normalized) {
+  const normalizedText = normalize(normalized);
+  if (!WORSHIP_INVALIDATION_PATTERNS.some((phrase) => normalizedText.includes(normalize(phrase)))) {
+    return false;
+  }
+
+  return [
+    "namaz",
+    "abdest",
+    "abdesti",
+    "oruç",
+    "orucu",
+    "oruclu",
+    "wudu",
+    "gusul",
+    "gusül",
+    "ibadet",
+  ].some((anchor) => normalizedText.includes(normalize(anchor)));
+}
+
 function matchesZikirPracticeRequest(normalized) {
   return ZIKIR_PRACTICE_PATTERNS.some((phrase) => includesNormalized(normalized, phrase));
 }
 
 function matchesDuaGuidanceRequest(normalized) {
   return DUA_GUIDANCE_PATTERNS.some((phrase) => includesNormalized(normalized, phrase));
+}
+
+function matchesDailyIslamicKnowledgeQuestion(normalized) {
+  return DAILY_ISLAMIC_KNOWLEDGE_PATTERNS.some((phrase) => includesNormalized(normalized, phrase));
 }
 
 function isCasualConversation(normalized) {

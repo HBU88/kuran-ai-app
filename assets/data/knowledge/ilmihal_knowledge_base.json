@@ -4,14 +4,14 @@
     "type": "worship_practice",
     "topic": "sabah_namazi",
     "triggers": [
-      "sabah namazı kaç rekat",
-      "sabah namazi kac rekat",
+      "sabah namazı kaç rek?t",
+      "sabah namazi kac rek?t",
       "sabah namazı kaç rekât",
       "sabah namazi kac rekât",
-      "sabah kaç rekat",
-      "sabah kac rekat"
+      "sabah kaç rek?t",
+      "sabah kac rek?t"
     ],
-    "answer_tr": "Sabah namazı 4 rekattır: 2 sünnet + 2 farz.",
+    "answer_tr": "Sabah namazı 4 rek?ttır: 2 sünnet + 2 farz.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -20,14 +20,14 @@
     "type": "worship_practice",
     "topic": "ogle_namazi",
     "triggers": [
-      "öğle namazı kaç rekat",
-      "ogle namazi kac rekat",
+      "öğle namazı kaç rek?t",
+      "ogle namazi kac rek?t",
       "öğle namazı kaç rekât",
       "ogle namazi kac rekât",
-      "öğle kaç rekat",
-      "ogle kaç rekat"
+      "öğle kaç rek?t",
+      "ogle kaç rek?t"
     ],
-    "answer_tr": "Öğle namazı 10 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet.",
+    "answer_tr": "Öğle namazı 10 rek?ttır: 4 ilk sünnet + 4 farz + 2 son sünnet.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -36,13 +36,13 @@
     "type": "worship_practice",
     "topic": "ikindi_namazi",
     "triggers": [
-      "ikindi namazı kaç rekat",
-      "ikindi namazi kac rekat",
+      "ikindi namazı kaç rek?t",
+      "ikindi namazi kac rek?t",
       "ikindi namazı kaç rekât",
       "ikindi namazi kac rekât",
-      "ikindi kaç rekat"
+      "ikindi kaç rek?t"
     ],
-    "answer_tr": "İkindi namazı 8 rekattır: 4 sünnet + 4 farz.",
+    "answer_tr": "İkindi namazı 8 rek?ttır: 4 sünnet + 4 farz.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -51,14 +51,14 @@
     "type": "worship_practice",
     "topic": "aksam_namazi",
     "triggers": [
-      "akşam namazı kaç rekat",
-      "aksam namazi kac rekat",
+      "akşam namazı kaç rek?t",
+      "aksam namazi kac rek?t",
       "akşam namazı kaç rekât",
       "aksam namazi kac rekât",
-      "akşam kaç rekat",
-      "aksam kaç rekat"
+      "akşam kaç rek?t",
+      "aksam kaç rek?t"
     ],
-    "answer_tr": "Akşam namazı 5 rekattır: 3 farz + 2 sünnet.",
+    "answer_tr": "Akşam namazı 5 rek?ttır: 3 farz + 2 sünnet.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -67,14 +67,14 @@
     "type": "worship_practice",
     "topic": "yatsi_namazi",
     "triggers": [
-      "yatsı namazı kaç rekat",
-      "yatsi namazi kac rekat",
+      "yatsı namazı kaç rek?t",
+      "yatsi namazi kac rek?t",
       "yatsı namazı kaç rekât",
       "yatsi namazi kac rekât",
-      "yatsı kaç rekat",
-      "yatsi kaç rekat"
+      "yatsı kaç rek?t",
+      "yatsi kaç rek?t"
     ],
-    "answer_tr": "Yatsı namazı 13 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet + 3 vitir.",
+    "answer_tr": "Yatsı namazı 13 rek?ttır: 4 ilk sünnet + 4 farz + 2 son sünnet + 3 vitir.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -83,13 +83,13 @@
     "type": "worship_practice",
     "topic": "vitir_namazi",
     "triggers": [
-      "vitir kaç rekat",
-      "vitir namazı kaç rekat",
+      "vitir kaç rek?t",
+      "vitir namazı kaç rek?t",
       "vitir kaç rekât",
       "vitir namazı kaç rekât",
-      "vitir namazi kac rekat"
+      "vitir namazi kac rek?t"
     ],
-    "answer_tr": "Vitir namazı 3 rekattır.",
+    "answer_tr": "Vitir namazı 3 rek?ttır.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -98,11 +98,11 @@
     "type": "worship_practice",
     "topic": "teravih_namazi",
     "triggers": [
-      "teravih namazı kaç rekat",
-      "teravi namazi kac rekat",
-      "ramazanda teravi namazi kac rekat",
+      "teravih namazı kaç rek?t",
+      "teravi namazi kac rek?t",
+      "ramazanda teravi namazi kac rek?t",
       "teravih kaç rekât",
-      "teravi kaç rekat"
+      "teravi kaç rek?t"
     ],
     "answer_tr": "Teravih namazı Ramazan ayında yatsı namazından sonra kılınır. Uygulamada 20 rekât olarak yaygındır; bazı uygulamalarda 8 rekât da kılınır. Genellikle 2'şer rekât hâlinde kılınması tavsiye edilir.",
     "source_note": "Diyanet-based curated internal knowledge.",
@@ -115,12 +115,54 @@
     "triggers": [
       "cuma namazı",
       "cuma namazi",
-      "cuma namazı kaç rekat",
-      "cuma namazi kac rekat",
+      "cuma namazı kaç rek?t",
+      "cuma namazi kac rek?t",
       "cuma namazı kaç rekât",
       "cuma namazi kac rekât"
     ],
-    "answer_tr": "Cuma namazının farzı 2 rekattır; sünnetlerle birlikte uygulama mezhebe ve yerel geleneğe göre değişebilir.",
+    "answer_tr": "Cuma namazının farzı 2 rek?ttır; sünnetlerle birlikte uygulama mezhebe ve yerel geleneğe göre değişebilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "cuma_namazi_nedir",
+    "type": "worship_practice",
+    "topic": "cuma_namazi_nedir",
+    "triggers": [
+      "cuma namaz? nedir",
+      "cuma namazi nedir",
+      "cuma namaz?",
+      "cuma ibadeti"
+    ],
+    "answer_tr": "Cuma namaz?, cuma g?n? ??le vaktinde cemaatle ve hutbe ile k?l?nan ?nemli bir namazd?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "cuma_namazi_kac_rek?t",
+    "type": "worship_practice",
+    "topic": "cuma_namazi_kac_rek?t",
+    "triggers": [
+      "cuma namaz? ka? rek?t",
+      "cuma namaz? ka? rek?t",
+      "cuma ka? rek?t",
+      "cuma farz?"
+    ],
+    "answer_tr": "Cuma namaz?n?n farz? 2 rek?tt?r. Farzdan ?nce 4 rek?t ilk s?nnet, farzdan sonra 4 rek?t son s?nnet k?l?n?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "cuma_namazi_kimlere_farzdır",
+    "type": "worship_practice",
+    "topic": "cuma_namazi_kimlere_farzdır",
+    "triggers": [
+      "cuma namaz? kimlere farzd?r",
+      "cuma namazi kimlere farzdir",
+      "cuma farz",
+      "mukim erkek"
+    ],
+    "answer_tr": "Cuma namaz?, ak?ll?, ergen, h?r, mukim ve mazeretsiz M?sl?man erkeklere farzd?r. Kad?nlara ve yolculara farz de?ildir.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -129,14 +171,56 @@
     "type": "worship_practice",
     "topic": "bayram_namazi",
     "triggers": [
-      "bayram namazı kaç rekat",
-      "bayram namazi kac rekat",
+      "bayram namazı kaç rek?t",
+      "bayram namazi kac rek?t",
       "bayram namazı kaç rekât",
       "bayram namazi kac rekât",
       "bayram namazı",
       "bayram namazi"
     ],
-    "answer_tr": "Bayram namazı 2 rekattır. Uygulama ayrıntıları için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "answer_tr": "Bayram namazı 2 rek?ttır. Uygulama ayrıntıları için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "bayram_namazi_nedir",
+    "type": "worship_practice",
+    "topic": "bayram_namazi_nedir",
+    "triggers": [
+      "bayram namaz? nedir",
+      "bayram namazi nedir",
+      "bayram namaz?",
+      "bayram sabah?"
+    ],
+    "answer_tr": "Bayram namaz?, Ramazan ve Kurban Bayram? sabah? cemaatle k?l?nan iki rek?tl?k namazd?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "bayram_namazi_nasil_kilinir",
+    "type": "worship_practice",
+    "topic": "bayram_namazi_nasil_kilinir",
+    "triggers": [
+      "bayram namaz? nas?l k?l?n?r",
+      "bayram namazi nasil kilinir",
+      "bayram namaz?",
+      "tekbir"
+    ],
+    "answer_tr": "Bayram namaz? iki rek?t olarak, ilave tekbirlerle ve cemaatle k?l?n?r. ?lk rek?tta iftitah tekbiri ve ilave tekbirler, ikinci rek?tta da ilave tekbirler al?n?r; ard?ndan Fatiha, zamm? sure, r?k?, secde ve selam gelir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "bayram_namazi_kac_rek?t",
+    "type": "worship_practice",
+    "topic": "bayram_namazi_kac_rek?t",
+    "triggers": [
+      "bayram namaz? ka? rek?t",
+      "bayram namaz? ka? rek?t",
+      "bayram namazi kac rek?t",
+      "bayram namaz?"
+    ],
+    "answer_tr": "Bayram namaz? 2 rek?tt?r. Hanef? uygulamada vacip kabul edilir ve cemaatle k?l?n?r.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -164,7 +248,7 @@
       "nasıl abdest alınır",
       "wudu"
     ],
-    "answer_tr": "Abdest genel olarak niyet, ağız-burun temizliği, yüzü yıkama, kolları yıkama, başı mesh etme ve ayakları yıkama adımlarından oluşur. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "answer_tr": "Abdest, namaz ve bazı ibadetler için alınan temizliktir. Niyet, ağız ve burun temizliği, yüzü yıkama, kolları yıkama, başı mesh etme ve ayakları yıkama adımlarıyla alınır.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -178,7 +262,7 @@
       "abdestin farzları nelerdir",
       "abdestin farzlari nelerdir"
     ],
-    "answer_tr": "Abdestin farzları mezhebe göre ayrıntı gösterebilir; genel olarak yüzü yıkamak, kolları dirseklere kadar yıkamak, başı mesh etmek ve ayakları topuklara kadar yıkamak sayılır. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "answer_tr": "Abdestin farzları genel olarak yüzü yıkamak, kolları dirseklere kadar yıkamak, başı mesh etmek ve ayakları topuklara kadar yıkamaktır. Ayrıntılı durumlarda güvenilir bir ilmihal kaynağı esas alınır.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -192,7 +276,7 @@
       "abdest bozan şeyler nelerdir",
       "abdest bozan seyler nelerdir"
     ],
-    "answer_tr": "Abdesti bozan durumlar konusunda bazı ayrıntılar mezhebe göre değişebilir; genel olarak tuvalet ihtiyacı, akıntı ve bayılma gibi haller buna girer. Detaylı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "answer_tr": "Abdesti bozan durumlar arasında tuvalet ihtiyacı, akıntı, bayılma ve benzeri hâller yer alır. Ayrıntılı durumlarda güvenilir bir ilmihal kaynağı esas alınır.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -224,60 +308,6 @@
     "requires_ayah": false
   },
   {
-    "id": "zakat_orani",
-    "type": "worship_practice",
-    "topic": "zekat",
-    "triggers": [
-      "zekât oranı",
-      "zekat oranı",
-      "zekât oranı nedir",
-      "zekat oranı nedir"
-    ],
-    "answer_tr": "Zekât oranı malın türüne göre değişebilir; temel hesaplama ve nisap ayrıntıları için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
-    "source_note": "Diyanet-based curated internal knowledge.",
-    "requires_ayah": false
-  },
-  {
-    "id": "zakat_kimler",
-    "type": "worship_practice",
-    "topic": "zekat",
-    "triggers": [
-      "zekât kimlere verilir",
-      "zekat kimlere verilir"
-    ],
-    "answer_tr": "Zekâtın verileceği kimseler konusunda ayrıntılar bulunmaktadır; genel ölçüler için güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
-    "source_note": "Diyanet-based curated internal knowledge.",
-    "requires_ayah": false
-  },
-  {
-    "id": "dua_nasil",
-    "type": "worship_practice",
-    "topic": "dua",
-    "triggers": [
-      "dua nasıl edilir",
-      "dua nasil edilir",
-      "nasıl dua edilir"
-    ],
-    "answer_tr": "Dua, samimi şekilde Allah'a yönelip ihtiyacını ve isteğini açıkça dile getirmektir. Kısa, içten ve düzenli dua etmek uygundur.",
-    "source_note": "Diyanet-based curated internal knowledge.",
-    "requires_ayah": false
-  },
-  {
-    "id": "tovbe_nasil",
-    "type": "worship_practice",
-    "topic": "tovbe",
-    "triggers": [
-      "tövbe nasıl edilir",
-      "tevbe nasıl edilir",
-      "nasıl tövbe edilir",
-      "nasıl tevbe edilir"
-    ],
-    "answer_tr": "Tövbe, pişmanlık duymak, hatayı bırakmak ve bir daha dönmemeye niyet etmektir. Kısa ve içten bir istiğfarla başlanabilir.",
-    "source_note": "Diyanet-based curated internal knowledge.",
-    "requires_ayah": false
-  }
-  ,
-  {
     "id": "gusul_howto",
     "type": "worship_practice",
     "topic": "gusul_abdesti",
@@ -290,7 +320,7 @@
       "gusül",
       "gusul"
     ],
-    "answer_tr": "Gusül abdesti genel olarak niyet, ağza su verme, burna su verme ve tüm bedeni yıkama adımlarından oluşur. Ayrıntılı durumlarda güvenilir bir ilmihal kaynağına veya ehil bir hocaya danışmak uygun olur.",
+    "answer_tr": "Gusül abdesti, büyük hadesten temizlenmek için alınan boy abdestidir. Ağza ve burna su vermekle birlikte bütün beden kuru yer kalmayacak şekilde yıkanır.",
     "source_note": "Diyanet-based curated internal knowledge.",
     "requires_ayah": false
   },
@@ -299,8 +329,8 @@
     "type": "worship_practice",
     "topic": "seferi_namazi",
     "triggers": [
-      "seferi namaz kaç rekat",
-      "seferi namaz kac rekat",
+      "seferi namaz kaç rek?t",
+      "seferi namaz kac rek?t",
       "seferi namaz kaç rekât",
       "seferi namaz kac rekât",
       "seferi namaz",
@@ -391,6 +421,1015 @@
     ],
     "answer_tr": "Günlük beş namaz vakti sabah, öğle, ikindi, akşam ve yatsıdır.",
     "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "zekat_nedir",
+    "type": "worship_practice",
+    "topic": "zekat_nedir",
+    "triggers": [
+      "zekat nedir",
+      "zekat kimlere farzdir",
+      "nisap sarti",
+      "hangi mallardan verilir",
+      "yilda bir kez",
+      "zekat hangi mallardan verilir"
+    ],
+    "answer_tr": "Zekât, nisap miktarına ulaşan ve üzerinden bir kamerî yıl geçen mala sahip Müslümanın malının belirli bir kısmını Allah rızası için vermesidir. Hangi mallardan verileceği, nisap şartı ve bir yılın dolması birlikte değerlendirilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "zekat_kime_verilir",
+    "type": "worship_practice",
+    "topic": "zekat_kime_verilir",
+    "triggers": [
+      "zekat kimlere verilir",
+      "fakirler",
+      "miskinler",
+      "borclular",
+      "yolda kalmislar",
+      "allah yolunda olanlar"
+    ],
+    "answer_tr": "Zekât fakirlere, miskinlere, borçlulara, yolda kalmışlara ve Allah yolunda olanlara verilir. Verilecek kişinin gerçekten ihtiyaç sahibi olması gerekir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "zekat_kime_verilmez",
+    "type": "worship_practice",
+    "topic": "zekat_kime_verilmez",
+    "triggers": [
+      "zekat kimlere verilmez",
+      "anne baba",
+      "cocuklar",
+      "es",
+      "zenginler",
+      "bakmakla yukumlu olunan kisiler"
+    ],
+    "answer_tr": "Zekât anne-baba, çocuklar, eş, bakmakla yükümlü olunan kişiler ve zenginlere verilmez.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "zekat_nisap_nedir",
+    "type": "worship_practice",
+    "topic": "zekat_nisap_nedir",
+    "triggers": [
+      "zekat nisap nedir",
+      "nisap miktari",
+      "altin uzerinden ornek",
+      "yil sarti"
+    ],
+    "answer_tr": "Nisap, zekâtın farz olabilmesi için gereken asgari servet miktarıdır. Uygulamada altın üzerinden örnek hesap yapılır; nisap miktarına ulaşma ve bir yılın dolması birlikte değerlendirilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "fitre_nedir",
+    "type": "worship_practice",
+    "topic": "fitre_nedir",
+    "triggers": [
+      "fitre nedir",
+      "fitre",
+      "kimlere vaciptir",
+      "kisi basina"
+    ],
+    "answer_tr": "Fitre, Ramazan Bayramı’na ulaşan ve temel ihtiyaçlarından fazla imkânı olan Müslümanın kişi başına verdiği vacip sadakadır. Ramazan sonunda, bayrama ulaşan kişinin sorumluluğudur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "fitre_kime_verilir",
+    "type": "worship_practice",
+    "topic": "fitre_kime_verilir",
+    "triggers": [
+      "fitre kime verilir",
+      "fitre kimlere verilir",
+      "fakirler",
+      "ihtiyac sahipleri",
+      "zekat verilebilen kisiler"
+    ],
+    "answer_tr": "Fitre fakirlere ve ihtiyaç sahiplerine verilir; zekât verilebilen kimseler genel olarak fitre için de değerlendirilebilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "fitre_ne_zaman_verilir",
+    "type": "worship_practice",
+    "topic": "fitre_ne_zaman_verilir",
+    "triggers": [
+      "fitre ne zaman verilir",
+      "fitre zamani",
+      "bayramdan once",
+      "ramazan icinde",
+      "bayram sabahina kadar"
+    ],
+    "answer_tr": "Fitre Ramazan içinde verilebilir; bayramdan önce verilmesi tercih edilir ve bayram sabahına kadar verilmesi gerekir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "zekat_orani",
+    "type": "worship_practice",
+    "topic": "zekat_nisap_nedir",
+    "triggers": [
+      "zekat orani nedir",
+      "zekat orani",
+      "zekat oran? nedir",
+      "zekat oran?"
+    ],
+    "answer_tr": "Zek?t oran? mal?n t?r?ne g?re de?i?ebilir; temel hesaplama nisap miktar?, bor?lar ve bir y?l?n dolmas?yla birlikte de?erlendirilir. Ayr?nt?l? oranlar i?in g?venilir ilmihal bilgisi esas al?nmal?d?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kurban_nedir",
+    "type": "worship_practice",
+    "topic": "kurban_nedir",
+    "triggers": [
+      "kurban nedir",
+      "kurban ibadeti",
+      "kurban bayraminda kesilen",
+      "allah rizasi icin kurban"
+    ],
+    "answer_tr": "Kurban, Kurban Bayram? g?nlerinde Allah r?zas? i?in belirli ?artlar? ta??yan hayvan?n usul?ne uygun ?ekilde kesilmesi ibadetidir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kurban_kime_vaciptir",
+    "type": "worship_practice",
+    "topic": "kurban_kime_vaciptir",
+    "triggers": [
+      "kurban kimlere vaciptir",
+      "kurban kimlere vacip",
+      "nisap miktari mal",
+      "yolcu olmamak"
+    ],
+    "answer_tr": "Kurban, M?sl?man, ak?ll? ve ergen olup nisap miktar? mala sahip ve yolcu olmayan kimse i?in vacip olur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kurban_ne_zaman_kesilir",
+    "type": "worship_practice",
+    "topic": "kurban_ne_zaman_kesilir",
+    "triggers": [
+      "kurban ne zaman kesilir",
+      "kurban zamani",
+      "bayram namazindan sonra kurban",
+      "kurban bayrami gunleri"
+    ],
+    "answer_tr": "Kurban, bayram namaz?ndan sonra ve Kurban Bayram? g?nleri i?inde kesilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kurban_eti_nasil_paylasilir",
+    "type": "worship_practice",
+    "topic": "kurban_eti_nasil_paylasilir",
+    "triggers": [
+      "kurban eti nasil paylasilir",
+      "kurban eti paylasimi",
+      "ihtiyac sahipleri",
+      "uc e bolme"
+    ],
+    "answer_tr": "Kurban eti aile i?inde kullan?labilir; akraba, kom?u ve ihtiya? sahipleriyle payla?mak g?zeldir. Uygulamada eti ??e b?lme tavsiyesi yayg?nd?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kurban_keserken_nelere_dikkat_edilir",
+    "type": "worship_practice",
+    "topic": "kurban_keserken_nelere_dikkat_edilir",
+    "triggers": [
+      "kurban keserken nelere dikkat edilir",
+      "kurban kesimi",
+      "besmele",
+      "hijyen",
+      "vekaletle kurban"
+    ],
+    "answer_tr": "Kurban kesiminde hayvana eziyet etmemek, ehil ki?i taraf?ndan kesilmesi, besmele, hijyen ve gerekti?inde vek?letle kurban ?nemlidir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "hac_nedir",
+    "type": "worship_practice",
+    "topic": "hac_nedir",
+    "triggers": [
+      "hac nedir",
+      "hac ibadeti",
+      "kabe ile ili?kisi",
+      "kutsal mek?nlar"
+    ],
+    "answer_tr": "Hac, belirli zamanda K?be ve kutsal mek?nlarla ba?lant?l? olarak yap?lan b?y?k bir ibadettir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "hac_kimlere_farzdır",
+    "type": "worship_practice",
+    "topic": "hac_kimlere_farzdır",
+    "triggers": [
+      "hac kimlere farzdır",
+      "hac kimlere farzdir",
+      "maddi imk?n? olan",
+      "yol g?venli?i"
+    ],
+    "answer_tr": "Hac, M?sl?man, ak?ll? ve ergen, h?r olup maddi ve bedeni imk?na sahip ve yol g?venli?i bulunan kimseye farzd?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "haccin_farzlari",
+    "type": "worship_practice",
+    "topic": "haccin_farzlari",
+    "triggers": [
+      "hacc?n farzlar?",
+      "haccin farzlari",
+      "ihram",
+      "arafat vakfesi",
+      "ziyaret tavaf?"
+    ],
+    "answer_tr": "Hacc?n temel farzlar? ihrama girmek, Arafat vakfesi yapmak ve ziyaret tavaf?n? ger?ekle?tirmektir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "umre_nedir",
+    "type": "worship_practice",
+    "topic": "umre_nedir",
+    "triggers": [
+      "umre nedir",
+      "umre ibadeti",
+      "ihram",
+      "tavaf",
+      "say",
+      "sa'y"
+    ],
+    "answer_tr": "Umre, ihramla ba?lay?p tavaf, sa?y ve t?ra? olup ihramdan ??kma ad?mlar?n? i?eren ibadettir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "hac_ile_umre_farki",
+    "type": "worship_practice",
+    "topic": "hac_ile_umre_farki",
+    "triggers": [
+      "hac ile umre fark?",
+      "hac ve umre fark?",
+      "hac farz",
+      "umre y?l?n ?o?u zaman?nda"
+    ],
+    "answer_tr": "Hac belirli zamanda yap?l?r ve Arafat vakfesi vard?r; umre ise y?l?n ?o?u zaman?nda yap?labilir ve farkl? bir h?k?mle de?erlendirilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "teyemmum_nedir",
+    "type": "worship_practice",
+    "topic": "teyemmum_nedir",
+    "triggers": [
+      "teyemmüm nedir",
+      "teyemum nedir",
+      "su yoksa",
+      "toprakla temizlik"
+    ],
+    "answer_tr": "Teyemmüm, su bulunmadığında veya su kullanmaya engel bir durum olduğunda temiz toprak cinsinden bir şeyle abdest veya gusül yerine yapılan temizliktir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "teyemmum_nasil_alinir",
+    "type": "worship_practice",
+    "topic": "teyemmum_nasil_alinir",
+    "triggers": [
+      "teyemmüm nasıl alınır",
+      "teyemum nasil alinir",
+      "teyemmüm almak",
+      "su yoksa abdest"
+    ],
+    "answer_tr": "Teyemmüm, niyet edilip temiz toprak cinsinden bir yüzeye eller vurularak yüzün ve kolların mesh edilmesiyle alınır. Önce niyet edilir, sonra yüz mesh edilir ve ardından kollar mesh edilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "teyemmumu_bozanlar",
+    "type": "worship_practice",
+    "topic": "teyemmumu_bozanlar",
+    "triggers": [
+      "teyemmümü bozan şeyler",
+      "teyemumu bozan seyler",
+      "teyemmüm bozulur mu",
+      "su bulunması"
+    ],
+    "answer_tr": "Teyemmüm, su bulunduğunda veya teyemmümü gerektiren özür ortadan kalktığında bozulur. Suya erişim varsa normal abdest veya gusül alınır.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "mest_uzerine_mesh",
+    "type": "worship_practice",
+    "topic": "mest_uzerine_mesh",
+    "triggers": [
+      "mest üzerine mesh",
+      "mesh nasıl yapılır",
+      "mest mesh"
+    ],
+    "answer_tr": "Mest üzerine mesh, abdestli olarak giyilmiş mestin üst kısmını ıslak elle meshetme kolaylığıdır. Mesh mestin üstüne yapılır ve abdest kolaylığı sağlar.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "sargi_uzerine_mesh",
+    "type": "worship_practice",
+    "topic": "sargi_uzerine_mesh",
+    "triggers": [
+      "sargı üzerine mesh",
+      "sargi üzerine mesh",
+      "yaraya mesh"
+    ],
+    "answer_tr": "Sargı üzerine mesh, yara veya benzeri bir özür bulunan yerde abdest kolaylığı sağlayan bir uygulamadır. Sargının üst kısmı zarar vermeden mesh edilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "hayiz_nedir",
+    "type": "worship_practice",
+    "topic": "hayiz_nedir",
+    "triggers": [
+      "hay?z nedir",
+      "hayiz nedir",
+      "adet nedir",
+      "regl nedir"
+    ],
+    "answer_tr": "Hay?z (adet), kad?n?n do?al bir h?lidir. Bu d?nemde namaz k?l?nmaz, oru? tutulmaz; tutulamayan oru?lar daha sonra kaza edilir, namazlar ise kaza edilmez.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "nifas_nedir",
+    "type": "worship_practice",
+    "topic": "nifas_nedir",
+    "triggers": [
+      "nifas nedir",
+      "lohusal?k nedir",
+      "lohusal?kta namaz",
+      "do?um sonras? kanama"
+    ],
+    "answer_tr": "Nifas, do?um sonras? g?r?len lohusal?k kanamas?d?r. Bu d?nemde namaz k?l?nmaz, oru? tutulmaz; tutulamayan oru?lar kaza edilir, namazlar kaza edilmez.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "istihaze_nedir",
+    "type": "worship_practice",
+    "topic": "istihaze_nedir",
+    "triggers": [
+      "istihaze nedir",
+      "?z?r kan?",
+      "ozur kani",
+      "hay?z ve nifas d??? kanama"
+    ],
+    "answer_tr": "?stihaze, hay?z ve nifas d???nda gelen ?z?r kan?d?r. Namaza ve oruca engel olmaz; ki?i ?z?r h?k?mlerine g?re ibadet eder.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "hayiz_halinde_namaz_oruc",
+    "type": "worship_practice",
+    "topic": "hayiz_halinde_namaz_oruc",
+    "triggers": [
+      "adetliyken namaz k?l?n?r m?",
+      "adetliyken oru? tutulur mu",
+      "regl iken namaz",
+      "adet halinde namaz"
+    ],
+    "answer_tr": "Adetliyken namaz k?l?nmaz ve namazlar kaza edilmez. Oru? tutulmaz; tutulamayan Ramazan oru?lar? daha sonra kaza edilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "adetliyken_oruc_kazasi",
+    "type": "worship_practice",
+    "topic": "adetliyken_oruc_kazasi",
+    "triggers": [
+      "adetliyken oru? kazas?",
+      "adetliyken tutulamayan oru? kaza edilir mi",
+      "ramazanda adet nedeniyle tutulamayan oru?"
+    ],
+    "answer_tr": "Adet nedeniyle tutulamayan Ramazan oru?lar? daha sonra kaza edilir. Bu, fidye ile kar??t?r?lmaz.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "adetliyken_kuran_okunur_mu",
+    "type": "worship_practice",
+    "topic": "adetliyken_kuran_okunur_mu",
+    "triggers": [
+      "adetliyken kuran okunur mu",
+      "hay?z halinde kuran okunur mu",
+      "mushafa dokunma",
+      "kuran okuma"
+    ],
+    "answer_tr": "Adet h?linde mushafa dokunma ve Kur?an okuma konusunda ihtilafl? ayr?nt?lar vard?r; k?sa bir ihtilaf notuyla dikkatli davran?l?r. Dua, zikir ve salavat okunabilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "ozur_kani_namaz",
+    "type": "worship_practice",
+    "topic": "ozur_kani_namaz",
+    "triggers": [
+      "?z?r kan? namaz",
+      "ozur kani namaz",
+      "?z?r kan? olan ki?i namaz k?labilir mi",
+      "abdest her vakit"
+    ],
+    "answer_tr": "?z?r kan? olan ki?i namaz k?labilir. Vakit girdikten sonra abdest al?n?r; ?z?r devam ediyorsa her vakit i?in abdest uygulamas? yap?l?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "yemin_nedir",
+    "type": "daily_practice",
+    "topic": "yemin",
+    "triggers": [
+      "yemin nedir",
+      "yemin say?l?r",
+      "hangi s?zler yemin say?l?r",
+      "vallahi",
+      "billahi",
+      "tallahi"
+    ],
+    "keywords": [
+      "yemin nedir",
+      "yemin say?l?r",
+      "hangi s?zler yemin say?l?r",
+      "vallahi",
+      "billahi",
+      "tallahi"
+    ],
+    "answer_tr": "Yemin, bir s?z? Allah ad?na g??lendirmektir.\n\nAd?m ad?m:\n- Vallahi, billahi, tallahi gibi ifadeler yemin say?labilir.\n- Yemin edilen s?z tutulmal?d?r.\n- Yemin bozulursa kefaret g?ndeme gelir.\n- Yalan yere yemin etmekten ?zellikle sak?n?lmal?d?r.\n\nDikkat edilmesi gerekenler:\n- ?aka, ?fke veya al??kanl?kla s?ylenen ifadelerde niyet ?nemlidir.\n- Bozulan yemin hafife al?nmamal?d?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "yemin_kefareti",
+    "type": "daily_practice",
+    "topic": "yemin",
+    "triggers": [
+      "yemin kefareti nedir",
+      "yemin kefareti",
+      "yemin bozulursa",
+      "yemin bozulursa ne olur"
+    ],
+    "keywords": [
+      "yemin kefareti nedir",
+      "yemin kefareti",
+      "yemin bozulursa",
+      "yemin bozulursa ne olur"
+    ],
+    "answer_tr": "Yemin kefareti, bozulan bir yeminin telafisi i?in yerine getirilen dini sorumluluktur.\n\nAd?m ad?m:\n- Yemin bozuldu?unda kefaret gerekir.\n- Genel uygulamada yoksul doyurma veya giydirme gibi yollar g?ndeme gelir.\n- Buna g?c? yetmeyen ki?i i?in oru? yolu de?erlendirilebilir.\n- Ki?i kendi durumuna uygun yolu g?venilir ilmihal bilgisiyle belirler.\n\nDikkat edilmesi gerekenler:\n- Kefaret geciktirilmemelidir.\n- Bu meselede ki?isel durum fark? olabilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "adak_nedir",
+    "type": "daily_practice",
+    "topic": "adak",
+    "triggers": [
+      "adak nedir",
+      "adak adamak",
+      "adak yerine getirilir mi",
+      "adak ne demek"
+    ],
+    "keywords": [
+      "adak nedir",
+      "adak adamak",
+      "adak yerine getirilir mi",
+      "adak ne demek"
+    ],
+    "answer_tr": "Adak, bir iste?in ger?ekle?mesi halinde Allah i?in bir ibadeti veya hayr? yapmay? ?stlenmektir.\n\nAd?m ad?m:\n- Adak, me?ru bir ibadet veya hay?r konusunda olur.\n- Adak ger?ekle?irse s?z yerine getirilmelidir.\n- Ada?? hafife almamak gerekir.\n\nDikkat edilmesi gerekenler:\n- Uygun olmayan bir ?eyi adamak do?ru de?ildir.\n- Her s?z? adak sanmamak gerekir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "adak_kurbani",
+    "type": "daily_practice",
+    "topic": "adak_kurbani",
+    "triggers": [
+      "adak kurban? nedir",
+      "adak kurbani",
+      "adak kurban? eti nas?l de?erlendirilir"
+    ],
+    "keywords": [
+      "adak kurban? nedir",
+      "adak kurbani",
+      "adak kurban? eti nas?l de?erlendirilir"
+    ],
+    "answer_tr": "Adak kurban?, adak sebebiyle kesilen kurband?r.\n\nAd?m ad?m:\n- Adak kurban? adak niyetiyle kesilir.\n- Eti adak sahibi ve hanesi taraf?ndan yenmez.\n- Et ihtiya? sahiplerine da??t?l?r.\n\nDikkat edilmesi gerekenler:\n- En g?venli uygulama eti ihtiya? sahiplerine ula?t?rmakt?r.\n- Adak kurban? normal kurban gibi serbest bir t?ketim konusu de?ildir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kefaret_nedir",
+    "type": "daily_practice",
+    "topic": "kefaret",
+    "triggers": [
+      "kefaret nedir",
+      "kefaret",
+      "oru? kefareti",
+      "yemin kefareti"
+    ],
+    "keywords": [
+      "kefaret nedir",
+      "kefaret",
+      "oru? kefareti",
+      "yemin kefareti"
+    ],
+    "answer_tr": "Kefaret, baz? ihlallerin telafisi i?in yerine getirilen dini bedeldir.\n\nAd?m ad?m:\n- Kefaret hangi sebeple gerekmi?se ?nce o durum anla??l?r.\n- Yemin bozulmas?, oru? ihlali gibi ?rnekler buna dahildir.\n- Duruma g?re uygun telafi yolu uygulan?r.\n\nDikkat edilmesi gerekenler:\n- Kefaretin t?r? meselenin ?e?idine g?re de?i?ir.\n- Ki?isel durumlarda g?venilir ilmihal bilgisi ?nemlidir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "tovbe_nasil_edilir",
+    "type": "daily_practice",
+    "topic": "tovbe",
+    "triggers": [
+      "t?vbe nas?l edilir",
+      "tevbe nas?l edilir",
+      "nas?l t?vbe edilir",
+      "nas?l tevbe edilir"
+    ],
+    "keywords": [
+      "t?vbe nas?l edilir",
+      "tevbe nas?l edilir",
+      "nas?l t?vbe edilir",
+      "nas?l tevbe edilir"
+    ],
+    "answer_tr": "T?vbe, pi?manl?k, g?nah? b?rakma ve yeniden yapmamaya niyetle edilir.\n\nAd?m ad?m:\n- Yap?lan hatadan pi?manl?k duyulur.\n- G?nah hemen b?rak?l?r.\n- Tekrar etmemeye karar verilir.\n- ?sti?far edilir ve gerekirse dua edilir.\n- Kul hakk? varsa helalle?me ve iade yoluna gidilir.\n\nDikkat edilmesi gerekenler:\n- T?vbe samimi olmal?d?r.\n- Kul hakk? varsa yaln?zca i?ten pi?manl?k yeterli olmaz.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "dua_nedir",
+    "type": "daily_practice",
+    "topic": "dua",
+    "triggers": [
+      "dua nedir",
+      "dua ne demek",
+      "dua anlam?"
+    ],
+    "keywords": [
+      "dua nedir",
+      "dua ne demek",
+      "dua anlam?"
+    ],
+    "answer_tr": "Dua, kulun Allah?a y?nelerek istekte bulunmas?d?r.\n\nAd?m ad?m:\n- Kalpten Allah?a y?nelilir.\n- ?htiya? a??k ve samimi ?ekilde s?ylenir.\n- Dua s?zle veya i?ten yap?labilir.\n\nDikkat edilmesi gerekenler:\n- Dua samimi olmal?d?r.\n- Dua ederken ?mit ve sab?r korunmal?d?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "dua_nasil_edilir",
+    "type": "daily_practice",
+    "topic": "dua",
+    "triggers": [
+      "dua nas?l edilir",
+      "dua nasil edilir",
+      "nas?l dua edilir",
+      "nas?l dua edeyim",
+      "hangi duay?"
+    ],
+    "keywords": [
+      "dua nas?l edilir",
+      "dua nasil edilir",
+      "nas?l dua edilir",
+      "nas?l dua edeyim",
+      "hangi duay?"
+    ],
+    "answer_tr": "Dua nas?l edilir?\n\nAd?m ad?m:\n- M?mk?nse hamd ve salavatla ba?lan?r.\n- ?htiya? a??k ve sade ?ekilde s?ylenir.\n- Dua samimi bir ?slupla s?rd?r?l?r.\n- ?mit ve sab?r korunur.\n\nDikkat edilmesi gerekenler:\n- Dua ederken abart?l? s?zlerden ka??nmak daha uygundur.\n- ?zel bir ihtiyaca g?re dua ?ekli de?i?ebilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "niyet_nasil",
+    "type": "daily_practice",
+    "topic": "niyet",
+    "triggers": [
+      "niyet nasil edilir",
+      "niyet nasıl edilir",
+      "nasıl niyet edilir",
+      "nasil niyet edilir",
+      "niyet",
+      "kalben niyet"
+    ],
+    "keywords": [
+      "niyet nasil edilir",
+      "niyet nasıl edilir",
+      "nasıl niyet edilir",
+      "nasil niyet edilir",
+      "niyet",
+      "kalben niyet"
+    ],
+    "answer_tr": "Niyet, yapılacak ibadeti kalben bilmek ve onu Allah rızası için yapmaya yönelmektir. Dil ile söylemek şart değildir.\n\nAdım adım:\n- Yapılacak ibadet kalben belirlenir.\n- İbadetin Allah rızası için yapıldığı içten niyet edilir.\n- Namaz, oruç, abdest veya gusül gibi ibadetlerde niyetin mahiyeti düşünülür.\n- Dil ile söylemek istenirse kısa ve sade şekilde söylenebilir; esas olan kalbin yönelmesidir.\n\nDikkat edilmesi gerekenler:\n- Niyet, ibadeti diğer işlerden ayıran iç yöneliştir.\n- Dil ile söylemek şart değildir.\n- Namaz, oruç, abdest ve gusül gibi ibadetlerde niyet, ibadetin anlamını belirginleştirir.\n\nYaygın hatalar:\n- Niyeti yalnızca sözden ibaret sanmak.\n- Kalpte yönelme olmadan sadece kelime tekrarına güvenmek.\n- Niyetin ibadetin başlangıcında önem taşıdığını unutmak.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "helal_haram_genel",
+    "type": "daily_practice",
+    "topic": "helal_haram",
+    "triggers": [
+      "helal haram nedir",
+      "helal ve haram",
+      "helal haram"
+    ],
+    "keywords": [
+      "helal haram nedir",
+      "helal ve haram",
+      "helal haram"
+    ],
+    "answer_tr": "Helal, dinen izin verilen; haram ise sak?n?lmas? gereken ?eydir.\n\nAd?m ad?m:\n- Yap?lacak i?in kayna?? ve niteli?i dikkate al?n?r.\n- ??pheli alanlar m?mk?nse terk edilir.\n- Kul hakk? ve adalet g?zetilir.\n\nDikkat edilmesi gerekenler:\n- G?nl?k hayatta sadece sonu? de?il, y?ntem de ?nemlidir.\n- ??pheli i?lerde g?venilir bilgi aranmal?d?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "faiz_nedir",
+    "type": "daily_practice",
+    "topic": "faiz",
+    "triggers": [
+      "faiz nedir",
+      "faiz",
+      "faizli i?lem"
+    ],
+    "keywords": [
+      "faiz nedir",
+      "faiz",
+      "faizli i?lem"
+    ],
+    "answer_tr": "Faiz, para veya bor? ili?kilerinde fazlal?k kar??l??? al?nan bedeldir ve sak?n?lmas? gereken bir konudur.\n\nAd?m ad?m:\n- ??lemde para veya bor? yap?s? kontrol edilir.\n- Faizli art?? olup olmad???na bak?l?r.\n- Modern finans ?r?nlerinde s?zle?me ayr?nt?lar? dikkatle incelenir.\n\nDikkat edilmesi gerekenler:\n- Kredi, mevduat ve gecikme bedellerinde ayr?nt? ?nemlidir.\n- ??pheli i?lemlerde g?venilir bilgi aranmal?d?r.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kul_hakki_nedir",
+    "type": "daily_practice",
+    "topic": "kul_hakki",
+    "triggers": [
+      "kul hakk? nedir",
+      "kul hakki nedir",
+      "kul hakk?",
+      "kul hakki"
+    ],
+    "keywords": [
+      "kul hakk? nedir",
+      "kul hakki nedir",
+      "kul hakk?",
+      "kul hakki"
+    ],
+    "answer_tr": "Kul hakk?, bir insan?n di?er insan ?zerindeki maddi veya manevi hakk?d?r.\n\nAd?m ad?m:\n- Hakk?n ne oldu?u belirlenir.\n- M?mk?nse hak sahibine iade edilir.\n- Helalle?me istenir.\n- Gerekirse zarar tazmin edilir.\n\nDikkat edilmesi gerekenler:\n- Kul hakk? yaln?zca i?ten pi?manl?kla kapanm?? say?lmaz.\n- Hak sahibine ula?mak as?l yoldur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "anne_baba_hakki",
+    "type": "daily_practice",
+    "topic": "anne_baba_hakki",
+    "triggers": [
+      "anne baba hakk? nedir",
+      "anne baba hakki nedir",
+      "anne baba hakk?",
+      "anne baba hakki"
+    ],
+    "keywords": [
+      "anne baba hakk? nedir",
+      "anne baba hakki nedir",
+      "anne baba hakk?",
+      "anne baba hakki"
+    ],
+    "answer_tr": "Anne baba hakk?, onlara iyilik, sayg?, dua ve bak?m sorumlulu?unu i?erir.\n\nAd?m ad?m:\n- Sayg?l? ve yumu?ak davran?l?r.\n- ?htiya?lar? g?c? ?l??s?nde kar??lan?r.\n- Hay?rla an?l?r ve dua edilir.\n- K?r?c? s?z ve davran??lardan uzak durulur.\n\nDikkat edilmesi gerekenler:\n- Bak?m ve iyilik, ki?inin g?c? ve h?line g?re de?erlendirilir.\n- Aile i?i sorunlarda sab?r ve adalet korunur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "giybet_nedir",
+    "type": "daily_practice",
+    "topic": "giybet",
+    "triggers": [
+      "g?ybet nedir",
+      "giybet nedir",
+      "g?ybet",
+      "giybet etmek"
+    ],
+    "keywords": [
+      "g?ybet nedir",
+      "giybet nedir",
+      "g?ybet",
+      "giybet etmek"
+    ],
+    "answer_tr": "G?ybet, bir kimseyi arkas?ndan ho?lanmayaca?? ?ekilde anmakt?r.\n\nAd?m ad?m:\n- Ba?kas?n?n ay?b?n? arkas?ndan konu?mamak gerekir.\n- Konu?ma zararl? y?ne gidiyorsa konu de?i?tirilir.\n- Dilin korunmas? al??kanl?k h?line getirilir.\n\nDikkat edilmesi gerekenler:\n- G?ybet, kalp k?r?c? ve toplumu bozucu bir davran??t?r.\n- Gerekirse helalle?me yoluna gidilir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "israf_nedir",
+    "type": "daily_practice",
+    "topic": "israf",
+    "triggers": [
+      "israf nedir",
+      "israf",
+      "israf etmek"
+    ],
+    "keywords": [
+      "israf nedir",
+      "israf",
+      "israf etmek"
+    ],
+    "answer_tr": "?sraf, imk?nlar? ?l??s?z ve gereksiz yere harcamakt?r.\n\nAd?m ad?m:\n- Yeme, para, zaman ve imk?nlarda ?l?? g?zetilir.\n- Gereksiz t?ketimden uzak durulur.\n- ?htiya? ile g?steri? birbirinden ayr?l?r.\n\nDikkat edilmesi gerekenler:\n- ?sraf sadece para de?il, zaman ve nimet konusunda da olabilir.\n- Nimetleri ?l??l? kullanmak gerekir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "selamlasma_adabi",
+    "type": "daily_practice",
+    "topic": "selamlasma",
+    "triggers": [
+      "selamla?ma adab?",
+      "selamlasma adabi",
+      "selam vermek",
+      "selam almak"
+    ],
+    "keywords": [
+      "selamla?ma adab?",
+      "selamlasma adabi",
+      "selam vermek",
+      "selam almak"
+    ],
+    "answer_tr": "Selamla?ma adab?, selam vermek, almak ve g?nl?k nezaketi korumakt?r.\n\nAd?m ad?m:\n- Selam verirken a??k ve g?zel s?z kullan?l?r.\n- Selam al?n?r ve m?mk?nse daha g?zel kar??l?k verilir.\n- G?nl?k ileti?imde nezaket korunur.\n\nDikkat edilmesi gerekenler:\n- Selam k?r?c? de?il birle?tirici olmal?d?r.\n- Kar??la?malarda sayg? korunur.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "komsuluk_hakki",
+    "type": "daily_practice",
+    "topic": "komsuluk_hakki",
+    "triggers": [
+      "kom?uluk hakk? nedir",
+      "komsuluk hakki nedir",
+      "kom?uluk hakk?",
+      "kom?u hakk?"
+    ],
+    "keywords": [
+      "kom?uluk hakk? nedir",
+      "komsuluk hakki nedir",
+      "kom?uluk hakk?",
+      "kom?u hakk?"
+    ],
+    "answer_tr": "Kom?uluk hakk?, kom?uya eziyet etmemek ve iyilikte bulunmakt?r.\n\nAd?m ad?m:\n- Kom?uya s?z ve davran??la eziyet edilmez.\n- ?htiya? halinde yard?mla??l?r.\n- Selam, hal hat?r ve iyi ge?im korunur.\n\nDikkat edilmesi gerekenler:\n- Ses, g?r?lt? ve hak ihlallerinden ka??nmak gerekir.\n- Kom?ulukta sab?r ve g?zel ?slup ?nemlidir.",
+    "source_note": "Diyanet-based curated internal knowledge.",
+    "requires_ayah": false
+  },
+  {
+    "id": "nikah_nedir",
+    "type": "daily_practice",
+    "topic": "nikah_nedir",
+    "triggers": [
+      "nik?h nedir",
+      "nikah nedir",
+      "nikah ne demek",
+      "evlilik nedir"
+    ],
+    "keywords": [
+      "nik?h nedir",
+      "nikah nedir",
+      "nikah ne demek",
+      "evlilik nedir"
+    ],
+    "answer_tr": "Nik?h, aile kurman?n din? ?er?evesini ifade eden temel bir konudur. K?sa ve genel anlam?yla kar??l?kl? r?za, me?ru evlilik ve aile sorumlulu?u ?ne ??kar.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "nikah_sartlari",
+    "type": "daily_practice",
+    "topic": "nikah_sartlari",
+    "triggers": [
+      "nik?h ?artlar?",
+      "nikah ?artlar?",
+      "nikah?n ?artlar?"
+    ],
+    "keywords": [
+      "nik?h ?artlar?",
+      "nikah ?artlar?",
+      "nikah?n ?artlar?"
+    ],
+    "answer_tr": "Nik?h?n ge?erli olabilmesi i?in temel ?artlar bulunur; taraflar?n r?zas?, me?ru evlilik engellerinin bulunmamas? ve aile kurma iradesi bu ?er?evede de?erlendirilir. Bu konu ki?isel ve hukuki sonu?lar do?urabilece?i i?in ?zel durumlarda g?venilir bir din g?revlisi ve ilgili hukuk uzman?ndan destek al?nmal?d?r.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "aile_hakki",
+    "type": "daily_practice",
+    "topic": "aile_hakki",
+    "triggers": [
+      "aile hakk?",
+      "aile hakki",
+      "aile sorumlulu?u",
+      "e? hakk?"
+    ],
+    "keywords": [
+      "aile hakk?",
+      "aile hakki",
+      "aile sorumlulu?u",
+      "e? hakk?"
+    ],
+    "answer_tr": "Aile i?inde sevgi, sayg?, sorumluluk ve adalet g?zetilmelidir. Aile i?i sorunlar hassas olabilir; ?zel durumlarda g?venilir bir din g?revlisi ve ilgili hukuk uzman?ndan destek al?nmal?d?r.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "bosanma_nedir",
+    "type": "daily_practice",
+    "topic": "bosanma_nedir",
+    "triggers": [
+      "bo?anma nedir",
+      "bosanma nedir",
+      "ayr?l?k",
+      "talak"
+    ],
+    "keywords": [
+      "bo?anma nedir",
+      "bosanma nedir",
+      "ayr?l?k",
+      "talak"
+    ],
+    "answer_tr": "Bo?anma, aile hukukunu ilgilendiren ciddi bir konudur. Bu konu ki?isel ve hukuki sonu?lar do?urabilece?i i?in ?zel durumlarda g?venilir bir din g?revlisi ve ilgili hukuk uzman?ndan destek al?nmal?d?r.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "talak_nedir",
+    "type": "daily_practice",
+    "topic": "talak_nedir",
+    "triggers": [
+      "talak nedir",
+      "talak",
+      "bo?anma h?km?"
+    ],
+    "keywords": [
+      "talak nedir",
+      "talak",
+      "bo?anma h?km?"
+    ],
+    "answer_tr": "Talak, bo?anma ile ilgili bir f?kh? terimdir. Bu konu ki?isel ve hukuki sonu?lar do?urabilece?i i?in ?zel durumlarda g?venilir bir din g?revlisi ve ilgili hukuk uzman?ndan destek al?nmal?d?r.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "miras_nedir",
+    "type": "daily_practice",
+    "topic": "miras_nedir",
+    "triggers": [
+      "miras nedir",
+      "miras",
+      "feraiz"
+    ],
+    "keywords": [
+      "miras nedir",
+      "miras",
+      "feraiz"
+    ],
+    "answer_tr": "Miras, ?l?m sonras? mal payla??m?n? ilgilendiren temel bir konudur. Bu konu ki?isel ve hukuki sonu?lar do?urabilece?i i?in ?zel durumlarda g?venilir bir din g?revlisi ve ilgili hukuk uzman?ndan destek al?nmal?d?r.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "miras_paylasimi_genel",
+    "type": "daily_practice",
+    "topic": "miras_paylasimi_genel",
+    "triggers": [
+      "miras payla??m?",
+      "miras paylasimi",
+      "payla??m"
+    ],
+    "keywords": [
+      "miras payla??m?",
+      "miras paylasimi",
+      "payla??m"
+    ],
+    "answer_tr": "Miras payla??m? temel ilke ve ?er?evelerle y?r?t?l?r. Bu konu ki?isel ve hukuki sonu?lar do?urabilece?i i?in ?zel durumlarda g?venilir bir din g?revlisi ve ilgili hukuk uzman?ndan destek al?nmal?d?r.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "sadaka_nedir",
+    "type": "daily_practice",
+    "topic": "sadaka_nedir",
+    "triggers": [
+      "sadaka nedir",
+      "sadaka",
+      "yard?m"
+    ],
+    "keywords": [
+      "sadaka nedir",
+      "sadaka",
+      "yard?m"
+    ],
+    "answer_tr": "Sadaka, Allah r?zas? i?in yap?lan g?n?ll? yard?m ve payla?mad?r.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "sadaka_kime_verilir",
+    "type": "daily_practice",
+    "topic": "sadaka_kime_verilir",
+    "triggers": [
+      "sadaka kime verilir",
+      "ihtiya? sahibi",
+      "fakir",
+      "miskin"
+    ],
+    "keywords": [
+      "sadaka kime verilir",
+      "ihtiya? sahibi",
+      "fakir",
+      "miskin"
+    ],
+    "answer_tr": "Sadaka ihtiya? sahiplerine ve uygun g?r?len kimselere verilir.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "kandil_geceleri_nedir",
+    "type": "daily_practice",
+    "topic": "kandil_geceleri_nedir",
+    "triggers": [
+      "kandil geceleri nedir",
+      "kandil geceleri",
+      "kandil"
+    ],
+    "keywords": [
+      "kandil geceleri nedir",
+      "kandil geceleri",
+      "kandil"
+    ],
+    "answer_tr": "Kandil geceleri, manevi yoğunluğu yüksek geceler olarak anılır. Geceyi dua, tövbe ve zikirle değerlendirmek amaçlanır.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "mirac_kandili_nedir",
+    "type": "daily_practice",
+    "topic": "mirac_kandili_nedir",
+    "aliases": [
+      "mirac kandili",
+      "miraç kandili",
+      "isra ve mirac",
+      "isra mirac gecesi"
+    ],
+    "triggers": [
+      "mirac kandili nedir",
+      "miraç kandili nedir",
+      "isra ve mirac",
+      "isra mirac gecesi",
+      "miraç",
+      "mirac"
+    ],
+    "keywords": [
+      "mirac kandili",
+      "miraç kandili",
+      "isra ve mirac",
+      "isra mirac gecesi",
+      "miraç",
+      "mirac"
+    ],
+    "answer_tr": "Miraç Kandili, Hz. Peygamber'in Miraç hadisesini hatırlatan manevi bir gecedir. Geceyi dua, tövbe, zikir ve salavatla değerlendirmek uygundur.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet.",
+    "requires_ayah": false
+  },
+  {
+    "id": "gece_ibadetleri",
+    "type": "daily_practice",
+    "topic": "gece_ibadetleri",
+    "triggers": [
+      "gece ibadetleri nelerdir",
+      "gece ibadetleri",
+      "tehecc?d",
+      "zikir",
+      "isti?far"
+    ],
+    "keywords": [
+      "gece ibadetleri nelerdir",
+      "gece ibadetleri",
+      "tehecc?d",
+      "zikir",
+      "isti?far"
+    ],
+    "answer_tr": "Gece ibadetleri, tehecc?d, dua, zikir ve isti?far gibi amelleri kapsar. Az ama devaml? ibadet te?vik edilir.",
+    "source_note": "Diyanet ve TDV ilmihal ?slubuyla haz?rlanm?? k?sa ?zet.",
     "requires_ayah": false
   }
 ]

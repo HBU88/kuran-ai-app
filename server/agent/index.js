@@ -39,6 +39,10 @@ const { loadAyahDataset } = require("../utils/load_ayah_dataset");
 const dataset = loadAyahDataset();
 const ayahs = dataset.ayahs;
 
+function isDebugChatEngineEnabled() {
+  return String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true";
+}
+
 function createTimingTracker() {
   const startedAt = Date.now();
   const timings = {
@@ -213,6 +217,10 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) 
 }
 
 function isIlmihalModuleQuestion(message, analysis = {}, history = []) {
+  if (resolveCurrentMessageOverrideTopic(message)) {
+    return false;
+  }
+
   return (
     isLocalKnowledgeQuery(message, analysis, null, history) ||
     analysis.intent === "worship_practice_question"
@@ -224,8 +232,9 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
   const route_mode = targetModule === "ilmihal" ? "ilmihal_knowledge" : "quran_guidance";
   const assistant_text =
     targetModule === "ilmihal"
-      ? "Bu soru Dinî Bilgiler bölümüne daha uygundur. Lütfen Dinî Bilgiler modülünü kullanın."
-      : "Bu soru Rehberlik bölümüne daha uygundur. Lütfen Rehberlik modülünü kullanın.";
+      ? "Bu soru İlmihal Rehberi bölümüne daha uygundur. Lütfen İlmihal Rehberi modülünü kullanın."
+    : "Bu soru Ayet Rehberi bölümüne daha uygundur. Lütfen Ayet Rehberi modülünü kullanın.";
+  const responsePreview = isDebugChatEngineEnabled() ? assistant_text.slice(0, 800) : null;
   const decision_meta = {
     module,
     route_mode,
@@ -237,6 +246,7 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
     semantic_score: 0,
     selected_ayah_id: null,
     timing_ms: normalizeTimingBreakdown(timing?.snapshot ? timing.snapshot() : null),
+    ...(responsePreview ? { response_preview: responsePreview } : {}),
   };
 
   return applySafetyGuard({
@@ -275,6 +285,7 @@ function buildIlmihalModuleResponse(message, history, baseAnalysis, timing) {
       recent_assistant_texts: recentAssistantTextsFromHistory(history),
     })
   );
+  const responsePreview = isDebugChatEngineEnabled() ? assistantText.slice(0, 800) : null;
   const decisionMeta = buildDecisionMeta(
     [],
     {
@@ -288,7 +299,8 @@ function buildIlmihalModuleResponse(message, history, baseAnalysis, timing) {
     knowledgeResult,
     timing.snapshot(),
     "local_fast_path",
-    "ilmihal"
+    "ilmihal",
+    responsePreview
   );
 
   return applySafetyGuard({
@@ -427,24 +439,36 @@ async function buildChatResponse(message, history = [], options = {}) {
     || forceKnowledgeOnlyReply
     ? "direct_answer"
     : resolveFinalResponseType(message, analysis, subIntent, ayahUsed, plannerResult);
+  const normalizedFinalResponseType =
+    routeMode === "quran_guidance" &&
+    ayahUsed &&
+    analysis.intent === "emotional_spiritual_support" &&
+    finalResponseType === "direct_answer"
+      ? "supportive_ayah"
+      : finalResponseType;
   const shouldForceAyahStyle = shouldForceAyahStyleResponse(
     explicitAyahRequest,
-    finalResponseType,
+    normalizedFinalResponseType,
     ayahUsed
   );
   const effectiveKnowledgeResult = shouldForceAyahStyle || explicitAyahRequest ? null : knowledgeResult;
   const finalSelectedAyah =
-    ayahUsed && (finalResponseType !== "direct_answer" || explicitAyahRequest) ? selectedAyah : null;
+    ayahUsed &&
+    (normalizedFinalResponseType !== "direct_answer" || explicitAyahRequest || routeMode === "quran_guidance")
+      ? selectedAyah
+      : null;
   const finalTopAyahIds =
-    ayahUsed && (finalResponseType !== "direct_answer" || explicitAyahRequest)
+    ayahUsed &&
+    (normalizedFinalResponseType !== "direct_answer" || explicitAyahRequest || routeMode === "quran_guidance")
       ? rankedAyahs.map((ayah) => ayah.id)
       : [];
   const consistencyGuard = enforceFinalPayloadConsistency({
-    responseType: finalResponseType,
+    responseType: normalizedFinalResponseType,
     ayahUsed,
     selectedAyah: finalSelectedAyah,
     topAyahIds: finalTopAyahIds,
     knowledgeDrivenAnswer,
+    routeMode,
   });
   const assistantText = timing.measureSync("response_composer_ms", () =>
     buildAssistantText(
@@ -463,6 +487,7 @@ async function buildChatResponse(message, history = [], options = {}) {
       }
     )
   );
+  const responsePreview = isDebugChatEngineEnabled() ? assistantText.slice(0, 800) : null;
   const decisionMeta = buildDecisionMeta(
     rankedAyahs,
     consistencyGuard,
@@ -471,7 +496,8 @@ async function buildChatResponse(message, history = [], options = {}) {
     knowledgeResult,
     timing.snapshot(),
     plannerDebugMeta.planner_source || "fallback",
-    moduleMode
+    moduleMode,
+    responsePreview
   );
   return applySafetyGuard({
     ...analysis,
@@ -492,7 +518,8 @@ function buildDecisionMeta(
   knowledgeResult,
   timingMs = null,
   plannerSource = "fallback",
-  module = "chat"
+  module = "chat",
+  responsePreview = null
 ) {
   const top = Array.isArray(rankedAyahs) && rankedAyahs.length > 0 ? rankedAyahs[0] : null;
   const topDebug = top?.debug || {};
@@ -516,6 +543,7 @@ function buildDecisionMeta(
     semantic_score: typeof topDebug.semantic_score === "number" ? topDebug.semantic_score : 0,
     selected_ayah_id: consistencyGuard.selectedAyah ? consistencyGuard.selectedAyah.id : null,
     timing_ms: normalizeTimingBreakdown(timingMs),
+    ...(responsePreview ? { response_preview: responsePreview.slice(0, 800) } : {}),
   };
 }
 
@@ -564,6 +592,7 @@ function shouldUseAyahForRouting(message, analysis, subIntent, plannerResult) {
 function resolveAyahUsage(message, analysis, rankedAyahs, topRankedAyah) {
   if (!topRankedAyah) return false;
   if (looksLikeFactualPracticeQuestion(message)) return false;
+  if (analysis.intent === "emotional_spiritual_support") return true;
   if (looksLikeGeneralIslamicQuestion(message, analysis)) {
     return shouldAttachAyahForGeneralQuestion(analysis, rankedAyahs);
   }
@@ -998,8 +1027,33 @@ function isPlannerResponseTypeAllowed(responseType, analysis, subIntent, ayahUse
   return true;
 }
 
-function enforceFinalPayloadConsistency({ responseType, ayahUsed, selectedAyah, topAyahIds, knowledgeDrivenAnswer }) {
-  if (responseType === "direct_answer" || ayahUsed === false || knowledgeDrivenAnswer) {
+function enforceFinalPayloadConsistency({
+  responseType,
+  ayahUsed,
+  selectedAyah,
+  topAyahIds,
+  knowledgeDrivenAnswer,
+  routeMode,
+}) {
+  if (ayahUsed === false || knowledgeDrivenAnswer) {
+    return {
+      responseType: "direct_answer",
+      ayahUsed: false,
+      selectedAyah: null,
+      topAyahIds: [],
+    };
+  }
+
+  if (responseType === "direct_answer") {
+    if (routeMode === "quran_guidance" && ayahUsed && selectedAyah) {
+      return {
+        responseType,
+        ayahUsed,
+        selectedAyah,
+        topAyahIds,
+      };
+    }
+
     return {
       responseType: "direct_answer",
       ayahUsed: false,

@@ -42,8 +42,21 @@ const fixedTests = [
   { kind: "fixed", group: "prayer", prompt: "cuma namazı kaç rekat?", expectedContains: "cuma" },
   { kind: "fixed", group: "prayer", prompt: "bayram namazı kaç rekat?", expectedContains: "bayram" },
   { kind: "fixed", group: "prayer", prompt: "cenaze namazı nasıl kılınır", expectedContains: "cenaze" },
-  { kind: "fixed", group: "knowledge", prompt: "abdest nasıl alınır", mustBeDirectAnswer: true },
-  { kind: "fixed", group: "knowledge", prompt: "gusül abdesti nasıl alınır", mustBeDirectAnswer: true },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "abdest nasıl alınır",
+    mustBeDirectAnswer: true,
+    expectedContains: ["Ağza üç defa", "Buruna üç defa", "Farzları"],
+    expectedNotContains: ["hocaya danış", "hocaya danismak"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "gusül abdesti nasıl alınır",
+    mustBeDirectAnswer: true,
+    expectedContains: ["Ağza üç defa", "Buruna üç defa", "kuru yer kalmayacak"],
+  },
   { kind: "fixed", group: "knowledge", prompt: "seferi namaz kaç rekât", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "vitir namazı vacip mi", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "bayram namazı nasıl kılınır", mustBeDirectAnswer: true },
@@ -53,12 +66,581 @@ const fixedTests = [
   { kind: "fixed", group: "knowledge", prompt: "oruç kimlere farzdır", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "oruç kimlere farz değildir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "sahur şart mı", mustBeDirectAnswer: true },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "zekat kime verilir",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "zekat_kime_verilir",
+    expectedContains: ["fakirler", "ihtiyaç sahibi"],
+    expectedNotContains: ["Zek?t", "miktar?na", "M?sl?man"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "zekât nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "zekat_nedir",
+    expectedContains: ["nisap", "yılda bir kez"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "zekât kimlere verilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "zekat_kime_verilir",
+    expectedContains: ["fakirler", "miskinler", "borçlular"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "zekât kimlere verilmez?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "zekat_kime_verilmez",
+    expectedContains: ["Anne", "çocuklar", "eş", "zenginler"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "zekât nisap nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "zekat_nisap_nedir",
+    expectedContains: ["nisap", "altın"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "fitre nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "fitre_nedir",
+    expectedContains: ["vacip", "kişi başına"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "fitre kime verilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "fitre_kime_verilir",
+    expectedContains: ["fakirler", "ihtiyaç sahipleri"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "fitre ne zaman verilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "fitre_ne_zaman_verilir",
+    expectedContains: ["Ramazan", "bayramdan önce", "bayram sabahına kadar"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kurban nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_nedir",
+    expectedContains: ["Kurban Bayramı", "Allah rızası"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kurban kimlere vaciptir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_kime_vaciptir",
+    expectedContains: ["Müslüman", "akıllı", "ergen", "nisap"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kurban ne zaman kesilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_ne_zaman_kesilir",
+    expectedContains: ["bayram namazından sonra", "Kurban Bayramı günleri"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kurban eti nasıl paylaşılır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_eti_nasil_paylasilir",
+    expectedContains: ["aile", "akraba", "ihtiyaç sahipleri"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kurban keserken nelere dikkat edilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_keserken_nelere_dikkat_edilir",
+    expectedContains: ["eziyet", "ehil kişi", "besmele", "hijyen", "vekalet"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Hac nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "hac_nedir",
+    expectedContains: ["Kâbe", "kutsal mekânlar"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Hac kimlere farzdır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "hac_kimlere_farzdır",
+    expectedContains: ["Müslüman", "akıllı", "ergen", "yol güvenliği"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Haccın farzları nelerdir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "haccin_farzlari",
+    expectedContains: ["İhrama girmek", "Arafat vakfesi", "Ziyaret tavafı"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Umre nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "umre_nedir",
+    expectedContains: ["ihram", "tavaf", "sa‘y"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Hac ile umre farkı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "hac_ile_umre_farki",
+    expectedContains: ["Arafat vakfesi", "belirli zamanda", "yılın çoğu zamanında"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Cuma namazı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "cuma_namazi_nedir",
+    expectedContains: ["cuma günü", "hutbe"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Cuma namazı kaç rekâttır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "cuma_namazi_kac_rekat",
+    expectedContains: ["2 rekattır", "ilk sünnet", "son sünnet"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Cuma namazı kimlere farzdır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "cuma_namazi_kimlere_farzdır",
+    expectedContains: ["Müslüman erkeklere", "kadınlara", "yolculara"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Bayram namazı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "bayram_namazi_nedir",
+    expectedContains: ["Ramazan", "Kurban Bayramı", "iki rekâtlık"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Bayram namazı nasıl kılınır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "bayram_namazi_nasil_kilinir",
+    expectedContains: ["ilave tekbirler", "Fatiha", "selam"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Bayram namazı kaç rekâttır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "bayram_namazi_kac_rekat",
+    expectedContains: ["2 rekattır", "vacip"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Teyemmüm nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "teyemmum_nedir",
+    expectedContains: ["toprak", "temizlik"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Teyemmüm nasıl alınır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "teyemmum_nasil_alinir",
+    expectedContains: ["niyet", "yüz", "kollar"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Teyemmümü bozan şeyler nelerdir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "teyemmumu_bozanlar",
+    expectedContains: ["su bulunduğunda", "özür"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Mest üzerine mesh nasıl yapılır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "mest_uzerine_mesh",
+    expectedContains: ["mest", "mesh"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Sargı üzerine mesh nasıl yapılır?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "sargi_uzerine_mesh",
+    expectedContains: ["sargı", "mesh"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Hayız nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "hayiz_nedir",
+    expectedContains: ["namaz", "oruç"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Adetliyken namaz kılınır mı?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "hayiz_halinde_namaz_oruc",
+    expectedContains: ["namaz kılınmaz", "oruç"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Adetliyken oruç tutulur mu?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "hayiz_halinde_namaz_oruc",
+    expectedContains: ["oruç tutulmaz", "kaza"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Adetliyken tutulamayan oruç kaza edilir mi?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "adetliyken_oruc_kazasi",
+    expectedContains: ["kaza", "fidye"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Nifas nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "nifas_nedir",
+    expectedContains: ["lohusalık", "namaz"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "İstihaze nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "istihaze_nedir",
+    expectedContains: ["özür kanı", "namaza"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Özür kanı olan kişi namaz kılabilir mi?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "ozur_kani_namaz",
+    expectedContains: ["namaz kılabilir", "abdest"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Adetliyken Kur’an okunur mu?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "adetliyken_kuran_okunur_mu",
+    expectedContains: ["Dua", "zikir", "salavat"],
+  },
   { kind: "fixed", group: "knowledge", prompt: "zekât oranı nedir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "zekât kimlere verilir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "dua nasıl edilir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "tövbe nasıl edilir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "namaz vakitleri nelerdir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "Hz Muhammed nasıl biriydi", mustBeDirectAnswer: true },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Yemin nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "yemin_nedir",
+    expectedContains: ["Allah adına", "kefaret"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Yemin kefareti nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "yemin_kefareti",
+    expectedContains: ["kefaret", "yoksul"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Adak nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "adak_nedir",
+    expectedContains: ["adak", "yerine getiril"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Adak kurbanı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "adak_kurbani",
+    expectedContains: ["ihtiyaç sahipleri", "adağı adayan"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kefaret nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kefaret_nedir",
+    expectedContains: ["telafi", "yemin"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Tövbe nasıl edilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "tovbe_nasil_edilir",
+    expectedContains: ["pişmanlık", "helalleşme"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Dua nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "dua_nedir",
+    expectedContains: ["Allah", "istekte bulunması"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Dua nasıl edilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "dua_nasil_edilir",
+    expectedContains: ["hamd", "salavat"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Helal haram nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "helal_haram_genel",
+    expectedContains: ["Helal", "haram"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Faiz nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "faiz_nedir",
+    expectedContains: ["sakınılması", "modern finans"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kul hakkı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kul_hakki_nedir",
+    expectedContains: ["iade", "helalleşme"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Anne baba hakkı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "anne_baba_hakki",
+    expectedContains: ["saygı", "dua"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Gıybet nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "giybet_nedir",
+    expectedContains: ["arkasından", "hoşlanmayacağı"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "İsraf nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "israf_nedir",
+    expectedContains: ["ölçüsüz", "gereksiz"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Selamlaşma adabı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "selamlasma_adabi",
+    expectedContains: ["selam vermek", "selam almak"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Komşuluk hakkı nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "komsuluk_hakki",
+    expectedContains: ["eziyet", "yardımlaşılır"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Nikâh nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "nikah_nedir",
+    expectedContains: ["aile", "rıza"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Nikâh şartları nelerdir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "nikah_sartlari",
+    expectedContains: ["şart", "hukuk"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Boşanma nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "bosanma_nedir",
+    expectedContains: ["aile", "hukuk"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Talak nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "talak_nedir",
+    expectedContains: ["boşanma", "fıkhî"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Miras nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "miras_nedir",
+    expectedContains: ["paylaşım", "borç"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Sadaka nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "sadaka_nedir",
+    expectedContains: ["Allah", "paylaşma"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Sadaka kime verilir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "sadaka_kime_verilir",
+    expectedContains: ["ihtiyaç", "fakir"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Mirac kandili nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "mirac_kandili_nedir",
+    expectedContains: ["Miraç", "dua"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Kandil geceleri nedir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kandil_geceleri_nedir",
+    expectedContains: ["manevi", "yoğunluğu", "yüksek", "tövbe", "değerlendirmek"],
+    expectedNotContains: ["yo?un", "y?ksek", "t?vbe", "de?erlendirmek"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "Gece ibadetleri nelerdir?",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "gece_ibadetleri",
+    expectedContains: ["teheccüd", "zikir"],
+  },
   { kind: "context", group: "knowledge", prompt: "abdest nasıl alınır", followUp: "nasıl alınır?", expectedContains: "abdest" },
   { kind: "context", group: "knowledge", prompt: "vitir namazı vacip mi", followUp: "vacip mi?", expectedContains: "vitir", followUpExpectedContains: "vitir" },
   { kind: "context", group: "prayer", prompt: "cuma namazı", followUp: "kaç rekat?", expectedContains: "cuma" },
@@ -363,7 +945,7 @@ async function runModuleEndpointSmokeTests() {
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
       expectedRedirectModule: "ilmihal",
-      expectAssistantContains: "Dinî Bilgiler bölümüne daha uygundur",
+      expectAssistantContains: "İlmihal Rehberi bölümüne daha uygundur",
       maxAyahRankerMs: 20,
     },
     {
@@ -373,7 +955,7 @@ async function runModuleEndpointSmokeTests() {
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
       expectedRedirectModule: "ayah",
-      expectAssistantContains: "Rehberlik bölümüne daha uygundur",
+      expectAssistantContains: "Ayet Rehberi bölümüne daha uygundur",
       maxAyahRankerMs: 0,
     },
     {
@@ -388,12 +970,64 @@ async function runModuleEndpointSmokeTests() {
     },
     {
       path: "/ilmihal-chat",
+      prompt: "niyet nasil edilir",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "niyet_nasil",
+      expectedRedirectModule: null,
+      expectAssistantContains: "kalben",
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "nasıl niyet edilir",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "niyet_nasil",
+      expectedRedirectModule: null,
+      expectAssistantContains: "kalben",
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "niyet nasıl edilir",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "niyet_nasil",
+      expectedRedirectModule: null,
+      expectAssistantContains: "kalben",
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "nasıl niyet edilir",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "niyet_nasil",
+      expectedRedirectModule: null,
+      expectAssistantContains: "kalben",
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
       prompt: "çok korkuyorum",
       expectedModule: "ilmihal",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
       expectedRedirectModule: "ayah",
-      expectAssistantContains: "Rehberlik bölümüne daha uygundur",
+      expectAssistantContains: "Ayet Rehberi bölümüne daha uygundur",
       maxAyahRankerMs: 0,
     },
   ];
@@ -416,6 +1050,9 @@ async function runModuleEndpointSmokeTests() {
     if (test.expectedKnowledgeHit === true && !payload?.decision_meta?.knowledge_hit_id) {
       failures.push("knowledge_hit_id missing");
     }
+    if (typeof test.expectedKnowledgeHitId === "string" && payload?.decision_meta?.knowledge_hit_id !== test.expectedKnowledgeHitId) {
+      failures.push(`knowledge_hit_id=${payload?.decision_meta?.knowledge_hit_id}`);
+    }
     if (Object.prototype.hasOwnProperty.call(test, "expectedRedirectModule")) {
       const redirectModule = payload?.redirect_module || null;
       if (redirectModule !== test.expectedRedirectModule) {
@@ -435,6 +1072,9 @@ async function runModuleEndpointSmokeTests() {
       if (rankerMs > test.maxAyahRankerMs) {
         failures.push(`ayah_ranker_ms=${rankerMs}`);
       }
+    }
+    if (typeof test.expectAssistantNotContains === "string" && payload?.assistant_text?.includes(test.expectAssistantNotContains)) {
+      failures.push(`assistant_text contains ${test.expectAssistantNotContains}`);
     }
     if (typeof test.expectAssistantContains === "string") {
       const expected = normalizeForMatch(test.expectAssistantContains);
@@ -487,6 +1127,22 @@ function validatePayload(test, payload) {
     }
   }
 
+  if (test.prompt === "Kandil geceleri nedir?") {
+    const assistantText = normalizeForMatch(payload?.assistant_text || "");
+    const requiredTokens = ["manevi", "yoğunluğu", "yüksek", "tövbe", "değerlendirmek"];
+    const forbiddenTokens = ["yo?un", "y?ksek", "t?vbe", "de?erlendirmek"];
+    for (const token of requiredTokens) {
+      if (!assistantText.includes(normalizeForMatch(token))) {
+        failures.push(`assistant_text missing expected text ${normalizeForMatch(token)}`);
+      }
+    }
+    for (const token of forbiddenTokens) {
+      if (assistantText.includes(normalizeForMatch(token))) {
+        failures.push(`assistant_text contains forbidden text ${normalizeForMatch(token)}`);
+      }
+    }
+  }
+
   if (AYAH_TYPES.has(payload?.response_type)) {
     if (!payload.selected_ayah) {
       failures.push(`selected_ayah is null for ${payload.response_type}`);
@@ -527,6 +1183,16 @@ function validatePayload(test, payload) {
     if (test.mustBeDirectAnswer && typeof payload?.assistant_text !== "string") failures.push("knowledge question missing assistant_text");
   }
 
+  const notContains = normalizeNotContainsList(test.expectedNotContains);
+  if (notContains.length > 0) {
+    const assistantText = normalizeForMatch(payload?.assistant_text || "");
+    for (const token of notContains) {
+      if (assistantText.includes(token)) {
+        failures.push(`assistant_text unexpectedly contained ${token}`);
+      }
+    }
+  }
+
   const alignmentRule = TOPIC_RULES[test.group];
   if (alignmentRule && test.explicitTopic) {
     const surahNumber = payload?.selected_ayah?.surahNumber;
@@ -544,6 +1210,14 @@ function validatePayload(test, payload) {
   }
 
   return failures;
+}
+
+function normalizeNotContainsList(value) {
+  if (!value) return [];
+  const list = Array.isArray(value) ? value : [value];
+  return list
+    .map((item) => normalizeForMatch(item))
+    .filter(Boolean);
 }
 
 async function runContextTest(test) {
