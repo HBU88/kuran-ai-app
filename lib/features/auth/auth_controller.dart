@@ -1,0 +1,76 @@
+import 'package:flutter/foundation.dart';
+
+import '../../data/models/auth_user_model.dart';
+import '../../data/sources/remote/auth_service.dart';
+
+class AuthController extends ChangeNotifier {
+  AuthController(this._service);
+
+  final AuthService _service;
+
+  AuthUserModel? user;
+  bool isBusy = false;
+  String? errorMessage;
+
+  bool get isLoggedIn => user != null && _service.isLoggedIn;
+
+  Future<bool> login({
+    required String email,
+    required String password,
+  }) async {
+    return _run(() async {
+      final session = await _service.login(email: email, password: password);
+      user = session.user;
+    });
+  }
+
+  Future<bool> register({
+    required String email,
+    required String password,
+    required bool termsAccepted,
+    required bool privacyPolicyAccepted,
+    required bool marketingConsent,
+    required bool adPersonalizationConsent,
+  }) async {
+    return _run(() async {
+      final session = await _service.register(
+        email: email,
+        password: password,
+        termsAccepted: termsAccepted,
+        privacyPolicyAccepted: privacyPolicyAccepted,
+        marketingConsent: marketingConsent,
+        adPersonalizationConsent: adPersonalizationConsent,
+      );
+      user = session.user;
+    });
+  }
+
+  Future<void> logout() async {
+    isBusy = true;
+    errorMessage = null;
+    notifyListeners();
+    await _service.logout();
+    user = null;
+    isBusy = false;
+    notifyListeners();
+  }
+
+  Future<bool> _run(Future<void> Function() action) async {
+    isBusy = true;
+    errorMessage = null;
+    notifyListeners();
+    try {
+      await action();
+      isBusy = false;
+      notifyListeners();
+      return true;
+    } on AuthServiceException catch (error) {
+      errorMessage = error.message;
+    } catch (_) {
+      errorMessage = 'İşlem tamamlanamadı. Lütfen tekrar deneyin.';
+    }
+    isBusy = false;
+    notifyListeners();
+    return false;
+  }
+}

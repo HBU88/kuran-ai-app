@@ -10,11 +10,13 @@ class SettingsController extends ChangeNotifier {
   bool darkThemeEnabled = false;
   bool notificationsEnabled = false;
   bool locationEnabled = false;
+  bool authOnboardingSeen = false;
 
   void load() {
     darkThemeEnabled = _repository.darkThemeEnabled;
     notificationsEnabled = _repository.notificationsEnabled;
     locationEnabled = _repository.locationEnabled;
+    authOnboardingSeen = _repository.authOnboardingSeen;
     notifyListeners();
   }
 
@@ -33,6 +35,12 @@ class SettingsController extends ChangeNotifier {
   Future<void> setLocationEnabled(bool enabled) async {
     locationEnabled = enabled;
     await _repository.setLocationEnabled(enabled);
+    notifyListeners();
+  }
+
+  Future<void> setAuthOnboardingSeen(bool seen) async {
+    authOnboardingSeen = seen;
+    await _repository.setAuthOnboardingSeen(seen);
     notifyListeners();
   }
 }

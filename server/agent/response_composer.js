@@ -461,9 +461,9 @@ function buildAyahCenteredAnswer(analysis, ayah, recentAssistantTexts = []) {
       "Şifa tarafını hatırlatan kısa bir ayet paylaşayım.",
     ],
     default: [
-      "Yazdığını ayet merkezli ve sakin bir destek niyetiyle ele aldım.",
+      "Yazdığını Kur’an merkezli ve sakin bir destek niyetiyle ele aldım.",
       "Sakin bir hatırlatma olarak kısa bir ayet paylaşayım.",
-      "Bu konuda ayet merkezli ve kısa bir destek iyi gelebilir.",
+      "Bu konuda Kur’an merkezli ve kısa bir destek iyi gelebilir.",
     ],
   };
   const templates = getSupportiveLeadTemplates(analysis);
@@ -806,15 +806,15 @@ function buildGeneralIslamicAnswer(message, routing = {}) {
   }
 
   if (normalized.includes("zikir") || normalized.includes("tesbih")) {
-    return "Evet, Allah'ı zikretmek genel olarak faziletli ve sevap kabul edilen bir ibadettir. Zikir kalbi diri tutar ve insanın Rabbini hatırlamasına yardımcı olur. Bunu bir fetva gibi değil, genel bir manevi bilgi olarak söyleyebilirim. İstersen sana günlük hayatta kolay çekilebilecek birkaç kısa zikir de önerebilirim.";
+    return "Allah'ı zikretmek kalbi diri tutan ve insanın Rabbini hatırlamasına yardımcı olan kıymetli bir ibadet pratiğidir. Bunu günlük manevi rehberlik niyetiyle, genel bir hatırlatma olarak paylaşabilirim. İstersen kolay sürdürülebilecek birkaç kısa zikir de önerebilirim.";
   }
   if (normalized.includes("dua")) {
-    return "Evet, dua etmek kulun Allah'a yönelmesi bakımından çok kıymetli bir ibadettir. Dua insanın aczini, ihtiyacını ve umudunu Rabbine açmasıdır. Kesin hüküm diliyle değil, genel bir hatırlatma olarak kısa ve samimi dua da değerlidir.";
+    return "Dua etmek kulun Allah'a yönelmesi bakımından çok kıymetli bir ibadettir. Dua insanın aczini, ihtiyacını ve umudunu Rabbine açmasıdır. Günlük manevi rehberlik içinde kısa ve samimi dua da değerlidir.";
   }
   if (mentionsProphet) {
     return "Hz. Muhammed, İslâm geleneğinde güvenilirliği, merhameti, sabrı, adaleti ve tevazusuyla örnek gösterilen bir peygamberdir. İnsanlara karşı yumuşak davranması, emanete sadakati ve zor zamanlarda metanetini koruması öne çıkar. İstersen bunu ahlâkı, aile hayatı veya liderliği açısından ayrı ayrı da konuşabiliriz.";
   }
-  return "Bu konuda kısa bir genel bilgi verebilirim: İslam'da niyet, samimiyet ve Allah'ı hatırlama çok kıymetlidir. Kesin fetva vermeden, günlük hayatta ölçülü ve samimi bir şekilde hayra yönelmek iyi bir başlangıç olur.";
+  return "Bu konuda kısa bir genel hatırlatma paylaşabilirim: İslam'da niyet, samimiyet ve Allah'ı hatırlama çok kıymetlidir. Günlük hayatta ölçülü ve samimi bir şekilde hayra yönelmek iyi bir başlangıç olur.";
 }
 
 function buildWorshipPracticeAnswer(message, routing = {}) {
@@ -866,7 +866,7 @@ function buildWorshipPracticeAnswer(message, routing = {}) {
   }
 
   if (normalized.includes("zikir")) {
-    return "Günlük olarak kısa ve sürdürülebilir zikirler tercih edebilirsin: Subhanallah, Elhamdülillah, Allahu ekber, La ilahe illallah ve salavat gibi. Az ama düzenli yapmak çoğu zaman daha uygulanabilir olur. Özel bir dini hüküm için ehil bir hocaya danışman daha doğru olur.";
+    return "Günlük olarak kısa ve sürdürülebilir zikirler tercih edebilirsin: Subhanallah, Elhamdülillah, Allahu ekber, La ilahe illallah ve salavat gibi. Az ama düzenli yapmak çoğu zaman daha uygulanabilir olur. Kişisel ve hassas dinî konularda güvenilir bir uzmana danışmak daha doğru olur.";
   }
   if (normalized.includes("sure")) {
     return "Kendini yormadan kısa surelerle başlayabilirsin: Fatiha, İhlas, Felak, Nas veya İnşirah gibi. İçinde bulunduğun hale göre kısa okuyup anlamını düşünmek de güzel bir pratik olabilir.";
@@ -1060,7 +1060,7 @@ function buildDuaRequestAnswer(message) {
     return "Buna uygun kısa ve samimi bir dua edebilirsin: Allah'ım, yalnızlık hissimde kalbimi Sana yaklaştır, bana huzur, sabır ve hayırlı insanlar nasip et. Duayı ezber cümle gibi değil, içinden geldiği gibi söylemen de kıymetlidir.";
   }
   if (normalized.includes("tövbe") || normalized.includes("aff")) {
-    return "Buna uygun sade bir dua şöyle olabilir: Allah'ım, hatalarımı bağışla, kalbimi temizle ve beni Sana yaklaştıran yollara yönelt. Bu kesin hüküm değil, tövbe ve umut duygusunu destekleyen sakin bir dua önerisidir.";
+    return "Buna uygun sade bir dua şöyle olabilir: Allah'ım, hatalarımı bağışla, kalbimi temizle ve beni Sana yaklaştıran yollara yönelt. Bu, tövbe ve umut duygusunu destekleyen sakin bir dua önerisidir.";
   }
   return "Buna uygun kısa bir dua şöyle olabilir: Allah'ım, kalbime ferahlık ver, beni hayra yönelt, zorlandığım yerde bana sabır ve güç nasip et. İstersen bunu kendi kelimelerinle daha kişisel hale getirebilirsin.";
 }
@@ -1070,7 +1070,7 @@ function buildZikirRequestAnswer(message) {
   if (normalized.includes("yalnız") || normalized.includes("huzur")) {
     return "Yalnızlık veya iç huzuru için kısa ve sürdürülebilir zikirler tercih edebilirsin: La ilahe illallah, Hasbiyallahu la ilahe illa hu veya salavat. Az ama düzenli yapmak daha uygulanabilir olur.";
   }
-  return "Günlük hayatta kolayca sürdürülebilecek zikirler seçebilirsin: Subhanallah, Elhamdülillah, Allahu ekber, La ilahe illallah ve salavat. Bunu kesin bir dini yükümlülük gibi değil, kalbi diri tutan bir pratik olarak düşünebilirsin.";
+  return "Günlük hayatta kolayca sürdürülebilecek zikirler seçebilirsin: Subhanallah, Elhamdülillah, Allahu ekber, La ilahe illallah ve salavat. Bunu kalbi diri tutan, yumuşak ve sürdürülebilir bir pratik olarak düşünebilirsin.";
 }
 
 function buildPracticalGuidanceAnswer(message) {
@@ -1085,7 +1085,7 @@ function buildPracticalGuidanceAnswer(message) {
 }
 
 function buildCasualConversationAnswer(message) {
-  return "Selam, HAKAI’ye hoş geldin. Sana ayet rehberliği veya ilmihal bilgisiyle yardımcı olabilirim.";
+  return "Selam, HAKAI’ye hoş geldin. Kur’an merkezli manevi rehberlik ve pratik dinî bilgilerle yanında olabilirim.";
 }
 
 function finalizeAssistantText(text) {
@@ -1226,7 +1226,5 @@ module.exports = {
   composeExplanationWithAyah,
   composeDuaGuidance,
 };
-
-
 
 

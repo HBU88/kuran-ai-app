@@ -15,8 +15,8 @@ function guardAssistantText(text) {
     return "Bu konuda zarar, nefret veya şiddeti destekleyen bir yönlendirme yapamam. Dilersen konuyu güvenli, sakin ve yapıcı bir dille ele alabiliriz.";
   }
 
-  if (needsSensitiveDisclaimer(value) && !value.includes("Bu yanıt genel bilgilendirme içindir")) {
-    return `${value}\n\nNot: Bu yanıt genel bilgilendirme içindir; resmî fetva, hukukî/medikal danışmanlık veya acil destek yerine geçmez. Hassas bir durum varsa ehil bir uzmana ya da yerel acil destek birimlerine başvur.`;
+  if (needsSensitiveDisclaimer(value) && !value.includes("Bu paylaşım genel bilgilendirme")) {
+    return `${value}\n\nNot: Bu paylaşım genel bilgilendirme ve manevi destek amaçlıdır; kişisel dinî karar, hukukî/medikal danışmanlık veya acil destek yerine geçmez. Hassas bir durum varsa ehil bir uzmana ya da yerel acil destek birimlerine başvur.`;
   }
 
   return value;

@@ -35,6 +35,11 @@ class HomeScreen extends StatelessWidget {
             tooltip: 'Favoriler',
           ),
           IconButton(
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.account),
+            icon: const Icon(Icons.person_outline_rounded),
+            tooltip: 'Hesap',
+          ),
+          IconButton(
             onPressed: () => Navigator.pushNamed(context, AppRoutes.settings),
             icon: const Icon(Icons.tune_rounded),
             tooltip: 'Ayarlar',
@@ -202,7 +207,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Ayet Rehberi, Dinî Bilgiler, Namaz Vakitleri, Kıble ve Ezber modüllerine buradan ulaşabilirsin.',
+                          'Kur’an merkezli manevi rehberlik, Dinî Bilgiler, Namaz Vakitleri ve Kıble modüllerine buradan ulaşabilirsin.',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: AppColors.textSecondary,
@@ -230,7 +235,7 @@ class _ModuleGrid extends StatelessWidget {
     final modules = [
       _ModuleData(
         label: 'Ayet Rehberi',
-        subtitle: 'Duygularına ve sorularına ayetlerle rehberlik',
+        subtitle: 'İç hâline göre kısa ayet rehberliği ve tefekkür',
         iconAsset: 'assets/app/ayah_icon.png',
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
@@ -240,7 +245,7 @@ class _ModuleGrid extends StatelessWidget {
       ),
       _ModuleData(
         label: 'Dinî Bilgiler',
-        subtitle: 'Namaz, ibadet, helal-haram ve günlük dinî sorular',
+        subtitle: 'Namaz, ibadet ve günlük pratik dinî bilgiler',
         iconAsset: 'assets/app/ilmihal_icon.png',
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
@@ -259,6 +264,12 @@ class _ModuleGrid extends StatelessWidget {
         subtitle: 'Kıble yönünü bul',
         iconAsset: 'assets/app/qibla_icon.png',
         onTap: () => Navigator.pushNamed(context, AppRoutes.qibla),
+      ),
+      _ModuleData(
+        label: 'HAKAI’yi Destekle',
+        subtitle: 'Projeyi ileride tek seferlik katkıyla destekle',
+        iconAsset: 'assets/app/launcher_icon.png',
+        onTap: () => Navigator.pushNamed(context, AppRoutes.support),
       ),
       // TODO: Re-enable Memorization module after v1 release
     ];

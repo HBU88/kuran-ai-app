@@ -9,9 +9,10 @@ class AppConstants {
       defaultValue: '',
     ),
   );
-  static const appTagline = 'Hakikate yönlendiren yapay zekâ';
+  static const appTagline =
+      'Kur’an merkezli manevi rehberlik sunan günlük bir yol arkadaşı';
   static const welcomeMessage =
-      'Selam, HAKAI’ye hoş geldin. Sana ayet rehberliği veya dinî bilgilerle yardımcı olabilirim.';
+      'Selam, HAKAI’ye hoş geldin. Kur’an merkezli manevi rehberlik ve pratik dinî bilgilerle yanında olabilirim.';
   static const connectionFallbackMessage =
       'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.';
   static const logoAssetPlaceholder = 'assets/app/launcher_icon.png';
@@ -35,4 +36,5 @@ class AppConstants {
   static const darkThemeStorageKey = 'dark_theme_enabled';
   static const memorizationStorageKey = 'memorization_progress';
   static const situationAyahHistoryStorageKey = 'situation_ayah_history';
+  static const authOnboardingSeenStorageKey = 'auth_onboarding_seen';
 }

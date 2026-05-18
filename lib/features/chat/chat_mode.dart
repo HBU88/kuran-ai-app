@@ -19,22 +19,22 @@ extension ChatModeX on ChatMode {
   String get introTitle {
     switch (this) {
       case ChatMode.chat:
-        return 'HAKAI ile sakin bir sohbet';
+        return 'HAKAI ile günlük manevi rehberlik';
       case ChatMode.ayah:
-        return 'Ayet Rehberi ile sakin bir sohbet';
+        return 'Ayet Rehberi ile Kur’an merkezli rehberlik';
       case ChatMode.ilmihal:
-        return 'Dinî Bilgiler ile sakin bir sohbet';
+        return 'Dinî Bilgiler ile pratik rehberlik';
     }
   }
 
   String get composerHint {
     switch (this) {
       case ChatMode.chat:
-        return 'Sorunuzu yazın...';
+        return 'İçinden geçeni yaz...';
       case ChatMode.ayah:
-        return 'Sorularınıza Kur’an’dan ayetlerle rehberlik edilir.';
+        return 'İç hâline Kur’an’dan kısa bir tefekkür eşlik eder.';
       case ChatMode.ilmihal:
-        return 'İbadetlerle ilgili dinî bilgileri sorabilirsiniz.';
+        return 'İbadet ve günlük dinî pratiklerle ilgili yazabilirsin.';
     }
   }
 

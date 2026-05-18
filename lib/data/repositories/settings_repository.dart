@@ -16,6 +16,9 @@ class SettingsRepository {
   bool get locationEnabled =>
       _preferences.getBool(AppConstants.locationEnabledStorageKey) ?? false;
 
+  bool get authOnboardingSeen =>
+      _preferences.getBool(AppConstants.authOnboardingSeenStorageKey) ?? false;
+
   Future<void> setDarkThemeEnabled(bool enabled) async {
     await _preferences.setBool(AppConstants.darkThemeStorageKey, enabled);
   }
@@ -29,5 +32,12 @@ class SettingsRepository {
 
   Future<void> setLocationEnabled(bool enabled) async {
     await _preferences.setBool(AppConstants.locationEnabledStorageKey, enabled);
+  }
+
+  Future<void> setAuthOnboardingSeen(bool seen) async {
+    await _preferences.setBool(
+      AppConstants.authOnboardingSeenStorageKey,
+      seen,
+    );
   }
 }

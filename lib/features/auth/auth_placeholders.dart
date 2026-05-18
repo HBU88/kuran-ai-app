@@ -1,15 +1,14 @@
 class AuthPlaceholders {
   const AuthPlaceholders._();
 
-  // TODO: Add a login screen when account UI is enabled.
-  static const loginScreen = 'login_screen_todo';
+  // TODO: Add Terms and Privacy document screens before public account launch.
+  static const policyDocuments = 'policy_documents_todo';
 
-  // TODO: Add a register screen with terms and privacy acceptance.
-  static const registerScreen = 'register_screen_todo';
+  // TODO: Move auth tokens from memory-only storage to Keychain/Keystore-backed
+  // secure storage when persistent sessions are enabled.
+  static const secureTokenStorage = 'secure_token_storage_todo';
 
-  // TODO: Add an account screen for profile and session management.
-  static const accountScreen = 'account_screen_todo';
-
-  // TODO: Add a consent screen for privacy, marketing, and ad settings.
-  static const consentScreen = 'consent_screen_todo';
+  // TODO: Add a dedicated consent management screen for changing optional
+  // marketing and ad personalization settings after registration.
+  static const consentManagement = 'consent_management_todo';
 }

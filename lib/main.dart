@@ -12,7 +12,9 @@ import 'data/repositories/prayer_repository.dart';
 import 'data/repositories/settings_repository.dart';
 import 'data/sources/local/local_ayah_source.dart';
 import 'data/sources/remote/ai_service.dart';
+import 'data/sources/remote/auth_service.dart';
 import 'data/sources/remote/prayer_api_service.dart';
+import 'features/auth/auth_controller.dart';
 import 'features/favorites/favorites_controller.dart';
 import 'features/memorization/memorization_controller.dart';
 import 'features/prayer_times/prayer_times_controller.dart';
@@ -45,6 +47,9 @@ Future<void> main() async {
         Provider.value(value: memorizationRepository),
         Provider.value(value: settingsRepository),
         Provider.value(value: notificationHelper),
+        ChangeNotifierProvider(
+          create: (_) => AuthController(AuthService()),
+        ),
         ChangeNotifierProvider(
           create: (_) =>
               FavoritesController(favoritesRepository, ayahRepository)..load(),

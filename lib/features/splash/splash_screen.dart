@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_routes.dart';
+import '../settings/settings_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) {
         return;
       }
-      Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+      final settings = context.read<SettingsController>();
+      Navigator.of(context).pushReplacementNamed(
+        settings.authOnboardingSeen ? AppRoutes.home : AppRoutes.onboarding,
+      );
     });
   }
 

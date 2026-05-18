@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/constants/app_routes.dart';
 import '../../shared/widgets/app_card.dart';
 import 'settings_controller.dart';
 
@@ -48,6 +49,32 @@ class SettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 18),
               AppCard(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.person_outline_rounded),
+                  title: const Text('Hesap'),
+                  subtitle: const Text(
+                    'İsteğe bağlı giriş, kayıt ve çıkış işlemleri.',
+                  ),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.account),
+                ),
+              ),
+              const SizedBox(height: 18),
+              AppCard(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.volunteer_activism_outlined),
+                  title: const Text('HAKAI’yi Destekle'),
+                  subtitle: const Text(
+                    'İleride tek seferlik katkıyla projeyi destekleme alanı.',
+                  ),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.support),
+                ),
+              ),
+              const SizedBox(height: 18),
+              AppCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -61,15 +88,11 @@ class SettingsScreen extends StatelessWidget {
                     const Text(AppConstants.appTagline),
                     const SizedBox(height: 10),
                     const Text(
-                      'Ayet Rehberi, duruma göre ayet önerisi, favoriler, namaz vakitleri ve temel ezber takibini sakin bir deneyimde bir araya getirir.',
+                      'HAKAI, Kur’an merkezli manevi rehberlik sunan günlük bir yol arkadaşıdır.',
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Dini hüküm veya fetva üretmez; ayet metinleri yerel veri havuzundan gelir.',
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Logo hazırlığı: açık Kur’an/kitap ve sade geometrik motif; koyu yeşil, sıcak altın ve bej paleti.',
+                      'Dinî Bilgiler alanı pratik ilmihal bilgisini ölçülü ve bağlama duyarlı bir dille sunar.',
                     ),
                   ],
                 ),
