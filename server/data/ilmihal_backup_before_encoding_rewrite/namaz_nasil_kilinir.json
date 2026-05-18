@@ -1,0 +1,77 @@
+{
+  "id": "namaz_nasil_kilinir",
+  "title": "Namaz Nasıl Kılınır?",
+  "category": "worship_practice",
+  "summary": "Namaz, abdestten sonra kıbleye yönelip niyet ederek, kıyam, kıraat, rükû ve secde düzeni içinde kılınır.",
+  "keywords": [
+    "namaz nasıl kılınır",
+    "namaza nasıl başlanır",
+    "rek�t nasıl kılınır",
+    "namazın kılınışı"
+  ],
+  "farzlar": [
+    "Namazdan önce abdest almak.",
+    "Kıbleye yönelmek.",
+    "Namaz için niyet etmek.",
+    "İftitah tekbiri almak.",
+    "Kıyamda durmak.",
+    "Kıraat etmek.",
+    "Rükû yapmak.",
+    "Secde yapmak.",
+    "Son oturuşu yapmak."
+  ],
+  "vacipler": [
+    "Sübhaneke okumak.",
+    "Fatiha okumak.",
+    "Zammı sure okumak.",
+    "Tadil-i erk�na dikkat etmek.",
+    "İki secde arasında kısa oturuş yapmak.",
+    "Tahiyyat, Salli-Barik ve Rabben� duaların1 okumak."
+  ],
+  "sunnetler": [
+    "Namaza sükûetle başlamak.",
+    "Eûzü besmele çekmek.",
+    "Her rek�tta d�zenli kıyam, kıraat, r�k� ve secde sırasın1 korumak.",
+    "Sağa ve sola selam vererek namazı tamamlamak."
+  ],
+  "step_by_step": [
+    "Abdest alınır.",
+    "Kıbleye dönülür.",
+    "Namaza niyet edilir.",
+    "İftitah tekbiri alınır.",
+    "Sübhaneke okunur.",
+    "Eûzü besmele çekilir.",
+    "Fatiha okunur.",
+    "Zammı sure okunur.",
+    "R�k�ya gidilir ve S�bh�ne rabbiyel az�m denir.",
+    "Rükûdan doğrulunur.",
+    "Secdeye gidilir ve S�bh�ne rabbiyel a�l� denir.",
+    "İki secde yapılır.",
+    "İkinci rek�ta kalkılır ve ayn1 sıra tekrar edilir.",
+    "Son oturu_ta Tahiyyat, Salli-Barik ve Rabben� dualar1 okunur.",
+    "Sağa ve sola selam verilerek namaz tamamlanır."
+  ],
+  "attention_points": [
+    "Namaz vaktinin girdiğinden emin olunmalıdır.",
+    "Rükû ve secdelerde acele edilmemehâhâhâlidir.",
+    "Kıraat, namazın türüne göre sessiz veya sesli yapılabilir.",
+    "Kıble yönü doğru tespit edilmehâhâhâlidir."
+  ],
+  "common_mistakes": [
+    "İftitah tekbirini unutularak namaza başlamak.",
+    "Fatiha veya zammı sureyi eksik okumak.",
+    "R�k� ve secdede tadil-i erk�na dikkat etmemek.",
+    "Son oturuşta Tahiyyat okumayı ihmal etmek.",
+    "Selam vermeden namazı bitirmeye çalışmak."
+  ],
+  "related_questions": [
+    "Sabah namazı nasıl kılınır?",
+    "Namazın farzları nelerdir?",
+    "Namazın vacipleri nelerdir?",
+    "Namazı bozan şeyler nelerdir?"
+  ],
+  "source_notes": [
+    "Diyanet İşleri Başkanlığı ve TDV ilmihal anlatım tarzı esas alınmıştır.",
+    "Türkiye'de yaygın Hanefî uygulaması gözetilmiştir."
+  ]
+}

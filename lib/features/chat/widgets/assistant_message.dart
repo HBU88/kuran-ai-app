@@ -32,25 +32,37 @@ class AssistantMessage extends StatelessWidget {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.sizeOf(context).width * 0.9,
           ),
-          padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
           decoration: BoxDecoration(
-            color: AppColors.surfaceSoft.withValues(alpha: 0.42),
-            borderRadius: BorderRadius.circular(AppRadius.large),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                AppColors.surfaceSoft.withValues(alpha: 0.94),
+                AppColors.surface.withValues(alpha: 0.88),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(AppRadius.xLarge),
             border: Border.all(
-              color: AppColors.divider.withValues(alpha: 0.45),
+              color: AppColors.divider.withValues(alpha: 0.8),
+              width: 0.8,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.22),
+                blurRadius: 18,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontSize: 15.5,
-                    height: 1.8,
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w400,
-                  ),
-            ),
+          padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontSize: 15.5,
+                  height: 1.78,
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w400,
+                ),
           ),
         ),
       ),

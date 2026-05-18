@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/models/chat_message_model.dart';
-import '../../../shared/widgets/ayah_card.dart';
+import '../../../shared/widgets/app_card.dart';
 import '../../../theme/app_colors.dart';
 
 class ChatAyahCard extends StatelessWidget {
@@ -14,20 +14,20 @@ class ChatAyahCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AyahCardSurface(
-      padding: const EdgeInsets.all(22),
+    return AppCard(
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             ayah.displayReference,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: AppColors.secondaryAccent,
-                  letterSpacing: 0,
+                  color: AppColors.primaryAccentSoft,
+                  letterSpacing: 0.2,
+                  fontWeight: FontWeight.w700,
                 ),
           ),
           const SizedBox(height: 14),
-          const SizedBox(height: 2),
           Align(
             alignment: Alignment.centerRight,
             child: Directionality(
@@ -36,20 +36,20 @@ class ChatAyahCard extends StatelessWidget {
                 ayah.textAr,
                 textAlign: TextAlign.right,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: 22,
+                      fontSize: 21,
                       height: 1.82,
                       color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
           Text(
             ayah.textTr,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontSize: 18,
-                  height: 1.8,
+                  fontSize: 17,
+                  height: 1.72,
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w500,
                 ),

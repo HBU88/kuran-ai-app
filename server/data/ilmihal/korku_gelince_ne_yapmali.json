@@ -1,0 +1,48 @@
+{
+  "id": "korku_gelince_ne_yapmali",
+  "title": "Korku Gelince Ne Yapmalı?",
+  "category": "daily_practice",
+  "summary": "Korku geldiğinde sükûnet, dua, nefes ve günlük düzeni korumak faydalıdır; korku sıklaşıyorsa profesyonel destek düşünülmelidir.",
+  "aliases": [
+    "korku gelince ne yapmalı",
+    "korku geldiğinde ne yapılır",
+    "aniden korkuyorum"
+  ],
+  "triggers": [
+    "korku gelince ne yapmalı",
+    "korku geldiğinde ne yapılır",
+    "aniden korkuyorum"
+  ],
+  "keywords": [
+    "korku",
+    "dua",
+    "sakinleşme",
+    "nefes"
+  ],
+  "step_by_step": [
+    "Dur, birkaç derin nefes al ve bulunduğun yeri sakinleştir.",
+    "Kısa bir dua veya zikirle kalbini toparla.",
+    "Yalnız kalmak seni daha çok zorluyorsa güvendiğin birine haber ver.",
+    "Korku tekrar ediyor, uyku ve günlük hayatı etkiliyorsa uzman desteği al."
+  ],
+  "attention_points": [
+    "Korku büyüyorsa tek başına taşımaya çalışmamak gerekir.",
+    "Manevî destek, gerekirse psikolojik destekle birlikte düşünülmelidir.",
+    "Kesin ve korkutucu açıklamalar yarar sağlamaz."
+  ],
+  "common_mistakes": [
+    "Korkuyu saklamaya çalışıp yardım istememek.",
+    "İnternette korku artırıcı yorumlara dalmak.",
+    "Uyku ve rutin düzenini tamamen bozmak."
+  ],
+  "related_questions": [
+    "Gece korkusu neden olur?",
+    "Vesvese şeytandan mı?",
+    "Kötü rüya görünce ne yapılır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Korku geldiğinde sükûnet, dua, nefes ve günlük düzeni korumak faydalıdır; korku sıklaşıyorsa profesyonel destek düşünülmelidir.",
+  "semantic_description": "korku gelince ne yapmalı korku geldiğinde ne yapılır aniden korkuyorum sorularına sakin ve pratik yönlendirme verir korku geldiğinde sükûnet dua nefes ve günlük düzeni korumak faydalıdır korku sıklaşıyorsa profesyonel destek düşünülmelidir"
+}

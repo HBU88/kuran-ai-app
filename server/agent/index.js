@@ -16,6 +16,7 @@ const {
 const {
   canonicalTopic,
   detectExplicitTopic,
+  isPrayerRakatsQuestion,
   normalize,
   secondaryThemesForContextTopic,
   themeForContextTopic,
@@ -31,6 +32,7 @@ const {
   isKnowledgeIntentQuestion,
   lookupKnowledgeAnswer,
 } = require("./knowledge_base");
+const { routeKnowledge } = require("./knowledge_router");
 const { getPlannerDebugMeta, planChatWithOpenAI } = require("./openai_planner");
 const { buildAssistantText } = require("./response_composer");
 const { applySafetyGuard } = require("./safety_guard");
@@ -106,9 +108,153 @@ function normalizeModuleMode(module) {
   return "chat";
 }
 
+function isForcedQuranGuidanceMessage(message, moduleMode = "chat") {
+  if (moduleMode !== "ilmihal") return false;
+  const normalized = String(message || "").toLocaleLowerCase("tr-TR");
+  const phrases = [
+    "yalniz hissediyorum",
+    "yalnız hissediyorum",
+    "allah beni affeder mi",
+    "cok pismanim",
+    "çok pişmanım",
+    "pismanim",
+    "pişmanım",
+    "pisman",
+    "pişman",
+    "tovbe",
+    "tövbe",
+  ];
+  return phrases.some((phrase) => normalized.includes(String(phrase).toLocaleLowerCase("tr-TR")));
+}
+
+function resolvePreModuleDecision(message, history = [], moduleMode = "chat") {
+  const knowledgeHit = routeKnowledge(message, {}, null, history);
+  if (!knowledgeHit) return null;
+
+  if (knowledgeHit.matched_by === "semantic") {
+    const confidence = typeof knowledgeHit.semantic_match_score === "number" ? knowledgeHit.semantic_match_score : 0;
+    if (confidence >= 0.75) {
+      return { module: "ilmihal", reason: "semantic_knowledge", pre_route_stage: "semantic", knowledgeHit };
+    }
+    // Weak semantic matches should still allow the module to fall back to a redirect or planner.
+    return null;
+  }
+
+  if (knowledgeHit) {
+    const preRouteStage = knowledgeHit.matched_by === "alias" ? "alias" : "exact";
+    return { module: "ilmihal", reason: "exact_knowledge", pre_route_stage: preRouteStage, knowledgeHit };
+  }
+
+  if (isForcedQuranGuidanceMessage(message, moduleMode)) {
+    return { module: "ayah", reason: "forced_quran_guidance", pre_route_stage: "emotional_redirect" };
+  }
+
+  return null;
+}
+
+function buildRedirectContextNote(message, baseAnalysis = {}) {
+  const normalized = normalize(message);
+  const topic = normalize(String(baseAnalysis.context_topic || baseAnalysis.primary_theme || ""));
+
+  if (
+    topic.includes(normalize("tövbe")) ||
+    normalized.includes(normalize("tövbe")) ||
+    normalized.includes(normalize("pişman")) ||
+    normalized.includes(normalize("affeder mi")) ||
+    normalized.includes(normalize("günah"))
+  ) {
+    return "Tövbe; pişmanlık, günahı bırakma ve yeniden dönmemeye niyet etmektir.";
+  }
+
+  if (
+    normalized.includes(normalize("yalnız")) ||
+    normalized.includes(normalize("yalniz")) ||
+    normalized.includes(normalize("korku")) ||
+    normalized.includes(normalize("korkuyorum")) ||
+    normalized.includes(normalize("endişe")) ||
+    normalized.includes(normalize("endise"))
+  ) {
+    return "Bu soru daha çok kalbi sakinleştiren manevi destekle ilgilidir.";
+  }
+
+  return "Bu konu daha çok manevi destekle ilgilidir.";
+}
+
 function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) {
   const moduleMode = normalizeModuleMode(options.module);
   const normalizedMessage = normalize(message);
+  const shortGreetingSignals = [
+    "selam",
+    "merhaba",
+    "nasılsın",
+    "nasilsin",
+    "iyi misin",
+    "günaydın",
+    "gunaydin",
+    "iyi akşamlar",
+    "iyi aksamlar",
+  ];
+  const emotionalGuidanceSignals = [
+    "korku",
+    "korkuyorum",
+    "çok korkuyorum",
+    "cok korkuyorum",
+    "endişe",
+    "endise",
+    "kaygı",
+    "kaygi",
+    "gelecek için endişeliyim",
+    "gelecek icin endiseliyim",
+    "maddi sıkıntı",
+    "maddi sikinti",
+    "maddi sıkıntı yaşıyorum",
+    "maddi sikinti yasiyorum",
+    "haksızlık",
+    "haksizlik",
+    "haksızlığa uğradım",
+    "haksizliga ugradim",
+    "zulüm",
+    "zulum",
+    "yalnız",
+    "yalniz",
+    "çok yalnız hissediyorum",
+    "cok yalniz hissediyorum",
+    "yalnız hissediyorum",
+    "yalniz hissediyorum",
+    "hasta",
+    "hastayım",
+    "hastayim",
+    "şifa",
+    "sifa",
+    "ölüm",
+    "olum",
+    "sabır",
+    "sabir",
+    "sabretmekte zorlanıyorum",
+    "sabretmekte zorlaniyorum",
+    "içim daralıyor",
+    "icim daraliyor",
+    "içim sıkılıyor",
+    "icim sikiliyor",
+    "üzgün",
+    "üzgünüm",
+    "mutsuz",
+    "mutsuzum",
+    "pişman",
+    "pisman",
+    "pişmanım",
+    "pismanim",
+    "tövbe",
+    "tovbe",
+    "tevbe",
+    "günah",
+    "gunah",
+    "affeder mi",
+    "bağışlar mı",
+    "bagislar mi",
+    "bağışlanır mı",
+    "bagislanir mi",
+  ];
   const guidanceSignals = [
     "korku",
     "korkuyorum",
@@ -151,9 +297,13 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) 
     "icim daraliyor",
     "içim sıkılıyor",
     "icim sikiliyor",
+    "üzgün",
+    "üzgünüm",
+    "mutsuz",
+    "mutsuzum",
   ];
 
-  if (isSimpleCasualConversation(message)) {
+  if (shortGreetingSignals.some((signal) => normalizedMessage === normalize(signal))) {
     return {
       intent: "casual_conversation",
       sub_intent: "casual_conversation",
@@ -167,7 +317,7 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) 
     };
   }
 
-  if (moduleMode !== "ayah") {
+  if (moduleMode !== "ayah" && !isPrayerRakatsQuestion(message)) {
     const localKnowledgeResult = lookupKnowledgeAnswer(message, baseAnalysis, null, history);
     if (localKnowledgeResult) {
       return {
@@ -186,6 +336,32 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) 
 
   const overrideTopic = resolveCurrentMessageOverrideTopic(message);
   const explicitTopic = resolveExplicitTopic(message);
+  const hasEmotionalGuidanceSignal = containsAnyRaw(message, emotionalGuidanceSignals);
+  if (hasEmotionalGuidanceSignal) {
+    const topic = canonicalTopic(overrideTopic || explicitTopic || baseAnalysis.context_topic || baseAnalysis.primary_theme || null);
+    const explicitAyahRequest = isExplicitAyahRequest(message, baseAnalysis, null, null) ||
+      normalizedMessage.includes(normalize("ayet"));
+    const intent = baseAnalysis.intent === "high_risk_sensitive"
+      ? "high_risk_sensitive"
+      : "emotional_spiritual_support";
+    const responseType = explicitAyahRequest
+      ? "direct_ayah"
+      : baseAnalysis.intent === "high_risk_sensitive"
+        ? "sensitive_support"
+        : "supportive_ayah";
+    return {
+      intent: explicitAyahRequest ? "ayah_request" : intent,
+      sub_intent: explicitAyahRequest ? "ayah_request" : "emotional_support",
+      needs_ayah: true,
+      needs_knowledge: false,
+      knowledge_topic: null,
+      ayah_topic: topic,
+      response_type: responseType,
+      reasoning_note: "local fast path: quran guidance",
+      planner_source: "local_fast_path",
+    };
+  }
+
   const shouldUseGuidanceFastPath =
     Boolean(overrideTopic || explicitTopic || containsAnyNormalized(normalizedMessage, guidanceSignals));
 
@@ -213,32 +389,61 @@ function resolveLocalFastPathPlan(message, history, baseAnalysis, options = {}) 
     };
   }
 
+  if (isSimpleCasualConversation(message)) {
+    return {
+      intent: "casual_conversation",
+      sub_intent: "casual_conversation",
+      needs_ayah: false,
+      needs_knowledge: false,
+      knowledge_topic: null,
+      ayah_topic: null,
+      response_type: "direct_answer",
+      reasoning_note: "local fast path: casual conversation",
+      planner_source: "local_fast_path",
+    };
+  }
+
   return null;
 }
 
 function isIlmihalModuleQuestion(message, analysis = {}, history = []) {
-  if (resolveCurrentMessageOverrideTopic(message)) {
-    return false;
+  if (hasKnowledgeMatch(message, analysis, null, history)) {
+    return true;
   }
-
   return (
     isLocalKnowledgeQuery(message, analysis, null, history) ||
+    isPrayerRakatsQuestion(message) ||
     analysis.intent === "worship_practice_question"
   );
 }
 
-function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targetModule) {
+function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targetModule, redirectContextNote = null, preRouteStage = null) {
   const response_type = "direct_answer";
-  const route_mode = targetModule === "ilmihal" ? "ilmihal_knowledge" : "quran_guidance";
+  const effectiveRedirectContextNote = redirectContextNote || (
+    targetModule === "ayah" && isRepentanceRedirectMessage(message)
+      ? "Tövbe; pişmanlık, günahı bırakma ve yeniden dönmemeye niyet etmektir."
+      : null
+  );
+  const route_mode = effectiveRedirectContextNote && targetModule === "ayah"
+    ? "quran_guidance_redirect"
+    : targetModule === "ilmihal"
+      ? "ilmihal_knowledge"
+      : "quran_guidance";
+  const redirectNote = typeof effectiveRedirectContextNote === "string" && effectiveRedirectContextNote.trim()
+    ? effectiveRedirectContextNote.trim()
+    : null;
   const assistant_text =
-    targetModule === "ilmihal"
-      ? "Bu soru İlmihal Rehberi bölümüne daha uygundur. Lütfen İlmihal Rehberi modülünü kullanın."
-    : "Bu soru Ayet Rehberi bölümüne daha uygundur. Lütfen Ayet Rehberi modülünü kullanın.";
+    redirectNote && targetModule === "ayah"
+      ? `${redirectNote}\n\nBu konuda kalbini güçlendirecek ayet için Ayet Rehberi bölümünü kullanabilirsin.`
+      : targetModule === "ilmihal"
+        ? "Bu soru İlmihal Rehberi bölümüne daha uygundur. Lütfen İlmihal Rehberi modülünü kullanın."
+        : "Bu soru Ayet Rehberi bölümüne daha uygundur. Lütfen Ayet Rehberi modülünü kullanın.";
   const responsePreview = isDebugChatEngineEnabled() ? assistant_text.slice(0, 800) : null;
   const decision_meta = {
     module,
     route_mode,
     planner_source: "local_fast_path",
+    pre_route_stage: preRouteStage || (redirectNote ? "emotional_redirect" : null),
     knowledge_hit_id: null,
     ranker_source: "fallback",
     semantic_candidates_count: 0,
@@ -258,10 +463,11 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
     decision_meta,
     assistant_text,
     redirect_module: targetModule,
+    ...(redirectNote ? { redirect_context_note: redirectNote } : {}),
   });
 }
 
-function buildIlmihalModuleResponse(message, history, baseAnalysis, timing) {
+function buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preRouteStage = null) {
   const knowledgeResult = timing.measureSync("knowledge_router_ms", () =>
     lookupKnowledgeAnswer(message, baseAnalysis, null, history)
   );
@@ -300,7 +506,9 @@ function buildIlmihalModuleResponse(message, history, baseAnalysis, timing) {
     timing.snapshot(),
     "local_fast_path",
     "ilmihal",
-    responsePreview
+    responsePreview,
+    null,
+    preRouteStage || null
   );
 
   return applySafetyGuard({
@@ -317,14 +525,70 @@ function buildIlmihalModuleResponse(message, history, baseAnalysis, timing) {
 async function buildChatResponse(message, history = [], options = {}) {
   const moduleMode = normalizeModuleMode(options.module);
   const timing = createTimingTracker();
+  const forceIlmihalKnowledge = options.forceIlmihalKnowledge === true;
+  const normalizedMessageForRepentance = normalize(message);
+  if (
+    moduleMode === "ilmihal" &&
+    !forceIlmihalKnowledge &&
+    (
+      normalizedMessageForRepentance.includes(normalize("\u00e7ok pi\u015fman\u0131m")) ||
+      normalizedMessageForRepentance.includes(normalize("pi\u015fman\u0131m")) ||
+      normalizedMessageForRepentance.includes(normalize("pi\u015fman"))
+    )
+  ) {
+    const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
+      analyzeUserMessageFallback(message, history)
+    );
+    return buildModuleRedirectResponse(
+      "ilmihal",
+      message,
+      baseAnalysis,
+      timing,
+      "ayah",
+      "T\u00f6vbe; pi\u015fmanl\u0131k, g\u00fcnah\u0131 b\u0131rakma ve yeniden d\u00f6nmemeye niyet etmektir.",
+      "emotional_redirect"
+    );
+  }
+
+  const preModuleDecision = timing.measureSync("knowledge_router_ms", () => resolvePreModuleDecision(message, history, moduleMode));
+  const preRouteStage = preModuleDecision?.pre_route_stage || null;
+  if (preModuleDecision?.module === "ayah" && moduleMode !== "ayah") {
+    const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
+      analyzeUserMessageFallback(message, history)
+    );
+    const redirectContextNote = moduleMode === "ilmihal"
+      ? buildRedirectContextNote(message, baseAnalysis)
+      : null;
+    return buildModuleRedirectResponse(moduleMode, message, baseAnalysis, timing, "ayah", redirectContextNote, preRouteStage || "emotional_redirect");
+  }
+  if (preModuleDecision?.module === "ilmihal" && moduleMode !== "ayah") {
+    const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
+      analyzeUserMessageFallback(message, history)
+    );
+    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preModuleDecision.pre_route_stage || preModuleDecision.reason || null);
+  }
 
   const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
     analyzeUserMessageFallback(message, history)
   );
-  if (moduleMode === "ilmihal") {
+  if (moduleMode === "ilmihal" && !forceIlmihalKnowledge) {
     if (!isIlmihalModuleQuestion(message, baseAnalysis, history)) {
-      return buildModuleRedirectResponse("ilmihal", message, baseAnalysis, timing, "ayah");
+      const redirectContextNote = isRepentanceRedirectMessage(message)
+        ? "Tövbe; pişmanlık, günahı bırakma ve yeniden dönmemeye niyet etmektir."
+        : null;
+      return buildModuleRedirectResponse(
+        "ilmihal",
+        message,
+        baseAnalysis,
+        timing,
+        "ayah",
+        redirectContextNote,
+        redirectContextNote ? "emotional_redirect" : null
+      );
     }
+    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing);
+  }
+  if (moduleMode === "ilmihal" && forceIlmihalKnowledge) {
     return buildIlmihalModuleResponse(message, history, baseAnalysis, timing);
   }
   if (moduleMode === "ayah" && isIlmihalModuleQuestion(message, baseAnalysis, history)) {
@@ -354,6 +618,7 @@ async function buildChatResponse(message, history = [], options = {}) {
     : mergedAnalysis;
   const shouldForceCasualConversation = timing.measureSync("context_resolver_ms", () =>
     isSimpleCasualConversation(message) &&
+    !hasEmotionalGuidanceSignal(message) &&
     !isExplicitAyahRequest(message, normalizedMergedAnalysis, null, plannerResult)
   );
   const analysis = shouldForceCasualConversation
@@ -396,9 +661,7 @@ async function buildChatResponse(message, history = [], options = {}) {
     : null;
   const routeMode = knowledgeResult && knowledgeResult.knowledge_hit_id
     ? knowledgeResult.route_mode || "ilmihal_knowledge"
-    : analysis.intent === "casual_conversation"
-      ? "casual"
-      : "quran_guidance";
+    : "quran_guidance";
   const shouldBypassAyahSelection = Boolean(knowledgeResult) && !explicitAyahRequest;
   const topicConstraint = plannerAyahTopicConstraint(message, analysis, plannerResult);
   const previouslyUsedAyahIds = previouslyUsedAyahIdsFromHistory(history);
@@ -497,7 +760,8 @@ async function buildChatResponse(message, history = [], options = {}) {
     timing.snapshot(),
     plannerDebugMeta.planner_source || "fallback",
     moduleMode,
-    responsePreview
+    responsePreview,
+    preRouteStage
   );
   return applySafetyGuard({
     ...analysis,
@@ -519,15 +783,30 @@ function buildDecisionMeta(
   timingMs = null,
   plannerSource = "fallback",
   module = "chat",
-  responsePreview = null
+  responsePreview = null,
+  preRouteStage = null
 ) {
   const top = Array.isArray(rankedAyahs) && rankedAyahs.length > 0 ? rankedAyahs[0] : null;
   const topDebug = top?.debug || {};
+  const inferredPreRouteStage =
+    preRouteStage ||
+    (knowledgeResult?.matched_by === "semantic"
+      ? "semantic"
+      : knowledgeResult?.knowledge_hit_id
+        ? (typeof knowledgeResult?.semantic_match_score === "number" && knowledgeResult.semantic_match_score > 0
+            ? "semantic"
+            : "alias")
+        : null);
   return {
     route_mode: knowledgeResult?.knowledge_hit_id ? routeMode || "ilmihal_knowledge" : routeMode,
     knowledge_hit_id: knowledgeResult?.knowledge_hit_id || null,
     planner_source: plannerSource || "fallback",
     module,
+    pre_route_stage: inferredPreRouteStage,
+    semantic_match_score:
+      typeof knowledgeResult?.semantic_match_score === "number" ? knowledgeResult.semantic_match_score : 0,
+    semantic_matched_topic: knowledgeResult?.semantic_matched_topic || null,
+    semantic_confidence: knowledgeResult?.semantic_confidence || null,
     ranker_source:
       top?.ranker_source ||
       topDebug.ranker_source ||
@@ -955,6 +1234,23 @@ function containsAnyNormalized(text, needles) {
   return needles.some((needle) => text.includes(normalize(needle)));
 }
 
+function containsAnyRaw(text, needles) {
+  const raw = String(text || "").toLocaleLowerCase("tr-TR");
+  return needles.some((needle) => raw.includes(String(needle || "").toLocaleLowerCase("tr-TR")));
+}
+
+function isRepentanceRedirectMessage(message) {
+  const normalized = normalize(message);
+  return [
+    "\u00e7ok pi\u015fman\u0131m",
+    "cok pismanim",
+    "pi\u015fman\u0131m",
+    "pismanim",
+    "\u00e7ok pi\u015fman",
+    "cok pisman",
+  ].some((phrase) => normalized.includes(normalize(phrase)));
+}
+
 
 function isSimpleCasualConversation(message) {
   const lowerMessage = String(message || "").trim().toLocaleLowerCase("tr-TR");
@@ -1002,6 +1298,72 @@ function isSimpleCasualConversation(message) {
     casualSignals.some((signal) => lowerMessage.includes(signal)) &&
     !strongerSignals.some((signal) => lowerMessage.includes(signal))
   );
+}
+
+function hasEmotionalGuidanceSignal(message) {
+  const normalizedMessage = String(message || "").toLocaleLowerCase("tr-TR");
+  const emotionalSignals = [
+    "korku",
+    "korkuyorum",
+    "çok korkuyorum",
+    "cok korkuyorum",
+    "endişe",
+    "endise",
+    "kaygı",
+    "kaygi",
+    "gelecek için endişeliyim",
+    "gelecek icin endiseliyim",
+    "maddi sıkıntı",
+    "maddi sikinti",
+    "maddi sıkıntı yaşıyorum",
+    "maddi sikinti yasiyorum",
+    "haksızlık",
+    "haksizlik",
+    "haksızlığa uğradım",
+    "haksizliga ugradim",
+    "zulüm",
+    "zulum",
+    "yalnız",
+    "yalniz",
+    "çok yalnız hissediyorum",
+    "cok yalniz hissediyorum",
+    "yalnız hissediyorum",
+    "yalniz hissediyorum",
+    "hasta",
+    "hastayım",
+    "hastayim",
+    "şifa",
+    "sifa",
+    "ölüm",
+    "olum",
+    "sabır",
+    "sabir",
+    "sabretmekte zorlanıyorum",
+    "sabretmekte zorlaniyorum",
+    "içim daralıyor",
+    "icim daraliyor",
+    "içim sıkılıyor",
+    "icim sikiliyor",
+    "üzgün",
+    "üzgünüm",
+    "mutsuz",
+    "mutsuzum",
+    "pişman",
+    "pisman",
+    "pişmanım",
+    "pismanim",
+    "tövbe",
+    "tovbe",
+    "tevbe",
+    "günah",
+    "gunah",
+    "affeder mi",
+    "bağışlar mı",
+    "bagislar mi",
+    "bağışlanır mı",
+    "bagislanir mi",
+  ];
+  return containsAnyRaw(normalizedMessage, emotionalSignals);
 }
 
 function shouldKeepHighRiskIntent(baseAnalysis, plannerResult) {

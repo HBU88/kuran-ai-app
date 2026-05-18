@@ -1,0 +1,48 @@
+{
+  "id": "cin_musallat_olur_mu",
+  "title": "Cin Musallat Olur Mu?",
+  "category": "daily_practice",
+  "summary": "Bir şikâyeti doğrudan musallata bağlamak doğru değildir; önce sakinlik, dua, güvenilir dinî rehberlik ve gerekirse sağlık desteği gerekir.",
+  "aliases": [
+    "cin musallat olur mu",
+    "musallat oldugu düşüncesi",
+    "üstümde cin var mı"
+  ],
+  "triggers": [
+    "cin musallat olur mu",
+    "musallat oldugu düşüncesi",
+    "üstümde cin var mı"
+  ],
+  "keywords": [
+    "cin musallat",
+    "korku",
+    "dua",
+    "rehberlik"
+  ],
+  "step_by_step": [
+    "Yaşanan sıkıntıyı tek bir sebebe bağlamadan değerlendir.",
+    "Düzenli dua, namaz ve sakin bir günlük düzen oluştur.",
+    "Dinî konuda güvenilir bir hocaya danış.",
+    "Uyku bozukluğu, panik veya yoğun kaygı sürüyorsa profesyonel destek al."
+  ],
+  "attention_points": [
+    "Korku dili kullanmak sorunu ağırlaştırabilir.",
+    "Kesin teşhis vermek yerine belirtileri dengeli değerlendirmek gerekir.",
+    "Sağlık ve psikoloji yönü göz ardı edilmemelidir."
+  ],
+  "common_mistakes": [
+    "Her zorlanmayı musallat diye adlandırmak.",
+    "Rastgele tavsiyelerle korkuyu artırmak.",
+    "Uzman desteğini geciktirmek."
+  ],
+  "related_questions": [
+    "Cin var mı?",
+    "Vesvese şeytandan mı?",
+    "Korku gelince ne yapmalı?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Bir şikâyeti doğrudan musallata bağlamak doğru değildir; önce sakinlik, dua, güvenilir dinî rehberlik ve gerekirse sağlık desteği gerekir.",
+  "semantic_description": "cin musallat olur mu musallat oldugu düşüncesi üstümde cin var mı sorularına sakin ve ölçülü cevap verir bir şikâyeti doğrudan musallata bağlamak doğru değildir önce sakinlik dua güvenilir dinî rehberlik ve gerekirse sağlık desteği gerekir"
+}

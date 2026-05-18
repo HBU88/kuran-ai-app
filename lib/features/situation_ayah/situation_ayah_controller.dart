@@ -116,14 +116,6 @@ class SituationAyahController extends ChangeNotifier {
     ayah = selection.ayah;
     support = aiText;
     loading = false;
-    debugPrint('RAW INPUT: $rawInput');
-    debugPrint('NORMALIZED INPUT: $normalizedInput');
-    debugPrint('AI ENABLED: $aiEnabled');
-    debugPrint('PRIMARY TAG: $primaryTag');
-    debugPrint('SECONDARY TAGS: $secondaryTags');
-    debugPrint('EMOTION: $emotion');
-    debugPrint('SEVERITY: $severity');
-    debugPrint('SELECTED AYAH ID: ${selection.ayah.id}');
     notifyListeners();
   }
 }

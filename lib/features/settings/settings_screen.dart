@@ -61,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
                     const Text(AppConstants.appTagline),
                     const SizedBox(height: 10),
                     const Text(
-                      'Rehberlik, duruma göre ayet önerisi, favoriler, namaz vakitleri ve temel ezber takibini sakin bir deneyimde bir araya getirir.',
+                      'Ayet Rehberi, duruma göre ayet önerisi, favoriler, namaz vakitleri ve temel ezber takibini sakin bir deneyimde bir araya getirir.',
                     ),
                     const SizedBox(height: 10),
                     const Text(

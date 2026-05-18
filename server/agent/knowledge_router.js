@@ -1,6 +1,7 @@
 ﻿const fs = require("fs");
 const path = require("path");
 const { normalize, decodeURIComponentSafe, canonicalTopic } = require("./context_resolver");
+const { matchSemanticTopic } = require("./semantic_topic_matcher");
 
 const ILMIHAL_PATH = path.join(__dirname, "..", "..", "assets", "data", "knowledge", "ilmihal_knowledge_base.json");
 
@@ -43,6 +44,60 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
   const kandilSpecialTopic = resolveKandilSpecialTopic(normalizedMessage);
   if (kandilSpecialTopic) {
     const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(kandilSpecialTopic));
+    if (hit) {
+      return {
+        id: hit.id || null,
+        file: "ilmihal_knowledge_base.json",
+        type: hit.type || "worship_practice",
+        topic: hit.topic || null,
+        answer_text: hit.answer_tr || "",
+        source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
+        requires_ayah: hit.requires_ayah === true,
+        route_mode: "ilmihal_knowledge",
+        knowledge_hit_id: hit.id || null,
+      };
+    }
+  }
+
+  const prayerCountTopic = resolvePrayerCountTopic(message, normalizedMessage, history);
+  if (prayerCountTopic) {
+    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(prayerCountTopic));
+    if (hit) {
+      return {
+        id: hit.id || null,
+        file: "ilmihal_knowledge_base.json",
+        type: hit.type || "worship_practice",
+        topic: hit.topic || null,
+        answer_text: hit.answer_tr || "",
+        source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
+        requires_ayah: hit.requires_ayah === true,
+        route_mode: "ilmihal_knowledge",
+        knowledge_hit_id: hit.id || null,
+      };
+    }
+  }
+
+  const vitirVacipTopic = resolveVitirVacipTopic(message, normalizedMessage, history);
+  if (vitirVacipTopic) {
+    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(vitirVacipTopic));
+    if (hit) {
+      return {
+        id: hit.id || null,
+        file: "ilmihal_knowledge_base.json",
+        type: hit.type || "worship_practice",
+        topic: hit.topic || null,
+        answer_text: hit.answer_tr || "",
+        source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
+        requires_ayah: hit.requires_ayah === true,
+        route_mode: "ilmihal_knowledge",
+        knowledge_hit_id: hit.id || null,
+      };
+    }
+  }
+
+  const prayerFollowupTopic = resolvePrayerFollowupTopic(message, normalizedMessage, history);
+  if (prayerFollowupTopic) {
+    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(prayerFollowupTopic));
     if (hit) {
       return {
         id: hit.id || null,
@@ -166,6 +221,24 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     }
   }
 
+  const namazScenarioTopic = resolveNamazScenarioTopic(message, normalizedMessage);
+  if (namazScenarioTopic) {
+    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(namazScenarioTopic));
+    if (hit) {
+      return {
+        id: hit.id || null,
+        file: "ilmihal_knowledge_base.json",
+        type: hit.type || "worship_practice",
+        topic: hit.topic || null,
+        answer_text: hit.answer_tr || "",
+        source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
+        requires_ayah: hit.requires_ayah === true,
+        route_mode: "ilmihal_knowledge",
+        knowledge_hit_id: hit.id || null,
+      };
+    }
+  }
+
   const dailyPracticeTopic = resolveDailyPracticeTopic(message, normalizedMessage);
   if (dailyPracticeTopic) {
     const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(dailyPracticeTopic));
@@ -182,6 +255,43 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
         knowledge_hit_id: hit.id || null,
       };
     }
+  }
+
+  const genericSupportPrompt =
+    includesLoose(normalizedMessage, "çok korkuyorum") ||
+    includesLoose(normalizedMessage, "korkuyorum") ||
+    includesLoose(normalizedMessage, "endişeliyim") ||
+    includesLoose(normalizedMessage, "endise") ||
+    includesLoose(normalizedMessage, "yalnızım") ||
+    includesLoose(normalizedMessage, "yalnizim") ||
+    includesLoose(normalizedMessage, "üzgünüm") ||
+    includesLoose(normalizedMessage, "uzgunum") ||
+    includesLoose(normalizedMessage, "içim sıkılıyor") ||
+    includesLoose(normalizedMessage, "icim sikiliyor") ||
+    includesLoose(normalizedMessage, "çok hastayım") ||
+    includesLoose(normalizedMessage, "hastayım") ||
+    includesLoose(normalizedMessage, "hastalik") ||
+    includesLoose(normalizedMessage, "hastalık") ||
+    includesLoose(normalizedMessage, "şifa istiyorum") ||
+    includesLoose(normalizedMessage, "sifa istiyorum") ||
+    includesLoose(normalizedMessage, "iyileşmek istiyorum") ||
+    includesLoose(normalizedMessage, "iyilesmek istiyorum") ||
+    includesLoose(normalizedMessage, "acı çekiyorum") ||
+    includesLoose(normalizedMessage, "aci cekiyorum");
+  if (
+    genericSupportPrompt &&
+    !includesLoose(normalizedMessage, "vesvese") &&
+    !includesLoose(normalizedMessage, "nazar") &&
+    !includesLoose(normalizedMessage, "büyü") &&
+    !includesLoose(normalizedMessage, "buyu") &&
+    !includesLoose(normalizedMessage, "cin") &&
+    !includesLoose(normalizedMessage, "korku gelince") &&
+    !includesLoose(normalizedMessage, "gece korkusu") &&
+    !includesLoose(normalizedMessage, "kötü rüya") &&
+    !includesLoose(normalizedMessage, "kotu ruya") &&
+    !includesLoose(normalizedMessage, "namaz")
+  ) {
+    return null;
   }
 
   const hardMatches = [
@@ -216,6 +326,28 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
           knowledge_hit_id: hardEntry.id || null,
         };
       }
+    }
+  }
+
+  const semanticMatch = matchSemanticTopic(normalizedMessage, entries);
+  if (semanticMatch) {
+    const hit = entries.find((entry) => topicKey(entry.topic || entry.id || "") === topicKey(semanticMatch.topic_id));
+    if (hit) {
+      return {
+        id: hit.id || null,
+        file: "ilmihal_knowledge_base.json",
+        type: hit.type || "worship_practice",
+        topic: hit.topic || null,
+        answer_text: hit.answer_tr || "",
+        source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
+        requires_ayah: hit.requires_ayah === true,
+        route_mode: "ilmihal_knowledge",
+        knowledge_hit_id: hit.id || null,
+        semantic_match_score: semanticMatch.score,
+        semantic_confidence: semanticMatch.confidence,
+        semantic_matched_topic: semanticMatch.topic_id,
+        matched_by: semanticMatch.matched_by || "semantic",
+      };
     }
   }
 
@@ -271,6 +403,7 @@ function isFollowupPrompt(normalizedMessage) {
   const prompts = [
     "kaÃ§ rekat",
     "kac rekat",
+    "rekat",
     "farzÄ± kaÃ§",
     "farzi kac",
     "farz mÄ±",
@@ -390,6 +523,45 @@ function resolveKurbanTopic(message, normalizedMessage) {
   }
   if ((includesLoose(normalizedMessage, "kurban kimlere vaciptir") || includesLoose(normalizedMessage, "kurban kime vaciptir") || raw.includes("kurban kimlere vaciptir")) && hasKurban) {
     return "kurban_kime_vaciptir";
+  }
+  if (
+    includesLoose(normalizedMessage, "büyükbaş kurbana kaç kişi ortak olabilir") ||
+    includesLoose(normalizedMessage, "kurban hisse") ||
+    includesLoose(normalizedMessage, "hisse kurban") ||
+    includesLoose(normalizedMessage, "ortak kurban")
+  ) {
+    return "kurban_hisse_olur_mu";
+  }
+  if (
+    includesLoose(normalizedMessage, "kurban yerine para verilir mi") ||
+    includesLoose(normalizedMessage, "kurban yerine para bağışı") ||
+    includesLoose(normalizedMessage, "kesmeden bağış") ||
+    includesLoose(normalizedMessage, "online kurban bağışı")
+  ) {
+    return "kurban_yerine_para_verilir_mi";
+  }
+  if (
+    includesLoose(normalizedMessage, "kurban eti kimlere verilir") ||
+    includesLoose(normalizedMessage, "tamamı dağıtılır mı") ||
+    includesLoose(normalizedMessage, "aile yiyebilir mi")
+  ) {
+    return "kurban_eti_kimlere_verilir";
+  }
+  if (
+    includesLoose(normalizedMessage, "kurbanlık hayvan nasıl olmalı") ||
+    includesLoose(normalizedMessage, "kusurlu hayvan kurban olur mu") ||
+    includesLoose(normalizedMessage, "yaş şartı") ||
+    includesLoose(normalizedMessage, "kurbanlik hayvan sartlari")
+  ) {
+    return "kurbanlik_hayvan_sartlari";
+  }
+  if (
+    includesLoose(normalizedMessage, "vekaletle kurban") ||
+    includesLoose(normalizedMessage, "vekâletle kurban") ||
+    includesLoose(normalizedMessage, "vekalet nasıl verilir") ||
+    includesLoose(normalizedMessage, "online kurban bağışı")
+  ) {
+    return "vekaletle_kurban";
   }
   if (includesLoose(normalizedMessage, "kurban nedir") || raw.includes("kurban nedir")) {
     return "kurban_nedir";
@@ -608,8 +780,214 @@ function resolveCumaBayramTopic(message, normalizedMessage) {
   return null;
 }
 
+function resolvePrayerCountTopic(message, normalizedMessage, history = []) {
+  const compactRawMessage = String(message || "").toLocaleLowerCase("tr-TR").replace(/\s+/g, " ").trim();
+
+  if (Array.isArray(history) && history.length > 0 && compactRawMessage.length <= 32) {
+    const recoveredTopic = recoverTopicFromRawHistory(history);
+    if (recoveredTopic) {
+      return recoveredTopic;
+    }
+  }
+
+  const hasCountCue =
+    compactRawMessage.includes("rekat") ||
+    compactRawMessage.includes("rekât") ||
+    compactRawMessage.includes("kaç rekat") ||
+    compactRawMessage.includes("kaç rekât") ||
+    compactRawMessage.includes("kac rekat") ||
+    compactRawMessage.includes("kac rekât");
+  const hasSpecificPrayerName =
+    compactRawMessage.includes("cuma") ||
+    compactRawMessage.includes("bayram") ||
+    compactRawMessage.includes("vitir") ||
+    compactRawMessage.includes("teravih") ||
+    compactRawMessage.includes("teravi") ||
+    compactRawMessage.includes("sabah") ||
+    compactRawMessage.includes("ogle") ||
+    compactRawMessage.includes("öğle") ||
+    compactRawMessage.includes("ikindi") ||
+    compactRawMessage.includes("aksam") ||
+    compactRawMessage.includes("akşam") ||
+    compactRawMessage.includes("yatsi") ||
+    compactRawMessage.includes("yatsı");
+
+  if (compactRawMessage.includes("namaz") && hasCountCue && !hasSpecificPrayerName) {
+    return "namaz_nasil_kilinir";
+  }
+
+  return null;
+}
+
+function resolvePrayerFollowupTopic(message, normalizedMessage, history = []) {
+  const compactRawMessage = String(message || "").toLocaleLowerCase("tr-TR").replace(/\s+/g, " ").trim();
+  const recoveredTopic = Array.isArray(history) && history.length > 0 ? recoverTopicFromRawHistory(history) : null;
+
+  if (!recoveredTopic) return null;
+  if (!compactRawMessage.includes("vacip") && !compactRawMessage.includes("farz") && !compactRawMessage.includes("sünnet") && !compactRawMessage.includes("sunnet")) {
+    return null;
+  }
+
+  if (topicKey(recoveredTopic) === topicKey("vitir_namazi")) {
+    return "vitir_vacip";
+  }
+
+  return null;
+}
+
+function resolveNamazScenarioTopic(message, normalizedMessage) {
+  const normalized = normalizeRawText(message);
+
+  if (
+    includesLoose(normalizedMessage, "namaz kaçırınca") ||
+    includesLoose(normalizedMessage, "namaz kacirinca") ||
+    includesLoose(normalizedMessage, "kaçırılan namaz") ||
+    includesLoose(normalizedMessage, "kacirilan namaz") ||
+    includesLoose(normalizedMessage, "kılınmayan namaz") ||
+    includesLoose(normalizedMessage, "kilinmayan namaz")
+  ) {
+    return "namaz_kacirinca_ne_yapilir";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "işyerinde namaz") ||
+    includesLoose(normalizedMessage, "isyerinde namaz") ||
+    includesLoose(normalizedMessage, "ofiste namaz") ||
+    includesLoose(normalizedMessage, "çalışırken namaz") ||
+    includesLoose(normalizedMessage, "calisirken namaz")
+  ) {
+    return "isyerinde_namaz_kilinir_mi";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "oturarak namaz") ||
+    includesLoose(normalizedMessage, "oturarak farz namaz") ||
+    includesLoose(normalizedMessage, "hasta iken namaz kılınır mı") ||
+    includesLoose(normalizedMessage, "hastayken namaz kılınır mı") ||
+    includesLoose(normalizedMessage, "hastayken namaz")
+  ) {
+    return "oturarak_namaz_kilinir_mi";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "araçta namaz") ||
+    includesLoose(normalizedMessage, "aracta namaz") ||
+    includesLoose(normalizedMessage, "arabada namaz") ||
+    includesLoose(normalizedMessage, "otobüste namaz") ||
+    includesLoose(normalizedMessage, "otobuste namaz")
+  ) {
+    return "aracta_namaz_kilinir_mi";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "namaz hızlı") ||
+    includesLoose(normalizedMessage, "namaz hizli") ||
+    includesLoose(normalizedMessage, "acele namaz") ||
+    includesLoose(normalizedMessage, "hızlı namaz") ||
+    includesLoose(normalizedMessage, "hizli namaz")
+  ) {
+    return "namaz_hizli_kilinirsa_olur_mu";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "cem edilerek namaz") ||
+    includesLoose(normalizedMessage, "namazları birleştirmek") ||
+    includesLoose(normalizedMessage, "namazlari birlestirmek") ||
+    includesLoose(normalizedMessage, "cem etmek") ||
+    includesLoose(normalizedMessage, "namaz cem")
+  ) {
+    return "cem_edilerek_namaz_kilinir_mi";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "yolculukta namaz") ||
+    includesLoose(normalizedMessage, "seferi namaz") ||
+    includesLoose(normalizedMessage, "seferî namaz") ||
+    includesLoose(normalizedMessage, "seferi namaz nasil")
+  ) {
+    return "yolculukta_namaz_nasil_kilinir";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "geç kalınan namaz") ||
+    includesLoose(normalizedMessage, "gec kalinan namaz") ||
+    includesLoose(normalizedMessage, "vakti geçen namaz") ||
+    includesLoose(normalizedMessage, "vakti gecen namaz") ||
+    includesLoose(normalizedMessage, "kaza namazı nasıl kılınır") ||
+    includesLoose(normalizedMessage, "kaza namazi nasil kilinir")
+  ) {
+    return "gec_kalinan_namaz_nasil_kilinir";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "vitir kılınmazsa") ||
+    includesLoose(normalizedMessage, "vitir kilinmazsa") ||
+    includesLoose(normalizedMessage, "vitir kaçırılırsa") ||
+    includesLoose(normalizedMessage, "vitir kacirilirsa")
+  ) {
+    return "vitir_kilinmazsa_ne_olur";
+  }
+
+  if (
+    includesLoose(normalizedMessage, "namazda şaşırma") ||
+    includesLoose(normalizedMessage, "namazda sasirma") ||
+    includesLoose(normalizedMessage, "namazda şaşırınca") ||
+    includesLoose(normalizedMessage, "namazda sasirinca") ||
+    includesLoose(normalizedMessage, "sehiv secdesi")
+  ) {
+    return "namazda_sasirma_ne_yapilir";
+  }
+
+  return null;
+}
+
+function resolveVitirVacipTopic(message, normalizedMessage, history = []) {
+  const compactRawMessage = String(message || "").toLocaleLowerCase("tr-TR").replace(/\s+/g, " ").trim();
+  const recoveredTopic = Array.isArray(history) && history.length > 0 ? recoverTopicFromRawHistory(history) : null;
+
+  if (compactRawMessage.includes("vitir") && (compactRawMessage.includes("vacip") || compactRawMessage.includes("farz"))) {
+    return "vitir_vacip";
+  }
+
+  if (
+    recoveredTopic &&
+    topicKey(recoveredTopic) === topicKey("vitir_namazi") &&
+    (compactRawMessage === "vacip mi?" || compactRawMessage === "vacip mi" || compactRawMessage === "farz mi?" || compactRawMessage === "farz mi")
+  ) {
+    return "vitir_vacip";
+  }
+
+  return null;
+}
+
 function resolveDailyPracticeTopic(message, normalizedMessage) {
   const raw = normalizeRawText(message);
+
+  const hasCountCue =
+    includesLoose(normalizedMessage, "kaç rekat") ||
+    includesLoose(normalizedMessage, "kaç rekât") ||
+    includesLoose(normalizedMessage, "kac rekat") ||
+    includesLoose(normalizedMessage, "kac rekât") ||
+    includesLoose(normalizedMessage, "rekat") ||
+    includesLoose(normalizedMessage, "rekât");
+  const hasSpecificPrayerName =
+    includesLoose(normalizedMessage, "cuma") ||
+    includesLoose(normalizedMessage, "bayram") ||
+    includesLoose(normalizedMessage, "vitir") ||
+    includesLoose(normalizedMessage, "teravih") ||
+    includesLoose(normalizedMessage, "teravi") ||
+    includesLoose(normalizedMessage, "sabah") ||
+    includesLoose(normalizedMessage, "ogle") ||
+    includesLoose(normalizedMessage, "öğle") ||
+    includesLoose(normalizedMessage, "ikindi") ||
+    includesLoose(normalizedMessage, "aksam") ||
+    includesLoose(normalizedMessage, "akşam") ||
+    includesLoose(normalizedMessage, "yatsi") ||
+    includesLoose(normalizedMessage, "yatsı");
+
+  if (includesLoose(normalizedMessage, "namaz") && hasCountCue && !hasSpecificPrayerName) {
+    return "namaz_nasil_kilinir";
+  }
 
   if (
     includesLoose(normalizedMessage, "niyet nasil edilir") ||
@@ -713,6 +1091,145 @@ function resolveDailyPracticeTopic(message, normalizedMessage) {
   if (includesLoose(normalizedMessage, "gece ibadetleri") || includesLoose(normalizedMessage, "gece ibadetleri nelerdir")) {
     return "gece_ibadetleri";
   }
+  if (
+    includesLoose(normalizedMessage, "vesvese şeytandan mı") ||
+    includesLoose(normalizedMessage, "vesvese seytandan mi") ||
+    includesLoose(normalizedMessage, "aklıma kötü düşünceler geliyor") ||
+    includesLoose(normalizedMessage, "sürekli şüpheye düşüyorum")
+  ) {
+    return "vesvese_seytandan_mi";
+  }
+  if (
+    includesLoose(normalizedMessage, "cin var mı") ||
+    includesLoose(normalizedMessage, "cin var mi") ||
+    includesLoose(normalizedMessage, "cinler gerçek mi") ||
+    includesLoose(normalizedMessage, "cin musallat olur mu") ||
+    includesLoose(normalizedMessage, "üstümde cin var mı") ||
+    includesLoose(normalizedMessage, "musallat oldugu düşüncesi")
+  ) {
+    return includesLoose(normalizedMessage, "musallat") ? "cin_musallat_olur_mu" : "cin_var_mi";
+  }
+  if (
+    includesLoose(normalizedMessage, "nazar var mı") ||
+    includesLoose(normalizedMessage, "nazar var mi") ||
+    includesLoose(normalizedMessage, "göz değmesi olur mu") ||
+    includesLoose(normalizedMessage, "nazardan nasıl korunur") ||
+    includesLoose(normalizedMessage, "nazardan korunma") ||
+    includesLoose(normalizedMessage, "nazar duası")
+  ) {
+    return includesLoose(normalizedMessage, "korun") || includesLoose(normalizedMessage, "dua")
+      ? "nazardan_korunma"
+      : "nazar_var_mi";
+  }
+  if (
+    includesLoose(normalizedMessage, "büyü var mı") ||
+    includesLoose(normalizedMessage, "buyu var mi") ||
+    includesLoose(normalizedMessage, "büyü gerçek mi") ||
+    includesLoose(normalizedMessage, "büyüden korunma") ||
+    includesLoose(normalizedMessage, "büyüden korunma duası") ||
+    includesLoose(normalizedMessage, "buyuden korunma duası")
+  ) {
+    return includesLoose(normalizedMessage, "korunma") ? "buyuden_korunma" : "buyu_var_mi";
+  }
+  if (
+    includesLoose(normalizedMessage, "korku gelince ne yapmalı") ||
+    includesLoose(normalizedMessage, "korku geldiğinde ne yapılır") ||
+    includesLoose(normalizedMessage, "aniden korkuyorum")
+  ) {
+    return "korku_gelince_ne_yapmali";
+  }
+  if (
+    includesLoose(normalizedMessage, "gece korkusu neden olur") ||
+    includesLoose(normalizedMessage, "gece neden korkarım") ||
+    includesLoose(normalizedMessage, "gece uyanıp korkuyorum")
+  ) {
+    return "gece_korkusu_neden_olur";
+  }
+  if (
+    includesLoose(normalizedMessage, "kötü rüya görünce ne yapılır") ||
+    includesLoose(normalizedMessage, "kotu ruya gorunce ne yapmali") ||
+    includesLoose(normalizedMessage, "kabus görünce ne yapılır")
+  ) {
+    return "kotu_ruya_gorunce_ne_yapmali";
+  }
+  const genericSupportPrompt =
+    includesLoose(normalizedMessage, "çok korkuyorum") ||
+    includesLoose(normalizedMessage, "korkuyorum") ||
+    includesLoose(normalizedMessage, "endişeliyim") ||
+    includesLoose(normalizedMessage, "endise") ||
+    includesLoose(normalizedMessage, "yalnızım") ||
+    includesLoose(normalizedMessage, "yalnizim") ||
+    includesLoose(normalizedMessage, "üzgünüm") ||
+    includesLoose(normalizedMessage, "uzgunum") ||
+    includesLoose(normalizedMessage, "içim sıkılıyor") ||
+    includesLoose(normalizedMessage, "icim sikiliyor");
+  if (
+    genericSupportPrompt &&
+    !includesLoose(normalizedMessage, "vesvese") &&
+    !includesLoose(normalizedMessage, "nazar") &&
+    !includesLoose(normalizedMessage, "büyü") &&
+    !includesLoose(normalizedMessage, "buyu") &&
+    !includesLoose(normalizedMessage, "cin") &&
+    !includesLoose(normalizedMessage, "korku gelince") &&
+    !includesLoose(normalizedMessage, "gece korkusu") &&
+    !includesLoose(normalizedMessage, "kötü rüya") &&
+    !includesLoose(normalizedMessage, "kotu ruya")
+  ) {
+    return null;
+  }
+  if (
+    includesLoose(normalizedMessage, "müzik dinlemek günah mı") ||
+    includesLoose(normalizedMessage, "muzik dinlemek gunah mi") ||
+    includesLoose(normalizedMessage, "şarkı dinlemek günah mı") ||
+    includesLoose(normalizedMessage, "sigara haram mı") ||
+    includesLoose(normalizedMessage, "sigara içmek günah mı") ||
+    includesLoose(normalizedMessage, "dövme yaptırmak caiz mi") ||
+    includesLoose(normalizedMessage, "dovme yaptirmak caiz mi") ||
+    includesLoose(normalizedMessage, "kredi kartı kullanmak caiz mi") ||
+    includesLoose(normalizedMessage, "kredi karti kullanmak caiz mi") ||
+    includesLoose(normalizedMessage, "banka faizi nedir") ||
+    includesLoose(normalizedMessage, "faiz nedir") ||
+    includesLoose(normalizedMessage, "yalan yere yemin etmek günah mı") ||
+    includesLoose(normalizedMessage, "bahis oynamak haram mı") ||
+    includesLoose(normalizedMessage, "bahis kumar haram mı") ||
+    includesLoose(normalizedMessage, "şüpheli kazanç ne yapılır") ||
+    includesLoose(normalizedMessage, "supheli kazanc ne yapilir") ||
+    includesLoose(normalizedMessage, "alışverişte kul hakkı olur mu") ||
+    includesLoose(normalizedMessage, "kul hakkı içeren alışveriş") ||
+    includesLoose(normalizedMessage, "haram para nasıl temizlenir") ||
+    includesLoose(normalizedMessage, "haram para temizleme")
+  ) {
+    if (includesLoose(normalizedMessage, "kredi kartı") || includesLoose(normalizedMessage, "kredi karti")) {
+      return "kredi_karti_kullanmak_caiz_mi";
+    }
+    if (includesLoose(normalizedMessage, "banka faizi")) {
+      return "banka_faizi_nedir";
+    }
+    if (includesLoose(normalizedMessage, "dövme") || includesLoose(normalizedMessage, "dovme")) {
+      return "dovme_yaptirmak_caiz_mi";
+    }
+    if (includesLoose(normalizedMessage, "sigara")) {
+      return "sigara_haram_mi";
+    }
+    if (includesLoose(normalizedMessage, "müzik") || includesLoose(normalizedMessage, "muzik") || includesLoose(normalizedMessage, "şarkı")) {
+      return "muzik_dinlemek_gunah_mi";
+    }
+    if (includesLoose(normalizedMessage, "yalan yere yemin")) {
+      return "yalan_yere_yemin_etmek";
+    }
+    if (includesLoose(normalizedMessage, "bahis") || includesLoose(normalizedMessage, "kumar")) {
+      return "bahis_kumar_haram_mi";
+    }
+    if (includesLoose(normalizedMessage, "kul hakkı içeren alışveriş") || includesLoose(normalizedMessage, "alışverişte kul hakkı")) {
+      return "kul_hakki_iceren_alisveris";
+    }
+    if (includesLoose(normalizedMessage, "haram para nasıl temizlenir") || includesLoose(normalizedMessage, "haram para temizleme")) {
+      return "haram_para_nasil_temizlenir";
+    }
+    if (includesLoose(normalizedMessage, "şüpheli kazanç") || includesLoose(normalizedMessage, "supheli kazanc")) {
+      return "supheli_kazanc_ne_yapilir";
+    }
+  }
 
   if (
     includesLoose(normalizedMessage, "yemin kefareti") ||
@@ -786,7 +1303,7 @@ function resolveDailyPracticeTopic(message, normalizedMessage) {
   ) {
     return "helal_haram_genel";
   }
-  if (includesLoose(normalizedMessage, "faiz nedir") || includesLoose(normalizedMessage, "faiz")) {
+  if (includesLoose(normalizedMessage, "faiz nedir") || normalizedMessage === normalizeLoose("faiz")) {
     return "faiz_nedir";
   }
   if (
@@ -826,16 +1343,18 @@ function recoverTopicFromRawHistory(history) {
   if (!Array.isArray(history) || history.length === 0) return null;
   for (let i = history.length - 1; i >= 0; i -= 1) {
     const item = history[i];
-    if (!item || typeof item.text !== "string") continue;
-    const raw = normalizeRawText(item.text);
+    if (!item || typeof item !== "object") continue;
+    const text = typeof item.text === "string" ? item.text : typeof item.content === "string" ? item.content : "";
+    if (!text) continue;
+    const raw = normalizeRawText(text);
     if (!raw) continue;
     if (raw.includes("abdest")) return "abdest";
     if (raw.includes("gusÃ¼l") || raw.includes("gusul")) return "gusul_abdesti";
     if (raw.includes("seferi")) return "seferi_namazi";
     if (raw.includes("oruc") || raw.includes("oruÃ§")) return "oruc";
     if (raw.includes("teravih") || raw.includes("teravi")) return "teravih_namazi";
-    if (raw.includes("cuma")) return "cuma_namazi";
-    if (raw.includes("bayram")) return "bayram_namazi";
+    if (raw.includes("cuma")) return "cuma_namazi_kac_rekat";
+    if (raw.includes("bayram")) return "bayram_namazi_kac_rekat";
     if (raw.includes("cenaze")) return "cenaze_namazi";
     if (raw.includes("vitir")) return "vitir_namazi";
     if (raw.includes("sabah")) return "sabah_namazi";

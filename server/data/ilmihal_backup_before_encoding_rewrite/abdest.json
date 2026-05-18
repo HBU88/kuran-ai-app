@@ -1,0 +1,68 @@
+{
+  "id": "abdest_howto",
+  "title": "Abdest",
+  "category": "worship_practice",
+  "summary": "Abdest, namaz ve bazı ibadetler için alınan temizliktir. Niyet, yıkama ve mesh adımlarıyla alınır.",
+  "keywords": [
+    "abdest nasıl alınır",
+    "abdestin farzları",
+    "abdesti bozan şeyler",
+    "boy abdesti",
+    "wudu"
+  ],
+  "farzlar": [
+    "Yüzü bir defa yıkamak.",
+    "Kolları dirseklerle birlikte bir defa yıkamak.",
+    "Başın en az dörtte birini mesh etmek.",
+    "Ayakları topuklarla birlikte bir defa yıkamak."
+  ],
+  "vacipler": [],
+  "sunnetler": [
+    "Niyet etmek.",
+    "Besmele çekmek.",
+    "Elleri bileklere kadar üç defa yıkamak.",
+    "Ağza üç defa su vermek.",
+    "Buruna üç defa su vermek.",
+    "Yüzü üç defa yıkamak.",
+    "Kulakları mesh etmek.",
+    "Boynu mesh etmek.",
+    "Uzuvları sırayla ve aralıksız yıkamak.",
+    "Sağdan başlamak."
+  ],
+  "step_by_step": [
+    "Niyet edilir ve besmele çekilir.",
+    "Elleri bileklere kadar üç defa yıkanır.",
+    "Ağza üç defa su verilir ve iyice çalkalanır.",
+    "Buruna üç defa su verilir ve burun temizlenir.",
+    "Yüzü üç defa yıkanır.",
+    "Kollar dirseklerle birlikte üç defa yıkanır.",
+    "Başa bir defa mesh edilir.",
+    "Kulaklar mesh edilir.",
+    "Boyun mesh edilir.",
+    "Ayaklar topuklarla birlikte üç defa yıkanır."
+  ],
+  "attention_points": [
+    "Su, yıkanması gereken bütün yerlere ulaşmalıdır.",
+    "Saç dipleri, sakal altı, kulak arkaları ve parmak araları kuru kalmamalıdır.",
+    "Oruçluyken ağza ve buruna su verirken aşırıya kaçmamak gerekir.",
+    "Mesh, suyu israf etmeden yapılır; başın en az dörtte biri mesh edilir.",
+    "Bilezik, saat gibi suyun ulaşmasını engelleyen şeyler çıkarılmalıdır."
+  ],
+  "common_mistakes": [
+    "Ağza ve buruna suyu yeterince ulaştırmamak.",
+    "Dirsekleri veya topukları tam yıkamamak.",
+    "Başı mesh etmek yerine çok az bir kısmı ıslatıp bırakmak.",
+    "Parmak aralarını, kulak arkalarını ve saç diplerini ihmal etmek.",
+    "Uzuvları kuru bırakacak kadar acele etmek."
+  ],
+  "related_questions": [
+    "Abdest nasıl alınır?",
+    "Abdestin farzları nelerdir?",
+    "Abdesti bozan şeyler nelerdir?",
+    "Oruçluyken abdest alınır mı?"
+  ],
+  "source_notes": [
+    "Diyanet İşleri Başkanlığı ilmihal anlatım tarzı esas alınmıştır.",
+    "TDV İslâm Ansiklopedisi ve Türkiye'de yaygın Hanefî ilmihal öğretimiyle uyumlu, pratik odaklı özet hazırlanmıştır."
+  ]
+}

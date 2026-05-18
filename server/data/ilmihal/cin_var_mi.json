@@ -1,0 +1,50 @@
+{
+  "id": "cin_var_mi",
+  "title": "Cin Var Mı?",
+  "category": "daily_practice",
+  "summary": "Cin konusu gayb alanına girer; kesin teşhis ve korku dili yerine sükûnet, dua ve güvenilir rehberlik esastır.",
+  "aliases": [
+    "cin var mı",
+    "cin var mi",
+    "cinler gerçek mi",
+    "cin hakkında ne denir"
+  ],
+  "triggers": [
+    "cin var mı",
+    "cin var mi",
+    "cinler gerçek mi",
+    "cin hakkında ne denir"
+  ],
+  "keywords": [
+    "cin",
+    "gayb",
+    "korku",
+    "dua"
+  ],
+  "step_by_step": [
+    "Gayb alanındaki konularda kesin hüküm iddiasından kaçın.",
+    "Korkuyu büyütmeden günlük düzenini ve ibadetini sürdür.",
+    "Felak ve Nâs gibi koruyucu duaları okuyabilirsin.",
+    "Süregelen sıkıntı varsa güvenilir dinî rehberlik ve gerekirse uzman desteği al."
+  ],
+  "attention_points": [
+    "Kesin bilgi varmış gibi konuşmak doğru değildir.",
+    "Korku ve dedikoduyla konu daha da ağırlaştırılmamalıdır.",
+    "Belirti diye sunulan şeyler varsa sağlık ve psikoloji yönü de düşünülmelidir."
+  ],
+  "common_mistakes": [
+    "İnternetteki söylentileri kesin delil saymak.",
+    "Her zorlanmayı doğrudan cinle açıklamak.",
+    "Manevî rahatlatmayı tıbbi desteğin yerine koymak."
+  ],
+  "related_questions": [
+    "Cin musallat olur mu?",
+    "Korku gelince ne yapmalı?",
+    "Kötü rüya görünce ne yapılır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Cin konusu gayb alanına girer; kesin teşhis ve korku dili yerine sükûnet, dua ve güvenilir rehberlik esastır.",
+  "semantic_description": "cin var mı cinler gerçek mi cin hakkında ne denir sorularına sakin ve ölçülü cevap verir cin konusu gayb alanına girer kesin teşhis ve korku dili yerine sükûnet dua ve güvenilir rehberlik esastır"
+}

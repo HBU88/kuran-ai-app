@@ -1,0 +1,44 @@
+{
+  "id": "namaz_vacipleri",
+  "title": "Namazın Vacipleri",
+  "category": "worship_practice",
+  "summary": "Namazın vacipleri, namazın düzenini ve tamamlayıcılığını güçlendirir.",
+  "keywords": [
+    "namazın vacipleri",
+    "namaz vacipleri",
+    "vacipler"
+  ],
+  "step_by_step": [
+    "Abdest, kıble ve niyet hazırlanır.",
+    "Kıraat, rükû, secde ve son oturuş sırayla yerine getirilir.",
+    "Namazın farz ve vacipleri tamamlanır."
+  ],
+  "farzlar": [],
+  "vacipler": [
+    "Fatiha okumak.",
+    "Fatiha'dan sonra zammı sure okumak.",
+    "Farz namazların ilk iki rekâtında kıraat yapmak.",
+    "Secdede alın ve burnu yere koymak.",
+    "Tadil-i erkâna dikkat etmek.",
+    "İlk oturuş.",
+    "Son oturuşta Tahiyyat okumak.",
+    "Namaz sonunda selam vermek.",
+    "Vitir namazında kunut tekbiri ve kunut duası."
+  ],
+  "sunnetler": [],
+  "attention_points": [
+    "Vacipler namazın düzenini güçlendirir ve ihmal edilmemelidir."
+  ],
+  "common_mistakes": [
+    "Fatiha'yı atlamak.",
+    "Tadil-i erkânı aceleye getirmek.",
+    "Kunut duasını unutmak."
+  ],
+  "related_questions": [
+    "Namazın vacipleri nelerdir?",
+    "Vitir namazının vacipleri nelerdir?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ]
+}

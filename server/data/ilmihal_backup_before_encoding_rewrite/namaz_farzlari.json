@@ -1,0 +1,56 @@
+{
+  "id": "namaz_farzlari",
+  "title": "Namazın Farzları",
+  "category": "worship_practice",
+  "summary": "Namazın farzları altısı namazdan önce, altısı namazın içindedir; toplam on iki farz vardır.",
+  "keywords": [
+    "namazın farzları",
+    "namaz farzları nelerdir",
+    "12 farz"
+  ],
+  "farzlar": [
+    "Hadesen taharet.",
+    "Necasetten taharet.",
+    "Setr-i avret.",
+    "İstikbal-i kıble.",
+    "Vakit.",
+    "Niyet.",
+    "İftitah tekbiri.",
+    "Kıyam.",
+    "Kıraat.",
+    "Rükû.",
+    "Secde.",
+    "Ka‘de-i ahîre."
+  ],
+  "vacipler": [],
+  "sunnetler": [],
+  "step_by_step": [
+    "Namazdan önce hadesten ve necasetten taharet sağlanır.",
+    "Avret yerleri örtülür ve kıbleye dönülür.",
+    "Vakit girmiş olmalıdır ve niyet edilir.",
+    "Namaz içinde iftitah tekbiri alınır.",
+    "Kıyamda durulur, kıraat edilir.",
+    "Rükû ve secde yapılır.",
+    "Son oturuşta ka‘de-i ahîre yerine getirilir."
+  ],
+  "attention_points": [
+    "Farzlardan biri terk edilirse namaz geçerli olmaz.",
+    "Farzlar namazın asıl iskeletidir.",
+    "Namazın sıhhati için tertip ve devamllık önemhâhâhâlidir."
+  ],
+  "common_mistakes": [
+    "Niyeti unutmak.",
+    "Kıbleye yönelmeyi ihmal etmek.",
+    "Son oturuşu atlamak.",
+    "Kıraat veya secdeyi eksik yapmak."
+  ],
+  "related_questions": [
+    "Namaz nasıl kılınır?",
+    "Sabah namazı nasıl kılınır?",
+    "Namazın vacipleri nelerdir?",
+    "Namazı bozan şeyler nelerdir?"
+  ],
+  "source_notes": [
+    "Diyanet ilmihali ve Türkiye'de yaygın Hanefî öğretimi esas alınmıştır."
+  ]
+}

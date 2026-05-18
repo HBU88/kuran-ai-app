@@ -2,7 +2,18 @@ class AppConstants {
   const AppConstants._();
 
   static const appName = 'HAKAI';
+  static const backendApiBaseUrl = String.fromEnvironment(
+    'HAKAI_API_BASE_URL',
+    defaultValue: String.fromEnvironment(
+      'HAKAI_CHAT_API_BASE_URL',
+      defaultValue: 'http://10.0.2.2:3000',
+    ),
+  );
   static const appTagline = 'Hakikate yönlendiren yapay zekâ';
+  static const welcomeMessage =
+      'Selam, HAKAI’ye hoş geldin. Sana ayet rehberliği veya ilmihal bilgisiyle yardımcı olabilirim.';
+  static const connectionFallbackMessage =
+      'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.';
   static const logoAssetPlaceholder = 'assets/app/launcher_icon.png';
   static const defaultCity = 'Istanbul';
   static const defaultCountry = '';

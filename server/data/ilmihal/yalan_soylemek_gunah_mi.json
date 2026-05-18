@@ -1,0 +1,50 @@
+{
+  "id": "yalan_soylemek_gunah_mi",
+  "title": "Yalan Söylemek Günah mı?",
+  "category": "daily_practice",
+  "summary": "Yalan söylemek günahtır; doğruyu söylemek, gerektiğinde susmak ve zararsız bir dille konuşmak esastır.",
+  "aliases": [
+    "yalan söylemek günah mı",
+    "yalan söylemek",
+    "yalan söylemek caiz mi"
+  ],
+  "triggers": [
+    "yalan söylemek günah mı",
+    "yalan söylemek",
+    "yalan söylemek caiz mi",
+    "susmak"
+  ],
+  "keywords": [
+    "yalan söylemek günah mı",
+    "yalan söylemek",
+    "doğruyu söylemek"
+  ],
+  "step_by_step": [
+    "Yalan hemen bırakılır.",
+    "Mümkünse doğru ifade edilir.",
+    "Gerektiğinde zararsız biçimde susmak tercih edilir.",
+    "Tekrarını önlemek için konuşmadan önce durup düşünülür."
+  ],
+  "attention_points": [
+    "Zorlayıcı özel durumlar için güvenilir bir din görevlisine danışılabilir.",
+    "İç huzursuzluğu varsa Ayet Rehberi destek sağlayabilir."
+  ],
+  "common_mistakes": [
+    "Küçük yalanları önemsiz görmek.",
+    "Alışkanlık hâline getirmek.",
+    "Doğruyu söylemek yerine sürekli kaçamak yol aramak."
+  ],
+  "related_questions": [
+    "Gıybet ettim ne yapmalıyım?",
+    "Kul hakkı nasıl ödenir?",
+    "Kalp kırmak kul hakkı mı?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Yalan söylemek günahtır; doğruyu söylemek, gerektiğinde susmak ve zararsız bir dille konuşmak esastır.",
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [],
+  "semantic_description": "Yalan söylemek günah mı? Doğruyu söylemek, gerektiğinde susmak, zararsız bir dil kullanmak ve yalandan uzak durmak."
+}

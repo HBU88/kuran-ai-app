@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/place_model.dart';
@@ -56,7 +55,6 @@ class DiyanetPlaceService {
     required String path,
   }) async {
     final uri = Uri.parse('$_baseUrl$path');
-    debugPrint('PLACE TARGET: $uri');
     final response = await _client.get(
       uri,
       headers: {
@@ -64,8 +62,6 @@ class DiyanetPlaceService {
         'Authorization': 'Bearer $token',
       },
     );
-    debugPrint('PLACE STATUS: ${response.statusCode}');
-    debugPrint('PLACE BODY: ${response.body}');
 
     if (response.statusCode != 200) {
       throw DiyanetPlaceException(

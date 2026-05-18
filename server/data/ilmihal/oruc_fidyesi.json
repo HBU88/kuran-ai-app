@@ -1,0 +1,35 @@
+{
+  "id": "oruc_fidyesi",
+  "title": "Oruç Fidyesi",
+  "category": "worship_practice",
+  "summary": "Oruç fidyesi, tutmaya gücü yetmeyen bazı kimselerin her gün için verdiği bedeldir.",
+  "keywords": [
+    "oruç fidyesi",
+    "oruc fidyesi",
+    "fidye"
+  ],
+  "step_by_step": [
+    "Oruç tutamama durumu değerlendirilir.",
+    "Yaşlılık veya kronik hastalık gibi kalıcı engel olup olmadığına bakılır.",
+    "Her gün için bir fakir doyurma esasıyla fidye verilir.",
+    "Ramazan sonunda toplam miktar gözden geçirilir."
+  ],
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [],
+  "attention_points": [
+    "Fidye, kaza ile karıştırılmamalıdır.",
+    "Kalıcı güç yetmeme hâli temel ölçüdür."
+  ],
+  "common_mistakes": [
+    "Geçici hastalıkta fidye ile yetinmek.",
+    "Kaza ile fidyeyi birbirine karıştırmak."
+  ],
+  "related_questions": [
+    "Oruç fidyesi nedir?",
+    "Kimler fidye verir?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ]
+}

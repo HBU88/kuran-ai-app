@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';
@@ -17,16 +19,44 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final card = Material(
-      color: AppColors.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppRadius.medium),
-        side: BorderSide(
-          color: AppColors.divider.withValues(alpha: 0.56),
-          width: 0.7,
+    final card = ClipRRect(
+      borderRadius: BorderRadius.circular(AppRadius.xLarge),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                AppColors.surface.withValues(alpha: 0.88),
+                AppColors.surfaceSoft.withValues(alpha: 0.78),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(AppRadius.xLarge),
+            border: Border.all(
+              color: AppColors.divider.withValues(alpha: 0.72),
+              width: 0.8,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.28),
+                blurRadius: 24,
+                offset: const Offset(0, 12),
+              ),
+              BoxShadow(
+                color: AppColors.primaryAccent.withValues(alpha: 0.05),
+                blurRadius: 24,
+                offset: const Offset(0, -4),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: padding,
+            child: child,
+          ),
         ),
       ),
-      child: Padding(padding: padding, child: child),
     );
 
     if (onTap == null) {
@@ -37,7 +67,7 @@ class AppCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AppRadius.medium),
+        borderRadius: BorderRadius.circular(AppRadius.xLarge),
         child: card,
       ),
     );

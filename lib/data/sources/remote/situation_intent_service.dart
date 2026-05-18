@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/utils/situation_tag_mapper.dart';
@@ -35,18 +34,11 @@ class SituationIntentService {
     if (realAiConfigured) {
       try {
         return await _analyzeWithAi(rawInput);
-      } catch (error) {
-        if (kDebugMode) {
-          debugPrint('SITUATION ANALYZER AI FAILED: $error');
-        }
+      } catch (_) {
       }
     }
 
     final fallback = SituationTagMapper.analyze(rawInput);
-    if (kDebugMode) {
-      debugPrint('SITUATION ANALYZER: fallback');
-      debugPrint('SITUATION ANALYSIS: ${fallback.toJson()}');
-    }
     return fallback;
   }
 

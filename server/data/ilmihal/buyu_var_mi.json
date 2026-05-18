@@ -1,0 +1,48 @@
+{
+  "id": "buyu_var_mi",
+  "title": "Büyü Var Mı?",
+  "category": "daily_practice",
+  "summary": "Büyü iddiaları istismara açık olabilir; kesin teşhis vermeden, korkuyu büyütmeden ve güvenilir rehberlik arayarak hareket etmek gerekir.",
+  "aliases": [
+    "büyü var mı",
+    "buyu var mi",
+    "büyü gerçek mi"
+  ],
+  "triggers": [
+    "büyü var mı",
+    "buyu var mi",
+    "büyü gerçek mi"
+  ],
+  "keywords": [
+    "büyü",
+    "sihir",
+    "korku",
+    "dua"
+  ],
+  "step_by_step": [
+    "İddiaları hemen kesin hükme çevirmeden değerlendir.",
+    "Korkuyu artıran yorumlardan uzak dur.",
+    "Koruyucu duaları ve düzenli ibadeti sürdür.",
+    "Belirtiler yoğun ise hem güvenilir dinî rehberlik hem de uzman desteği al."
+  ],
+  "attention_points": [
+    "Büyüye bağlamak, başka sebepleri görmeyi engelleyebilir.",
+    "İstismara açık uygulamalardan uzak durmak önemlidir.",
+    "Süregelen kaygı, uykusuzluk veya panik tıbbi destek gerektirebilir."
+  ],
+  "common_mistakes": [
+    "Her sıkıntıyı büyüye bağlamak.",
+    "Korkuyu artıran kişilere yönelmek.",
+    "Güvenilir kaynak yerine söylentilere dayanmak."
+  ],
+  "related_questions": [
+    "Büyüden korunma duası",
+    "Cin musallat olur mu?",
+    "Korku gelince ne yapmalı?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Büyü iddiaları istismara açık olabilir; kesin teşhis vermeden, korkuyu büyütmeden ve güvenilir rehberlik arayarak hareket etmek gerekir.",
+  "semantic_description": "büyü var mı büyü gerçek mi sihir korku dua sorularına sakin ve ölçülü cevap verir büyü iddiaları istismara açık olabilir kesin teşhis vermeden korkuyu büyütmeden ve güvenilir rehberlik arayarak hareket etmek gerekir"
+}

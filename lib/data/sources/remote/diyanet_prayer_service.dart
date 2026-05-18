@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class DiyanetPrayerService {
@@ -25,11 +24,6 @@ class DiyanetPrayerService {
       );
       lastRequestUrl = requestUri.toString();
       final authorizationHeader = 'Bearer $accessToken';
-      debugPrint('PRAYER TARGET: $requestUri');
-      debugPrint(
-        'PRAYER AUTHORIZATION HEADER PRESENT: '
-        '${authorizationHeader.isNotEmpty}',
-      );
       final response = await _client.get(
         requestUri,
         headers: {
@@ -39,8 +33,6 @@ class DiyanetPrayerService {
       );
       lastStatusCode = response.statusCode;
       lastResponseBody = response.body;
-      debugPrint('PRAYER STATUS: ${response.statusCode}');
-      debugPrint('PRAYER BODY: ${response.body}');
 
       if (response.statusCode != 200) {
         throw DiyanetPrayerException(

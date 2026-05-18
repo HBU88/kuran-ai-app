@@ -8,6 +8,7 @@ class AppRoutes {
   static const favorites = '/favorites';
   static const prayerTimes = '/prayer-times';
   static const qibla = '/qibla';
-  static const memorization = '/memorization';
+  // TODO: Re-enable Memorization module after v1 release
+  // static const memorization = '/memorization';
   static const settings = '/settings';
 }

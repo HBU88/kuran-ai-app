@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../data/models/chat_message_model.dart';
 import '../../data/sources/remote/chat_agent_service.dart';
 import 'chat_mode.dart';
@@ -79,7 +80,7 @@ class ChatController extends ChangeNotifier {
         ChatMessageModel(
           id: _nextId(),
           role: 'assistant',
-          text: 'Şu an cevap oluşturulamadı. Lütfen tekrar deneyin.',
+          text: AppConstants.connectionFallbackMessage,
           createdAt: DateTime.now(),
           sourceUserText: message,
           technicalError: error.toString(),
@@ -87,6 +88,7 @@ class ChatController extends ChangeNotifier {
           debugResponseBody: error.responseBody,
           debugParsedErrorMessage: error.parsedErrorMessage,
           debugSentHistoryCount: history.length,
+          canRetry: error.showRetryAction,
         ),
       );
     } catch (error) {
@@ -96,11 +98,12 @@ class ChatController extends ChangeNotifier {
         ChatMessageModel(
           id: _nextId(),
           role: 'assistant',
-          text: 'Şu an cevap oluşturulamadı. Lütfen tekrar deneyin.',
+          text: AppConstants.connectionFallbackMessage,
           createdAt: DateTime.now(),
           sourceUserText: message,
           technicalError: error.toString(),
           debugSentHistoryCount: history.length,
+          canRetry: true,
         ),
       );
     } finally {
@@ -117,6 +120,7 @@ class ChatController extends ChangeNotifier {
     _validateResponse(json);
     final selectedAyahJson = json['selected_ayah'];
     final debugJson = json['debug'];
+    final inferredResponseType = _inferResponseType(json, selectedAyahJson);
     return ChatMessageModel(
       id: _nextId(),
       role: 'assistant',
@@ -128,7 +132,7 @@ class ChatController extends ChangeNotifier {
           : null,
       intent: json['intent']?.toString(),
       primaryTheme: json['primary_theme']?.toString(),
-      responseType: json['response_type']?.toString(),
+      responseType: json['response_type']?.toString() ?? inferredResponseType,
       redirectModule: json['redirect_module']?.toString(),
       contextTopic: json['context_topic']?.toString(),
       ayahUsed: json['ayah_used'] == true,
@@ -145,16 +149,15 @@ class ChatController extends ChangeNotifier {
                     debugJson
                         .map((key, value) => MapEntry(key.toString(), value)),
                   ),
-                )
+              )
               : null,
+      canRetry: false,
     );
   }
 
   void _validateResponse(Map<String, dynamic> json) {
     final missing = <String>[];
     for (final key in const [
-      'intent',
-      'response_type',
       'assistant_text',
       'selected_ayah',
     ]) {
@@ -168,6 +171,16 @@ class ChatController extends ChangeNotifier {
         responseBody: json.toString(),
       );
     }
+  }
+
+  String _inferResponseType(Map<String, dynamic> json, Object? selectedAyahJson) {
+    if (selectedAyahJson is Map<String, dynamic>) {
+      return 'direct_ayah';
+    }
+    if (json['redirect_module'] != null) {
+      return 'direct_answer';
+    }
+    return 'direct_answer';
   }
 
   String _nextId() {

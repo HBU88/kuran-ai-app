@@ -46,13 +46,13 @@ function loadKnowledgeBase() {
 
 function lookupKnowledgeAnswer(message, analysis = {}, plannerPlan = null, history = []) {
   const normalizedMessage = normalizeMessage(message);
-  if (isSupportiveForgivenessPrompt(message, normalizedMessage) && !hasProceduralKnowledgeCue(message, normalizedMessage)) {
-    return null;
-  }
-
   const ilmihalHit = routeKnowledge(message, analysis, plannerPlan, history);
   if (ilmihalHit) {
     return ilmihalHit;
+  }
+
+  if (isSupportiveForgivenessPrompt(message, normalizedMessage) && !hasProceduralKnowledgeCue(message, normalizedMessage)) {
+    return null;
   }
 
   const prophetHit = lookupProphetBehaviorAnswer(normalizedMessage);
@@ -166,6 +166,23 @@ function matchesLocalKnowledgeCue(normalizedMessage) {
     "helal",
     "haram",
     "faiz",
+    "müzik",
+    "muzik",
+    "sigara",
+    "dövme",
+    "dovme",
+    "kredi kartı",
+    "kredi karti",
+    "banka faizi",
+    "bahis",
+    "kumar",
+    "şüpheli kazanç",
+    "supheli kazanc",
+    "alışverişte kul hakkı",
+    "kul hakkı içeren alışveriş",
+    "haram para nasıl temizlenir",
+    "haram para temizleme",
+    "yalan yere yemin",
     "kul hakki",
     "kul hakkı",
     "anne baba",
@@ -329,6 +346,25 @@ function hasProceduralKnowledgeCue(message, normalizedMessage) {
     "tevbe nasıl edilir",
     "nasıl tövbe etmeliyim",
     "nasıl tevbe etmeliyim",
+    "günah işledim ne yapmalıyım",
+    "gunah isledim ne yapmalıyim",
+    "tövbenin şartları nelerdir",
+    "tevbenin şartları nelerdir",
+    "aynı günahı tekrar işliyorum",
+    "ayni gunahi tekrar isliyorum",
+    "kul hakkı nasıl ödenir",
+    "kul hakki nasil odenir",
+    "gıybet ettim ne yapmalıyım",
+    "giybet ettim ne yapmaliyim",
+    "yalan söylemek günah mı",
+    "yalan soylemek gunah mi",
+    "kalp kırmak kul hakkı mı",
+    "kalp kirmak kul hakki mi",
+    "haram para kazandım ne yapmalıyım",
+    "haram para kazandim ne yapmaliyim",
+    "faizli kredi kullanmak caiz mi",
+    "zina yaptım tövbe olur mu",
+    "zina yaptim tovbe olur mu",
     "tövbe duası",
     "tevbe duası",
     "duası var mı",

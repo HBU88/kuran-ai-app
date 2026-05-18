@@ -1,0 +1,48 @@
+{
+  "id": "gece_korkusu_neden_olur",
+  "title": "Gece Korkusu Neden Olur?",
+  "category": "daily_practice",
+  "summary": "Gece korkusu çoğu zaman stres, yorgunluk, uyku düzensizliği ve benzeri sebeplerle artabilir; sık oluyorsa değerlendirme gerekir.",
+  "aliases": [
+    "gece korkusu neden olur",
+    "gece neden korkarım",
+    "gece uyanıp korkuyorum"
+  ],
+  "triggers": [
+    "gece korkusu neden olur",
+    "gece neden korkarım",
+    "gece uyanıp korkuyorum"
+  ],
+  "keywords": [
+    "gece korkusu",
+    "stres",
+    "uyku",
+    "kaygı"
+  ],
+  "step_by_step": [
+    "Uyku düzenini, ekran kullanımını ve gün içi stresi gözden geçir.",
+    "Yatmadan önce kısa bir dua ve sakinleştirici rutin oluştur.",
+    "Odayı, ışığı ve ortamı daha huzurlu hale getir.",
+    "Korku devam ediyorsa hekim veya psikolog desteği al."
+  ],
+  "attention_points": [
+    "Gece korkusunu hemen olağanüstü bir sebebe bağlama.",
+    "Sıklaşan kabus, çarpıntı veya panik belirtileri ciddiye alınmalıdır.",
+    "Profesyonel destek almak zayıflık değil, önleyici bir adımdır."
+  ],
+  "common_mistakes": [
+    "Uykusuzluğu ve stresi göz ardı etmek.",
+    "Korkuyu sürekli besleyen içeriklere bakmak.",
+    "Gerekli tıbbi değerlendirmeyi ertelemek."
+  ],
+  "related_questions": [
+    "Korku gelince ne yapmalı?",
+    "Kötü rüya görünce ne yapılır?",
+    "Vesvese şeytandan mı?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Gece korkusu çoğu zaman stres, yorgunluk, uyku düzensizliği ve benzeri sebeplerle artabilir; sık oluyorsa değerlendirme gerekir.",
+  "semantic_description": "gece korkusu neden olur gece neden korkarım gece uyanıp korkuyorum sorularına dengeli bir açıklama verir gece korkusu çoğu zaman stres yorgunluk uyku düzensizliği ve benzeri sebeplerle artabilir sık oluyorsa değerlendirme gerekir"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "nazar_var_mi",
+  "title": "Nazar Var Mı?",
+  "category": "daily_practice",
+  "summary": "Nazarla ilgili konuşmalarda korku ve abartıdan kaçınılır; koruma ve şifa Allah'tandır, kişi dua ve dengeli bir güven içinde yaşar.",
+  "aliases": [
+    "nazar var mı",
+    "nazar gerçek mi",
+    "göz değmesi olur mu"
+  ],
+  "triggers": [
+    "nazar var mı",
+    "nazar gerçek mi",
+    "göz değmesi olur mu"
+  ],
+  "keywords": [
+    "nazar",
+    "göz değmesi",
+    "dua",
+    "korunma"
+  ],
+  "step_by_step": [
+    "Nazar konusunu korku üretmeden değerlendir.",
+    "Felak, Nâs ve Ayetü'l-Kürsî gibi dualarla korunmayı alışkanlık haline getir.",
+    "Sabah-akşam zikirlerini ihmal etme.",
+    "Bedensel ya da ruhsal sıkıntı varsa uygun sağlık desteği al."
+  ],
+  "attention_points": [
+    "Nazar iddiasıyla insanları suçlamaktan kaçınmak gerekir.",
+    "Korunma dua ve tevekkülle birlikte düşünülmelidir.",
+    "Sürekli kaygı varsa profesyonel destek yararlı olabilir."
+  ],
+  "common_mistakes": [
+    "Her aksiliği nazara bağlamak.",
+    "Korku üreten uygulamalara yönelmek.",
+    "Dua ile tedaviyi birbirine karıştırmak."
+  ],
+  "related_questions": [
+    "Nazardan nasıl korunur?",
+    "Büyü var mı?",
+    "Kötü rüya görünce ne yapılır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Nazarla ilgili konuşmalarda korku ve abartıdan kaçınılır; koruma ve şifa Allah'tandır, kişi dua ve dengeli bir güven içinde yaşar.",
+  "semantic_description": "nazar var mı göz değmesi olur mu nazar gerçek mi sorularına sakin ve ölçülü cevap verir nazarla ilgili konuşmalarda korku ve abartıdan kaçınılır koruma ve şifa Allah tandır kişi dua ve dengeli bir güven içinde yaşar"
+}

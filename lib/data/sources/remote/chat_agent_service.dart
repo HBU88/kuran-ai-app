@@ -1,18 +1,23 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
+import '../../../core/constants/app_constants.dart';
 import '../../../features/chat/chat_mode.dart';
 
 class ChatAgentService {
   ChatAgentService({
     http.Client? client,
-    String baseUrl = 'http://10.0.2.2:3000',
+    String baseUrl = AppConstants.backendApiBaseUrl,
+    this.requestTimeout = const Duration(seconds: 12),
   })  : _client = client ?? http.Client(),
         _baseUrl = baseUrl;
 
   final http.Client _client;
   final String _baseUrl;
+  final Duration requestTimeout;
 
   Future<Map<String, dynamic>> sendMessage(
     String message, {
@@ -21,24 +26,50 @@ class ChatAgentService {
   }) async {
     final target = Uri.parse('$_baseUrl${mode.endpointPath}');
     final requestBody = {'message': message, 'history': history};
-    final response = await _client.post(
-      target,
-      headers: const {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(requestBody),
-    );
+    http.Response response;
+    try {
+      response = await _client
+          .post(
+            target,
+            headers: const {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: jsonEncode(requestBody),
+          )
+          .timeout(requestTimeout);
+    } on TimeoutException catch (error) {
+      throw ChatAgentException(
+        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
+        isTimeout: true,
+        isTransient: true,
+        originalError: error,
+      );
+    } on SocketException catch (error) {
+      throw ChatAgentException(
+        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
+        isNetworkError: true,
+        isTransient: true,
+        originalError: error,
+      );
+    } on http.ClientException catch (error) {
+      throw ChatAgentException(
+        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
+        isNetworkError: true,
+        isTransient: true,
+        originalError: error,
+      );
+    }
     final decodedBody = utf8.decode(response.bodyBytes);
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
       final parsedError = _readParsedError(decodedBody);
       throw ChatAgentException(
-        'HAKAI request failed with status ${response.statusCode}. '
-        'Body: $decodedBody',
+        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
         statusCode: response.statusCode,
         responseBody: decodedBody,
         parsedErrorMessage: parsedError,
+        isTransient: true,
       );
     }
 
@@ -73,12 +104,22 @@ class ChatAgentException implements Exception {
     this.statusCode,
     this.responseBody,
     this.parsedErrorMessage,
+    this.originalError,
+    this.isTimeout = false,
+    this.isNetworkError = false,
+    this.isTransient = false,
   });
 
   final String message;
   final int? statusCode;
   final String? responseBody;
   final String? parsedErrorMessage;
+  final Object? originalError;
+  final bool isTimeout;
+  final bool isNetworkError;
+  final bool isTransient;
+
+  bool get showRetryAction => isTimeout || isNetworkError || isTransient;
 
   @override
   String toString() {
@@ -91,6 +132,9 @@ class ChatAgentException implements Exception {
     }
     if (parsedErrorMessage != null && parsedErrorMessage!.isNotEmpty) {
       parts.add('Parsed error: $parsedErrorMessage');
+    }
+    if (originalError != null) {
+      parts.add('Cause: $originalError');
     }
     return parts.join(' ');
   }

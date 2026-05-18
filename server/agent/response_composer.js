@@ -1,16 +1,35 @@
 ﻿// Builds the assistant text once intent, themes, routing, and selected ayah are known.
 
+const fs = require("fs");
+const path = require("path");
+
 const { isPrayerRakatsQuestion, normalize, decodeURIComponentSafe } = require("./context_resolver");
 
+const ILMIHAL_DATA_DIR = path.join(__dirname, "..", "data", "ilmihal");
+const structuredIlmihalCache = new Map();
+
 function buildAssistantText(analysis, ayah, message, routing = {}) {
+  const normalizedMessage = normalize(message);
+  const prayerContext = inferPrayerContext(routing);
+  const isPrayerContextFollowup =
+    Boolean(prayerContext) &&
+    (
+      normalizedMessage.includes("vacip") ||
+      normalizedMessage.includes("farz") ||
+      normalizedMessage.includes("rekat") ||
+      normalizedMessage.includes("rekât") ||
+      normalizedMessage.includes("kaç")
+    );
   let text;
   if (analysis.intent === "high_risk_sensitive") {
     text =
       "Bunu ciddiye alıyorum. Eğer kendine zarar verme düşüncen varsa lütfen hemen bulunduğun yerdeki acil destek hattına, güvendiğin birine veya en yakın sağlık birimine ulaş. Burada sana sakin biçimde eşlik edebilirim ama acil destek yerine geçemem.";
+  } else if (isPrayerContextRulingFollowup(message, routing)) {
+    text = buildPrayerRulingAnswer(routing);
+  } else if (isPrayerRakatsQuestion(message) || isPrayerContextFollowup) {
+    text = buildPrayerRakatsAnswer(message, routing);
   } else if (analysis.intent === "worship_practice_question" && routing.knowledgeResult) {
     text = composeKnowledgeFirstAnswer(routing.knowledgeResult, ayah);
-  } else if (analysis.intent === "worship_practice_question" && isPrayerRakatsQuestion(message)) {
-    text = buildPrayerRakatsAnswer(message, routing);
   } else if (routing.knowledgeResult) {
     text = composeKnowledgeFirstAnswer(routing.knowledgeResult, ayah);
   } else if (ayah && isAyahPreferredResponseType(analysis.response_type)) {
@@ -115,10 +134,169 @@ function isAyahPreferredResponseType(responseType) {
 }
 
 function composeKnowledgeFirstAnswer(knowledgeResult, selectedAyah) {
+  const structured = loadStructuredIlmihalContent(knowledgeResult);
+  if (structured) {
+    return formatStructuredIlmihalAnswer(structured);
+  }
+
   const baseText = knowledgeResult?.answer_text
     ? knowledgeResult.answer_text
-    : "Bu konuda k?sa ve d?zenli bir ibadet prati?iyle ba?lamak daha uygun olabilir.";
+    : "Bu konuda kısa ve düzenli bir ibadet pratiğiyle başlamak daha uygun olabilir.";
   return baseText;
+}
+
+function loadStructuredIlmihalContent(knowledgeResult) {
+  if (!knowledgeResult || typeof knowledgeResult !== "object") {
+    return null;
+  }
+
+  const structured = findStructuredIlmihalFile(knowledgeResult);
+  if (!structured) {
+    return null;
+  }
+
+  if (looksCorrupted(structured)) {
+    return null;
+  }
+
+  return structured;
+}
+
+function findStructuredIlmihalFile(knowledgeResult) {
+  if (!fs.existsSync(ILMIHAL_DATA_DIR)) {
+    return null;
+  }
+
+  const aliasFile = resolveStructuredIlmihalAlias(knowledgeResult);
+  if (aliasFile) {
+    const aliased = getParsedIlmihalFile(aliasFile);
+    if (aliased) {
+      return aliased;
+    }
+  }
+
+  const files = fs.readdirSync(ILMIHAL_DATA_DIR).filter((file) => file.endsWith(".json"));
+  const normalizedId = normalize(String(knowledgeResult.id || ""));
+  const normalizedTopic = normalize(String(knowledgeResult.topic || ""));
+
+  for (const fileName of files) {
+    const cached = getParsedIlmihalFile(fileName);
+    if (!cached) continue;
+    const dataId = normalize(String(cached.id || ""));
+    const dataTopic = normalize(String(cached.topic || ""));
+    if (normalizedId && dataId === normalizedId) return cached;
+    if (normalizedTopic && dataTopic === normalizedTopic) return cached;
+  }
+
+  return null;
+}
+
+function resolveStructuredIlmihalAlias(knowledgeResult) {
+  const normalizedId = normalize(String(knowledgeResult?.id || ""));
+  const normalizedTopic = normalize(String(knowledgeResult?.topic || ""));
+
+  if (normalizedId.startsWith("abdest_") || normalizedTopic === "abdest") {
+    return "abdest.json";
+  }
+  if (normalizedId.startsWith("gusul_") || normalizedTopic.includes("gusul")) {
+    return "gusul.json";
+  }
+
+  return null;
+}
+
+function getParsedIlmihalFile(fileName) {
+  const filePath = path.join(ILMIHAL_DATA_DIR, fileName);
+  if (structuredIlmihalCache.has(filePath)) {
+    return structuredIlmihalCache.get(filePath);
+  }
+
+  try {
+    const raw = fs.readFileSync(filePath, "utf8");
+    const parsed = JSON.parse(raw);
+    structuredIlmihalCache.set(filePath, parsed);
+    return parsed;
+  } catch (error) {
+    structuredIlmihalCache.set(filePath, null);
+    return null;
+  }
+}
+
+function looksCorrupted(value) {
+  const text = collectStructuredIlmihalText(value);
+  if (!text) {
+    return false;
+  }
+
+  const badTokens = ["Ã", "Ä", "ÔÇ", "�"];
+  return badTokens.some((token) => text.includes(token));
+}
+
+function collectStructuredIlmihalText(value) {
+  if (!value || typeof value !== "object") {
+    return "";
+  }
+
+  const parts = [];
+  const fields = [
+    value.title,
+    value.summary,
+    value.category,
+    value.id,
+    value.keywords,
+    value.farzlar,
+    value.vacipler,
+    value.sunnetler,
+    value.step_by_step,
+    value.attention_points,
+    value.common_mistakes,
+    value.related_questions,
+    value.source_notes,
+  ];
+
+  for (const field of fields) {
+    if (Array.isArray(field)) {
+      for (const item of field) {
+        if (typeof item === "string") {
+          parts.push(item);
+        }
+      }
+      continue;
+    }
+    if (typeof field === "string") {
+      parts.push(field);
+    }
+  }
+
+  return parts.join(" ");
+}
+
+function formatStructuredIlmihalAnswer(data) {
+  const parts = [];
+  if (data.summary) {
+    parts.push(String(data.summary).trim());
+  }
+  appendSection(parts, "Adım adım", data.step_by_step);
+  appendSection(parts, "Farzları", data.farzlar);
+  appendSection(parts, "Vacipleri", data.vacipler);
+  appendSection(parts, "Sünnetleri", data.sunnetler);
+  appendSection(parts, "Dikkat edilmesi gerekenler", data.attention_points);
+  appendSection(parts, "Yaygın hatalar", data.common_mistakes);
+  if (Array.isArray(data.related_questions) && data.related_questions.length > 0) {
+    parts.push(`İlgili sorular: ${data.related_questions.join(" · ")}`);
+  }
+  return parts.filter(Boolean).join("\n\n");
+}
+
+function appendSection(parts, title, items) {
+  if (!Array.isArray(items) || items.length === 0) {
+    return;
+  }
+  const normalizedItems = items.map((item) => String(item).trim()).filter(Boolean);
+  if (normalizedItems.length === 0) {
+    return;
+  }
+  parts.push(`${title}:\n- ${normalizedItems.join("\n- ")}`);
 }
 
 function composeDirectAyah(selectedAyah, recentAssistantTexts = []) {
@@ -580,6 +758,15 @@ function formatAyah(ayah) {
 }
 
 function buildGeneralIslamicAnswer(message, routing = {}) {
+  const structured = loadStructuredIlmihalContent(routing.knowledgeResult);
+  if (structured) {
+    return formatStructuredIlmihalAnswer(structured);
+  }
+
+  if (routing.knowledgeResult?.answer_text) {
+    return routing.knowledgeResult.answer_text;
+  }
+
   const normalized = normalize(message);
   const knowledgeTopic = normalize(routing.knowledgeTopic || "");
   const mentionsProphet =
@@ -631,6 +818,11 @@ function buildGeneralIslamicAnswer(message, routing = {}) {
 }
 
 function buildWorshipPracticeAnswer(message, routing = {}) {
+  const structured = loadStructuredIlmihalContent(routing.knowledgeResult);
+  if (structured) {
+    return formatStructuredIlmihalAnswer(structured);
+  }
+
   if (routing.knowledgeResult?.answer_text) {
     return routing.knowledgeResult.answer_text;
   }
@@ -653,7 +845,16 @@ function buildWorshipPracticeAnswer(message, routing = {}) {
   }
 
   if (prayerContext) {
-    if (normalized.includes("kaç") || normalized.includes("kac") || normalized.includes("rekat") || normalized.includes("rekât")) {
+    if (
+      normalized.includes("kaç") ||
+      normalized.includes("kac") ||
+      normalized.includes("rekat") ||
+      normalized.includes("rekât") ||
+      normalized.includes("vacip") ||
+      normalized.includes("farz") ||
+      normalized.includes("sünnet") ||
+      normalized.includes("sunnet")
+    ) {
       const contextualAnswer = buildPrayerRakatsAnswer(prayerContext, routing);
       if (contextualAnswer) {
         return contextualAnswer;
@@ -677,6 +878,30 @@ function buildPrayerRakatsAnswer(message, routing = {}) {
   const normalized = normalize(message);
   const prayerContext = inferPrayerContext(routing);
   const explicitCurrentMatch = [
+    {
+      keys: ["sabah"],
+      answer: "Sabah namazı 4 rekattır: 2 sünnet + 2 farz.",
+    },
+    {
+      keys: ["ogle", "öğle"],
+      answer: "Öğle namazı 10 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet.",
+    },
+    {
+      keys: ["ikindi"],
+      answer: "İkindi namazı 8 rekattır: 4 sünnet + 4 farz.",
+    },
+    {
+      keys: ["aksam", "akşam"],
+      answer: "Akşam namazı 5 rekattır: 3 farz + 2 sünnet.",
+    },
+    {
+      keys: ["yatsi", "yatsı"],
+      answer: "Yatsı namazı 13 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet + 3 vitir.",
+    },
+    {
+      keys: ["vitir"],
+      answer: "Vitir namazı 3 rekattır.",
+    },
     {
       keys: ["teravih", "teravi"],
       answer:
@@ -763,30 +988,53 @@ function buildPrayerRakatsAnswer(message, routing = {}) {
     }
   }
 
-  return "Namazın rekât sayısı mezhebe göre bazı ayrıntılar gösterebilir; istersen sabah, öğle, ikindi, akşam, yatsı veya vitir diye ayrı sorabilirsin.";
+  return "Namazın rekât sayısı (rekat sayısı) mezhebe göre bazı ayrıntılar gösterebilir; istersen sabah, öğle, ikindi, akşam, yatsı veya vitir diye ayrı sorabilirsin.";
+}
+
+function isPrayerContextRulingFollowup(message, routing = {}) {
+  const normalized = normalize(message);
+  const prayerContext = inferPrayerContext(routing);
+  if (!prayerContext) return false;
+  if (!(normalized.includes("vacip") || normalized.includes("farz") || normalized.includes("sünnet") || normalized.includes("sunnet"))) {
+    return false;
+  }
+  return prayerContext === "vitir";
+}
+
+function buildPrayerRulingAnswer(routing = {}) {
+  const prayerContext = inferPrayerContext(routing);
+  if (prayerContext === "vitir") {
+    return "Vitir vaciptir; diğer mezheplerde farklı değerlendirmeler vardır.";
+  }
+  return "Bu sorunun hükmü, ilgili namaza göre değişebilir; istersen adını açıkça yazarak sorabilirsin.";
 }
 
 function inferPrayerContext(routing = {}) {
-  const current = normalize(routing.current_message || "");
-  const currentTopics = ["sabah", "??le", "ogle", "ikindi", "ak?am", "aksam", "yats?", "yatsi", "vitir", "teravih", "teravi", "cuma", "bayram", "cenaze"];
-  const directHit = currentTopics.find((topic) => current.includes(normalize(topic))) || null;
-  if (directHit) {
-    return directHit;
-  }
+  const parts = [];
+  if (typeof routing.current_message === "string") parts.push(routing.current_message);
+  if (typeof routing.knowledgeTopic === "string") parts.push(routing.knowledgeTopic);
+  if (Array.isArray(routing.recent_assistant_texts)) parts.push(...routing.recent_assistant_texts);
 
-  const hints = [];
-  if (Array.isArray(routing.recent_assistant_texts)) {
-    hints.push(...routing.recent_assistant_texts);
+  const normalized = normalize(parts.join(" "));
+  const prayerTopics = [
+    ["teravih", ["teravih", "teravi"]],
+    ["cuma", ["cuma"]],
+    ["bayram", ["bayram"]],
+    ["cenaze", ["cenaze"]],
+    ["vitir", ["vitir"]],
+    ["sabah", ["sabah"]],
+    ["ogle", ["öğle", "ogle"]],
+    ["ikindi", ["ikindi"]],
+    ["aksam", ["akşam", "aksam"]],
+    ["yatsi", ["yatsı", "yatsi"]],
+  ];
+
+  for (const [topic, variants] of prayerTopics) {
+    if (variants.some((variant) => normalized.includes(normalize(variant)))) {
+      return topic;
+    }
   }
-  if (typeof routing.knowledgeTopic === "string") {
-    hints.push(routing.knowledgeTopic);
-  }
-  if (typeof routing.current_message === "string") {
-    hints.push(routing.current_message);
-  }
-  const normalized = normalize(hints.join(" "));
-  const topics = ["sabah", "??le", "ogle", "ikindi", "ak?am", "aksam", "yats?", "yatsi", "vitir", "teravih", "teravi", "cuma", "bayram", "cenaze"];
-  return topics.find((topic) => normalized.includes(normalize(topic))) || null;
+  return null;
 }
 
 function prayerContextDescription(prayerContext) {
@@ -837,24 +1085,7 @@ function buildPracticalGuidanceAnswer(message) {
 }
 
 function buildCasualConversationAnswer(message) {
-  const normalized = normalize(message);
-  if (
-    normalized.includes("nasılsın") ||
-    normalized.includes("nasilsin") ||
-    normalized.includes("iyi misin")
-  ) {
-    return "İyiyim, teşekkür ederim. Sen nasılsın?";
-  }
-  if (normalized.includes("ne yapıyorsun") || normalized.includes("ne yapiyorsun")) {
-    return "Buradayım. Bugün nasıl hissediyorsun?";
-  }
-  if (normalized.includes("günaydın") || normalized.includes("gunaydin")) {
-    return "Günaydın. Umarım günün sakin geçer.";
-  }
-  if (normalized.includes("iyi akşamlar") || normalized.includes("iyi aksamlar")) {
-    return "İyi akşamlar. Buradayım, istersen konuşabiliriz.";
-  }
-  return "Selam, hoş geldin. İstersen konuşabiliriz.";
+  return "Selam, HAKAI’ye hoş geldin. Sana ayet rehberliği veya ilmihal bilgisiyle yardımcı olabilirim.";
 }
 
 function finalizeAssistantText(text) {

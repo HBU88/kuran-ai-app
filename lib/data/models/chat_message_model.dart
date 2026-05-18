@@ -22,6 +22,7 @@ class ChatMessageModel {
     this.debugParsedErrorMessage,
     this.debugSentHistoryCount,
     this.debug,
+    this.canRetry = false,
   });
 
   final String id;
@@ -46,6 +47,7 @@ class ChatMessageModel {
   final String? debugParsedErrorMessage;
   final int? debugSentHistoryCount;
   final ChatDebugInfo? debug;
+  final bool canRetry;
 
   bool get isUser => role == 'user';
 

@@ -1,0 +1,49 @@
+{
+  "id": "namaz_vacipleri",
+  "title": "Namazın Vacipleri",
+  "category": "worship_practice",
+  "summary": "Hanefî ilmihal öğretiminde namazın vacipleri, namazın tamamlayıcı ve önemli unsurlarıdır.",
+  "keywords": [
+    "namazın vacipleri",
+    "namaz vacipleri",
+    "vacipler"
+  ],
+  "farzlar": [],
+  "vacipler": [
+    "Fatiha okumak.",
+    "Fatiha?dan sonra zammı sure okumak.",
+    "Farz namazların ilk iki rek�tında kıraat yapmak.",
+    "Secdede alın ve burnu yere koymak.",
+    "Tadil-i erk�na dikkat etmek.",
+    "İlk oturuşu yapmak.",
+    "Son oturuşta Tahiyyat okumak.",
+    "Namaz sonunda selam vermek.",
+    "Vitir namazında kunut tekbiri ve kunut duası okumak."
+  ],
+  "sunnetler": [],
+  "step_by_step": [
+    "Namazda Fatiha ve zammı sure düzeni korunur.",
+    "İlk iki rek�tta kıraat eksik edilmez.",
+    "R�k� ve secdelerde tadil-i erk�n gözetilir.",
+    "İlk ve son oturuşlar doğru şekilde yapılır.",
+    "Vitir namazında kunut tekbiri ve duası okunur."
+  ],
+  "attention_points": [
+    "Vacipler, namazın düzenli ve eksiksiz kılınması için önemhâhâhâlidir.",
+    "Bilerek terk edilirse telafi gerekir."
+  ],
+  "common_mistakes": [
+    "Fatiha?dan sonra zammı sureyi unutmak.",
+    "İlk oturuşu atlamak.",
+    "Kunut duasını bırakmak.",
+    "Tadil-i erk�na dikkat etmemek."
+  ],
+  "related_questions": [
+    "Namazın farzları nelerdir?",
+    "Vitir namazı vacip mi?",
+    "Namaz nasıl kılınır?"
+  ],
+  "source_notes": [
+    "Diyanet ve Türkiye'de yaygın Hanefî ilmihal öğretimi esas alınmıştır."
+  ]
+}

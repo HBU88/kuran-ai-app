@@ -1,0 +1,48 @@
+{
+  "id": "namaz_nasil_kilinir",
+  "title": "Namaz Nasıl Kılınır?",
+  "category": "worship_practice",
+  "summary": "Namazın kaç rekat olduğu, kılınan namaza göre değişir; genel namaz akışı burada özetlenir.",
+  "keywords": [
+    "namaz nasıl kılınır",
+    "namaza nasıl başlanır",
+    "rekât nasıl kılınır",
+    "namaz",
+    "namaz kaç rekat",
+    "namaz rekat"
+  ],
+  "step_by_step": [
+    "Abdest alınır ve kıbleye dönülür.",
+    "Niyet edilir ve iftitah tekbiri alınır.",
+    "Sübhaneke okunur, Eûzü besmele çekilir.",
+    "Fatiha ve zammı sure okunur.",
+    "Rükûda Sübhâne rabbiyel azîm denir.",
+    "Secdede Sübhâne rabbiyel a'lâ denir.",
+    "İki secde yapılır ve ikinci rekâta kalkılır.",
+    "Son oturuşta Tahiyyat, Salli-Barik ve Rabbena duaları okunur.",
+    "Sağa ve sola selam verilir."
+  ],
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [],
+  "attention_points": [
+    "Namazın özünde huşu, düzen ve devamlılık vardır.",
+    "Rekât sayısı namaza göre değişebilir.",
+    "Namazın kaç rekat olduğu, kılınan namaza göre değişir."
+  ],
+  "common_mistakes": [
+    "Kıraat sırasını karıştırmak.",
+    "Rükû ve secdede tesbihleri unutmak.",
+    "Son oturuşu eksik bırakmak."
+  ],
+  "related_questions": [
+    "Namaz nasıl kılınır?",
+    "Namaza nasıl başlanır?",
+    "Rekât nasıl kılınır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Namazın kaç rekat olduğu, kılınan namaza göre değişir; genel namaz akışı burada özetlenir.",
+  "semantic_description": "namazin kac rekat oldugu kilinan namaza gore degisir genel namaz akisi burada ozetlenir namaz nasil kilinir namaz kac rekat namaz rekat"
+}

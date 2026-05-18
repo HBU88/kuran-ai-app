@@ -105,7 +105,7 @@ class SituationTagMapper {
       {'kaygı': 10, 'tevekkül': 7, 'umut': 5, 'çaresizlik': 5},
     );
     scoreMatch(
-      ['kaygı', 'kaygılıyım', 'endişe', 'endişeliyim', 'panik', 'stres'],
+      ['kaygı', 'kaygılıyım', 'endişe', 'endişeliyim', 'gelecek için endişeliyim', 'panik', 'stres', 'yarın ne olacak'],
       {'kaygı': 9, 'tevekkül': 6, 'korku': 4, 'umut': 2},
     );
     scoreMatch(
@@ -118,6 +118,12 @@ class SituationTagMapper {
         'terk edildim',
         'kimse beni anlamıyor',
         'yanımda kimse yok',
+        'Allah benden uzak mı',
+        'Allah bana yakın mı',
+        'Allah beni duyar mı',
+        'uzak hissediyorum',
+        'manevi boşluk',
+        'kalbim soğudu',
       ],
       {'yalnızlık': 10, 'tevekkül': 6, 'umut': 4},
     );
@@ -180,7 +186,7 @@ class SituationTagMapper {
       {'nefs mücadelesi': 10, 'irade': 8, 'sebat': 7, 'tövbe': 5},
     );
     scoreMatch(
-      ['sabredemiyorum', 'sabretmek', 'sabır', 'zorlanıyorum', 'zor geliyor'],
+      ['sabredemiyorum', 'sabretmek', 'sabır', 'zorlanıyorum', 'zor geliyor', 'dayanamıyorum', 'birini kaybettim', 'yas'],
       {'sabır': 8, 'sebat': 5, 'umut': 2},
     );
     scoreMatch(
@@ -188,7 +194,7 @@ class SituationTagMapper {
       {'şükür': 9, 'umut': 2},
     );
     scoreMatch(
-      ['affetmek', 'affedemiyorum', 'affet', 'kırıldım', 'öfke', 'kızgınım'],
+      ['affetmek', 'affedemiyorum', 'affet', 'kırıldım', 'öfke', 'kızgınım', 'haksızlığa uğradım', 'adalet istiyorum', 'zulüm görüyorum'],
       {'affetmek': 9, 'sabır': 4},
     );
     scoreMatch(
@@ -196,7 +202,7 @@ class SituationTagMapper {
       {'aile': 8, 'sabır': 4, 'affetmek': 3},
     );
     scoreMatch(
-      ['rızık', 'para', 'işsizim', 'borç', 'geçinemiyorum', 'iş bulamıyorum'],
+      ['rızık', 'para', 'işsizim', 'borç', 'borcum var', 'çok borcum var', 'geçinemiyorum', 'iş bulamıyorum', 'para yetmiyor'],
       {'rızık': 9, 'tevekkül': 6, 'umut': 4, 'şükür': 2},
     );
     scoreMatch(

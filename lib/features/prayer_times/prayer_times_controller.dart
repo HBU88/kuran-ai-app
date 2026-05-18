@@ -199,8 +199,6 @@ class PrayerTimesController extends ChangeNotifier {
     debugPrayerEndpointUrl =
         cityId == null ? null : _repository.prayerEndpointUrlFor(cityId);
     _updateSelectedLocationLabel();
-    debugPrint('NEW CITY SELECTED: $cityId $selectedCityName');
-    debugPrint('NEW PRAYER ENDPOINT: ${debugPrayerEndpointUrl ?? '-'}');
     notifyListeners();
 
     if (cityId != null) {

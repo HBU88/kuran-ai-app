@@ -1,0 +1,51 @@
+{
+  "id": "ayni_gunahi_tekrar_islemek",
+  "title": "Aynı Günahı Tekrar İşlemek",
+  "category": "daily_practice",
+  "summary": "Aynı günaha yeniden düşmek tövbeyi boşa çıkarmaz; kişi yeniden bırakıp tekrar tövbe eder, ümitsizliğe kapılmaz.",
+  "aliases": [
+    "aynı günahı tekrar işliyorum",
+    "aynı günahı tekrar işlemek",
+    "tekrar aynı günaha düşmek"
+  ],
+  "triggers": [
+    "aynı günahı tekrar işliyorum",
+    "aynı günahı tekrar işlemek",
+    "tekrar aynı günaha düşmek",
+    "yeniden tövbe"
+  ],
+  "keywords": [
+    "aynı günahı tekrar işliyorum",
+    "aynı günahı tekrar işlemek",
+    "yeniden tövbe",
+    "ümitsizlik"
+  ],
+  "step_by_step": [
+    "Yeniden günah bırakılır.",
+    "Tekrar tövbe edilir; yeniden tövbe etmekten çekinilmez.",
+    "Tetikleyen ortam ve alışkanlıklar azaltılır.",
+    "İyi ameller ve düzenli dua ile destek alınır."
+  ],
+  "attention_points": [
+    "Tekrarlamak normalleşmez, ama dönüş kapısını kapatmaz.",
+    "Manevi destek gerekiyorsa Ayet Rehberi açılabilir."
+  ],
+  "common_mistakes": [
+    "Bir kez bozdum diye tamamen vazgeçmek.",
+    "Kendini suçlayıp tekrar denememek.",
+    "Aynı ortama dönüp sonucu değiştirmeyi beklemek."
+  ],
+  "related_questions": [
+    "Günah işledim ne yapmalıyım?",
+    "Tövbemin şartları nelerdir?",
+    "Zina günahından tövbe"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Aynı günaha yeniden düşmek tövbeyi boşa çıkarmaz; kişi yeniden bırakıp tekrar tövbe eder, ümitsizliğe kapılmaz.",
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [],
+  "semantic_description": "Aynı günahı tekrar işlemek tövbeyi bozar mı? Tekrar tövbe, ümitsizliğe kapılmama, tetikleyen ortamdan uzaklaşma ve manevi destek."
+}

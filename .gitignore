@@ -88,3 +88,4 @@ dist/
 build/
 tmp/
 .cache/
+test_artifacts/

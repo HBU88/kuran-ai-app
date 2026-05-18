@@ -1,0 +1,48 @@
+{
+  "id": "supheli_kazanc_ne_yapilir",
+  "title": "Şüpheli Kazanç Ne Yapılır?",
+  "category": "daily_practice",
+  "summary": "Kaynağı tam net olmayan kazançlarda ihtiyatlı davranmak, şüpheyi azaltmak ve mümkünse helal alternatifi tercih etmek gerekir.",
+  "aliases": [
+    "şüpheli kazanç ne yapılır",
+    "supheli kazanc ne yapilir",
+    "şüpheli gelir"
+  ],
+  "triggers": [
+    "şüpheli kazanç ne yapılır",
+    "supheli kazanc ne yapilir",
+    "şüpheli gelir"
+  ],
+  "keywords": [
+    "şüpheli",
+    "kazanç",
+    "helal",
+    "ihtiyat"
+  ],
+  "step_by_step": [
+    "Kaynağı ve şartları yeniden kontrol et.",
+    "Şüpheyi azaltan belgeleri ve açıklamaları topla.",
+    "Mümkünse helal ve açık yolu tercih et.",
+    "Kafa karışıklığı sürerse güvenilir bir âlime danış."
+  ],
+  "attention_points": [
+    "Belirsiz kazancı normalleştirmemek gerekir.",
+    "Sırf kolay olduğu için şüpheli yola devam edilmemelidir.",
+    "Somut ayrıntılar yoksa kesin hüküm yerine danışma tercih edilir."
+  ],
+  "common_mistakes": [
+    "Şüpheyi hiç araştırmamak.",
+    "Kaynak belirsizliğini önemsememek.",
+    "Sırf kazanç var diye her yolu uygun görmek."
+  ],
+  "related_questions": [
+    "Haram para nasıl temizlenir?",
+    "Banka faizi nedir?",
+    "Kul hakkı içeren alışveriş?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Kaynağı tam net olmayan kazançlarda ihtiyatlı davranmak, şüpheyi azaltmak ve mümkünse helal alternatifi tercih etmek gerekir.",
+  "semantic_description": "şüpheli kazanç ne yapılır supheli kazanc ne yapilir şüpheli gelir sorularına sakin ve pratik cevap verir kaynağı tam net olmayan kazançlarda ihtiyatlı davranmak şüpheyi azaltmak ve mümkünse helal alternatifi tercih etmek gerekir"
+}

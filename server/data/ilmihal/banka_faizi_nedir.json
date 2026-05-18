@@ -1,0 +1,46 @@
+{
+  "id": "banka_faizi_nedir",
+  "title": "Banka Faizi Nedir?",
+  "category": "daily_practice",
+  "summary": "Banka faizi, borç veya mevduat ilişkisine eklenen artış anlamına gelir; faizli işlemlerden sakınmak, şartları dikkatle değerlendirmek gerekir.",
+  "aliases": [
+    "banka faizi nedir",
+    "banka faizi"
+  ],
+  "triggers": [
+    "banka faizi nedir",
+    "banka faizi"
+  ],
+  "keywords": [
+    "banka faizi",
+    "faiz",
+    "borç",
+    "artış"
+  ],
+  "step_by_step": [
+    "İşlemin borç mu, mevduat mı olduğunu ayırt et.",
+    "Faiz oranı, gecikme ve ek ücretleri kontrol et.",
+    "Şüphede kalırsan güvenilir bir din görevlisine danış.",
+    "Mümkünse faizden uzak bir düzen kur."
+  ],
+  "attention_points": [
+    "Her kazanç ya da artış aynı hükme girmez; ayrıntı önemlidir.",
+    "Yalnız başına internet bilgisiyle hüküm vermemek gerekir.",
+    "Karmaşık finansal durumlarda danışma faydalıdır."
+  ],
+  "common_mistakes": [
+    "Faiz ile her tür ücretlendirmeyi aynı görmek.",
+    "Sözleşmeyi okumadan onaylamak.",
+    "Detayları önemsiz saymak."
+  ],
+  "related_questions": [
+    "Kredi kartı kullanmak caiz mi?",
+    "Faizli kredi kullanmak caiz mi?",
+    "Şüpheli kazanç ne yapılır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Banka faizi, borç veya mevduat ilişkisine eklenen artış anlamına gelir; faizli işlemlerden sakınmak, şartları dikkatle değerlendirmek gerekir.",
+  "semantic_description": "banka faizi nedir banka faizi faiz nedir sorularına sakin ve pratik cevap verir banka faizi borç veya mevduat ilişkisine eklenen artış anlamına gelir faizli işlemlerden sakınmak şartları dikkatle değerlendirmek gerekir"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "sabah_namazi",
+  "title": "Sabah Namazı",
+  "category": "worship_practice",
+  "summary": "Sabah namazı 2 rekât sünnet ve 2 rekât farzdan oluşur.",
+  "keywords": [
+    "sabah namazı",
+    "sabah namazı nasıl kılınır",
+    "sabah namazı kaç rekât"
+  ],
+  "step_by_step": [
+    "Sabah namazının önce 2 rekât sünneti kılınır.",
+    "Ardından 2 rekât farzı kılınır.",
+    "İlk rekâtta Fatiha ve zammı sure okunur.",
+    "İkinci rekâtta da aynı düzen sürdürülür.",
+    "Son oturuşta Tahiyyat, Salli-Barik ve Rabbena duaları okunur.",
+    "Selam verilerek namaz tamamlanır."
+  ],
+  "farzlar": [
+    "Sabah namazının farzı 2 rekâttır."
+  ],
+  "vacipler": [],
+  "sunnetler": [],
+  "attention_points": [
+    "Sünnet ile farz ayrı niyetle kılınır.",
+    "Vakit girdikten sonra kılınması gerekir."
+  ],
+  "common_mistakes": [
+    "Sünneti farzla karıştırmak.",
+    "Son oturuşu unutmak."
+  ],
+  "related_questions": [
+    "Sabah namazı nasıl kılınır?",
+    "Sabah namazı kaç rekâttır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "namazi_bozanlar",
+  "title": "Namazı Bozan Şeyler",
+  "category": "worship_practice",
+  "summary": "Namaz sırasında yapılan bazı fiiller namazı bozar; konuşmak, yemek içmek ve aşırı hareket bunların başında gelir.",
+  "keywords": [
+    "namazı bozan şeyler",
+    "namazı bozanlar",
+    "namazı geçersiz kılan şeyler",
+    "namaz hangi durumlarda bozulur"
+  ],
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [],
+  "step_by_step": [
+    "Namazda konuşmaktan kaçınılır.",
+    "Namazda yemek ve içmekten kaçınılır.",
+    "Kıble yönünden tamamen dönülmez.",
+    "Abdest bozulursa namaz da bozulur.",
+    "Namazın farzlarından biri terk edilmez.",
+    "Kahkaha ile gülmek namazı bozar.",
+    "Aşırı hareket namazı bozar.",
+    "Avret yerinin açılması namazı bozar.",
+    "Aşırı hareket edilmez.",
+    "Avret yerleri açık bırakılmaz.",
+    "Bilinç kaybı veya bayılma olursa namaz bozulur."
+  ],
+  "attention_points": [
+    "Namazda sükûnet ve huşû korunmalıdır.",
+    "Az hareket ile çok hareket arasındaki fark gözetilmehâhâhâlidir.",
+    "Şüpheli bir durumda namaz yeniden kılınmalıdır."
+  ],
+  "common_mistakes": [
+    "Namaz içinde konuşmak.",
+    "Kıbleyi tamamen terk etmek.",
+    "Gülmek veya aşırı hareket etmek.",
+    "Avret yerini açık bırakmak.",
+    "Kahkaha ile gülmek.",
+    "Avret yerinin açılması."
+  ],
+  "related_questions": [
+    "Namazda konuşmak namazı bozar mı?",
+    "Abdest bozulursa namaz bozulur mu?",
+    "Namaz hangi durumlarda bozulur?"
+  ],
+  "source_notes": [
+    "Diyanet ve Hanefî ilmihal çizgisi esas alınmıştır."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "muzik_dinlemek_gunah_mi",
+  "title": "Müzik Dinlemek Günah Mı?",
+  "category": "daily_practice",
+  "summary": "Müziğin içeriği, dinleyende oluşturduğu etki ve kişiyi hangi yöne götürdüğü önemlidir; insanı olumsuzluğa sürükleyen içeriklerden uzak durmak daha uygundur.",
+  "aliases": [
+    "müzik dinlemek günah mı",
+    "muzik dinlemek gunah mi",
+    "müzik dinlemek",
+    "şarkı dinlemek günah mı"
+  ],
+  "triggers": [
+    "müzik dinlemek günah mı",
+    "muzik dinlemek gunah mi",
+    "müzik dinlemek",
+    "şarkı dinlemek günah mı"
+  ],
+  "keywords": [
+    "müzik",
+    "şarkı",
+    "günah",
+    "içerik"
+  ],
+  "step_by_step": [
+    "Dinlediğin içeriğin sözlerini ve sende bıraktığı etkiyi değerlendir.",
+    "Seni kötü alışkanlıklara sürüklüyorsa uzak dur.",
+    "Sükûnet, ölçü ve dengeyi koru.",
+    "Özel durumlarda güvenilir bir din görevlisine danış."
+  ],
+  "attention_points": [
+    "Her içerik aynı şekilde değerlendirilmez; ayrıntı önemlidir.",
+    "Kalbi ve davranışı olumsuz etkileyen içeriklerden uzak durmak faydalıdır.",
+    "Kararsız kalınan konularda güvenilir âlime danışmak uygun olur."
+  ],
+  "common_mistakes": [
+    "İçeriğe bakmadan toplu hüküm vermek.",
+    "Dinlediğinin etkisini hiç hesaba katmamak.",
+    "Sadece alışkanlığa göre hareket etmek."
+  ],
+  "related_questions": [
+    "Şüpheli kazanç ne yapılır?",
+    "Sigara haram mı?",
+    "Bahis oynamak haram mı?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Müziğin içeriği, dinleyende oluşturduğu etki ve kişiyi hangi yöne götürdüğü önemlidir; insanı olumsuzluğa sürükleyen içeriklerden uzak durmak daha uygundur.",
+  "semantic_description": "müzik dinlemek günah mı muzik dinlemek gunah mi şarkı dinlemek günah mı sorularına sakin ve pratik cevap verir müziğin içeriği dinleyende oluşturduğu etki ve kişiyi hangi yöne götürdüğü önemlidir insanı olumsuzluğa sürükleyen içeriklerden uzak durmak daha uygundur"
+}

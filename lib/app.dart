@@ -6,7 +6,6 @@ import 'core/constants/app_routes.dart';
 import 'features/chat/chat_screen.dart';
 import 'features/favorites/favorites_screen.dart';
 import 'features/home/home_screen.dart';
-import 'features/memorization/memorization_screen.dart';
 import 'features/prayer_times/prayer_times_screen.dart';
 import 'features/qibla/qibla_screen.dart';
 import 'features/settings/settings_controller.dart';
@@ -38,7 +37,6 @@ class QuranMvpApp extends StatelessWidget {
             AppRoutes.favorites: (_) => const FavoritesScreen(),
             AppRoutes.prayerTimes: (_) => const PrayerTimesScreen(),
             AppRoutes.qibla: (_) => const QiblaScreen(),
-            AppRoutes.memorization: (_) => const MemorizationScreen(),
             AppRoutes.settings: (_) => const SettingsScreen(),
           },
         );

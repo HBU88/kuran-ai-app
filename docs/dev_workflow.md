@@ -13,9 +13,22 @@ flutter run
 ```
 
 ## Android emulator backend URL
-When testing from an Android emulator, use:
+When testing from an Android emulator, use the default backend URL:
 
 `http://10.0.2.2:3000/chat`
+
+## Real Android phone backend URL
+When testing on a physical phone on the same Wi-Fi network, build with the PC's LAN IP:
+
+```powershell
+flutter run --dart-define=HAKAI_API_BASE_URL=http://192.168.x.x:3000
+```
+
+For release APK testing:
+
+```powershell
+flutter build apk --release --dart-define=HAKAI_API_BASE_URL=http://192.168.x.x:3000
+```
 
 ## Watch live chat logs
 ```powershell

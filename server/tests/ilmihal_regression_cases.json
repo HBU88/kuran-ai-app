@@ -1,0 +1,522 @@
+[
+  {
+    "id": "kurban_nedir",
+    "query": "kurban nedir",
+    "expected_knowledge_hit_id": "kurban_nedir",
+    "expected_text_contains": ["Kurban Bayramı", "Allah rızası"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurban_kime_vaciptir",
+    "query": "kurban kimlere vaciptir",
+    "expected_knowledge_hit_id": "kurban_kime_vaciptir",
+    "expected_text_contains": ["Müslüman", "nisap", "yolcu olmayan"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurban_ne_zaman_kesilir",
+    "query": "kurban ne zaman kesilir",
+    "expected_knowledge_hit_id": "kurban_ne_zaman_kesilir",
+    "expected_text_contains": ["bayram namazından sonra", "Kurban Bayramı günleri"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurban_eti_nasil_paylasilir",
+    "query": "kurban eti nasıl paylaşılır",
+    "expected_knowledge_hit_id": "kurban_eti_nasil_paylasilir",
+    "expected_text_contains": ["aile", "ihtiyaç sahipleri", "komşu"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurban_keserken_nelere_dikkat_edilir",
+    "query": "kurban keserken nelere dikkat edilir",
+    "expected_knowledge_hit_id": "kurban_keserken_nelere_dikkat_edilir",
+    "expected_text_contains": ["eziyet", "vekâlet", "hijyen"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurban_hisse",
+    "query": "büyükbaş kurbana kaç kişi ortak olabilir",
+    "expected_knowledge_hit_id": "kurban_hisse_olur_mu",
+    "expected_text_contains": ["yedi kişi", "kurban ibadeti"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurban_yerine_para",
+    "query": "kurban yerine para verilir mi",
+    "expected_knowledge_hit_id": "kurban_yerine_para_verilir_mi",
+    "expected_text_contains": ["para bağışı", "vekâletle kestirme"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurban_eti_kimlere",
+    "query": "kurban eti kimlere verilir",
+    "expected_knowledge_hit_id": "kurban_eti_kimlere_verilir",
+    "expected_text_contains": ["aile", "ihtiyaç sahipleri", "akraba"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "kurbanlik_hayvan_sartlari",
+    "query": "kurbanlık hayvan nasıl olmalı",
+    "expected_knowledge_hit_id": "kurbanlik_hayvan_sartlari",
+    "expected_text_contains": ["sağlıklı", "kusurlu", "yaş şartı"],
+    "tags": ["kurban"]
+  },
+  {
+    "id": "vekaletle_kurban",
+    "query": "vekaletle kurban olur mu",
+    "expected_knowledge_hit_id": "vekaletle_kurban",
+    "expected_text_contains": ["vekâlet", "online", "kurban kestirilebilir"],
+    "tags": ["kurban"]
+  },
+{
+    "id":  "gunah_isledim",
+    "query":  "günah işledim ne yapmalıyım",
+    "expected_knowledge_hit_id":  "gunah_isledim_ne_yapmaliyim",
+    "expected_text_contains":  [
+                                   "hemen tövbe",
+                                   "günahtan uzaklaş",
+                                   "Ayet Rehberi"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+{
+    "id":  "tovbenin_sartlari",
+    "query":  "tövbenin şartları nelerdir",
+    "expected_knowledge_hit_id":  "tovbenin_sartlari",
+    "expected_text_contains":  [
+                                   "günahtan vazgeçmek",
+                                   "pişman olmak",
+                                   "kul hakkı"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+{
+    "id":  "ayni_gunahi_tekrar_islemek",
+    "query":  "aynı günahı tekrar işliyorum",
+    "expected_knowledge_hit_id":  "ayni_gunahi_tekrar_islemek",
+    "expected_text_contains":  [
+                                   "tövbeyi boşa çıkarmaz",
+                                   "yeniden tövbe",
+                                   "ümitsizliğe"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+{
+    "id":  "kul_hakki_nasil_odenir",
+    "query":  "kul hakkı nasıl ödenir",
+    "expected_knowledge_hit_id":  "kul_hakki_nasil_odenir",
+    "expected_text_contains":  [
+                                   "helalleşmek",
+                                   "zararı telafi",
+                                   "mümkün olan en kısa sürede"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+  {
+    "id":  "giybet_ettim",
+    "query":  "gıybet ettim ne yapmalıyım",
+    "expected_knowledge_hit_id":  "giybet_ettim_ne_yapmaliyim",
+    "expected_text_contains":  [
+                                   "Gıybetten tövbe etmek",
+                                   "helalleşmek",
+                                   "dili korumak"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+{
+    "id":  "yalan_soylemek_gunah_mi",
+    "query":  "yalan söylemek günah mı",
+    "expected_knowledge_hit_id":  "yalan_soylemek_gunah_mi",
+    "expected_text_contains":  [
+                                   "günahtır",
+                                   "doğruyu söylemek",
+                                   "susmak"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+{
+    "id":  "kalp_kirmak_kul_hakki_mi",
+    "query":  "kalp kırmak kul hakkı mı",
+    "expected_knowledge_hit_id":  "kalp_kirmak_kul_hakki_mi",
+    "expected_text_contains":  [
+                                   "kul hakkına girer",
+                                   "özür",
+                                   "gönül alma"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+{
+    "id":  "haram_para_kazanmak",
+    "query":  "haram para kazandım ne yapmalıyım",
+    "expected_knowledge_hit_id":  "haram_para_kazanmak",
+    "expected_text_contains":  [
+                                   "meşru kazanç sayılmaz",
+                                   "helal kazanca yönelmeli",
+                                   "Tövbe"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+  {
+    "id":  "faizli_kredi_kullanmak",
+    "query":  "faizli kredi kullanmak caiz mi",
+    "expected_knowledge_hit_id":  "faizli_kredi_kullanmak",
+    "expected_text_contains":  [
+                                   "Faizli kredi ağır bir konudur",
+                                   "faizsiz yol aramalıdır",
+                                   "Ayet Rehberi"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+{
+    "id":  "zina_gunahindan_tovbe",
+    "query":  "zina yaptım tövbe olur mu",
+    "expected_knowledge_hit_id":  "zina_gunahindan_tovbe",
+    "expected_text_contains":  [
+                                   "tövbe kapısı açıktır",
+                                   "günahı bırakıp",
+                                   "temiz bir çevre"
+                               ],
+    "tags":  [
+                 "tovbe"
+             ]
+},
+  {
+    "id": "vesvese_seytandan_mi",
+    "query": "vesvese şeytandan mı",
+    "expected_knowledge_hit_id": "vesvese_seytandan_mi",
+    "expected_text_contains": [
+      "dua",
+      "zikir",
+      "profesyonel destek"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "cin_var_mi",
+    "query": "cin var mı",
+    "expected_knowledge_hit_id": "cin_var_mi",
+    "expected_text_contains": [
+      "gayb",
+      "korku dili",
+      "güvenilir rehberlik"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "cin_musallat_olur_mu",
+    "query": "cin musallat olur mu",
+    "expected_knowledge_hit_id": "cin_musallat_olur_mu",
+    "expected_text_contains": [
+      "musallata bağlamak doğru değildir",
+      "dua",
+      "sağlık desteği"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "nazar_var_mi",
+    "query": "nazar var mı",
+    "expected_knowledge_hit_id": "nazar_var_mi",
+    "expected_text_contains": [
+      "korku ve abartıdan kaçınılır",
+      "koruma ve şifa",
+      "dua"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "nazardan_korunma",
+    "query": "nazardan nasıl korunur",
+    "expected_knowledge_hit_id": "nazardan_korunma",
+    "expected_text_contains": [
+      "Ayetü'l-Kürsî",
+      "Felak-Nâs",
+      "zikir"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "buyu_var_mi",
+    "query": "büyü var mı",
+    "expected_knowledge_hit_id": "buyu_var_mi",
+    "expected_text_contains": [
+      "istismara açık",
+      "korkuyu büyütmeden",
+      "güvenilir rehberlik"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "buyuden_korunma",
+    "query": "büyüden korunma duası",
+    "expected_knowledge_hit_id": "buyuden_korunma",
+    "expected_text_contains": [
+      "korunma duaları",
+      "düzenli ibadet",
+      "güvenilir kaynaklara"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "korku_gelince_ne_yapmali",
+    "query": "korku gelince ne yapmalı",
+    "expected_knowledge_hit_id": "korku_gelince_ne_yapmali",
+    "expected_text_contains": [
+      "sükûnet",
+      "dua",
+      "profesyonel destek"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "gece_korkusu_neden_olur",
+    "query": "gece korkusu neden olur",
+    "expected_knowledge_hit_id": "gece_korkusu_neden_olur",
+    "expected_text_contains": [
+      "stres",
+      "uyku düzensizliği",
+      "değerlendirme"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "kotu_ruya_gorunce_ne_yapmali",
+    "query": "kötü rüya görünce ne yapılır",
+    "expected_knowledge_hit_id": "kotu_ruya_gorunce_ne_yapmali",
+    "expected_text_contains": [
+      "Allah'a sığınmak",
+      "dua",
+      "huzuru korumak"
+    ],
+    "tags": ["vesvese"]
+  },
+  {
+    "id": "muzik_dinlemek_gunah_mi",
+    "query": "müzik dinlemek günah mı",
+    "expected_knowledge_hit_id": "muzik_dinlemek_gunah_mi",
+    "expected_text_contains": [
+      "içeriği",
+      "olumsuzluğa sürükleyen",
+      "güvenilir bir din görevlisine danış"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "sigara_haram_mi",
+    "query": "sigara haram mı",
+    "expected_knowledge_hit_id": "sigara_haram_mi",
+    "expected_text_contains": [
+      "sağlığa zarar veren",
+      "bırakma süreci",
+      "destekle yürütülmelidir"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "dovme_yaptirmak_caiz_mi",
+    "query": "dövme yaptırmak caiz mi",
+    "expected_knowledge_hit_id": "dovme_yaptirmak_caiz_mi",
+    "expected_text_contains": [
+      "sağlık, temizlik ve dinî hassasiyetler",
+      "acele edilmemeli",
+      "güvenilir bir âlime danışılmalıdır"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "kredi_karti_kullanmak_caiz_mi",
+    "query": "kredi kartı kullanmak caiz mi",
+    "expected_knowledge_hit_id": "kredi_karti_kullanmak_caiz_mi",
+    "expected_text_contains": [
+      "ödeme düzeni",
+      "faiz riski",
+      "sözleşmeyi dikkatle okumak"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "banka_faizi_nedir",
+    "query": "banka faizi nedir",
+    "expected_knowledge_hit_id": "banka_faizi_nedir",
+    "expected_text_contains": [
+      "borç veya mevduat ilişkisine eklenen artış",
+      "faizli işlemlerden sakınmak",
+      "şartları dikkatle değerlendirmek"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "yalan_yere_yemin_etmek",
+    "query": "yalan yere yemin etmek günah mı",
+    "expected_knowledge_hit_id": "yalan_yere_yemin_etmek",
+    "expected_text_contains": [
+      "ağır bir yanlışlıktır",
+      "helalleşmeli",
+      "tövbe etmelidir"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "bahis_kumar_haram_mi",
+    "query": "bahis oynamak haram mı",
+    "expected_knowledge_hit_id": "bahis_kumar_haram_mi",
+    "expected_text_contains": [
+      "emek dışı kazanç arayışı",
+      "kayıp döngüsü",
+      "sakınılması gereken"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "supheli_kazanc_ne_yapilir",
+    "query": "şüpheli kazanç ne yapılır",
+    "expected_knowledge_hit_id": "supheli_kazanc_ne_yapilir",
+    "expected_text_contains": [
+      "ihtiyatlı davranmak",
+      "şüpheyi azaltmak",
+      "helal alternatifi"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "kul_hakki_iceren_alisveris",
+    "query": "alışverişte kul hakkı olur mu",
+    "expected_knowledge_hit_id": "kul_hakki_iceren_alisveris",
+    "expected_text_contains": [
+      "kul hakkı doğabilir",
+      "düzeltme",
+      "helalleşme"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "haram_para_nasil_temizlenir",
+    "query": "haram para nasıl temizlenir",
+    "expected_knowledge_hit_id": "haram_para_nasil_temizlenir",
+    "expected_text_contains": [
+      "meşru hale gelmez",
+      "kaynağı ayırmalı",
+      "güvenilir danışma"
+    ],
+    "tags": ["helal_haram"]
+  },
+  {
+    "id": "namaz_kacirinca_ne_yapilir",
+    "query": "namaz kaçırınca ne yapılır",
+    "expected_knowledge_hit_id": "namaz_kacirinca_ne_yapilir",
+    "expected_text_contains": [
+      "kaza",
+      "tövbe"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "isyerinde_namaz_kilinir_mi",
+    "query": "işyerinde namaz kılınır mı",
+    "expected_knowledge_hit_id": "isyerinde_namaz_kilinir_mi",
+    "expected_text_contains": [
+      "temiz",
+      "vakit"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "oturarak_namaz_kilinir_mi",
+    "query": "oturarak namaz kılınır mı",
+    "expected_knowledge_hit_id": "oturarak_namaz_kilinir_mi",
+    "expected_text_contains": [
+      "ayakta",
+      "mazeret"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "aracta_namaz_kilinir_mi",
+    "query": "araçta namaz kılınır mı",
+    "expected_knowledge_hit_id": "aracta_namaz_kilinir_mi",
+    "expected_text_contains": [
+      "güvenli",
+      "vakit"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "namaz_hizli_kilinirsa_olur_mu",
+    "query": "namaz hızlı kılınırsa olur mu",
+    "expected_knowledge_hit_id": "namaz_hizli_kilinirsa_olur_mu",
+    "expected_text_contains": [
+      "tadil",
+      "rükün"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "cem_edilerek_namaz_kilinir_mi",
+    "query": "cem edilerek namaz kılınır mı",
+    "expected_knowledge_hit_id": "cem_edilerek_namaz_kilinir_mi",
+    "expected_text_contains": [
+      "vakit",
+      "cem"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "yolculukta_namaz_nasil_kilinir",
+    "query": "yolculukta namaz nasıl kılınır",
+    "expected_knowledge_hit_id": "yolculukta_namaz_nasil_kilinir",
+    "expected_text_contains": [
+      "sefer",
+      "iki rekât"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "gec_kalinan_namaz_nasil_kilinir",
+    "query": "geç kalınan namaz nasıl kılınır",
+    "expected_knowledge_hit_id": "gec_kalinan_namaz_nasil_kilinir",
+    "expected_text_contains": [
+      "imama",
+      "devam"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "vitir_kilinmazsa_ne_olur",
+    "query": "vitir kılınmazsa ne olur",
+    "expected_knowledge_hit_id": "vitir_kilinmazsa_ne_olur",
+    "expected_text_contains": [
+      "vitir",
+      "kaza"
+    ],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "namazda_sasirma_ne_yapilir",
+    "query": "namazda şaşırma ne yapılır",
+    "expected_knowledge_hit_id": "namazda_sasirma_ne_yapilir",
+    "expected_text_contains": [
+      "sehiv",
+      "secde"
+    ],
+    "tags": ["namaz"]
+  }
+]

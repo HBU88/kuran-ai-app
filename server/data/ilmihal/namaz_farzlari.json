@@ -1,0 +1,50 @@
+{
+  "id": "namaz_farzlari",
+  "title": "Namazın Farzları",
+  "category": "worship_practice",
+  "summary": "Namazın farzları dış şartlar ve iç farzlar olarak birlikte düşünülür.",
+  "keywords": [
+    "namazın farzları",
+    "namaz farzları",
+    "namazın dış farzları",
+    "namazın iç farzları"
+  ],
+  "step_by_step": [
+    "Abdest, kıble ve niyet hazırlanır.",
+    "Kıraat, rükû, secde ve son oturuş sırayla yerine getirilir.",
+    "Namazın farz ve vacipleri tamamlanır."
+  ],
+  "farzlar": [
+    "Hadesten taharet.",
+    "Necasetten taharet.",
+    "Setr-i avret.",
+    "İstikbal-i kıble.",
+    "Vakit.",
+    "Niyet.",
+    "İftitah tekbiri.",
+    "Kıyam.",
+    "Kıraat.",
+    "Rükû.",
+    "Secde.",
+    "Ka'de-i âhire."
+  ],
+  "vacipler": [],
+  "sunnetler": [],
+  "attention_points": [
+    "Dış şartlar namazdan önce, iç farzlar namazın içinde tamamlanır.",
+    "Niyet ve vakit namazın temel düzenini belirler."
+  ],
+  "common_mistakes": [
+    "Dış farzları hafife almak.",
+    "Kıyam veya kıraati eksik yapmak.",
+    "Son oturuşu unutmak."
+  ],
+  "related_questions": [
+    "Namazın farzları nelerdir?",
+    "Namazın dış farzları nelerdir?",
+    "Namazın iç farzları nelerdir?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ]
+}

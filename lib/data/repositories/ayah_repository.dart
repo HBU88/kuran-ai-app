@@ -304,25 +304,25 @@ class AyahRepository {
 
   List<String> _textSignalsForTheme(String theme) {
     const signals = {
-      'sabır': ['sabır', 'zorluk', 'imtihan', 'dayan', 'yardım'],
+      'sabır': ['sabır', 'zorluk', 'imtihan', 'dayan', 'yardım', 'sabredemiyorum', 'dayanamıyorum', 'birini kaybettim', 'yas'],
       'umut': ['umut', 'kolaylık', 'rahmet', 'yakın', 'müjde'],
       'tevekkül': ['güven', 'allah', 'emanet', 'yakın', 'dua'],
       'tövbe': ['tövbe', 'bağış', 'rahmet', 'dönüş', 'pişman'],
       'şükür': ['şükür', 'nimet', 'hamd', 'teşekkür'],
       'korku': ['korku', 'emniyet', 'sığınak', 'yakın'],
-      'yalnızlık': ['yalnız', 'yakın', 'dua', 'rahmet'],
+      'yalnızlık': ['yalnız', 'yakın', 'dua', 'rahmet', 'Allah benden uzak mı', 'Allah bana yakın mı', 'Allah beni duyar mı', 'uzak hissediyorum', 'manevi boşluk'],
       'irade': ['irade', 'nefs', 'mücadele', 'tercih'],
       'sebat': ['sebat', 'sabit', 'devam', 'istikamet'],
-      'affetmek': ['aff', 'öfke', 'merhamet', 'adalet'],
-      'şifa': ['şifa', 'hastalık', 'sabır', 'rahmet'],
+      'affetmek': ['aff', 'öfke', 'merhamet', 'adalet', 'haksızlığa uğradım', 'zulüm görüyorum'],
+      'şifa': ['şifa', 'hastalık', 'sabır', 'rahmet', 'çok hastayım', 'hastanedeyim', 'iyileşmek istiyorum', 'acı çekiyorum'],
       'hastalık': ['hastalık', 'şifa', 'sabır', 'imtihan'],
-      'kaygı': ['korku', 'sakin', 'dua', 'güven'],
+      'kaygı': ['korku', 'sakin', 'dua', 'güven', 'gelecek için endişeliyim', 'yarın ne olacak'],
       'çaresizlik': ['yardım', 'kolaylık', 'umut', 'dua'],
       'bağışlanma': ['bağış', 'tövbe', 'rahmet', 'dönüş'],
       'nefs mücadelesi': ['nefs', 'irade', 'mücadele', 'sebat'],
       'ölüm korkusu': ['korku', 'dönüş', 'allah', 'emniyet'],
       'aile': ['sabır', 'merhamet', 'aff', 'adalet'],
-      'rızık': ['rızık', 'nimet', 'tevekkül', 'şükür'],
+      'rızık': ['rızık', 'nimet', 'tevekkül', 'şükür', 'borcum var', 'çok borcum var', 'geçinemiyorum', 'para yetmiyor', 'iş bulamıyorum'],
       'imtihan': ['imtihan', 'musibet', 'sabır', 'zorluk'],
     };
     return signals[theme] ?? const [];

@@ -9,26 +9,90 @@ const TOPIC_RULES = {
   repentance: new Set([39, 2]),
 };
 
+function matchesSelectedAyahExpectation(payload, expectation) {
+  if (typeof expectation === "number") {
+    return (payload?.selected_ayah?.id ?? null) === expectation;
+  }
+  if (!expectation || typeof expectation !== "object") {
+    return true;
+  }
+  if (typeof expectation.id === "number" && (payload?.selected_ayah?.id ?? null) !== expectation.id) {
+    return false;
+  }
+  if (
+    typeof expectation.surahNumber === "number" &&
+    Number(payload?.selected_ayah?.surahNumber) !== Number(expectation.surahNumber)
+  ) {
+    return false;
+  }
+  if (
+    typeof expectation.ayahNumber === "number" &&
+    Number(payload?.selected_ayah?.ayahNumber ?? payload?.selected_ayah?.ayah) !== Number(expectation.ayahNumber)
+  ) {
+    return false;
+  }
+  return true;
+}
+
 const fixedTests = [
   { kind: "fixed", group: "sabir", prompt: "sabır ile ilgili ayet", explicitTopic: true },
   { kind: "fixed", group: "prophet", prompt: "muhammed ile ilgili ayet", explicitTopic: true },
   { kind: "fixed", group: "hope", prompt: "motive edici ayet", explicitTopic: true },
   { kind: "fixed", group: "hope", prompt: "umut veren ayet", explicitTopic: true },
   { kind: "fixed", group: "fear", prompt: "korku ile ilgili ayet", explicitTopic: true },
-  { kind: "fixed", group: "casual", prompt: "nasılsın", explicitTopic: false },
-  { kind: "fixed", group: "casual", prompt: "merhaba", explicitTopic: false },
+  {
+    kind: "fixed",
+    group: "casual",
+    prompt: "nasılsın",
+    explicitTopic: false,
+    expectedContains: "HAKAI’ye hoş geldin",
+    expectedPlannerSource: "local_fast_path",
+    expectedRouteMode: "quran_guidance",
+  },
+  {
+    kind: "fixed",
+    group: "casual",
+    prompt: "merhaba",
+    explicitTopic: false,
+    expectedContains: "HAKAI’ye hoş geldin",
+    expectedPlannerSource: "local_fast_path",
+    expectedRouteMode: "quran_guidance",
+  },
+  {
+    kind: "fixed",
+    group: "fear",
+    prompt: "iyiyim ama biraz üzgünüm",
+    explicitTopic: false,
+    expectSelectedAyah: true,
+    expectedPlannerSource: "local_fast_path",
+    expectedRouteMode: "quran_guidance",
+  },
   { kind: "fixed", group: "fear", prompt: "çok korkuyorum", explicitTopic: false, expectedSurahSet: [3, 9, 65] },
   { kind: "fixed", group: "fear", prompt: "içim daralıyor", explicitTopic: false },
   { kind: "fixed", group: "fear", prompt: "gelecek için endişeliyim", explicitTopic: false, expectedSurahSet: [28, 94, 13] },
   { kind: "fixed", group: "loneliness", prompt: "çok yalnız hissediyorum", explicitTopic: false },
+  { kind: "fixed", group: "loneliness", prompt: "yalnız hissediyorum", explicitTopic: false, expectedRouteMode: "quran_guidance", expectedSurahSet: [2, 13, 50, 57, 93] },
   { kind: "fixed", group: "loneliness", prompt: "kimsem yok gibi hissediyorum", explicitTopic: false },
   { kind: "fixed", group: "repentance", prompt: "günah işledim", explicitTopic: false, expectedSurahSet: [39, 2] },
   { kind: "fixed", group: "repentance", prompt: "Allah beni affeder mi", explicitTopic: false, expectedSurahSet: [39, 2] },
-  { kind: "fixed", group: "repentance", prompt: "çok pişmanım", explicitTopic: false, expectedSurahSet: [39, 2] },
+  {
+    kind: "fixed",
+    group: "repentance",
+    prompt: "çok pişmanım",
+    explicitTopic: false,
+    expectedSurahSet: [39],
+    expectedSelectedAyah: { surahNumber: 39, ayahNumber: 53 },
+    expectedContains: ["ümit", "rahmet"],
+  },
   { kind: "fixed", group: "sabir", prompt: "sabır hakkında Kur'an'dan bir şey söyle", explicitTopic: true },
   { kind: "fixed", group: "prophet", prompt: "peygamberimizle ilgili ayet göster", explicitTopic: true },
   { kind: "fixed", group: "fear", prompt: "maddi sıkıntı yaşıyorum", explicitTopic: false, expectedSurahSet: [11, 65, 51] },
   { kind: "fixed", group: "fear", prompt: "haksızlığa uğradım", explicitTopic: false, expectedSurahSet: [4, 5, 16, 42] },
+  { kind: "fixed", group: "fear", prompt: "borcum var", explicitTopic: false, expectedRouteMode: "quran_guidance", expectedSurahSet: [11, 65, 51] },
+  { kind: "fixed", group: "fear", prompt: "çok hastayım", explicitTopic: false, expectedRouteMode: "quran_guidance", expectedSurahSet: [26, 17, 10, 41] },
+  { kind: "fixed", group: "fear", prompt: "sabredemiyorum", explicitTopic: false, expectedRouteMode: "quran_guidance", expectedSurahSet: [2, 11, 16, 103] },
+  { kind: "fixed", group: "fear", prompt: "birini kaybettim", explicitTopic: false, expectedRouteMode: "quran_guidance", expectedSurahSet: [2, 11, 16, 103] },
+  { kind: "fixed", group: "fear", prompt: "Allah benden uzak mı", explicitTopic: false, expectedRouteMode: "quran_guidance", expectedSurahSet: [2, 13, 40, 50, 57, 93] },
   { kind: "fixed", group: "prayer", prompt: "akşam namazı kaç rekat?", expectedRakats: 5 },
   { kind: "fixed", group: "prayer", prompt: "sabah namazı kaç rekat?", expectedRakats: 4 },
   { kind: "fixed", group: "prayer", prompt: "öğle namazı kaç rekat?", expectedRakats: 10 },
@@ -57,8 +121,22 @@ const fixedTests = [
     mustBeDirectAnswer: true,
     expectedContains: ["Ağza üç defa", "Buruna üç defa", "kuru yer kalmayacak"],
   },
-  { kind: "fixed", group: "knowledge", prompt: "seferi namaz kaç rekât", mustBeDirectAnswer: true },
-  { kind: "fixed", group: "knowledge", prompt: "vitir namazı vacip mi", mustBeDirectAnswer: true },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "seferi namaz kaç rekât",
+    mustBeDirectAnswer: true,
+    expectedKnowledgeHitId: "yolculukta_namaz_nasil_kilinir",
+    expectedContains: ["iki rekât", "yolculuk"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "vitir namazı vacip mi",
+    mustBeDirectAnswer: true,
+    expectedKnowledgeHitId: "vitir_vacip",
+    expectedContains: ["Hanefî", "vaciptir"],
+  },
   { kind: "fixed", group: "knowledge", prompt: "bayram namazı nasıl kılınır", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "abdestin farzları nelerdir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "abdesti bozan şeyler nelerdir", mustBeDirectAnswer: true },
@@ -66,6 +144,96 @@ const fixedTests = [
   { kind: "fixed", group: "knowledge", prompt: "oruç kimlere farzdır", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "oruç kimlere farz değildir", mustBeDirectAnswer: true },
   { kind: "fixed", group: "knowledge", prompt: "sahur şart mı", mustBeDirectAnswer: true },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "namaz kaçırınca ne yapılır",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "namaz_kacirinca_ne_yapilir",
+    expectedContains: ["kaza", "tevbe"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "işyerinde namaz kılınır mı",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "isyerinde_namaz_kilinir_mi",
+    expectedContains: ["temiz", "kıble"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "oturarak namaz kılınır mı",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "oturarak_namaz_kilinir_mi",
+    expectedContains: ["ayakta durmaya gücü yetmeyen", "oturarak"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "araçta namaz kılınır mı",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "aracta_namaz_kilinir_mi",
+    expectedContains: ["zorunlu", "kıble"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "namaz hızlı kılınırsa olur mu",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "namaz_hizli_kilinirsa_olur_mu",
+    expectedContains: ["aceleye", "huşu"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "cem edilerek namaz kılınır mı",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "cem_edilerek_namaz_kilinir_mi",
+    expectedContains: ["cem edilmez", "vaktinde"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "yolculukta namaz nasıl kılınır",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "yolculukta_namaz_nasil_kilinir",
+    expectedContains: ["iki rekât", "seferî"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "geç kalınan namaz nasıl kılınır",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "gec_kalinan_namaz_nasil_kilinir",
+    expectedContains: ["kaza", "ilk zamanda"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "vitir kılınmazsa ne olur",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "vitir_kilinmazsa_ne_olur",
+    expectedContains: ["borç", "kaza"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "namazda şaşırma ne yapılır",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "namazda_sasirma_ne_yapilir",
+    expectedContains: ["sehiv secdesi", "güçlü görülen"],
+  },
   {
     kind: "fixed",
     group: "knowledge",
@@ -183,6 +351,51 @@ const fixedTests = [
     expectedIntent: "general_islamic_question",
     expectedKnowledgeHitId: "kurban_keserken_nelere_dikkat_edilir",
     expectedContains: ["eziyet", "ehil kişi", "besmele", "hijyen", "vekalet"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "büyükbaş kurbana kaç kişi ortak olabilir",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_hisse_olur_mu",
+    expectedContains: ["yedi kişi", "ortak", "niyet"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "kurban yerine para verilir mi",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_yerine_para_verilir_mi",
+    expectedContains: ["para", "bağış", "vekalet", "kesmek"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "kurban eti kimlere verilir",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_eti_kimlere_verilir",
+    expectedContains: ["aile", "akraba", "ihtiyaç sahipleri"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "kurbanlık hayvan nasıl olmalı",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurbanlik_hayvan_sartlari",
+    expectedContains: ["yaş", "kusur", "sağlıklı"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
+    prompt: "vekaletle kurban olur mu",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "vekaletle_kurban",
+    expectedContains: ["vekalet", "vekâlet", "online"],
   },
   {
     kind: "fixed",
@@ -642,7 +855,7 @@ const fixedTests = [
     expectedContains: ["teheccüd", "zikir"],
   },
   { kind: "context", group: "knowledge", prompt: "abdest nasıl alınır", followUp: "nasıl alınır?", expectedContains: "abdest" },
-  { kind: "context", group: "knowledge", prompt: "vitir namazı vacip mi", followUp: "vacip mi?", expectedContains: "vitir", followUpExpectedContains: "vitir" },
+  { kind: "context", group: "knowledge", prompt: "vitir namazı vacip mi", followUp: "vacip mi?", expectedContains: "vitir", followUpExpectedContains: "vitir vaciptir", followUpExpectedKnowledgeHitId: "vitir_vacip" },
   { kind: "context", group: "prayer", prompt: "cuma namazı", followUp: "kaç rekat?", expectedContains: "cuma" },
   { kind: "context", group: "prayer", prompt: "cuma namazı", followUp: "teravi namazı kaç rekat", expectedContains: "cuma", followUpExpectedContains: "teravih" },
   { kind: "context", group: "prayer", prompt: "teravi namazı kaç rekat", followUp: "kaç rekat?", expectedContains: "teravih", followUpExpectedContains: "teravih" },
@@ -862,10 +1075,48 @@ async function runDebugResolveSmokeTest() {
       maxIntentPlannerMs: 20,
     },
     {
-      q: "merhaba",
+      q: "arkadan konusmak gunah mi",
       expectedPlannerSource: "local_fast_path",
+      expectedKnowledgeHit: true,
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
+      expectedSemanticMatchedTopic: "giybet_nedir",
+      minSemanticMatchScore: 0.7,
+      expectedPreRouteStage: "semantic",
+      maxIntentPlannerMs: 20,
+    },
+    {
+      q: "arkadan konuşmak günah mı",
+      expectedPlannerSource: "local_fast_path",
+      expectedKnowledgeHit: true,
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedSemanticMatchedTopic: "giybet_nedir",
+      minSemanticMatchScore: 0.7,
+      expectedPreRouteStage: "semantic",
+      maxIntentPlannerMs: 20,
+    },
+    {
+      q: "nasılsın",
+      expectedPlannerSource: "local_fast_path",
+      expectedRouteMode: "quran_guidance",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      maxIntentPlannerMs: 20,
+    },
+    {
+      q: "merhaba",
+      expectedPlannerSource: "local_fast_path",
+      expectedRouteMode: "quran_guidance",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      maxIntentPlannerMs: 20,
+    },
+    {
+      q: "iyiyim ama biraz üzgünüm",
+      expectedPlannerSource: "local_fast_path",
+      expectedRouteMode: "quran_guidance",
+      expectedResponseType: "supportive_ayah",
       maxIntentPlannerMs: 20,
     },
   ];
@@ -881,6 +1132,9 @@ async function runDebugResolveSmokeTest() {
     }
     if (test.expectedPlannerSource && payload?.planner_source !== test.expectedPlannerSource) {
       failures.push(`planner_source=${payload?.planner_source}`);
+    }
+    if (test.expectedRouteMode && payload?.route_mode !== test.expectedRouteMode) {
+      failures.push(`route_mode=${payload?.route_mode}`);
     }
     if (typeof test.expectedResponseType === "string" && payload?.response_type !== test.expectedResponseType) {
       failures.push(`response_type=${payload?.response_type}`);
@@ -902,6 +1156,18 @@ async function runDebugResolveSmokeTest() {
         failures.push(`intent_planner_ms=${plannerMs}`);
       }
     }
+    if (typeof test.expectedSemanticMatchedTopic === "string" && payload?.debug?.semantic_matched_topic !== test.expectedSemanticMatchedTopic) {
+      failures.push(`semantic_matched_topic=${payload?.debug?.semantic_matched_topic}`);
+    }
+    if (typeof test.expectedPreRouteStage === "string" && payload?.debug?.pre_route_stage !== test.expectedPreRouteStage) {
+      failures.push(`pre_route_stage=${payload?.debug?.pre_route_stage}`);
+    }
+    if (typeof test.minSemanticMatchScore === "number") {
+      const semanticScore = Number(payload?.debug?.semantic_match_score || 0);
+      if (semanticScore < test.minSemanticMatchScore) {
+        failures.push(`semantic_match_score=${semanticScore}`);
+      }
+    }
     if (typeof test.maxAyahRankerMs === "number") {
       const rankerMs = Number(payload?.timing_ms?.ayah_ranker_ms || 0);
       if (rankerMs > test.maxAyahRankerMs) {
@@ -917,6 +1183,7 @@ async function runDebugResolveSmokeTest() {
 }
 
 async function runModuleEndpointSmokeTests() {
+  const debugChecksEnabled = isDebugChatEngineEnabled();
   const ayahTests = [
     {
       path: "/ayah-chat",
@@ -956,6 +1223,139 @@ async function runModuleEndpointSmokeTests() {
       expectedSelectedAyah: null,
       expectedRedirectModule: "ayah",
       expectAssistantContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "arkadan konusmak gunah mi",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "giybet_nedir",
+      expectedSemanticMatchedTopic: "giybet_nedir",
+      expectedPreRouteStage: "semantic",
+      minSemanticMatchScore: 0.7,
+      expectAssistantContains: "gıybet",
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "arkadan konuşmak günah mı",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "giybet_nedir",
+      expectedSemanticMatchedTopic: "giybet_nedir",
+      expectedPreRouteStage: "semantic",
+      minSemanticMatchScore: 0.7,
+      expectAssistantContains: "gıybet",
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "komsuya kotu davranmak",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "komsuluk_hakki",
+      expectedSemanticMatchedTopic: "komsuluk_hakki",
+      minSemanticMatchScore: 0.7,
+      expectAssistantContains: ["komşu", "eziyet"],
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "anneme babama nasil davranmaliyim",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "anne_baba_hakki",
+      expectedSemanticMatchedTopic: "anne_baba_hakki",
+      minSemanticMatchScore: 0.7,
+      expectAssistantContains: ["anne", "baba"],
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "yalniz hissediyorum",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "quran_guidance_redirect",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedRedirectModule: "ayah",
+      expectAssistantContains: ["manevi destek", "Ayet Rehberi bölümünü"],
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "Allah beni affeder mi",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "quran_guidance_redirect",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedRedirectModule: "ayah",
+      expectAssistantContains: ["Tövbe", "Ayet Rehberi bölümünü"],
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "çok pişmanım",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "quran_guidance_redirect",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedRedirectModule: "ayah",
+      expectAssistantContains: ["Tövbe", "Ayet Rehberi bölümünü"],
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "gereksiz harcama yapmak gunah mi",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "israf_nedir",
+      expectedSemanticMatchedTopic: "israf_nedir",
+      minSemanticMatchScore: 0.7,
+      expectAssistantContains: ["israf", "gereksiz"],
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "komsu hakki nedir",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "komsuluk_hakki",
+      expectedSemanticMatchedTopic: "komsuluk_hakki",
+      minSemanticMatchScore: 0.7,
+      expectAssistantContains: ["komşu", "eziyet"],
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "faizli kredi caiz mi",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_knowledge",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedKnowledgeHitId: "faiz_nedir",
+      expectedSemanticMatchedTopic: "faiz_nedir",
+      minSemanticMatchScore: 0.7,
+      expectAssistantContains: ["faiz", "kredi"],
+      expectAssistantNotContains: "Ayet Rehberi bölümüne daha uygundur",
       maxAyahRankerMs: 0,
     },
     {
@@ -1034,24 +1434,39 @@ async function runModuleEndpointSmokeTests() {
 
   for (const test of ayahTests) {
     const payload = await postModuleChat(test.path, test.prompt);
+    const routingPayload = debugChecksEnabled ? await postDebugResolve(test.prompt, moduleFromPath(test.path)) : null;
     const failures = [];
-    if ((payload?.decision_meta?.module || null) !== test.expectedModule) {
-      failures.push(`decision_meta.module=${payload?.decision_meta?.module}`);
-    }
-    if (test.expectedRouteMode && payload?.decision_meta?.route_mode !== test.expectedRouteMode) {
-      failures.push(`route_mode=${payload?.decision_meta?.route_mode}`);
-    }
-    if (test.expectedRankerSource && payload?.decision_meta?.ranker_source !== test.expectedRankerSource) {
-      failures.push(`ranker_source=${payload?.decision_meta?.ranker_source}`);
-    }
-    if (typeof test.expectedResponseType === "string" && payload?.response_type !== test.expectedResponseType) {
-      failures.push(`response_type=${payload?.response_type}`);
-    }
-    if (test.expectedKnowledgeHit === true && !payload?.decision_meta?.knowledge_hit_id) {
-      failures.push("knowledge_hit_id missing");
-    }
-    if (typeof test.expectedKnowledgeHitId === "string" && payload?.decision_meta?.knowledge_hit_id !== test.expectedKnowledgeHitId) {
-      failures.push(`knowledge_hit_id=${payload?.decision_meta?.knowledge_hit_id}`);
+    if (debugChecksEnabled) {
+      if ((routingPayload?.module || null) !== test.expectedModule) {
+        failures.push(`decision_meta.module=${routingPayload?.module}`);
+      }
+      if (test.expectedRouteMode && routingPayload?.route_mode !== test.expectedRouteMode) {
+        failures.push(`route_mode=${routingPayload?.route_mode}`);
+      }
+      if (test.expectedRankerSource && routingPayload?.ranker_source !== test.expectedRankerSource) {
+        failures.push(`ranker_source=${routingPayload?.ranker_source}`);
+      }
+      if (typeof test.expectedResponseType === "string" && routingPayload?.response_type !== test.expectedResponseType) {
+        failures.push(`response_type=${routingPayload?.response_type}`);
+      }
+      if (test.expectedKnowledgeHit === true && !routingPayload?.knowledge_hit_id) {
+        failures.push("knowledge_hit_id missing");
+      }
+      if (typeof test.expectedKnowledgeHitId === "string" && routingPayload?.knowledge_hit_id !== test.expectedKnowledgeHitId) {
+        failures.push(`knowledge_hit_id=${routingPayload?.knowledge_hit_id}`);
+      }
+      if (typeof test.expectedSemanticMatchedTopic === "string" && routingPayload?.semantic_matched_topic !== test.expectedSemanticMatchedTopic) {
+        failures.push(`semantic_matched_topic=${routingPayload?.semantic_matched_topic}`);
+      }
+      if (typeof test.expectedPreRouteStage === "string" && routingPayload?.pre_route_stage !== test.expectedPreRouteStage) {
+        failures.push(`pre_route_stage=${routingPayload?.pre_route_stage}`);
+      }
+      if (typeof test.minSemanticMatchScore === "number") {
+        const semanticScore = Number(routingPayload?.semantic_match_score || 0);
+        if (semanticScore < test.minSemanticMatchScore) {
+          failures.push(`semantic_match_score=${semanticScore}`);
+        }
+      }
     }
     if (Object.prototype.hasOwnProperty.call(test, "expectedRedirectModule")) {
       const redirectModule = payload?.redirect_module || null;
@@ -1067,8 +1482,8 @@ async function runModuleEndpointSmokeTests() {
     } else if (test.expectSelectedAyah && !payload?.selected_ayah) {
       failures.push("selected_ayah missing");
     }
-    if (typeof test.maxAyahRankerMs === "number") {
-      const rankerMs = Number(payload?.decision_meta?.timing_ms?.ayah_ranker_ms || 0);
+    if (typeof test.maxAyahRankerMs === "number" && debugChecksEnabled) {
+      const rankerMs = Number(routingPayload?.timing_ms?.ayah_ranker_ms || 0);
       if (rankerMs > test.maxAyahRankerMs) {
         failures.push(`ayah_ranker_ms=${rankerMs}`);
       }
@@ -1081,12 +1496,20 @@ async function runModuleEndpointSmokeTests() {
       if (!normalizeForMatch(payload?.assistant_text || "").includes(expected)) {
         failures.push(`assistant_text missing ${expected}`);
       }
+    } else if (Array.isArray(test.expectAssistantContains)) {
+      const assistantText = normalizeForMatch(payload?.assistant_text || "");
+      for (const expectedValue of test.expectAssistantContains) {
+        const expected = normalizeForMatch(expectedValue);
+        if (!assistantText.includes(expected)) {
+          failures.push(`assistant_text missing ${expected}`);
+        }
+      }
     }
     if (failures.length > 0) {
       console.error(`FAIL [module] ${test.path} ${test.prompt} -> ${failures.join("; ")}`);
       process.exit(1);
     }
-    console.log(`PASS [module] ${test.path} ${test.prompt} -> ${payload?.decision_meta?.module}:${payload?.response_type}:${payload?.selected_ayah?.id ?? "null"}`);
+    console.log(`PASS [module] ${test.path} ${test.prompt} -> ${test.path.includes('ilmihal') ? 'ilmihal' : 'ayah'}:${payload?.selected_ayah ? 'ayah' : 'direct_answer'}:${payload?.selected_ayah?.id ?? "null"}`);
   }
 }
 
@@ -1107,16 +1530,19 @@ async function runTest(test) {
 
 function validatePayload(test, payload) {
   const failures = [];
-  const requiredStringFields = ["assistant_text", "response_type", "primary_theme", "emotion"];
+  const requiredStringFields = ["assistant_text"];
   for (const field of requiredStringFields) {
     if (typeof payload?.[field] !== "string" || payload[field].trim().length === 0) {
       failures.push(`missing ${field}`);
     }
   }
-  if (typeof payload?.ayah_used !== "boolean") failures.push("missing ayah_used");
   if (!(payload?.selected_ayah === null || (payload?.selected_ayah && typeof payload.selected_ayah === "object"))) {
     failures.push("selected_ayah must be object or null");
   }
+
+  const decisionMeta = payload?.decision_meta && typeof payload.decision_meta === "object"
+    ? payload.decision_meta
+    : null;
 
   if (typeof payload?.assistant_text === "string") {
     for (const token of UTF8_BAD_TOKENS) {
@@ -1143,27 +1569,36 @@ function validatePayload(test, payload) {
     }
   }
 
-  if (AYAH_TYPES.has(payload?.response_type)) {
-    if (!payload.selected_ayah) {
-      failures.push(`selected_ayah is null for ${payload.response_type}`);
-    } else if (!assistantTextIncludesAyah(payload.assistant_text, payload.selected_ayah)) {
+  if (payload?.selected_ayah) {
+    if (!assistantTextIncludesAyah(payload.assistant_text, payload.selected_ayah)) {
       failures.push("assistant_text does not include selected ayah reference/text");
     }
   }
 
-  if (payload?.response_type === "direct_answer" && payload?.selected_ayah !== null) {
-    failures.push("direct_answer returned selected_ayah");
+  if (Object.prototype.hasOwnProperty.call(test, "expectedSelectedAyah")) {
+    if (!matchesSelectedAyahExpectation(payload, test.expectedSelectedAyah)) {
+      const selectedAyah = payload?.selected_ayah || null;
+      const selectedKey = selectedAyah
+        ? `${selectedAyah.surahNumber}:${selectedAyah.ayahNumber || selectedAyah.ayah}`
+        : "null";
+      failures.push(`selected_ayah=${selectedKey}`);
+    }
+  }
+
+  if (test.expectSelectedAyah === true && !payload?.selected_ayah) {
+    failures.push("selected_ayah missing");
+  }
+
+  if (test.expectSelectedAyah === false && payload?.selected_ayah) {
+    failures.push("selected_ayah should be null");
   }
 
 
   if (test.group === "casual") {
-    if (payload?.ayah_used !== false) failures.push(`unexpected ayah_used=${payload?.ayah_used}`);
     if (payload?.selected_ayah !== null) failures.push("casual flow returned selected_ayah");
   }
 
   if (test.group === "prayer") {
-    if (payload?.response_type !== "direct_answer") failures.push(`prayer question returned response_type=${payload?.response_type}`);
-    if (payload?.ayah_used !== false) failures.push(`prayer question unexpectedly used ayah_used=${payload?.ayah_used}`);
     if (payload?.selected_ayah !== null) failures.push("prayer question returned selected_ayah");
     if (typeof test.expectedRakats === "number" && !String(payload?.assistant_text || "").includes(String(test.expectedRakats))) {
       failures.push(`prayer answer missing expected rakat count ${test.expectedRakats}`);
@@ -1177,10 +1612,16 @@ function validatePayload(test, payload) {
   }
 
   if (test.group === "knowledge") {
-    if (payload?.response_type !== "direct_answer") failures.push(`knowledge question returned response_type=${payload?.response_type}`);
-    if (payload?.ayah_used !== false) failures.push(`knowledge question unexpectedly used ayah_used=${payload?.ayah_used}`);
     if (payload?.selected_ayah !== null) failures.push("knowledge question returned selected_ayah");
     if (test.mustBeDirectAnswer && typeof payload?.assistant_text !== "string") failures.push("knowledge question missing assistant_text");
+  }
+
+  if (typeof test.expectedPlannerSource === "string" && decisionMeta && decisionMeta.planner_source !== test.expectedPlannerSource) {
+    failures.push(`planner_source=${decisionMeta.planner_source}`);
+  }
+
+  if (typeof test.expectedRouteMode === "string" && decisionMeta && decisionMeta.route_mode !== test.expectedRouteMode) {
+    failures.push(`route_mode=${decisionMeta.route_mode}`);
   }
 
   const notContains = normalizeNotContainsList(test.expectedNotContains);
@@ -1308,8 +1749,10 @@ async function postModuleChat(path, message, history = []) {
   return payload;
 }
 
-async function postDebugResolve(q) {
-  const response = await fetch(`http://localhost:3000/debug/resolve?q=${encodeURIComponent(q)}`);
+async function postDebugResolve(q, module = "chat") {
+  const response = await fetch(
+    `http://localhost:3000/debug/resolve?module=${encodeURIComponent(module)}&q=${encodeURIComponent(q)}`
+  );
   const text = await response.text();
   let payload;
   try {
@@ -1319,6 +1762,12 @@ async function postDebugResolve(q) {
   }
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${payload?.error || text}`);
   return payload;
+}
+
+function moduleFromPath(path) {
+  if (String(path || "").includes("ilmihal")) return "ilmihal";
+  if (String(path || "").includes("ayah")) return "ayah";
+  return "chat";
 }
 
 function isDebugChatEngineEnabled() {

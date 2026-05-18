@@ -1,0 +1,48 @@
+{
+  "id": "kul_hakki_iceren_alisveris",
+  "title": "Kul Hakkı İçeren Alışveriş",
+  "category": "daily_practice",
+  "summary": "Alışverişte aldatma, eksik bilgilendirme, kusuru gizleme veya zarar verme varsa kul hakkı doğabilir; düzeltme ve helalleşme önemlidir.",
+  "aliases": [
+    "alışverişte kul hakkı olur mu",
+    "kul hakkı içeren alışveriş",
+    "alışverişte aldatma"
+  ],
+  "triggers": [
+    "alışverişte kul hakkı olur mu",
+    "kul hakkı içeren alışveriş",
+    "alışverişte aldatma"
+  ],
+  "keywords": [
+    "alışveriş",
+    "kul hakkı",
+    "aldatma",
+    "kusur"
+  ],
+  "step_by_step": [
+    "Satılan şeyi doğru ve eksiksiz anlat.",
+    "Gizlenen kusur varsa düzeltme yoluna git.",
+    "Zarar doğduysa telafi etmeyi düşün.",
+    "Belirsiz noktalar için güvenilir danışma al."
+  ],
+  "attention_points": [
+    "Ticarette dürüstlük esastır.",
+    "Küçük görünen bir hata da hak doğurabilir.",
+    "Karmaşık satışlarda ayrıntı önemlidir."
+  ],
+  "common_mistakes": [
+    "Kusuru saklamayı normal görmek.",
+    "Eksik bilgiyle satış yapıp sonra sorun çıkınca şaşırmak.",
+    "Telafiyi ertelemek."
+  ],
+  "related_questions": [
+    "Kul hakkı nasıl ödenir?",
+    "Şüpheli kazanç ne yapılır?",
+    "Haram para nasıl temizlenir?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Alışverişte aldatma, eksik bilgilendirme, kusuru gizleme veya zarar verme varsa kul hakkı doğabilir; düzeltme ve helalleşme önemlidir.",
+  "semantic_description": "alışverişte kul hakkı olur mu kul hakkı içeren alışveriş alışverişte aldatma sorularına sakin ve pratik cevap verir alışverişte aldatma eksik bilgilendirme kusuru gizleme veya zarar verme varsa kul hakkı doğabilir düzeltme ve helalleşme önemlidir"
+}

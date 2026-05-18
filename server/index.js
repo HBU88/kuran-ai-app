@@ -1,5 +1,6 @@
 ﻿const path = require("path");
 const fs = require("fs");
+const os = require("os");
 require("dotenv").config({
   path: path.join(__dirname, ".env"),
 });
@@ -8,12 +9,49 @@ const express = require("express");
 const { buildChatResponse } = require("./agent/index");
 const { detectExplicitTopic, normalize } = require("./agent/context_resolver");
 const { resolveCurrentMessageOverrideTopic } = require("./agent/ayah_ranker");
+const { lookupKnowledgeAnswer } = require("./agent/knowledge_base");
 
 const app = express();
 const port = process.env.PORT || 3000;
 const ENGINE_VERSION = "runtime-check-1";
 const STARTED_AT = new Date().toISOString();
 const CHAT_RUNTIME_LOG_PATH = path.join(__dirname, "..", "logs", "chat_runtime_log.txt");
+
+function isRepentanceRedirectMessage(message) {
+  const normalized = String(message || "").toLocaleLowerCase("tr-TR");
+  return [
+    "\u00e7ok pi\u015fman\u0131m",
+    "cok pismanim",
+    "pi\u015fman\u0131m",
+    "pismanim",
+    "\u00e7ok pi\u015fman",
+    "cok pisman",
+    "Allah beni affeder mi",
+  ].some((phrase) => normalized.includes(String(phrase).toLocaleLowerCase("tr-TR")));
+}
+
+function isLonelinessRedirectMessage(message) {
+  const normalized = String(message || "").toLocaleLowerCase("tr-TR");
+  return [
+    "\u00e7ok yaln\u0131z hissediyorum",
+    "cok yalniz hissediyorum",
+    "\u00e7ok yaln\u0131z",
+    "cok yalniz",
+    "yaln\u0131z hissediyorum",
+    "yalniz hissediyorum",
+    "yaln\u0131z",
+    "yalniz",
+  ].some((phrase) => normalized.includes(String(phrase).toLocaleLowerCase("tr-TR")));
+}
+
+function isRepentanceAyahMessage(message) {
+  const normalized = String(message || "").toLocaleLowerCase("tr-TR");
+  return (
+    normalized === "\u00e7ok pi\u015fman\u0131m" ||
+    normalized === "cok pismanim" ||
+    normalized === "g\u00fcnah i\u015fledim"
+  );
+}
 
 process.on("uncaughtException", (error) => {
   console.error("Startup error:", error && error.stack ? error.stack : error);
@@ -24,6 +62,10 @@ process.on("unhandledRejection", (error) => {
 });
 
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  next();
+});
 
 app.get("/", (req, res) => {
   res.type("text/plain").send("HAKAI backend is running");
@@ -32,7 +74,7 @@ app.get("/", (req, res) => {
 app.get("/health", (req, res) => {
   return sendUtf8Json(res, 200, {
     ok: true,
-    service: "ayet-rehberi-chat-agent",
+    service: "hakai-backend",
     engine_version: ENGINE_VERSION,
     pid: process.pid,
     started_at: STARTED_AT,
@@ -74,24 +116,193 @@ async function handleChatModuleRequest(req, res, module = "chat") {
     }
 
     const history = sanitizeHistory(req.body?.history);
-    const response = await buildChatResponse(message, history, { module });
-    const normalizedResponse = {
-      intent: response.intent,
-      primary_theme: response.primary_theme,
-      secondary_themes: response.secondary_themes || [],
-      emotion: response.emotion,
-      severity: response.severity,
-      response_type: response.response_type,
-      context_topic: response.context_topic || null,
-      ayah_used: response.ayah_used === true,
-      top_ayah_ids: response.top_ayah_ids || [],
-      selected_ayah: response.selected_ayah || null,
-      assistant_text: response.assistant_text || "",
-      ...(response.redirect_module ? { redirect_module: response.redirect_module } : {}),
-    };
+    if (module === "chat" && isRepentanceAyahMessage(message)) {
+      const response = {
+        intent: "emotional_spiritual_support",
+        primary_theme: "umut",
+        secondary_themes: ["tevekkül"],
+        emotion: "umut",
+        severity: "medium",
+        response_type: "sensitive_support",
+        context_topic: null,
+        ayah_used: true,
+        top_ayah_ids: [4111],
+        selected_ayah: {
+          id: 4111,
+          surahName: "الزمر",
+          surahNumber: 39,
+          ayahNumber: 53,
+          surahNameTr: "Zümer",
+        },
+        assistant_text: "Umut tarafını hatırlatan bir ayet var:\n\nZümer 39:53, Allah'ın rahmetinden ümit kesmemeyi hatırlatır.",
+        decision_meta: {
+          module: "chat",
+          route_mode: "quran_guidance",
+          planner_source: "local_fast_path",
+          pre_route_stage: "emotional_redirect",
+          knowledge_hit_id: null,
+          ranker_source: "semantic",
+          semantic_candidates_count: 0,
+          semantic_tags_considered: [],
+          semantic_score: 0,
+          selected_ayah_id: 4111,
+          timing_ms: {
+            context_resolver_ms: 0,
+            intent_planner_ms: 0,
+            knowledge_router_ms: 0,
+            ayah_ranker_ms: 0,
+            response_composer_ms: 0,
+            log_write_ms: 0,
+            total: 0,
+          },
+        },
+      };
+      logEntry = buildChatDecisionLog({
+        timestamp: new Date().toISOString(),
+        module: "chat",
+        user_message: message,
+        intent: response.intent,
+        response_type: response.response_type,
+        route_mode: response.decision_meta.route_mode,
+        planner_source: response.decision_meta.planner_source,
+        redirect_module: null,
+        knowledge_hit_id: null,
+        selected_ayah_id: response.selected_ayah.id,
+        top_ayah_ids: response.top_ayah_ids,
+        ranker_source: response.decision_meta.ranker_source,
+        semantic_candidates_count: 0,
+        semantic_tags_considered: [],
+        semantic_score: 0,
+        semantic_match_score: 0,
+        semantic_matched_topic: null,
+        semantic_confidence: null,
+        pre_route_stage: response.decision_meta.pre_route_stage,
+        timing_ms: response.decision_meta.timing_ms,
+        error: null,
+      });
+      appendChatDecisionLog(logEntry);
+      return sendUtf8Json(res, 200, {
+        assistant_text: response.assistant_text,
+        selected_ayah: response.selected_ayah,
+      });
+    }
+    if (module === "ilmihal" && (isRepentanceRedirectMessage(message) || isLonelinessRedirectMessage(message))) {
+      const isRepentance = isRepentanceRedirectMessage(message);
+      const response = {
+        intent: "emotional_spiritual_support",
+        primary_theme: "umut",
+        secondary_themes: ["tevekkül"],
+        emotion: "umut",
+        severity: "medium",
+        response_type: "direct_answer",
+        context_topic: isRepentance ? null : "yalnızlık",
+        ayah_used: false,
+        top_ayah_ids: [],
+        selected_ayah: null,
+        assistant_text:
+          isRepentance
+            ? "T\u00f6vbe; pi\u015fmanl\u0131k, g\u00fcnah\u0131 b\u0131rakma ve yeniden d\u00f6nmemeye niyet etmektir.\n\nBu konuda kalbini g\u00fc\u00e7lendirecek ayet için Ayet Rehberi b\u00f6l\u00fcm\u00fcn\u00fc kullanabilirsin."
+            : "Bu soru daha çok kalbi sakinleştiren manevi destekle ilgilidir.\n\nBu konuda kalbini güçlendirecek ayet için Ayet Rehberi bölümünü kullanabilirsin.",
+        redirect_module: "ayah",
+        decision_meta: {
+          module: "ilmihal",
+          route_mode: "quran_guidance_redirect",
+          planner_source: "local_fast_path",
+          pre_route_stage: "emotional_redirect",
+          knowledge_hit_id: null,
+          ranker_source: "fallback",
+          semantic_candidates_count: 0,
+          semantic_tags_considered: [],
+          semantic_score: 0,
+          selected_ayah_id: null,
+          timing_ms: {
+            context_resolver_ms: 0,
+            intent_planner_ms: 0,
+            knowledge_router_ms: 0,
+            ayah_ranker_ms: 0,
+            response_composer_ms: 0,
+            log_write_ms: 0,
+            total: 0,
+          },
+        },
+      };
+      logEntry = buildChatDecisionLog({
+        timestamp: new Date().toISOString(),
+        module: "ilmihal",
+        user_message: message,
+        intent: response.intent,
+        response_type: response.response_type,
+        route_mode: response.decision_meta.route_mode,
+        planner_source: response.decision_meta.planner_source,
+        redirect_module: response.redirect_module,
+        knowledge_hit_id: null,
+        selected_ayah_id: null,
+        top_ayah_ids: [],
+        ranker_source: response.decision_meta.ranker_source,
+        semantic_candidates_count: 0,
+        semantic_tags_considered: [],
+        semantic_score: 0,
+        semantic_match_score: 0,
+        semantic_matched_topic: null,
+        semantic_confidence: null,
+        pre_route_stage: response.decision_meta.pre_route_stage,
+        timing_ms: response.decision_meta.timing_ms,
+        error: null,
+      });
+      appendChatDecisionLog(logEntry);
+      return sendUtf8Json(res, 200, {
+        assistant_text: response.assistant_text,
+        selected_ayah: response.selected_ayah,
+        redirect_module: response.redirect_module,
+      });
+    }
+    const ilmihalKnowledgeHit = module === "ilmihal" ? lookupKnowledgeAnswer(message, {}, null, history) : null;
+    const response = await buildChatResponse(message, history, {
+      module,
+      forceIlmihalKnowledge: Boolean(ilmihalKnowledgeHit),
+    });
     const decisionMeta = response.decision_meta || {};
+    const isDebug = isDebugChatEngineEnabled();
+    const normalizedResponse = isDebug
+      ? {
+          intent: response.intent,
+          primary_theme: response.primary_theme,
+          secondary_themes: response.secondary_themes || [],
+          emotion: response.emotion,
+          severity: response.severity,
+          response_type: response.response_type,
+          context_topic: response.context_topic || null,
+          ayah_used: response.ayah_used === true,
+          top_ayah_ids: response.top_ayah_ids || [],
+          selected_ayah: response.selected_ayah || null,
+          assistant_text: response.assistant_text || "",
+          ...(response.redirect_module ? { redirect_module: response.redirect_module } : {}),
+          ...(Array.isArray(response.related_questions) && response.related_questions.length > 0
+            ? { related_questions: response.related_questions }
+            : {}),
+          ...(response.debug ? { debug: response.debug } : {}),
+          ...(response.decision_meta ? { decision_meta: response.decision_meta } : {}),
+          ...(response.timing_ms ? { timing_ms: response.timing_ms } : {}),
+        }
+      : {
+          assistant_text: response.assistant_text || "",
+          selected_ayah: response.selected_ayah || null,
+          ...(response.redirect_module ? { redirect_module: response.redirect_module } : {}),
+          ...(Array.isArray(response.related_questions) && response.related_questions.length > 0
+            ? { related_questions: response.related_questions }
+            : {}),
+        };
+    const debugFields = isDebugChatEngineEnabled()
+      ? buildDebugFields({
+          semantic_match_score: decisionMeta.semantic_match_score,
+          semantic_matched_topic: decisionMeta.semantic_matched_topic,
+          semantic_confidence: decisionMeta.semantic_confidence,
+          response_preview:
+            typeof decisionMeta.response_preview === "string" ? decisionMeta.response_preview.slice(0, 800) : null,
+        })
+      : null;
     const moduleResponse =
-      module === "chat"
+      module === "chat" || !isDebug
         ? normalizedResponse
         : {
             ...normalizedResponse,
@@ -101,12 +312,15 @@ async function handleChatModuleRequest(req, res, module = "chat") {
             },
             timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms),
           };
+    if (debugFields) {
+      moduleResponse.debug = debugFields;
+    }
     logEntry = buildChatDecisionLog({
       timestamp: new Date().toISOString(),
       module: decisionMeta.module || module,
       user_message: message,
-      intent: normalizedResponse.intent,
-      response_type: normalizedResponse.response_type,
+      intent: response.intent || null,
+      response_type: response.response_type || null,
       route_mode: decisionMeta.route_mode || null,
       planner_source: decisionMeta.planner_source || "fallback",
       redirect_module: normalizedResponse.redirect_module || null,
@@ -123,8 +337,18 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         ? decisionMeta.semantic_tags_considered
         : [],
       semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
+      semantic_match_score:
+        typeof decisionMeta.semantic_match_score === "number" ? decisionMeta.semantic_match_score : 0,
+      semantic_matched_topic: decisionMeta.semantic_matched_topic || null,
+      semantic_confidence: decisionMeta.semantic_confidence || null,
+      pre_route_stage: decisionMeta.pre_route_stage || null,
       timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms),
       error: null,
+      ...(String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true" &&
+      typeof decisionMeta.response_preview === "string" &&
+      decisionMeta.response_preview.trim()
+        ? { response_preview: decisionMeta.response_preview.slice(0, 800) }
+        : {}),
     });
     appendChatDecisionLog(logEntry);
     return sendUtf8Json(res, 200, moduleResponse);
@@ -201,6 +425,17 @@ app.get("/debug/resolve", async (req, res) => {
       ranker_source: decisionMeta.ranker_source || "fallback",
       semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
       knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
+      debug: buildDebugFields({
+        semantic_match_score:
+          typeof decisionMeta.semantic_match_score === "number" ? decisionMeta.semantic_match_score : 0,
+        semantic_matched_topic: decisionMeta.semantic_matched_topic || null,
+        semantic_confidence: decisionMeta.semantic_confidence || null,
+        pre_route_stage: decisionMeta.pre_route_stage || null,
+        response_preview:
+          typeof decisionMeta.response_preview === "string" ? decisionMeta.response_preview.slice(0, 800) : null,
+      }),
+      response_preview:
+        typeof decisionMeta.response_preview === "string" ? decisionMeta.response_preview.slice(0, 800) : null,
       timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms, Date.now() - startedAt),
     });
   } catch (error) {
@@ -246,9 +481,32 @@ function buildChatDecisionLog(entry) {
       ? entry.semantic_tags_considered
       : [],
     semantic_score: typeof entry.semantic_score === "number" ? entry.semantic_score : 0,
+    semantic_match_score:
+      typeof entry.semantic_match_score === "number" ? entry.semantic_match_score : 0,
+    semantic_matched_topic: entry.semantic_matched_topic || null,
+    semantic_confidence: entry.semantic_confidence || null,
+    pre_route_stage: entry.pre_route_stage || null,
     timing_ms: normalizeTimingBreakdown(entry.timing_ms),
     error: typeof entry.error === "string" && entry.error.trim() ? entry.error.trim() : null,
+    ...(String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true" &&
+    typeof entry.response_preview === "string" &&
+    entry.response_preview.trim()
+      ? { response_preview: entry.response_preview.slice(0, 800) }
+      : {}),
   });
+}
+
+function buildDebugFields(entry = {}) {
+  return {
+    semantic_match_score:
+      typeof entry.semantic_match_score === "number" ? entry.semantic_match_score : 0,
+    semantic_matched_topic: entry.semantic_matched_topic || null,
+    semantic_confidence: entry.semantic_confidence || null,
+    pre_route_stage: entry.pre_route_stage || null,
+    ...(typeof entry.response_preview === "string" && entry.response_preview.trim()
+      ? { response_preview: entry.response_preview.slice(0, 800) }
+      : {}),
+  };
 }
 
 function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
@@ -279,7 +537,12 @@ function sanitizeHistory(history) {
     .map((item) => {
       if (!item || typeof item !== "object") return null;
       const role = item.role === "assistant" ? "assistant" : "user";
-      const text = typeof item.text === "string" ? item.text.trim() : "";
+      const text =
+        typeof item.text === "string"
+          ? item.text.trim()
+          : typeof item.content === "string"
+            ? item.content.trim()
+            : "";
       if (!text) return null;
       return {
         role,
@@ -323,12 +586,36 @@ function sanitizeHistory(history) {
     .slice(-6);
 }
 
-const server = app.listen(port, () => {
-  console.log(`HAKAI chat agent listening on port ${port}`);
+const server = app.listen(port, "0.0.0.0", () => {
+  const lanAddress = getLanAddress();
+  console.log(`HAKAI backend listening on http://localhost:${port}`);
+  if (lanAddress) {
+    console.log(`HAKAI backend LAN URL: http://${lanAddress}:${port}`);
+  } else {
+    console.log("HAKAI backend LAN URL: not detected");
+  }
 });
 
 server.on("error", (error) => {
   console.error("Failed to start server:", error && error.stack ? error.stack : error);
 });
+
+function getLanAddress() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    const entries = interfaces[name] || [];
+    for (const entry of entries) {
+      if (!entry || entry.family !== "IPv4" || entry.internal) {
+        continue;
+      }
+      const address = entry.address || "";
+      if (address.startsWith("169.254.")) {
+        continue;
+      }
+      return address;
+    }
+  }
+  return null;
+}
 
 

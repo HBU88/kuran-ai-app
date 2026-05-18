@@ -1,0 +1,50 @@
+{
+  "id": "kredi_karti_kullanmak_caiz_mi",
+  "title": "Kredi Kartı Kullanmak Caiz Mi?",
+  "category": "daily_practice",
+  "summary": "Kredi kartında ödeme düzeni, gecikme şartları ve faiz riski belirleyicidir; kullanırken sözleşmeyi dikkatle okumak ve ölçülü davranmak gerekir.",
+  "aliases": [
+    "kredi kartı kullanmak caiz mi",
+    "kredi karti kullanmak caiz mi",
+    "kredi kartı",
+    "kredi kartı ile alışveriş"
+  ],
+  "triggers": [
+    "kredi kartı kullanmak caiz mi",
+    "kredi karti kullanmak caiz mi",
+    "kredi kartı",
+    "kredi kartı ile alışveriş"
+  ],
+  "keywords": [
+    "kredi kartı",
+    "caiz",
+    "faiz",
+    "gecikme"
+  ],
+  "step_by_step": [
+    "Kartın ödeme ve gecikme şartlarını oku.",
+    "Faiz ve ek ücret riskini dikkate al.",
+    "Mümkünse harcamayı kontrol altında tut.",
+    "Karmaşık sözleşmelerde güvenilir bir uzmana danış."
+  ],
+  "attention_points": [
+    "Kartın kendisi ile kullanım şartları aynı şey değildir.",
+    "Gecikme ve taksit şartları özellikle önemlidir.",
+    "Sözleşme karmaşıksa danışma gerekir."
+  ],
+  "common_mistakes": [
+    "Kartı sınırsız harcama imkânı sanmak.",
+    "Gecikme şartlarını okumamak.",
+    "Fazla borçlanmayı normal görmek."
+  ],
+  "related_questions": [
+    "Banka faizi nedir?",
+    "Faizli kredi kullanmak caiz mi?",
+    "Şüpheli kazanç ne yapılır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Kredi kartında ödeme düzeni, gecikme şartları ve faiz riski belirleyicidir; kullanırken sözleşmeyi dikkatle okumak ve ölçülü davranmak gerekir.",
+  "semantic_description": "kredi kartı kullanmak caiz mi kredi karti kullanmak caiz mi kredi kartı ile alışveriş sorularına sakin ve pratik cevap verir kredi kartında ödeme düzeni gecikme şartları ve faiz riski belirleyicidir kullanırken sözleşmeyi dikkatle okumak ve ölçülü davranmak gerekir"
+}

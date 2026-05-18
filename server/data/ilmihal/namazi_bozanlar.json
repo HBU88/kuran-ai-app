@@ -1,0 +1,42 @@
+{
+  "id": "namazi_bozanlar",
+  "title": "Namazı Bozanlar",
+  "category": "worship_practice",
+  "summary": "Namaz bazı söz, davranış ve durumlarla bozulabilir.",
+  "keywords": [
+    "namazı bozan şeyler",
+    "namazı bozan",
+    "namaz bozanlar",
+    "geçersiz kılan"
+  ],
+  "step_by_step": [
+    "Abdest, kıble ve niyet hazırlanır.",
+    "Kıraat, rükû, secde ve son oturuş sırayla yerine getirilir.",
+    "Namazın farz ve vacipleri tamamlanır."
+  ],
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [],
+  "attention_points": [
+    "Namazda sükûnet ve dikkati korumak gerekir."
+  ],
+  "common_mistakes": [
+    "Namazda konuşmak.",
+    "Namazda yemek veya içmek.",
+    "Kıble yönünden tamamen dönmek.",
+    "Abdesti bozulan kişinin namazı sürdürmesi.",
+    "Namazın farzlarından birini terk etmek.",
+    "Kahkaha ile gülmek.",
+    "Aşırı hareket etmek.",
+    "Avret yerinin açılması.",
+    "Bilinç kaybı veya bayılma."
+  ],
+  "related_questions": [
+    "Namazı bozan şeyler nelerdir?",
+    "Namazda konuşmak namazı bozar mı?",
+    "Namazda kahkaha ile gülmek namazı bozar mı?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ]
+}

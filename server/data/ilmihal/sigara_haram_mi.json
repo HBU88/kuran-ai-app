@@ -1,0 +1,50 @@
+{
+  "id": "sigara_haram_mi",
+  "title": "Sigara Haram Mı?",
+  "category": "daily_practice",
+  "summary": "Sigara sağlığa zarar veren, israfa yol açabilen ve kişiyi zayıf düşürebilen bir alışkanlıktır; bırakma süreci adım adım ve destekle yürütülmelidir.",
+  "aliases": [
+    "sigara haram mı",
+    "sigara içmek günah mı",
+    "sigara",
+    "sigara bırakma"
+  ],
+  "triggers": [
+    "sigara haram mı",
+    "sigara içmek günah mı",
+    "sigara",
+    "sigara bırakma"
+  ],
+  "keywords": [
+    "sigara",
+    "haram",
+    "günah",
+    "sağlık"
+  ],
+  "step_by_step": [
+    "Sağlık ve bağımlılık boyutunu ciddiye al.",
+    "Bırakma için küçük ve sürdürülebilir bir plan yap.",
+    "Gerekirse hekim ve destek hatlarından yardım al.",
+    "Dua ve kararlılıkla süreci sürdür."
+  ],
+  "attention_points": [
+    "Bu konu yalnızca dinî değil, sağlık yönü de olan bir konudur.",
+    "Bırakmakta zorlanmak utanılacak bir durum değildir.",
+    "Kademeli destek almak süreci kolaylaştırabilir."
+  ],
+  "common_mistakes": [
+    "Zararı küçümsemek.",
+    "Bir anda bırakmayı başaramayınca vazgeçmek.",
+    "Yardım istemeyi geciktirmek."
+  ],
+  "related_questions": [
+    "Haram para nasıl temizlenir?",
+    "Şüpheli kazanç ne yapılır?",
+    "Müzik dinlemek günah mı?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Sigara sağlığa zarar veren, israfa yol açabilen ve kişiyi zayıf düşürebilen bir alışkanlıktır; bırakma süreci adım adım ve destekle yürütülmelidir.",
+  "semantic_description": "sigara haram mı sigara içmek günah mı sigara bırakma sorularına sakin ve pratik cevap verir sigara sağlığa zarar veren israfa yol açabilen ve kişiyi zayıf düşürebilen bir alışkanlıktır bırakma süreci adım adım ve destekle yürütülmelidir"
+}

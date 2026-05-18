@@ -1,0 +1,50 @@
+{
+  "id": "kul_hakki_nasil_odenir",
+  "title": "Kul Hakkı Nasıl Ödenir?",
+  "category": "daily_practice",
+  "summary": "Kul hakkı, hak sahibine ulaşarak helalleşmek ve zararı mümkün olan en kısa sürede telafi etmekle ödenir.",
+  "aliases": [
+    "kul hakkı nasıl ödenir",
+    "kul hakkı nasıl ödenir?",
+    "kul hakkı ödemek"
+  ],
+  "triggers": [
+    "kul hakkı nasıl ödenir",
+    "kul hakkı ödemek",
+    "helalleşmek",
+    "zararı telafi"
+  ],
+  "keywords": [
+    "kul hakkı",
+    "helalleşmek",
+    "zararı telafi"
+  ],
+  "step_by_step": [
+    "Verilen zarar açıkça tespit edilir.",
+    "Hak sahibine ulaşılabiliyorsa helallik istenir.",
+    "Maddi zarar varsa geri ödeme veya zararı telafi edilir.",
+    "Sözlü kırgınlık varsa özür ve gönül alma yolu aranır."
+  ],
+  "attention_points": [
+    "Kul hakkı, sadece içten pişmanlıkla kapanmaz; mümkün olan telafi gerekir.",
+    "Son durum belirsizse güvenilir bir din görevlisine danışılabilir."
+  ],
+  "common_mistakes": [
+    "Helalleşmeyi gereksiz görmek.",
+    "Sadece istigfar yeter sanmak.",
+    "Zararı gidermeyi geciktirmek."
+  ],
+  "related_questions": [
+    "Gıybet ettim ne yapmalıyım?",
+    "Kalp kırmak kul hakkı mı?",
+    "Günah işledim ne yapmalıyım?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "answer_tr": "Kul hakkı, hak sahibine ulaşarak helalleşmek ve zararı mümkün olan en kısa sürede telafi etmekle ödenir.",
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [],
+  "semantic_description": "Kul hakkı nasıl ödenir? Helalleşme, zararı telafi etme, hak sahibine ulaşma ve mümkün olan en kısa sürede ödeme."
+}

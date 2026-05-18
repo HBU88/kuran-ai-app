@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class DiyanetAuthService {
@@ -63,8 +62,6 @@ class DiyanetAuthService {
     required Map<String, String> payload,
     required String payloadShape,
   }) async {
-    debugPrint('LOGIN TARGET: $_loginUri');
-    debugPrint('LOGIN PAYLOAD SHAPE: $payloadShape');
     final response = await _client.post(
       _loginUri,
       headers: const {
@@ -75,8 +72,6 @@ class DiyanetAuthService {
     );
     lastStatusCode = response.statusCode;
     lastResponseBody = response.body;
-    debugPrint('LOGIN STATUS: ${response.statusCode}');
-    debugPrint('LOGIN BODY: ${response.body}');
     return response;
   }
 

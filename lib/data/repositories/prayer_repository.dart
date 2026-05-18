@@ -1,7 +1,5 @@
 import 'dart:collection';
-import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/app_constants.dart';
@@ -183,27 +181,14 @@ class PrayerRepository {
     _lastRawErrorMessage = null;
 
     try {
-      if (kDebugMode) {
-        debugPrint('SELECTED COUNTRY ID: ${selectedCountryId ?? '-'}');
-        debugPrint('SELECTED STATE ID: ${selectedStateId ?? '-'}');
-        debugPrint('SELECTED CITY ID: $prayerCityId');
-        debugPrint('SELECTED CITY NAME: $selectedCityName');
-        debugPrint('PRAYER TARGET: ${prayerEndpointUrlFor(prayerCityId)}');
-      }
       final accessToken = await _getAccessToken();
       _lastLoginStatusCode = _authService.lastStatusCode;
-      if (kDebugMode) {
-        debugPrint('Diyanet token received: $accessToken');
-      }
 
       final json = await _prayerService.getDailyPrayerTimes(
         accessToken,
         cityId: prayerCityId,
       );
       _lastPrayerStatusCode = _prayerService.lastStatusCode;
-      if (kDebugMode) {
-        debugPrint('Diyanet prayer JSON response: ${jsonEncode(json)}');
-      }
 
       return _fromDiyanetJson(
         json: json,
@@ -211,14 +196,10 @@ class PrayerRepository {
         country: selectedCountry,
         cityId: prayerCityId,
       );
-    } catch (error, stackTrace) {
+    } catch (error) {
       _lastLoginStatusCode = _authService.lastStatusCode;
       _lastPrayerStatusCode = _prayerService.lastStatusCode;
       _lastRawErrorMessage = error.toString();
-      if (kDebugMode) {
-        debugPrint('Diyanet prayer flow error: $_lastRawErrorMessage');
-        debugPrintStack(stackTrace: stackTrace);
-      }
       throw PrayerRepositoryException(
         'Diyanet prayer flow failed. Original error: $error',
         cause: error,

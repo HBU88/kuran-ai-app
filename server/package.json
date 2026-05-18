@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "smoke": "node agent.js \"çok yalnız hissediyorum\"",
-    "test:chat": "node tests/chat_response_validator.mjs"
+    "test:chat": "node tests/chat_response_validator.mjs",
+    "test:ilmihal-regression": "node scripts/ilmihal/test_ilmihal_regression.mjs",
+    "audit:ilmihal": "node scripts/ilmihal/audit_diyanet_coverage.mjs",
+    "validate:ilmihal": "node scripts/ilmihal/validate_ilmihal.mjs"
   },
   "dependencies": {
     "body-parser": "^2.2.2",

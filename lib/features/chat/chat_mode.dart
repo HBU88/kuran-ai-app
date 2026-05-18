@@ -10,9 +10,9 @@ extension ChatModeX on ChatMode {
       case ChatMode.chat:
         return 'HAKAI';
       case ChatMode.ayah:
-        return 'Rehberlik';
+        return 'Ayet Rehberi';
       case ChatMode.ilmihal:
-        return 'Dinî Bilgiler';
+        return 'İlmihal Rehberi';
     }
   }
 
@@ -21,9 +21,39 @@ extension ChatModeX on ChatMode {
       case ChatMode.chat:
         return 'HAKAI ile sakin bir sohbet';
       case ChatMode.ayah:
-        return 'Rehberlik ile sakin bir sohbet';
+        return 'Ayet Rehberi ile sakin bir sohbet';
       case ChatMode.ilmihal:
-        return 'Dinî Bilgiler ile sakin bir sohbet';
+        return 'İlmihal Rehberi ile sakin bir sohbet';
+    }
+  }
+
+  String get composerHint {
+    switch (this) {
+      case ChatMode.chat:
+        return 'Sorunuzu yazın...';
+      case ChatMode.ayah:
+        return 'Sorularınıza Kur’an’dan ayetlerle rehberlik edilir.';
+      case ChatMode.ilmihal:
+        return 'İbadetlerle ilgili dinî bilgileri sorabilirsiniz.';
+    }
+  }
+
+  List<String> get suggestionQuestions {
+    switch (this) {
+      case ChatMode.chat:
+        return const [];
+      case ChatMode.ayah:
+        return const [
+          'Sabır ile ilgili ayet',
+          'İman hakkında ayet',
+          'Korku ve endişe için ayet',
+        ];
+      case ChatMode.ilmihal:
+        return const [
+          'Abdest nasıl alınır?',
+          'Namazın farzları nelerdir?',
+          'Oruç hangi durumlarda bozulur?',
+        ];
     }
   }
 

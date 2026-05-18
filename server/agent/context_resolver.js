@@ -92,6 +92,12 @@ const TOPIC_PATTERNS = [
       "sabr",
       "sebat",
       "sabretmek",
+      "sabredemiyorum",
+      "dayanamıyorum",
+      "çok zorlanıyorum",
+      "birini kaybettim",
+      "yakınımı kaybettim",
+      "yas",
       "sabır ayeti",
       "sabir ayeti",
       "zor zamanlarda sabır",
@@ -128,11 +134,15 @@ const TOPIC_PATTERNS = [
       "teselli",
       "umut veren",
       "motive edici",
+      "güçlendirecek",
+      "güçlendirici",
+      "güç veren",
+      "içimi güçlendirecek",
     ],
   },
   {
     topic: "yalnızlık",
-    phrases: ["yalnız", "yalnızlık", "yalniz", "yalnizlik", "kimsem yok", "kimsesiz"],
+    phrases: ["yalnız", "yalnızlık", "yalniz", "yalnizlik", "kimsem yok", "kimsesiz", "Allah benden uzak mı", "Allah bana yakın mı", "Allah beni duyar mı", "uzak hissediyorum", "manevi boşluk", "kalbim soğudu"],
   },
   {
     topic: "korku",
@@ -153,6 +163,8 @@ const TOPIC_PATTERNS = [
       "endise",
       "endişeliyim",
       "endiseliyim",
+      "gelecek için endişeliyim",
+      "yarın ne olacak",
       "tedirgin",
       "panik",
       "kötü bir şey",
@@ -174,6 +186,9 @@ const TOPIC_PATTERNS = [
       "hakkim yeniyor",
       "haks?zl??a u?rad?m",
       "haksizliga ugradim",
+      "adalet istiyorum",
+      "zulüm görüyorum",
+      "zulum goruyorum",
     ],
   },
   {
@@ -191,6 +206,11 @@ const TOPIC_PATTERNS = [
       "gecim derdi",
       "maddi s?k?nt? ya??yorum",
       "maddi sikinti yasiyorum",
+      "borcum var",
+      "çok borcum var",
+      "geçinemiyorum",
+      "para yetmiyor",
+      "iş bulamıyorum",
     ],
   },
   {
@@ -386,7 +406,7 @@ function inferContextTopic(message, history = []) {
 function recoverLastExplicitTopic(history) {
   if (!Array.isArray(history)) return null;
 
-  const explicitTopics = ["namaz", "dua", "zikir", "sabır", "tevekkül", "tövbe", "umut", "hz_muhammed"];
+  const explicitTopics = ["namaz", "dua", "zikir", "sabır", "tevekkül", "tövbe", "umut", "hz_muhammed", "şifa", "adalet", "rızık", "yalnızlık", "kaygı"];
 
   for (let i = history.length - 1; i >= 0; i -= 1) {
     const msg = history[i];
@@ -560,6 +580,8 @@ function secondaryThemesForContextTopic(topic) {
     yalnızlık: ["tevekkül", "umut"],
     şifa: ["hastalık", "sabır"],
     kaygı: ["tevekkül", "umut"],
+    adalet: ["sabır", "affetmek"],
+    rızık: ["tevekkül", "umut"],
     daralma: ["tevekkül", "umut"],
     korku: ["tevekkül", "umut"],
     çaresizlik: ["tevekkül", "sabır"],
