@@ -46,7 +46,7 @@ powershell -ExecutionPolicy Bypass -File scripts/run_ilmihal_visual_regression.p
 
 This command:
 
-- opens only `İlmihal Rehberi`
+- opens only `Dinî Bilgiler`
 - runs only the selected tagged cases
 - checks that expected text appears on screen
 - captures screenshots only on failure

@@ -7,7 +7,7 @@ require("dotenv").config({
 
 const express = require("express");
 const { buildChatResponse } = require("./agent/index");
-const { detectExplicitTopic, normalize } = require("./agent/context_resolver");
+const { detectExplicitTopic, isPureGreetingMessage, normalize } = require("./agent/context_resolver");
 const { resolveCurrentMessageOverrideTopic } = require("./agent/ayah_ranker");
 const { lookupKnowledgeAnswer } = require("./agent/knowledge_base");
 
@@ -256,7 +256,10 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         redirect_module: response.redirect_module,
       });
     }
-    const ilmihalKnowledgeHit = module === "ilmihal" ? lookupKnowledgeAnswer(message, {}, null, history) : null;
+    const ilmihalKnowledgeHit =
+      module === "ilmihal" && !isPureGreetingMessage(message)
+        ? lookupKnowledgeAnswer(message, {}, null, history)
+        : null;
     const response = await buildChatResponse(message, history, {
       module,
       forceIlmihalKnowledge: Boolean(ilmihalKnowledgeHit),
@@ -617,5 +620,4 @@ function getLanAddress() {
   }
   return null;
 }
-
 

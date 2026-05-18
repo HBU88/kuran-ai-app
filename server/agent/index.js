@@ -16,6 +16,7 @@ const {
 const {
   canonicalTopic,
   detectExplicitTopic,
+  isPureGreetingMessage,
   isPrayerRakatsQuestion,
   normalize,
   secondaryThemesForContextTopic,
@@ -128,6 +129,10 @@ function isForcedQuranGuidanceMessage(message, moduleMode = "chat") {
 }
 
 function resolvePreModuleDecision(message, history = [], moduleMode = "chat") {
+  if (isPureGreetingMessage(message)) {
+    return { module: "chat", reason: "pure_greeting", pre_route_stage: "casual_greeting" };
+  }
+
   const knowledgeHit = routeKnowledge(message, {}, null, history);
   if (!knowledgeHit) return null;
 
@@ -522,10 +527,70 @@ function buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preR
   });
 }
 
+function buildCasualConversationResponse(message, history, baseAnalysis, timing, moduleMode = "chat") {
+  const routeMode = moduleMode === "ilmihal" ? "casual_conversation" : "quran_guidance";
+  const analysis = {
+    ...baseAnalysis,
+    intent: "casual_conversation",
+    sub_intent: "casual_conversation",
+    response_type: "direct_answer",
+    primary_theme: "casual",
+    context_topic: "casual",
+    emotion: baseAnalysis.emotion || "sakin",
+    severity: baseAnalysis.severity || "low",
+  };
+  const assistantText = timing.measureSync("response_composer_ms", () =>
+    buildAssistantText(analysis, null, message, {
+      subIntent: "casual_conversation",
+      responseStrategy: responseStrategyForSubIntent("casual_conversation"),
+      recent_assistant_texts: recentAssistantTextsFromHistory(history),
+    })
+  );
+  const moduleGreeting =
+    moduleMode === "ilmihal"
+      ? "Merhaba, Dinî Bilgiler bölümündeyim. Namaz, ibadet, helal-haram ve günlük dinî konularda soru sorabilirsin."
+      : assistantText;
+  const responsePreview = isDebugChatEngineEnabled() ? moduleGreeting.slice(0, 800) : null;
+  const decisionMeta = buildDecisionMeta(
+    [],
+    {
+      responseType: "direct_answer",
+      ayahUsed: false,
+      selectedAyah: null,
+      topAyahIds: [],
+    },
+    false,
+    routeMode,
+    null,
+    timing.snapshot(),
+    "local_fast_path",
+    moduleMode,
+    responsePreview,
+    "casual_greeting"
+  );
+
+  return applySafetyGuard({
+    ...analysis,
+    response_type: "direct_answer",
+    ayah_used: false,
+    top_ayah_ids: [],
+    selected_ayah: null,
+    decision_meta: decisionMeta,
+    assistant_text: moduleGreeting,
+  });
+}
+
 async function buildChatResponse(message, history = [], options = {}) {
   const moduleMode = normalizeModuleMode(options.module);
   const timing = createTimingTracker();
   const forceIlmihalKnowledge = options.forceIlmihalKnowledge === true;
+  if (isPureGreetingMessage(message)) {
+    const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
+      analyzeUserMessageFallback(message, history)
+    );
+    return buildCasualConversationResponse(message, history, baseAnalysis, timing, moduleMode);
+  }
+
   const normalizedMessageForRepentance = normalize(message);
   if (
     moduleMode === "ilmihal" &&
@@ -1452,7 +1517,4 @@ function wasPlannerAppliedToAnalysis(baseAnalysis, analysis, plannerResult) {
     analysis.response_type !== baseAnalysis.response_type
   );
 }
-
-
-
 

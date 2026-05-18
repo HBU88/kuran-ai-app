@@ -11,7 +11,7 @@ class AppConstants {
   );
   static const appTagline = 'Hakikate yönlendiren yapay zekâ';
   static const welcomeMessage =
-      'Selam, HAKAI’ye hoş geldin. Sana ayet rehberliği veya ilmihal bilgisiyle yardımcı olabilirim.';
+      'Selam, HAKAI’ye hoş geldin. Sana ayet rehberliği veya dinî bilgilerle yardımcı olabilirim.';
   static const connectionFallbackMessage =
       'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.';
   static const logoAssetPlaceholder = 'assets/app/launcher_icon.png';

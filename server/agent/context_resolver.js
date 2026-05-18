@@ -612,6 +612,17 @@ function normalize(value) {
   return text;
 }
 
+function isPureGreetingMessage(value) {
+  const normalized = normalize(value);
+  return new Set([
+    "merhaba",
+    "selam",
+    "hello",
+    "nasılsın",
+    "nasilsin",
+  ]).has(normalized);
+}
+
 function decodeURIComponentSafe(str) {
   try {
     return decodeURIComponent(str);
@@ -728,5 +739,6 @@ module.exports = {
   themeForContextTopic,
   secondaryThemesForContextTopic,
   normalize,
+  isPureGreetingMessage,
   decodeURIComponentSafe,
 };

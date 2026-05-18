@@ -45,7 +45,7 @@ Future<void> main() async {
         );
         await _requireExactlyOne(
           tester,
-          find.widgetWithText(HomeMenuItem, 'İlmihal Rehberi'),
+          find.widgetWithText(HomeMenuItem, 'Dinî Bilgiler'),
         );
         await _requireExactlyOne(
           tester,
@@ -67,13 +67,13 @@ Future<void> main() async {
     );
   });
 
-  testWidgets('İlmihal Rehberi opens', (WidgetTester tester) async {
+  testWidgets('Dinî Bilgiler opens', (WidgetTester tester) async {
     await _runVisualScenario(
       tester,
       screenshotName: 'ilmihal_rehberi_opens_failure',
       body: () async {
         await _launchAppAndWaitForHome(tester);
-        await _openChatMode(tester, 'İlmihal Rehberi');
+        await _openChatMode(tester, 'Dinî Bilgiler');
         await _requireExactlyOne(tester, find.byType(ChatScreen));
       },
     );
@@ -85,7 +85,7 @@ Future<void> main() async {
       screenshotName: 'user_can_type_message_failure',
       body: () async {
         await _launchAppAndWaitForHome(tester);
-        await _openChatMode(tester, 'İlmihal Rehberi');
+        await _openChatMode(tester, 'Dinî Bilgiler');
         const prompt = 'arkadan konuşmak günah mı';
         await _typeMessage(tester, prompt);
         await _requireAtLeastOne(tester, find.text(prompt));
@@ -100,7 +100,7 @@ Future<void> main() async {
       screenshotName: 'response_bubble_appears_failure',
       body: () async {
         await _launchAppAndWaitForHome(tester);
-        await _openChatMode(tester, 'İlmihal Rehberi');
+        await _openChatMode(tester, 'Dinî Bilgiler');
         await _sendMessage(tester, 'arkadan konuşmak günah mı');
         await _scrollChatIntoView(tester, find.byType(AssistantMessage));
         await _requireAtLeastOne(tester, find.byType(AssistantMessage));
@@ -109,18 +109,21 @@ Future<void> main() async {
     );
   });
 
-  testWidgets('redirect message appears correctly', (WidgetTester tester) async {
+  testWidgets('redirect message appears correctly',
+      (WidgetTester tester) async {
     await _runVisualScenario(
       tester,
       screenshotName: 'redirect_message_appears_failure',
       body: () async {
         await _launchAppAndWaitForHome(tester);
-        await _openChatMode(tester, 'İlmihal Rehberi');
+        await _openChatMode(tester, 'Dinî Bilgiler');
         await _sendMessage(tester, 'Allah beni affeder mi');
         await _scrollChatIntoView(tester, find.textContaining('Tövbe'));
-        await _scrollChatIntoView(tester, find.textContaining("Ayet Rehberi'ne git"));
+        await _scrollChatIntoView(
+            tester, find.textContaining("Ayet Rehberi'ne git"));
         await _requireAtLeastOne(tester, find.textContaining('Tövbe'));
-        await _requireAtLeastOne(tester, find.textContaining("Ayet Rehberi'ne git"));
+        await _requireAtLeastOne(
+            tester, find.textContaining("Ayet Rehberi'ne git"));
 
         await tester.tap(find.text("Ayet Rehberi'ne git"));
         await tester.pump();
@@ -129,7 +132,8 @@ Future<void> main() async {
     );
   });
 
-  testWidgets('redirect message appears for pişmanlık', (WidgetTester tester) async {
+  testWidgets('redirect message appears for pişmanlık',
+      (WidgetTester tester) async {
     await _runVisualScenario(
       tester,
       screenshotName: 'redirect_message_pismanlik_failure',
@@ -138,9 +142,11 @@ Future<void> main() async {
         await _openChatMode(tester, 'Ayet Rehberi');
         await _sendMessage(tester, 'çok pişmanım');
         await _scrollChatIntoView(tester, find.textContaining('daha uygundur'));
-        await _scrollChatIntoView(tester, find.textContaining("İlmihal Rehberi'ne git"));
+        await _scrollChatIntoView(
+            tester, find.textContaining("Dinî Bilgiler'e git"));
         await _requireAtLeastOne(tester, find.textContaining('daha uygundur'));
-        await _requireAtLeastOne(tester, find.textContaining("İlmihal Rehberi'ne git"));
+        await _requireAtLeastOne(
+            tester, find.textContaining("Dinî Bilgiler'e git"));
       },
     );
   });
@@ -199,10 +205,12 @@ Future<void> main() async {
           await _launchAppAndWaitForHome(tester);
           await _openChatMode(tester, 'Ayet Rehberi');
           await _sendMessage(tester, scenario.prompt);
-          await _scrollChatIntoView(tester, find.textContaining(scenario.fragment));
+          await _scrollChatIntoView(
+              tester, find.textContaining(scenario.fragment));
           await _scrollChatIntoView(tester, find.byType(ChatAyahCard));
           await _requireAtLeastOne(tester, find.byType(ChatAyahCard));
-          await _requireAtLeastOne(tester, find.textContaining(scenario.fragment));
+          await _requireAtLeastOne(
+              tester, find.textContaining(scenario.fragment));
         },
       );
     });
@@ -250,7 +258,7 @@ Future<void> _launchAppAndWaitForHome(WidgetTester tester) async {
   await app.main();
   await tester.pump();
   final ayetFinder = find.widgetWithText(HomeMenuItem, 'Ayet Rehberi');
-  final ilmihalFinder = find.widgetWithText(HomeMenuItem, 'İlmihal Rehberi');
+  final ilmihalFinder = find.widgetWithText(HomeMenuItem, 'Dinî Bilgiler');
   await _waitFor(tester, ayetFinder);
   await _waitFor(tester, ilmihalFinder);
   await tester.ensureVisible(ayetFinder);

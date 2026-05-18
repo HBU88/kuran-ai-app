@@ -55,7 +55,9 @@ List<_RegressionCase> _loadCases() {
     throw StateError('Visual regression cases must be a JSON array.');
   }
 
-  return parsed.map((item) => _RegressionCase.fromJson(item as Map<String, dynamic>)).toList();
+  return parsed
+      .map((item) => _RegressionCase.fromJson(item as Map<String, dynamic>))
+      .toList();
 }
 
 Future<void> _runVisualScenario(
@@ -89,7 +91,8 @@ String _assistantBubbleText(WidgetTester tester) {
   );
   final buffer = StringBuffer();
   for (final widget in tester.widgetList<Text>(textFinder)) {
-    final text = widget.data?.trim() ?? widget.textSpan?.toPlainText().trim() ?? '';
+    final text =
+        widget.data?.trim() ?? widget.textSpan?.toPlainText().trim() ?? '';
     if (text.isNotEmpty) {
       if (buffer.isNotEmpty) {
         buffer.writeln();
@@ -103,14 +106,14 @@ String _assistantBubbleText(WidgetTester tester) {
 Future<void> _launchAppAndOpenIlmihal(WidgetTester tester) async {
   await app.main();
   await tester.pump();
-  final ilmihalFinder = find.widgetWithText(HomeMenuItem, 'İlmihal Rehberi');
+  final ilmihalFinder = find.widgetWithText(HomeMenuItem, 'Dinî Bilgiler');
   await _waitFor(tester, find.widgetWithText(HomeMenuItem, 'Ayet Rehberi'));
   await _waitFor(tester, ilmihalFinder);
   await tester.ensureVisible(ilmihalFinder);
   await tester.pumpAndSettle(const Duration(milliseconds: 250));
   await tester.tap(ilmihalFinder);
   await tester.pump();
-  await _waitFor(tester, find.text('İlmihal Rehberi ile sakin bir sohbet'));
+  await _waitFor(tester, find.text('Dinî Bilgiler ile sakin bir sohbet'));
 }
 
 Future<void> _sendMessage(WidgetTester tester, String text) async {
@@ -152,7 +155,8 @@ class _RegressionCase {
     return _RegressionCase(
       id: (json['id'] ?? '').toString(),
       query: (json['query'] ?? '').toString(),
-      expectedTextContains: List<String>.from(json['expected_text_contains'] ?? const <String>[]),
+      expectedTextContains:
+          List<String>.from(json['expected_text_contains'] ?? const <String>[]),
     );
   }
 

@@ -1320,7 +1320,17 @@ function resolveDailyPracticeTopic(message, normalizedMessage) {
   ) {
     return "anne_baba_hakki";
   }
-  if (includesLoose(normalizedMessage, "giybet nedir") || includesLoose(normalizedMessage, "gıybet nedir") || includesLoose(normalizedMessage, "giybet")) {
+  if (
+    includesLoose(normalizedMessage, "giybet nedir") ||
+    includesLoose(normalizedMessage, "gıybet nedir") ||
+    includesLoose(normalizedMessage, "giybet etmek gunah mi") ||
+    includesLoose(normalizedMessage, "gıybet etmek günah mı") ||
+    includesLoose(normalizedMessage, "arkadan konusmak") ||
+    includesLoose(normalizedMessage, "arkadan konuşmak") ||
+    includesLoose(normalizedMessage, "birinin arkasindan konusmak") ||
+    includesLoose(normalizedMessage, "birinin arkasından konuşmak") ||
+    includesLoose(normalizedMessage, "giybet")
+  ) {
     return "giybet_nedir";
   }
   if (includesLoose(normalizedMessage, "israf nedir") || includesLoose(normalizedMessage, "israf")) {
@@ -1389,4 +1399,3 @@ module.exports = {
   routeKnowledge,
   loadIlmihalKnowledge,
 };
-

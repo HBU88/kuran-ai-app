@@ -1227,6 +1227,42 @@ async function runModuleEndpointSmokeTests() {
     },
     {
       path: "/ilmihal-chat",
+      prompt: "Merhaba",
+      expectedModule: "ilmihal",
+      expectedIntent: "casual_conversation",
+      expectedRouteMode: "casual_conversation",
+      unexpectedRouteMode: "quran_guidance",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedRedirectModule: null,
+      expectAssistantContains: "Merhaba, Dinî Bilgiler bölümündeyim. Namaz, ibadet, helal-haram ve günlük dinî konularda soru sorabilirsin.",
+      expectAssistantNotContains: "Ayet Rehberi",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "selam",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "casual_conversation",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedRedirectModule: null,
+      expectAssistantContains: "Merhaba, Dinî Bilgiler bölümündeyim. Namaz, ibadet, helal-haram ve günlük dinî konularda soru sorabilirsin.",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
+      prompt: "hello",
+      expectedModule: "ilmihal",
+      expectedRouteMode: "casual_conversation",
+      expectedResponseType: "direct_answer",
+      expectedSelectedAyah: null,
+      expectedRedirectModule: null,
+      expectAssistantContains: "Merhaba, Dinî Bilgiler bölümündeyim. Namaz, ibadet, helal-haram ve günlük dinî konularda soru sorabilirsin.",
+      maxAyahRankerMs: 0,
+    },
+    {
+      path: "/ilmihal-chat",
       prompt: "arkadan konusmak gunah mi",
       expectedModule: "ilmihal",
       expectedRouteMode: "ilmihal_knowledge",
@@ -1440,8 +1476,14 @@ async function runModuleEndpointSmokeTests() {
       if ((routingPayload?.module || null) !== test.expectedModule) {
         failures.push(`decision_meta.module=${routingPayload?.module}`);
       }
+      if (test.expectedIntent && routingPayload?.intent !== test.expectedIntent) {
+        failures.push(`intent=${routingPayload?.intent}`);
+      }
       if (test.expectedRouteMode && routingPayload?.route_mode !== test.expectedRouteMode) {
         failures.push(`route_mode=${routingPayload?.route_mode}`);
+      }
+      if (test.unexpectedRouteMode && routingPayload?.route_mode === test.unexpectedRouteMode) {
+        failures.push(`route_mode must not be ${test.unexpectedRouteMode}`);
       }
       if (test.expectedRankerSource && routingPayload?.ranker_source !== test.expectedRankerSource) {
         failures.push(`ranker_source=${routingPayload?.ranker_source}`);
@@ -1800,4 +1842,3 @@ function failResult(test, reason, payload = null) {
 }
 
 await main();
-

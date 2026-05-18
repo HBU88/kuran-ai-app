@@ -12,7 +12,7 @@ extension ChatModeX on ChatMode {
       case ChatMode.ayah:
         return 'Ayet Rehberi';
       case ChatMode.ilmihal:
-        return 'İlmihal Rehberi';
+        return 'Dinî Bilgiler';
     }
   }
 
@@ -23,7 +23,7 @@ extension ChatModeX on ChatMode {
       case ChatMode.ayah:
         return 'Ayet Rehberi ile sakin bir sohbet';
       case ChatMode.ilmihal:
-        return 'İlmihal Rehberi ile sakin bir sohbet';
+        return 'Dinî Bilgiler ile sakin bir sohbet';
     }
   }
 

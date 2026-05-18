@@ -74,18 +74,22 @@ class HomeScreen extends StatelessWidget {
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [
-                                  AppColors.primaryAccent.withValues(alpha: 0.22),
+                                  AppColors.primaryAccent
+                                      .withValues(alpha: 0.22),
                                   AppColors.surfaceSoft,
                                 ],
                               ),
-                              borderRadius: BorderRadius.circular(AppRadius.medium),
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.medium),
                               border: Border.all(
-                                color: AppColors.primaryAccent.withValues(alpha: 0.2),
+                                color: AppColors.primaryAccent
+                                    .withValues(alpha: 0.2),
                                 width: 0.8,
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.primaryAccent.withValues(alpha: 0.16),
+                                  color: AppColors.primaryAccent
+                                      .withValues(alpha: 0.16),
                                   blurRadius: 16,
                                   offset: const Offset(0, 6),
                                 ),
@@ -112,7 +116,10 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   AppConstants.appName,
-                                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium
+                                      ?.copyWith(
                                         fontWeight: FontWeight.w800,
                                         letterSpacing: 0.6,
                                       ),
@@ -120,7 +127,10 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(height: 5),
                                 Text(
                                   AppConstants.appTagline,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
                                         color: AppColors.textSecondary,
                                         height: 1.45,
                                       ),
@@ -136,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                         runSpacing: 8,
                         children: [
                           _StatusChip(label: 'Kur’an'),
-                          _StatusChip(label: 'İlmihal'),
+                          _StatusChip(label: 'Dinî Bilgiler'),
                           _StatusChip(label: 'Kıble'),
                           _StatusChip(label: 'Ezber'),
                         ],
@@ -148,7 +158,8 @@ class HomeScreen extends StatelessWidget {
                 SectionTitle(
                   'Bugünün Ayeti',
                   action: TextButton(
-                    onPressed: () => Navigator.pushNamed(context, AppRoutes.chat),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.chat),
                     child: const Text('Sohbete git'),
                   ),
                 ),
@@ -166,7 +177,8 @@ class HomeScreen extends StatelessWidget {
                 const _ModuleGrid(),
                 const SizedBox(height: AppSpacing.large),
                 AppCard(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Row(
                     children: [
                       Container(
@@ -174,9 +186,11 @@ class HomeScreen extends StatelessWidget {
                         height: 36,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: AppColors.primaryAccent.withValues(alpha: 0.14),
+                          color:
+                              AppColors.primaryAccent.withValues(alpha: 0.14),
                           border: Border.all(
-                            color: AppColors.primaryAccent.withValues(alpha: 0.16),
+                            color:
+                                AppColors.primaryAccent.withValues(alpha: 0.16),
                           ),
                         ),
                         child: const Icon(
@@ -188,11 +202,12 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Ayet Rehberi, İlmihal Rehberi, Namaz Vakitleri, Kıble ve Ezber modüllerine buradan ulaşabilirsin.',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: AppColors.textSecondary,
-                                height: 1.5,
-                              ),
+                          'Ayet Rehberi, Dinî Bilgiler, Namaz Vakitleri, Kıble ve Ezber modüllerine buradan ulaşabilirsin.',
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.textSecondary,
+                                    height: 1.5,
+                                  ),
                         ),
                       ),
                     ],
@@ -224,8 +239,8 @@ class _ModuleGrid extends StatelessWidget {
         ),
       ),
       _ModuleData(
-        label: 'İlmihal Rehberi',
-        subtitle: 'İbadet ve günlük dinî bilgiler',
+        label: 'Dinî Bilgiler',
+        subtitle: 'Namaz, ibadet, helal-haram ve günlük dinî sorular',
         iconAsset: 'assets/app/ilmihal_icon.png',
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(

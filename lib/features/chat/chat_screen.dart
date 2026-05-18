@@ -427,7 +427,7 @@ class _ModuleRedirectAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isIlmihal = targetModule == 'ilmihal';
-    final label = isIlmihal ? "İlmihal Rehberi'ne git" : "Ayet Rehberi'ne git";
+    final label = isIlmihal ? "Dinî Bilgiler'e git" : "Ayet Rehberi'ne git";
     final mode = isIlmihal ? ChatMode.ilmihal : ChatMode.ayah;
 
     return Padding(
