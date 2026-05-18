@@ -5,14 +5,25 @@ import 'package:http/http.dart' as http;
 class DiyanetAuthService {
   DiyanetAuthService({
     http.Client? client,
-    String userName = 'uckun.burak@gmail.com',
-    String password = '7D-aK+y3',
+    String? userName,
+    String? password,
   })  : _client = client ?? http.Client(),
-        _userName = userName,
-        _password = password;
+        _userName = (userName ?? _defaultUserName).trim(),
+        _password = password ?? _defaultPassword;
 
   static final Uri _loginUri = Uri.parse(
-    'https://awqatsalah.diyanet.gov.tr/Auth/Login',
+    const String.fromEnvironment(
+      'DIYANET_AUTH_URL',
+      defaultValue: 'https://awqatsalah.diyanet.gov.tr/Auth/Login',
+    ),
+  );
+  static const _defaultUserName = String.fromEnvironment(
+    'DIYANET_API_USERNAME',
+    defaultValue: '',
+  );
+  static const _defaultPassword = String.fromEnvironment(
+    'DIYANET_API_PASSWORD',
+    defaultValue: '',
   );
 
   final http.Client _client;
@@ -22,6 +33,12 @@ class DiyanetAuthService {
   String? lastResponseBody;
 
   Future<String> login() async {
+    if (_userName.isEmpty || _password.isEmpty) {
+      throw const DiyanetAuthException(
+        'Diyanet credentials are not configured.',
+      );
+    }
+
     try {
       final response = await _postLogin(
         payload: {
@@ -78,8 +95,7 @@ class DiyanetAuthService {
   String _accessTokenFromResponse(http.Response response) {
     if (response.statusCode != 200) {
       throw DiyanetAuthException(
-        'Diyanet login failed with status ${response.statusCode}. '
-        'Body: ${response.body}',
+        'Diyanet login failed with status ${response.statusCode}.',
         statusCode: response.statusCode,
         responseBody: response.body,
       );
@@ -151,7 +167,7 @@ class DiyanetAuthException implements Exception {
       parts.add('Status: $statusCode');
     }
     if (responseBody != null && responseBody!.isNotEmpty) {
-      parts.add('Body: $responseBody');
+      parts.add('Body length: ${responseBody!.length}');
     }
     if (cause != null) {
       parts.add('Cause: $cause');

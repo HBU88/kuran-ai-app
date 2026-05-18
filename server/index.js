@@ -10,6 +10,7 @@ const { buildChatResponse } = require("./agent/index");
 const { detectExplicitTopic, isPureGreetingMessage, normalize } = require("./agent/context_resolver");
 const { resolveCurrentMessageOverrideTopic } = require("./agent/ayah_ranker");
 const { lookupKnowledgeAnswer } = require("./agent/knowledge_base");
+const { AuthService, bearerTokenFromRequest } = require("./auth");
 const {
   createCorsMiddleware,
   createRateLimiter,
@@ -24,6 +25,7 @@ const port = process.env.PORT || 3000;
 const ENGINE_VERSION = "runtime-check-1";
 const STARTED_AT = new Date().toISOString();
 const CHAT_RUNTIME_LOG_PATH = path.join(__dirname, "..", "logs", "chat_runtime_log.txt");
+const authService = new AuthService();
 
 function isRepentanceRedirectMessage(message) {
   const normalized = String(message || "").toLocaleLowerCase("tr-TR");
@@ -92,6 +94,75 @@ app.get("/health", (req, res) => {
 });
 
 const chatRateLimiter = createRateLimiter();
+const authRateLimiter = createRateLimiter({
+  max: readPositiveInt(process.env.HAKAI_AUTH_RATE_LIMIT_MAX, 10),
+  windowMs: readPositiveInt(process.env.HAKAI_AUTH_RATE_LIMIT_WINDOW_MS, 60_000),
+});
+
+app.post("/auth/register", authRateLimiter, async (req, res) => {
+  try {
+    const result = await authService.register(req.body || {});
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 400, {
+        ok: false,
+        error: result.error,
+      });
+    }
+    return sendUtf8Json(res, 201, {
+      ok: true,
+      user: result.user,
+      token: result.token,
+      token_type: "Bearer",
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
+app.post("/auth/login", authRateLimiter, async (req, res) => {
+  try {
+    const result = await authService.login(req.body || {});
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 400, {
+        ok: false,
+        error: result.error,
+      });
+    }
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      user: result.user,
+      token: result.token,
+      token_type: "Bearer",
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
+app.post("/auth/logout", authRateLimiter, (req, res) => {
+  return sendUtf8Json(res, 200, {
+    ok: true,
+    message: "logout is handled by deleting the client-side bearer token",
+  });
+});
+
+app.get("/me", authRateLimiter, async (req, res) => {
+  try {
+    const result = await authService.me(bearerTokenFromRequest(req));
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 401, {
+        ok: false,
+        error: result.error,
+      });
+    }
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      user: result.user,
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
 
 app.post("/chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "chat"));
 app.post("/ayah-chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "ayah"));
@@ -501,6 +572,24 @@ function sendUtf8Json(res, statusCode, body) {
   res.status(statusCode);
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   return res.json(body);
+}
+
+function handleAuthError(res, error) {
+  if (error && error.message === "HAKAI_AUTH_JWT_SECRET is required") {
+    return sendUtf8Json(res, 500, {
+      ok: false,
+      error: "auth is not configured",
+    });
+  }
+  return sendUtf8Json(res, 500, {
+    ok: false,
+    error: "auth request failed",
+  });
+}
+
+function readPositiveInt(value, fallback) {
+  const parsed = Number.parseInt(String(value || ""), 10);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 }
 
 function isDebugChatEngineEnabled() {

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "smoke": "node agent.js \"çok yalnız hissediyorum\"",
+    "test:auth": "node tests/auth_regression.mjs",
     "test:security": "node tests/security_regression.mjs",
     "test:chat": "node tests/chat_response_validator.mjs",
     "test:ilmihal-regression": "node scripts/ilmihal/test_ilmihal_regression.mjs",
