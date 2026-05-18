@@ -139,6 +139,48 @@ app.post("/auth/login", authRateLimiter, async (req, res) => {
   }
 });
 
+app.post("/auth/forgot-password", authRateLimiter, async (req, res) => {
+  try {
+    const result = await authService.forgotPassword(req.body || {});
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 400, {
+        ok: false,
+        error: result.error,
+      });
+    }
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      message:
+        "Eğer bu e-posta adresiyle kayıtlı bir hesap varsa, şifre yenileme bağlantısı gönderilecektir.",
+    });
+  } catch (error) {
+    console.warn("[auth] password reset request failed internally");
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      message:
+        "Eğer bu e-posta adresiyle kayıtlı bir hesap varsa, şifre yenileme bağlantısı gönderilecektir.",
+    });
+  }
+});
+
+app.post("/auth/reset-password", authRateLimiter, async (req, res) => {
+  try {
+    const result = await authService.resetPassword(req.body || {});
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 400, {
+        ok: false,
+        error: result.error,
+      });
+    }
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      message: "password reset completed",
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
 app.post("/auth/logout", authRateLimiter, (req, res) => {
   return sendUtf8Json(res, 200, {
     ok: true,

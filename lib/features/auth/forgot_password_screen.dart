@@ -8,30 +8,30 @@ import '../../theme/app_colors.dart';
 import 'auth_controller.dart';
 import 'auth_form_validators.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
+
+  static const _genericSuccessMessage =
+      'Eğer bu e-posta adresiyle kayıtlı bir hesap varsa, şifre yenileme bağlantısı gönderilecektir.';
 
   @override
   void dispose() {
     _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Giriş yap')),
+      appBar: AppBar(title: const Text('Şifremi unuttum')),
       body: AppGradientBackground(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(18, 10, 18, 28),
@@ -41,16 +41,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 key: _formKey,
                 child: Consumer<AuthController>(
                   builder: (context, controller, _) {
+                    final infoMessage = controller.infoMessage;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'HAKAI hesabı',
+                          'Şifre yenileme',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Giriş yapmadan da Kur’an merkezli manevi rehberlik ve tüm modülleri kullanabilirsin.',
+                          'E-posta adresini yaz. Hesabın varsa şifre yenileme bağlantısı hazırlanır.',
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 18),
@@ -64,30 +65,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           validator: AuthFormValidators.email,
                         ),
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _passwordController,
-                          obscureText: _obscurePassword,
-                          autofillHints: const [AutofillHints.password],
-                          decoration: InputDecoration(
-                            labelText: 'Şifre',
-                            prefixIcon: const Icon(Icons.lock_outline_rounded),
-                            suffixIcon: IconButton(
-                              tooltip: _obscurePassword
-                                  ? 'Şifreyi göster'
-                                  : 'Şifreyi gizle',
-                              onPressed: () => setState(
-                                () => _obscurePassword = !_obscurePassword,
-                              ),
-                              icon: Icon(
-                                _obscurePassword
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined,
-                              ),
-                            ),
+                        if (infoMessage != null) ...[
+                          const SizedBox(height: 12),
+                          Text(
+                            _genericSuccessMessage,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: AppColors.primaryAccent,
+                                    ),
                           ),
-                          validator: AuthFormValidators.password,
-                        ),
+                        ],
                         if (controller.errorMessage != null) ...[
                           const SizedBox(height: 12),
                           Text(
@@ -112,30 +99,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                       strokeWidth: 2,
                                     ),
                                   )
-                                : const Icon(Icons.login_rounded),
-                            label: const Text('Giriş yap'),
+                                : const Icon(Icons.mark_email_read_outlined),
+                            label: const Text('Bağlantı gönder'),
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: controller.isBusy
-                                ? null
-                                : () => Navigator.pushNamed(
-                                      context,
-                                      AppRoutes.forgotPassword,
-                                    ),
-                            child: const Text('Şifremi unuttum'),
-                          ),
-                        ),
-                        const SizedBox(height: 4),
                         TextButton(
-                          onPressed: () => Navigator.pushReplacementNamed(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Giriş ekranına dön'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pushNamed(
                             context,
-                            AppRoutes.register,
+                            AppRoutes.resetPassword,
                           ),
-                          child: const Text('Hesabın yok mu? Kayıt ol'),
+                          child: const Text('Şifre yenileme kodum var'),
                         ),
                       ],
                     );
@@ -151,16 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-    final controller = context.read<AuthController>();
-    final ok = await controller.login(
-      email: _emailController.text.trim(),
-      password: _passwordController.text,
-    );
-    if (!mounted || !ok) return;
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      AppRoutes.account,
-      ModalRoute.withName(AppRoutes.home),
-    );
+    await context.read<AuthController>().forgotPassword(
+          email: _emailController.text.trim(),
+        );
   }
 }

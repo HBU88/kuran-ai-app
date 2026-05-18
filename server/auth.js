@@ -3,9 +3,17 @@ const fs = require("fs");
 const path = require("path");
 
 const DEFAULT_TOKEN_TTL_SECONDS = 60 * 60 * 24 * 7;
+const DEFAULT_PASSWORD_RESET_TOKEN_TTL_SECONDS = 30 * 60;
 const DEFAULT_USER_STORE_PATH = path.join(__dirname, ".data", "users.json");
+const DEFAULT_PASSWORD_RESET_DEV_OUTBOX_PATH = path.join(
+  __dirname,
+  ".data",
+  "password-reset-dev-outbox.json"
+);
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PASSWORD_MIN_LENGTH = 8;
+const PASSWORD_RESET_GENERIC_MESSAGE =
+  "If an account exists for that email, a password reset link will be sent.";
 
 class JsonUserStore {
   constructor(filePath = process.env.HAKAI_USER_STORE_PATH || DEFAULT_USER_STORE_PATH) {
@@ -28,6 +36,18 @@ class JsonUserStore {
     users.push(user);
     await this._writeUsers(users);
     return user;
+  }
+
+  async updateById(id, updater) {
+    const users = await this._readUsers();
+    const index = users.findIndex((user) => user.id === id);
+    if (index === -1) {
+      return null;
+    }
+    const updated = await updater({ ...users[index] });
+    users[index] = updated;
+    await this._writeUsers(users);
+    return updated;
   }
 
   async _readUsers() {
@@ -54,10 +74,17 @@ class JsonUserStore {
 class AuthService {
   constructor(options = {}) {
     this.store = options.store || new JsonUserStore(options.storePath);
+    this.passwordResetMailer = options.passwordResetMailer || new PasswordResetMailer();
     this.jwtSecret = options.jwtSecret || process.env.HAKAI_AUTH_JWT_SECRET || "";
     this.tokenTtlSeconds = Number.isInteger(options.tokenTtlSeconds)
       ? options.tokenTtlSeconds
       : readPositiveInt(process.env.HAKAI_AUTH_TOKEN_TTL_SECONDS, DEFAULT_TOKEN_TTL_SECONDS);
+    this.passwordResetTokenTtlSeconds = Number.isInteger(options.passwordResetTokenTtlSeconds)
+      ? options.passwordResetTokenTtlSeconds
+      : readPositiveInt(
+          process.env.HAKAI_PASSWORD_RESET_TOKEN_TTL_SECONDS,
+          DEFAULT_PASSWORD_RESET_TOKEN_TTL_SECONDS
+        );
   }
 
   async register(input = {}) {
@@ -115,6 +142,91 @@ class AuthService {
     };
   }
 
+  async forgotPassword(input = {}) {
+    const emailValidation = validateEmail(input.email);
+    if (!emailValidation.ok) {
+      return emailValidation;
+    }
+
+    const email = normalizeEmail(input.email);
+    const user = await this.store.findByEmail(email);
+    if (!user) {
+      return genericPasswordResetResult();
+    }
+
+    const rawToken = createPasswordResetToken();
+    const nowMs = Date.now();
+    const resetRecord = {
+      id: crypto.randomUUID(),
+      token_hash: hashPasswordResetToken(rawToken),
+      created_at: new Date(nowMs).toISOString(),
+      expires_at: new Date(nowMs + this.passwordResetTokenTtlSeconds * 1000).toISOString(),
+      used_at: null,
+    };
+
+    await this.store.updateById(user.id, (currentUser) => ({
+      ...currentUser,
+      password_reset_tokens: [
+        resetRecord,
+        ...activeResetTokens(currentUser.password_reset_tokens),
+      ].slice(0, 5),
+      updated_at: new Date(nowMs).toISOString(),
+    }));
+
+    await this.passwordResetMailer.sendPasswordReset({
+      email,
+      token: rawToken,
+      resetUrl: buildPasswordResetUrl(rawToken),
+    });
+
+    return genericPasswordResetResult();
+  }
+
+  async resetPassword(input = {}) {
+    const tokenValidation = validatePasswordResetTokenInput(input.token);
+    if (!tokenValidation.ok) return tokenValidation;
+    const passwordValidation = validatePassword(input.new_password);
+    if (!passwordValidation.ok) return passwordValidation;
+
+    const tokenHash = hashPasswordResetToken(input.token);
+    const users = await this.store._readUsers();
+    const user = users.find((candidate) =>
+      activeResetTokens(candidate.password_reset_tokens).some((record) =>
+        safeEqualString(record.token_hash, tokenHash)
+      )
+    );
+
+    if (!user) {
+      return { ok: false, statusCode: 400, error: "password reset token is invalid" };
+    }
+
+    const matchingToken = activeResetTokens(user.password_reset_tokens).find((record) =>
+      safeEqualString(record.token_hash, tokenHash)
+    );
+    if (!matchingToken) {
+      return { ok: false, statusCode: 400, error: "password reset token is invalid" };
+    }
+    if (matchingToken.used_at) {
+      return { ok: false, statusCode: 400, error: "password reset token is already used" };
+    }
+    if (Date.parse(matchingToken.expires_at) <= Date.now()) {
+      return { ok: false, statusCode: 400, error: "password reset token is expired" };
+    }
+
+    const now = new Date().toISOString();
+    await this.store.updateById(user.id, async (currentUser) => ({
+      ...currentUser,
+      password_hash: await hashPassword(input.new_password),
+      password_reset_tokens: activeResetTokens(currentUser.password_reset_tokens).map((record) => ({
+        ...record,
+        used_at: record.used_at || now,
+      })),
+      updated_at: now,
+    }));
+
+    return { ok: true, statusCode: 200 };
+  }
+
   issueToken(user) {
     if (!this.jwtSecret) {
       throw new Error("HAKAI_AUTH_JWT_SECRET is required");
@@ -148,6 +260,31 @@ class AuthService {
       return { ok: false, statusCode: 401, error: "invalid authorization token" };
     }
     return { ok: true, statusCode: 200, user: publicUser(user) };
+  }
+}
+
+class PasswordResetMailer {
+  constructor(options = {}) {
+    this.env = options.env || process.env.NODE_ENV || "development";
+    this.outboxPath = options.outboxPath || process.env.HAKAI_PASSWORD_RESET_DEV_OUTBOX_PATH || DEFAULT_PASSWORD_RESET_DEV_OUTBOX_PATH;
+  }
+
+  async sendPasswordReset({ email, token, resetUrl }) {
+    if (this.env === "production") {
+      console.warn("[auth] password reset email provider is not configured");
+      return false;
+    }
+
+    await appendDevPasswordResetOutbox(this.outboxPath, {
+      email,
+      reset_url: resetUrl,
+      token,
+      created_at: new Date().toISOString(),
+    });
+    console.info(
+      `[auth] dev password reset link written to ${this.outboxPath} for email_hash=${hashLogValue(email)} token_prefix=${String(token).slice(0, 8)}`
+    );
+    return true;
   }
 }
 
@@ -190,6 +327,13 @@ function validatePassword(password) {
   }
   if (password.length < PASSWORD_MIN_LENGTH) {
     return { ok: false, statusCode: 400, error: "password is too short" };
+  }
+  return { ok: true };
+}
+
+function validatePasswordResetTokenInput(token) {
+  if (typeof token !== "string" || !token.trim()) {
+    return { ok: false, statusCode: 400, error: "password reset token is required" };
   }
   return { ok: true };
 }
@@ -254,6 +398,53 @@ function safeEqualString(left, right) {
   return leftBuffer.length === rightBuffer.length && crypto.timingSafeEqual(leftBuffer, rightBuffer);
 }
 
+function createPasswordResetToken() {
+  return crypto.randomBytes(32).toString("base64url");
+}
+
+function hashPasswordResetToken(token) {
+  return crypto.createHash("sha256").update(String(token || ""), "utf8").digest("base64url");
+}
+
+function activeResetTokens(tokens) {
+  return Array.isArray(tokens) ? tokens.filter((token) => token && typeof token === "object") : [];
+}
+
+function genericPasswordResetResult() {
+  return {
+    ok: true,
+    statusCode: 200,
+    message: PASSWORD_RESET_GENERIC_MESSAGE,
+  };
+}
+
+function buildPasswordResetUrl(token) {
+  const baseUrl = String(process.env.HAKAI_PUBLIC_APP_URL || "http://localhost:3000").replace(/\/+$/, "");
+  return `${baseUrl}/reset-password?token=${encodeURIComponent(token)}`;
+}
+
+async function appendDevPasswordResetOutbox(filePath, entry) {
+  await fs.promises.mkdir(path.dirname(filePath), { recursive: true });
+  let entries = [];
+  try {
+    const raw = await fs.promises.readFile(filePath, "utf8");
+    const parsed = JSON.parse(raw);
+    entries = Array.isArray(parsed.resets) ? parsed.resets : [];
+  } catch (error) {
+    if (!error || error.code !== "ENOENT") {
+      throw error;
+    }
+  }
+  entries.push(entry);
+  const tmpPath = `${filePath}.${process.pid}.tmp`;
+  await fs.promises.writeFile(tmpPath, JSON.stringify({ resets: entries.slice(-20) }, null, 2), "utf8");
+  await fs.promises.rename(tmpPath, filePath);
+}
+
+function hashLogValue(value) {
+  return crypto.createHash("sha256").update(String(value || ""), "utf8").digest("hex").slice(0, 16);
+}
+
 function base64UrlJson(value) {
   return Buffer.from(JSON.stringify(value), "utf8").toString("base64url");
 }
@@ -288,9 +479,12 @@ function readPositiveInt(value, fallback) {
 module.exports = {
   AuthService,
   JsonUserStore,
+  PasswordResetMailer,
   bearerTokenFromRequest,
+  hashPasswordResetToken,
   publicUser,
   validateLoginInput,
   validateRegistrationInput,
+  validatePasswordResetTokenInput,
   verifyJwt,
 };

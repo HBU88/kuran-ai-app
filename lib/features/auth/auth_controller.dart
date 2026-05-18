@@ -11,6 +11,7 @@ class AuthController extends ChangeNotifier {
   AuthUserModel? user;
   bool isBusy = false;
   String? errorMessage;
+  String? infoMessage;
 
   bool get isLoggedIn => user != null && _service.isLoggedIn;
 
@@ -55,9 +56,28 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> forgotPassword({
+    required String email,
+  }) async {
+    return _run(() async {
+      infoMessage = await _service.forgotPassword(email: email);
+    });
+  }
+
+  Future<bool> resetPassword({
+    required String token,
+    required String newPassword,
+  }) async {
+    return _run(() async {
+      await _service.resetPassword(token: token, newPassword: newPassword);
+      infoMessage = 'Şifren yenilendi. Yeni şifrenle giriş yapabilirsin.';
+    });
+  }
+
   Future<bool> _run(Future<void> Function() action) async {
     isBusy = true;
     errorMessage = null;
+    infoMessage = null;
     notifyListeners();
     try {
       await action();

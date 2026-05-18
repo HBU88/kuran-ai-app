@@ -80,6 +80,43 @@ class AuthService {
     return AuthUserModel.fromJson(user);
   }
 
+  Future<String> forgotPassword({
+    required String email,
+  }) async {
+    final response = await _send(
+      () => _client.post(
+        Uri.parse('$_baseUrl/auth/forgot-password'),
+        headers: const {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({'email': email}),
+      ),
+    );
+    final decoded = _decodeObject(response);
+    return decoded['message']?.toString() ??
+        'Eğer bu e-posta adresiyle kayıtlı bir hesap varsa, şifre yenileme bağlantısı gönderilecektir.';
+  }
+
+  Future<void> resetPassword({
+    required String token,
+    required String newPassword,
+  }) async {
+    await _send(
+      () => _client.post(
+        Uri.parse('$_baseUrl/auth/reset-password'),
+        headers: const {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'token': token,
+          'new_password': newPassword,
+        }),
+      ),
+    );
+  }
+
   Future<void> logout() async {
     final token = _accessToken;
     _accessToken = null;
