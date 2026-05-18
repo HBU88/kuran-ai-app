@@ -10,12 +10,14 @@ class HomeMenuItem extends StatelessWidget {
     required this.subtitle,
     required this.iconAsset,
     required this.onTap,
+    this.icon,
   });
 
   final String label;
   final String subtitle;
   final String iconAsset;
   final VoidCallback onTap;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -79,26 +81,34 @@ class HomeMenuItem extends StatelessWidget {
                     child: SizedBox(
                       width: 56,
                       height: 56,
-                      child: Image.asset(
-                        iconAsset,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.red.withValues(alpha: 0.18),
-                              borderRadius: BorderRadius.circular(AppRadius.small),
-                              border: Border.all(
-                                color: Colors.redAccent.withValues(alpha: 0.55),
-                              ),
+                      child: icon == null
+                          ? Image.asset(
+                              iconAsset,
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.red.withValues(alpha: 0.18),
+                                    borderRadius:
+                                        BorderRadius.circular(AppRadius.small),
+                                    border: Border.all(
+                                      color: Colors.redAccent
+                                          .withValues(alpha: 0.55),
+                                    ),
+                                  ),
+                                  child: const Icon(
+                                    Icons.broken_image_outlined,
+                                    color: Colors.redAccent,
+                                    size: 22,
+                                  ),
+                                );
+                              },
+                            )
+                          : Icon(
+                              icon,
+                              color: AppColors.primaryAccent,
+                              size: 34,
                             ),
-                            child: const Icon(
-                              Icons.broken_image_outlined,
-                              color: Colors.redAccent,
-                              size: 22,
-                            ),
-                          );
-                        },
-                      ),
                     ),
                   ),
                 ),

@@ -49,7 +49,7 @@ class AppLogo extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: ClipOval(
               child: Image.asset(
-                'assets/app/launcher_icon.png',
+                AppConstants.logoAssetPlaceholder,
                 fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) {
                   return const Icon(

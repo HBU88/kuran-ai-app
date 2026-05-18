@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(8),
                               child: Image.asset(
-                                'assets/app/launcher_icon.png',
+                                AppConstants.logoAssetPlaceholder,
                                 fit: BoxFit.contain,
                                 errorBuilder: (context, error, stackTrace) {
                                   return const Icon(
@@ -180,44 +180,6 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 const _ModuleGrid(),
-                const SizedBox(height: AppSpacing.large),
-                AppCard(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color:
-                              AppColors.primaryAccent.withValues(alpha: 0.14),
-                          border: Border.all(
-                            color:
-                                AppColors.primaryAccent.withValues(alpha: 0.16),
-                          ),
-                        ),
-                        child: const Icon(
-                          Icons.circle_outlined,
-                          size: 18,
-                          color: AppColors.primaryAccent,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'Kur’an merkezli manevi rehberlik, Dinî Bilgiler, Namaz Vakitleri ve Kıble modüllerine buradan ulaşabilirsin.',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.textSecondary,
-                                    height: 1.5,
-                                  ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           );
@@ -269,6 +231,7 @@ class _ModuleGrid extends StatelessWidget {
         label: 'HAKAI’yi Destekle',
         subtitle: 'Projeyi ileride tek seferlik katkıyla destekle',
         iconAsset: 'assets/app/launcher_icon.png',
+        icon: Icons.volunteer_activism_outlined,
         onTap: () => Navigator.pushNamed(context, AppRoutes.support),
       ),
       // TODO: Re-enable Memorization module after v1 release
@@ -290,6 +253,7 @@ class _ModuleGrid extends StatelessWidget {
           label: module.label,
           subtitle: module.subtitle,
           iconAsset: module.iconAsset,
+          icon: module.icon,
           onTap: module.onTap,
         );
       },
@@ -303,12 +267,14 @@ class _ModuleData {
     required this.subtitle,
     required this.iconAsset,
     required this.onTap,
+    this.icon,
   });
 
   final String label;
   final String subtitle;
   final String iconAsset;
   final VoidCallback onTap;
+  final IconData? icon;
 }
 
 class _StatusChip extends StatelessWidget {

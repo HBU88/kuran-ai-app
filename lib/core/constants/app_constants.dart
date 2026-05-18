@@ -15,7 +15,9 @@ class AppConstants {
       'Selam, HAKAI’ye hoş geldin. Kur’an merkezli manevi rehberlik ve pratik dinî bilgilerle yanında olabilirim.';
   static const connectionFallbackMessage =
       'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.';
-  static const logoAssetPlaceholder = 'assets/app/launcher_icon.png';
+  // TODO: Native launcher icon assets are separate; regenerate iOS/Android
+  // launcher assets only when the app icon direction is finalized.
+  static const logoAssetPlaceholder = 'assets/app/qibla_icon.png';
   static const defaultCity = 'Istanbul';
   static const defaultCountry = '';
   static const countryCode = defaultCountry;

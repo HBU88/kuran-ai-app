@@ -36,9 +36,18 @@ class OnboardingScreen extends StatelessWidget {
                               AppColors.primaryAccent.withValues(alpha: 0.22),
                         ),
                       ),
-                      child: const Icon(
-                        Icons.auto_stories_rounded,
-                        color: AppColors.primaryAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                          'assets/app/qibla_icon.png',
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(
+                              Icons.explore_outlined,
+                              color: AppColors.primaryAccent,
+                            );
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(height: 18),

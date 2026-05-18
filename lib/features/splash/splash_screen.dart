@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_routes.dart';
+import '../../theme/app_colors.dart';
 import '../settings/settings_controller.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,10 +44,19 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Theme.of(context).colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: Icon(
-                Icons.auto_stories_rounded,
-                size: 48,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Image.asset(
+                  AppConstants.logoAssetPlaceholder,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                      Icons.explore_outlined,
+                      size: 48,
+                      color: AppColors.primaryAccent,
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 18),
