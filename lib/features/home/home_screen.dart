@@ -153,7 +153,6 @@ class HomeScreen extends StatelessWidget {
                           _StatusChip(label: 'Kur’an'),
                           _StatusChip(label: 'Dinî Bilgiler'),
                           _StatusChip(label: 'Kıble'),
-                          _StatusChip(label: 'Ezber'),
                         ],
                       ),
                     ],
