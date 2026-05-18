@@ -8,7 +8,16 @@ class NotificationHelper {
 
   Future<void> initialize() async {
     const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const settings = InitializationSettings(android: android);
+    const darwin = DarwinInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+    );
+    const settings = InitializationSettings(
+      android: android,
+      iOS: darwin,
+      macOS: darwin,
+    );
     await _plugin.initialize(settings);
   }
 
@@ -25,7 +34,12 @@ class NotificationHelper {
       importance: Importance.defaultImportance,
       priority: Priority.defaultPriority,
     );
-    const details = NotificationDetails(android: androidDetails);
+    const darwinDetails = DarwinNotificationDetails();
+    const details = NotificationDetails(
+      android: androidDetails,
+      iOS: darwinDetails,
+      macOS: darwinDetails,
+    );
     await _plugin.show(
       1,
       'Bildirimler açık',
