@@ -6,7 +6,7 @@ class AppConstants {
     'HAKAI_API_BASE_URL',
     defaultValue: String.fromEnvironment(
       'HAKAI_CHAT_API_BASE_URL',
-      defaultValue: 'http://10.0.2.2:3000',
+      defaultValue: '',
     ),
   );
   static const appTagline = 'Hakikate yönlendiren yapay zekâ';

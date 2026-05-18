@@ -10,6 +10,14 @@ const { buildChatResponse } = require("./agent/index");
 const { detectExplicitTopic, isPureGreetingMessage, normalize } = require("./agent/context_resolver");
 const { resolveCurrentMessageOverrideTopic } = require("./agent/ayah_ranker");
 const { lookupKnowledgeAnswer } = require("./agent/knowledge_base");
+const {
+  createCorsMiddleware,
+  createRateLimiter,
+  isUnsafePrompt,
+  isVerboseChatLoggingEnabled,
+  summarizeUserMessage,
+  validateChatMessage,
+} = require("./security");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -61,7 +69,8 @@ process.on("unhandledRejection", (error) => {
   console.error("Startup error:", error && error.stack ? error.stack : error);
 });
 
-app.use(express.json());
+app.use(createCorsMiddleware());
+app.use(express.json({ limit: process.env.HAKAI_JSON_BODY_LIMIT || "32kb" }));
 app.use((req, res, next) => {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   next();
@@ -82,25 +91,53 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.post("/chat", (req, res) => handleChatModuleRequest(req, res, "chat"));
-app.post("/ayah-chat", (req, res) => handleChatModuleRequest(req, res, "ayah"));
-app.post("/ilmihal-chat", (req, res) => handleChatModuleRequest(req, res, "ilmihal"));
+const chatRateLimiter = createRateLimiter();
+
+app.post("/chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "chat"));
+app.post("/ayah-chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "ayah"));
+app.post("/ilmihal-chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "ilmihal"));
 
 async function handleChatModuleRequest(req, res, module = "chat") {
   let logEntry = null;
   try {
-    const message = req.body?.message;
-    if (typeof message !== "string" || message.trim().length === 0) {
+    const validation = validateChatMessage(req.body?.message);
+    if (!validation.ok) {
       const errorResponse = {
         ok: false,
-        error: "message is required",
+        error: validation.error,
       };
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
         module,
-        user_message: typeof message === "string" ? message : "",
+        user_message: typeof req.body?.message === "string" ? req.body.message : "",
         intent: null,
         response_type: null,
+        route_mode: null,
+        knowledge_hit_id: null,
+        selected_ayah_id: null,
+        top_ayah_ids: [],
+        ranker_source: "fallback",
+        semantic_candidates_count: 0,
+        semantic_tags_considered: [],
+        semantic_score: 0,
+        error: errorResponse.error,
+      });
+      appendChatDecisionLog(logEntry);
+      return sendUtf8Json(res, validation.statusCode || 400, errorResponse);
+    }
+
+    const message = validation.message;
+    if (isUnsafePrompt(message)) {
+      const errorResponse = {
+        ok: false,
+        error: "request cannot be processed safely",
+      };
+      logEntry = buildChatDecisionLog({
+        timestamp: new Date().toISOString(),
+        module,
+        user_message: message,
+        intent: "blocked_unsafe_prompt",
+        response_type: "direct_answer",
         route_mode: null,
         knowledge_hit_id: null,
         selected_ayah_id: null,
@@ -358,7 +395,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
   } catch (error) {
     const errorResponse = {
       ok: false,
-      error: error.message,
+      error: "internal server error",
     };
     if (!logEntry) {
       logEntry = buildChatDecisionLog({
@@ -447,9 +484,15 @@ app.get("/debug/resolve", async (req, res) => {
 });
 
 app.use((error, req, res, next) => {
+  if (error && error.type === "entity.too.large") {
+    return sendUtf8Json(res, 413, { ok: false, error: "request body is too large" });
+  }
+  if (error instanceof SyntaxError && "body" in error) {
+    return sendUtf8Json(res, 400, { ok: false, error: "invalid json body" });
+  }
   const errorResponse = {
     ok: false,
-    error: error.message,
+    error: "internal server error",
   };
   return sendUtf8Json(res, 500, errorResponse);
 });
@@ -468,7 +511,7 @@ function buildChatDecisionLog(entry) {
   return JSON.stringify({
     timestamp: entry.timestamp || new Date().toISOString(),
     module: entry.module || "chat",
-    user_message: typeof entry.user_message === "string" ? entry.user_message : "",
+    ...summarizeUserMessage(entry.user_message),
     intent: entry.intent || null,
     response_type: entry.response_type || null,
     route_mode: entry.route_mode || null,
@@ -492,6 +535,7 @@ function buildChatDecisionLog(entry) {
     timing_ms: normalizeTimingBreakdown(entry.timing_ms),
     error: typeof entry.error === "string" && entry.error.trim() ? entry.error.trim() : null,
     ...(String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true" &&
+    isVerboseChatLoggingEnabled() &&
     typeof entry.response_preview === "string" &&
     entry.response_preview.trim()
       ? { response_preview: entry.response_preview.slice(0, 800) }
@@ -526,12 +570,22 @@ function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
 }
 
 function appendChatDecisionLog(line) {
+  if (!isChatDecisionLoggingEnabled()) {
+    return;
+  }
   try {
     fs.mkdirSync(path.dirname(CHAT_RUNTIME_LOG_PATH), { recursive: true });
     fs.appendFileSync(CHAT_RUNTIME_LOG_PATH, Buffer.from(`${line}\n`, "utf8"));
   } catch (error) {
     console.error("Failed to append chat runtime log:", error && error.stack ? error.stack : error);
   }
+}
+
+function isChatDecisionLoggingEnabled() {
+  const explicit = String(process.env.HAKAI_CHAT_LOGS_ENABLED || "").trim().toLowerCase();
+  if (explicit === "true") return true;
+  if (explicit === "false") return false;
+  return process.env.NODE_ENV !== "production";
 }
 
 function sanitizeHistory(history) {
@@ -620,4 +674,3 @@ function getLanAddress() {
   }
   return null;
 }
-

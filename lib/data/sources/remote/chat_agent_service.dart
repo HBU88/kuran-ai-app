@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
@@ -13,11 +14,36 @@ class ChatAgentService {
     String baseUrl = AppConstants.backendApiBaseUrl,
     this.requestTimeout = const Duration(seconds: 12),
   })  : _client = client ?? http.Client(),
-        _baseUrl = baseUrl;
+        _baseUrl = _resolveBaseUrl(baseUrl);
 
   final http.Client _client;
   final String _baseUrl;
   final Duration requestTimeout;
+
+  static String _resolveBaseUrl(String configuredBaseUrl) {
+    final value = configuredBaseUrl.trim();
+    if (value.isEmpty) {
+      if (kReleaseMode) {
+        throw const ChatAgentException(
+          'HAKAI_API_BASE_URL release yapılandırması eksik.',
+          isConfigurationError: true,
+        );
+      }
+      return 'http://10.0.2.2:3000';
+    }
+
+    final uri = Uri.tryParse(value);
+    final host = uri?.host.toLowerCase() ?? '';
+    final isLocalhost =
+        host == 'localhost' || host == '127.0.0.1' || host == '10.0.2.2';
+    if (kReleaseMode && isLocalhost) {
+      throw const ChatAgentException(
+        'HAKAI_API_BASE_URL release için localhost olamaz.',
+        isConfigurationError: true,
+      );
+    }
+    return value;
+  }
 
   Future<Map<String, dynamic>> sendMessage(
     String message, {
@@ -108,6 +134,7 @@ class ChatAgentException implements Exception {
     this.isTimeout = false,
     this.isNetworkError = false,
     this.isTransient = false,
+    this.isConfigurationError = false,
   });
 
   final String message;
@@ -118,6 +145,7 @@ class ChatAgentException implements Exception {
   final bool isTimeout;
   final bool isNetworkError;
   final bool isTransient;
+  final bool isConfigurationError;
 
   bool get showRetryAction => isTimeout || isNetworkError || isTransient;
 
