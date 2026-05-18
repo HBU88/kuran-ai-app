@@ -58,7 +58,7 @@ Future<List<Directory>> _resolveLogDirectories() async {
       final base = await getApplicationDocumentsDirectory();
       return [Directory('${base.path}${Platform.pathSeparator}logs')];
     } catch (_) {
-      return [Directory('/data/data/com.example.kuran_uygulamasi/files/logs')];
+      return [Directory('/data/data/com.hakai.app/files/logs')];
     }
   }
 

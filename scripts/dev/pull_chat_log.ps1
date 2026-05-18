@@ -1,10 +1,10 @@
 $ErrorActionPreference = 'Stop'
 
 $adb = 'C:\Users\burak\AppData\Local\Android\Sdk\platform-tools\adb.exe'
-$packageName = 'com.example.kuran_uygulamasi'
+$packageName = 'com.hakai.app'
 $remotePaths = @(
-  '/data/data/com.example.kuran_uygulamasi/app_flutter/logs/chat_runtime_log.txt',
-  '/data/data/com.example.kuran_uygulamasi/files/logs/chat_runtime_log.txt'
+  '/data/data/com.hakai.app/app_flutter/logs/chat_runtime_log.txt',
+  '/data/data/com.hakai.app/files/logs/chat_runtime_log.txt'
 )
 $destinationPath = 'C:\kuran_app\logs\chat_runtime_log.txt'
 $destinationDir = Split-Path -Path $destinationPath -Parent

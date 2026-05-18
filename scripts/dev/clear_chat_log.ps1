@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $adb = 'C:\Users\burak\AppData\Local\Android\Sdk\platform-tools\adb.exe'
-$packageName = 'com.example.kuran_uygulamasi'
-$remotePath = '/data/data/com.example.kuran_uygulamasi/app_flutter/logs/chat_runtime_log.txt'
+$packageName = 'com.hakai.app'
+$remotePath = '/data/data/com.hakai.app/app_flutter/logs/chat_runtime_log.txt'
 $hostPath = 'C:\kuran_app\logs\chat_runtime_log.txt'
 
 if (-not (Test-Path -LiteralPath $adb)) {
