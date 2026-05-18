@@ -28,17 +28,30 @@ class AccountScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.large),
                 AppCard(
+                  padding: EdgeInsets.zero,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Gizlilik',
-                        style: Theme.of(context).textTheme.titleMedium,
+                      ListTile(
+                        leading: const Icon(Icons.manage_accounts_outlined),
+                        title: const Text('Hesap ve Verilerim'),
+                        subtitle: const Text(
+                          'Hesap silme ve veri seçenekleri.',
+                        ),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          AppRoutes.dataAccount,
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Üyelik, ileride kayıtlı tercihler, favoriler, geçmiş, premium seçenekler ve projeye destek akışları için güvenli bir temel sağlar.',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      const Divider(height: 1),
+                      ListTile(
+                        leading: const Icon(Icons.privacy_tip_outlined),
+                        title: const Text('Gizlilik Politikası'),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          AppRoutes.privacy,
+                        ),
                       ),
                     ],
                   ),

@@ -5,6 +5,7 @@ import 'core/constants/app_constants.dart';
 import 'core/constants/app_routes.dart';
 import 'features/auth/account_screen.dart';
 import 'features/auth/forgot_password_screen.dart';
+import 'features/auth/legal_info_screens.dart';
 import 'features/auth/login_screen.dart';
 import 'features/auth/onboarding_screen.dart';
 import 'features/auth/register_screen.dart';
@@ -51,6 +52,10 @@ class QuranMvpApp extends StatelessWidget {
             AppRoutes.register: (_) => const RegisterScreen(),
             AppRoutes.forgotPassword: (_) => const ForgotPasswordScreen(),
             AppRoutes.resetPassword: (_) => const ResetPasswordScreen(),
+            AppRoutes.privacy: (_) => const PrivacyPolicyScreen(),
+            AppRoutes.terms: (_) => const TermsOfUseScreen(),
+            AppRoutes.disclaimer: (_) => const GuidanceDisclaimerScreen(),
+            AppRoutes.dataAccount: (_) => const DataAccountScreen(),
             AppRoutes.support: (_) => const SupportScreen(),
           },
         );

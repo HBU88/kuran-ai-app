@@ -50,6 +50,16 @@ class JsonUserStore {
     return updated;
   }
 
+  async deleteById(id) {
+    const users = await this._readUsers();
+    const nextUsers = users.filter((user) => user.id !== id);
+    if (nextUsers.length === users.length) {
+      return false;
+    }
+    await this._writeUsers(nextUsers);
+    return true;
+  }
+
   async _readUsers() {
     try {
       const raw = await fs.promises.readFile(this.filePath, "utf8");
@@ -260,6 +270,26 @@ class AuthService {
       return { ok: false, statusCode: 401, error: "invalid authorization token" };
     }
     return { ok: true, statusCode: 200, user: publicUser(user) };
+  }
+
+  async deleteMe(token) {
+    if (!token) {
+      return { ok: false, statusCode: 401, error: "authorization token is required" };
+    }
+
+    let payload;
+    try {
+      payload = verifyJwt(token, this.jwtSecret);
+    } catch {
+      return { ok: false, statusCode: 401, error: "invalid authorization token" };
+    }
+
+    await this.store.deleteById(payload.sub);
+    return {
+      ok: true,
+      statusCode: 200,
+      message: "account deletion completed",
+    };
   }
 }
 

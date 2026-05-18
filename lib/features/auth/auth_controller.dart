@@ -56,6 +56,28 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> deleteAccount() async {
+    isBusy = true;
+    errorMessage = null;
+    infoMessage = null;
+    notifyListeners();
+    try {
+      await _service.deleteAccount();
+      user = null;
+      infoMessage = 'Hesabın silindi. Misafir olarak devam edebilirsin.';
+      isBusy = false;
+      notifyListeners();
+      return true;
+    } on AuthServiceException catch (error) {
+      errorMessage = error.message;
+    } catch (_) {
+      errorMessage = 'Hesap silme işlemi tamamlanamadı.';
+    }
+    isBusy = false;
+    notifyListeners();
+    return false;
+  }
+
   Future<bool> forgotPassword({
     required String email,
   }) async {

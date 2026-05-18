@@ -181,6 +181,25 @@ const expiredResetResult = await expiredService.resetPassword({
 assert.equal(expiredResetResult.ok, false);
 assert.equal(expiredResetResult.error, "password reset token is expired");
 
+const deleteWithoutTokenResult = await service.deleteMe(null);
+assert.equal(deleteWithoutTokenResult.ok, false);
+assert.equal(deleteWithoutTokenResult.statusCode, 401);
+
+const deleteWithTokenResult = await service.deleteMe(newPasswordAfterResetResult.token);
+assert.equal(deleteWithTokenResult.ok, true);
+assert.equal(deleteWithTokenResult.statusCode, 200);
+
+const loginAfterDeleteResult = await service.login({
+  email: "user@example.com",
+  password: "new-correct-horse-password",
+});
+assert.equal(loginAfterDeleteResult.ok, false);
+assert.equal(loginAfterDeleteResult.statusCode, 401);
+
+const meAfterDeleteResult = await service.me(newPasswordAfterResetResult.token);
+assert.equal(meAfterDeleteResult.ok, false);
+assert.equal(meAfterDeleteResult.statusCode, 401);
+
 await fs.rm(tmpDir, { recursive: true, force: true });
 
 console.log("PASS auth regression");

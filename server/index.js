@@ -206,6 +206,24 @@ app.get("/me", authRateLimiter, async (req, res) => {
   }
 });
 
+app.delete("/me", authRateLimiter, async (req, res) => {
+  try {
+    const result = await authService.deleteMe(bearerTokenFromRequest(req));
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 401, {
+        ok: false,
+        error: result.error,
+      });
+    }
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      message: "account deletion completed",
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
 app.post("/chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "chat"));
 app.post("/ayah-chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "ayah"));
 app.post("/ilmihal-chat", chatRateLimiter, (req, res) => handleChatModuleRequest(req, res, "ilmihal"));

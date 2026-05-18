@@ -137,6 +137,24 @@ class AuthService {
     }
   }
 
+  Future<void> deleteAccount() async {
+    final token = _accessToken;
+    if (token == null) {
+      throw const AuthServiceException('Oturum bulunamadı.');
+    }
+
+    await _send(
+      () => _client.delete(
+        Uri.parse('$_baseUrl/me'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+    _accessToken = null;
+  }
+
   Future<AuthSession> _postAuth(
     String path,
     Map<String, dynamic> body,

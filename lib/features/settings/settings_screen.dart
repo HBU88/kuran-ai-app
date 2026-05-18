@@ -63,6 +63,45 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: 18),
               AppCard(
                 padding: EdgeInsets.zero,
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.privacy_tip_outlined),
+                      title: const Text('Gizlilik Politikası'),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.privacy),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: const Icon(Icons.description_outlined),
+                      title: const Text('Kullanım Şartları'),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.terms),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: const Icon(Icons.psychology_alt_outlined),
+                      title: const Text('Dinî İçerik ve Yapay Zekâ Açıklaması'),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.disclaimer),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: const Icon(Icons.manage_accounts_outlined),
+                      title: const Text('Hesap ve Verilerim'),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.dataAccount),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 18),
+              AppCard(
+                padding: EdgeInsets.zero,
                 child: ListTile(
                   leading: const Icon(Icons.volunteer_activism_outlined),
                   title: const Text('HAKAI’yi Destekle'),

@@ -14,6 +14,10 @@ class AppRoutes {
   static const register = '/register';
   static const forgotPassword = '/forgot-password';
   static const resetPassword = '/reset-password';
+  static const privacy = '/privacy';
+  static const terms = '/terms';
+  static const disclaimer = '/disclaimer';
+  static const dataAccount = '/data-account';
   static const support = '/support';
   // TODO: Re-enable Memorization module after v1 release
   // static const memorization = '/memorization';
