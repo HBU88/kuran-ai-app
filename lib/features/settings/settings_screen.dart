@@ -96,6 +96,16 @@ class SettingsScreen extends StatelessWidget {
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.dataAccount),
                     ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: const Icon(Icons.info_outline_rounded),
+                      title: const Text('Hakkında ve Kaynaklar'),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        AppRoutes.aboutSources,
+                      ),
+                    ),
                   ],
                 ),
               ),

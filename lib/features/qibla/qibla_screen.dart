@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' show Platform;
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
@@ -364,16 +365,18 @@ class _QiblaScreenState extends State<QiblaScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: AppSpacing.large),
-            _QiblaDebugCard(
-              position: _position,
-              qiblaBearing: qiblaBearing,
-              heading: heading,
-              relativeRotation: displayRotation,
-              rawRelativeRotation: relativeRotation,
-              isAligned: _qiblaAligned,
-              referenceNote: referenceNote,
-            ),
+            if (kDebugMode) ...[
+              const SizedBox(height: AppSpacing.large),
+              _QiblaDebugCard(
+                position: _position,
+                qiblaBearing: qiblaBearing,
+                heading: heading,
+                relativeRotation: displayRotation,
+                rawRelativeRotation: relativeRotation,
+                isAligned: _qiblaAligned,
+                referenceNote: referenceNote,
+              ),
+            ],
             const SizedBox(height: AppSpacing.large),
             AppCard(
               padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
@@ -431,16 +434,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
               ),
             ),
             const SizedBox(height: AppSpacing.large),
-            AppCard(
-              padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
-              child: Text(
-                'Kıble oku, cihaz yönüne göre döner. Konum veya pusula verisi yoksa yön hesabı yapılamaz.',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      height: 1.6,
-                      color: AppColors.textSecondary,
-                    ),
-              ),
-            ),
+            const _QiblaTrustFooter(),
           ],
         ),
       ),
@@ -527,6 +521,39 @@ class _QiblaScreenState extends State<QiblaScreen> {
       return null;
     }
     return nearest;
+  }
+}
+
+class _QiblaTrustFooter extends StatelessWidget {
+  const _QiblaTrustFooter();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 2, 8, 4),
+      child: Column(
+        children: [
+          Text(
+            'Kıble yönü, bulunduğunuz konum ve Kâbe koordinatları kullanılarak hesaplanmaktadır.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  height: 1.55,
+                  color: AppColors.textSecondary.withValues(alpha: 0.82),
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            'Pusula doğruluğu cihaz sensörleri ve konum servislerine bağlıdır.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  height: 1.45,
+                  color: AppColors.textMuted.withValues(alpha: 0.78),
+                ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

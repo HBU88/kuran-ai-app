@@ -56,6 +56,7 @@ class QuranMvpApp extends StatelessWidget {
             AppRoutes.terms: (_) => const TermsOfUseScreen(),
             AppRoutes.disclaimer: (_) => const GuidanceDisclaimerScreen(),
             AppRoutes.dataAccount: (_) => const DataAccountScreen(),
+            AppRoutes.aboutSources: (_) => const AboutSourcesScreen(),
             AppRoutes.support: (_) => const SupportScreen(),
           },
         );

@@ -18,6 +18,7 @@ class AppRoutes {
   static const terms = '/terms';
   static const disclaimer = '/disclaimer';
   static const dataAccount = '/data-account';
+  static const aboutSources = '/about-sources';
   static const support = '/support';
   // TODO: Re-enable Memorization module after v1 release
   // static const memorization = '/memorization';

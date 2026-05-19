@@ -127,6 +127,44 @@ class GuidanceDisclaimerScreen extends StatelessWidget {
   }
 }
 
+class AboutSourcesScreen extends StatelessWidget {
+  const AboutSourcesScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const _LegalArticleScreen(
+      title: 'Hakkında ve Kaynaklar',
+      sections: [
+        _LegalSection(
+          title: 'Kıble yönü',
+          body:
+              'Kıble yönü, bulunduğunuz konum ile Kâbe koordinatları arasındaki başlangıç yönü hesaplanarak belirlenir. Kâbe koordinatları: 21.422487, 39.826206.',
+        ),
+        _LegalSection(
+          title: 'Pusula',
+          body:
+              'Pusula doğruluğu cihaz sensörleri, manyetik alan etkileri ve konum servislerinin doğruluğuna bağlıdır.',
+        ),
+        _LegalSection(
+          title: 'Ayet içerikleri',
+          body:
+              'Ayet yönlendirmeleri Kur’an merkezli olarak hazırlanır; dini hüküm/fetva amacı taşımaz.',
+        ),
+        _LegalSection(
+          title: 'Dinî bilgiler',
+          body:
+              'Dinî bilgiler modülü genel bilgilendirme amacı taşır. Detaylı ve bağlayıcı dini konularda Diyanet İşleri Başkanlığı veya ehil uzmanlara başvurulmalıdır.',
+        ),
+        _LegalSection(
+          title: 'Referans notları',
+          body:
+              'Diyanet İşleri Başkanlığı, Kur’an-ı Kerim ve Kâbe koordinatları uygulamada bilgilendirici referans olarak anılır; canlı kazıma veya zorunlu dış API bağımlılığı kullanılmaz.',
+        ),
+      ],
+    );
+  }
+}
+
 class DataAccountScreen extends StatelessWidget {
   const DataAccountScreen({super.key});
 
