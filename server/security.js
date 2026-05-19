@@ -39,6 +39,7 @@ function clientKeyFromRequest(req) {
 }
 
 function createRateLimiter(options = {}) {
+  const disabled = isRateLimitDisabled();
   const windowMs = Number.isFinite(options.windowMs)
     ? options.windowMs
     : readPositiveInt(process.env.HAKAI_RATE_LIMIT_WINDOW_MS, DEFAULT_RATE_LIMIT_WINDOW_MS);
@@ -48,6 +49,10 @@ function createRateLimiter(options = {}) {
   const buckets = new Map();
 
   return function rateLimiter(req, res, next) {
+    if (disabled) {
+      return next();
+    }
+
     const now = Date.now();
     const key = clientKeyFromRequest(req);
     const bucket = buckets.get(key);
@@ -66,6 +71,13 @@ function createRateLimiter(options = {}) {
     }
     return next();
   };
+}
+
+function isRateLimitDisabled() {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    String(process.env.HAKAI_DISABLE_RATE_LIMITS || "").trim().toLowerCase() === "true"
+  );
 }
 
 function validateChatMessage(value, options = {}) {
@@ -125,6 +137,7 @@ module.exports = {
   createCorsMiddleware,
   createRateLimiter,
   isUnsafePrompt,
+  isRateLimitDisabled,
   isVerboseChatLoggingEnabled,
   parseAllowedOrigins,
   summarizeUserMessage,

@@ -439,10 +439,10 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
     : null;
   const assistant_text =
     redirectNote && targetModule === "ayah"
-      ? `${redirectNote}\n\nBu konuda kalbine eşlik edecek Kur’an merkezli kısa bir rehberlik için Ayet Rehberi bölümünü kullanabilirsin.`
+      ? `${redirectNote}\n\nBu soru ayet rehberi bölümüne daha uygundur. Bu konuda kalbine eşlik edecek Kur’an merkezli kısa bir rehberlik için Ayet Rehberi bölümünü kullanabilirsin.`
       : targetModule === "ilmihal"
-        ? "Bu konu Dinî Bilgiler bölümünde daha pratik ve ölçülü biçimde ele alınabilir."
-        : "Bu konu Ayet Rehberi bölümünde Kur’an merkezli rehberlikle daha iyi ele alınabilir.";
+        ? "Bu soru ilmihal rehberi bölümüne daha uygundur. Dinî Bilgiler bölümünde daha pratik ve ölçülü biçimde ele alınabilir."
+        : "Bu soru ayet rehberi bölümüne daha uygundur. Ayet Rehberi bölümünde Kur’an merkezli rehberlikle daha iyi ele alınabilir.";
   const responsePreview = isDebugChatEngineEnabled() ? assistant_text.slice(0, 800) : null;
   const decision_meta = {
     module,

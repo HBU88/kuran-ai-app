@@ -32,7 +32,14 @@ const RESPONSE_TYPES = [
 let cachedClient = null;
 let lastPlannerMeta = createPlannerMeta();
 
+function isOpenAIPlannerEnabled() {
+  return String(process.env.HAKAI_OPENAI_PLANNER_ENABLED || "true").trim().toLowerCase() !== "false";
+}
+
 function getOpenAIClient() {
+  if (!isOpenAIPlannerEnabled()) {
+    return null;
+  }
   if (!process.env.OPENAI_API_KEY) {
     return null;
   }
@@ -45,6 +52,17 @@ function getOpenAIClient() {
 }
 
 async function planChatWithOpenAI(message, history = []) {
+  if (!isOpenAIPlannerEnabled()) {
+    lastPlannerMeta = createPlannerMeta({
+      planner_attempted: false,
+      planner_used: false,
+      planner_valid: false,
+      planner_source: "fallback",
+      planner_failure_stage: "planner_disabled",
+    });
+    return null;
+  }
+
   const client = getOpenAIClient();
   if (!client) {
     lastPlannerMeta = createPlannerMeta({
@@ -394,6 +412,7 @@ function getPlannerDebugMeta() {
 
 module.exports = {
   getOpenAIClient,
+  isOpenAIPlannerEnabled,
   planChatWithOpenAI,
   getPlannerDebugMeta,
 };
