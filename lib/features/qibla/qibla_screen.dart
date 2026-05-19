@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -20,14 +22,24 @@ class QiblaScreen extends StatefulWidget {
 }
 
 class _QiblaScreenState extends State<QiblaScreen> {
+  static const double _alignEnterThreshold = 5.0;
+  static const double _alignExitThreshold = 10.0;
+  static const double _headingSmoothingFactor = 0.22;
+
   StreamSubscription<CompassEvent>? _compassSubscription;
 
   Position? _position;
   double? _heading;
+  double? _rawHeading;
   double? _qiblaBearing;
+  double? _lockedRelativeRotation;
   String? _locationMessage;
   String? _compassMessage;
+  LocationPermission? _locationPermission;
+  bool? _locationServiceEnabled;
+  bool _qiblaAligned = false;
   bool _locationLoading = true;
+  DateTime? _lastDebugLogAt;
 
   @override
   void initState() {
@@ -54,16 +66,20 @@ class _QiblaScreenState extends State<QiblaScreen> {
     _compassSubscription = stream.listen(
       (event) {
         if (!mounted) return;
-        final heading = event.heading;
+        final heading = _resolveCompassHeading(event);
         setState(() {
-          if (heading == null || heading.isNaN) {
+          if (heading == null) {
+            _rawHeading = null;
             _heading = null;
             _compassMessage = 'Pusula verisi alınamadı.';
           } else {
-            _heading = heading;
+            _rawHeading = heading;
+            _heading = _smoothHeading(_heading, heading);
             _compassMessage = null;
+            _updateAlignmentState();
           }
         });
+        _logQiblaDebug();
       },
       onError: (_) {
         if (!mounted) return;
@@ -82,39 +98,54 @@ class _QiblaScreenState extends State<QiblaScreen> {
 
     try {
       final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      debugPrint('QIBLA_LOCATION service_enabled=$serviceEnabled');
       if (!serviceEnabled) {
         setState(() {
-          _locationMessage = 'Konum servisi kapalı.';
+          _locationServiceEnabled = false;
+          _locationMessage = 'Konum servisleri kapalı.';
           _locationLoading = false;
         });
+        _logQiblaDebug(force: true);
         return;
       }
+      _locationServiceEnabled = true;
 
       var permission = await Geolocator.checkPermission();
+      debugPrint('QIBLA_LOCATION permission_before=$permission');
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
+        debugPrint('QIBLA_LOCATION permission_after_request=$permission');
       }
+      _locationPermission = permission;
 
       if (permission == LocationPermission.denied) {
         setState(() {
+          _locationPermission = permission;
           _locationMessage = 'Konum izni verilmedi.';
           _locationLoading = false;
         });
+        _logQiblaDebug(force: true);
         return;
       }
 
       if (permission == LocationPermission.deniedForever) {
         setState(() {
+          _locationPermission = permission;
           _locationMessage = 'Konum izni kalıcı olarak reddedildi.';
           _locationLoading = false;
         });
+        _logQiblaDebug(force: true);
         return;
       }
 
       final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.high,
-        ),
+        locationSettings: _locationSettings,
+      );
+      debugPrint(
+        'QIBLA_LOCATION position_success '
+        'lat=${position.latitude.toStringAsFixed(6)} '
+        'lon=${position.longitude.toStringAsFixed(6)} '
+        'accuracy=${position.accuracy.toStringAsFixed(1)}',
       );
 
       final bearing = QiblaCalculator.bearingToKaaba(
@@ -126,15 +157,35 @@ class _QiblaScreenState extends State<QiblaScreen> {
       setState(() {
         _position = position;
         _qiblaBearing = bearing;
+        _locationPermission = permission;
+        _locationServiceEnabled = true;
         _locationLoading = false;
+        _updateAlignmentState();
       });
-    } catch (_) {
+      _logQiblaDebug(force: true);
+    } catch (error) {
+      debugPrint('QIBLA_LOCATION position_failure=$error');
       if (!mounted) return;
       setState(() {
-        _locationMessage = 'Konum alınamadı.';
+        _locationMessage =
+            'Konum alınamadı. Lütfen izin ve servis durumunu kontrol et.';
         _locationLoading = false;
       });
+      _logQiblaDebug(force: true);
     }
+  }
+
+  LocationSettings get _locationSettings {
+    if (Platform.isIOS) {
+      return AppleSettings(
+        accuracy: LocationAccuracy.best,
+        activityType: ActivityType.other,
+        pauseLocationUpdatesAutomatically: false,
+      );
+    }
+    return const LocationSettings(
+      accuracy: LocationAccuracy.high,
+    );
   }
 
   Future<void> _openLocationSettings() async {
@@ -143,6 +194,92 @@ class _QiblaScreenState extends State<QiblaScreen> {
 
   Future<void> _openServiceSettings() async {
     await Geolocator.openLocationSettings();
+  }
+
+  double? _resolveCompassHeading(CompassEvent event) {
+    // flutter_compass maps iOS CLHeading.trueHeading into `heading` when
+    // location permission is available; Android provides sensor azimuth.
+    // If the platform plugin cannot provide a valid value, keep the UI waiting.
+    final heading = event.heading;
+    if (heading == null || heading.isNaN || !heading.isFinite) {
+      return null;
+    }
+    if (Platform.isIOS && heading < 0) {
+      return null;
+    }
+    return QiblaCalculator.normalizeDegrees(heading);
+  }
+
+  double _smoothHeading(double? previousHeading, double nextHeading) {
+    if (previousHeading == null) return nextHeading;
+    final delta = QiblaCalculator.normalizeSignedDegrees(
+      nextHeading - previousHeading,
+    );
+    return QiblaCalculator.normalizeDegrees(
+      previousHeading + delta * _headingSmoothingFactor,
+    );
+  }
+
+  void _updateAlignmentState() {
+    final qiblaBearing = _qiblaBearing;
+    final heading = _heading;
+    if (qiblaBearing == null || heading == null) {
+      _qiblaAligned = false;
+      _lockedRelativeRotation = null;
+      return;
+    }
+
+    final rotation = QiblaCalculator.relativeRotation(
+      bearingToKaaba: qiblaBearing,
+      deviceHeading: heading,
+    );
+    final distance = rotation.abs();
+    if (_qiblaAligned) {
+      if (distance > _alignExitThreshold) {
+        _qiblaAligned = false;
+        _lockedRelativeRotation = null;
+      } else {
+        _lockedRelativeRotation = 0;
+      }
+      return;
+    }
+
+    if (distance <= _alignEnterThreshold) {
+      _qiblaAligned = true;
+      _lockedRelativeRotation = 0;
+      HapticFeedback.mediumImpact();
+    }
+  }
+
+  void _logQiblaDebug({bool force = false}) {
+    if (!force) {
+      final now = DateTime.now();
+      final last = _lastDebugLogAt;
+      if (last != null && now.difference(last).inSeconds < 2) {
+        return;
+      }
+      _lastDebugLogAt = now;
+    }
+
+    final position = _position;
+    final qiblaBearing = _qiblaBearing;
+    final heading = _heading;
+    final rawHeading = _rawHeading;
+    final rotation = qiblaBearing == null || heading == null
+        ? null
+        : QiblaCalculator.relativeRotation(
+            bearingToKaaba: qiblaBearing,
+            deviceHeading: heading,
+          );
+    debugPrint(
+      'QIBLA_DEBUG lat=${position?.latitude.toStringAsFixed(6) ?? '-'} '
+      'lon=${position?.longitude.toStringAsFixed(6) ?? '-'} '
+      'bearing=${qiblaBearing?.toStringAsFixed(2) ?? '-'} '
+      'heading=${heading?.toStringAsFixed(2) ?? '-'} '
+      'raw_heading=${rawHeading?.toStringAsFixed(2) ?? '-'} '
+      'rotation=${rotation?.toStringAsFixed(2) ?? '-'} '
+      'aligned=$_qiblaAligned',
+    );
   }
 
   @override
@@ -155,6 +292,9 @@ class _QiblaScreenState extends State<QiblaScreen> {
             bearingToKaaba: qiblaBearing,
             deviceHeading: heading,
           );
+    final displayRotation =
+        _qiblaAligned ? _lockedRelativeRotation ?? 0 : relativeRotation;
+    final referenceNote = _buildReferenceValidationNote(_position);
 
     return Scaffold(
       appBar: AppBar(
@@ -176,6 +316,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
               heading: heading,
               locationMessage: _locationMessage,
               compassMessage: _compassMessage,
+              isAligned: _qiblaAligned,
             ),
             const SizedBox(height: AppSpacing.large),
             AppCard(
@@ -183,12 +324,18 @@ class _QiblaScreenState extends State<QiblaScreen> {
               child: Column(
                 children: [
                   _CompassDial(
-                    relativeRotation: relativeRotation,
+                    relativeRotation: displayRotation,
                     heading: heading,
                     qiblaBearing: qiblaBearing,
+                    isAligned: _qiblaAligned,
                     compassMessage: _compassMessage,
                   ),
                   const SizedBox(height: 22),
+                  _AlignmentStatus(
+                    isAligned: _qiblaAligned,
+                    hasDirection: qiblaBearing != null && heading != null,
+                  ),
+                  const SizedBox(height: 16),
                   Wrap(
                     spacing: 10,
                     runSpacing: 10,
@@ -216,6 +363,16 @@ class _QiblaScreenState extends State<QiblaScreen> {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(height: AppSpacing.large),
+            _QiblaDebugCard(
+              position: _position,
+              qiblaBearing: qiblaBearing,
+              heading: heading,
+              relativeRotation: displayRotation,
+              rawRelativeRotation: relativeRotation,
+              isAligned: _qiblaAligned,
+              referenceNote: referenceNote,
             ),
             const SizedBox(height: AppSpacing.large),
             AppCard(
@@ -267,16 +424,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
                         icon: Icons.refresh_rounded,
                         onPressed: _loadLocation,
                       ),
-                      _ActionButton(
-                        label: 'İzin ayarları',
-                        icon: Icons.settings_outlined,
-                        onPressed: _openLocationSettings,
-                      ),
-                      _ActionButton(
-                        label: 'Konum ayarları',
-                        icon: Icons.gps_fixed_rounded,
-                        onPressed: _openServiceSettings,
-                      ),
+                      ..._locationActionButtons(),
                     ],
                   ),
                 ],
@@ -298,6 +446,88 @@ class _QiblaScreenState extends State<QiblaScreen> {
       ),
     );
   }
+
+  List<Widget> _locationActionButtons() {
+    final serviceEnabled = _locationServiceEnabled;
+    final permission = _locationPermission;
+    if (serviceEnabled == false) {
+      return [
+        _ActionButton(
+          label: 'Konum servislerini aç',
+          icon: Icons.gps_fixed_rounded,
+          onPressed: _openServiceSettings,
+        ),
+      ];
+    }
+    if (permission == LocationPermission.denied) {
+      return [
+        _ActionButton(
+          label: 'Konum izni ver',
+          icon: Icons.location_on_outlined,
+          onPressed: _loadLocation,
+        ),
+      ];
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return [
+        _ActionButton(
+          label: 'Konum izni ver',
+          icon: Icons.settings_outlined,
+          onPressed: _openLocationSettings,
+        ),
+      ];
+    }
+    return [
+      _ActionButton(
+        label: 'İzin ayarları',
+        icon: Icons.settings_outlined,
+        onPressed: _openLocationSettings,
+      ),
+      _ActionButton(
+        label: 'Konum servislerini aç',
+        icon: Icons.gps_fixed_rounded,
+        onPressed: _openServiceSettings,
+      ),
+    ];
+  }
+
+  String _buildReferenceValidationNote(Position? position) {
+    const baseNote =
+        'Diyanet için stabil ve belgelenmiş halka açık Kıble API endpoint’i doğrulanmadı; bu ekran Diyanet’i üretimde canlı bağımlılık olarak kullanmaz.';
+    if (position == null) {
+      return '$baseNote Manuel kontrol referansı: İstanbul 151-152°, Ankara 154° civarı.';
+    }
+
+    final nearest = _nearestReferenceCity(position);
+    if (nearest == null) {
+      return '$baseNote Yakın şehir referansı yok; hesap yerel formülle yapılır.';
+    }
+    final calculated = QiblaCalculator.bearingToKaaba(
+      latitude: nearest.latitude,
+      longitude: nearest.longitude,
+    );
+    return '$baseNote ${nearest.name} manuel referans: ${nearest.expectedBearingLabel}. '
+        'Yerel formül referans koordinatta ${calculated.toStringAsFixed(1)}°. ${nearest.note}';
+  }
+
+  QiblaReferenceCity? _nearestReferenceCity(Position position) {
+    QiblaReferenceCity? nearest;
+    double? nearestDistanceSquared;
+    for (final reference in QiblaCalculator.referenceCities) {
+      final latDelta = position.latitude - reference.latitude;
+      final lonDelta = position.longitude - reference.longitude;
+      final distanceSquared = latDelta * latDelta + lonDelta * lonDelta;
+      if (nearestDistanceSquared == null ||
+          distanceSquared < nearestDistanceSquared) {
+        nearest = reference;
+        nearestDistanceSquared = distanceSquared;
+      }
+    }
+    if (nearestDistanceSquared == null || nearestDistanceSquared > 1.0) {
+      return null;
+    }
+    return nearest;
+  }
 }
 
 class _HeroCard extends StatelessWidget {
@@ -306,12 +536,14 @@ class _HeroCard extends StatelessWidget {
     required this.heading,
     required this.locationMessage,
     required this.compassMessage,
+    required this.isAligned,
   });
 
   final double? qiblaBearing;
   final double? heading;
   final String? locationMessage;
   final String? compassMessage;
+  final bool isAligned;
 
   @override
   Widget build(BuildContext context) {
@@ -354,8 +586,14 @@ class _HeroCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.primaryAccent.withValues(alpha: 0.9),
-                        AppColors.primaryAccentSoft.withValues(alpha: 0.75),
+                        (isAligned
+                                ? Colors.greenAccent
+                                : AppColors.primaryAccent)
+                            .withValues(alpha: 0.9),
+                        (isAligned
+                                ? Colors.greenAccent
+                                : AppColors.primaryAccentSoft)
+                            .withValues(alpha: 0.75),
                       ],
                     ),
                     boxShadow: [
@@ -366,8 +604,10 @@ class _HeroCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Icon(
-                    Icons.explore_outlined,
+                  child: Icon(
+                    isAligned
+                        ? Icons.check_circle_outline_rounded
+                        : Icons.explore_outlined,
                     color: Colors.white,
                   ),
                 ),
@@ -377,7 +617,7 @@ class _HeroCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Kıble yönü',
+                        isAligned ? 'Kıble yönü bulundu' : 'Kıble yönü',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w900,
                               letterSpacing: -0.2,
@@ -385,7 +625,9 @@ class _HeroCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Konum ve pusula verisiyle Kâbe yönünü gösterir.',
+                        isAligned
+                            ? 'Bu yön kıble yönüdür.'
+                            : 'Konum ve pusula verisiyle Kâbe yönünü gösterir.',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.textSecondary,
                               height: 1.55,
@@ -430,34 +672,208 @@ class _HeroCard extends StatelessWidget {
   }
 }
 
+class _QiblaDebugCard extends StatelessWidget {
+  const _QiblaDebugCard({
+    required this.position,
+    required this.qiblaBearing,
+    required this.heading,
+    required this.relativeRotation,
+    required this.rawRelativeRotation,
+    required this.isAligned,
+    required this.referenceNote,
+  });
+
+  final Position? position;
+  final double? qiblaBearing;
+  final double? heading;
+  final double? relativeRotation;
+  final double? rawRelativeRotation;
+  final bool isAligned;
+  final String referenceNote;
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
+      color: AppColors.textSecondary,
+      height: 1.5,
+      fontFeatures: const [FontFeature.tabularFigures()],
+    );
+    return AppCard(
+      padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Kıble debug',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.textPrimary,
+                ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            [
+              'Konum: ${_formatCoordinate(position?.latitude)}, ${_formatCoordinate(position?.longitude)}',
+              'Kıble açısı: ${_formatDegrees(qiblaBearing)}',
+              'Pusula yönü: ${_formatDegrees(heading)}',
+              'Dönüş açısı: ${_formatSignedDegrees(relativeRotation)}',
+              'Ham dönüş: ${_formatSignedDegrees(rawRelativeRotation)}',
+              'Hizalı: ${isAligned ? 'Evet' : 'Hayır'}',
+              'Referans: $referenceNote',
+            ].join('\n'),
+            style: textStyle,
+          ),
+        ],
+      ),
+    );
+  }
+
+  static String _formatCoordinate(double? value) {
+    return value == null ? 'Bekleniyor' : value.toStringAsFixed(6);
+  }
+
+  static String _formatDegrees(double? value) {
+    return value == null ? 'Bekleniyor' : '${value.toStringAsFixed(2)}°';
+  }
+
+  static String _formatSignedDegrees(double? value) {
+    if (value == null) return 'Bekleniyor';
+    final prefix = value > 0 ? '+' : '';
+    return '$prefix${value.toStringAsFixed(2)}°';
+  }
+}
+
+class _AlignmentStatus extends StatelessWidget {
+  const _AlignmentStatus({
+    required this.isAligned,
+    required this.hasDirection,
+  });
+
+  final bool isAligned;
+  final bool hasDirection;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isAligned ? Colors.greenAccent : AppColors.primaryAccentSoft;
+    final title = isAligned
+        ? 'Kıble yönü bulundu'
+        : hasDirection
+            ? 'Telefonu yavaşça çevirin'
+            : 'Konum ve pusula bekleniyor';
+    final subtitle = isAligned
+        ? 'Bu yön kıble yönüdür'
+        : hasDirection
+            ? 'Ok merkeze geldiğinde yön sabitlenecek.'
+            : 'Yön hesabı için konum ve pusula verisi gerekir.';
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 220),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: isAligned ? 0.16 : 0.1),
+        borderRadius: BorderRadius.circular(AppRadius.medium),
+        border: Border.all(
+          color: color.withValues(alpha: isAligned ? 0.5 : 0.28),
+          width: isAligned ? 1.4 : 1,
+        ),
+        boxShadow: isAligned
+            ? [
+                BoxShadow(
+                  color: color.withValues(alpha: 0.16),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
+              ]
+            : null,
+      ),
+      child: Row(
+        children: [
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 180),
+            child: Icon(
+              isAligned
+                  ? Icons.check_circle_outline_rounded
+                  : Icons.screen_rotation_alt_outlined,
+              key: ValueKey<bool>(isAligned),
+              color: color,
+              size: 24,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _CompassDial extends StatelessWidget {
   const _CompassDial({
     required this.relativeRotation,
     required this.heading,
     required this.qiblaBearing,
+    required this.isAligned,
     required this.compassMessage,
   });
 
   final double? relativeRotation;
   final double? heading;
   final double? qiblaBearing;
+  final bool isAligned;
   final String? compassMessage;
 
   @override
   Widget build(BuildContext context) {
-    final angle = relativeRotation == null
-        ? 0.0
-        : relativeRotation! * math.pi / 180.0;
+    final angle =
+        relativeRotation == null ? 0.0 : relativeRotation! * math.pi / 180.0;
+    final accentColor =
+        isAligned ? Colors.greenAccent : AppColors.primaryAccentSoft;
+    final primaryColor = isAligned ? Colors.green : AppColors.primaryAccent;
 
     return Column(
       children: [
-        SizedBox(
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 220),
+          curve: Curves.easeOutCubic,
           width: 278,
           height: 278,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: isAligned
+                ? [
+                    BoxShadow(
+                      color: Colors.greenAccent.withValues(alpha: 0.24),
+                      blurRadius: 34,
+                      spreadRadius: 6,
+                    ),
+                  ]
+                : null,
+          ),
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Container(
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
@@ -468,8 +884,9 @@ class _CompassDial extends StatelessWidget {
                     ],
                   ),
                   border: Border.all(
-                    color: AppColors.primaryAccent.withValues(alpha: 0.18),
-                    width: 1.2,
+                    color:
+                        primaryColor.withValues(alpha: isAligned ? 0.55 : 0.18),
+                    width: isAligned ? 2 : 1.2,
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -478,9 +895,10 @@ class _CompassDial extends StatelessWidget {
                       offset: const Offset(0, 14),
                     ),
                     BoxShadow(
-                      color: AppColors.primaryAccent.withValues(alpha: 0.12),
-                      blurRadius: 26,
-                      spreadRadius: 2,
+                      color: primaryColor.withValues(
+                          alpha: isAligned ? 0.22 : 0.12),
+                      blurRadius: isAligned ? 34 : 26,
+                      spreadRadius: isAligned ? 5 : 2,
                     ),
                   ],
                 ),
@@ -502,17 +920,18 @@ class _CompassDial extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: AppColors.primaryAccent.withValues(alpha: 0.1),
+                    color:
+                        primaryColor.withValues(alpha: isAligned ? 0.24 : 0.1),
                     width: 1,
                   ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 18,
                 child: _DirectionMark(
                   label: 'N',
                   glow: true,
-                  color: AppColors.primaryAccentSoft,
+                  color: accentColor,
                 ),
               ),
               const Positioned(
@@ -536,48 +955,51 @@ class _CompassDial extends StatelessWidget {
                   color: AppColors.textSecondary,
                 ),
               ),
-              Transform.rotate(
-                angle: angle,
-                child: TweenAnimationBuilder<double>(
-                  tween: Tween<double>(
-                    begin: 0,
-                    end: relativeRotation ?? 0,
-                  ),
-                  duration: const Duration(milliseconds: 250),
-                  builder: (context, value, child) {
-                    return child!;
-                  },
-                  child: Icon(
-                    Icons.navigation_rounded,
-                    size: 126,
-                    color: AppColors.primaryAccentSoft,
-                    shadows: [
-                      Shadow(
-                        color: AppColors.primaryAccent.withValues(alpha: 0.28),
-                        blurRadius: 16,
-                      ),
-                      Shadow(
-                        color: Colors.black.withValues(alpha: 0.2),
-                        blurRadius: 12,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 26,
-                height: 26,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primaryAccent,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primaryAccent.withValues(alpha: 0.4),
-                      blurRadius: 18,
-                      spreadRadius: 4,
+              AnimatedRotation(
+                turns: angle / (math.pi * 2),
+                duration: isAligned
+                    ? const Duration(milliseconds: 120)
+                    : const Duration(milliseconds: 180),
+                curve: Curves.easeOutCubic,
+                child: Icon(
+                  Icons.navigation_rounded,
+                  size: isAligned ? 134 : 126,
+                  color: accentColor,
+                  shadows: [
+                    Shadow(
+                      color: primaryColor.withValues(
+                          alpha: isAligned ? 0.45 : 0.28),
+                      blurRadius: isAligned ? 24 : 16,
+                    ),
+                    Shadow(
+                      color: Colors.black.withValues(alpha: 0.2),
+                      blurRadius: 12,
                     ),
                   ],
                 ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
+                width: isAligned ? 34 : 26,
+                height: isAligned ? 34 : 26,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: primaryColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withValues(alpha: 0.4),
+                      blurRadius: isAligned ? 24 : 18,
+                      spreadRadius: isAligned ? 6 : 4,
+                    ),
+                  ],
+                ),
+                child: isAligned
+                    ? const Icon(
+                        Icons.check_rounded,
+                        size: 21,
+                        color: Colors.white,
+                      )
+                    : null,
               ),
             ],
           ),

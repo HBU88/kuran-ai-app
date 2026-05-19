@@ -1,0 +1,3 @@
+// Default backend for local Xcode/device runs.
+// Flutter CLI --dart-define values in Generated.xcconfig can override this file.
+DART_DEFINES=SEFLQUlfQVBJX0JBU0VfVVJMPWh0dHBzOi8vaGFrYW4tYmFja2VuZC5vbnJlbmRlci5jb20=

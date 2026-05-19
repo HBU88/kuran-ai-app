@@ -233,11 +233,8 @@ class AuthService {
   static String _resolveBaseUrl(String configuredBaseUrl) {
     final value = configuredBaseUrl.trim();
     if (value.isEmpty) {
-      if (kReleaseMode) {
-        throw const AuthServiceException(
-          'HAKAI_API_BASE_URL release yapılandırması eksik.',
-          isConfigurationError: true,
-        );
+      if (kReleaseMode || Platform.isIOS) {
+        return AppConstants.productionBackendApiBaseUrl;
       }
       return 'http://10.0.2.2:3000';
     }

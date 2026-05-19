@@ -3,9 +3,30 @@ import 'dart:math' as math;
 class QiblaCalculator {
   const QiblaCalculator._();
 
-  static const double kaabaLatitude = 21.4225;
-  static const double kaabaLongitude = 39.8262;
+  static const double kaabaLatitude = 21.422487;
+  static const double kaabaLongitude = 39.826206;
+  static const List<QiblaReferenceCity> referenceCities = [
+    QiblaReferenceCity(
+      name: 'İstanbul',
+      latitude: 41.0082,
+      longitude: 28.9784,
+      expectedBearingLabel: '151-152°',
+      note: 'Yerel formül İstanbul merkezinde yaklaşık 151.6° üretir.',
+    ),
+    QiblaReferenceCity(
+      name: 'Ankara',
+      latitude: 39.9334,
+      longitude: 32.8597,
+      expectedBearingLabel: '154° civarı',
+      note:
+          'Bazı Diyanet/pusula referansları yaklaşık 154° verebilir; true-north yerel formül ilçe/merkez koordinatına göre farklılaşabilir.',
+    ),
+  ];
 
+  // Primary runtime path: deterministic great-circle initial bearing from the
+  // user's coordinates to Kaaba. Diyanet does not currently expose a confirmed
+  // stable public Qibla API endpoint, so Diyanet values should remain a manual
+  // validation/reference layer unless an official API contract is confirmed.
   static double bearingToKaaba({
     required double latitude,
     required double longitude,
@@ -20,17 +41,43 @@ class QiblaCalculator {
     final x = math.cos(lat1) * math.sin(lat2) -
         math.sin(lat1) * math.cos(lat2) * math.cos(deltaLon);
     final bearing = math.atan2(y, x);
-    return (_radToDeg(bearing) + 360.0) % 360.0;
+    return normalizeDegrees(_radToDeg(bearing));
   }
 
   static double relativeRotation({
     required double bearingToKaaba,
     required double deviceHeading,
   }) {
-    return (bearingToKaaba - deviceHeading + 360.0) % 360.0;
+    return normalizeSignedDegrees(bearingToKaaba - deviceHeading);
+  }
+
+  static double normalizeDegrees(double value) {
+    final normalized = value % 360.0;
+    return normalized < 0 ? normalized + 360.0 : normalized;
+  }
+
+  static double normalizeSignedDegrees(double value) {
+    final normalized = normalizeDegrees(value);
+    return normalized > 180.0 ? normalized - 360.0 : normalized;
   }
 
   static double _degToRad(double value) => value * math.pi / 180.0;
 
   static double _radToDeg(double value) => value * 180.0 / math.pi;
+}
+
+class QiblaReferenceCity {
+  const QiblaReferenceCity({
+    required this.name,
+    required this.latitude,
+    required this.longitude,
+    required this.expectedBearingLabel,
+    required this.note,
+  });
+
+  final String name;
+  final double latitude;
+  final double longitude;
+  final String expectedBearingLabel;
+  final String note;
 }

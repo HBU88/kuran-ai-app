@@ -2,6 +2,8 @@ class AppConstants {
   const AppConstants._();
 
   static const appName = 'HAKAI';
+  static const productionBackendApiBaseUrl =
+      'https://hakan-backend.onrender.com';
   static const backendApiBaseUrl = String.fromEnvironment(
     'HAKAI_API_BASE_URL',
     defaultValue: String.fromEnvironment(
