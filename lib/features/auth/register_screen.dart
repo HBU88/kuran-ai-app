@@ -54,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Üyelik, gelecekte kayıtlı tercihler, favoriler, geçmiş, premium seçenekler ve projeye destek özellikleri için hazırlanır. Pazarlama ve kişiselleştirme izinleri isteğe bağlıdır.',
+                          'Üyelik, gelecekte kayıtlı tercihler, favoriler, geçmiş, ek hesap seçenekleri ve projeye destek özellikleri için hazırlanır. Pazarlama ve kişiselleştirme izinleri isteğe bağlıdır.',
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 18),

@@ -67,7 +67,7 @@ class OnboardingScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Hesap oluşturmak ileride kayıtlı tercihler, favoriler, geçmiş ve premium özellikler için kullanılacaktır.',
+                      'Hesap oluşturmak ileride kayıtlı tercihler, favoriler, geçmiş ve ek hesap özellikleri için kullanılacaktır.',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: AppSpacing.large),

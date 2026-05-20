@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/constants/app_routes.dart';
 import '../../data/models/chat_message_model.dart';
 import '../../data/models/recommended_resource.dart';
 import '../../data/services/habit_tracking_service.dart';
@@ -166,21 +165,6 @@ class _ChatViewState extends State<_ChatView> {
                             children: [
                               _ChatHero(mode: widget.mode),
                               const SizedBox(height: AppSpacing.large),
-                              if (widget.mode == ChatMode.ilmihal) ...[
-                                const _ReligiousChatInfoCard(),
-                                const SizedBox(height: AppSpacing.medium),
-                                if (controller.usageLimitBypassedForDebug)
-                                  const _ReligiousUsageDebugBypassCard()
-                                else
-                                  _ReligiousUsageStatusCard(
-                                    remaining: controller
-                                        .remainingReligiousChatAnswers,
-                                    loaded: controller.usageStateLoaded,
-                                    pendingPurchase:
-                                        controller.hasPendingPurchase,
-                                  ),
-                                const SizedBox(height: AppSpacing.medium),
-                              ],
                               if (controller.isEmpty)
                                 _EmptyChatIntro(mode: widget.mode)
                               else
@@ -211,18 +195,6 @@ class _ChatViewState extends State<_ChatView> {
                   _ChatComposer(
                     controller: _textController,
                     sending: controller.loading,
-                    locked: controller.isReligiousChatLocked,
-                    lockedPanel: controller.isReligiousChatLocked
-                        ? _ReligiousChatLockedPanel(
-                            isLoggedIn: controller.isLoggedIn,
-                            pendingPurchase: controller.hasPendingPurchase,
-                          )
-                        : null,
-                    remainingReligiousChatAnswers:
-                        widget.mode == ChatMode.ilmihal &&
-                                !controller.usageLimitBypassedForDebug
-                            ? controller.remainingReligiousChatAnswers
-                            : null,
                     onSend: () => _send(context),
                     hintText: widget.mode.composerHint,
                   ),
@@ -551,231 +523,6 @@ class _WaitingForResponseCard extends StatelessWidget {
   }
 }
 
-class _ReligiousChatInfoCard extends StatelessWidget {
-  const _ReligiousChatInfoCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCard(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 38,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryAccent.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(AppRadius.medium),
-                ),
-                child: const Icon(
-                  Icons.info_outline_rounded,
-                  color: AppColors.primaryAccent,
-                  size: 20,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  'Dinî Bilgiler Kullanımı',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Bu bölümde ilk 5 yanıt ücretsizdir. Sonrasında HAKAI’nin gelişimini destekleyerek ek Dinî Bilgiler cevap hakkı alabilir ve kullanmaya devam edebilirsin.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  height: 1.55,
-                  color: AppColors.textSecondary,
-                ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'HAKAI fetva makamı değildir. Detaylı ve bağlayıcı dinî konularda ehil kişilere veya güvenilir kaynaklara danışmanı öneririz.',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  height: 1.55,
-                  color: AppColors.textMuted,
-                ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ReligiousUsageStatusCard extends StatelessWidget {
-  const _ReligiousUsageStatusCard({
-    required this.remaining,
-    required this.loaded,
-    required this.pendingPurchase,
-  });
-
-  final int remaining;
-  final bool loaded;
-  final bool pendingPurchase;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCard(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.confirmation_number_outlined,
-            color: AppColors.primaryAccent,
-            size: 19,
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              loaded
-                  ? 'Kalan Dinî Bilgiler hakkı: $remaining'
-                  : 'Kalan Dinî Bilgiler hakkı hazırlanıyor...',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-            ),
-          ),
-          if (pendingPurchase)
-            Tooltip(
-              message:
-                  'Destek işlemin alındı. Cevap hakların doğrulama sonrası aktif olacaktır.',
-              child: Icon(
-                Icons.hourglass_top_rounded,
-                color: AppColors.secondaryAccent.withValues(alpha: 0.9),
-                size: 18,
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ReligiousUsageDebugBypassCard extends StatelessWidget {
-  const _ReligiousUsageDebugBypassCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCard(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.bug_report_outlined,
-            color: AppColors.primaryAccent,
-            size: 19,
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              'Test modu: limit devre dışı',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.primaryAccentSoft,
-                  ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ReligiousChatLockedPanel extends StatelessWidget {
-  const _ReligiousChatLockedPanel({
-    required this.isLoggedIn,
-    required this.pendingPurchase,
-  });
-
-  final bool isLoggedIn;
-  final bool pendingPurchase;
-
-  @override
-  Widget build(BuildContext context) {
-    final buttonLabel = isLoggedIn ? 'Cevap hakkı al' : 'Giriş Yap ve Devam Et';
-    return AppCard(
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Icon(
-            Icons.lock_outline_rounded,
-            color: AppColors.primaryAccent,
-            size: 28,
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Dinî Bilgiler hakkın doldu',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'İlk 5 ücretsiz yanıt hakkını kullandın. HAKAI’ye destek olarak ek cevap hakkı alabilir ve Dinî Bilgiler bölümünü kullanmaya devam edebilirsin.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  height: 1.55,
-                  color: AppColors.textSecondary,
-                ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'Bu destek, uygulamanın sunucu ve yapay zekâ maliyetlerini karşılamaya ve HAKAI’nin bağımsız şekilde gelişmesine yardımcı olur.',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  height: 1.55,
-                  color: AppColors.textMuted,
-                ),
-          ),
-          if (!isLoggedIn) ...[
-            const SizedBox(height: 10),
-            Text(
-              'Cevap haklarının hesaba tanımlanabilmesi için giriş veya kayıt gerekebilir.',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    height: 1.55,
-                    color: AppColors.textMuted,
-                  ),
-            ),
-          ],
-          if (pendingPurchase) ...[
-            const SizedBox(height: 10),
-            Text(
-              'Destek işlemin alındı. Cevap hakların doğrulama sonrası aktif olacaktır.',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    height: 1.55,
-                    color: AppColors.primaryAccentSoft,
-                    fontWeight: FontWeight.w700,
-                  ),
-            ),
-          ],
-          const SizedBox(height: 14),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              onPressed: () => Navigator.pushNamed(
-                context,
-                isLoggedIn ? AppRoutes.support : AppRoutes.login,
-              ),
-              icon: Icon(
-                isLoggedIn
-                    ? Icons.volunteer_activism_outlined
-                    : Icons.login_rounded,
-              ),
-              label: Text(buttonLabel),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _SuggestionStrip extends StatelessWidget {
   const _SuggestionStrip({
     required this.suggestions,
@@ -812,20 +559,14 @@ class _ChatComposer extends StatelessWidget {
   const _ChatComposer({
     required this.controller,
     required this.sending,
-    required this.locked,
     required this.onSend,
     required this.hintText,
-    this.lockedPanel,
-    this.remainingReligiousChatAnswers,
   });
 
   final TextEditingController controller;
   final bool sending;
-  final bool locked;
   final VoidCallback onSend;
   final String hintText;
-  final Widget? lockedPanel;
-  final int? remainingReligiousChatAnswers;
 
   @override
   Widget build(BuildContext context) {
@@ -833,84 +574,64 @@ class _ChatComposer extends StatelessWidget {
       top: false,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(18, 8, 18, 16),
-        child: locked && lockedPanel != null
-            ? lockedPanel
-            : Column(
-                mainAxisSize: MainAxisSize.min,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppCard(
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  if (remainingReligiousChatAnswers != null) ...[
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 4, bottom: 8),
-                        child: Text(
-                          'Kalan Dinî Bilgiler hakkı: $remainingReligiousChatAnswers',
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: AppColors.textMuted,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: controller,
+                      minLines: 1,
+                      maxLines: 5,
+                      keyboardType: TextInputType.multiline,
+                      textInputAction: TextInputAction.newline,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      decoration: InputDecoration(
+                        hintText: hintText,
+                        filled: false,
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 10,
                         ),
                       ),
                     ),
-                  ],
-                  AppCard(
-                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: controller,
-                            minLines: 1,
-                            maxLines: 5,
-                            keyboardType: TextInputType.multiline,
-                            textInputAction: TextInputAction.newline,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            decoration: InputDecoration(
-                              hintText: hintText,
-                              filled: false,
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 10,
-                              ),
-                            ),
-                          ),
+                  ),
+                  const SizedBox(width: AppSpacing.small),
+                  SizedBox.square(
+                    dimension: 50,
+                    child: FilledButton(
+                      onPressed: sending ? null : onSend,
+                      style: FilledButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        backgroundColor: AppColors.primaryAccent,
+                        foregroundColor: AppColors.appBackground,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppRadius.large),
                         ),
-                        const SizedBox(width: AppSpacing.small),
-                        SizedBox.square(
-                          dimension: 50,
-                          child: FilledButton(
-                            onPressed: sending ? null : onSend,
-                            style: FilledButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              backgroundColor: AppColors.primaryAccent,
-                              foregroundColor: AppColors.appBackground,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(AppRadius.large),
-                              ),
+                      ),
+                      child: sending
+                          ? const SizedBox.square(
+                              dimension: 18,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(
+                              Icons.arrow_upward_rounded,
+                              size: 18,
                             ),
-                            child: sending
-                                ? const SizedBox.square(
-                                    dimension: 18,
-                                    child: CircularProgressIndicator(
-                                        strokeWidth: 2),
-                                  )
-                                : const Icon(
-                                    Icons.arrow_upward_rounded,
-                                    size: 18,
-                                  ),
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
       ),
     );
   }
