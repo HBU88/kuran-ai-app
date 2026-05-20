@@ -131,20 +131,25 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     }
   }
 
-  const kurbanTopic = resolveKurbanTopic(message, normalizedMessage);
-  if (kurbanTopic) {
-    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(kurbanTopic));
+  const kurbanMatch = resolveKurbanTopic(message, normalizedMessage);
+  if (kurbanMatch) {
+    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(kurbanMatch.topic));
     if (hit) {
       return {
         id: hit.id || null,
         file: "ilmihal_knowledge_base.json",
         type: hit.type || "worship_practice",
         topic: hit.topic || null,
+        matched_title: resolveKnowledgeTitle(hit),
         answer_text: hit.answer_tr || "",
         source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
         requires_ayah: hit.requires_ayah === true,
         route_mode: "ilmihal_knowledge",
         knowledge_hit_id: hit.id || null,
+        matched_knowledge_id: hit.id || null,
+        matched_by: kurbanMatch.match_reason,
+        match_reason: kurbanMatch.match_reason,
+        match_score: kurbanMatch.match_score,
       };
     }
   }
@@ -505,24 +510,45 @@ function resolveKurbanTopic(message, normalizedMessage) {
     includesLoose(normalizedMessage, "adak kurbani nedir") ||
     includesLoose(normalizedMessage, "adak kurbanı nedir")
   ) {
-    return "adak_kurbani";
+    return topicMatch("adak_kurbani", "exact_normalized_question", 100);
   }
 
+  if (
+    includesLoose(normalizedMessage, "kurban kimlere vaciptir") ||
+    includesLoose(normalizedMessage, "kurban kime vaciptir") ||
+    raw.includes("kurban kimlere vaciptir") ||
+    raw.includes("kurban kime vaciptir")
+  ) {
+    return topicMatch("kurban_kime_vaciptir", "exact_normalized_question", 100);
+  }
+  if (
+    hasKurban &&
+    (includesLoose(normalizedMessage, "kimlere vacip") ||
+      includesLoose(normalizedMessage, "kime vacip") ||
+      includesLoose(normalizedMessage, "kimler kurban keser") ||
+      includesLoose(normalizedMessage, "kurban yükümlülüğü") ||
+      includesLoose(normalizedMessage, "kurban yukumlulugu") ||
+      includesLoose(normalizedMessage, "kurban kesmek kimlere gerekir") ||
+      raw.includes("kimlere vacip") ||
+      raw.includes("kime vacip") ||
+      raw.includes("kimler kurban keser") ||
+      raw.includes("kurban yukumlulugu") ||
+      raw.includes("kurban kesmek kimlere gerekir"))
+  ) {
+    return topicMatch("kurban_kime_vaciptir", "intent_phrase", 90);
+  }
   if ((includesLoose(normalizedMessage, "kurban keserken nelere dikkat edilir") || includesLoose(normalizedMessage, "kurban keserken") || raw.includes("kurban keserken")) && hasKurban) {
-    return "kurban_keserken_nelere_dikkat_edilir";
+    return topicMatch("kurban_keserken_nelere_dikkat_edilir", "exact_normalized_question", 100);
   }
   if (
     includesLoose(normalizedMessage, "kurban eti nasil paylasilir") ||
     includesLoose(normalizedMessage, "kurban eti nasıl paylaşılır") ||
     (hasEti && hasPaylas)
   ) {
-    return "kurban_eti_nasil_paylasilir";
+    return topicMatch("kurban_eti_nasil_paylasilir", hasEti && hasPaylas ? "intent_phrase" : "exact_normalized_question", hasEti && hasPaylas ? 90 : 100);
   }
   if ((includesLoose(normalizedMessage, "kurban ne zaman kesilir") || includesLoose(normalizedMessage, "kurban zamani") || raw.includes("kurban ne zaman")) && hasKurban) {
-    return "kurban_ne_zaman_kesilir";
-  }
-  if ((includesLoose(normalizedMessage, "kurban kimlere vaciptir") || includesLoose(normalizedMessage, "kurban kime vaciptir") || raw.includes("kurban kimlere vaciptir")) && hasKurban) {
-    return "kurban_kime_vaciptir";
+    return topicMatch("kurban_ne_zaman_kesilir", "exact_normalized_question", 100);
   }
   if (
     includesLoose(normalizedMessage, "büyükbaş kurbana kaç kişi ortak olabilir") ||
@@ -530,7 +556,7 @@ function resolveKurbanTopic(message, normalizedMessage) {
     includesLoose(normalizedMessage, "hisse kurban") ||
     includesLoose(normalizedMessage, "ortak kurban")
   ) {
-    return "kurban_hisse_olur_mu";
+    return topicMatch("kurban_hisse_olur_mu", "intent_phrase", 90);
   }
   if (
     includesLoose(normalizedMessage, "kurban yerine para verilir mi") ||
@@ -538,14 +564,14 @@ function resolveKurbanTopic(message, normalizedMessage) {
     includesLoose(normalizedMessage, "kesmeden bağış") ||
     includesLoose(normalizedMessage, "online kurban bağışı")
   ) {
-    return "kurban_yerine_para_verilir_mi";
+    return topicMatch("kurban_yerine_para_verilir_mi", "intent_phrase", 90);
   }
   if (
     includesLoose(normalizedMessage, "kurban eti kimlere verilir") ||
     includesLoose(normalizedMessage, "tamamı dağıtılır mı") ||
     includesLoose(normalizedMessage, "aile yiyebilir mi")
   ) {
-    return "kurban_eti_kimlere_verilir";
+    return topicMatch("kurban_eti_kimlere_verilir", "intent_phrase", 90);
   }
   if (
     includesLoose(normalizedMessage, "kurbanlık hayvan nasıl olmalı") ||
@@ -553,7 +579,7 @@ function resolveKurbanTopic(message, normalizedMessage) {
     includesLoose(normalizedMessage, "yaş şartı") ||
     includesLoose(normalizedMessage, "kurbanlik hayvan sartlari")
   ) {
-    return "kurbanlik_hayvan_sartlari";
+    return topicMatch("kurbanlik_hayvan_sartlari", "intent_phrase", 90);
   }
   if (
     includesLoose(normalizedMessage, "vekaletle kurban") ||
@@ -561,15 +587,28 @@ function resolveKurbanTopic(message, normalizedMessage) {
     includesLoose(normalizedMessage, "vekalet nasıl verilir") ||
     includesLoose(normalizedMessage, "online kurban bağışı")
   ) {
-    return "vekaletle_kurban";
+    return topicMatch("vekaletle_kurban", "intent_phrase", 90);
   }
   if (includesLoose(normalizedMessage, "kurban nedir") || raw.includes("kurban nedir")) {
-    return "kurban_nedir";
+    return topicMatch("kurban_nedir", "exact_normalized_question", 100);
   }
   if (hasKurban) {
-    return "kurban_nedir";
+    return topicMatch("kurban_nedir", "topic_keyword", 40);
   }
   return null;
+}
+
+function topicMatch(topic, match_reason, match_score) {
+  return { topic, match_reason, match_score };
+}
+
+function resolveKnowledgeTitle(entry) {
+  if (!entry || typeof entry !== "object") return null;
+  if (typeof entry.title === "string" && entry.title.trim()) return entry.title.trim();
+  const aliases = Array.isArray(entry.aliases) ? entry.aliases : [];
+  const aliasTitle = aliases.find((alias) => typeof alias === "string" && alias.trim());
+  if (aliasTitle) return aliasTitle.trim();
+  return typeof entry.topic === "string" && entry.topic.trim() ? entry.topic.trim() : entry.id || null;
 }
 
 function resolveHacUmreTopic(message, normalizedMessage) {

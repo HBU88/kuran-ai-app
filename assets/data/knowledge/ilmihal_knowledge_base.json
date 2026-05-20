@@ -1327,7 +1327,7 @@
       "kurban kimlere vaciptir",
       "kurban kime vaciptir"
     ],
-    "answer_tr": "Kurban, Müslüman, akıllı, ergen, nisap miktarı mala sahip ve yolcu olmayan kimse için vacip olur.",
+    "answer_tr": "Hanefî görüşe göre kurban; Müslüman, akıllı, ergen, nisap miktarı mala sahip ve mukim yani yolcu olmayan kimse için vacip olur.",
     "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet.",
     "requires_ayah": false,
     "response_file": "server\\data\\ilmihal\\kurban_kime_vaciptir.json",

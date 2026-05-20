@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -324,10 +323,7 @@ class AuthService {
   static String _resolveBaseUrl(String configuredBaseUrl) {
     final value = configuredBaseUrl.trim();
     if (value.isEmpty) {
-      if (kReleaseMode || Platform.isIOS) {
-        return AppConstants.productionBackendApiBaseUrl;
-      }
-      return 'http://10.0.2.2:3000';
+      return AppConstants.resolvedBackendApiBaseUrl;
     }
 
     final uri = Uri.tryParse(value);
@@ -335,10 +331,7 @@ class AuthService {
     final isLocalhost =
         host == 'localhost' || host == '127.0.0.1' || host == '10.0.2.2';
     if (kReleaseMode && isLocalhost) {
-      throw const AuthServiceException(
-        'HAKAI_API_BASE_URL release için localhost olamaz.',
-        isConfigurationError: true,
-      );
+      return AppConstants.productionBackendApiBaseUrl;
     }
     return value;
   }

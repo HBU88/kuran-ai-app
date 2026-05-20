@@ -44,8 +44,13 @@ class ChatController extends ChangeNotifier {
   List<ChatMessageModel> get messages => List.unmodifiable(_messages);
   bool get isEmpty => _messages.isEmpty;
   bool get isReligiousChat => mode == ChatMode.ilmihal;
+  bool get usageLimitBypassedForDebug =>
+      !kReleaseMode && AppConstants.debugDisableUsageLimits;
   bool get isReligiousChatLocked =>
-      isReligiousChat && usageStateLoaded && remainingReligiousChatAnswers <= 0;
+      isReligiousChat &&
+      !usageLimitBypassedForDebug &&
+      usageStateLoaded &&
+      remainingReligiousChatAnswers <= 0;
   int get remainingReligiousChatAnswers =>
       freeAnswersRemaining + paidAnswersRemaining;
   bool get hasPendingPurchase => _authController?.hasPendingPurchase == true;
@@ -53,6 +58,17 @@ class ChatController extends ChangeNotifier {
 
   Future<void> loadUsageState() async {
     if (!isReligiousChat) return;
+    if (usageLimitBypassedForDebug) {
+      debugPrint(
+        'HAKAI_USAGE_GATE mode=ilmihal bypassed=true '
+        'reason=debug_disable_usage_limits',
+      );
+      freeAnswersRemaining = ReligiousChatLimitService.freeAnswerLimit;
+      paidAnswersRemaining = 0;
+      usageStateLoaded = true;
+      notifyListeners();
+      return;
+    }
     freeAnswersRemaining = _religiousChatLimitService?.freeAnswersRemaining ??
         ReligiousChatLimitService.freeAnswerLimit;
     if (_authController?.isLoggedIn == true) {
@@ -187,6 +203,14 @@ class ChatController extends ChangeNotifier {
 
   Future<void> _recordReligiousChatSuccess() async {
     if (!isReligiousChat) return;
+    if (usageLimitBypassedForDebug) {
+      final before = remainingReligiousChatAnswers;
+      debugPrint(
+        'HAKAI_USAGE_LIMIT mode=ilmihal bypassed=true '
+        'decremented=false before=$before after=$before',
+      );
+      return;
+    }
 
     final limitService = _religiousChatLimitService;
     if (limitService != null && limitService.hasFreeAnswerRemaining) {

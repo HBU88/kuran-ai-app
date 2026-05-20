@@ -169,13 +169,16 @@ class _ChatViewState extends State<_ChatView> {
                               if (widget.mode == ChatMode.ilmihal) ...[
                                 const _ReligiousChatInfoCard(),
                                 const SizedBox(height: AppSpacing.medium),
-                                _ReligiousUsageStatusCard(
-                                  remaining:
-                                      controller.remainingReligiousChatAnswers,
-                                  loaded: controller.usageStateLoaded,
-                                  pendingPurchase:
-                                      controller.hasPendingPurchase,
-                                ),
+                                if (controller.usageLimitBypassedForDebug)
+                                  const _ReligiousUsageDebugBypassCard()
+                                else
+                                  _ReligiousUsageStatusCard(
+                                    remaining: controller
+                                        .remainingReligiousChatAnswers,
+                                    loaded: controller.usageStateLoaded,
+                                    pendingPurchase:
+                                        controller.hasPendingPurchase,
+                                  ),
                                 const SizedBox(height: AppSpacing.medium),
                               ],
                               if (controller.isEmpty)
@@ -216,7 +219,8 @@ class _ChatViewState extends State<_ChatView> {
                           )
                         : null,
                     remainingReligiousChatAnswers:
-                        widget.mode == ChatMode.ilmihal
+                        widget.mode == ChatMode.ilmihal &&
+                                !controller.usageLimitBypassedForDebug
                             ? controller.remainingReligiousChatAnswers
                             : null,
                     onSend: () => _send(context),
@@ -648,6 +652,36 @@ class _ReligiousUsageStatusCard extends StatelessWidget {
                 size: 18,
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReligiousUsageDebugBypassCard extends StatelessWidget {
+  const _ReligiousUsageDebugBypassCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.bug_report_outlined,
+            color: AppColors.primaryAccent,
+            size: 19,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              'Test modu: limit devre dışı',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.primaryAccentSoft,
+                  ),
+            ),
+          ),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
+import 'core/constants/app_constants.dart';
 import 'core/utils/notification_helper.dart';
 import 'data/repositories/ayah_repository.dart';
 import 'data/repositories/favorites_repository.dart';
@@ -25,6 +26,7 @@ import 'features/situation_ayah/situation_ayah_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  debugPrint(AppConstants.startupApiBaseUrlLogLine);
 
   final preferences = await SharedPreferences.getInstance();
   final localSource = LocalAyahSource();
@@ -40,8 +42,24 @@ Future<void> main() async {
     FlutterLocalNotificationsPlugin(),
   );
 
-  await notificationHelper.initialize();
-  await habitTrackingService.trackAppOpen();
+  try {
+    await notificationHelper.initialize();
+  } catch (error, stackTrace) {
+    debugPrint('HAKAI_STARTUP notification_init_failed=$error');
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stackTrace,
+        library: 'HAKAI startup',
+        context: ErrorDescription('initializing notifications'),
+      ),
+    );
+  }
+  try {
+    await habitTrackingService.trackAppOpen();
+  } catch (error) {
+    debugPrint('HAKAI_STARTUP habit_tracking_failed=$error');
+  }
 
   runApp(
     MultiProvider(

@@ -67,4 +67,14 @@ extension ChatModeX on ChatMode {
         return '/ilmihal-chat';
     }
   }
+
+  String? get sourceScreen {
+    switch (this) {
+      case ChatMode.chat:
+      case ChatMode.ayah:
+        return null;
+      case ChatMode.ilmihal:
+        return 'religious_qa';
+    }
+  }
 }

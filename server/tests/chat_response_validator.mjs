@@ -328,6 +328,16 @@ const fixedTests = [
   {
     kind: "fixed",
     group: "knowledge",
+    prompt: "kurban kimlere vacip",
+    mustBeDirectAnswer: true,
+    expectedIntent: "general_islamic_question",
+    expectedKnowledgeHitId: "kurban_kime_vaciptir",
+    expectedContains: ["Hanefî", "Müslüman", "akıllı", "ergen", "nisap", "mukim"],
+    expectedNotContains: ["Kurban Bayramı günlerinde Allah rızası için kesilen ibadettir"],
+  },
+  {
+    kind: "fixed",
+    group: "knowledge",
     prompt: "Kurban ne zaman kesilir?",
     mustBeDirectAnswer: true,
     expectedIntent: "general_islamic_question",
@@ -1666,6 +1676,16 @@ function validatePayload(test, payload) {
     failures.push(`route_mode=${decisionMeta.route_mode}`);
   }
 
+  const expectedContains = normalizeContainsList(test.expectedContains);
+  if (expectedContains.length > 0) {
+    const assistantText = normalizeForMatch(payload?.assistant_text || "");
+    for (const token of expectedContains) {
+      if (!assistantText.includes(token)) {
+        failures.push(`assistant_text missing expected text ${token}`);
+      }
+    }
+  }
+
   const notContains = normalizeNotContainsList(test.expectedNotContains);
   if (notContains.length > 0) {
     const assistantText = normalizeForMatch(payload?.assistant_text || "");
@@ -1693,6 +1713,14 @@ function validatePayload(test, payload) {
   }
 
   return failures;
+}
+
+function normalizeContainsList(value) {
+  if (!value) return [];
+  const list = Array.isArray(value) ? value : [value];
+  return list
+    .map((item) => normalizeForMatch(item))
+    .filter(Boolean);
 }
 
 function normalizeNotContainsList(value) {

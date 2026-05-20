@@ -855,6 +855,7 @@ function buildDecisionMeta(
   const topDebug = top?.debug || {};
   const inferredPreRouteStage =
     preRouteStage ||
+    knowledgeResult?.match_reason ||
     (knowledgeResult?.matched_by === "semantic"
       ? "semantic"
       : knowledgeResult?.knowledge_hit_id
@@ -865,6 +866,17 @@ function buildDecisionMeta(
   return {
     route_mode: knowledgeResult?.knowledge_hit_id ? routeMode || "ilmihal_knowledge" : routeMode,
     knowledge_hit_id: knowledgeResult?.knowledge_hit_id || null,
+    matched_knowledge_id: knowledgeResult?.matched_knowledge_id || knowledgeResult?.knowledge_hit_id || null,
+    matched_title: knowledgeResult?.matched_title || knowledgeResult?.title || knowledgeResult?.topic || null,
+    match_reason: knowledgeResult?.match_reason || knowledgeResult?.matched_by || null,
+    match_score:
+      typeof knowledgeResult?.match_score === "number"
+        ? knowledgeResult.match_score
+        : typeof knowledgeResult?.semantic_match_score === "number"
+          ? knowledgeResult.semantic_match_score
+          : knowledgeResult?.knowledge_hit_id
+            ? 1
+            : 0,
     planner_source: plannerSource || "fallback",
     module,
     pre_route_stage: inferredPreRouteStage,

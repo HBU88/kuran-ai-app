@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,10 +22,7 @@ class ChatAgentService {
   static String _resolveBaseUrl(String configuredBaseUrl) {
     final value = configuredBaseUrl.trim();
     if (value.isEmpty) {
-      if (kReleaseMode || Platform.isIOS) {
-        return AppConstants.productionBackendApiBaseUrl;
-      }
-      return 'http://10.0.2.2:3000';
+      return AppConstants.resolvedBackendApiBaseUrl;
     }
 
     final uri = Uri.tryParse(value);
@@ -34,10 +30,7 @@ class ChatAgentService {
     final isLocalhost =
         host == 'localhost' || host == '127.0.0.1' || host == '10.0.2.2';
     if (kReleaseMode && isLocalhost) {
-      throw const ChatAgentException(
-        'HAKAI_API_BASE_URL release için localhost olamaz.',
-        isConfigurationError: true,
-      );
+      return AppConstants.productionBackendApiBaseUrl;
     }
     return value;
   }
@@ -48,7 +41,17 @@ class ChatAgentService {
     ChatMode mode = ChatMode.chat,
   }) async {
     final target = Uri.parse('$_baseUrl${mode.endpointPath}');
-    final requestBody = {'message': message, 'history': history};
+    final sourceScreen = mode.sourceScreen;
+    final requestBody = {
+      'message': message,
+      'history': history,
+      if (sourceScreen != null) 'source_screen': sourceScreen,
+    };
+    _debugPrintChatRequest(
+      target: target,
+      sourceScreen: sourceScreen,
+      message: message,
+    );
     http.Response response;
     try {
       response = await _client
@@ -118,6 +121,31 @@ class ChatAgentService {
       return null;
     }
     return null;
+  }
+
+  void _debugPrintChatRequest({
+    required Uri target,
+    required String? sourceScreen,
+    required String message,
+  }) {
+    const debugChatRawLogs =
+        bool.fromEnvironment('DEBUG_CHAT_RAW_LOGS', defaultValue: false);
+    final debugFlags = [
+      'debug_disable_usage_limits='
+          '${!kReleaseMode && AppConstants.debugDisableUsageLimits}',
+      'debug_chat_raw_logs=${!kReleaseMode && debugChatRawLogs}',
+      'release_mode=$kReleaseMode',
+    ].join(',');
+    final normalizedPreview = message.replaceAll(RegExp(r'\s+'), ' ').trim();
+    final preview = normalizedPreview.length <= 80
+        ? normalizedPreview
+        : normalizedPreview.substring(0, 80);
+    debugPrint(
+      'HAKAI_CHAT_REQUEST endpoint=$target '
+      'source_screen=${sourceScreen ?? '-'} '
+      'debug_flags=$debugFlags '
+      'message_preview=$preview',
+    );
   }
 }
 

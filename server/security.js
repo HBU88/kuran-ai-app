@@ -101,6 +101,20 @@ function isVerboseChatLoggingEnabled() {
   return String(process.env.HAKAI_VERBOSE_CHAT_LOGS || "").trim().toLowerCase() === "true";
 }
 
+function isRawChatLoggingEnabled() {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    String(process.env.DEBUG_CHAT_RAW_LOGS || "").trim().toLowerCase() === "true"
+  );
+}
+
+function isUsageLimitBypassEnabled() {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    String(process.env.DEBUG_DISABLE_USAGE_LIMITS || "").trim().toLowerCase() === "true"
+  );
+}
+
 function summarizeUserMessage(message) {
   const text = typeof message === "string" ? message.trim() : "";
   if (!text) {
@@ -136,9 +150,11 @@ module.exports = {
   DEFAULT_MAX_CHAT_MESSAGE_LENGTH,
   createCorsMiddleware,
   createRateLimiter,
+  isRawChatLoggingEnabled,
   isUnsafePrompt,
   isRateLimitDisabled,
   isVerboseChatLoggingEnabled,
+  isUsageLimitBypassEnabled,
   parseAllowedOrigins,
   summarizeUserMessage,
   validateChatMessage,

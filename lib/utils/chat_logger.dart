@@ -6,7 +6,12 @@ import 'package:path_provider/path_provider.dart';
 
 import '../data/models/chat_message_model.dart';
 
+const _rawChatLogsEnabled = bool.fromEnvironment('DEBUG_CHAT_RAW_LOGS');
+
 Future<void> logChatTurn(ChatMessageModel message) async {
+  if (!_rawChatLogsEnabled) {
+    return;
+  }
   if (message.isUser) {
     return;
   }
@@ -24,6 +29,13 @@ Future<void> logChatTurn(ChatMessageModel message) async {
     ..writeln('[$timestamp]')
     ..writeln('USER: $userText')
     ..writeln('ASSISTANT: $assistantText')
+    ..writeln('ENDPOINT: local_flutter_chat')
+    ..writeln('SCREEN: chat')
+    ..writeln(
+        'FINAL_ROUTE: ${message.debug?.routing?.responseType ?? message.responseType ?? '-'}')
+    ..writeln(
+        'SELECTED_AYAH_REFERENCE: ${message.selectedAyah?.displayReference ?? '-'}')
+    ..writeln('BLOCKED_OVERRIDE_REASON: -')
     ..writeln('AYAH_ID: ${message.selectedAyahId ?? '-'}')
     ..writeln('THEME: $theme')
     ..writeln('EMOTION: ${message.emotion ?? '-'}')

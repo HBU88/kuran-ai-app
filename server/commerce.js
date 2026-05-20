@@ -12,6 +12,13 @@ const CREDIT_BY_PRODUCT_ID = {
   support_special_499: 300,
 };
 
+function isUsageLimitBypassEnabled() {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    String(process.env.DEBUG_DISABLE_USAGE_LIMITS || "").trim().toLowerCase() === "true"
+  );
+}
+
 class JsonCommerceStore {
   constructor(filePath = process.env.HAKAI_COMMERCE_STORE_PATH || DEFAULT_COMMERCE_STORE_PATH) {
     this.filePath = filePath;
@@ -122,15 +129,25 @@ class CommerceService {
 
   async getReligiousChatStatus(userId) {
     const entitlements = await this.getEntitlements(userId);
+    const bypassed = isUsageLimitBypassEnabled();
     return {
       religious_chat_credits_remaining: entitlements.religious_chat_credits_remaining,
-      can_consume: entitlements.religious_chat_credits_remaining > 0,
+      can_consume: bypassed || entitlements.religious_chat_credits_remaining > 0,
       supporter_status: entitlements.supporter_status,
+      ...(bypassed ? { usage_limit_bypassed_for_debug: true } : {}),
     };
   }
 
   async consumeReligiousChatCredit(userId) {
     const current = await this.store.getEntitlements(userId);
+    if (isUsageLimitBypassEnabled()) {
+      return {
+        ok: true,
+        statusCode: 200,
+        entitlements: publicEntitlements(current),
+        usage_limit_bypassed_for_debug: true,
+      };
+    }
     if ((current.religious_chat_credits_remaining || 0) <= 0) {
       return {
         ok: false,

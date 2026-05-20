@@ -15,8 +15,10 @@ const { CommerceService } = require("./commerce");
 const {
   createCorsMiddleware,
   createRateLimiter,
+  isRawChatLoggingEnabled,
   isUnsafePrompt,
   isVerboseChatLoggingEnabled,
+  isUsageLimitBypassEnabled,
   summarizeUserMessage,
   validateChatMessage,
 } = require("./security");
@@ -297,6 +299,9 @@ app.post("/usage/religious-chat/consume", authRateLimiter, async (req, res) => {
     return sendUtf8Json(res, 200, {
       ok: true,
       entitlements: result.entitlements,
+      ...(result.usage_limit_bypassed_for_debug
+        ? { usage_limit_bypassed_for_debug: true }
+        : {}),
     });
   } catch (error) {
     return handleAuthError(res, error);
@@ -319,6 +324,8 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
         module,
+        endpoint: req.path,
+        source: module,
         user_message: typeof req.body?.message === "string" ? req.body.message : "",
         intent: null,
         response_type: null,
@@ -345,6 +352,8 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
         module,
+        endpoint: req.path,
+        source: module,
         user_message: message,
         intent: "blocked_unsafe_prompt",
         response_type: "direct_answer",
@@ -357,6 +366,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         semantic_tags_considered: [],
         semantic_score: 0,
         error: errorResponse.error,
+        blocked_override_reason: "unsafe_prompt",
       });
       appendChatDecisionLog(logEntry);
       return sendUtf8Json(res, 400, errorResponse);
@@ -407,6 +417,8 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
         module: "chat",
+        endpoint: req.path,
+        source: "chat",
         user_message: message,
         intent: response.intent,
         response_type: response.response_type,
@@ -415,6 +427,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         redirect_module: null,
         knowledge_hit_id: null,
         selected_ayah_id: response.selected_ayah.id,
+        selected_ayah_reference: selectedAyahReference(response.selected_ayah),
         top_ayah_ids: response.top_ayah_ids,
         ranker_source: response.decision_meta.ranker_source,
         semantic_candidates_count: 0,
@@ -426,6 +439,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         pre_route_stage: response.decision_meta.pre_route_stage,
         timing_ms: response.decision_meta.timing_ms,
         error: null,
+        assistant_response_preview: response.assistant_text,
       });
       appendChatDecisionLog(logEntry);
       return sendUtf8Json(res, 200, {
@@ -476,6 +490,8 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
         module: "ilmihal",
+        endpoint: req.path,
+        source: "ilmihal",
         user_message: message,
         intent: response.intent,
         response_type: response.response_type,
@@ -495,6 +511,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         pre_route_stage: response.decision_meta.pre_route_stage,
         timing_ms: response.decision_meta.timing_ms,
         error: null,
+        assistant_response_preview: response.assistant_text,
       });
       appendChatDecisionLog(logEntry);
       return sendUtf8Json(res, 200, {
@@ -568,6 +585,8 @@ async function handleChatModuleRequest(req, res, module = "chat") {
     logEntry = buildChatDecisionLog({
       timestamp: new Date().toISOString(),
       module: decisionMeta.module || module,
+      endpoint: req.path,
+      source: module,
       user_message: message,
       intent: response.intent || null,
       response_type: response.response_type || null,
@@ -575,9 +594,15 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       planner_source: decisionMeta.planner_source || "fallback",
       redirect_module: normalizedResponse.redirect_module || null,
       knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
+      matched_knowledge_id: decisionMeta.matched_knowledge_id || decisionMeta.knowledge_hit_id || null,
+      matched_title: decisionMeta.matched_title || null,
+      match_reason: decisionMeta.match_reason || null,
+      match_score:
+        typeof decisionMeta.match_score === "number" ? decisionMeta.match_score : 0,
       selected_ayah_id: normalizedResponse.selected_ayah
         ? normalizedResponse.selected_ayah.id || null
         : null,
+      selected_ayah_reference: selectedAyahReference(normalizedResponse.selected_ayah),
       top_ayah_ids: normalizedResponse.top_ayah_ids || [],
       ranker_source: decisionMeta.ranker_source || "fallback",
       semantic_candidates_count: Number.isInteger(decisionMeta.semantic_candidates_count)
@@ -594,6 +619,9 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       pre_route_stage: decisionMeta.pre_route_stage || null,
       timing_ms: normalizeTimingBreakdown(decisionMeta.timing_ms),
       error: null,
+      assistant_response_preview:
+        typeof response.assistant_text === "string" ? response.assistant_text.slice(0, 800) : null,
+      blocked_override_reason: decisionMeta.blocked_override_reason || null,
       ...(String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true" &&
       typeof decisionMeta.response_preview === "string" &&
       decisionMeta.response_preview.trim()
@@ -611,6 +639,8 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
         module,
+        endpoint: req.path,
+        source: module,
         user_message: typeof req.body?.message === "string" ? req.body.message : "",
         intent: null,
         response_type: null,
@@ -627,6 +657,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
           total: 0,
         },
         error: error.message,
+        blocked_override_reason: null,
       });
       appendChatDecisionLog(logEntry);
     }
@@ -675,6 +706,10 @@ app.get("/debug/resolve", async (req, res) => {
       ranker_source: decisionMeta.ranker_source || "fallback",
       semantic_score: typeof decisionMeta.semantic_score === "number" ? decisionMeta.semantic_score : 0,
       knowledge_hit_id: decisionMeta.knowledge_hit_id || null,
+      matched_knowledge_id: decisionMeta.matched_knowledge_id || decisionMeta.knowledge_hit_id || null,
+      matched_title: decisionMeta.matched_title || null,
+      match_reason: decisionMeta.match_reason || null,
+      match_score: typeof decisionMeta.match_score === "number" ? decisionMeta.match_score : 0,
       debug: buildDebugFields({
         semantic_match_score:
           typeof decisionMeta.semantic_match_score === "number" ? decisionMeta.semantic_match_score : 0,
@@ -748,6 +783,24 @@ function isDebugChatEngineEnabled() {
 }
 
 function buildChatDecisionLog(entry) {
+  const rawDebugFields = isRawChatLoggingEnabled()
+    ? {
+        raw_user_message:
+          typeof entry.user_message === "string" ? entry.user_message.slice(0, 2000) : "",
+        assistant_response_preview:
+          typeof entry.assistant_response_preview === "string"
+            ? entry.assistant_response_preview.slice(0, 800)
+            : typeof entry.response_preview === "string"
+              ? entry.response_preview.slice(0, 800)
+              : null,
+        endpoint: entry.endpoint || null,
+        screen: entry.source || entry.screen || entry.module || null,
+        source: entry.source || entry.screen || entry.module || null,
+        final_route: entry.final_route || entry.route_mode || entry.redirect_module || null,
+        selected_ayah_reference: entry.selected_ayah_reference || null,
+        blocked_override_reason: entry.blocked_override_reason || null,
+      }
+    : {};
   return JSON.stringify({
     timestamp: entry.timestamp || new Date().toISOString(),
     module: entry.module || "chat",
@@ -757,6 +810,10 @@ function buildChatDecisionLog(entry) {
     route_mode: entry.route_mode || null,
     planner_source: entry.planner_source || "fallback",
     knowledge_hit_id: entry.knowledge_hit_id || null,
+    matched_knowledge_id: entry.matched_knowledge_id || entry.knowledge_hit_id || null,
+    matched_title: entry.matched_title || null,
+    match_reason: entry.match_reason || null,
+    match_score: typeof entry.match_score === "number" ? entry.match_score : 0,
     selected_ayah_id:
       typeof entry.selected_ayah_id === "number" ? entry.selected_ayah_id : null,
     top_ayah_ids: Array.isArray(entry.top_ayah_ids) ? entry.top_ayah_ids : [],
@@ -774,6 +831,8 @@ function buildChatDecisionLog(entry) {
     pre_route_stage: entry.pre_route_stage || null,
     timing_ms: normalizeTimingBreakdown(entry.timing_ms),
     error: typeof entry.error === "string" && entry.error.trim() ? entry.error.trim() : null,
+    ...(isUsageLimitBypassEnabled() ? { usage_limit_bypassed_for_debug: true } : {}),
+    ...rawDebugFields,
     ...(String(process.env.DEBUG_CHAT_ENGINE || "").trim().toLowerCase() === "true" &&
     isVerboseChatLoggingEnabled() &&
     typeof entry.response_preview === "string" &&
@@ -794,6 +853,22 @@ function buildDebugFields(entry = {}) {
       ? { response_preview: entry.response_preview.slice(0, 800) }
       : {}),
   };
+}
+
+function selectedAyahReference(selectedAyah) {
+  if (!selectedAyah || typeof selectedAyah !== "object") return null;
+  const surahName =
+    selectedAyah.surahNameTr ||
+    selectedAyah.surah_name_tr ||
+    selectedAyah.surah ||
+    selectedAyah.surahName ||
+    "";
+  const surahNumber =
+    selectedAyah.surahNumber || selectedAyah.surah_number || selectedAyah.surah_no || "";
+  const ayahNumber =
+    selectedAyah.ayahNumber || selectedAyah.ayah || selectedAyah.ayah_number || "";
+  const numericRef = surahNumber && ayahNumber ? `${surahNumber}:${ayahNumber}` : "";
+  return [surahName, numericRef].filter(Boolean).join(" ").trim() || null;
 }
 
 function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
