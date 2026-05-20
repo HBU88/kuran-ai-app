@@ -11,6 +11,7 @@ const { detectExplicitTopic, isPureGreetingMessage, normalize } = require("./age
 const { resolveCurrentMessageOverrideTopic } = require("./agent/ayah_ranker");
 const { lookupKnowledgeAnswer } = require("./agent/knowledge_base");
 const { AuthService, bearerTokenFromRequest } = require("./auth");
+const { CommerceService } = require("./commerce");
 const {
   createCorsMiddleware,
   createRateLimiter,
@@ -26,6 +27,7 @@ const ENGINE_VERSION = "runtime-check-1";
 const STARTED_AT = new Date().toISOString();
 const CHAT_RUNTIME_LOG_PATH = path.join(__dirname, "..", "logs", "chat_runtime_log.txt");
 const authService = new AuthService();
+const commerceService = new CommerceService();
 
 function isRepentanceRedirectMessage(message) {
   const normalized = String(message || "").toLocaleLowerCase("tr-TR");
@@ -208,6 +210,14 @@ app.get("/me", authRateLimiter, async (req, res) => {
 
 app.delete("/me", authRateLimiter, async (req, res) => {
   try {
+    const auth = await authService.authenticate(bearerTokenFromRequest(req));
+    if (!auth.ok) {
+      return sendUtf8Json(res, auth.statusCode || 401, {
+        ok: false,
+        error: auth.error,
+      });
+    }
+    await commerceService.deleteUserData(auth.user.id);
     const result = await authService.deleteMe(bearerTokenFromRequest(req));
     if (!result.ok) {
       return sendUtf8Json(res, result.statusCode || 401, {
@@ -218,6 +228,75 @@ app.delete("/me", authRateLimiter, async (req, res) => {
     return sendUtf8Json(res, 200, {
       ok: true,
       message: "account deletion completed",
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
+app.get("/me/entitlements", authRateLimiter, async (req, res) => {
+  try {
+    const auth = await requireAuthenticatedUser(req, res);
+    if (!auth) return;
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      entitlements: await commerceService.getEntitlements(auth.user.id),
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
+app.post("/purchases/verify", authRateLimiter, async (req, res) => {
+  try {
+    const auth = await requireAuthenticatedUser(req, res);
+    if (!auth) return;
+    const result = await commerceService.verifyPurchase(auth.user.id, req.body || {});
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 400, {
+        ok: false,
+        error: result.error,
+      });
+    }
+    return sendUtf8Json(res, result.statusCode || 200, {
+      ok: true,
+      purchase: result.purchase,
+      entitlements: result.entitlements,
+      ...(result.message ? { message: result.message } : {}),
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
+app.get("/usage/religious-chat/status", authRateLimiter, async (req, res) => {
+  try {
+    const auth = await requireAuthenticatedUser(req, res);
+    if (!auth) return;
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      usage: await commerceService.getReligiousChatStatus(auth.user.id),
+    });
+  } catch (error) {
+    return handleAuthError(res, error);
+  }
+});
+
+app.post("/usage/religious-chat/consume", authRateLimiter, async (req, res) => {
+  try {
+    const auth = await requireAuthenticatedUser(req, res);
+    if (!auth) return;
+    const result = await commerceService.consumeReligiousChatCredit(auth.user.id);
+    if (!result.ok) {
+      return sendUtf8Json(res, result.statusCode || 400, {
+        ok: false,
+        error: result.error,
+        entitlements: result.entitlements,
+      });
+    }
+    return sendUtf8Json(res, 200, {
+      ok: true,
+      entitlements: result.entitlements,
     });
   } catch (error) {
     return handleAuthError(res, error);
@@ -645,6 +724,18 @@ function handleAuthError(res, error) {
     ok: false,
     error: "auth request failed",
   });
+}
+
+async function requireAuthenticatedUser(req, res) {
+  const result = await authService.authenticate(bearerTokenFromRequest(req));
+  if (!result.ok) {
+    sendUtf8Json(res, result.statusCode || 401, {
+      ok: false,
+      error: result.error,
+    });
+    return null;
+  }
+  return result;
 }
 
 function readPositiveInt(value, fallback) {

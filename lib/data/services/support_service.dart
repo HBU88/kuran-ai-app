@@ -6,7 +6,10 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 class SupportService extends ChangeNotifier {
   SupportService({
     InAppPurchase? inAppPurchase,
-  }) : _inAppPurchase = inAppPurchase ?? InAppPurchase.instance;
+    Future<PurchaseBackendVerification> Function(PurchaseDetails purchase)?
+        verifyPurchase,
+  })  : _inAppPurchase = inAppPurchase ?? InAppPurchase.instance,
+        _verifyPurchase = verifyPurchase;
 
   static const smallProductId = 'support_small';
   static const mediumProductId = 'support_medium';
@@ -23,6 +26,8 @@ class SupportService extends ChangeNotifier {
   };
 
   final InAppPurchase _inAppPurchase;
+  final Future<PurchaseBackendVerification> Function(PurchaseDetails purchase)?
+      _verifyPurchase;
   StreamSubscription<List<PurchaseDetails>>? _purchaseSubscription;
 
   bool _isLoading = false;
@@ -114,10 +119,15 @@ class SupportService extends ChangeNotifier {
           break;
         case PurchaseStatus.purchased:
         case PurchaseStatus.restored:
-          // Support purchases are voluntary app support only. They do not
-          // unlock premium religious content or feature access.
-          // TODO: Add server-side receipt validation later if needed.
-          _successMessage = 'Desteğin için teşekkür ederiz.';
+          final verification = await _verifyPurchase?.call(purchase);
+          if (verification == null) {
+            _errorMessage = 'Satın alma kaydı şu anda doğrulamaya alınamadı.';
+          } else if (verification.status == 'verified') {
+            _successMessage = 'Desteğin için teşekkür ederiz.';
+          } else {
+            _successMessage =
+                'Desteğin alındı. App Store doğrulaması tamamlanınca kullanım hakların güncellenecek.';
+          }
           _isPurchasing = false;
           break;
         case PurchaseStatus.error:
@@ -147,6 +157,16 @@ class SupportService extends ChangeNotifier {
     _purchaseSubscription?.cancel();
     super.dispose();
   }
+}
+
+class PurchaseBackendVerification {
+  const PurchaseBackendVerification({
+    required this.status,
+    required this.creditsGranted,
+  });
+
+  final String status;
+  final int creditsGranted;
 }
 
 int _compareSupportProducts(ProductDetails a, ProductDetails b) {

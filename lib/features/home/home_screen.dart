@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,6 +7,7 @@ import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_routes.dart';
 import '../../data/models/ayah_model.dart';
 import '../../data/repositories/ayah_repository.dart';
+import '../../data/services/habit_tracking_service.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_gradient_background.dart';
 import '../../shared/widgets/app_logo.dart';
@@ -18,8 +21,15 @@ import '../chat/chat_mode.dart';
 import '../chat/chat_screen.dart';
 import 'widgets/home_menu_item.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _trackedDailyAyahView = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +69,15 @@ class HomeScreen extends StatelessWidget {
           }
 
           final ayah = snapshot.data!;
+          if (!_trackedDailyAyahView) {
+            _trackedDailyAyahView = true;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (!mounted) return;
+              unawaited(
+                context.read<HabitTrackingService>().trackDailyAyahView(),
+              );
+            });
+          }
           return AppGradientBackground(
             child: ListView(
               padding: const EdgeInsets.fromLTRB(18, 10, 18, 30),

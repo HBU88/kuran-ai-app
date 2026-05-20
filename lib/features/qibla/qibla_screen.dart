@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/services/habit_tracking_service.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_gradient_background.dart';
 import '../../theme/app_colors.dart';
@@ -45,6 +47,10 @@ class _QiblaScreenState extends State<QiblaScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      unawaited(context.read<HabitTrackingService>().trackQiblaOpen());
+    });
     _startCompassListener();
     _loadLocation();
   }

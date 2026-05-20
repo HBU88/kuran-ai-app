@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../data/models/auth_user_model.dart';
+import '../../data/models/entitlement_model.dart';
 import '../../data/sources/remote/auth_service.dart';
 
 class AuthController extends ChangeNotifier {
@@ -9,6 +10,7 @@ class AuthController extends ChangeNotifier {
   final AuthService _service;
 
   AuthUserModel? user;
+  EntitlementModel? entitlements;
   bool isBusy = false;
   String? errorMessage;
   String? infoMessage;
@@ -22,6 +24,7 @@ class AuthController extends ChangeNotifier {
     return _run(() async {
       final session = await _service.login(email: email, password: password);
       user = session.user;
+      await _refreshEntitlementsQuietly();
     });
   }
 
@@ -43,6 +46,7 @@ class AuthController extends ChangeNotifier {
         adPersonalizationConsent: adPersonalizationConsent,
       );
       user = session.user;
+      await _refreshEntitlementsQuietly();
     });
   }
 
@@ -52,6 +56,7 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
     await _service.logout();
     user = null;
+    entitlements = null;
     isBusy = false;
     notifyListeners();
   }
@@ -64,6 +69,7 @@ class AuthController extends ChangeNotifier {
     try {
       await _service.deleteAccount();
       user = null;
+      entitlements = null;
       infoMessage = 'Hesabın silindi. Misafir olarak devam edebilirsin.';
       isBusy = false;
       notifyListeners();
@@ -96,6 +102,79 @@ class AuthController extends ChangeNotifier {
     });
   }
 
+  Future<EntitlementModel?> fetchEntitlements() async {
+    if (!isLoggedIn) return null;
+    try {
+      entitlements = await _service.fetchEntitlements();
+      notifyListeners();
+      return entitlements;
+    } on AuthServiceException catch (error) {
+      errorMessage = error.message;
+    } catch (_) {
+      errorMessage = 'Hak bilgileri alınamadı.';
+    }
+    notifyListeners();
+    return null;
+  }
+
+  Future<PurchaseVerificationResult?> verifyPurchase({
+    required String productId,
+    required String platform,
+    String? transactionId,
+    String? purchaseToken,
+  }) async {
+    if (!isLoggedIn) {
+      errorMessage = 'Destek işlemi için giriş yapmalısın.';
+      notifyListeners();
+      return null;
+    }
+    try {
+      final result = await _service.verifyPurchase(
+        productId: productId,
+        platform: platform,
+        transactionId: transactionId,
+        purchaseToken: purchaseToken,
+      );
+      entitlements = result.entitlements;
+      notifyListeners();
+      return result;
+    } on AuthServiceException catch (error) {
+      errorMessage = error.message;
+    } catch (_) {
+      errorMessage = 'Satın alma doğrulaması başlatılamadı.';
+    }
+    notifyListeners();
+    return null;
+  }
+
+  Future<ReligiousChatUsageStatus?> fetchReligiousChatUsageStatus() async {
+    if (!isLoggedIn) return null;
+    try {
+      return await _service.fetchReligiousChatUsageStatus();
+    } on AuthServiceException catch (error) {
+      errorMessage = error.message;
+    } catch (_) {
+      errorMessage = 'Kullanım durumu alınamadı.';
+    }
+    notifyListeners();
+    return null;
+  }
+
+  Future<EntitlementModel?> consumeReligiousChatCredit() async {
+    if (!isLoggedIn) return null;
+    try {
+      entitlements = await _service.consumeReligiousChatCredit();
+      notifyListeners();
+      return entitlements;
+    } on AuthServiceException catch (error) {
+      errorMessage = error.message;
+    } catch (_) {
+      errorMessage = 'Kullanım hakkı güncellenemedi.';
+    }
+    notifyListeners();
+    return null;
+  }
+
   Future<bool> _run(Future<void> Function() action) async {
     isBusy = true;
     errorMessage = null;
@@ -114,5 +193,13 @@ class AuthController extends ChangeNotifier {
     isBusy = false;
     notifyListeners();
     return false;
+  }
+
+  Future<void> _refreshEntitlementsQuietly() async {
+    try {
+      entitlements = await _service.fetchEntitlements();
+    } catch (_) {
+      entitlements = null;
+    }
   }
 }

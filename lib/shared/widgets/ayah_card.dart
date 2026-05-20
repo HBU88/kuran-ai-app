@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../data/models/ayah_model.dart';
+import '../../data/services/habit_tracking_service.dart';
 import '../../features/favorites/favorites_controller.dart';
 import '../../theme/app_colors.dart';
 import 'ayah_detail_sheet.dart';
@@ -90,7 +92,14 @@ class AyahCard extends StatelessWidget {
                       active: isFavorite,
                       tooltip:
                           isFavorite ? 'Favoriden \u00e7\u0131kar' : 'Favori',
-                      onPressed: () => favorites.toggle(ayah),
+                      onPressed: () async {
+                        if (!isFavorite) {
+                          await context
+                              .read<HabitTrackingService>()
+                              .trackFavoriteAdded();
+                        }
+                        await favorites.toggle(ayah);
+                      },
                     );
                   },
                 ),
@@ -98,10 +107,11 @@ class AyahCard extends StatelessWidget {
                 _AyahActionIcon(
                   icon: Icons.ios_share_rounded,
                   tooltip: 'Payla\u015f',
-                  onPressed: () {
-                    Share.share(
-                      '${ayah.reference}\n\n${ayah.textTr}\n\n${ayah.textAr}',
-                    );
+                  onPressed: () async {
+                    await context
+                        .read<HabitTrackingService>()
+                        .trackShareAyahTapped();
+                    await Share.share(_shareText(ayah));
                   },
                 ),
                 const Spacer(),
@@ -115,6 +125,10 @@ class AyahCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _shareText(AyahModel ayah) {
+    return '${ayah.textTr}\n\n${ayah.reference}\n\nHAKAI\n${AppConstants.appShareLinkPlaceholder}';
   }
 }
 

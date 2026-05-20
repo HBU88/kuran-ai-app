@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/models/chat_message_model.dart';
 import '../../data/models/recommended_resource.dart';
+import '../../data/services/habit_tracking_service.dart';
 import '../../data/services/recommended_resource_service.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_gradient_background.dart';
@@ -31,7 +32,10 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ChatController(mode: mode),
+      create: (context) => ChatController(
+        mode: mode,
+        habitTrackingService: context.read<HabitTrackingService>(),
+      ),
       child: _ChatView(mode: mode),
     );
   }
@@ -164,6 +168,10 @@ class _ChatViewState extends State<_ChatView> {
                                   context,
                                   controller,
                                   controller.messages,
+                                ),
+                              if (controller.loading)
+                                _WaitingForResponseCard(
+                                  slowResponse: controller.slowResponse,
                                 ),
                               const SizedBox(height: AppSpacing.large),
                             ],
@@ -466,6 +474,45 @@ class _ModuleRedirectAction extends StatelessWidget {
             isIlmihal ? Icons.menu_book_rounded : Icons.auto_stories_rounded,
           ),
           label: Text(label),
+        ),
+      ),
+    );
+  }
+}
+
+class _WaitingForResponseCard extends StatelessWidget {
+  const _WaitingForResponseCard({required this.slowResponse});
+
+  final bool slowResponse;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: AppCard(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox.square(
+                dimension: 18,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+              const SizedBox(width: 12),
+              Flexible(
+                child: Text(
+                  slowResponse
+                      ? 'İlk bağlantı biraz uzun sürebilir, lütfen bekleyin.'
+                      : 'Cevap hazırlanıyor…',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

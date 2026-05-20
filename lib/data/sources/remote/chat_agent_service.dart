@@ -12,7 +12,7 @@ class ChatAgentService {
   ChatAgentService({
     http.Client? client,
     String baseUrl = AppConstants.backendApiBaseUrl,
-    this.requestTimeout = const Duration(seconds: 12),
+    this.requestTimeout = const Duration(seconds: 45),
   })  : _client = client ?? http.Client(),
         _baseUrl = _resolveBaseUrl(baseUrl);
 
@@ -63,21 +63,21 @@ class ChatAgentService {
           .timeout(requestTimeout);
     } on TimeoutException catch (error) {
       throw ChatAgentException(
-        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
+        AppConstants.connectionFallbackMessage,
         isTimeout: true,
         isTransient: true,
         originalError: error,
       );
     } on SocketException catch (error) {
       throw ChatAgentException(
-        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
+        AppConstants.connectionFallbackMessage,
         isNetworkError: true,
         isTransient: true,
         originalError: error,
       );
     } on http.ClientException catch (error) {
       throw ChatAgentException(
-        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
+        AppConstants.connectionFallbackMessage,
         isNetworkError: true,
         isTransient: true,
         originalError: error,
@@ -88,7 +88,7 @@ class ChatAgentService {
     if (response.statusCode < 200 || response.statusCode >= 300) {
       final parsedError = _readParsedError(decodedBody);
       throw ChatAgentException(
-        'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.',
+        AppConstants.connectionFallbackMessage,
         statusCode: response.statusCode,
         responseBody: decodedBody,
         parsedErrorMessage: parsedError,

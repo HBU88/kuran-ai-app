@@ -254,6 +254,12 @@ class AuthService {
   }
 
   async me(token) {
+    const auth = await this.authenticate(token);
+    if (!auth.ok) return auth;
+    return { ok: true, statusCode: 200, user: publicUser(auth.user) };
+  }
+
+  async authenticate(token) {
     if (!token) {
       return { ok: false, statusCode: 401, error: "authorization token is required" };
     }
@@ -269,22 +275,14 @@ class AuthService {
     if (!user) {
       return { ok: false, statusCode: 401, error: "invalid authorization token" };
     }
-    return { ok: true, statusCode: 200, user: publicUser(user) };
+    return { ok: true, statusCode: 200, user };
   }
 
   async deleteMe(token) {
-    if (!token) {
-      return { ok: false, statusCode: 401, error: "authorization token is required" };
-    }
+    const auth = await this.authenticate(token);
+    if (!auth.ok) return auth;
 
-    let payload;
-    try {
-      payload = verifyJwt(token, this.jwtSecret);
-    } catch {
-      return { ok: false, statusCode: 401, error: "invalid authorization token" };
-    }
-
-    await this.store.deleteById(payload.sub);
+    await this.store.deleteById(auth.user.id);
     return {
       ok: true,
       statusCode: 200,

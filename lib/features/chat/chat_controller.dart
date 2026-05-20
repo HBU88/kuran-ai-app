@@ -1,26 +1,34 @@
 // ignore_for_file: prefer_single_quotes
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../data/models/chat_message_model.dart';
+import '../../data/services/habit_tracking_service.dart';
 import '../../data/sources/remote/chat_agent_service.dart';
 import 'chat_mode.dart';
 
 class ChatController extends ChangeNotifier {
   ChatController({
     ChatAgentService? service,
+    HabitTrackingService? habitTrackingService,
     this.mode = ChatMode.chat,
-  }) : _service = service ?? ChatAgentService();
+  })  : _service = service ?? ChatAgentService(),
+        _habitTrackingService = habitTrackingService;
 
   final ChatAgentService _service;
+  final HabitTrackingService? _habitTrackingService;
   final ChatMode mode;
 
   final List<ChatMessageModel> _messages = [];
   bool loading = false;
   bool runningSmokeTest = false;
+  bool slowResponse = false;
   String? errorMessage;
   String? debugErrorMessage;
+  Timer? _slowResponseTimer;
 
   List<ChatMessageModel> get messages => List.unmodifiable(_messages);
   bool get isEmpty => _messages.isEmpty;
@@ -35,6 +43,8 @@ class ChatController extends ChangeNotifier {
     _messages.clear();
     loading = false;
     runningSmokeTest = false;
+    slowResponse = false;
+    _slowResponseTimer?.cancel();
     errorMessage = null;
     debugErrorMessage = null;
     notifyListeners();
@@ -58,6 +68,17 @@ class ChatController extends ChangeNotifier {
       ),
     );
     loading = true;
+    slowResponse = false;
+    _slowResponseTimer?.cancel();
+    _slowResponseTimer = Timer(const Duration(seconds: 6), () {
+      if (!loading) return;
+      slowResponse = true;
+      notifyListeners();
+    });
+    final habitTrackingService = _habitTrackingService;
+    if (habitTrackingService != null) {
+      unawaited(habitTrackingService.trackChatMessageSent(mode.name));
+    }
     notifyListeners();
 
     try {
@@ -73,7 +94,13 @@ class ChatController extends ChangeNotifier {
           sentHistoryCount: history.length,
         ),
       );
+      if (habitTrackingService != null) {
+        unawaited(habitTrackingService.trackChatResponseSuccess());
+      }
     } on ChatAgentException catch (error) {
+      if (habitTrackingService != null) {
+        unawaited(habitTrackingService.trackChatResponseError());
+      }
       errorMessage = error.toString();
       debugErrorMessage = error.toString();
       _messages.add(
@@ -92,6 +119,9 @@ class ChatController extends ChangeNotifier {
         ),
       );
     } catch (error) {
+      if (habitTrackingService != null) {
+        unawaited(habitTrackingService.trackChatResponseError());
+      }
       errorMessage = error.toString();
       debugErrorMessage = error.toString();
       _messages.add(
@@ -108,8 +138,16 @@ class ChatController extends ChangeNotifier {
       );
     } finally {
       loading = false;
+      slowResponse = false;
+      _slowResponseTimer?.cancel();
       notifyListeners();
     }
+  }
+
+  @override
+  void dispose() {
+    _slowResponseTimer?.cancel();
+    super.dispose();
   }
 
   ChatMessageModel _assistantMessageFromResponse(
@@ -149,7 +187,7 @@ class ChatController extends ChangeNotifier {
                     debugJson
                         .map((key, value) => MapEntry(key.toString(), value)),
                   ),
-              )
+                )
               : null,
       canRetry: false,
     );
@@ -173,7 +211,8 @@ class ChatController extends ChangeNotifier {
     }
   }
 
-  String _inferResponseType(Map<String, dynamic> json, Object? selectedAyahJson) {
+  String _inferResponseType(
+      Map<String, dynamic> json, Object? selectedAyahJson) {
     if (selectedAyahJson is Map<String, dynamic>) {
       return 'direct_ayah';
     }

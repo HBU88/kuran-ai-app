@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/utils/situation_tag_mapper.dart';
+import '../../data/services/habit_tracking_service.dart';
 import '../../features/favorites/favorites_controller.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/ayah_card.dart';
@@ -123,7 +124,14 @@ class _SituationResult extends StatelessWidget {
             builder: (context, favorites, _) {
               final favorite = favorites.isFavorite(ayah.id);
               return IconButton(
-                onPressed: () => favorites.toggle(ayah),
+                onPressed: () async {
+                  if (!favorite) {
+                    await context
+                        .read<HabitTrackingService>()
+                        .trackFavoriteAdded();
+                  }
+                  await favorites.toggle(ayah);
+                },
                 icon: Icon(
                   favorite
                       ? Icons.favorite_rounded

@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
 import '../../models/auth_user_model.dart';
+import '../../models/entitlement_model.dart';
 
 class AuthService {
   AuthService({
@@ -78,6 +79,74 @@ class AuthService {
       throw const AuthServiceException('Kullanıcı yanıtı okunamadı.');
     }
     return AuthUserModel.fromJson(user);
+  }
+
+  Future<AuthUserModel> fetchMe() => me();
+
+  Future<EntitlementModel> fetchEntitlements() async {
+    final decoded = await _getAuthenticatedObject('/me/entitlements');
+    final entitlements = decoded['entitlements'];
+    if (entitlements is! Map<String, dynamic>) {
+      throw const AuthServiceException('Hak bilgisi yanıtı okunamadı.');
+    }
+    return EntitlementModel.fromJson(entitlements);
+  }
+
+  Future<PurchaseVerificationResult> verifyPurchase({
+    required String productId,
+    required String platform,
+    String? transactionId,
+    String? purchaseToken,
+  }) async {
+    final token = _requireAccessToken();
+    final response = await _send(
+      () => _client.post(
+        Uri.parse('$_baseUrl/purchases/verify'),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          'product_id': productId,
+          'platform': platform,
+          if (transactionId != null && transactionId.trim().isNotEmpty)
+            'transaction_id': transactionId.trim(),
+          if (purchaseToken != null && purchaseToken.trim().isNotEmpty)
+            'purchase_token': purchaseToken.trim(),
+        }),
+      ),
+    );
+    return PurchaseVerificationResult.fromJson(_decodeObject(response));
+  }
+
+  Future<ReligiousChatUsageStatus> fetchReligiousChatUsageStatus() async {
+    final decoded = await _getAuthenticatedObject(
+      '/usage/religious-chat/status',
+    );
+    final usage = decoded['usage'];
+    if (usage is! Map<String, dynamic>) {
+      throw const AuthServiceException('Kullanım hakkı yanıtı okunamadı.');
+    }
+    return ReligiousChatUsageStatus.fromJson(usage);
+  }
+
+  Future<EntitlementModel> consumeReligiousChatCredit() async {
+    final token = _requireAccessToken();
+    final response = await _send(
+      () => _client.post(
+        Uri.parse('$_baseUrl/usage/religious-chat/consume'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+    final entitlements = _decodeObject(response)['entitlements'];
+    if (entitlements is! Map<String, dynamic>) {
+      throw const AuthServiceException('Kullanım hakkı yanıtı okunamadı.');
+    }
+    return EntitlementModel.fromJson(entitlements);
   }
 
   Future<String> forgotPassword({
@@ -153,6 +222,28 @@ class AuthService {
       ),
     );
     _accessToken = null;
+  }
+
+  Future<Map<String, dynamic>> _getAuthenticatedObject(String path) async {
+    final token = _requireAccessToken();
+    final response = await _send(
+      () => _client.get(
+        Uri.parse('$_baseUrl$path'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+    return _decodeObject(response);
+  }
+
+  String _requireAccessToken() {
+    final token = _accessToken;
+    if (token == null) {
+      throw const AuthServiceException('Oturum bulunamadı.');
+    }
+    return token;
   }
 
   Future<AuthSession> _postAuth(

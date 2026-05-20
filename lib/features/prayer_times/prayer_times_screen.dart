@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/utils/notification_helper.dart';
+import '../../data/services/habit_tracking_service.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/loading_view.dart';
 import 'prayer_times_controller.dart';
@@ -15,6 +18,17 @@ class PrayerTimesScreen extends StatefulWidget {
 }
 
 class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      unawaited(
+        context.read<HabitTrackingService>().trackPrayerTimesOpen(),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

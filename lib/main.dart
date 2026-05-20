@@ -10,6 +10,7 @@ import 'data/repositories/favorites_repository.dart';
 import 'data/repositories/memorization_repository.dart';
 import 'data/repositories/prayer_repository.dart';
 import 'data/repositories/settings_repository.dart';
+import 'data/services/habit_tracking_service.dart';
 import 'data/sources/local/local_ayah_source.dart';
 import 'data/sources/remote/ai_service.dart';
 import 'data/sources/remote/auth_service.dart';
@@ -32,11 +33,13 @@ Future<void> main() async {
   final memorizationRepository =
       MemorizationRepository(localSource, preferences);
   final settingsRepository = SettingsRepository(preferences);
+  final habitTrackingService = HabitTrackingService(preferences);
   final notificationHelper = NotificationHelper(
     FlutterLocalNotificationsPlugin(),
   );
 
   await notificationHelper.initialize();
+  await habitTrackingService.trackAppOpen();
 
   runApp(
     MultiProvider(
@@ -47,6 +50,7 @@ Future<void> main() async {
         Provider.value(value: memorizationRepository),
         Provider.value(value: settingsRepository),
         Provider.value(value: notificationHelper),
+        Provider.value(value: habitTrackingService),
         ChangeNotifierProvider(
           create: (_) => AuthController(AuthService()),
         ),

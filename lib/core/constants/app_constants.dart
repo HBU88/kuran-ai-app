@@ -16,7 +16,8 @@ class AppConstants {
   static const welcomeMessage =
       'Selam, HAKAI’ye hoş geldin. Kur’an merkezli manevi rehberlik ve pratik dinî bilgilerle yanında olabilirim.';
   static const connectionFallbackMessage =
-      'Şu anda bağlantı kurulamadı. Lütfen tekrar deneyin.';
+      'Bağlantı kurulamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.';
+  static const appShareLinkPlaceholder = 'https://hakai.app';
   // TODO: Native launcher icon assets are separate; regenerate iOS/Android
   // launcher assets only when the app icon direction is finalized.
   static const logoAssetPlaceholder = 'assets/app/qibla_icon.png';

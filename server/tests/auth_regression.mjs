@@ -6,9 +6,11 @@ import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 const { AuthService, JsonUserStore } = require("../auth");
+const { CommerceService, JsonCommerceStore } = require("../commerce");
 
 const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "hakai-auth-"));
 const storePath = path.join(tmpDir, "users.json");
+const commerceStorePath = path.join(tmpDir, "commerce.json");
 const sentResetMessages = [];
 const service = new AuthService({
   store: new JsonUserStore(storePath),
@@ -89,6 +91,53 @@ assert.equal(wrongPasswordResult.statusCode, 401);
 const meResult = await service.me(loginResult.token);
 assert.equal(meResult.ok, true);
 assert.equal(meResult.user.email, "user@example.com");
+
+const authResult = await service.authenticate(loginResult.token);
+assert.equal(authResult.ok, true);
+assert.equal(authResult.user.email, "user@example.com");
+
+const commerceService = new CommerceService({
+  store: new JsonCommerceStore(commerceStorePath),
+});
+
+const initialEntitlements = await commerceService.getEntitlements(authResult.user.id);
+assert.equal(initialEntitlements.religious_chat_credits_remaining, 0);
+assert.equal(initialEntitlements.supporter_status, false);
+
+const invalidPurchaseResult = await commerceService.verifyPurchase(authResult.user.id, {
+  platform: "ios",
+  product_id: "support_large",
+  transaction_id: "bad-product",
+});
+assert.equal(invalidPurchaseResult.ok, false);
+assert.equal(invalidPurchaseResult.statusCode, 400);
+
+const pendingPurchaseResult = await commerceService.verifyPurchase(authResult.user.id, {
+  platform: "ios",
+  product_id: "support_small",
+  transaction_id: "test-transaction-1",
+});
+assert.equal(pendingPurchaseResult.ok, true);
+assert.equal(pendingPurchaseResult.statusCode, 202);
+assert.equal(pendingPurchaseResult.purchase.status, "pending");
+assert.equal(pendingPurchaseResult.purchase.credits_granted, 0);
+assert.equal(pendingPurchaseResult.entitlements.religious_chat_credits_remaining, 0);
+
+const repeatedPurchaseResult = await commerceService.verifyPurchase(authResult.user.id, {
+  platform: "ios",
+  product_id: "support_small",
+  transaction_id: "test-transaction-1",
+});
+assert.equal(repeatedPurchaseResult.ok, true);
+assert.equal(repeatedPurchaseResult.purchase.id, pendingPurchaseResult.purchase.id);
+
+const usageStatus = await commerceService.getReligiousChatStatus(authResult.user.id);
+assert.equal(usageStatus.can_consume, false);
+assert.equal(usageStatus.religious_chat_credits_remaining, 0);
+
+const consumeWithoutCredits = await commerceService.consumeReligiousChatCredit(authResult.user.id);
+assert.equal(consumeWithoutCredits.ok, false);
+assert.equal(consumeWithoutCredits.statusCode, 402);
 
 const meWithoutTokenResult = await service.me(null);
 assert.equal(meWithoutTokenResult.ok, false);
