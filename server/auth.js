@@ -85,7 +85,12 @@ class AuthService {
   constructor(options = {}) {
     this.store = options.store || new JsonUserStore(options.storePath);
     this.passwordResetMailer = options.passwordResetMailer || new PasswordResetMailer();
-    this.jwtSecret = options.jwtSecret || process.env.HAKAI_AUTH_JWT_SECRET || "";
+    this.jwtSecret =
+      options.jwtSecret ||
+      process.env.HAKAI_AUTH_JWT_SECRET ||
+      process.env.JWT_SECRET ||
+      process.env.HAKAI_SECRET ||
+      "";
     this.tokenTtlSeconds = Number.isInteger(options.tokenTtlSeconds)
       ? options.tokenTtlSeconds
       : readPositiveInt(process.env.HAKAI_AUTH_TOKEN_TTL_SECONDS, DEFAULT_TOKEN_TTL_SECONDS);
@@ -295,9 +300,25 @@ class PasswordResetMailer {
   constructor(options = {}) {
     this.env = options.env || process.env.NODE_ENV || "development";
     this.outboxPath = options.outboxPath || process.env.HAKAI_PASSWORD_RESET_DEV_OUTBOX_PATH || DEFAULT_PASSWORD_RESET_DEV_OUTBOX_PATH;
+    this.sendGridApiKey =
+      process.env.SENDGRID_API_KEY || process.env.HAKAI_SENDGRID_API_KEY || "";
+    this.sendGridFrom =
+      process.env.HAKAI_PASSWORD_RESET_FROM_EMAIL ||
+      process.env.PASSWORD_RESET_FROM_EMAIL ||
+      `noreply@${String(process.env.HAKAI_PUBLIC_APP_URL || "hakai.app").replace(/^https?:\/\//, "")}`;
+    this.sendGridFromName = process.env.HAKAI_PASSWORD_RESET_FROM_NAME || "HAKAI";
+    this.sendGridSubject =
+      process.env.HAKAI_PASSWORD_RESET_SUBJECT ||
+      "HAKAI | Şifre Yenileme Bağlantısı";
   }
 
   async sendPasswordReset({ email, token, resetUrl }) {
+    if (this.sendGridApiKey) {
+      const ok = await this._sendPasswordResetWithSendGrid({ email, resetUrl });
+      if (ok) return true;
+      console.warn("[auth] password reset email provider failed, falling back to dev outbox");
+    }
+
     if (this.env === "production") {
       console.warn("[auth] password reset email provider is not configured");
       return false;
@@ -313,6 +334,40 @@ class PasswordResetMailer {
       `[auth] dev password reset link written to ${this.outboxPath} for email_hash=${hashLogValue(email)} token_prefix=${String(token).slice(0, 8)}`
     );
     return true;
+  }
+
+  async _sendPasswordResetWithSendGrid({ email, resetUrl }) {
+    try {
+      await fetch("https://api.sendgrid.com/v3/mail/send", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${this.sendGridApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          personalizations: [
+            {
+              to: [{ email }],
+              subject: this.sendGridSubject,
+            },
+          ],
+          from: {
+            email: this.sendGridFrom,
+            name: this.sendGridFromName,
+          },
+          content: [
+            {
+              type: "text/plain",
+              value: `Merhaba,\n\nŞifre yenileme talebi alındı. Aşağıdaki bağlantıya tıklayarak yeni şifreni belirleyebilirsin:\n\n${resetUrl}\n\nBu isteği sen yapmadıysan lütfen bu mesajı dikkate alma.`,
+            },
+          ],
+        }),
+      });
+      return true;
+    } catch (error) {
+      console.warn("[auth] SendGrid password reset email failed", error);
+      return false;
+    }
   }
 }
 
@@ -447,7 +502,12 @@ function genericPasswordResetResult() {
 }
 
 function buildPasswordResetUrl(token) {
-  const baseUrl = String(process.env.HAKAI_PUBLIC_APP_URL || "http://localhost:3000").replace(/\/+$/, "");
+  const baseUrl = String(
+    process.env.HAKAI_PUBLIC_APP_URL ||
+      process.env.PUBLIC_APP_URL ||
+      process.env.APP_URL ||
+      "http://localhost:3000"
+  ).replace(/\/+$/, "");
   return `${baseUrl}/reset-password?token=${encodeURIComponent(token)}`;
 }
 
