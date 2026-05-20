@@ -7,19 +7,27 @@ import 'package:flutter/foundation.dart';
 import '../../core/constants/app_constants.dart';
 import '../../data/models/chat_message_model.dart';
 import '../../data/services/habit_tracking_service.dart';
+import '../../data/services/religious_chat_limit_service.dart';
 import '../../data/sources/remote/chat_agent_service.dart';
+import '../auth/auth_controller.dart';
 import 'chat_mode.dart';
 
 class ChatController extends ChangeNotifier {
   ChatController({
     ChatAgentService? service,
     HabitTrackingService? habitTrackingService,
+    ReligiousChatLimitService? religiousChatLimitService,
+    AuthController? authController,
     this.mode = ChatMode.chat,
   })  : _service = service ?? ChatAgentService(),
-        _habitTrackingService = habitTrackingService;
+        _habitTrackingService = habitTrackingService,
+        _religiousChatLimitService = religiousChatLimitService,
+        _authController = authController;
 
   final ChatAgentService _service;
   final HabitTrackingService? _habitTrackingService;
+  final ReligiousChatLimitService? _religiousChatLimitService;
+  final AuthController? _authController;
   final ChatMode mode;
 
   final List<ChatMessageModel> _messages = [];
@@ -28,10 +36,36 @@ class ChatController extends ChangeNotifier {
   bool slowResponse = false;
   String? errorMessage;
   String? debugErrorMessage;
+  int freeAnswersRemaining = ReligiousChatLimitService.freeAnswerLimit;
+  int paidAnswersRemaining = 0;
+  bool usageStateLoaded = false;
   Timer? _slowResponseTimer;
 
   List<ChatMessageModel> get messages => List.unmodifiable(_messages);
   bool get isEmpty => _messages.isEmpty;
+  bool get isReligiousChat => mode == ChatMode.ilmihal;
+  bool get isReligiousChatLocked =>
+      isReligiousChat && usageStateLoaded && remainingReligiousChatAnswers <= 0;
+  int get remainingReligiousChatAnswers =>
+      freeAnswersRemaining + paidAnswersRemaining;
+  bool get hasPendingPurchase => _authController?.hasPendingPurchase == true;
+  bool get isLoggedIn => _authController?.isLoggedIn == true;
+
+  Future<void> loadUsageState() async {
+    if (!isReligiousChat) return;
+    freeAnswersRemaining = _religiousChatLimitService?.freeAnswersRemaining ??
+        ReligiousChatLimitService.freeAnswerLimit;
+    if (_authController?.isLoggedIn == true) {
+      final entitlements = await _authController?.fetchEntitlements();
+      paidAnswersRemaining = entitlements?.religiousChatCreditsRemaining ??
+          _authController?.entitlements?.religiousChatCreditsRemaining ??
+          0;
+    } else {
+      paidAnswersRemaining = 0;
+    }
+    usageStateLoaded = true;
+    notifyListeners();
+  }
 
   void clearConversation() {
     if (_messages.isEmpty && !loading && !runningSmokeTest) {
@@ -53,6 +87,12 @@ class ChatController extends ChangeNotifier {
   Future<void> send(String rawMessage) async {
     final message = rawMessage.trim();
     if (message.isEmpty || loading) {
+      return;
+    }
+    if (isReligiousChat && !usageStateLoaded) {
+      await loadUsageState();
+    }
+    if (isReligiousChatLocked) {
       return;
     }
 
@@ -94,6 +134,7 @@ class ChatController extends ChangeNotifier {
           sentHistoryCount: history.length,
         ),
       );
+      await _recordReligiousChatSuccess();
       if (habitTrackingService != null) {
         unawaited(habitTrackingService.trackChatResponseSuccess());
       }
@@ -142,6 +183,28 @@ class ChatController extends ChangeNotifier {
       _slowResponseTimer?.cancel();
       notifyListeners();
     }
+  }
+
+  Future<void> _recordReligiousChatSuccess() async {
+    if (!isReligiousChat) return;
+
+    final limitService = _religiousChatLimitService;
+    if (limitService != null && limitService.hasFreeAnswerRemaining) {
+      await limitService.recordFreeAnswerUsed();
+      freeAnswersRemaining = limitService.freeAnswersRemaining;
+      return;
+    }
+
+    if (_authController?.isLoggedIn == true && paidAnswersRemaining > 0) {
+      final entitlements = await _authController?.consumeReligiousChatCredit();
+      paidAnswersRemaining =
+          entitlements?.religiousChatCreditsRemaining ?? paidAnswersRemaining;
+      return;
+    }
+
+    freeAnswersRemaining = limitService?.freeAnswersRemaining ?? 0;
+    paidAnswersRemaining =
+        _authController?.entitlements?.religiousChatCreditsRemaining ?? 0;
   }
 
   @override

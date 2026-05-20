@@ -11,6 +11,7 @@ import 'data/repositories/memorization_repository.dart';
 import 'data/repositories/prayer_repository.dart';
 import 'data/repositories/settings_repository.dart';
 import 'data/services/habit_tracking_service.dart';
+import 'data/services/religious_chat_limit_service.dart';
 import 'data/sources/local/local_ayah_source.dart';
 import 'data/sources/remote/ai_service.dart';
 import 'data/sources/remote/auth_service.dart';
@@ -34,6 +35,7 @@ Future<void> main() async {
       MemorizationRepository(localSource, preferences);
   final settingsRepository = SettingsRepository(preferences);
   final habitTrackingService = HabitTrackingService(preferences);
+  final religiousChatLimitService = ReligiousChatLimitService(preferences);
   final notificationHelper = NotificationHelper(
     FlutterLocalNotificationsPlugin(),
   );
@@ -51,6 +53,7 @@ Future<void> main() async {
         Provider.value(value: settingsRepository),
         Provider.value(value: notificationHelper),
         Provider.value(value: habitTrackingService),
+        Provider.value(value: religiousChatLimitService),
         ChangeNotifierProvider(
           create: (_) => AuthController(AuthService()),
         ),

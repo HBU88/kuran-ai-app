@@ -44,4 +44,6 @@ class AppConstants {
   static const memorizationStorageKey = 'memorization_progress';
   static const situationAyahHistoryStorageKey = 'situation_ayah_history';
   static const authOnboardingSeenStorageKey = 'auth_onboarding_seen';
+  static const religiousChatFreeUsageStorageKey =
+      'religious_chat_free_usage_count';
 }

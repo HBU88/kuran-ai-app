@@ -14,6 +14,7 @@ class AuthController extends ChangeNotifier {
   bool isBusy = false;
   String? errorMessage;
   String? infoMessage;
+  bool hasPendingPurchase = false;
 
   bool get isLoggedIn => user != null && _service.isLoggedIn;
 
@@ -136,6 +137,7 @@ class AuthController extends ChangeNotifier {
         purchaseToken: purchaseToken,
       );
       entitlements = result.entitlements;
+      hasPendingPurchase = result.status == 'pending';
       notifyListeners();
       return result;
     } on AuthServiceException catch (error) {
