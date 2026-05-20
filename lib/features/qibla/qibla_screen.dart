@@ -534,7 +534,7 @@ class _QiblaTrustFooter extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Kıble yönü, bulunduğunuz konum ve Kâbe koordinatları kullanılarak hesaplanmaktadır.',
+            'Kıble yönü, bulunduğunuz konum ve Kâbe koordinatları kullanılarak büyük daire yönü yöntemiyle hesaplanmaktadır.',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   height: 1.55,

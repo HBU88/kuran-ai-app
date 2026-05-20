@@ -54,6 +54,35 @@ class ChatAyahCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
           ),
+          const SizedBox(height: 14),
+          const _DisabledAudioNotice(),
+        ],
+      ),
+    );
+  }
+}
+
+class _DisabledAudioNotice extends StatelessWidget {
+  const _DisabledAudioNotice();
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextButton.icon(
+            onPressed: null,
+            icon: const Icon(Icons.play_circle_outline_rounded, size: 18),
+            label: const Text('Dinle'),
+          ),
+          Text(
+            'Sesli dinleme yakında eklenecek.',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColors.textMuted,
+                ),
+          ),
         ],
       ),
     );

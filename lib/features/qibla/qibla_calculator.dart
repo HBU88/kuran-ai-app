@@ -3,8 +3,8 @@ import 'dart:math' as math;
 class QiblaCalculator {
   const QiblaCalculator._();
 
-  static const double kaabaLatitude = 21.422487;
-  static const double kaabaLongitude = 39.826206;
+  static const double kaabaLatitude = 21.4224779;
+  static const double kaabaLongitude = 39.8251832;
   static const List<QiblaReferenceCity> referenceCities = [
     QiblaReferenceCity(
       name: 'İstanbul',
@@ -24,9 +24,9 @@ class QiblaCalculator {
   ];
 
   // Primary runtime path: deterministic great-circle initial bearing from the
-  // user's coordinates to Kaaba. Diyanet does not currently expose a confirmed
-  // stable public Qibla API endpoint, so Diyanet values should remain a manual
-  // validation/reference layer unless an official API contract is confirmed.
+  // user's coordinates to Kaaba. The Kaaba coordinate reference follows public
+  // Qibla documentation and remains local; Google, Diyanet, or other external
+  // services are not runtime dependencies for this calculation.
   static double bearingToKaaba({
     required double latitude,
     required double longitude,

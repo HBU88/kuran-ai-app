@@ -11,6 +11,7 @@ import 'features/auth/onboarding_screen.dart';
 import 'features/auth/register_screen.dart';
 import 'features/auth/reset_password_screen.dart';
 import 'features/chat/chat_screen.dart';
+import 'features/duas/duas_screen.dart';
 import 'features/favorites/favorites_screen.dart';
 import 'features/home/home_screen.dart';
 import 'features/prayer_times/prayer_times_screen.dart';
@@ -19,6 +20,7 @@ import 'features/settings/settings_controller.dart';
 import 'features/settings/settings_screen.dart';
 import 'features/situation_ayah/situation_ayah_screen.dart';
 import 'features/splash/splash_screen.dart';
+import 'features/surahs/surahs_screen.dart';
 import 'features/support/support_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -44,6 +46,8 @@ class QuranMvpApp extends StatelessWidget {
             AppRoutes.chat: (_) => const ChatScreen(),
             AppRoutes.situationAyah: (_) => const SituationAyahScreen(),
             AppRoutes.favorites: (_) => const FavoritesScreen(),
+            AppRoutes.duas: (_) => const DuasScreen(),
+            AppRoutes.surahs: (_) => const SurahsScreen(),
             AppRoutes.prayerTimes: (_) => const PrayerTimesScreen(),
             AppRoutes.qibla: (_) => const QiblaScreen(),
             AppRoutes.settings: (_) => const SettingsScreen(),

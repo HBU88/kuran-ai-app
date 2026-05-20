@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/chat_message_model.dart';
+import '../../data/models/recommended_resource.dart';
+import '../../data/services/recommended_resource_service.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_gradient_background.dart';
 import '../../shared/widgets/loading_view.dart';
+import '../../shared/widgets/recommended_resource_card.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_radius.dart';
 import '../../theme/app_spacing.dart';
@@ -370,6 +373,16 @@ class _ChatMessageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedAyah = message.selectedAyah;
+    final recommendedResources = selectedAyah == null
+        ? const <RecommendedResource>[]
+        : const RecommendedResourceService().matchByTags(
+            [
+              selectedAyah.displayReference,
+              ...selectedAyah.tags,
+            ],
+          );
+
     return Column(
       crossAxisAlignment:
           message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
@@ -378,10 +391,17 @@ class _ChatMessageItem extends StatelessWidget {
           UserBubble(text: message.text.trim())
         else
           AssistantMessage(text: _displayAssistantText(message)),
-        if (!message.isUser && message.selectedAyah != null)
+        if (!message.isUser && selectedAyah != null)
           Padding(
             padding: const EdgeInsets.only(top: 12),
-            child: ChatAyahCard(ayah: message.selectedAyah!),
+            child: ChatAyahCard(ayah: selectedAyah),
+          ),
+        if (!message.isUser && recommendedResources.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: RecommendedResourcesSection(
+              resources: recommendedResources,
+            ),
           ),
         if (!message.isUser && message.redirectModule != null)
           _ModuleRedirectAction(targetModule: message.redirectModule!),

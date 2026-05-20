@@ -215,6 +215,20 @@ class _ModuleGrid extends StatelessWidget {
         ),
       ),
       _ModuleData(
+        label: 'Dualar',
+        subtitle: 'Arapça ve Türkçe seçilmiş dua metinleri',
+        iconAsset: 'assets/app/dualar_icon_clean.png',
+        imageIconSize: 64,
+        onTap: () => Navigator.pushNamed(context, AppRoutes.duas),
+      ),
+      _ModuleData(
+        label: 'Sureler',
+        subtitle: 'Kur’an surelerini sırayla incele',
+        iconAsset: 'assets/app/sureler_icon_clean.png',
+        imageIconSize: 64,
+        onTap: () => Navigator.pushNamed(context, AppRoutes.surahs),
+      ),
+      _ModuleData(
         label: 'Namaz Vakitleri',
         subtitle: 'Günlük vakit takibi',
         iconAsset: 'assets/app/prayer_times_icon.png',
@@ -227,8 +241,8 @@ class _ModuleGrid extends StatelessWidget {
         onTap: () => Navigator.pushNamed(context, AppRoutes.qibla),
       ),
       _ModuleData(
-        label: 'HAKAI’yi Destekle',
-        subtitle: 'Projeyi ileride tek seferlik katkıyla destekle',
+        label: 'HAKAI’ye Destek Ol',
+        subtitle: 'Uygulama içi destek seçenekleri',
         iconAsset: 'assets/app/launcher_icon.png',
         icon: Icons.volunteer_activism_outlined,
         onTap: () => Navigator.pushNamed(context, AppRoutes.support),
@@ -253,6 +267,7 @@ class _ModuleGrid extends StatelessWidget {
           subtitle: module.subtitle,
           iconAsset: module.iconAsset,
           icon: module.icon,
+          imageIconSize: module.imageIconSize,
           onTap: module.onTap,
         );
       },
@@ -267,6 +282,7 @@ class _ModuleData {
     required this.iconAsset,
     required this.onTap,
     this.icon,
+    this.imageIconSize = 56,
   });
 
   final String label;
@@ -274,6 +290,7 @@ class _ModuleData {
   final String iconAsset;
   final VoidCallback onTap;
   final IconData? icon;
+  final double imageIconSize;
 }
 
 class _StatusChip extends StatelessWidget {

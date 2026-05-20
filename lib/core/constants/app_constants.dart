@@ -26,6 +26,8 @@ class AppConstants {
 
   static const todayAyahAsset = 'assets/data/ayahs.json';
   static const surahAsset = 'assets/data/surahs.json';
+  static const fullQuranTrAsset = 'assets/data/full_quran/source_tr.json';
+  static const duasAsset = 'assets/data/duas.json';
 
   static const favoriteStorageKey = 'favorite_ayah_records';
   static const selectedCityStorageKey = 'selected_city';

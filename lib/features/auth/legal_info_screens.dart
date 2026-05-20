@@ -19,12 +19,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
         _LegalSection(
           title: 'Kısa özet',
           body:
-              'HAKAI, Kur’an merkezli manevi rehberlik sunan günlük bir yol arkadaşıdır. Uygulama misafir olarak kullanılabilir; hesap oluşturmak isteğe bağlıdır.',
+              'HAKAI, Kur’an merkezli günlük manevi rehberlik sunar. Uygulama misafir olarak kullanılabilir; hesap oluşturmak isteğe bağlıdır.',
         ),
         _LegalSection(
-          title: 'Hesap verileri',
+          title: 'Kişisel veri yaklaşımı',
           body:
-              'Hesap oluşturursan e-posta adresin, şifre özetin, şartlar ve gizlilik kabul zamanların, pazarlama izni ve reklam kişiselleştirme izni saklanır. Şifren düz metin olarak saklanmaz.',
+              'HAKAI kişisel verilerini satmaz. Hesap oluşturursan e-posta adresin, şifre özetin ve onay zamanların saklanabilir. Şifren düz metin olarak saklanmaz.',
         ),
         _LegalSection(
           title: 'Misafir kullanım',
@@ -32,24 +32,44 @@ class PrivacyPolicyScreen extends StatelessWidget {
               'Giriş yapmadan Ayet Rehberi, Dinî Bilgiler ve diğer temel alanları kullanabilirsin. Misafir kullanım hesap verisi oluşturmaz.',
         ),
         _LegalSection(
-          title: 'Sohbet ve günlükler',
+          title: 'Mesajların işlenmesi',
           body:
-              'Sohbet mesajların yanıt üretmek için işlenebilir. Günlükler mümkün olduğunca azaltılır; üretim ortamında ayrıntılı sohbet günlükleri kapalı tutulacak şekilde tasarlanmıştır.',
+              'Yazdığın mesajlar yanıt oluşturmak için geçici olarak işlenebilir. HAKAI, gereğinden fazla kişisel veri toplamamaya özen gösterir.',
         ),
         _LegalSection(
-          title: 'Reklam ve profilleme',
+          title: 'Reklam ve takip',
           body:
-              'HAKAI, sohbet içeriğinden hassas dinî reklam profili çıkarmaz ve saklamaz. Pazarlama izni ve reklam kişiselleştirme izni varsayılan olarak kapalıdır. Şu anda reklam veya affiliate bağlantı aktif değildir.',
+              'HAKAI içinde reklam SDK’sı, takip SDK’sı, IDFA veya AppTrackingTransparency izni kullanılmaz.',
         ),
         _LegalSection(
-          title: 'Destek ve ödeme',
+          title: 'Önerilen kaynaklar',
           body:
-              'İleride projeyi destekleme seçenekleri Apple uyumlu uygulama içi satın alma ile eklenebilir. Bu görevde ödeme, reklam veya harici ödeme bağlantısı etkinleştirilmemiştir.',
+              '“Bu konuda önerilen kaynaklar” kartları yerel ve etiket temelli olarak gösterilir. Bu öneriler kullanıcı profili oluşturmak veya kişisel takip yapmak için kullanılmaz.',
         ),
         _LegalSection(
-          title: 'Veri talepleri',
+          title: 'Dış bağlantılar',
           body:
-              'Hesap verilerini silme talebini uygulama içinden başlatabilirsin. Veri erişimi veya destek için iletişim adresi eklenecek. TODO: destek e-posta adresi.',
+              'Önerilen kaynaklardaki dış bağlantılar yalnızca kullanıcı karta dokunduğunda açılır. HAKAI arka planda dış bağlantı açmaz.',
+        ),
+        _LegalSection(
+          title: 'Uygulama içi destek',
+          body:
+              'HAKAI’ye destek seçenekleri App Store In-App Purchase üzerinden sunulur. Dış ödeme bağlantısı, banka hesabı veya uygulama dışı ödeme yönlendirmesi kullanılmaz.',
+        ),
+        _LegalSection(
+          title: 'Konum izni',
+          body:
+              'Konum izni yalnızca Kıble yönü ve etkinse namaz vaktiyle ilgili konum özellikleri için kullanılır. Kıble hesabı, bulunduğun konum ile Kâbe koordinatları arasındaki yöne dayanır.',
+        ),
+        _LegalSection(
+          title: 'Dinî içerik sınırı',
+          body:
+              'HAKAI bir fetva makamı değildir. Bağlayıcı dinî konularda Diyanet İşleri Başkanlığı veya ehil uzmanlara başvurulmalıdır.',
+        ),
+        _LegalSection(
+          title: 'Sorumluluk',
+          body:
+              'Uygulamadaki bilgiler genel rehberlik amaçlıdır. Önemli kararlar için güvenilir kaynaklar ve yetkin kişilerle birlikte değerlendirme yapılmalıdır.',
         ),
       ],
     );
@@ -67,12 +87,12 @@ class TermsOfUseScreen extends StatelessWidget {
         _LegalSection(
           title: 'Amaç',
           body:
-              'HAKAI, Kur’an merkezli manevi rehberlik ve kısa destek sunar. Uygulama bir fetva makamı değildir.',
+              'HAKAI, Kur’an merkezli manevi rehberlik ve günlük destek sunar. Uygulama bir fetva makamı değildir.',
         ),
         _LegalSection(
           title: 'Sınırlar',
           body:
-              'HAKAI, ehil din âlimlerinin, resmî dinî kurumların, sağlık uzmanlarının, hukuk danışmanlarının veya acil yardım birimlerinin yerine geçmez.',
+              'HAKAI, ehil din âlimlerinin, resmî dinî kurumların, doktorların, hukuk danışmanlarının, finansal danışmanların veya acil yardım birimlerinin yerine geçmez.',
         ),
         _LegalSection(
           title: 'Hassas konular',
@@ -80,14 +100,24 @@ class TermsOfUseScreen extends StatelessWidget {
               'Dinî hüküm, sağlık, psikoloji, hukuk, şiddet, kendine zarar verme veya acil durum içeren konularda uygun ve yetkin kişilerden destek alman gerekir.',
         ),
         _LegalSection(
-          title: 'Destek seçenekleri',
+          title: 'Kullanım sorumluluğu',
           body:
-              'Destek ödemeleri ileride aktif olursa tamamen isteğe bağlıdır. Destek vermek manevî üstünlük, dinî fayda veya temel özelliklere ayrıcalıklı erişim anlamına gelmez.',
+              'Uygulamadaki içerikler genel bilgilendirme ve manevi destek amacı taşır. Yanıtlar tek başına kesin karar veya bağlayıcı hüküm yerine kullanılmamalıdır.',
         ),
         _LegalSection(
-          title: 'Temel kullanım',
+          title: 'Uygulama içi destek',
           body:
-              'Misafir kullanım ve temel rehberlik alanları uygulamanın tasarlandığı şekilde erişilebilir kalır.',
+              'HAKAI’ye destek satın almaları tamamen isteğe bağlıdır. Destek vermek temel dinî içeriklere erişimi açmaz, kapatmaz veya kullanıcıya dinî bir üstünlük sağlamaz.',
+        ),
+        _LegalSection(
+          title: 'Önerilen kaynaklar',
+          body:
+              'Önerilen dış kaynaklar kullanıcı dokunduğunda uygulama dışında açılır. Bu kaynakların içerik, hizmet ve gizlilik uygulamaları ilgili sağlayıcıların sorumluluğundadır.',
+        ),
+        _LegalSection(
+          title: 'Sorumluluk sınırı',
+          body:
+              'HAKAI, bilgileri dikkatle sunmayı amaçlar; ancak yanıtların her durumda eksiksiz, hatasız veya kişisel durumuna uygun olacağını garanti etmez.',
         ),
       ],
     );
@@ -138,7 +168,7 @@ class AboutSourcesScreen extends StatelessWidget {
         _LegalSection(
           title: 'Kıble yönü',
           body:
-              'Kıble yönü, bulunduğunuz konum ile Kâbe koordinatları arasındaki başlangıç yönü hesaplanarak belirlenir. Kâbe koordinatları: 21.422487, 39.826206.',
+              'Kıble yönü, bulunduğunuz konum ile Kâbe koordinatları arasındaki büyük daire başlangıç yönü hesaplanarak belirlenir. Kâbe koordinatları: 21.4224779, 39.8251832.',
         ),
         _LegalSection(
           title: 'Pusula',
@@ -148,17 +178,22 @@ class AboutSourcesScreen extends StatelessWidget {
         _LegalSection(
           title: 'Ayet içerikleri',
           body:
-              'Ayet yönlendirmeleri Kur’an merkezli olarak hazırlanır; dini hüküm/fetva amacı taşımaz.',
+              'Ayet yönlendirmeleri Kur’an merkezli olarak hazırlanır; dinî hüküm/fetva amacı taşımaz.',
+        ),
+        _LegalSection(
+          title: 'Sesli okuma',
+          body:
+              'Kur’an sesli okuma özelliği, doğrulanmış kârî kayıtları üzerinden sunulmalıdır. Ses kaynakları ve kullanım koşulları ayrıca belirtilir; yapay zekâ ile üretilmiş Kur’an tilaveti kullanılmaz.',
         ),
         _LegalSection(
           title: 'Dinî bilgiler',
           body:
-              'Dinî bilgiler modülü genel bilgilendirme amacı taşır. Detaylı ve bağlayıcı dini konularda Diyanet İşleri Başkanlığı veya ehil uzmanlara başvurulmalıdır.',
+              'Dinî bilgiler modülü genel bilgilendirme amacı taşır. Detaylı ve bağlayıcı dinî konularda Diyanet İşleri Başkanlığı veya ehil uzmanlara başvurulmalıdır.',
         ),
         _LegalSection(
           title: 'Referans notları',
           body:
-              'Diyanet İşleri Başkanlığı, Kur’an-ı Kerim ve Kâbe koordinatları uygulamada bilgilendirici referans olarak anılır; canlı kazıma veya zorunlu dış API bağımlılığı kullanılmaz.',
+              'Kur’an ve dua içerikleri güvenilir kaynaklarla doğrulanarak sunulmalıdır. Bağlayıcı dinî konularda Diyanet İşleri Başkanlığı veya ehil uzmanlara başvurulmalıdır.',
         ),
       ],
     );

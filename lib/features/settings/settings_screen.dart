@@ -114,9 +114,9 @@ class SettingsScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 child: ListTile(
                   leading: const Icon(Icons.volunteer_activism_outlined),
-                  title: const Text('HAKAI’yi Destekle'),
+                  title: const Text('HAKAI’ye Destek Ol'),
                   subtitle: const Text(
-                    'İleride tek seferlik katkıyla projeyi destekleme alanı.',
+                    'Uygulama içi destek seçenekleri.',
                   ),
                   trailing: const Icon(Icons.chevron_right_rounded),
                   onTap: () => Navigator.pushNamed(context, AppRoutes.support),
@@ -134,14 +134,16 @@ class SettingsScreen extends StatelessWidget {
                           ),
                     ),
                     const SizedBox(height: 6),
-                    const Text(AppConstants.appTagline),
-                    const SizedBox(height: 10),
                     const Text(
-                      'HAKAI, Kur’an merkezli manevi rehberlik sunan günlük bir yol arkadaşıdır.',
+                      'Kur’an merkezli günlük manevi rehberlik.',
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Dinî Bilgiler alanı pratik ilmihal bilgisini ölçülü ve bağlama duyarlı bir dille sunar.',
+                      'Sürüm 0.1.0',
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      AppConstants.appTagline,
                     ),
                   ],
                 ),

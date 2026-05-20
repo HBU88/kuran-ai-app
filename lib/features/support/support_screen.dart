@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
-import '../../data/models/support_product.dart';
-import '../../data/services/support_payment_service.dart';
+import '../../data/services/support_service.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_gradient_background.dart';
 import '../../theme/app_colors.dart';
@@ -15,19 +15,41 @@ class SupportScreen extends StatefulWidget {
 }
 
 class _SupportScreenState extends State<SupportScreen> {
-  final SupportPaymentService _paymentService = const SupportPaymentService();
-  late final Future<List<SupportProduct>> _productsFuture;
+  late final SupportService _supportService;
 
   @override
   void initState() {
     super.initState();
-    _productsFuture = _paymentService.loadSupportProducts();
+    _supportService = SupportService()..addListener(_handleSupportUpdate);
+    _supportService.initialize();
+  }
+
+  @override
+  void dispose() {
+    _supportService
+      ..removeListener(_handleSupportUpdate)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _handleSupportUpdate() {
+    if (!mounted) return;
+    setState(() {});
+
+    final message =
+        _supportService.successMessage ?? _supportService.errorMessage;
+    if (message == null) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+    _supportService.clearMessages();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('HAKAI’yi Destekle')),
+      appBar: AppBar(title: const Text('HAKAI’ye Destek Ol')),
       body: AppGradientBackground(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(18, 10, 18, 28),
@@ -43,93 +65,116 @@ class _SupportScreenState extends State<SupportScreen> {
                   ),
                   const SizedBox(height: 14),
                   Text(
-                    'HAKAI’yi Destekle',
+                    'HAKAI’ye Destek Ol',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w800,
                         ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'HAKAI, Kur’an merkezli manevi rehberliği daha fazla kişiye ulaştırmak ve uygulamayı geliştirmeye devam etmek için hazırlanıyor.',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  const SizedBox(height: AppSpacing.medium),
-                  Text(
-                    'Dilersen tek seferlik bir destekle bu projenin gelişimine katkıda bulunabilirsin. Desteğin; uygulamanın geliştirilmesine, daha kararlı çalışmasına ve yeni özelliklerin hazırlanmasına yardımcı olur.',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  const SizedBox(height: AppSpacing.medium),
-                  Text(
-                    'Destek olmak tamamen isteğe bağlıdır. HAKAI’nin temel özelliklerini kullanmaya devam edebilirsin.',
+                    'HAKAI’nin gelişimine katkı sağlamak istersen, uygulama içi destek seçeneklerini kullanabilirsin.',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
             ),
             const SizedBox(height: AppSpacing.large),
-            FutureBuilder<List<SupportProduct>>(
-              future: _productsFuture,
-              builder: (context, snapshot) {
-                final products = snapshot.data ?? const <SupportProduct>[];
-                if (products.isEmpty &&
-                    snapshot.connectionState != ConnectionState.done) {
-                  return const AppCard(
-                    child: Center(child: CircularProgressIndicator()),
-                  );
-                }
-                return Column(
-                  children: [
-                    for (final product in products) ...[
-                      _SupportTierCard(
-                        product: product,
-                        onPurchasePressed: () => _purchaseProduct(product.id),
-                        onUnavailablePressed: () =>
-                            _showPendingMessage(context),
-                      ),
-                      const SizedBox(height: 12),
-                    ],
-                    AppCard(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Icons.info_outline_rounded,
-                            color: AppColors.primaryAccent,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              'Destek seçenekleri yakında aktif olacaktır.',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ),
-                        ],
-                      ),
+            if (_supportService.isLoading)
+              const AppCard(
+                child: Center(child: CircularProgressIndicator()),
+              )
+            else if (!_supportService.hasProducts)
+              const AppCard(
+                child: Text('Destek seçenekleri şu anda yüklenemedi.'),
+              )
+            else
+              _SupportProductsList(
+                products: _supportService.products,
+                isPurchasing: _supportService.isPurchasing,
+                onPurchasePressed: _supportService.purchaseSupportProduct,
+              ),
+            const SizedBox(height: AppSpacing.medium),
+            AppCard(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.verified_user_outlined,
+                    color: AppColors.primaryAccent,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'Destek seçenekleri App Store üzerinden güvenli şekilde sunulur.',
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                  ],
-                );
-              },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
+}
 
-  void _showPendingMessage(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Destek seçenekleri yakında aktif olacaktır.'),
-      ),
-    );
-  }
+class _SupportProductsList extends StatelessWidget {
+  const _SupportProductsList({
+    required this.products,
+    required this.isPurchasing,
+    required this.onPurchasePressed,
+  });
 
-  Future<void> _purchaseProduct(String productId) async {
-    final result = await _paymentService.purchaseSupportProduct(productId);
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(result.message)),
+  final List<ProductDetails> products;
+  final bool isPurchasing;
+  final ValueChanged<ProductDetails> onPurchasePressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final standardProducts = products
+        .where((product) =>
+            product.id == SupportService.smallProductId ||
+            product.id == SupportService.mediumProductId)
+        .toList();
+    final specialProducts = products
+        .where((product) => product.id.startsWith('support_special_'))
+        .toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final product in standardProducts) ...[
+          _SupportTierCard(
+            product: product,
+            title: _displayTitle(product),
+            isPurchasing: isPurchasing,
+            onPurchasePressed: () => onPurchasePressed(product),
+          ),
+          const SizedBox(height: 12),
+        ],
+        if (specialProducts.isNotEmpty) ...[
+          const SizedBox(height: AppSpacing.small),
+          Text(
+            'Özel Destek',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+          const SizedBox(height: AppSpacing.small),
+          for (final product in specialProducts) ...[
+            _SupportTierCard(
+              product: product,
+              title: 'Özel Destek',
+              isPurchasing: isPurchasing,
+              onPurchasePressed: () => onPurchasePressed(product),
+            ),
+            const SizedBox(height: 12),
+          ],
+        ],
+      ],
     );
   }
 }
@@ -137,17 +182,18 @@ class _SupportScreenState extends State<SupportScreen> {
 class _SupportTierCard extends StatelessWidget {
   const _SupportTierCard({
     required this.product,
+    required this.title,
+    required this.isPurchasing,
     required this.onPurchasePressed,
-    required this.onUnavailablePressed,
   });
 
-  final SupportProduct product;
+  final ProductDetails product;
+  final String title;
+  final bool isPurchasing;
   final VoidCallback onPurchasePressed;
-  final VoidCallback onUnavailablePressed;
 
   @override
   Widget build(BuildContext context) {
-    final priceLabel = product.priceLabel ?? 'Yakında aktif olacak';
     return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,14 +206,16 @@ class _SupportTierCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.title,
+                      title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w800,
                           ),
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      product.description,
+                      product.description.isEmpty
+                          ? _fallbackDescription(product.id)
+                          : product.description,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -175,9 +223,10 @@ class _SupportTierCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                priceLabel,
+                product.price,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: AppColors.textMuted,
+                      color: AppColors.primaryAccentSoft,
+                      fontWeight: FontWeight.w800,
                     ),
               ),
             ],
@@ -186,17 +235,41 @@ class _SupportTierCard extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
-              onPressed: product.isAvailable
-                  ? onPurchasePressed
-                  : onUnavailablePressed,
-              icon: const Icon(Icons.lock_clock_rounded),
-              label: Text(
-                product.isAvailable ? 'Destek ol' : 'Yakında aktif olacak',
-              ),
+              onPressed: isPurchasing ? null : onPurchasePressed,
+              icon: isPurchasing
+                  ? const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.favorite_border_rounded),
+              label: const Text('Destek ol'),
             ),
           ),
         ],
       ),
     );
   }
+
+  String _fallbackDescription(String productId) {
+    return switch (productId) {
+      SupportService.smallProductId => 'Küçük destek seçeneği.',
+      SupportService.mediumProductId => 'Orta destek seçeneği.',
+      SupportService.special199ProductId => 'Özel destek seçeneği.',
+      SupportService.special299ProductId => 'Özel destek seçeneği.',
+      SupportService.special499ProductId => 'Özel destek seçeneği.',
+      _ => 'Gönüllü uygulama desteği.',
+    };
+  }
+}
+
+String _displayTitle(ProductDetails product) {
+  return switch (product.id) {
+    SupportService.smallProductId => 'Küçük Destek',
+    SupportService.mediumProductId => 'Orta Destek',
+    SupportService.special199ProductId => 'Özel Destek',
+    SupportService.special299ProductId => 'Özel Destek',
+    SupportService.special499ProductId => 'Özel Destek',
+    _ => product.title,
+  };
 }

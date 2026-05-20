@@ -7,6 +7,8 @@ class AppRoutes {
   static const chat = '/chat';
   static const situationAyah = '/situation-ayah';
   static const favorites = '/favorites';
+  static const duas = '/duas';
+  static const surahs = '/surahs';
   static const prayerTimes = '/prayer-times';
   static const qibla = '/qibla';
   static const account = '/account';

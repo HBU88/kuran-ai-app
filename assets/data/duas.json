@@ -1,0 +1,1261 @@
+[
+  {
+    "id": "fatiha_hidayet_duasi",
+    "title": "Fâtiha Hidayet Duası",
+    "arabic": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+    "transliteration": "İhdinâs-sırâtal mustakîm.",
+    "turkishMeaning": "Bizi dosdoğru yola ilet.",
+    "source": "Fâtiha Suresi 1/6",
+    "category": "Kur’an Duası",
+    "tags": [
+      "hidayet",
+      "yol",
+      "namaz"
+    ],
+    "note": "Kur’an ayetidir; kısa ve temel bir hidayet duası olarak sunulur."
+  },
+  {
+    "id": "rabbena_taqabbal_minna",
+    "title": "Rabbena Tekabbel Minnâ",
+    "arabic": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ",
+    "transliteration": "Rabbenâ tekabbel minnâ inneke entes-semîul alîm.",
+    "turkishMeaning": "Rabbimiz! Bizden kabul buyur. Şüphesiz sen hakkıyla işiten, hakkıyla bilensin.",
+    "source": "Bakara Suresi 2/127",
+    "category": "Kabul Duası",
+    "tags": [
+      "kabul",
+      "ibadet",
+      "teslimiyet"
+    ],
+    "note": "Kur’an duasıdır; ibadet ve hayırlı işlerin kabulü için okunabilecek bir yakarıştır."
+  },
+  {
+    "id": "rabbena_wajalna_muslimayn",
+    "title": "Teslimiyet Duası",
+    "arabic": "رَبَّنَا وَاجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِنْ ذُرِّيَّتِنَا أُمَّةً مُسْلِمَةً لَكَ",
+    "transliteration": "Rabbenâ vec'alnâ müslimeyni leke ve min zürriyyetinâ ümmeten müslimeten lek.",
+    "turkishMeaning": "Rabbimiz! Bizi sana teslim olanlardan kıl; soyumuzdan da sana teslim olan bir ümmet çıkar.",
+    "source": "Bakara Suresi 2/128",
+    "category": "Kur’an Duası",
+    "tags": [
+      "teslimiyet",
+      "aile",
+      "nesil"
+    ],
+    "note": "Kur’an ayetinden alınmıştır; aile ve nesil için hayır duası anlamı taşır."
+  },
+  {
+    "id": "rabbena_atina",
+    "title": "Rabbena Âtinâ",
+    "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+    "transliteration": "Rabbenâ âtinâ fid-dünyâ haseneten ve fil-âhireti haseneten ve kınâ azâben-nâr.",
+    "turkishMeaning": "Rabbimiz! Bize dünyada da iyilik, ahirette de iyilik ver ve bizi ateş azabından koru.",
+    "source": "Bakara Suresi 2/201",
+    "category": "Kur’an Duası",
+    "tags": [
+      "dünya",
+      "ahiret",
+      "iyilik",
+      "korunma"
+    ],
+    "note": "Kur’an duasıdır; dünya ve ahiret iyiliğini birlikte isteyen kapsamlı bir duadır."
+  },
+  {
+    "id": "rabbena_afrigh_alayna_sabran",
+    "title": "Sabır ve Sebat Duası",
+    "arabic": "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",
+    "transliteration": "Rabbenâ efriğ aleynâ sabran ve sebbit akdâmenâ vensurnâ alel-kavmil kâfirîn.",
+    "turkishMeaning": "Rabbimiz! Üzerimize sabır yağdır, ayaklarımızı sabit kıl ve inkârcı topluluğa karşı bize yardım et.",
+    "source": "Bakara Suresi 2/250",
+    "category": "Sabır Duası",
+    "tags": [
+      "sabır",
+      "sebat",
+      "yardım"
+    ],
+    "note": "Kur’an ayetidir; zorluk karşısında sabır ve kararlılık anlamı taşır."
+  },
+  {
+    "id": "rabbena_la_tuakhizna",
+    "title": "Yanılma ve Unutma Duası",
+    "arabic": "رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا",
+    "transliteration": "Rabbenâ lâ tüâhiznâ in nesînâ ev ahta'nâ.",
+    "turkishMeaning": "Rabbimiz! Unutur ya da yanılırsak bizi sorumlu tutma.",
+    "source": "Bakara Suresi 2/286",
+    "category": "Bağışlanma Duası",
+    "tags": [
+      "bağışlanma",
+      "hata",
+      "unutma"
+    ],
+    "note": "Kur’an duasıdır; insanın hata ve unutma hâline dair merhamet dileğini ifade eder."
+  },
+  {
+    "id": "rabbena_la_tuzigh_qulubana",
+    "title": "Kalbin Sabit Kalması Duası",
+    "arabic": "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً",
+    "transliteration": "Rabbenâ lâ tüziğ kulûbenâ ba'de iz hedeytenâ ve heb lenâ min ledünke rahmeh.",
+    "turkishMeaning": "Rabbimiz! Bizi doğru yola ilettikten sonra kalplerimizi eğriltme; katından bize rahmet bağışla.",
+    "source": "Âl-i İmrân Suresi 3/8",
+    "category": "Sebat Duası",
+    "tags": [
+      "kalp",
+      "hidayet",
+      "rahmet"
+    ],
+    "note": "Kur’an ayetidir; iman ve istikamet üzere kalma niyetiyle okunur."
+  },
+  {
+    "id": "rabbena_innana_amanna",
+    "title": "İman ve Bağışlanma Duası",
+    "arabic": "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ",
+    "transliteration": "Rabbenâ innenâ âmennâ fağfir lenâ zunûbenâ ve kınâ azâben-nâr.",
+    "turkishMeaning": "Rabbimiz! Biz iman ettik; günahlarımızı bağışla ve bizi ateş azabından koru.",
+    "source": "Âl-i İmrân Suresi 3/16",
+    "category": "Bağışlanma Duası",
+    "tags": [
+      "iman",
+      "bağışlanma",
+      "korunma"
+    ],
+    "note": "Kur’an duasıdır; iman ikrarı ve bağışlanma dileğini birlikte taşır."
+  },
+  {
+    "id": "rabbi_hab_li_min_ladunka",
+    "title": "Hayırlı Nesil Duası",
+    "arabic": "رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ",
+    "transliteration": "Rabbi heb lî min ledünke zürriyyeten tayyibeh, inneke semîud-duâ.",
+    "turkishMeaning": "Rabbim! Bana katından temiz bir nesil bağışla. Şüphesiz sen duayı işitensin.",
+    "source": "Âl-i İmrân Suresi 3/38",
+    "category": "Aile Duası",
+    "tags": [
+      "aile",
+      "çocuk",
+      "nesil"
+    ],
+    "note": "Kur’an ayetidir; aile ve hayırlı nesil temalı bir duadır."
+  },
+  {
+    "id": "rabbena_amanna_bima_anzalta",
+    "title": "Şahitlerle Beraber Yazılma Duası",
+    "arabic": "رَبَّنَا آمَنَّا بِمَا أَنْزَلْتَ وَاتَّبَعْنَا الرَّسُولَ فَاكْتُبْنَا مَعَ الشَّاهِدِينَ",
+    "transliteration": "Rabbenâ âmennâ bimâ enzelte vetteba'ner-rasûle fektübnâ meaş-şâhidîn.",
+    "turkishMeaning": "Rabbimiz! İndirdiğine iman ettik ve peygambere uyduk; bizi şahitlerle beraber yaz.",
+    "source": "Âl-i İmrân Suresi 3/53",
+    "category": "İman Duası",
+    "tags": [
+      "iman",
+      "sadakat",
+      "şahitlik"
+    ],
+    "note": "Kur’an ayetidir; iman ve hakka bağlılık anlamı taşır."
+  },
+  {
+    "id": "rabbena_ighfir_lana_dhunubana",
+    "title": "Günah ve Aşırılık İçin Bağışlanma Duası",
+    "arabic": "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا",
+    "transliteration": "Rabbenağfir lenâ zunûbenâ ve isrâfenâ fî emrinâ ve sebbit akdâmenâ.",
+    "turkishMeaning": "Rabbimiz! Günahlarımızı ve işlerimizdeki aşırılıklarımızı bağışla; ayaklarımızı sabit kıl.",
+    "source": "Âl-i İmrân Suresi 3/147",
+    "category": "Bağışlanma Duası",
+    "tags": [
+      "bağışlanma",
+      "sebat",
+      "ölçü"
+    ],
+    "note": "Kur’an duasıdır; bağışlanma ve istikamet dileğini içerir."
+  },
+  {
+    "id": "rabbena_zalamna_anfusana",
+    "title": "Tövbe Duası",
+    "arabic": "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+    "transliteration": "Rabbenâ zalemnâ enfüsenâ ve in lem tağfir lenâ ve terhamnâ lenekûnenne minel-hâsirîn.",
+    "turkishMeaning": "Rabbimiz! Biz kendimize zulmettik. Bizi bağışlamaz ve bize merhamet etmezsen mutlaka ziyana uğrayanlardan oluruz.",
+    "source": "A‘râf Suresi 7/23",
+    "category": "Tövbe Duası",
+    "tags": [
+      "tövbe",
+      "pişmanlık",
+      "merhamet"
+    ],
+    "note": "Kur’an ayetidir; pişmanlık ve Allah’ın rahmetine sığınma anlamı taşır."
+  },
+  {
+    "id": "hasbiyallahu",
+    "title": "Tevekkül Duası",
+    "arabic": "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+    "transliteration": "Hasbiyallâhu lâ ilâhe illâ hû, aleyhi tevekkeltü ve hüve rabbul-arşil-azîm.",
+    "turkishMeaning": "Allah bana yeter. O’ndan başka ilah yoktur. Ben O’na tevekkül ettim. O, büyük arşın Rabbidir.",
+    "source": "Tevbe Suresi 9/129",
+    "category": "Tevekkül Duası",
+    "tags": [
+      "tevekkül",
+      "güven",
+      "sıkıntı"
+    ],
+    "note": "Kur’an ayetidir; güven ve teslimiyet temalıdır."
+  },
+  {
+    "id": "rabbi_jalni_muqimas_salat",
+    "title": "Namaz Üzere Kalma Duası",
+    "arabic": "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ",
+    "transliteration": "Rabbi'calnî mukîmes-salâti ve min zürriyyetî rabbenâ ve tekabbel duâ.",
+    "turkishMeaning": "Rabbim! Beni ve soyumdan gelecekleri namazı dosdoğru kılanlardan eyle. Rabbimiz, duamı kabul buyur.",
+    "source": "İbrâhîm Suresi 14/40",
+    "category": "Namaz Duası",
+    "tags": [
+      "namaz",
+      "aile",
+      "istikamet"
+    ],
+    "note": "Kur’an duasıdır; namaz bilinci ve aile için dua içerir."
+  },
+  {
+    "id": "rabbirhamhuma",
+    "title": "Anne Baba Duası",
+    "arabic": "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+    "transliteration": "Rabbirhamhumâ kemâ rabbeyânî sağîrâ.",
+    "turkishMeaning": "Rabbim! Onlar beni küçükken yetiştirdikleri gibi sen de onlara merhamet et.",
+    "source": "İsrâ Suresi 17/24",
+    "category": "Aile Duası",
+    "tags": [
+      "anne",
+      "baba",
+      "merhamet",
+      "aile"
+    ],
+    "note": "Kur’an ayetidir; anne baba için merhamet duasıdır."
+  },
+  {
+    "id": "rabbena_atina_min_ladunka_rahma",
+    "title": "Rahmet ve Doğruluk Duası",
+    "arabic": "رَبَّنَا آتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",
+    "transliteration": "Rabbenâ âtinâ min ledünke rahmeten ve heyyi' lenâ min emrinâ raşedâ.",
+    "turkishMeaning": "Rabbimiz! Katından bize rahmet ver ve işimizde bize doğruluk hazırla.",
+    "source": "Kehf Suresi 18/10",
+    "category": "Rahmet Duası",
+    "tags": [
+      "rahmet",
+      "doğruluk",
+      "karar"
+    ],
+    "note": "Kur’an duasıdır; doğru karar ve rahmet dileği taşır."
+  },
+  {
+    "id": "rabbishrahli_sadri",
+    "title": "Ferahlık Duası",
+    "arabic": "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي يَفْقَهُوا قَوْلِي",
+    "transliteration": "Rabbişrah lî sadrî ve yessir lî emrî vahlul ukdeten min lisânî yefkahû kavlî.",
+    "turkishMeaning": "Rabbim! Gönlüme ferahlık ver, işimi bana kolaylaştır; dilimdeki bağı çöz ki sözümü anlasınlar.",
+    "source": "Tâhâ Suresi 20/25-28",
+    "category": "Rahatlama Duası",
+    "tags": [
+      "ferahlık",
+      "kolaylık",
+      "konuşma",
+      "sıkıntı"
+    ],
+    "note": "Kur’an duasıdır; zor bir iş veya konuşma öncesinde anlam bakımından uygundur."
+  },
+  {
+    "id": "rabbi_zidni_ilma",
+    "title": "İlim Duası",
+    "arabic": "رَبِّ زِدْنِي عِلْمًا",
+    "transliteration": "Rabbi zidnî ilmâ.",
+    "turkishMeaning": "Rabbim, ilmimi artır.",
+    "source": "Tâhâ Suresi 20/114",
+    "category": "İlim Duası",
+    "tags": [
+      "ilim",
+      "öğrenme",
+      "okuma"
+    ],
+    "note": "Kur’an ayetidir; öğrenme ve ilim talebi için kısa bir duadır."
+  },
+  {
+    "id": "la_ilaha_illa_ente",
+    "title": "Yunus Peygamberin Duası",
+    "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
+    "transliteration": "Lâ ilâhe illâ ente sübhâneke innî küntü minez-zâlimîn.",
+    "turkishMeaning": "Senden başka ilah yoktur. Seni tenzih ederim. Gerçekten ben zalimlerden oldum.",
+    "source": "Enbiyâ Suresi 21/87",
+    "category": "Sıkıntı ve Tövbe Duası",
+    "tags": [
+      "sıkıntı",
+      "tövbe",
+      "pişmanlık"
+    ],
+    "note": "Kur’an ayetidir; sıkıntı anında Allah’a yönelişi ifade eder."
+  },
+  {
+    "id": "rabbena_hab_lana_min_azwajina",
+    "title": "Aile ve Göz Aydınlığı Duası",
+    "arabic": "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+    "transliteration": "Rabbenâ heb lenâ min ezvâcinâ ve zürriyyâtinâ kurrate a'yünin vec'alnâ lil-müttekîne imâmâ.",
+    "turkishMeaning": "Rabbimiz! Eşlerimizden ve çocuklarımızdan bize göz aydınlığı bağışla; bizi takva sahiplerine önder kıl.",
+    "source": "Furkân Suresi 25/74",
+    "category": "Aile Duası",
+    "tags": [
+      "aile",
+      "çocuk",
+      "takva"
+    ],
+    "note": "Kur’an duasıdır; aile huzuru ve hayırlı nesil için okunur."
+  },
+  {
+    "id": "rabbi_hab_li_hukman",
+    "title": "Hikmet ve Salihlerle Beraberlik Duası",
+    "arabic": "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",
+    "transliteration": "Rabbi heb lî hukmen ve elhıknî bis-sâlihîn.",
+    "turkishMeaning": "Rabbim! Bana hikmet ver ve beni salihlerin arasına kat.",
+    "source": "Şuarâ Suresi 26/83",
+    "category": "Hikmet Duası",
+    "tags": [
+      "hikmet",
+      "salihler",
+      "ahlak"
+    ],
+    "note": "Kur’an ayetidir; hikmet ve iyi kullarla beraberlik duasıdır."
+  },
+  {
+    "id": "rabbi_inni_lima",
+    "title": "Rızık ve Hayır Duası",
+    "arabic": "رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
+    "transliteration": "Rabbi innî limâ enzelte ileyye min hayrin fakîr.",
+    "turkishMeaning": "Rabbim, bana indireceğin her hayra muhtacım.",
+    "source": "Kasas Suresi 28/24",
+    "category": "Rızık ve Bereket Duası",
+    "tags": [
+      "rızık",
+      "bereket",
+      "ihtiyaç",
+      "hayır"
+    ],
+    "note": "Kur’an ayetidir; ihtiyaç ve hayır talebi anlamı taşır."
+  },
+  {
+    "id": "rabbena_ighfir_lana_waliikhwanina",
+    "title": "Kardeşlik ve Bağışlanma Duası",
+    "arabic": "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ",
+    "transliteration": "Rabbenağfir lenâ ve li-ihvâninellezîne sebekûnâ bil-îmân.",
+    "turkishMeaning": "Rabbimiz! Bizi ve bizden önce iman etmiş kardeşlerimizi bağışla.",
+    "source": "Haşr Suresi 59/10",
+    "category": "Kardeşlik Duası",
+    "tags": [
+      "kardeşlik",
+      "bağışlanma",
+      "ümmet"
+    ],
+    "note": "Kur’an duasıdır; geçmiş müminler ve kardeşlik bilinci için okunur."
+  },
+  {
+    "id": "yemek_duasi",
+    "title": "Yemek Duası",
+    "arabic": "اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ",
+    "transliteration": "Allahümme bârik lenâ fîmâ razaktenâ ve kınâ azâben-nâr.",
+    "turkishMeaning": "Allah’ım! Bize verdiğin rızıkta bereket ihsan et ve bizi ateş azabından koru.",
+    "source": "Yaygın dua metni",
+    "category": "Günlük Dua",
+    "tags": [
+      "yemek",
+      "rızık",
+      "bereket"
+    ],
+    "note": "Günlük kullanımda yaygın olarak okunan bir dua metnidir; belirli bir kaynak isnadı yapılmamıştır."
+  },
+  {
+    "id": "yemekten_sonra_dua",
+    "title": "Yemekten Sonra Dua",
+    "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مِنَ الْمُسْلِمِينَ",
+    "transliteration": "Elhamdülillâhillezî et'amenâ ve sekânâ ve cealenâ minel-müslimîn.",
+    "turkishMeaning": "Bizi yediren, içiren ve müslümanlardan kılan Allah’a hamdolsun.",
+    "source": "Yaygın dua metni",
+    "category": "Günlük Dua",
+    "tags": [
+      "yemek",
+      "şükür",
+      "nimet"
+    ],
+    "note": "Yemek sonrasında şükür anlamıyla yaygın kullanılan dua metnidir."
+  },
+  {
+    "id": "uyku_duasi",
+    "title": "Uyku Duası",
+    "arabic": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+    "transliteration": "Bismike Allahümme emûtü ve ahyâ.",
+    "turkishMeaning": "Allah’ım! Senin adınla ölür ve senin adınla dirilirim.",
+    "source": "Yaygın dua metni",
+    "category": "Günlük Dua",
+    "tags": [
+      "uyku",
+      "gece",
+      "teslimiyet"
+    ],
+    "note": "Uyumadan önce okunması yaygın olan kısa dua metnidir."
+  },
+  {
+    "id": "uyaninca_dua",
+    "title": "Uyanınca Dua",
+    "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+    "transliteration": "Elhamdülillâhillezî ahyânâ ba'de mâ emâtenâ ve ileyhin-nüşûr.",
+    "turkishMeaning": "Bizi öldürdükten sonra dirilten Allah’a hamdolsun. Dönüş O’nadır.",
+    "source": "Yaygın dua metni",
+    "category": "Günlük Dua",
+    "tags": [
+      "uyanmak",
+      "sabah",
+      "şükür"
+    ],
+    "note": "Uyanınca şükür anlamıyla yaygın okunan dua metnidir."
+  },
+  {
+    "id": "eve_girerken_dua",
+    "title": "Eve Girerken Dua",
+    "arabic": "بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا",
+    "transliteration": "Bismillâhi velecnâ ve bismillâhi haracnâ ve alallâhi rabbinâ tevekkelnâ.",
+    "turkishMeaning": "Allah’ın adıyla girdik, Allah’ın adıyla çıktık; Rabbimiz Allah’a tevekkül ettik.",
+    "source": "Yaygın dua metni",
+    "category": "Günlük Dua",
+    "tags": [
+      "ev",
+      "aile",
+      "tevekkül"
+    ],
+    "note": "Eve girişte tevekkül ve bereket niyetiyle yaygın kullanılan dua metnidir."
+  },
+  {
+    "id": "evden_cikarken_dua",
+    "title": "Evden Çıkarken Dua",
+    "arabic": "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+    "transliteration": "Bismillâhi tevekkeltü alallâh, ve lâ havle ve lâ kuvvete illâ billâh.",
+    "turkishMeaning": "Allah’ın adıyla. Allah’a tevekkül ettim. Güç ve kuvvet ancak Allah’ın yardımıyladır.",
+    "source": "Yaygın dua metni",
+    "category": "Günlük Dua",
+    "tags": [
+      "ev",
+      "çıkış",
+      "korunma",
+      "tevekkül"
+    ],
+    "note": "Evden çıkarken tevekkül anlamıyla yaygın okunan dua metnidir."
+  },
+  {
+    "id": "yolculuk_duasi",
+    "title": "Yolculuk Duası",
+    "arabic": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنْقَلِبُونَ",
+    "transliteration": "Sübhânellezî sehhara lenâ hâzâ ve mâ kunnâ lehû mukrinîn. Ve innâ ilâ rabbinâ le münkalibûn.",
+    "turkishMeaning": "Bunu bizim hizmetimize veren Allah’ı tesbih ederiz; yoksa biz buna güç yetiremezdik. Şüphesiz biz Rabbimize döneceğiz.",
+    "source": "Zuhruf Suresi 43/13-14",
+    "category": "Yolculuk Duası",
+    "tags": [
+      "yolculuk",
+      "korunma",
+      "şükür"
+    ],
+    "note": "Kur’an ayetidir; yolculuk duası olarak yaygın şekilde okunur."
+  },
+  {
+    "id": "namaz_sonrasi_kisa_dua",
+    "title": "Namaz Sonrası Kısa Dua",
+    "arabic": "اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+    "transliteration": "Allahümme entes-selâmü ve minkes-selâm, tebârekte yâ zel-celâli vel-ikrâm.",
+    "turkishMeaning": "Allah’ım! Sen selamsın, selamet sendendir. Ey celal ve ikram sahibi, sen yücesin.",
+    "source": "Yaygın dua metni",
+    "category": "Namaz Duası",
+    "tags": [
+      "namaz",
+      "zikir",
+      "selam"
+    ],
+    "note": "Namaz sonrasında yaygın okunan kısa dua ve zikir metnidir; burada kaynak isnadı yapılmamıştır."
+  },
+  {
+    "id": "afiyet_duasi",
+    "title": "Afiyet Duası",
+    "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+    "transliteration": "Allahümme innî es'elükel-afve vel-âfiyete fid-dünyâ vel-âhirah.",
+    "turkishMeaning": "Allah’ım! Senden dünyada ve ahirette af ve afiyet isterim.",
+    "source": "Yaygın dua metni",
+    "category": "Afiyet Duası",
+    "tags": [
+      "afiyet",
+      "sağlık",
+      "bağışlanma"
+    ],
+    "note": "Af ve afiyet isteme anlamıyla yaygın kullanılan dua metnidir."
+  },
+  {
+    "id": "istigfar_tovbe_duasi",
+    "title": "İstiğfar / Tövbe Duası",
+    "arabic": "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ وَأَتُوبُ إِلَيْهِ",
+    "transliteration": "Estağfirullâhel-azîm ve etûbü ileyh.",
+    "turkishMeaning": "Yüce Allah’tan bağışlanma diler ve O’na tövbe ederim.",
+    "source": "Yaygın dua metni",
+    "category": "Tövbe Duası",
+    "tags": [
+      "istiğfar",
+      "tövbe",
+      "bağışlanma"
+    ],
+    "note": "Kısa istiğfar ifadesidir; günlük tövbe ve bağışlanma niyetiyle yaygın kullanılır."
+  },
+  {
+    "id": "hastalik_sifa_duasi",
+    "title": "Hastalık / Şifa Duası",
+    "arabic": "اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ اشْفِ أَنْتَ الشَّافِي لَا شِفَاءَ إِلَّا شِفَاؤُكَ شِفَاءً لَا يُغَادِرُ سَقَمًا",
+    "transliteration": "Allahümme rabben-nâs, ezhibil-be's, işfi ente'ş-şâfî, lâ şifâe illâ şifâük, şifâen lâ yugâdiru sekamâ.",
+    "turkishMeaning": "Allah’ım, insanların Rabbi! Sıkıntıyı gider, şifa ver. Şifa veren sensin; senin şifandan başka şifa yoktur. Hastalık bırakmayan bir şifa ver.",
+    "source": "Yaygın dua metni",
+    "category": "Şifa Duası",
+    "tags": [
+      "hastalık",
+      "şifa",
+      "afiyet"
+    ],
+    "note": "Şifa niyetiyle yaygın okunan dua metnidir. Tıbbi durumlarda profesyonel sağlık desteğinin yerini tutmaz."
+  },
+  {
+    "id": "korunma_felak_duasi",
+    "title": "Felak ile Korunma Duası",
+    "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِنْ شَرِّ مَا خَلَقَ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+    "transliteration": "Kul eûzü birabbil-felak. Min şerri mâ halak. Ve min şerri ğâsikın izâ vekab. Ve min şerrin-neffâsâti fil-ukad. Ve min şerri hâsidin izâ hased.",
+    "turkishMeaning": "De ki: Sabahın Rabbine sığınırım; yarattığı şeylerin şerrinden, çöktüğü zaman karanlığın şerrinden, düğümlere üfleyenlerin şerrinden ve haset ettiği zaman hasetçinin şerrinden.",
+    "source": "Felak Suresi 113/1-5",
+    "category": "Korunma Duası",
+    "tags": [
+      "korunma",
+      "sığınma",
+      "felak"
+    ],
+    "note": "Kur’an suresidir; korunma ve Allah’a sığınma anlamı taşır."
+  },
+  {
+    "id": "korunma_nas_duasi",
+    "title": "Nâs ile Korunma Duası",
+    "arabic": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ إِلَٰهِ النَّاسِ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ مِنَ الْجِنَّةِ وَالنَّاسِ",
+    "transliteration": "Kul eûzü birabbin-nâs. Melikin-nâs. İlâhin-nâs. Min şerril-vesvâsil-hannâs. Ellezî yüvesvisü fî sudûrin-nâs. Minel-cinneti ven-nâs.",
+    "turkishMeaning": "De ki: İnsanların Rabbine, insanların Melikine, insanların İlahına sığınırım; insanların kalplerine vesvese veren sinsi vesvesecinin şerrinden; cinlerden ve insanlardan.",
+    "source": "Nâs Suresi 114/1-6",
+    "category": "Korunma Duası",
+    "tags": [
+      "korunma",
+      "vesvese",
+      "sığınma"
+    ],
+    "note": "Kur’an suresidir; vesvese ve kötülüklerden Allah’a sığınma anlamı taşır."
+  },
+  {
+    "id": "niyaz_para_gecim_rahatligi",
+    "title": "Para ve Geçim Rahatlığı İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, geçimimi helal ve temiz yollarla kolaylaştır. Kalbimi hırstan, dilimi şikâyetten, kazancımı haramdan uzak eyle. Bana emeğimin bereketini göster; ihtiyaçlarımı ölçülü, onurlu ve hayırlı şekilde karşılamayı nasip et. Darlık içinde sabır, bolluk içinde şükür ver. Rızkımı yalnız parayla değil; huzur, sağlık, aile bereketi ve gönül zenginliğiyle de genişlet. Bana aceleyle değil istikametle hareket etmeyi, kolaylık geldiğinde şükrü, zorluk geldiğinde sabrı korumayı öğret. Attığım her adımda helal sınırları gözetmeyi ve kalbimi sana güvenle diri tutmayı nasip et. Bana aceleyle değil istikametle hareket etmeyi, kolaylık geldiğinde şükrü, zorluk geldiğinde sabrı korumayı öğret. Attığım her adımda helal sınırları gözetmeyi ve kalbimi sana güvenle diri tutmayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Geçim Duası",
+    "tags": [
+      "para",
+      "geçim",
+      "helal kazanç",
+      "rahatlık"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; kesin sonuç vaadi içermez."
+  },
+  {
+    "id": "niyaz_rizik_bereket",
+    "title": "Rızık ve Bereket İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, rızkımı helalinden, temizinden ve bereketlisinden ihsan eyle. Elime geçen nimeti israf etmeden, kibirlenmeden ve kimseye haksızlık etmeden kullanmayı nasip et. Evime huzur, soframa bereket, kalbime kanaat ver. Bana hayırlı kapılar aç; kapandığında ise razı olmayı, beklemeyi ve daha hayırlısını istemeyi öğret. Rızkı sadece miktar olarak değil, huzur, kanaat ve hayır olarak da anlamayı bana öğret. Emeğimi bereketlendir, soframızı şükürle genişlet, kazancımı iyilikte kullanmayı ve ihtiyaç sahiplerini unutmamayı nasip et. Rızkı sadece miktar olarak değil, huzur, kanaat ve hayır olarak da anlamayı bana öğret. Emeğimi bereketlendir, soframızı şükürle genişlet, kazancımı iyilikte kullanmayı ve ihtiyaç sahiplerini unutmamayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Rızık ve Bereket Duası",
+    "tags": [
+      "rızık",
+      "bereket",
+      "kanaat",
+      "helal"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_borclardan_kurtulma",
+    "title": "Borçlardan Kurtulmak İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, üzerimdeki borç yükünü hafifletmeme yardım et. Bana doğru karar, düzenli emek ve helal kazanç kapıları nasip eyle. Borcumu öderken kimseye haksızlık etmemeyi, yeni yüklerin altına bilinçsizce girmemeyi ve nefsimi ölçüsüz isteklerden korumayı nasip et. Darlığımı ferahlığa, kaygımı tevekküle, dağınıklığımı düzene çevir. Bana aceleyle değil istikametle hareket etmeyi, kolaylık geldiğinde şükrü, zorluk geldiğinde sabrı korumayı öğret. Attığım her adımda helal sınırları gözetmeyi ve kalbimi sana güvenle diri tutmayı nasip et. Bana aceleyle değil istikametle hareket etmeyi, kolaylık geldiğinde şükrü, zorluk geldiğinde sabrı korumayı öğret. Attığım her adımda helal sınırları gözetmeyi ve kalbimi sana güvenle diri tutmayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Geçim Duası",
+    "tags": [
+      "borç",
+      "geçim",
+      "düzen",
+      "ferahlık"
+    ],
+    "note": "Mali konularda dua ile birlikte planlı hareket etmek ve gerekirse uzman desteği almak önemlidir."
+  },
+  {
+    "id": "niyaz_is_bulma_basarisi",
+    "title": "İş Bulma ve İşte Başarı İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, bana helal, hayırlı ve insanlara faydalı olacak bir iş nasip et. Yeteneğimi geliştirmeyi, emeğimi dürüstçe ortaya koymayı ve karşıma çıkan fırsatları doğru değerlendirmeyi kolaylaştır. İşimde adaletli, güvenilir ve üretken olmayı nasip eyle. Başarıyı kibir sebebi değil, şükür ve hizmet vesilesi kıl. Çalışma hayatımda hakkı gözetmeyi, emeğimi küçümsememeyi ve bana emanet edilen işleri güzelce tamamlamayı nasip et. Başarıyı kibir sebebi değil, şükür ve hizmet vesilesi kıl; kalbimi helal kazanca bağlı eyle. Çalışma hayatımda hakkı gözetmeyi, emeğimi küçümsememeyi ve bana emanet edilen işleri güzelce tamamlamayı nasip et. Başarıyı kibir sebebi değil, şükür ve hizmet vesilesi kıl; kalbimi helal kazanca bağlı eyle.",
+    "source": "Türkçe niyaz metni",
+    "category": "İş ve Emek Duası",
+    "tags": [
+      "iş",
+      "başarı",
+      "emek",
+      "helal kazanç"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_mutluluk_ic_huzur",
+    "title": "Mutluluk ve İç Huzuru İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, kalbime sakinlik, zihnime açıklık, günlerime huzur ver. Beni geçmişin pişmanlığında ve geleceğin kaygısında kaybolmaktan koru. Sahip olduklarımı fark etmeyi, eksiklerime sabırla yaklaşmayı ve içimdeki iyiliği büyütmeyi nasip et. Mutluluğumu geçici şeylere bağlamadan, sana yakınlık ve güzel ahlakla güçlendir. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir.",
+    "source": "Türkçe niyaz metni",
+    "category": "Huzur Duası",
+    "tags": [
+      "mutluluk",
+      "huzur",
+      "kaygı",
+      "sakinlik"
+    ],
+    "note": "Yoğun kaygı, depresyon veya kendine zarar düşüncelerinde profesyonel destek alınmalıdır."
+  },
+  {
+    "id": "niyaz_aile_huzuru",
+    "title": "Aile Huzuru İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, ailemize merhamet, anlayış ve güzel iletişim nasip et. Kırıcı sözlerden, inattan, haksızlıktan ve sevgiyi zedeleyen davranışlardan bizi koru. Evimizi güven, saygı ve şefkatle doldur. Farklılıklarımızı kavga sebebi değil, birbirimizi tamamlamaya vesile kıl. Kalplerimizi hayırda birleştir. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme.",
+    "source": "Türkçe niyaz metni",
+    "category": "Aile Duası",
+    "tags": [
+      "aile",
+      "huzur",
+      "iletişim",
+      "merhamet"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_evlilik_hayirli_es",
+    "title": "Evlilik ve Hayırlı Eş İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, hakkımda hayırlıysa bana ahlakı güzel, merhametli, güvenilir ve huzur veren bir eş nasip et. Evliliği sadece isteklerimin değil, sorumluluk, emanet ve karşılıklı iyilik bilincinin de parçası olarak görmeyi öğret. Kalbimi acelecilikten, yanlış bağlardan ve hayırsız ısrarlardan koru. Hakkımda hayırlı olanı kolaylaştır, hayırlı olmayanı kalbimi incitmeden uzaklaştır. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme.",
+    "source": "Türkçe niyaz metni",
+    "category": "Aile Duası",
+    "tags": [
+      "evlilik",
+      "hayırlı eş",
+      "aile",
+      "karar"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; kesin sonuç vaadi içermez."
+  },
+  {
+    "id": "niyaz_korku_kaygi",
+    "title": "Korku ve Kaygı Anında Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, kalbimi saran korkuyu hafiflet, bana güven ve sükûnet ver. Kontrol edemediğim şeyleri sana bırakmayı, elimden geleni de cesaretle yapmayı nasip et. Zihnimi karanlık ihtimallerle yormaktan, kalbimi umutsuzluğa teslim etmekten koru. Bana sabır, açıklık ve güvenli adımlar atma gücü ver. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir.",
+    "source": "Türkçe niyaz metni",
+    "category": "Huzur Duası",
+    "tags": [
+      "korku",
+      "kaygı",
+      "sıkıntı",
+      "sakinlik"
+    ],
+    "note": "Yoğun veya sürekli kaygı durumunda dua ile birlikte profesyonel destek almak önemlidir."
+  },
+  {
+    "id": "niyaz_nazar_korunma",
+    "title": "Nazar ve Korunma İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, beni, ailemi ve sevdiklerimi görünen ve görünmeyen kötülüklerden koru. Kalbimizi hasetten, dilimizi kötü sözden, niyetimizi bozulmaktan muhafaza eyle. Bize verilen nimetleri şükürle taşımayı nasip et. Korkuyla değil sana sığınmanın huzuruyla yaşamayı öğret. Beni gereksiz korkulara teslim etmeden tedbirli, dikkatli ve ölçülü yaşamayı nasip et. Kalbimi vesveseden, dilimi kötü sözden, evimi huzuru bozan etkilerden koru; güvenimi yalnız sana bağlamayı öğret. Beni gereksiz korkulara teslim etmeden tedbirli, dikkatli ve ölçülü yaşamayı nasip et. Kalbimi vesveseden, dilimi kötü sözden, evimi huzuru bozan etkilerden koru; güvenimi yalnız sana bağlamayı öğret.",
+    "source": "Türkçe niyaz metni",
+    "category": "Korunma Duası",
+    "tags": [
+      "nazar",
+      "korunma",
+      "haset",
+      "sığınma"
+    ],
+    "note": "Korunma için Kur’an’dan Felak ve Nâs sureleri de uygulamada ayrı dua olarak yer alır."
+  },
+  {
+    "id": "niyaz_kotu_aliskanliklardan_kurtulma",
+    "title": "Kötü Alışkanlıklardan Kurtulmak İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, bana zarar veren alışkanlıkları fark etmeyi ve onlardan adım adım uzaklaşmayı nasip et. İrademi güçlendir, beni iyi insanlarla ve hayırlı uğraşlarla destekle. Düştüğümde umutsuzluğa kapılmadan yeniden kalkmayı öğret. Nefsimi temize çıkarma gafletinden ve kendime zarar veren ısrarlardan beni koru. Bana değişimin küçük ama kararlı adımlarla başladığını unutturma. Hatalarımı örtbas etmek yerine onarmayı, nefsimi tanımayı, iyi insanlarla yakınlaşmayı ve her gün biraz daha temiz bir yola dönmeyi nasip et. Bana değişimin küçük ama kararlı adımlarla başladığını unutturma. Hatalarımı örtbas etmek yerine onarmayı, nefsimi tanımayı, iyi insanlarla yakınlaşmayı ve her gün biraz daha temiz bir yola dönmeyi nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Tövbe ve Değişim Duası",
+    "tags": [
+      "alışkanlık",
+      "tövbe",
+      "irade",
+      "değişim"
+    ],
+    "note": "Bağımlılık veya ciddi zarar içeren durumlarda profesyonel destek alınmalıdır."
+  },
+  {
+    "id": "niyaz_karar_verme_hayirlisini_isteme",
+    "title": "Karar Verme ve Hayırlısını İsteme Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, önümdeki seçenekler içinde hakkımda hayırlı olanı bana kolaylaştır. Nefsimin acele isteğini, korkularımın baskısını ve insanların etkisini hakikatin önüne geçirme. Bana doğru düşünme, istişare etme ve sonuç ne olursa olsun rıza gösterebilme olgunluğu ver. Hayırlı olanı kalbime ısındır, hayırsız olanı güzellikle uzaklaştır. Bana istişare etmeyi, bilgiyi araştırmayı, acele hükümden kaçınmayı ve kalbimdeki işaretleri hikmetle değerlendirmeyi nasip et. Sonucu sana bırakırken sorumluluktan kaçmayan, hayırlı olanı görünce cesaretle yürüyen bir kul eyle. Bana istişare etmeyi, bilgiyi araştırmayı, acele hükümden kaçınmayı ve kalbimdeki işaretleri hikmetle değerlendirmeyi nasip et. Sonucu sana bırakırken sorumluluktan kaçmayan, hayırlı olanı görünce cesaretle yürüyen bir kul eyle.",
+    "source": "Türkçe niyaz metni",
+    "category": "Karar Duası",
+    "tags": [
+      "karar",
+      "hayırlısı",
+      "istişare",
+      "tevekkül"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_sukur",
+    "title": "Şükür Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, bana verdiğin nimetleri fark eden bir kalp nasip et. Küçük görünen iyilikleri küçümsememeyi, sahip olduklarımı israf etmemeyi ve şükrümü davranışlarımla göstermeyi öğret. Beni nankörlükten, kıyasın yorgunluğundan ve sürekli eksik görme hâlinden koru. Şükrümü artır, nimetlerimi hayra vesile kıl. Nimetleri sadece sözle değil davranışla da değerlendirmeyi bana nasip et. Sahip olduklarımı iyilikte kullanmayı, eksiklerime rağmen umudu korumayı, bollukta tevazuyu ve darlıkta vakarı kaybetmemeyi öğret. Nimetleri sadece sözle değil davranışla da değerlendirmeyi bana nasip et. Sahip olduklarımı iyilikte kullanmayı, eksiklerime rağmen umudu korumayı, bollukta tevazuyu ve darlıkta vakarı kaybetmemeyi öğret.",
+    "source": "Türkçe niyaz metni",
+    "category": "Şükür Duası",
+    "tags": [
+      "şükür",
+      "nimet",
+      "kanaat",
+      "huzur"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_sabir",
+    "title": "Sabır Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, zorlandığım yerde bana sabır, dayanma gücü ve hikmet ver. Sabrımı pasif bekleyiş değil, doğru olanı sürdürme kuvveti kıl. Kalbimi isyana, dilimi kırıcı söze, davranışlarımı acele pişmanlıklara düşürme. Bu imtihanın içinden daha olgun, daha merhametli ve sana daha yakın çıkmayı nasip et. Sabrımı öfke biriktiren bir suskunluk değil, hikmetli ve vakarlı bir duruş eyle. Zorlandığım anda doğru sözü seçmeyi, doğru zamanı beklemeyi ve kalbimdeki umudu diri tutmayı nasip et. Sabrımı öfke biriktiren bir suskunluk değil, hikmetli ve vakarlı bir duruş eyle. Zorlandığım anda doğru sözü seçmeyi, doğru zamanı beklemeyi ve kalbimdeki umudu diri tutmayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Sabır Duası",
+    "tags": [
+      "sabır",
+      "imtihan",
+      "dayanma",
+      "sebat"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_hastalik_sifa",
+    "title": "Hastalık ve Şifa İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, hastalığıma şifa, bedenime güç, kalbime sabır ver. Tedavimi, hekimimi ve kullandığım vesileleri hayra çıkar. Ağrımı hafiflet, korkumu yatıştır, umudumu diri tut. Bana sağlığı kıymet bilen, hastalıkta da sana sığınan bir gönül nasip et. Şifayı senden bilir, sebeplere sarılmayı da bir sorumluluk kabul ederim. Tedbir almayı ihmal etmeden, şifayı senden bilerek ve vesilelere sorumlulukla sarılarak yürümeyi nasip et. Hastalık sürecinde kalbimi yalnızlık hissinden koru; yakınlarıma da anlayış, sabır ve merhamet ver. Tedbir almayı ihmal etmeden, şifayı senden bilerek ve vesilelere sorumlulukla sarılarak yürümeyi nasip et. Hastalık sürecinde kalbimi yalnızlık hissinden koru; yakınlarıma da anlayış, sabır ve merhamet ver.",
+    "source": "Türkçe niyaz metni",
+    "category": "Şifa Duası",
+    "tags": [
+      "hastalık",
+      "şifa",
+      "sağlık",
+      "sabır"
+    ],
+    "note": "Tıbbi tavsiye yerine geçmez; sağlık sorunlarında profesyonel destek alınmalıdır."
+  },
+  {
+    "id": "niyaz_tovbe_bagislanma",
+    "title": "Tövbe ve Bağışlanma Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allah’ım, bildiğim ve bilmediğim hatalarım için senden bağışlanma dilerim. Beni pişmanlığın içinde tüketme; pişmanlığımı dönüşe, dönüşümü güzel ahlaka çevir. Kul hakkından, kibirden, gizli yanlışlardan ve aynı hataya ısrarla dönmekten beni koru. Rahmetinden ümidimi kesmeden, sorumluluğumu da unutmadan sana yöneliyorum. Pişmanlığımı umutsuzluğa değil dönüşe, mahcubiyetimi güzel ahlaka ve telafiye vesile kıl. Bana aynı hatalara götüren yolları tanımayı, onlardan uzaklaşmayı ve rahmetinden ümit kesmemeyi nasip et. Pişmanlığımı umutsuzluğa değil dönüşe, mahcubiyetimi güzel ahlaka ve telafiye vesile kıl. Bana aynı hatalara götüren yolları tanımayı, onlardan uzaklaşmayı ve rahmetinden ümit kesmemeyi nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Tövbe Duası",
+    "tags": [
+      "tövbe",
+      "bağışlanma",
+      "pişmanlık",
+      "rahmet"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_gecim_ferahligi",
+    "title": "Geçim Ferahlığı İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, geçimimde helal, temiz ve bereketli kapılar açmanı niyaz ederim. Elimde olanı israf etmeden kullanmayı, olmayan için de ümitsizliğe düşmeden gayret etmeyi bana nasip et. Kalbimi hırsla değil tevekkülle, dilimi şikayetle değil şükürle meşgul eyle. Ailemin ve sevdiklerimin ihtiyaçlarını helal yoldan karşılayabilmem için emeğime güç, işime düzen, kararlarıma isabet ver. Daraldığım zamanlarda beni sabırla ayakta tut, kolaylıkları fark eden bir gönül ihsan eyle. Bana aceleyle değil istikametle hareket etmeyi, kolaylık geldiğinde şükrü, zorluk geldiğinde sabrı korumayı öğret. Attığım her adımda helal sınırları gözetmeyi ve kalbimi sana güvenle diri tutmayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Geçim Duası",
+    "tags": [
+      "geçim",
+      "para",
+      "ferahlık",
+      "helal kazanç"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; belli bir sonucu garanti etmez."
+  },
+  {
+    "id": "niyaz_maddi_sikinti_sabir",
+    "title": "Maddi Sıkıntıda Sabır İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, maddi sıkıntıların kalbimi karartmasına ve aile huzurumu bozmasına izin verme. Bana doğru adım atmayı, borcumu ve sorumluluklarımı dürüstçe takip etmeyi, kolay görünen yanlış yollardan uzak durmayı nasip eyle. Rızkımı helalinden genişlet, emeğimin karşılığını hayırlı kıl, ihtiyaçlarımı kanaat ve hikmetle düzenlememe yardım et. Bugünün yükünü taşırken yarına dair umudumu diri tut. Beni acelecilikten, paniğe kapılmaktan ve kul hakkına girmekten muhafaza eyle. Bana aceleyle değil istikametle hareket etmeyi, kolaylık geldiğinde şükrü, zorluk geldiğinde sabrı korumayı öğret. Attığım her adımda helal sınırları gözetmeyi ve kalbimi sana güvenle diri tutmayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Geçim Duası",
+    "tags": [
+      "maddi sıkıntı",
+      "sabır",
+      "rızık",
+      "tevekkül"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; maddi danışmanlık yerine geçmez."
+  },
+  {
+    "id": "niyaz_borc_odeme_kolayligi",
+    "title": "Borç Ödeme Kolaylığı İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, üzerimdeki borç ve sorumlulukları helal kazançla, kul hakkına girmeden ve kimseyi incitmeden yerine getirebilmeyi nasip et. Harcamalarımda ölçü, planlarımda açıklık, niyetimde doğruluk ver. Beni gereksiz yüklerden, gösterişten, aceleyle alınan yanlış kararlardan koru. Borçlu olduğum insanlara karşı mahcubiyetimi dürüstlükle gidermeme yardım et. Önüme hayırlı imkanlar çıkar, emeğime bereket ver, kalbimi korkudan ziyade sorumluluk bilinciyle güçlendir. Bu yükü taşırken insanlara karşı mahcup olmadan dürüstçe davranmayı, planlı olmayı ve sözümde durmayı nasip et. Kalbime ferahlık, işlerime açıklık, rızkıma bereket ver; beni umutsuzluğa ve yanlış yollara düşmekten koru.",
+    "source": "Türkçe niyaz metni",
+    "category": "Borç Duası",
+    "tags": [
+      "borç",
+      "ödeme",
+      "helal kazanç",
+      "sorumluluk"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; belli bir sonucu garanti etmez."
+  },
+  {
+    "id": "niyaz_borc_yukunden_kurtulma",
+    "title": "Borç Yükünden Kurtulmak İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, borç yükünün ruhumu ezdiği anlarda bana feraset, sabır ve temiz bir çıkış yolu göster. Gelirimi bereketli, giderimi ölçülü, kararlarımı isabetli kıl. Bana sözümde durmayı, insanlara karşı açık ve saygılı olmayı, hakkaniyetten ayrılmadan çözüm aramayı nasip et. Kazancımı helalinden artır, ihtiyaçlarımı gereksiz arzularımdan ayırt ettir. Beni umutsuzluğa, öfkeye ve yanlış yollara sürükleyecek her düşünceden koru. Kalbime düzen, evime huzur ver. Bu yükü taşırken insanlara karşı mahcup olmadan dürüstçe davranmayı, planlı olmayı ve sözümde durmayı nasip et. Kalbime ferahlık, işlerime açıklık, rızkıma bereket ver; beni umutsuzluğa ve yanlış yollara düşmekten koru.",
+    "source": "Türkçe niyaz metni",
+    "category": "Borç Duası",
+    "tags": [
+      "borç",
+      "ferahlık",
+      "huzur",
+      "plan"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; hukuki veya mali danışmanlık yerine geçmez."
+  },
+  {
+    "id": "niyaz_is_bulma_hayirli_kapi",
+    "title": "İş Bulmak İçin Hayırlı Kapı Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, bana helal kazanç sağlayacağım, emeğimi değerli kılacak ve ahlakımı koruyabileceğim hayırlı bir iş kapısı aç. Arayış sürecinde ümidimi kaybetmemeyi, kendimi geliştirmeyi ve doğru fırsatları fark etmeyi nasip et. Görüşmelerimde dilime açıklık, kalbime sakinlik, davranışlarıma güven ver. Beni hakkım olmayanı istemekten, emeğimi küçümsemekten ve ümitsizliğe teslim olmaktan koru. Hakkımda hayırlı olan işi bana yaklaştır, hayırsız olanı da gönlümü incitmeden uzaklaştır. Çalışma hayatımda hakkı gözetmeyi, emeğimi küçümsememeyi ve bana emanet edilen işleri güzelce tamamlamayı nasip et. Başarıyı kibir sebebi değil, şükür ve hizmet vesilesi kıl; kalbimi helal kazanca bağlı eyle.",
+    "source": "Türkçe niyaz metni",
+    "category": "İş ve Emek Duası",
+    "tags": [
+      "iş bulma",
+      "helal kazanç",
+      "fırsat",
+      "emek"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; iş sonucu garanti etmez."
+  },
+  {
+    "id": "niyaz_iste_basari_istikamet",
+    "title": "İşte Başarı ve İstikamet İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, çalıştığım işte emeğimi bereketli, niyetimi temiz, davranışlarımı adil kıl. Bana bilgimi artırmayı, görevimi hakkıyla yapmayı, insanlarla saygı ve güven içinde çalışmayı nasip et. Başarı isteğimi kibirden, rekabetimi haksızlıktan, gayretimi tükenmişlikten koru. Zor kararlar karşısında bana hikmet, yoğun zamanlarda sabır, hatalarımda ders alma olgunluğu ver. Kazancımı helal, işimi hayırlı, kalbimi huzurlu eyle. Beni işimde de kulluğumda da istikametten ayırma. Çalışma hayatımda hakkı gözetmeyi, emeğimi küçümsememeyi ve bana emanet edilen işleri güzelce tamamlamayı nasip et. Başarıyı kibir sebebi değil, şükür ve hizmet vesilesi kıl; kalbimi helal kazanca bağlı eyle.",
+    "source": "Türkçe niyaz metni",
+    "category": "İş ve Emek Duası",
+    "tags": [
+      "işte başarı",
+      "emek",
+      "istikamet",
+      "helal kazanç"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; belli bir sonucu garanti etmez."
+  },
+  {
+    "id": "niyaz_ic_huzur_sukunet",
+    "title": "İç Huzuru ve Sükûnet İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, kalbimde biriken yorgunluğu, zihnimi meşgul eden dağınıklığı ve içime çöken ağırlığı rahmetinle hafiflet. Bana kendimi toparlayacak sakinlik, geçmişten ders alacak olgunluk ve bugünü hayırla yaşayacak güç ver. Kalbimi kin, kıskançlık, pişmanlık ve gereksiz korkularla tüketmekten koru. Beni sana yaklaştıran düşünceleri çoğalt, dilimi şükre, gözümü güzelliğe, gönlümü merhamete aç. İçimde huzura, hayatımda dengeye, ilişkilerimde iyiliğe vesile olacak yollar nasip et. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir.",
+    "source": "Türkçe niyaz metni",
+    "category": "Huzur Duası",
+    "tags": [
+      "iç huzur",
+      "sükûnet",
+      "mutluluk",
+      "kalp"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; sağlık desteği gereken durumlarda profesyonel yardım alınmalıdır."
+  },
+  {
+    "id": "niyaz_mutluluk_sukur_denge",
+    "title": "Mutluluk, Şükür ve Denge İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, mutluluğu sadece dış şartlara bağlamayan, nimetleri fark eden ve imtihanlar karşısında da dengede kalabilen bir gönül nasip et. Sevincimde taşkınlıktan, üzüntümde isyandan, beklentilerimde ölçüsüzlükten beni koru. Bana ailemle, işimle, sağlığımla ve vaktimle ilgili güzellikleri fark ettir. Eksiklerimi tamamlamak için gayret verirken elimdekileri hor görmemeyi öğret. Kalbimi şükürle genişlet, yüzümü hayra çevir, günlerimi sade ama anlamlı iyiliklerle bereketlendir. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir.",
+    "source": "Türkçe niyaz metni",
+    "category": "Huzur Duası",
+    "tags": [
+      "mutluluk",
+      "şükür",
+      "denge",
+      "huzur"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_ev_huzuru",
+    "title": "Ev Huzuru İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, evimizi güven, merhamet, saygı ve helal rızıkla bereketlendir. Kapısından giren her sözü yumuşak, her niyeti temiz, her davranışı adaletli eyle. Evimizde kırgınlık varsa onarmayı, yorgunluk varsa paylaşmayı, anlaşmazlık varsa hikmetle konuşmayı nasip et. Bizi birbirimize yük değil destek, öfkeye değil anlayışa vesile kıl. Soframıza bereket, odalarımıza huzur, kalplerimize şefkat ver. Bu evi iyiliğin, duanın ve güzel ahlakın yaşandığı bir yuva eyle. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme.",
+    "source": "Türkçe niyaz metni",
+    "category": "Aile Duası",
+    "tags": [
+      "ev huzuru",
+      "aile",
+      "yuva",
+      "bereket"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_ailede_merhamet",
+    "title": "Ailede Merhamet ve Anlayış İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, ailemizin içine sevgiyle birlikte saygı, yakınlıkla birlikte sabır, konuşmalarımıza da hikmet yerleştir. Bizi birbirimizin kusurunu büyüten değil, iyiliğini çoğaltan kullarından eyle. Kırgınlıklarımızı onarmayı, yanlışlarımızı kabul etmeyi, haklı olduğumuz anlarda bile merhameti kaybetmemeyi nasip et. Büyüklerimize hürmet, küçüklerimize şefkat, eşler arasında güven ve sadakat ver. Evimizde huzuru bozan öfke, inat, kıskançlık ve ilgisizlikten bizi muhafaza eyle. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme.",
+    "source": "Türkçe niyaz metni",
+    "category": "Aile Duası",
+    "tags": [
+      "aile huzuru",
+      "merhamet",
+      "anlayış",
+      "saygı"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_evlilik_hayirli_yuva",
+    "title": "Evlilik ve Hayırlı Yuva İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, evlilik niyetimi hayırla, iffetle ve güzel ahlakla bereketlendir. Bana kalbi temiz, sorumluluk sahibi, merhametli ve dinî hassasiyetlerime saygılı bir eş nasip eyle; beni de böyle bir yuva için olgunlaştır. Aceleyle, yalnızlık korkusuyla veya gösterişle karar vermekten koru. Hakkımda hayırlı olan kişiyi ve zamanı kolaylaştır, hayırsız olanı kalbimi kırmadan uzaklaştır. Kurulacak yuvayı sevgi, sadakat, emek, sabır ve karşılıklı anlayış üzerine bina etmeyi nasip et. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme.",
+    "source": "Türkçe niyaz metni",
+    "category": "Aile Duası",
+    "tags": [
+      "evlilik",
+      "hayırlı eş",
+      "yuva",
+      "sadakat"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; belirli bir sonucu garanti etmez."
+  },
+  {
+    "id": "niyaz_cocuklar_icin",
+    "title": "Çocuklar İçin Dua",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, çocuklarımızı beden, akıl, kalp ve ahlak bakımından hayırla büyüt. Onlara doğruyu sevdirecek, yanlıştan uzaklaştıracak bir vicdan nasip et. Kalplerini iman, merhamet, saygı ve iyilikle güçlendir. Bizlere de onları baskıyla değil hikmetle, öfkeyle değil sabırla, ihmal etmeden ve kırmadan yetiştirmeyi öğret. Eğitimlerinde kolaylık, arkadaşlıklarında hayır, karakterlerinde sağlamlık ver. Onları kötülüklerden, zararlı alışkanlıklardan, ümitsizlikten ve kalplerini incitecek her türlü etkiden muhafaza eyle. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme.",
+    "source": "Türkçe niyaz metni",
+    "category": "Aile Duası",
+    "tags": [
+      "çocuklar",
+      "aile",
+      "terbiye",
+      "korunma"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_anne_baba_icin",
+    "title": "Anne Baba İçin Dua",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, anne babama sağlık, afiyet, huzur ve hayırlı ömür nasip et. Hayatta olanlarına hizmet etmeyi, gönüllerini almayı, ihtiyaçlarını fark etmeyi ve sözlerimde incitici olmamayı bana lütfet. Vefat etmiş olanlarına rahmetinle muamele eyle, kabirlerini genişlet, hatalarını bağışla. Onların üzerimdeki emeklerini unutmayan, dua ve iyilikle karşılık vermeye çalışan bir evlat olmayı nasip et. Aile bağlarımızı merhametle güçlendir, kırgınlıklarımızı hayırla onar. Bize birbirimizi dinlemeyi, kırmadan konuşmayı, haklılık ararken sevgiyi kaybetmemeyi öğret. Evimizi dua, emek, sadakat ve anlayışla güçlendir; küçük meselelerin büyük kırgınlıklara dönüşmesine izin verme.",
+    "source": "Türkçe niyaz metni",
+    "category": "Aile Duası",
+    "tags": [
+      "anne baba",
+      "evlat",
+      "rahmet",
+      "aile"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_sinav_basari",
+    "title": "Sınav ve Başarı İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, sınav ve çalışma sürecimde zihnimi açık, kalbimi sakin, gayretimi düzenli kıl. Öğrendiğimi anlamayı, anladığımı unutmamayı, zamanımı verimli kullanmayı nasip et. Beni tembellikten, paniğe kapılmaktan, kendimi başkalarıyla kırıcı biçimde kıyaslamaktan koru. Emeğimin karşılığını hayırla almayı, sonuç ne olursa olsun ondan ders çıkarıp yoluma devam etmeyi öğret. Başarımı kibirden, eksiklerimi ümitsizlikten uzak eyle. Bana hayırlı kapılar aç. Bana düzenli çalışmayı, zamanı iyi kullanmayı ve sonuca takılıp niyetimi bozmamayı öğret. Emeğimi hayırlı kapılara vesile kıl; başarı gelirse şükretmeyi, gecikirse sabırla yeniden gayret etmeyi nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Başarı Duası",
+    "tags": [
+      "sınav",
+      "başarı",
+      "çalışma",
+      "zihin açıklığı"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; çalışma ve hazırlığın yerini tutmaz."
+  },
+  {
+    "id": "niyaz_kalp_huzuru",
+    "title": "Kalp Huzuru İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, kalbimi taşıyamadığı yüklerle baş başa bırakma. İçimde adı konmamış bir sıkıntı, kırgınlık veya pişmanlık varsa onu hayırlı bir farkındalığa dönüştür. Bana kendimi affetmeyi, başkalarını bağışlamayı ve geçmişten bugünü zehirlemeyecek kadar ders almayı nasip et. Kalbimi sana yaklaştıran zikre, güzel ahlaka ve iyiliğe aç. Gereksiz endişeleri hafiflet, doğru adımları kolaylaştır. İçimde huzur, davranışlarımda nezaket, hayatımda denge ihsan eyle. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir.",
+    "source": "Türkçe niyaz metni",
+    "category": "Huzur Duası",
+    "tags": [
+      "kalp huzuru",
+      "bağışlama",
+      "sükûnet",
+      "denge"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_umut_tazeleme",
+    "title": "Umut Tazelemek İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, umudumun zayıfladığı, yolumu görmekte zorlandığım zamanlarda kalbime ferahlık ver. Beni karanlık düşüncelere, çaresizlik hissine ve kendimi değersiz görmeye teslim etme. Küçük de olsa hayırlı bir adım atabilmeyi, güzel bir söze tutunabilmeyi, yeniden toparlanabilmeyi nasip et. Kapandığını sandığım kapıların ardında hikmet, geciken işlerin içinde hayır olabileceğini bana hatırlat. Sabırla gayret etmeyi, şükürle güçlenmeyi ve rahmetinden ümit kesmemeyi lütfet. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir.",
+    "source": "Türkçe niyaz metni",
+    "category": "Huzur Duası",
+    "tags": [
+      "umut",
+      "ferahlık",
+      "sabır",
+      "toparlanma"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; ağır ruhsal krizlerde profesyonel destek alınmalıdır."
+  },
+  {
+    "id": "niyaz_zor_zamanda_ferahlik",
+    "title": "Zor Zamanlarda Ferahlık İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, zor zamanların ağırlığı altında kalbimi yalnız ve sahipsiz hissettirme. Bana sabredecek güç, doğruyu görecek basiret, yanlış yollardan uzak duracak irade ver. Sıkıntılarımı hafifletecek hayırlı vesileler çıkar, gönlüme dayanma kuvveti, dilime güzel söz, davranışlarıma vakar nasip et. Bu süreçten daha merhametli, daha bilinçli ve sana daha yakın bir kul olarak çıkmayı lütfet. Üzerimdeki yükleri taşıyabileceğim şekilde kolaylaştır, kalbime ferahlık indir. Bu süreçte bana doğru insanlara ulaşmayı, yardım istemekten çekinmemeyi ve küçük kolaylıkları fark etmeyi nasip et. Gönlümü daraltan düşünceleri hafiflet; önüme hayırlı, temiz ve sürdürülebilir çıkış yolları aç.",
+    "source": "Türkçe niyaz metni",
+    "category": "Ferahlık Duası",
+    "tags": [
+      "zor zamanlar",
+      "ferahlık",
+      "sabır",
+      "umut"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_korku_kaygi_sukunet",
+    "title": "Korku ve Kaygıda Sükûnet Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, korku ve kaygının zihnimi büyüttüğü anlarda bana sükûnet ver. Gerçek olanla zihnimde büyüyeni ayırt edebilmeyi, tedbirimi aldıktan sonra sana güvenebilmeyi nasip et. Kalbimi telaşla değil tevekkülle, bedenimi gerginlikle değil huzurla destekle. Beni çaresizlik hissinden, yalnızlık düşüncesinden ve kendime zarar verecek kararlardan koru. Yardım istemeyi, konuşmayı ve doğru desteğe ulaşmayı kolaylaştır. İçime güven, çevreme iyilik, yoluma hayır ihsan eyle. Bana duygularımı bastırmadan olgunlukla taşımayı, kendime ve çevreme merhametle yaklaşmayı nasip et. İçimdeki sıkıntıları hayırlı farkındalıklara dönüştür; kalbimi zikre, şükre, sabra ve güzel ahlaka yönlendir.",
+    "source": "Türkçe niyaz metni",
+    "category": "Huzur Duası",
+    "tags": [
+      "korku",
+      "kaygı",
+      "sükûnet",
+      "tevekkül"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; yoğun kaygı durumunda profesyonel destek alınmalıdır."
+  },
+  {
+    "id": "niyaz_nazar_korunma_huzur",
+    "title": "Nazar ve Korunma İçin Huzur Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, beni, ailemi ve sevdiklerimi görünen görünmeyen kötülüklerden, hasetten, kötü niyetten ve kalpleri daraltan etkilerden muhafaza eyle. Bize tedbir almayı, mahremiyetimizi korumayı, nimetleri gösterişle değil şükürle taşımayı nasip et. Kalbimizi korkularla değil sana güvenle güçlendir. Evimize huzur, ilişkilerimize samimiyet, sözlerimize dikkat ver. Bize zarar vermek isteyenlere karşı hayırlı bir perde, içimizi yoran vesveselere karşı ferahlık ihsan eyle. Beni gereksiz korkulara teslim etmeden tedbirli, dikkatli ve ölçülü yaşamayı nasip et. Kalbimi vesveseden, dilimi kötü sözden, evimi huzuru bozan etkilerden koru; güvenimi yalnız sana bağlamayı öğret.",
+    "source": "Türkçe niyaz metni",
+    "category": "Korunma Duası",
+    "tags": [
+      "nazar",
+      "korunma",
+      "haset",
+      "huzur"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; Kur’an sureleriyle karıştırılmamalıdır."
+  },
+  {
+    "id": "niyaz_kotu_aliskanlik_irade",
+    "title": "Kötü Alışkanlıklardan Kurtulmak İçin İrade Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, bana zarar veren alışkanlıkları fark edecek dürüstlük, onlardan uzaklaşacak irade ve yerine hayırlı davranışlar koyacak sabır ver. Düştüğümde ümitsizliğe kapılmadan yeniden başlamayı, yalnız kaldığım anlarda kendimi koruyacak tedbirler almayı nasip et. Beni kötü arkadaşlıktan, boş vakti yanlış kullanmaktan ve nefsimi zayıflatan ortamlardan uzaklaştır. Yardım almam gerekiyorsa bunu ertelemeyecek cesaret ver. Kalbimi tövbeye, hayatımı istikamete, günlerimi faydalı uğraşlara aç. Bana değişimin küçük ama kararlı adımlarla başladığını unutturma. Hatalarımı örtbas etmek yerine onarmayı, nefsimi tanımayı, iyi insanlarla yakınlaşmayı ve her gün biraz daha temiz bir yola dönmeyi nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Tövbe ve Değişim Duası",
+    "tags": [
+      "kötü alışkanlık",
+      "irade",
+      "tövbe",
+      "değişim"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; bağımlılık durumlarında uzman desteği alınmalıdır."
+  },
+  {
+    "id": "niyaz_karar_hayirli_secim",
+    "title": "Karar Verirken Hayırlı Seçim Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, önümdeki seçenekler arasında nefsime hoş geleni değil hakkımda hayırlı olanı seçebilmeyi nasip et. Bilmediğim yönleri sen bilirsin; bana doğru bilgiye ulaşmayı, ehil insanlara danışmayı, aceleyle hüküm vermemeyi öğret. Kalbimi inat, korku, gösteriş ve başkalarının baskısından koru. Hayırlı olanı kolaylaştır, hayırsız olanı zararsızca uzaklaştır. Verdiğim kararın sorumluluğunu olgunlukla taşımayı, sonucunda da sana güvenerek yoluma devam etmeyi lütfet. Bana istişare etmeyi, bilgiyi araştırmayı, acele hükümden kaçınmayı ve kalbimdeki işaretleri hikmetle değerlendirmeyi nasip et. Sonucu sana bırakırken sorumluluktan kaçmayan, hayırlı olanı görünce cesaretle yürüyen bir kul eyle.",
+    "source": "Türkçe niyaz metni",
+    "category": "Karar Duası",
+    "tags": [
+      "karar verme",
+      "hayırlısı",
+      "istişare",
+      "seçim"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; istişare ve araştırmanın yerini tutmaz."
+  },
+  {
+    "id": "niyaz_sukur_derinligi",
+    "title": "Şükrü Derinleştirmek İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, bana verdiğin nimetleri alışılmış şeyler gibi görmeyen, küçük güzellikleri fark eden ve şükrünü sadece dilde bırakmayan bir kalp nasip et. Sağlığım, ailem, vaktim, rızkım ve öğrenme imkanım için sana hamd ederim. Sahip olduklarımı iyilikte kullanmayı, eksiklerim için gayret ederken isyana düşmemeyi öğret. Beni nankörlükten, kıyasın yorgunluğundan ve doyumsuzluktan koru. Şükrümü güzel ahlakla, cömertlikle, emekle ve insanlara faydalı olmakla tamamlamayı lütfet. Nimetleri sadece sözle değil davranışla da değerlendirmeyi bana nasip et. Sahip olduklarımı iyilikte kullanmayı, eksiklerime rağmen umudu korumayı, bollukta tevazuyu ve darlıkta vakarı kaybetmemeyi öğret.",
+    "source": "Türkçe niyaz metni",
+    "category": "Şükür Duası",
+    "tags": [
+      "şükür",
+      "hamd",
+      "nimet",
+      "iyilik"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_sabir_dirayet",
+    "title": "Sabır ve Dirayet İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, sabrı pasif bekleyiş değil, doğru yolda sağlam durma gücü olarak yaşamayı bana nasip et. Zorlandığım konularda dilimi kırıcı sözlerden, kalbimi isyandan, davranışlarımı acelecilikten koru. Bana gayretle tevekkülü, tedbirle teslimiyeti, umutla gerçekçiliği bir arada taşıyacak dirayet ver. Sınandığım yerde karakterimi güzelleştir, beklediğim yerde kalbimi olgunlaştır. Sabırla yürürken hakkı ve merhameti kaybetmeyen kullarından eyle. Sabrımı öfke biriktiren bir suskunluk değil, hikmetli ve vakarlı bir duruş eyle. Zorlandığım anda doğru sözü seçmeyi, doğru zamanı beklemeyi ve kalbimdeki umudu diri tutmayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Sabır Duası",
+    "tags": [
+      "sabır",
+      "dirayet",
+      "tevekkül",
+      "güç"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_sifa_afiyet_umudu",
+    "title": "Hastalık ve Şifa İçin Umut Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, hastalık ve yorgunluk zamanlarında bedenime şifa, kalbime sabır, zihnime sükûnet ver. Tedavimi, hekimlerimi ve kullandığım vesileleri hayırlı kıl. Beni korkuyla değil umutla, ihmal ile değil doğru tedbirle hareket ettir. Ağrılarımı hafiflet, gücümü toparla, yakınlarıma da sabır ve anlayış nasip et. Bu süreçte nimetlerin değerini fark etmeyi, sağlığıma kavuştuğumda onu hayırda kullanmayı lütfet. Şifayı senden bilir, vesilelere de sorumlulukla sarılırım. Tedbir almayı ihmal etmeden, şifayı senden bilerek ve vesilelere sorumlulukla sarılarak yürümeyi nasip et. Hastalık sürecinde kalbimi yalnızlık hissinden koru; yakınlarıma da anlayış, sabır ve merhamet ver.",
+    "source": "Türkçe niyaz metni",
+    "category": "Şifa Duası",
+    "tags": [
+      "hastalık",
+      "şifa",
+      "afiyet",
+      "umut"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; tıbbi tedavinin yerine geçmez."
+  },
+  {
+    "id": "niyaz_tovbe_yeniden_baslama",
+    "title": "Tövbe ve Yeniden Başlama Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, bilerek ya da bilmeyerek yaptığım hatalar için affına sığınırım. Beni günahı hafife almaktan da rahmetinden ümit kesmekten de koru. Yanlışımı kabul edecek cesaret, zarar verdiysem telafi edecek sorumluluk, aynı hataya dönmemek için sağlam bir irade ver. Kalbimi temizle, dilimi güzelleştir, adımlarımı hayra çevir. Geçmişimin yükünü geleceğimi karartacak bir zincire dönüştürme; bana samimi tövbe, güzel ahlak ve yeniden başlama gücü nasip et. Pişmanlığımı umutsuzluğa değil dönüşe, mahcubiyetimi güzel ahlaka ve telafiye vesile kıl. Bana aynı hatalara götüren yolları tanımayı, onlardan uzaklaşmayı ve rahmetinden ümit kesmemeyi nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Tövbe Duası",
+    "tags": [
+      "tövbe",
+      "bağışlanma",
+      "yeniden başlama",
+      "irade"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  },
+  {
+    "id": "niyaz_rizik_kanaat_bereket",
+    "title": "Rızık, Kanaat ve Bereket İçin Niyaz",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Rabbim, rızkımı helalinden, bereketlisinden ve gönlümü daraltmayacak şekilde nasip et. Çokluğun içinde israfa, azlığın içinde isyana düşmekten beni koru. Bana çalışmayı, üretmeyi, paylaşmayı ve kanaati birlikte yaşamayı öğret. Kazancımda kul hakkı, harcamamda ölçüsüzlük, kalbimde doyumsuzluk bırakma. Ailemizin sofrasını bereketlendir, emeğimizi zayi etme, ihtiyaçlarımızı hayırlı yollarla karşıla. Sahip olduklarımızı iyilikte kullanmayı, rızkın sahibinin sen olduğunu unutmamayı nasip et. Rızkı sadece miktar olarak değil, huzur, kanaat ve hayır olarak da anlamayı bana öğret. Emeğimi bereketlendir, soframızı şükürle genişlet, kazancımı iyilikte kullanmayı ve ihtiyaç sahiplerini unutmamayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Rızık ve Bereket Duası",
+    "tags": [
+      "rızık",
+      "bereket",
+      "kanaat",
+      "helal"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir; belli bir sonucu garanti etmez."
+  },
+  {
+    "id": "niyaz_hayirli_kazanc_paylasma",
+    "title": "Hayırlı Kazanç ve Paylaşma Niyazı",
+    "arabic": "",
+    "transliteration": "",
+    "turkishMeaning": "",
+    "turkishPrayer": "Allahım, kazancımı helal, emeğimi faydalı, niyetimi temiz eyle. Bana yalnızca kazanmayı değil, kazandığımı doğru kullanmayı ve ihtiyaç sahibini unutmamayı nasip et. İşimde bereket, kararlarımda adalet, ilişkilerimde güven ver. Rızkımı artırırsan şükrümü, daraltırsan sabrımı artır. Beni hırsın körlüğünden, cimriliğin darlığından ve gösterişin boşluğundan muhafaza eyle. Elimden gelen iyiliği küçük görmeden, aileme ve çevreme fayda sağlayan bir kul olmayı lütfet. Rızkı sadece miktar olarak değil, huzur, kanaat ve hayır olarak da anlamayı bana öğret. Emeğimi bereketlendir, soframızı şükürle genişlet, kazancımı iyilikte kullanmayı ve ihtiyaç sahiplerini unutmamayı nasip et.",
+    "source": "Türkçe niyaz metni",
+    "category": "Rızık ve Bereket Duası",
+    "tags": [
+      "kazanç",
+      "paylaşma",
+      "bereket",
+      "şükür"
+    ],
+    "note": "Modern ihtiyaçlar için hazırlanmış Türkçe niyaz metnidir."
+  }
+]

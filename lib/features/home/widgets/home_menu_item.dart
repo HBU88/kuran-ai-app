@@ -11,6 +11,7 @@ class HomeMenuItem extends StatelessWidget {
     required this.iconAsset,
     required this.onTap,
     this.icon,
+    this.imageIconSize = 56,
   });
 
   final String label;
@@ -18,6 +19,7 @@ class HomeMenuItem extends StatelessWidget {
   final String iconAsset;
   final VoidCallback onTap;
   final IconData? icon;
+  final double imageIconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -77,40 +79,7 @@ class HomeMenuItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Center(
-                    child: SizedBox(
-                      width: 56,
-                      height: 56,
-                      child: icon == null
-                          ? Image.asset(
-                              iconAsset,
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.red.withValues(alpha: 0.18),
-                                    borderRadius:
-                                        BorderRadius.circular(AppRadius.small),
-                                    border: Border.all(
-                                      color: Colors.redAccent
-                                          .withValues(alpha: 0.55),
-                                    ),
-                                  ),
-                                  child: const Icon(
-                                    Icons.broken_image_outlined,
-                                    color: Colors.redAccent,
-                                    size: 22,
-                                  ),
-                                );
-                              },
-                            )
-                          : Icon(
-                              icon,
-                              color: AppColors.primaryAccent,
-                              size: 34,
-                            ),
-                    ),
-                  ),
+                  child: Center(child: _ModuleIconBody(item: this)),
                 ),
                 const Spacer(),
                 Text(
@@ -137,6 +106,52 @@ class HomeMenuItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ModuleIconBody extends StatelessWidget {
+  const _ModuleIconBody({required this.item});
+
+  final HomeMenuItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: item.imageIconSize,
+      height: item.imageIconSize,
+      child: item.icon == null
+          ? ClipRRect(
+              borderRadius: BorderRadius.circular(AppRadius.small),
+              child: Image.asset(
+                item.iconAsset,
+                fit: BoxFit.contain,
+                cacheWidth: (item.imageIconSize *
+                        MediaQuery.devicePixelRatioOf(context))
+                    .round(),
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red.withValues(alpha: 0.18),
+                      borderRadius: BorderRadius.circular(AppRadius.small),
+                      border: Border.all(
+                        color: Colors.redAccent.withValues(alpha: 0.55),
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.broken_image_outlined,
+                      color: Colors.redAccent,
+                      size: 22,
+                    ),
+                  );
+                },
+              ),
+            )
+          : Icon(
+              item.icon,
+              color: AppColors.primaryAccent,
+              size: 34,
+            ),
     );
   }
 }

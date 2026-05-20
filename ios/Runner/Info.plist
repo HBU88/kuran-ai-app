@@ -28,8 +28,6 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>HAKAI, Kıble yönünü bulunduğun konuma göre hesaplamak için konumunu kullanır.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>HAKAI yalnızca uygulama açıkken Kıble yönü için konum kullanır; arka planda konum takibi yapmaz.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
