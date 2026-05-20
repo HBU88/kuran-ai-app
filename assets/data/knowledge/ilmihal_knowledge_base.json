@@ -1,5 +1,35 @@
 [
   {
+    "id": "abdest_bozanlar",
+    "type": "worship_practice",
+    "topic": "abdest_bozanlar",
+    "aliases": [
+      "Abdesti Bozan Şeyler Nelerdir?",
+      "Abdesti bozan şeyler",
+      "Abdest bozan durumlar"
+    ],
+    "triggers": [
+      "Abdesti bozan şeyler nelerdir?",
+      "abdesti bozan şeyler",
+      "abdest bozan durumlar",
+      "abdest bozulur mu",
+      "tuvalet ihtiyacı",
+      "kanama",
+      "bayılma",
+      "uyku"
+    ],
+    "keywords": [
+      "abdesti bozan şeyler",
+      "abdest bozan durumlar",
+      "abdest bozulur mu"
+    ],
+    "answer_tr": "Abdesti bozan durumlar genel olarak ön ve arka yoldan çıkan şeyler, vücuttan çıkan kan veya irin gibi akıntılar, bayılma, sarhoşluk ve namazda kendini tutamayacak derecede uyku hâlidir. Ayrıntılar mezheplere göre değişebileceği için özel durumlarda güvenilir ilmihal kaynaklarına veya ehil kişilere danışmak uygundur.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet.",
+    "requires_ayah": false,
+    "response_file": "server\\data\\ilmihal\\abdest_bozanlar.json",
+    "semantic_description": "abdesti bozan şeyler nelerdir abdest bozan durumlar tuvalet ihtiyacı kanama irin bayılma sarhoşluk uyku abdesti bozan şeyler"
+  },
+  {
     "id": "abdest_howto",
     "type": "worship_practice",
     "topic": "abdest_howto",
@@ -3873,6 +3903,55 @@
       "Müzik dinlemek günah mı?"
     ],
     "semantic_description": "sigara haram mı sigara içmek günah mı sigara bırakma sorularına sakin ve pratik cevap verir sigara sağlığa zarar veren israfa yol açabilen ve kişiyi zayıf düşürebilen bir alışkanlıktır bırakma süreci adım adım ve destekle yürütülmelidir"
+  },
+  {
+    "id": "alkol_gunah_mi",
+    "type": "daily_practice",
+    "topic": "alkol_gunah_mi",
+    "title": "Alkol Günah Mı?",
+    "aliases": [
+      "alkol günah mı",
+      "alkol haram mı",
+      "içki günah mı",
+      "içki haram mı",
+      "içki içmek günah mı",
+      "alkol içmek günah mı",
+      "içki içmek caiz mi",
+      "alkol içmek caiz mi",
+      "içki içmek yasak mı"
+    ],
+    "triggers": [
+      "alkol günah mı",
+      "alkol haram mı",
+      "içki günah mı",
+      "içki haram mı",
+      "içki içmek günah mı",
+      "alkol içmek günah mı",
+      "içki içmek caiz mi",
+      "alkol içmek caiz mi",
+      "içki içmek yasak mı",
+      "alkol",
+      "içki"
+    ],
+    "keywords": [
+      "alkol",
+      "içki",
+      "haram",
+      "günah",
+      "sarhoş",
+      "müskir"
+    ],
+    "summary": "İslam'da alkol (içki) haramdır. Kur'an-ı Kerim'de sarhoş edici içecekler açıkça yasaklanmıştır (Maide 90-91). Az ya da çok, her sarhoş edici içecek aynı hükme tabidir.",
+    "answer_tr": "İslam'da alkol (içki) haramdır. Kur'an-ı Kerim'de sarhoş edici içecekler açıkça yasaklanmıştır (Maide 90-91). Az ya da çok, her sarhoş edici içecek aynı hükme tabidir. Alkolü bırakmak isteyen kişiye sabır, dua ve gerekirse sağlık desteği önerilir.",
+    "source_note": "Kur'an-ı Kerim Maide Suresi 90-91. ayetler; Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/alkol_gunah_mi.json",
+    "related_questions": [
+      "Sigara haram mı?",
+      "Müzik dinlemek günah mı?",
+      "Tövbe nasıl edilir?"
+    ],
+    "semantic_description": "alkol içki haram günah alkol içmek günah mı içki içmek caiz mi sorularına sakin ve net cevap verir İslam'da alkol haramdır Maide suresi sarhoş edici her içecek yasaklanmıştır az da olsa alkol haramdır bırakmak için dua sabır ve destek önerilir"
   },
   {
     "id": "dovme_yaptirmak_caiz_mi",

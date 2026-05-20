@@ -166,6 +166,8 @@ function matchesLocalKnowledgeCue(normalizedMessage) {
     "helal",
     "haram",
     "faiz",
+    "alkol",
+    "içki",
     "müzik",
     "muzik",
     "sigara",

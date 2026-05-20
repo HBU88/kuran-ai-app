@@ -131,26 +131,44 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     }
   }
 
+  const abdestTopic = resolveAbdestTopic(message, normalizedMessage);
+  if (abdestTopic) {
+    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(abdestTopic.topic));
+    if (hit) {
+      return buildIlmihalHit(hit, {
+        matchReason: abdestTopic.match_reason,
+        matchScore: abdestTopic.match_score,
+      });
+    }
+  }
+
   const kurbanMatch = resolveKurbanTopic(message, normalizedMessage);
   if (kurbanMatch) {
-    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(kurbanMatch.topic));
-    if (hit) {
+    if (kurbanMatch.clarification) {
       return {
-        id: hit.id || null,
-        file: "ilmihal_knowledge_base.json",
-        type: hit.type || "worship_practice",
-        topic: hit.topic || null,
-        matched_title: resolveKnowledgeTitle(hit),
-        answer_text: hit.answer_tr || "",
-        source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
-        requires_ayah: hit.requires_ayah === true,
-        route_mode: "ilmihal_knowledge",
-        knowledge_hit_id: hit.id || null,
-        matched_knowledge_id: hit.id || null,
+        id: null,
+        file: null,
+        type: "clarification",
+        topic: null,
+        matched_title: null,
+        answer_text: "Bu konuda güvenilir cevap verebilmem için sorunu biraz daha netleştirir misin?",
+        source_note: "clarification_needed",
+        requires_ayah: false,
+        route_mode: "ilmihal_clarification",
+        knowledge_hit_id: null,
+        matched_knowledge_id: null,
         matched_by: kurbanMatch.match_reason,
         match_reason: kurbanMatch.match_reason,
         match_score: kurbanMatch.match_score,
+        rejected_candidates: kurbanMatch.rejected_candidates || [],
       };
+    }
+    const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(kurbanMatch.topic));
+    if (hit) {
+      return buildIlmihalHit(hit, {
+        matchReason: kurbanMatch.match_reason,
+        matchScore: kurbanMatch.match_score,
+      });
     }
   }
 
@@ -450,6 +468,48 @@ function includesLoose(text, phrase) {
   return normalizeLoose(String(text || "")).includes(normalizeLoose(String(phrase || "")));
 }
 
+function buildIlmihalHit(hit, { matchReason = "exact", matchScore = 1, rejectedCandidates = [] } = {}) {
+  return {
+    id: hit.id || null,
+    file: "ilmihal_knowledge_base.json",
+    type: hit.type || "worship_practice",
+    topic: hit.topic || null,
+    matched_title: resolveKnowledgeTitle(hit),
+    answer_text: hit.answer_tr || "",
+    source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
+    requires_ayah: hit.requires_ayah === true,
+    route_mode: "ilmihal_knowledge",
+    knowledge_hit_id: hit.id || null,
+    matched_knowledge_id: hit.id || null,
+    matched_by: matchReason,
+    match_reason: matchReason,
+    match_score: matchScore,
+    rejected_candidates: rejectedCandidates,
+  };
+}
+
+function resolveAbdestTopic(message, normalizedMessage) {
+  const raw = normalizeRawText(message);
+  const hasAbdest = includesLoose(normalizedMessage, "abdest") || raw.includes("abdest");
+  if (!hasAbdest) return null;
+  if (
+    includesLoose(normalizedMessage, "abdesti bozan") ||
+    includesLoose(normalizedMessage, "abdest bozan") ||
+    raw.includes("abdesti bozan") ||
+    raw.includes("abdest bozan")
+  ) {
+    return topicMatch("abdest_bozanlar", "intent_phrase", 95);
+  }
+  if (
+    includesLoose(normalizedMessage, "abdest nasil alinir") ||
+    includesLoose(normalizedMessage, "abdest nasıl alınır") ||
+    raw.includes("abdest nasil alinir")
+  ) {
+    return topicMatch("abdest_howto", "exact_normalized_question", 100);
+  }
+  return null;
+}
+
 function resolveZekatFitreTopic(normalizedMessage) {
   if (includesLoose(normalizedMessage, "zekat kimlere verilmez") || includesLoose(normalizedMessage, "zekÃ¢t kimlere verilmez")) {
     return "zekat_kime_verilmez";
@@ -537,8 +597,18 @@ function resolveKurbanTopic(message, normalizedMessage) {
   ) {
     return topicMatch("kurban_kime_vaciptir", "intent_phrase", 90);
   }
-  if ((includesLoose(normalizedMessage, "kurban keserken nelere dikkat edilir") || includesLoose(normalizedMessage, "kurban keserken") || raw.includes("kurban keserken")) && hasKurban) {
-    return topicMatch("kurban_keserken_nelere_dikkat_edilir", "exact_normalized_question", 100);
+  if (
+    hasKurban &&
+    (includesLoose(normalizedMessage, "kurban keserken nelere dikkat edilir") ||
+      includesLoose(normalizedMessage, "kurban keserken") ||
+      includesLoose(normalizedMessage, "kurban nasil kesilir") ||
+      includesLoose(normalizedMessage, "kurban nasıl kesilir") ||
+      includesLoose(normalizedMessage, "kurban kesimi") ||
+      raw.includes("kurban keserken") ||
+      raw.includes("kurban nasil kesilir") ||
+      raw.includes("kurban kesimi"))
+  ) {
+    return topicMatch("kurban_keserken_nelere_dikkat_edilir", "intent_phrase", 95);
   }
   if (
     includesLoose(normalizedMessage, "kurban eti nasil paylasilir") ||
@@ -593,7 +663,15 @@ function resolveKurbanTopic(message, normalizedMessage) {
     return topicMatch("kurban_nedir", "exact_normalized_question", 100);
   }
   if (hasKurban) {
-    return topicMatch("kurban_nedir", "topic_keyword", 40);
+    return {
+      clarification: true,
+      match_reason: "low_confidence_topic_keyword",
+      match_score: 20,
+      rejected_candidates: [
+        { id: "kurban_nedir", reason: "broad_topic_keyword" },
+        { id: "bayram_namazi_nedir", reason: "wrong_domain_contains_kurban_bayram" },
+      ],
+    };
   }
   return null;
 }
@@ -1216,6 +1294,14 @@ function resolveDailyPracticeTopic(message, normalizedMessage) {
   ) {
     return null;
   }
+  // Alkol / içki — explicit check BEFORE the broad günah-mı block so it always wins
+  if (
+    includesLoose(normalizedMessage, "alkol") ||
+    includesLoose(normalizedMessage, "içki")
+  ) {
+    return "alkol_gunah_mi";
+  }
+
   if (
     includesLoose(normalizedMessage, "müzik dinlemek günah mı") ||
     includesLoose(normalizedMessage, "muzik dinlemek gunah mi") ||

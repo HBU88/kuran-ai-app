@@ -97,6 +97,30 @@ app.get("/health", (req, res) => {
   });
 });
 
+app.get("/debug/config", (req, res) => {
+  // Never expose secret values — only boolean flags safe for debugging
+  return sendUtf8Json(res, 200, {
+    ok: true,
+    openai_configured: Boolean(process.env.OPENAI_API_KEY),
+    diyanet_configured: Boolean(
+      process.env.DIYANET_API_USERNAME && process.env.DIYANET_API_PASSWORD
+    ),
+    usage_limits_enabled: String(process.env.HAKAI_USAGE_LIMITS_ENABLED || "false")
+      .trim()
+      .toLowerCase() === "true",
+    religious_qa_available: true,
+    openai_planner_enabled: String(process.env.HAKAI_OPENAI_PLANNER_ENABLED || "true")
+      .trim()
+      .toLowerCase() !== "false",
+    debug_chat_engine: String(process.env.DEBUG_CHAT_ENGINE || "false")
+      .trim()
+      .toLowerCase() === "true",
+    usage_limit_bypass_active: isUsageLimitBypassEnabled(),
+    engine_version: ENGINE_VERSION,
+    started_at: STARTED_AT,
+  });
+});
+
 const chatRateLimiter = createRateLimiter();
 const authRateLimiter = createRateLimiter({
   max: readPositiveInt(process.env.HAKAI_AUTH_RATE_LIMIT_MAX, 10),
@@ -316,6 +340,12 @@ async function handleChatModuleRequest(req, res, module = "chat") {
   let logEntry = null;
   try {
     const validation = validateChatMessage(req.body?.message);
+    const sourceScreen =
+      typeof req.body?.source_screen === "string"
+        ? req.body.source_screen
+        : typeof req.body?.sourceScreen === "string"
+          ? req.body.sourceScreen
+          : null;
     if (!validation.ok) {
       const errorResponse = {
         ok: false,
@@ -326,6 +356,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         module,
         endpoint: req.path,
         source: module,
+        source_screen: sourceScreen || null,
         user_message: typeof req.body?.message === "string" ? req.body.message : "",
         intent: null,
         response_type: null,
@@ -354,6 +385,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         module,
         endpoint: req.path,
         source: module,
+        source_screen: sourceScreen || null,
         user_message: message,
         intent: "blocked_unsafe_prompt",
         response_type: "direct_answer",
@@ -371,7 +403,6 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       appendChatDecisionLog(logEntry);
       return sendUtf8Json(res, 400, errorResponse);
     }
-
     const history = sanitizeHistory(req.body?.history);
     if (module === "chat" && isRepentanceAyahMessage(message)) {
       const response = {
@@ -447,85 +478,13 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         selected_ayah: response.selected_ayah,
       });
     }
-    if (module === "ilmihal" && (isRepentanceRedirectMessage(message) || isLonelinessRedirectMessage(message))) {
-      const isRepentance = isRepentanceRedirectMessage(message);
-      const response = {
-        intent: "emotional_spiritual_support",
-        primary_theme: "umut",
-        secondary_themes: ["tevekkül"],
-        emotion: "umut",
-        severity: "medium",
-        response_type: "direct_answer",
-        context_topic: isRepentance ? null : "yalnızlık",
-        ayah_used: false,
-        top_ayah_ids: [],
-        selected_ayah: null,
-        assistant_text:
-          isRepentance
-            ? "T\u00f6vbe; pi\u015fmanl\u0131k, g\u00fcnah\u0131 b\u0131rakma ve yeniden d\u00f6nmemeye niyet etmektir.\n\nBu konuda kalbini g\u00fc\u00e7lendirecek ayet için Ayet Rehberi b\u00f6l\u00fcm\u00fcn\u00fc kullanabilirsin."
-            : "Bu soru daha çok kalbi sakinleştiren manevi destekle ilgilidir.\n\nBu konuda kalbini güçlendirecek ayet için Ayet Rehberi bölümünü kullanabilirsin.",
-        redirect_module: "ayah",
-        decision_meta: {
-          module: "ilmihal",
-          route_mode: "quran_guidance_redirect",
-          planner_source: "local_fast_path",
-          pre_route_stage: "emotional_redirect",
-          knowledge_hit_id: null,
-          ranker_source: "fallback",
-          semantic_candidates_count: 0,
-          semantic_tags_considered: [],
-          semantic_score: 0,
-          selected_ayah_id: null,
-          timing_ms: {
-            context_resolver_ms: 0,
-            intent_planner_ms: 0,
-            knowledge_router_ms: 0,
-            ayah_ranker_ms: 0,
-            response_composer_ms: 0,
-            log_write_ms: 0,
-            total: 0,
-          },
-        },
-      };
-      logEntry = buildChatDecisionLog({
-        timestamp: new Date().toISOString(),
-        module: "ilmihal",
-        endpoint: req.path,
-        source: "ilmihal",
-        user_message: message,
-        intent: response.intent,
-        response_type: response.response_type,
-        route_mode: response.decision_meta.route_mode,
-        planner_source: response.decision_meta.planner_source,
-        redirect_module: response.redirect_module,
-        knowledge_hit_id: null,
-        selected_ayah_id: null,
-        top_ayah_ids: [],
-        ranker_source: response.decision_meta.ranker_source,
-        semantic_candidates_count: 0,
-        semantic_tags_considered: [],
-        semantic_score: 0,
-        semantic_match_score: 0,
-        semantic_matched_topic: null,
-        semantic_confidence: null,
-        pre_route_stage: response.decision_meta.pre_route_stage,
-        timing_ms: response.decision_meta.timing_ms,
-        error: null,
-        assistant_response_preview: response.assistant_text,
-      });
-      appendChatDecisionLog(logEntry);
-      return sendUtf8Json(res, 200, {
-        assistant_text: response.assistant_text,
-        selected_ayah: response.selected_ayah,
-        redirect_module: response.redirect_module,
-      });
-    }
     const ilmihalKnowledgeHit =
       module === "ilmihal" && !isPureGreetingMessage(message)
         ? lookupKnowledgeAnswer(message, {}, null, history)
         : null;
     const response = await buildChatResponse(message, history, {
       module,
+      source_screen: sourceScreen,
       forceIlmihalKnowledge: Boolean(ilmihalKnowledgeHit),
     });
     const decisionMeta = response.decision_meta || {};
@@ -587,6 +546,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       module: decisionMeta.module || module,
       endpoint: req.path,
       source: module,
+      source_screen: sourceScreen || null,
       user_message: message,
       intent: response.intent || null,
       response_type: response.response_type || null,
@@ -599,6 +559,10 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       match_reason: decisionMeta.match_reason || null,
       match_score:
         typeof decisionMeta.match_score === "number" ? decisionMeta.match_score : 0,
+      rejected_candidates: Array.isArray(decisionMeta.rejected_candidates)
+        ? decisionMeta.rejected_candidates
+        : [],
+      final_route: decisionMeta.route_mode || normalizedResponse.redirect_module || null,
       selected_ayah_id: normalizedResponse.selected_ayah
         ? normalizedResponse.selected_ayah.id || null
         : null,
@@ -641,6 +605,7 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         module,
         endpoint: req.path,
         source: module,
+        source_screen: sourceScreen || null,
         user_message: typeof req.body?.message === "string" ? req.body.message : "",
         intent: null,
         response_type: null,
@@ -710,6 +675,10 @@ app.get("/debug/resolve", async (req, res) => {
       matched_title: decisionMeta.matched_title || null,
       match_reason: decisionMeta.match_reason || null,
       match_score: typeof decisionMeta.match_score === "number" ? decisionMeta.match_score : 0,
+      rejected_candidates: Array.isArray(decisionMeta.rejected_candidates)
+        ? decisionMeta.rejected_candidates
+        : [],
+      final_route: decisionMeta.route_mode || response.redirect_module || null,
       debug: buildDebugFields({
         semantic_match_score:
           typeof decisionMeta.semantic_match_score === "number" ? decisionMeta.semantic_match_score : 0,
@@ -814,6 +783,10 @@ function buildChatDecisionLog(entry) {
     matched_title: entry.matched_title || null,
     match_reason: entry.match_reason || null,
     match_score: typeof entry.match_score === "number" ? entry.match_score : 0,
+    rejected_candidates: Array.isArray(entry.rejected_candidates)
+      ? entry.rejected_candidates
+      : [],
+    final_route: entry.final_route || entry.route_mode || entry.redirect_module || null,
     selected_ayah_id:
       typeof entry.selected_ayah_id === "number" ? entry.selected_ayah_id : null,
     top_ayah_ids: Array.isArray(entry.top_ayah_ids) ? entry.top_ayah_ids : [],
