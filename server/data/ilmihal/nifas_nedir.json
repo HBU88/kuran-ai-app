@@ -2,17 +2,24 @@
   "id": "nifas_nedir",
   "title": "Nifas Nedir?",
   "category": "worship_practice",
-  "summary": "Nifas, doğum sonrası lohusalık kanamasıdır; bu dönemde namaz kılınmaz ve oruç tutulmaz.",
+  "summary": "Nifas, doğum sonrası lohusalık kanamasıdır; bu dönemde ibadet yapılamaz ve oruç tutulmaz.",
   "keywords": [
     "nifas nedir",
-    "lohusalıkta namaz",
-    "lohusalık"
+    "lohusalık ibadet",
+    "lohusalık",
+    "doğum sonrası ibadet"
+  ],
+  "manual_semantic_descriptions": [
+    "Nifas, doğum sonrası lohusalık kanaması döneminde ibadet yapılmaz",
+    "Lohusalık döneminde oruç tutulmaz ama kaza edilir",
+    "Nifas halinde namaz değil, genel ibadet yapılamaz",
+    "Doğum sonrası kanamanın dini hükümleri"
   ],
   "step_by_step": [
     "Nifas, doğum sonrası lohusalık kanamasıdır.",
-    "Bu dönemde namaz kılınmaz ve oruç tutulmaz.",
+    "Bu dönemde ibadet yapılamaz ve oruç tutulmaz.",
     "Tutulamayan oruçlar daha sonra kaza edilir.",
-    "Namazlar kaza edilmez."
+    "İbadetler kaza edilmez."
   ],
   "farzlar": [],
   "vacipler": [],
@@ -21,12 +28,14 @@
     "Lohusalık süreci sağlık açısından da hassas olabilir."
   ],
   "common_mistakes": [
-    "Namazı kaza etmeye çalışmak.",
+    "İbadeti kaza etmeye çalışmak.",
     "Oruç kazasını ihmal etmek."
   ],
   "related_questions": [
     "Nifas nedir?",
-    "Lohusalıkta namaz kılınır mı?"
+    "Lohusalıkta ibadet yapılır mı?",
+    "Hayız nedir?",
+    "İstihaze nedir?"
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."

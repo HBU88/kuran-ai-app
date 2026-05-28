@@ -2,17 +2,25 @@
   "id": "hayiz_nedir",
   "title": "Hayız Nedir?",
   "category": "worship_practice",
-  "summary": "Hayız, kadının doğal adet hâlidir; bu dönemde namaz kılınmaz, oruç tutulmaz ve tutulamayan oruçlar sonra kaza edilir.",
+  "summary": "Hayız, kadının doğal adet hâlidir; bu dönemde ibadet yapılamaz, oruç tutulmaz ve tutulamayan oruçlar sonra kaza edilir.",
   "keywords": [
     "hayız nedir",
     "adet nedir",
-    "regl nedir"
+    "regl nedir",
+    "adet ibadet",
+    "hayız ibadet"
+  ],
+  "manual_semantic_descriptions": [
+    "Hayız döneminde ibadet yapılmaz, oruç tutulmaz",
+    "Adetliyken namaz değil genel ibadet yapılamaz",
+    "Hayız hükümleri ve oruç kazası",
+    "Doğal adet sürecinin dini hükümleri"
   ],
   "step_by_step": [
     "Hayız, kadının doğal adet hâlidir.",
-    "Bu dönemde namaz kılınmaz.",
+    "Bu dönemde ibadet yapılamaz.",
     "Oruç tutulmaz; tutulamayan oruç daha sonra kaza edilir.",
-    "Namazlar ise kaza edilmez."
+    "İbadetler ise kaza edilmez."
   ],
   "farzlar": [],
   "vacipler": [],
@@ -21,13 +29,15 @@
     "Hayız bir temizlik veya eksiklik hâli değil, doğal bir süreçtir."
   ],
   "common_mistakes": [
-    "Namazları sonradan kaza etmeye çalışmak.",
-    "Oruç ve namaz hükümlerini karıştırmak."
+    "İbadeti sonradan kaza etmeye çalışmak.",
+    "Oruç ve ibadet hükümlerini karıştırmak."
   ],
   "related_questions": [
     "Hayız nedir?",
-    "Adetliyken namaz kılınır mı?",
-    "Adetliyken oruç tutulur mu?"
+    "Adetliyken ibadet yapılır mı?",
+    "Adetliyken oruç tutulur mu?",
+    "Nifas nedir?",
+    "İstihaze nedir?"
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."

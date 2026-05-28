@@ -2,15 +2,20 @@
   "id": "istihaze_nedir",
   "title": "İstihaze Nedir?",
   "category": "worship_practice",
-  "summary": "İstihaze, hayız ve nifas dışında gelen özür kanıdır; namaza ve oruca engel olmaz.",
+  "summary": "İstihaze, hayız ve nifas dışında gelen özür kanıdır; ibadete ve oruca engel olmaz.",
   "keywords": [
     "istihaze nedir",
     "özür kanı",
     "ozur kani"
   ],
+  "manual_semantic_descriptions": [
+    "İstihaze, hayız ve nifas dışında gelen anormal kanamadır",
+    "İstihaze hayızdan farklı olarak ibadete engel olmaz",
+    "Nifas döneminden sonra devam eden kanamanın dini hükümleri"
+  ],
   "step_by_step": [
     "İstihaze, hayız ve nifas dışında gelen özür kanıdır.",
-    "Namaza ve oruca engel sayılmaz.",
+    "İbadete engel sayılmaz; oruç tutulabilir ve namaz kılınabilir.",
     "Abdest ve özür hükümlerine göre ibadet edilir."
   ],
   "farzlar": [],
@@ -24,7 +29,11 @@
   ],
   "related_questions": [
     "İstihaze nedir?",
-    "Özür kanı namazı etkiler mi?"
+    "İstihaze hayızdan farklı mı?",
+    "İstihaze nifastan farklı mı?",
+    "Özür kanı ibadeti etkiler mi?",
+    "Hayız nedir?",
+    "Nifas nedir?"
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."

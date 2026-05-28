@@ -19,7 +19,11 @@
     "audit:ilmihal": "node scripts/ilmihal/audit_diyanet_coverage.mjs",
     "validate:ilmihal": "node scripts/ilmihal/validate_ilmihal.mjs",
     "validate:kb": "node knowledge-base-validator.js",
-    "expand:kb": "node knowledge-base-validator.js && node knowledge-base-expander.js"
+    "expand:kb": "node knowledge-base-validator.js && node knowledge-base-expander.js",
+    "detect:collisions": "node semantic-collision-detector.js",
+    "validate:coverage": "node coverage-validator.js",
+    "test:qa-suite": "node qa-test-suite-generator.js",
+    "qa:pre-launch": "node qa-pre-launch-orchestrator.js"
   },
   "dependencies": {
     "body-parser": "^2.2.2",
