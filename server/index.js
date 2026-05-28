@@ -22,6 +22,8 @@ const {
   summarizeUserMessage,
   validateChatMessage,
 } = require("./security");
+const ilmihalDebugLogger          = require("./ilmihal-debug-logger");
+const { logKBMiss, getMissStats } = require("./kb-miss-logger");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,6 +32,9 @@ const STARTED_AT = new Date().toISOString();
 const CHAT_RUNTIME_LOG_PATH = path.join(__dirname, "..", "logs", "chat_runtime_log.txt");
 const authService = new AuthService();
 const commerceService = new CommerceService();
+
+// Debug logging counter
+let requestCounter = 0;
 
 function isRepentanceRedirectMessage(message) {
   const normalized = String(message || "").toLocaleLowerCase("tr-TR");
@@ -404,6 +409,13 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       return sendUtf8Json(res, 400, errorResponse);
     }
     const history = sanitizeHistory(req.body?.history);
+
+    // Debug logging for ilmihal-chat
+    if (module === "ilmihal") {
+      requestCounter++;
+      ilmihalDebugLogger.logIncomingQuestion(requestCounter, message);
+    }
+
     if (module === "chat" && isRepentanceAyahMessage(message)) {
       const response = {
         intent: "emotional_spiritual_support",
@@ -482,6 +494,46 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       module === "ilmihal" && !isPureGreetingMessage(message)
         ? lookupKnowledgeAnswer(message, {}, null, history)
         : null;
+
+    // Debug logging + KB-miss tracking for ilmihal-chat
+    if (module === "ilmihal" && !isPureGreetingMessage(message)) {
+      ilmihalDebugLogger.logSemanticMatchStart(message);
+
+      if (ilmihalKnowledgeHit) {
+        // KB hit: log matched entry details
+        ilmihalDebugLogger.logKnowledgeBaseHit({
+          id: ilmihalKnowledgeHit.id || ilmihalKnowledgeHit.knowledge_hit_id,
+          expectedTopic: ilmihalKnowledgeHit.topic || ilmihalKnowledgeHit.expectedTopic,
+          label: ilmihalKnowledgeHit.title || ilmihalKnowledgeHit.label,
+          matchScore: ilmihalKnowledgeHit.matchScore,
+          routingScore: ilmihalKnowledgeHit.routingScore,
+          confidence: ilmihalKnowledgeHit.confidence,
+          answer: ilmihalKnowledgeHit.answer_text || ilmihalKnowledgeHit.answer,
+        });
+        ilmihalDebugLogger.logRoutingDecision(
+          ilmihalKnowledgeHit.topic || ilmihalKnowledgeHit.expectedTopic,
+          ilmihalKnowledgeHit.title || ilmihalKnowledgeHit.label,
+          ilmihalKnowledgeHit.matchScore || 0,
+          ilmihalKnowledgeHit.confidence || 0
+        );
+      } else {
+        // KB miss: log it and record for future KB expansion
+        ilmihalDebugLogger.logNoMatch(message, 'No knowledge base entry matched — OpenAI fallback will be used');
+        logKBMiss({
+          question: message,
+          kbScore: 0,
+          responseSource: 'openai_fallback',
+          timestamp: new Date().toISOString(),
+        });
+        console.log(`[kb-miss] OpenAI fallback: "${message.slice(0, 80)}"`);
+      }
+
+      // Log rejected candidates if provided
+      if (ilmihalKnowledgeHit && Array.isArray(ilmihalKnowledgeHit.rejected)) {
+        ilmihalDebugLogger.logRejectedCandidates(ilmihalKnowledgeHit.rejected);
+      }
+    }
+
     const response = await buildChatResponse(message, history, {
       module,
       source_screen: sourceScreen,
@@ -593,12 +645,28 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         : {}),
     });
     appendChatDecisionLog(logEntry);
+
+    // Debug logging for ilmihal final response
+    if (module === "ilmihal") {
+      const responseType = ilmihalKnowledgeHit && ilmihalKnowledgeHit.hit ? 'knowledge_base' : 'ai_generated';
+      ilmihalDebugLogger.logFinalResponse(
+        response.assistant_text || '',
+        responseType
+      );
+    }
+
     return sendUtf8Json(res, 200, moduleResponse);
   } catch (error) {
     const errorResponse = {
       ok: false,
       error: "internal server error",
     };
+
+    // Debug logging for ilmihal errors
+    if (module === "ilmihal") {
+      ilmihalDebugLogger.logError(error);
+    }
+
     if (!logEntry) {
       logEntry = buildChatDecisionLog({
         timestamp: new Date().toISOString(),
@@ -629,6 +697,22 @@ async function handleChatModuleRequest(req, res, module = "chat") {
     return sendUtf8Json(res, 500, errorResponse);
   }
 }
+
+// ── KB Miss stats endpoint (debug only) ────────────────────────────────────
+app.get("/debug/kb-misses", (req, res) => {
+  if (!isDebugChatEngineEnabled()) {
+    return sendUtf8Json(res, 404, { ok: false, error: "not found" });
+  }
+  const days = Number(req.query.days) || 7;
+  const stats = getMissStats(days);
+  return sendUtf8Json(res, 200, {
+    ok: true,
+    window_days: days,
+    total_misses: stats.total,
+    pending_kb_additions: stats.pending,
+    top_missing_questions: stats.top,
+  });
+});
 
 app.get("/debug/resolve", async (req, res) => {
   if (!isDebugChatEngineEnabled()) {

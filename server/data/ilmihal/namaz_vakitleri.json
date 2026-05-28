@@ -1,0 +1,48 @@
+{
+  "id": "namaz_vakitleri",
+  "title": "Beş Vakit Namaz Vakitleri",
+  "category": "worship_practice",
+  "summary": "Beş vakit namazın vakitleri ve başlangıç-bitiş süreleri.",
+  "keywords": [
+    "namaz vakitleri",
+    "beş vakit",
+    "namaz saatleri",
+    "imsak öğle ikindi akşam yatsı",
+    "namaz zamanları"
+  ],
+  "step_by_step": [
+    "Sabah (Fecr): Fecr-i sadıktan güneş doğana kadar.",
+    "Öğle (Zuhr): Güneşin tepe noktasından geçmesinden ikindi vaktine kadar.",
+    "İkindi (Asr): Öğleden sonra gölge uzunluğunun belirli miktara ulaşmasından güneş batana kadar.",
+    "Akşam (Mağrib): Güneş battıktan sonra ufuktaki kızıllık/beyazlık gidinceye kadar.",
+    "Yatsı (İşa): Akşam vaktinin çıkmasından fecre (imsağa) kadar."
+  ],
+  "farzlar": [
+    "Her namazı kendi vaktinde kılmak"
+  ],
+  "vacipler": [],
+  "sunnetler": [],
+  "attention_points": [
+    "Vakit çıkmadan kılmak farzdır.",
+    "Ezanı takip ederek vakitleri öğrenmek kolaylaştırır."
+  ],
+  "common_mistakes": [
+    "İkindi namazını öğleyle karıştırmak.",
+    "Yatsıyı geç vakitte kılmayı ihmal etmek."
+  ],
+  "related_questions": [
+    "Namaz nedir?",
+    "Namaz kaç rekattır?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır."
+  ],
+  "manual_semantic_descriptions": [
+    "namaz vakitleri",
+    "beş vakit",
+    "namaz saatleri",
+    "imsak öğle ikindi akşam yatsı",
+    "namaz zamanları"
+  ],
+  "_auto_generated": false
+}

@@ -1,0 +1,223 @@
+name: Daily QA Tests - Generated Questions
+
+on:
+  schedule:
+    # Run at 2 AM UTC daily
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  qa-tests:
+    name: Semantic Matching QA with Generated Questions
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install dependencies
+        working-directory: server
+        run: npm ci
+
+      - name: Generate random test questions
+        working-directory: server
+        timeout-minutes: 5
+        run: node question-generator.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Start backend server
+        working-directory: server
+        timeout-minutes: 5
+        run: |
+          npm start > server.log 2>&1 &
+          echo $! > server.pid
+
+          for i in {1..30}; do
+            if curl -s http://localhost:3000/health > /dev/null 2>&1; then
+              echo "✅ Server is ready"
+              break
+            fi
+            echo "⏳ Waiting for server... ($i/30)"
+            sleep 1
+          done
+
+      - name: Run QA test suite
+        working-directory: server
+        timeout-minutes: 20
+        run: node test-suite.js
+        env:
+          BACKEND_URL: 'http://localhost:3000'
+
+      - name: Analyze test results
+        working-directory: server
+        timeout-minutes: 5
+        if: always()
+        run: node question-analyzer.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Run auto-fix analysis (critical issues only)
+        working-directory: server
+        timeout-minutes: 5
+        if: always()
+        run: node auto-fix.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Prepare commit data
+        if: always()
+        working-directory: server
+        run: |
+          # Get latest test results
+          LATEST_RESULTS=$(ls -1t test_results/test_results_*.json 2>/dev/null | head -1)
+          if [ -f "$LATEST_RESULTS" ]; then
+            AVG_SCORE=$(jq '.summary.avgMatchScore' "$LATEST_RESULTS")
+            ERROR_COUNT=$(jq '.summary.errors' "$LATEST_RESULTS")
+            echo "AVG_SCORE=$AVG_SCORE" >> $GITHUB_ENV
+            echo "ERROR_COUNT=$ERROR_COUNT" >> $GITHUB_ENV
+          fi
+
+      - name: Commit test results
+        if: always()
+        working-directory: server
+        run: |
+          git config user.name "QA Bot"
+          git config user.email "qa@hakai.local"
+
+          # Add test results (most recent)
+          git add test_results/test_results_*.json 2>/dev/null || true
+          git add test_results/analysis_*.json 2>/dev/null || true
+          git add test_results/analysis_*.txt 2>/dev/null || true
+          git add test_results/recommendations_*.json 2>/dev/null || true
+          git add generated_questions_*.json 2>/dev/null || true
+
+          # Commit only if there are changes
+          if ! git diff --cached --quiet; then
+            git commit -m "📊 Daily QA Report: Avg ${AVG_SCORE}% | Errors: ${ERROR_COUNT}
+
+Automated daily test run results with generated question variations.
+- Generated fresh questions across all topics
+- Tested semantic matching accuracy
+- Analyzed performance metrics
+- Generated improvement recommendations
+
+Co-Authored-By: QA Bot <qa@hakai.local>"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: qa-test-results
+          path: server/test_results/
+          retention-days: 30
+
+      - name: Upload generated questions
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-questions
+          path: server/generated_questions_*.json
+          retention-days: 7
+
+      - name: Post summary to GitHub
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Find latest test results
+            const resultsDir = 'server/test_results';
+            if (!fs.existsSync(resultsDir)) {
+              console.log('No results directory');
+              return;
+            }
+
+            const resultFiles = fs.readdirSync(resultsDir)
+              .filter(f => f.startsWith('test_results_') && f.endsWith('.json'))
+              .sort()
+              .reverse();
+
+            const analysisFiles = fs.readdirSync(resultsDir)
+              .filter(f => f.startsWith('analysis_') && f.endsWith('.txt'))
+              .sort()
+              .reverse();
+
+            if (resultFiles.length === 0) return;
+
+            const results = JSON.parse(fs.readFileSync(path.join(resultsDir, resultFiles[0]), 'utf8'));
+
+            let message = `# 🧪 Daily QA Test Results\n\n`;
+            message += `📈 **Overall Metrics:**\n`;
+            message += `- Tests: ${results.summary.successfulResponses}/${results.summary.totalTests}\n`;
+            message += `- Avg Score: ${results.summary.avgMatchScore}%\n`;
+            message += `- Avg Response: ${results.summary.avgResponseTime}ms\n`;
+            message += `- Errors: ${results.summary.errors}\n\n`;
+
+            if (results.criticalIssues.length > 0) {
+              message += `⚠️  **Critical Issues:** ${results.criticalIssues.length}\n\n`;
+            }
+
+            if (analysisFiles.length > 0) {
+              const analysis = fs.readFileSync(path.join(resultsDir, analysisFiles[0]), 'utf8');
+              message += `\`\`\`\n${analysis.substring(0, 1000)}\n\`\`\`\n`;
+            }
+
+            // Post as workflow run summary
+            console.log(message);
+
+      - name: Notify on critical issues
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          custom_payload: |
+            const fs = require('fs');
+            const path = require('path');
+            const resultsDir = 'server/test_results';
+            const resultFiles = fs.readdirSync(resultsDir)
+              .filter(f => f.startsWith('test_results_'))
+              .sort()
+              .reverse();
+
+            const results = JSON.parse(fs.readFileSync(path.join(resultsDir, resultFiles[0]), 'utf8'));
+
+            let color = 'good';
+            let title = '✅ QA Tests Passed';
+            if (results.criticalIssues.length > 0) {
+              color = 'danger';
+              title = '🚨 Critical Issues Detected';
+            } else if (results.summary.avgMatchScore < 75) {
+              color = 'warning';
+              title = '⚠️  Low Average Score';
+            }
+
+            payload.attachments = [{
+              color: color,
+              title: title,
+              text: `Avg Score: ${results.summary.avgMatchScore}% | Errors: ${results.summary.errors} | Response: ${results.summary.avgResponseTime}ms`,
+              actions: [{
+                type: 'button',
+                text: 'View Results',
+                url: `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+              }]
+            }];
+            return payload;
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        continue-on-error: true

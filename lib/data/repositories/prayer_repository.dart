@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/app_constants.dart';
@@ -21,15 +22,18 @@ class PrayerRepository {
   })  : _authService = authService ?? DiyanetAuthService(),
         _placeService = placeService ?? DiyanetPlaceService(),
         _prayerService = prayerService ?? DiyanetPrayerService(),
+        _legacyProvider = legacyProvider,
         _defaultCityId = defaultCityId;
 
   static const _defaultFallbackCityId = 9541;
   static const _defaultFallbackCityName = 'Istanbul';
+  static const _defaultFallbackCountryName = 'Turkey';
 
   final SharedPreferences _preferences;
   final DiyanetAuthService _authService;
   final DiyanetPlaceService _placeService;
   final DiyanetPrayerService _prayerService;
+  final PrayerProvider _legacyProvider;
   final int _defaultCityId;
   String? _accessToken;
   int? _lastLoginStatusCode;
@@ -40,7 +44,8 @@ class PrayerRepository {
   int? get lastPrayerStatusCode => _lastPrayerStatusCode;
   String? get lastRawErrorMessage => _lastRawErrorMessage;
   String? get lastPrayerEndpointUrl => _prayerService.lastRequestUrl;
-  String get source => 'diyanet';
+  String get source => _lastSource;
+  String _lastSource = 'diyanet';
 
   String get selectedCity =>
       _preferences.getString(AppConstants.selectedCityNameStorageKey) ??
@@ -48,7 +53,8 @@ class PrayerRepository {
       _defaultFallbackCityName;
 
   String get selectedCountry =>
-      _preferences.getString(AppConstants.selectedCountryNameStorageKey) ?? '';
+      _preferences.getString(AppConstants.selectedCountryNameStorageKey) ??
+      _defaultFallbackCountryName;
 
   int? get selectedCountryId =>
       _preferences.getInt(AppConstants.selectedCountryIdStorageKey);
@@ -179,8 +185,20 @@ class PrayerRepository {
     _lastLoginStatusCode = null;
     _lastPrayerStatusCode = null;
     _lastRawErrorMessage = null;
+    _lastSource = 'diyanet';
+
+    _logPrayerRequest(
+      city: selectedCityName,
+      district: selectedCityName,
+      source: 'diyanet',
+    );
 
     try {
+      if (!_authService.isConfigured) {
+        throw const DiyanetAuthException(
+          'Diyanet credentials are not configured.',
+        );
+      }
       final accessToken = await _getAccessToken();
       _lastLoginStatusCode = _authService.lastStatusCode;
 
@@ -190,19 +208,78 @@ class PrayerRepository {
       );
       _lastPrayerStatusCode = _prayerService.lastStatusCode;
 
-      return _fromDiyanetJson(
+      final model = _fromDiyanetJson(
         json: json,
         city: selectedCityName,
         country: selectedCountry,
         cityId: prayerCityId,
       );
+      _logPrayerResponse(
+        success: true,
+        status: _lastPrayerStatusCode ?? _lastLoginStatusCode,
+        source: 'diyanet',
+      );
+      return model;
     } catch (error) {
       _lastLoginStatusCode = _authService.lastStatusCode;
       _lastPrayerStatusCode = _prayerService.lastStatusCode;
       _lastRawErrorMessage = error.toString();
-      throw PrayerRepositoryException(
-        'Diyanet prayer flow failed. Original error: $error',
+      _logPrayerResponse(
+        success: false,
+        status: _lastPrayerStatusCode ?? _lastLoginStatusCode,
+        source: 'diyanet',
+        error: _safePrayerError(error),
+      );
+      return _getLegacyTodayTimes(
+        city: selectedCityName,
+        country: selectedCountry,
+        cityId: prayerCityId,
         cause: error,
+      );
+    }
+  }
+
+  Future<PrayerTimeModel> _getLegacyTodayTimes({
+    required String city,
+    required String country,
+    required int cityId,
+    required Object cause,
+  }) async {
+    final fallbackCountry =
+        country.trim().isEmpty ? _defaultFallbackCountryName : country.trim();
+    _lastSource = 'aladhan_fallback';
+    _logPrayerRequest(
+      city: city,
+      district: city,
+      source: _lastSource,
+    );
+    try {
+      final json = await _legacyProvider.fetchByCity(
+        city: city,
+        country: fallbackCountry,
+      );
+      final model = _fromLegacyJson(
+        json: json,
+        city: city,
+        country: fallbackCountry,
+        cityId: cityId,
+      );
+      _logPrayerResponse(
+        success: true,
+        status: 200,
+        source: _lastSource,
+      );
+      return model;
+    } catch (fallbackError) {
+      _logPrayerResponse(
+        success: false,
+        source: _lastSource,
+        error: _safePrayerError(fallbackError),
+      );
+      throw PrayerRepositoryException(
+        'Prayer time providers failed. Diyanet error: ${_safePrayerError(cause)}. '
+        'Fallback error: ${_safePrayerError(fallbackError)}',
+        cause: fallbackError,
       );
     }
   }
@@ -297,6 +374,93 @@ class PrayerRepository {
       hijriDateFormatted: _extractHijriDateFormatted(json, payload),
       source: 'diyanet',
     );
+  }
+
+  PrayerTimeModel _fromLegacyJson({
+    required Map<String, dynamic> json,
+    required String city,
+    required String country,
+    required int cityId,
+  }) {
+    final data = json['data'];
+    if (data is! Map<String, dynamic>) {
+      throw StateError('Fallback prayer response missing data object.');
+    }
+    final timings = data['timings'];
+    if (timings is! Map) {
+      throw StateError('Fallback prayer timings missing from API response.');
+    }
+    final timingMap = _toStringKeyedMap(timings);
+    final date = data['date'];
+    final dateMap = date is Map ? _toStringKeyedMap(date) : <String, dynamic>{};
+    final hijri = dateMap['hijri'];
+    final hijriMap =
+        hijri is Map ? _toStringKeyedMap(hijri) : <String, dynamic>{};
+    final rawPrayerStrings = LinkedHashMap<String, String>.from({
+      'İmsak': _requiredTime(timingMap, const ['Fajr', 'fajr'], 'Fajr'),
+      'Güneş':
+          _requiredTime(timingMap, const ['Sunrise', 'sunrise'], 'Sunrise'),
+      'Öğle': _requiredTime(timingMap, const ['Dhuhr', 'dhuhr'], 'Dhuhr'),
+      'İkindi': _requiredTime(timingMap, const ['Asr', 'asr'], 'Asr'),
+      'Akşam':
+          _requiredTime(timingMap, const ['Maghrib', 'maghrib'], 'Maghrib'),
+      'Yatsı': _requiredTime(timingMap, const ['Isha', 'isha'], 'Isha'),
+    });
+
+    return PrayerTimeModel.fromRaw(
+      city: city,
+      country: country,
+      selectedCityId: cityId,
+      selectedCityName: city,
+      greenwichMeanTimeZone:
+          DateTime.now().toLocal().timeZoneOffset.inMinutes / 60,
+      effectiveNowSource: 'device_timezone_fallback',
+      rawPrayerStrings: rawPrayerStrings,
+      hijriDateFormatted: _readLegacyHijriDate(hijriMap),
+      source: 'aladhan_fallback',
+    );
+  }
+
+  String _readLegacyHijriDate(Map<String, dynamic> hijri) {
+    final day = _readString(hijri, const ['day']);
+    final year = _readString(hijri, const ['year']);
+    final month = hijri['month'];
+    String? monthName;
+    if (month is Map) {
+      monthName = _readString(_toStringKeyedMap(month), const ['tr', 'en']);
+    }
+    return [day, monthName, year]
+        .whereType<String>()
+        .where((part) => part.isNotEmpty)
+        .join(' ');
+  }
+
+  void _logPrayerRequest({
+    required String city,
+    required String district,
+    required String source,
+  }) {
+    debugPrint(
+      'HAKAI_PRAYER_REQUEST city=$city district=$district source=$source',
+    );
+  }
+
+  void _logPrayerResponse({
+    required bool success,
+    required String source,
+    int? status,
+    String? error,
+  }) {
+    debugPrint(
+      'HAKAI_PRAYER_RESPONSE success=$success status=${status ?? '-'} '
+      'source=$source error=${error ?? '-'}',
+    );
+  }
+
+  String _safePrayerError(Object error) {
+    return error
+        .toString()
+        .replaceAll(RegExp(r'password=[^,\\s]+'), 'password=<hidden>');
   }
 
   Future<void> _clearSelectedState() async {

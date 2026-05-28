@@ -1,0 +1,60 @@
+{
+  "id": "namaz_nedir",
+  "title": "Namaz Nedir?",
+  "category": "worship_practice",
+  "summary": "Namaz, İslam'ın beş şartından biri olup günde beş vakit kılınan zorunlu ibadettir.",
+  "keywords": [
+    "namaz nedir",
+    "namaz ne demek",
+    "namaz hakkında",
+    "namaz tanımı",
+    "beş vakit namaz",
+    "salat nedir"
+  ],
+  "manual_semantic_descriptions": [
+    "Namaz İslam'ın beş temel ibadetinden biridir",
+    "Müslümanların günde beş kez yaptığı zorunlu ibadet",
+    "Namaz tanımı ve açıklaması",
+    "Namaz ne demek sorusunun cevabı",
+    "Salat İslam'da farz bir ibadettir"
+  ],
+  "step_by_step": [
+    "Namaz, İslam'ın beş şartından ikincisidir.",
+    "Günde beş vakit kılınması her müslümana farzdır (sabah, öğle, ikindi, akşam, yatsı).",
+    "Allah'ın huzurunda O'na yönelik yapılan söz ve eylemlerden oluşan ibadet bütünüdür.",
+    "Kıyam (ayakta durmak), kıraat (Kur'an okumak), rükû ve secde içerir.",
+    "Namaz öncesinde abdest alınması şarttır."
+  ],
+  "farzlar": [
+    "Beş vakti vaktinde kılmak",
+    "Abdestli olmak",
+    "Kıbleye yönelmek",
+    "Avret yerini örtmek"
+  ],
+  "vacipler": [],
+  "sunnetler": [
+    "Sünnet rekâtları kılmak",
+    "Cemaatle kılmak",
+    "Ezanı beklemek"
+  ],
+  "attention_points": [
+    "Namaz İslam'ın direğidir; terk etmek büyük günahtır.",
+    "Vakit çıkmadan kılmaya özen gösterilmelidir.",
+    "Çocuklara 7 yaşından itibaren öğretilmesi tavsiye edilir."
+  ],
+  "common_mistakes": [
+    "Aceleyle kılmak, secde ve rükûyu tam yapmamak.",
+    "Niyet etmeyi unutmak.",
+    "Abdesti olmadan namaza durmak."
+  ],
+  "related_questions": [
+    "Namaz nasıl kılınır?",
+    "Namaz kimlere farzdır?",
+    "Namazın farzları nelerdir?",
+    "Namaz kaç rekattır?"
+  ],
+  "source_notes": [
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
+  ],
+  "_auto_generated": false
+}

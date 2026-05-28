@@ -32,8 +32,10 @@ class DiyanetAuthService {
   int? lastStatusCode;
   String? lastResponseBody;
 
+  bool get isConfigured => _userName.isNotEmpty && _password.isNotEmpty;
+
   Future<String> login() async {
-    if (_userName.isEmpty || _password.isEmpty) {
+    if (!isConfigured) {
       throw const DiyanetAuthException(
         'Diyanet credentials are not configured.',
       );

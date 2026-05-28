@@ -1,0 +1,47 @@
+{
+  "id": "nafile_namaz_nedir",
+  "title": "Nafile Namaz Nedir?",
+  "category": "worship_practice",
+  "summary": "Farz ve vacip dışında kılınan, kişinin kendiliğinden kıldığı ek namazlardır.",
+  "keywords": [
+    "nafile namaz",
+    "nafile ibadet",
+    "nafile ne demek",
+    "gönüllü namaz",
+    "sünnet nafile fark"
+  ],
+  "step_by_step": [
+    "Nafile, farz ve vacibin dışında kılınan gönüllü namazlardır.",
+    "Teheccüt, kuşluk (duha), Evvabin ve nafile namaz örnekleridir.",
+    "Kılınması sevap, terk edilmesi günah değildir (sünnetin aksine).",
+    "Farzların eksiğini tamamlamaya yardımcı olur."
+  ],
+  "farzlar": [],
+  "vacipler": [],
+  "sunnetler": [
+    "Teheccüt namazı",
+    "Kuşluk namazı",
+    "Evvâbîn namazı"
+  ],
+  "attention_points": [
+    "Nafile ibadetlerde aşırıya kaçmamak gerekir."
+  ],
+  "common_mistakes": [
+    "Nafile ile sünneti karıştırmak."
+  ],
+  "related_questions": [
+    "Gece ibadetleri nedir?",
+    "Teheccüt namazı nedir?"
+  ],
+  "source_notes": [
+    "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır."
+  ],
+  "manual_semantic_descriptions": [
+    "nafile namaz",
+    "nafile ibadet",
+    "nafile ne demek",
+    "gönüllü namaz",
+    "sünnet nafile fark"
+  ],
+  "_auto_generated": false
+}

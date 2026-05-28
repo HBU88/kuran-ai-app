@@ -21,16 +21,17 @@ class AppConstants {
   static String get resolvedBackendApiBaseUrl {
     final configured = backendApiBaseUrl.trim();
     if (configured.isEmpty) {
-      if (kReleaseMode || Platform.isIOS) {
+      if (kReleaseMode) {
         return productionBackendApiBaseUrl;
       }
-      return 'http://10.0.2.2:3000';
+      if (Platform.isIOS) {
+        return "http://localhost:3000";
+      }
+      return "http://10.0.2.2:3000";
     }
-
     final uri = Uri.tryParse(configured);
-    final host = uri?.host.toLowerCase() ?? '';
-    final isLocalhost =
-        host == 'localhost' || host == '127.0.0.1' || host == '10.0.2.2';
+    final host = uri?.host.toLowerCase() ?? "";
+    final isLocalhost = host == "localhost" || host == "127.0.0.1" || host == "10.0.2.2";
     if (kReleaseMode && isLocalhost) {
       return productionBackendApiBaseUrl;
     }
