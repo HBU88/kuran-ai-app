@@ -1229,10 +1229,11 @@ async function runModuleEndpointSmokeTests() {
       path: "/ilmihal-chat",
       prompt: "sabır ile ilgili ayet",
       expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_clarification",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectedRedirectModule: "ayah",
-      expectAssistantContains: "Ayet Rehberi bölümüne daha uygundur",
+      expectedRedirectModule: null,
+      expectAssistantContains: "Dinî Bilgiler bölümünde sana daha doğru bir yanıt verebilmem için",
       maxAyahRankerMs: 0,
     },
     {
@@ -1333,33 +1334,35 @@ async function runModuleEndpointSmokeTests() {
       path: "/ilmihal-chat",
       prompt: "yalniz hissediyorum",
       expectedModule: "ilmihal",
-      expectedRouteMode: "quran_guidance_redirect",
+      expectedRouteMode: "ilmihal_clarification",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectedRedirectModule: "ayah",
-      expectAssistantContains: ["manevi destek", "Ayet Rehberi bölümünü"],
+      expectedRedirectModule: null,
+      expectAssistantContains: "Dinî Bilgiler bölümünde sana daha doğru bir yanıt verebilmem için",
       maxAyahRankerMs: 0,
     },
     {
       path: "/ilmihal-chat",
       prompt: "Allah beni affeder mi",
+      requestBody: { source_screen: "religious_qa" },
       expectedModule: "ilmihal",
-      expectedRouteMode: "quran_guidance_redirect",
+      expectedRouteMode: "ilmihal_clarification",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectedRedirectModule: "ayah",
-      expectAssistantContains: ["Tövbe", "Ayet Rehberi bölümünü"],
+      expectedRedirectModule: null,
+      expectedDecisionMetaSourceScreen: "religious_qa",
+      expectAssistantContains: "Dinî Bilgiler bölümünde sana daha doğru bir yanıt verebilmem için",
       maxAyahRankerMs: 0,
     },
     {
       path: "/ilmihal-chat",
       prompt: "çok pişmanım",
       expectedModule: "ilmihal",
-      expectedRouteMode: "quran_guidance_redirect",
+      expectedRouteMode: "ilmihal_clarification",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectedRedirectModule: "ayah",
-      expectAssistantContains: ["Tövbe", "Ayet Rehberi bölümünü"],
+      expectedRedirectModule: null,
+      expectAssistantContains: "Dinî Bilgiler bölümünde sana daha doğru bir yanıt verebilmem için",
       maxAyahRankerMs: 0,
     },
     {
@@ -1470,16 +1473,17 @@ async function runModuleEndpointSmokeTests() {
       path: "/ilmihal-chat",
       prompt: "çok korkuyorum",
       expectedModule: "ilmihal",
+      expectedRouteMode: "ilmihal_clarification",
       expectedResponseType: "direct_answer",
       expectedSelectedAyah: null,
-      expectedRedirectModule: "ayah",
-      expectAssistantContains: "Ayet Rehberi bölümüne daha uygundur",
+      expectedRedirectModule: null,
+      expectAssistantContains: "Dinî Bilgiler bölümünde sana daha doğru bir yanıt verebilmem için",
       maxAyahRankerMs: 0,
     },
   ];
 
   for (const test of ayahTests) {
-    const payload = await postModuleChat(test.path, test.prompt);
+    const payload = await postModuleChat(test.path, test.prompt, [], test.requestBody || {});
     const routingPayload = debugChecksEnabled ? await postDebugResolve(test.prompt, moduleFromPath(test.path)) : null;
     const failures = [];
     if (debugChecksEnabled) {
@@ -1518,6 +1522,12 @@ async function runModuleEndpointSmokeTests() {
         if (semanticScore < test.minSemanticMatchScore) {
           failures.push(`semantic_match_score=${semanticScore}`);
         }
+      }
+    }
+    if (typeof test.expectedDecisionMetaSourceScreen === "string") {
+      const actualSourceScreen = payload?.decision_meta?.source_screen || null;
+      if (actualSourceScreen !== test.expectedDecisionMetaSourceScreen) {
+        failures.push(`decision_meta.source_screen=${actualSourceScreen}`);
       }
     }
     if (Object.prototype.hasOwnProperty.call(test, "expectedRedirectModule")) {
@@ -1802,11 +1812,11 @@ async function postChat(message, history = []) {
   return payload;
 }
 
-async function postModuleChat(path, message, history = []) {
+async function postModuleChat(path, message, history = [], extraBody = {}) {
   const response = await fetch(`http://localhost:3000${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({ message, history, ...extraBody }),
   });
   const text = await response.text();
   let payload;

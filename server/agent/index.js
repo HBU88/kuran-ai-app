@@ -101,10 +101,13 @@ function normalizeTimingBreakdown(timingMs, fallbackTotal = null) {
   };
 }
 
-function normalizeModuleMode(module) {
+function normalizeModuleMode(module, sourceScreen) {
   const normalized = String(module || "chat").trim().toLowerCase();
   if (normalized === "ayah" || normalized === "ilmihal" || normalized === "chat") {
     return normalized;
+  }
+  if (String(sourceScreen || "").trim().toLowerCase() === "religious_qa") {
+    return "ilmihal";
   }
   return "chat";
 }
@@ -472,13 +475,51 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
   });
 }
 
-function buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preRouteStage = null) {
+function buildIlmihalClarificationResponse(message, history, baseAnalysis, timing, sourceScreen = null) {
+  const assistantText =
+    "Dinî Bilgiler bölümünde sana daha doğru bir yanıt verebilmem için sorunu biraz daha netleştirebilir misin?";
+  const analysis = {
+    ...baseAnalysis,
+    response_type: "direct_answer",
+  };
+  const responsePreview = isDebugChatEngineEnabled() ? assistantText.slice(0, 800) : null;
+  const decisionMeta = buildDecisionMeta(
+    [],
+    {
+      responseType: "direct_answer",
+      ayahUsed: false,
+      selectedAyah: null,
+      topAyahIds: [],
+    },
+    false,
+    "ilmihal_clarification",
+    null,
+    timing.snapshot(),
+    "local_fast_path",
+    "ilmihal",
+    responsePreview,
+    null,
+    sourceScreen
+  );
+
+  return applySafetyGuard({
+    ...analysis,
+    response_type: "direct_answer",
+    ayah_used: false,
+    top_ayah_ids: [],
+    selected_ayah: null,
+    decision_meta: decisionMeta,
+    assistant_text: assistantText,
+  });
+}
+
+function buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preRouteStage = null, sourceScreen = null) {
   const knowledgeResult = timing.measureSync("knowledge_router_ms", () =>
     lookupKnowledgeAnswer(message, baseAnalysis, null, history)
   );
 
   if (!knowledgeResult) {
-    return buildModuleRedirectResponse("ilmihal", message, baseAnalysis, timing, "ayah");
+    return buildIlmihalClarificationResponse(message, history, baseAnalysis, timing, sourceScreen);
   }
 
   const subIntent = resolveSubIntent(message, baseAnalysis, null);
@@ -513,7 +554,7 @@ function buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preR
     "ilmihal",
     responsePreview,
     null,
-    preRouteStage || null
+    sourceScreen
   );
 
   return applySafetyGuard({
@@ -581,7 +622,7 @@ function buildCasualConversationResponse(message, history, baseAnalysis, timing,
 }
 
 async function buildChatResponse(message, history = [], options = {}) {
-  const moduleMode = normalizeModuleMode(options.module);
+  const moduleMode = normalizeModuleMode(options.module, options.source_screen);
   const timing = createTimingTracker();
   const forceIlmihalKnowledge = options.forceIlmihalKnowledge === true;
   if (isPureGreetingMessage(message)) {
@@ -591,70 +632,38 @@ async function buildChatResponse(message, history = [], options = {}) {
     return buildCasualConversationResponse(message, history, baseAnalysis, timing, moduleMode);
   }
 
-  const normalizedMessageForRepentance = normalize(message);
-  if (
-    moduleMode === "ilmihal" &&
-    !forceIlmihalKnowledge &&
-    (
-      normalizedMessageForRepentance.includes(normalize("\u00e7ok pi\u015fman\u0131m")) ||
-      normalizedMessageForRepentance.includes(normalize("pi\u015fman\u0131m")) ||
-      normalizedMessageForRepentance.includes(normalize("pi\u015fman"))
-    )
-  ) {
-    const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
-      analyzeUserMessageFallback(message, history)
-    );
-    return buildModuleRedirectResponse(
-      "ilmihal",
-      message,
-      baseAnalysis,
-      timing,
-      "ayah",
-      "T\u00f6vbe; pi\u015fmanl\u0131k, g\u00fcnah\u0131 b\u0131rakma ve yeniden d\u00f6nmemeye niyet etmektir.",
-      "emotional_redirect"
-    );
-  }
-
   const preModuleDecision = timing.measureSync("knowledge_router_ms", () => resolvePreModuleDecision(message, history, moduleMode));
   const preRouteStage = preModuleDecision?.pre_route_stage || null;
   if (preModuleDecision?.module === "ayah" && moduleMode !== "ayah") {
-    const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
-      analyzeUserMessageFallback(message, history)
-    );
-    const redirectContextNote = moduleMode === "ilmihal"
-      ? buildRedirectContextNote(message, baseAnalysis)
-      : null;
-    return buildModuleRedirectResponse(moduleMode, message, baseAnalysis, timing, "ayah", redirectContextNote, preRouteStage || "emotional_redirect");
+    if (moduleMode !== "ilmihal") {
+      const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
+        analyzeUserMessageFallback(message, history)
+      );
+      const redirectContextNote = moduleMode === "ilmihal"
+        ? buildRedirectContextNote(message, baseAnalysis)
+        : null;
+      return buildModuleRedirectResponse(moduleMode, message, baseAnalysis, timing, "ayah", redirectContextNote, preRouteStage || "emotional_redirect");
+    }
   }
   if (preModuleDecision?.module === "ilmihal" && moduleMode !== "ayah") {
     const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
       analyzeUserMessageFallback(message, history)
     );
-    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preModuleDecision.pre_route_stage || preModuleDecision.reason || null);
+    return buildIlmihalModuleResponse(
+      message,
+      history,
+      baseAnalysis,
+      timing,
+      preModuleDecision.pre_route_stage || preModuleDecision.reason || null,
+      options.source_screen || null
+    );
   }
 
   const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
     analyzeUserMessageFallback(message, history)
   );
-  if (moduleMode === "ilmihal" && !forceIlmihalKnowledge) {
-    if (!isIlmihalModuleQuestion(message, baseAnalysis, history)) {
-      const redirectContextNote = isRepentanceRedirectMessage(message)
-        ? "Tövbe; pişmanlık, günahı bırakma ve yeniden dönmemeye niyet etmektir."
-        : null;
-      return buildModuleRedirectResponse(
-        "ilmihal",
-        message,
-        baseAnalysis,
-        timing,
-        "ayah",
-        redirectContextNote,
-        redirectContextNote ? "emotional_redirect" : null
-      );
-    }
-    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing);
-  }
-  if (moduleMode === "ilmihal" && forceIlmihalKnowledge) {
-    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing);
+  if (moduleMode === "ilmihal") {
+    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing, null, options.source_screen || null);
   }
   if (moduleMode === "ayah" && isIlmihalModuleQuestion(message, baseAnalysis, history)) {
     return buildModuleRedirectResponse("ayah", message, baseAnalysis, timing, "ilmihal");
@@ -724,8 +733,8 @@ async function buildChatResponse(message, history = [], options = {}) {
           : null
       )
     : null;
-  const routeMode = knowledgeResult && knowledgeResult.knowledge_hit_id
-    ? knowledgeResult.route_mode || "ilmihal_knowledge"
+  const routeMode = knowledgeResult
+    ? knowledgeResult.route_mode || (knowledgeResult.knowledge_hit_id ? "ilmihal_knowledge" : "ilmihal_clarification")
     : "quran_guidance";
   const shouldBypassAyahSelection = Boolean(knowledgeResult) && !explicitAyahRequest;
   const topicConstraint = plannerAyahTopicConstraint(message, analysis, plannerResult);
@@ -849,7 +858,8 @@ function buildDecisionMeta(
   plannerSource = "fallback",
   module = "chat",
   responsePreview = null,
-  preRouteStage = null
+  preRouteStage = null,
+  sourceScreen = null
 ) {
   const top = Array.isArray(rankedAyahs) && rankedAyahs.length > 0 ? rankedAyahs[0] : null;
   const topDebug = top?.debug || {};
@@ -877,7 +887,11 @@ function buildDecisionMeta(
           : knowledgeResult?.knowledge_hit_id
             ? 1
             : 0,
+    rejected_candidates: Array.isArray(knowledgeResult?.rejected_candidates)
+      ? knowledgeResult.rejected_candidates
+      : [],
     planner_source: plannerSource || "fallback",
+    source_screen: sourceScreen || null,
     module,
     pre_route_stage: inferredPreRouteStage,
     semantic_match_score:

@@ -8,8 +8,14 @@
     "smoke": "node agent.js \"çok yalnız hissediyorum\"",
     "test:auth": "node tests/auth_regression.mjs",
     "test:security": "node tests/security_regression.mjs",
+    "test:religious-qa": "node tests/religious_qa_regression.cjs",
     "test:chat": "node tests/chat_response_validator.mjs",
     "test:ilmihal-regression": "node scripts/ilmihal/test_ilmihal_regression.mjs",
+    "generate:questions": "node question-generator.js",
+    "test:qa": "node test-suite.js",
+    "analyze:qa": "node question-analyzer.js",
+    "fix:qa": "node auto-fix.js",
+    "qa:full": "npm run generate:questions && npm run test:qa && npm run analyze:qa && npm run fix:qa",
     "audit:ilmihal": "node scripts/ilmihal/audit_diyanet_coverage.mjs",
     "validate:ilmihal": "node scripts/ilmihal/validate_ilmihal.mjs"
   },
@@ -18,6 +24,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^4.22.1",
+    "node-fetch": "^3.3.2",
     "openai": "^4.104.0"
   },
   "description": "",

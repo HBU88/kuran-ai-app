@@ -2,6 +2,7 @@
 const path = require("path");
 const { normalize, decodeURIComponentSafe, canonicalTopic } = require("./context_resolver");
 const { matchSemanticTopic } = require("./semantic_topic_matcher");
+const { compareQuestions, getSynonyms, extractSemanticTokens, calculateSemanticSimilarity } = require("./turkish_nlp_utils");
 
 const ILMIHAL_PATH = path.join(__dirname, "..", "..", "assets", "data", "knowledge", "ilmihal_knowledge_base.json");
 
@@ -503,9 +504,13 @@ function resolveAbdestTopic(message, normalizedMessage) {
   if (
     includesLoose(normalizedMessage, "abdest nasil alinir") ||
     includesLoose(normalizedMessage, "abdest nasıl alınır") ||
-    raw.includes("abdest nasil alinir")
+    includesLoose(normalizedMessage, "abdest alma") ||
+    includesLoose(normalizedMessage, "abdest adimlari") ||
+    includesLoose(normalizedMessage, "abdest adımları") ||
+    raw.includes("abdest nasil alinir") ||
+    raw.includes("abdest alma")
   ) {
-    return topicMatch("abdest_howto", "exact_normalized_question", 100);
+    return topicMatch("abdest_howto", "intent_phrase", 90);
   }
   return null;
 }
@@ -580,6 +585,32 @@ function resolveKurbanTopic(message, normalizedMessage) {
     raw.includes("kurban kime vaciptir")
   ) {
     return topicMatch("kurban_kime_vaciptir", "exact_normalized_question", 100);
+  }
+
+  // Check for semantic variations: "kurban kimlere" with obligation verb synonyms (gerekir, farzdır, zorunludur, lazım)
+  if (hasKurban && (includesLoose(normalizedMessage, "kurban kimlere") || includesLoose(normalizedMessage, "kurban kime"))) {
+    const obligationSynonyms = ['gerekir', 'farzdır', 'farz', 'zorunlu', 'zorunludur', 'lazım', 'lazımdir', 'lazımdır'];
+    const hasObligationVerb = obligationSynonyms.some(verb =>
+      includesLoose(normalizedMessage, verb) || raw.includes(verb)
+    );
+
+    if (hasObligationVerb) {
+      // This is asking about who must do kurban - match to kurban_kime_vaciptir
+      return topicMatch("kurban_kime_vaciptir", "semantic_synonym_match", 85);
+    }
+  }
+
+  // Check for "kurban kesmek [obligation verb]" - asking if it's obligatory to cut kurban
+  if (hasKurban && (includesLoose(normalizedMessage, "kurban kesmek") || includesLoose(normalizedMessage, "kurban kes"))) {
+    const obligationSynonyms = ['gerekir', 'farzdır', 'farz', 'zorunlu', 'zorunludur', 'vacip', 'vaciptir', 'lazım', 'lazımdir', 'lazımdır', 'mi'];
+    const hasObligationVerb = obligationSynonyms.some(verb =>
+      includesLoose(normalizedMessage, verb) || raw.includes(verb)
+    );
+
+    if (hasObligationVerb) {
+      // This is asking about obligation of cutting kurban - match to kurban_kime_vaciptir
+      return topicMatch("kurban_kime_vaciptir", "semantic_synonym_match", 80);
+    }
   }
   if (
     hasKurban &&

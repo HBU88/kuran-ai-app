@@ -1,0 +1,236 @@
+{
+  "test_suites": {
+    "ilmihal": {
+      "name": "Islamic Religious Knowledge (İlmihal)",
+      "endpoint": "/ilmihal-chat",
+      "cases": [
+        {
+          "id": "kurban_obligation_exact",
+          "query": "kurban kimlere vaciptir",
+          "expected_topic": "kurban_kime_vaciptir",
+          "min_score": 80,
+          "category": "kurban",
+          "description": "Exact question about who kurban is obligatory for"
+        },
+        {
+          "id": "kurban_obligation_synonym",
+          "query": "kurban kimlere gerekir",
+          "expected_topic": "kurban_kime_vaciptir",
+          "min_score": 70,
+          "category": "kurban",
+          "description": "Synonym variation: gerekir instead of vaciptir"
+        },
+        {
+          "id": "kurban_obligation_paraphrase",
+          "query": "kurban kesmek zorunlu mu",
+          "expected_topic": "kurban_kime_vaciptir",
+          "min_score": 60,
+          "category": "kurban",
+          "description": "Paraphrased question about kurban obligation"
+        },
+        {
+          "id": "kurban_definition",
+          "query": "kurban nedir",
+          "expected_topic": "kurban_nedir",
+          "min_score": 70,
+          "category": "kurban",
+          "description": "Definition of kurban"
+        },
+        {
+          "id": "kurban_timing",
+          "query": "kurban ne zaman kesilir",
+          "expected_topic": "kurban_ne_zaman_kesilir",
+          "min_score": 70,
+          "category": "kurban",
+          "description": "When is kurban performed"
+        },
+        {
+          "id": "abdest_exact",
+          "query": "Abdest nasıl alınır",
+          "expected_topic": "abdest_howto",
+          "min_score": 90,
+          "category": "ablution",
+          "description": "Exact question about how to perform ablution"
+        },
+        {
+          "id": "abdest_variation",
+          "query": "Abdest alma adımları nedir",
+          "expected_topic": "abdest_howto",
+          "min_score": 70,
+          "category": "ablution",
+          "description": "Variation: steps of ablution"
+        },
+        {
+          "id": "abdest_invalidators",
+          "query": "Abdest bozanlar nelerdir",
+          "expected_topic": "abdest_bozanlar",
+          "min_score": 70,
+          "category": "ablution",
+          "description": "What breaks ablution"
+        },
+        {
+          "id": "greeting_direct",
+          "query": "Selamlaşma nedir",
+          "expected_topic": "selamlasma_adabi",
+          "min_score": 70,
+          "category": "greeting",
+          "description": "What is greeting etiquette"
+        },
+        {
+          "id": "greeting_giving",
+          "query": "Selam vermek nedir",
+          "expected_topic": "selamlasma_adabi",
+          "min_score": 60,
+          "category": "greeting",
+          "description": "What is giving greetings"
+        },
+        {
+          "id": "dua_definition",
+          "query": "Dua nedir",
+          "expected_topic": "dua_nedir",
+          "min_score": 70,
+          "category": "dua",
+          "description": "What is prayer/dua"
+        },
+        {
+          "id": "dua_how_to",
+          "query": "Dua nasıl edilir",
+          "expected_topic": "dua_nasil_edilir",
+          "min_score": 70,
+          "category": "dua",
+          "description": "How to make dua"
+        },
+        {
+          "id": "namaz_times",
+          "query": "Namaz vakitleri nedir",
+          "expected_topic": "namaz_vakitleri",
+          "min_score": 70,
+          "category": "salat",
+          "description": "Prayer times"
+        },
+        {
+          "id": "namaz_obligatory_count",
+          "query": "Günde kaç namaz kılmak lazım",
+          "expected_topic": "namaz_kac_rekat",
+          "min_score": 60,
+          "category": "salat",
+          "description": "How many prayers required daily"
+        },
+        {
+          "id": "fasting_definition",
+          "query": "Oruç nedir",
+          "expected_topic": "oruc_nedir",
+          "min_score": 70,
+          "category": "fasting",
+          "description": "What is fasting"
+        },
+        {
+          "id": "zakat_definition",
+          "query": "Zekât nedir",
+          "expected_topic": "zekat_nedir",
+          "min_score": 70,
+          "category": "zakat",
+          "description": "What is zakat"
+        },
+        {
+          "id": "hajj_obligation",
+          "query": "Hac kimlere farzdır",
+          "expected_topic": "hac_kimlere_farzdır",
+          "min_score": 70,
+          "category": "hajj",
+          "description": "Who is hajj obligatory for"
+        },
+        {
+          "id": "nikah_conditions",
+          "query": "Nikah şartları nelerdir",
+          "expected_topic": "nikah_sartlari",
+          "min_score": 70,
+          "category": "marriage",
+          "description": "Conditions for marriage"
+        },
+        {
+          "id": "halal_earning",
+          "query": "Helal kazanç nedir",
+          "expected_topic": "helal_kazanc_nedir",
+          "min_score": 70,
+          "category": "ethics",
+          "description": "What is halal earning"
+        },
+        {
+          "id": "ghibah_definition",
+          "query": "Gıybet nedir",
+          "expected_topic": "giybet_nedir",
+          "min_score": 70,
+          "category": "ethics",
+          "description": "What is backbiting"
+        },
+        {
+          "id": "parents_rights",
+          "query": "Anne baba hakkı nedir",
+          "expected_topic": "anne_baba_hakki",
+          "min_score": 70,
+          "category": "family",
+          "description": "Rights of parents"
+        },
+        {
+          "id": "neighbor_rights",
+          "query": "Komşu hakkı nedir",
+          "expected_topic": "komsuluk_hakki",
+          "min_score": 70,
+          "category": "social",
+          "description": "Rights of neighbors"
+        }
+      ]
+    },
+    "rehberlik": {
+      "name": "Quranic Guidance (Rehberlik)",
+      "endpoint": "/chat",
+      "cases": [
+        {
+          "id": "guidance_loneliness",
+          "query": "çok yalnız hissediyorum",
+          "expected_intent": "emotional_spiritual_support",
+          "min_ayah_count": 1,
+          "category": "emotional_support",
+          "description": "Loneliness support with Quranic guidance"
+        },
+        {
+          "id": "guidance_repentance",
+          "query": "çok pişman uyum",
+          "expected_intent": "emotional_spiritual_support",
+          "min_ayah_count": 1,
+          "category": "emotional_support",
+          "description": "Repentance support with Quranic guidance"
+        },
+        {
+          "id": "guidance_fear",
+          "query": "çok korkuyorum",
+          "expected_intent": "emotional_spiritual_support",
+          "min_ayah_count": 1,
+          "category": "emotional_support",
+          "description": "Fear support with Quranic guidance"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "created_at": "2026-05-28",
+    "total_cases": 26,
+    "categories": [
+      "kurban",
+      "ablution",
+      "greeting",
+      "dua",
+      "salat",
+      "fasting",
+      "zakat",
+      "hajj",
+      "marriage",
+      "ethics",
+      "family",
+      "social",
+      "emotional_support"
+    ]
+  }
+}

@@ -1,0 +1,439 @@
+{
+  "timestamp": "2026-05-28T11:40:02.883Z",
+  "backend_url": "http://localhost:3000",
+  "duration_ms": 11483,
+  "suites": {
+    "ilmihal": {
+      "name": "Islamic Religious Knowledge (İlmihal)",
+      "endpoint": "/ilmihal-chat",
+      "cases": [
+        {
+          "id": "kurban_obligation_exact",
+          "query": "kurban kimlere vaciptir",
+          "category": "kurban",
+          "passed": true,
+          "failureReason": null,
+          "score": 10000,
+          "duration": 35,
+          "metadata": {
+            "knowledge_hit_id": "kurban_kime_vaciptir",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "kurban_obligation_synonym",
+          "query": "kurban kimlere gerekir",
+          "category": "kurban",
+          "passed": true,
+          "failureReason": null,
+          "score": 8500,
+          "duration": 14,
+          "metadata": {
+            "knowledge_hit_id": "kurban_kime_vaciptir",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "kurban_obligation_paraphrase",
+          "query": "kurban kesmek zorunlu mu",
+          "category": "kurban",
+          "passed": true,
+          "failureReason": null,
+          "score": 8000,
+          "duration": 12,
+          "metadata": {
+            "knowledge_hit_id": "kurban_kime_vaciptir",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "kurban_definition",
+          "query": "kurban nedir",
+          "category": "kurban",
+          "passed": true,
+          "failureReason": null,
+          "score": 10000,
+          "duration": 11,
+          "metadata": {
+            "knowledge_hit_id": "kurban_nedir",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "kurban_timing",
+          "query": "kurban ne zaman kesilir",
+          "category": "kurban",
+          "passed": true,
+          "failureReason": null,
+          "score": 10000,
+          "duration": 11,
+          "metadata": {
+            "knowledge_hit_id": "kurban_ne_zaman_kesilir",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "abdest_exact",
+          "query": "Abdest nasıl alınır",
+          "category": "ablution",
+          "passed": true,
+          "failureReason": null,
+          "score": 9000,
+          "duration": 7,
+          "metadata": {
+            "knowledge_hit_id": "abdest_howto",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "abdest_variation",
+          "query": "Abdest alma adımları nedir",
+          "category": "ablution",
+          "passed": true,
+          "failureReason": null,
+          "score": 9000,
+          "duration": 8,
+          "metadata": {
+            "knowledge_hit_id": "abdest_howto",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "abdest_invalidators",
+          "query": "Abdest bozanlar nelerdir",
+          "category": "ablution",
+          "passed": true,
+          "failureReason": null,
+          "score": 9500,
+          "duration": 15,
+          "metadata": {
+            "knowledge_hit_id": "abdest_bozanlar",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "greeting_direct",
+          "query": "Selamlaşma nedir",
+          "category": "greeting",
+          "passed": true,
+          "failureReason": null,
+          "score": 81.81818181818183,
+          "duration": 4455,
+          "metadata": {
+            "knowledge_hit_id": "selamlasma_adabi",
+            "intent": "casual_conversation",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "greeting_giving",
+          "query": "Selam vermek nedir",
+          "category": "greeting",
+          "passed": true,
+          "failureReason": null,
+          "score": 74.21052631578947,
+          "duration": 1862,
+          "metadata": {
+            "knowledge_hit_id": "selamlasma_adabi",
+            "intent": "casual_conversation",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "dua_definition",
+          "query": "Dua nedir",
+          "category": "dua",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 14,
+          "metadata": {
+            "knowledge_hit_id": "dua_nedir",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "dua_how_to",
+          "query": "Dua nasıl edilir",
+          "category": "dua",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 13,
+          "metadata": {
+            "knowledge_hit_id": "dua_nasil_edilir",
+            "intent": "worship_practice_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "namaz_times",
+          "query": "Namaz vakitleri nedir",
+          "category": "salat",
+          "passed": false,
+          "failureReason": "Wrong topic: expected namaz_vakitleri, got namaz_vacipleri",
+          "score": 61.547105411832995,
+          "duration": 788,
+          "metadata": {
+            "knowledge_hit_id": "namaz_vacipleri",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "namaz_obligatory_count",
+          "query": "Günde kaç namaz kılmak lazım",
+          "category": "salat",
+          "passed": false,
+          "failureReason": "Wrong topic: expected namaz_kac_rekat, got namaz_hizli_kilinirsa_olur_mu",
+          "score": 64.33333333333333,
+          "duration": 541,
+          "metadata": {
+            "knowledge_hit_id": "namaz_hizli_kilinirsa_olur_mu",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "fasting_definition",
+          "query": "Oruç nedir",
+          "category": "fasting",
+          "passed": true,
+          "failureReason": null,
+          "score": 84.61538461538461,
+          "duration": 796,
+          "metadata": {
+            "knowledge_hit_id": "oruc_nedir",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "zakat_definition",
+          "query": "Zekât nedir",
+          "category": "zakat",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 12,
+          "metadata": {
+            "knowledge_hit_id": "zekat_nedir",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "hajj_obligation",
+          "query": "Hac kimlere farzdır",
+          "category": "hajj",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 10,
+          "metadata": {
+            "knowledge_hit_id": "hac_kimlere_farzdır",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "nikah_conditions",
+          "query": "Nikah şartları nelerdir",
+          "category": "marriage",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 17,
+          "metadata": {
+            "knowledge_hit_id": "nikah_sartlari",
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "halal_earning",
+          "query": "Helal kazanç nedir",
+          "category": "ethics",
+          "passed": true,
+          "failureReason": null,
+          "score": 90,
+          "duration": 502,
+          "metadata": {
+            "knowledge_hit_id": "helal_kazanc_nedir",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "ghibah_definition",
+          "query": "Gıybet nedir",
+          "category": "ethics",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 19,
+          "metadata": {
+            "knowledge_hit_id": "giybet_nedir",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "parents_rights",
+          "query": "Anne baba hakkı nedir",
+          "category": "family",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 18,
+          "metadata": {
+            "knowledge_hit_id": "anne_baba_hakki",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "neighbor_rights",
+          "query": "Komşu hakkı nedir",
+          "category": "social",
+          "passed": true,
+          "failureReason": null,
+          "score": 73.33333333333334,
+          "duration": 611,
+          "metadata": {
+            "knowledge_hit_id": "komsuluk_hakki",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        }
+      ],
+      "summary": {
+        "total": 22,
+        "passed": 20,
+        "failed": 2,
+        "pass_rate": "90.9"
+      }
+    },
+    "rehberlik": {
+      "name": "Quranic Guidance (Rehberlik)",
+      "endpoint": "/chat",
+      "cases": [
+        {
+          "id": "guidance_loneliness",
+          "query": "çok yalnız hissediyorum",
+          "category": "emotional_support",
+          "passed": false,
+          "failureReason": "Wrong intent: expected emotional_spiritual_support, got general_islamic_question",
+          "score": 0,
+          "duration": 617,
+          "metadata": {
+            "knowledge_hit_id": "teyemmumu_bozanlar",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "guidance_repentance",
+          "query": "çok pişman uyum",
+          "category": "emotional_support",
+          "passed": false,
+          "failureReason": "Wrong intent: expected emotional_spiritual_support, got general_islamic_question",
+          "score": 0,
+          "duration": 996,
+          "metadata": {
+            "knowledge_hit_id": "tovbenin_sartlari",
+            "intent": "general_islamic_question",
+            "ayah_count": 0,
+            "route_mode": "ilmihal_knowledge"
+          }
+        },
+        {
+          "id": "guidance_fear",
+          "query": "çok korkuyorum",
+          "category": "emotional_support",
+          "passed": true,
+          "failureReason": null,
+          "score": 100,
+          "duration": 97,
+          "metadata": {
+            "knowledge_hit_id": null,
+            "intent": "emotional_spiritual_support",
+            "ayah_count": 3,
+            "route_mode": "quran_guidance"
+          }
+        }
+      ],
+      "summary": {
+        "total": 3,
+        "passed": 1,
+        "failed": 2,
+        "pass_rate": "33.3"
+      }
+    }
+  },
+  "summary": {
+    "total": 25,
+    "passed": 21,
+    "failed": 4,
+    "pass_rate": "84.0",
+    "duration_sec": "11.48"
+  },
+  "failures": [
+    {
+      "test_id": "namaz_times",
+      "query": "Namaz vakitleri nedir",
+      "reason": "Wrong topic: expected namaz_vakitleri, got namaz_vacipleri",
+      "category": "salat"
+    },
+    {
+      "test_id": "namaz_obligatory_count",
+      "query": "Günde kaç namaz kılmak lazım",
+      "reason": "Wrong topic: expected namaz_kac_rekat, got namaz_hizli_kilinirsa_olur_mu",
+      "category": "salat"
+    },
+    {
+      "test_id": "guidance_loneliness",
+      "query": "çok yalnız hissediyorum",
+      "reason": "Wrong intent: expected emotional_spiritual_support, got general_islamic_question",
+      "category": "emotional_support"
+    },
+    {
+      "test_id": "guidance_repentance",
+      "query": "çok pişman uyum",
+      "reason": "Wrong intent: expected emotional_spiritual_support, got general_islamic_question",
+      "category": "emotional_support"
+    }
+  ]
+}

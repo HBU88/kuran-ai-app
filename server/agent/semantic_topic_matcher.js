@@ -4,6 +4,11 @@ const crypto = require("crypto");
 const { execFileSync } = require("child_process");
 
 const { normalize } = require("./context_resolver");
+const {
+  extractSemanticTokens,
+  calculateSemanticSimilarity,
+  getSynonyms
+} = require("./turkish_nlp_utils");
 
 const CACHE_DIR = path.join(__dirname, "..", "cache");
 const CACHE_PATH = path.join(CACHE_DIR, "ilmihal_topic_embeddings.json");
@@ -100,9 +105,17 @@ function buildSemanticMatch(best) {
   if (!best || !best.profile) return null;
 
   const score = clampScore(best.score);
-  if (score < 0.7) return null;
+  // Lower threshold to 0.4 for short queries with semantic matching
+  // Jaccard on short queries inherently has lower scores
+  if (score < 0.4) return null;
 
-  const confidence = score >= 0.82 ? "high" : "low";
+  // Improved confidence scoring with Turkish NLP
+  let confidence = "low";
+  if (score >= 0.85) {
+    confidence = "high";
+  } else if (score >= 0.75) {
+    confidence = "medium";
+  }
 
   return {
     topic_id: best.profile.topic_id,
@@ -110,6 +123,7 @@ function buildSemanticMatch(best) {
     confidence,
     matched_by: "semantic",
     semantic_description: best.profile.semantic_description,
+    match_reason: `semantic_match_score_${Math.round(score * 100)}`,
   };
 }
 
@@ -130,8 +144,11 @@ function loadSemanticProfiles(entries) {
     .filter((entry) => entry && typeof entry === "object")
     .map((entry) => {
       const topicId = String(entry.topic || entry.id || "").trim();
+      // Prioritize MANUAL_SEMANTIC_DESCRIPTIONS over entry.semantic_description
+      // This allows overriding knowledge base descriptions with better semantic matches
+      const manualDescription = MANUAL_SEMANTIC_DESCRIPTIONS[topicId];
       const semanticDescription = normalizeSemanticText(
-        entry.semantic_description || buildSemanticDescription(entry)
+        manualDescription !== undefined ? manualDescription : (entry.semantic_description || buildSemanticDescription(entry))
       );
       const cachedProfile = cachedProfilesById.get(topicId) || null;
       return {
@@ -275,6 +292,45 @@ function getQueryEmbedding(normalizedQuery) {
 }
 
 function localSemanticScore(normalizedQuery, profile) {
+  // Use Turkish semantic token extraction for better matching
+  const querySemanticTokens = extractSemanticTokens(normalizedQuery);
+  const profileSemanticTokens = extractSemanticTokens(profile.semantic_description || '');
+
+  // Extract semantic tokens from keywords (which is a Set)
+  const keywordsText = profile.keywords instanceof Set
+    ? Array.from(profile.keywords).join(' ')
+    : (profile.keywords || '');
+  const keywordSemanticTokens = extractSemanticTokens(keywordsText);
+
+  if (querySemanticTokens.size === 0) return 0;
+
+  // Use "query coverage" metric instead of pure Jaccard
+  // This measures what fraction of query tokens appear in the profile
+  // This is better for user queries because we want all query terms to match
+  const intersection = new Set([...querySemanticTokens].filter(t => profileSemanticTokens.has(t)));
+  const queryCoverage = intersection.size / querySemanticTokens.size;  // What % of query tokens are in profile
+
+  // Keyword similarity using similar coverage metric
+  const keywordIntersection = new Set([...querySemanticTokens].filter(t => keywordSemanticTokens.has(t)));
+  const keywordCoverage = keywordSemanticTokens.size > 0
+    ? keywordIntersection.size / Math.max(querySemanticTokens.size, 1)
+    : 0;
+
+  // Exact phrase match bonus
+  const phraseCoverage = profile.semantic_description.includes(normalizedQuery) ? 1 : 0;
+
+  // Weighted combination - prioritize query coverage
+  const score = clampScore(
+    queryCoverage * 0.65 +          // Primary: how many query tokens appear in profile
+    keywordCoverage * 0.25 +        // Secondary: keyword coverage
+    phraseCoverage * 0.1            // Bonus: exact phrase match
+  );
+
+  return score;
+}
+
+// Legacy token matching for fallback
+function localSemanticScoreLegacy(normalizedQuery, profile) {
   const queryTokens = buildTokenSet(normalizedQuery);
   const profileTokens = profile.tokens || new Set();
   const keywordTokens = profile.keywords || new Set();
@@ -471,6 +527,8 @@ function clampScore(value) {
 }
 
 const MANUAL_SEMANTIC_DESCRIPTIONS = {
+  selamlasma_adabi:
+    "Selamlaşma nedir selamlasma ne demek selam adabi selam vermek selam vermek adabi selam almak selam nedir selam ne demek",
   giybet_nedir:
     "Gıybet nedir? Arkadan konuşmak, bir kişinin hoşlanmayacağı sözü onun arkasından söylemek ve dedikodu yapmak demektir.",
   anne_baba_hakki:
