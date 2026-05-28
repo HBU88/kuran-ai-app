@@ -4218,5 +4218,476 @@
       "Kul hakkı nasıl ödenir?"
     ],
     "semantic_description": "haram para nasıl temizlenir haram para temizleme haram kazanç nasıl ayrılır sorularına sakin ve pratik cevap verir haram kazanç meşru hale gelmez kişi kaynağı ayırmalı hak sahibine dönme imkânı varsa onu düşünmeli ve ayrıntılı durumlarda güvenilir danışma almalıdır"
+  },
+  {
+    "id": "kaza_kader_nedir",
+    "type": "religious_knowledge",
+    "topic": "kaza_kader_nedir",
+    "aliases": [
+      "Kaza ve Kader Nedir?",
+      "Kader ne demek",
+      "Alın yazısı"
+    ],
+    "triggers": [
+      "kaza kader nedir",
+      "kader ne demek",
+      "alın yazısı",
+      "kadere iman",
+      "özgür irade var mı",
+      "Allah her şeyi biliyor mu",
+      "takdir"
+    ],
+    "keywords": [
+      "kaza kader",
+      "kader",
+      "alın yazısı",
+      "kadere iman",
+      "özgür irade"
+    ],
+    "answer_tr": "Kader, Allah'ın her şeyi ezelde bilmesi ve takdir etmesidir. Kaza ise bu takdirin zamanı gelince gerçekleşmesidir. İslam'ın altı iman esasından biridir. İnsanın özgür iradesi vardır; kendi tercihlerinden sorumludur. Kader sorumluluğu ortadan kaldırmaz; başa gelen musibetlerde sabretmek, tedbirsizliği kadere bağlamamak gerekir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/kaza_kader_nedir.json",
+    "semantic_description": "kaza kader nedir kader ne demek alın yazısı kadere iman özgür irade Allah her şeyi biliyor mu takdir"
+  },
+  {
+    "id": "melekler_nedir",
+    "type": "religious_knowledge",
+    "topic": "melekler_nedir",
+    "aliases": [
+      "Melekler Nedir?",
+      "Melek ne demek",
+      "Meleklere iman"
+    ],
+    "triggers": [
+      "melekler nedir",
+      "melek ne demek",
+      "meleklere iman",
+      "Cebrail kimdir",
+      "Azrail kimdir",
+      "Mikail",
+      "İsrafil",
+      "kiramen katibin",
+      "melek çeşitleri"
+    ],
+    "keywords": [
+      "melekler",
+      "melek",
+      "Cebrail",
+      "Azrail",
+      "Mikail",
+      "İsrafil"
+    ],
+    "answer_tr": "Melekler, Allah'ın nurdan yarattığı, günah işlemeyen, emrine tam itaat eden varlıklardır. Meleklere iman İslam'ın 6 iman şartından biridir. Dört büyük melek: Cebrail (vahiy), Mikail (rızık), İsrafil (Sur), Azrail (can alma). Kiramen Katibin, her insanın yanındaki yazıcı meleklerdir. Münker ve Nekir, kabirde soru soran meleklerdir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/melekler_nedir.json",
+    "semantic_description": "melekler nedir melek ne demek Cebrail Mikail İsrafil Azrail kiramen katibin meleklere iman"
+  },
+  {
+    "id": "kabir_hayati_nedir",
+    "type": "religious_knowledge",
+    "topic": "kabir_hayati_nedir",
+    "aliases": [
+      "Kabir Hayatı Nedir?",
+      "Kabir azabı var mı",
+      "Ölümden sonra ne olur"
+    ],
+    "triggers": [
+      "kabir hayatı nedir",
+      "kabir azabı var mı",
+      "kabir nimeti",
+      "berzah alemi",
+      "Münker Nekir",
+      "kabir sorgusu",
+      "ölümden sonra ne olur",
+      "öldükten sonra",
+      "kabirde ne sorulur"
+    ],
+    "keywords": [
+      "kabir hayatı",
+      "kabir azabı",
+      "berzah",
+      "Münker Nekir"
+    ],
+    "answer_tr": "Kabir hayatı, ölümden kıyamete kadar süren berzah âlemidir. Münker ve Nekir melekleri kabirde 'Rabbin kim, dinin ne, peygamberin kim?' diye sorar. Doğru cevap veren müminin kabri genişler ve cennet bahçesi gibi olur; günahkâr için ise kabir sıkıntısı söz konusudur. Kabir azabı Kur'an ve sahih hadislerle sabittir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/kabir_hayati_nedir.json",
+    "semantic_description": "kabir hayatı nedir kabir azabı var mı berzah alemi Münker Nekir sorgusu ölümden sonra ne olur"
+  },
+  {
+    "id": "kiyamet_alametleri",
+    "type": "religious_knowledge",
+    "topic": "kiyamet_alametleri",
+    "aliases": [
+      "Kıyamet Alametleri",
+      "Kıyamet ne zaman kopacak"
+    ],
+    "triggers": [
+      "kıyamet alametleri",
+      "kıyamet ne zaman kopacak",
+      "büyük kıyamet alametleri",
+      "küçük kıyamet alametleri",
+      "Deccal kimdir",
+      "Mehdi çıkacak mı",
+      "Hz. İsa inecek mi",
+      "güneş batıdan doğacak mı"
+    ],
+    "keywords": [
+      "kıyamet alametleri",
+      "Deccal",
+      "kıyamet"
+    ],
+    "answer_tr": "Kıyamet alametleri küçük ve büyük olmak üzere ikiye ayrılır. Küçük alametler: ahlaki bozulma, ilmin azalması, fitnelerin artması. Büyük alametler (10): Deccal'in çıkması, Hz. İsa'nın inmesi, Ye'cüc-Me'cüc, güneşin batıdan doğması, büyük yer sarsıntıları. Kıyametin tam vakti sadece Allah tarafından bilinir; bu konuda tahmin yürütmek doğru değildir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/kiyamet_alametleri.json",
+    "semantic_description": "kıyamet alametleri nelerdir Deccal Mehdi Hz. İsa güneş batıdan doğacak"
+  },
+  {
+    "id": "cennet_nedir",
+    "type": "religious_knowledge",
+    "topic": "cennet_nedir",
+    "aliases": [
+      "Cennet Nedir?",
+      "Cennete kimler girer",
+      "Cennet nasıl bir yer"
+    ],
+    "triggers": [
+      "cennet nedir",
+      "cennet nasıl bir yer",
+      "cennete kimler girer",
+      "cennet dereceleri",
+      "Firdevs nedir",
+      "cennet nimetleri",
+      "ahirette cennet"
+    ],
+    "keywords": [
+      "cennet",
+      "Firdevs",
+      "cennet nimetleri",
+      "ahiret"
+    ],
+    "answer_tr": "Cennet, iman edip salih amel işleyenlere Allah'ın vadettiği ebedi mutluluk yurdudur. En yüksek derece Firdevs cennetidir. Kur'an'da nehirler, meyveler, ipek elbiseler ve Allah'ın rızası zikredilir. En büyük nimet Allah'ı görmektir. Cennette acı, hastalık, ölüm ve üzüntü yoktur. Cennete giriş Allah'ın rahmetiyledir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/cennet_nedir.json",
+    "semantic_description": "cennet nedir nasıl bir yer cennete kimler girer Firdevs cennet dereceleri nimetleri"
+  },
+  {
+    "id": "cehennem_nedir",
+    "type": "religious_knowledge",
+    "topic": "cehennem_nedir",
+    "aliases": [
+      "Cehennem Nedir?",
+      "Cehenneme kimler girer",
+      "Cehennem nasıl bir yer"
+    ],
+    "triggers": [
+      "cehennem nedir",
+      "cehennem nasıl bir yer",
+      "cehenneme kimler girer",
+      "cehennem tabakalar",
+      "ebedi azap mı",
+      "günahkâr cehennemde kalır mı"
+    ],
+    "keywords": [
+      "cehennem",
+      "azap",
+      "cehennem tabakalar"
+    ],
+    "answer_tr": "Cehennem, inkârcılar ve günahkârlar için hazırlanmış azap yurdudur. Kur'an'da yedi tabakası vardır. Kâfirler cehennemde ebedi kalır; günahkâr müminler ise günahları kadar azap çektikten sonra çıkabilir — bu Ehl-i Sünnet akidesidir. Tövbe ve Allah'ın affı her zaman geçerlidir; cehennem korkusu umutsuzluğa değil, ibadete yöneltmelidir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/cehennem_nedir.json",
+    "semantic_description": "cehennem nedir nasıl bir yer cehenneme kimler girer tabakalar azap ebedi mi"
+  },
+  {
+    "id": "kutsal_kitaplar_nedir",
+    "type": "religious_knowledge",
+    "topic": "kutsal_kitaplar_nedir",
+    "aliases": [
+      "İlahi Kitaplar Nelerdir?",
+      "Kutsal kitaplar",
+      "Dört büyük kitap"
+    ],
+    "triggers": [
+      "ilahi kitaplar nelerdir",
+      "kutsal kitaplar nedir",
+      "Tevrat nedir",
+      "Zebur nedir",
+      "İncil nedir",
+      "dört büyük kitap",
+      "kitaplara iman",
+      "Kur'an kaçıncı kitap"
+    ],
+    "keywords": [
+      "ilahi kitaplar",
+      "kutsal kitaplar",
+      "Tevrat",
+      "Zebur",
+      "İncil",
+      "kitaplara iman"
+    ],
+    "answer_tr": "İlahi kitaplar, Allah'ın peygamberlere gönderdiği vahiy kitaplarıdır. Dört büyük kitap: Tevrat (Hz. Musa), Zebur (Hz. Davut), İncil (Hz. İsa), Kur'an-ı Kerim (Hz. Muhammed). Kitaplara iman, İslam'ın 6 iman şartından biridir. Kur'an son ve korunmuş kitaptır; diğerleri tahrife uğramıştır.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/kutsal_kitaplar_nedir.json",
+    "semantic_description": "ilahi kutsal kitaplar nelerdir Tevrat Zebur İncil Kur'an dört büyük kitap iman"
+  },
+  {
+    "id": "peygamberler_nedir",
+    "type": "religious_knowledge",
+    "topic": "peygamberler_nedir",
+    "aliases": [
+      "Peygamberler Kimdir?",
+      "Kaç peygamber var",
+      "İlk ve son peygamber"
+    ],
+    "triggers": [
+      "peygamberler kimdir",
+      "kaç peygamber var",
+      "ilk peygamber kim",
+      "son peygamber kim",
+      "nebi rasul farkı",
+      "ulu'l azm peygamberler",
+      "peygamberlere iman"
+    ],
+    "keywords": [
+      "peygamberler",
+      "nebi rasul",
+      "ulu'l azm",
+      "peygamberlere iman"
+    ],
+    "answer_tr": "Peygamberler, Allah'ın vahiy gönderdiği seçkin insanlardır. İlk peygamber Hz. Adem, son peygamber Hz. Muhammed'dir. Kur'an'da 25 peygamberin adı geçer. Ulu'l Azm peygamberler: Hz. Nuh, Hz. İbrahim, Hz. Musa, Hz. İsa, Hz. Muhammed. Peygamberlerin özellikleri: sıdk, emanet, tebliğ, fetanet, ismet. Hz. Muhammed'den sonra peygamber gelmeyecektir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/peygamberler_nedir.json",
+    "semantic_description": "peygamberler kimdir kaç tane ilk son peygamber nebi rasul ulu'l azm iman"
+  },
+  {
+    "id": "hz_muhammed_hayati",
+    "type": "religious_knowledge",
+    "topic": "hz_muhammed_hayati",
+    "aliases": [
+      "Hz. Muhammed'in Hayatı",
+      "Peygamberimizin hayatı",
+      "Siyer"
+    ],
+    "triggers": [
+      "hz muhammed hayatı",
+      "peygamberimizin hayatı",
+      "hz muhammed kimdir",
+      "peygamber ne zaman doğdu",
+      "siyer özet",
+      "fil yılı",
+      "muhammed aleyhisselam"
+    ],
+    "keywords": [
+      "hz muhammed",
+      "peygamberimiz",
+      "siyer",
+      "fil yılı"
+    ],
+    "answer_tr": "Hz. Muhammed (s.a.v.) 571 yılında Mekke'de doğdu, 632 yılında Medine'de vefat etti. 40 yaşında Hira Mağarası'nda ilk vahiy geldi. Mekke'de 13 yıl, Medine'de 10 yıl tebliğ etti. 622'deki Hicret İslam tarihinin dönüm noktasıdır. Veda Haccı'nda 'Size iki emanet bırakıyorum: Kuran ve sünnetim' dedi. 63 yaşında vefat etti.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/hz_muhammed_hayati.json",
+    "semantic_description": "hz muhammed hayatı kimdir peygamberimiz siyer fil yılı Mekke Medine doğum vefat"
+  },
+  {
+    "id": "hicret_nedir",
+    "type": "religious_knowledge",
+    "topic": "hicret_nedir",
+    "aliases": [
+      "Hicret Nedir?",
+      "Medine'ye hicret",
+      "Hicri takvim"
+    ],
+    "triggers": [
+      "hicret nedir",
+      "medineye hicret",
+      "hicri takvim",
+      "622 yılı",
+      "ensar muhacir",
+      "mekke medine göç"
+    ],
+    "keywords": [
+      "hicret",
+      "Hicri takvim",
+      "Ensar",
+      "Muhacir"
+    ],
+    "answer_tr": "Hicret, Hz. Muhammed ve Müslümanların 622 yılında Mekke'den Medine'ye göçüdür. Hz. Peygamber, Hz. Ebu Bekir ile Sevr Mağarası'nda saklandıktan sonra Medine'ye ulaştı. Mekke'den gelenlere 'Muhacir', onları karşılayan Medinelilere 'Ensar' denir. Hicret, İslam devletinin temelini kurdu ve Hicri takvimin başlangıcıdır.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/hicret_nedir.json",
+    "semantic_description": "hicret nedir Medine göç 622 Ensar Muhacir Hicri takvim"
+  },
+  {
+    "id": "dort_halife_kimdir",
+    "type": "religious_knowledge",
+    "topic": "dort_halife_kimdir",
+    "aliases": [
+      "Dört Halife Kimdir?",
+      "Hulefa-i Raşidin",
+      "İlk halifeler"
+    ],
+    "triggers": [
+      "dört halife kimdir",
+      "hulefai raşidin",
+      "ebu bekir ömer osman ali",
+      "ilk halife kim",
+      "halife ne demek",
+      "islam halifeleri"
+    ],
+    "keywords": [
+      "dört halife",
+      "hulefai raşidin",
+      "Ebu Bekir",
+      "Ömer",
+      "Osman",
+      "Ali"
+    ],
+    "answer_tr": "Dört Halife (Hulefa-i Raşidin): 1. Hz. Ebu Bekir (632-634) — ridde savaşları, Kur'an'ı toplattı. 2. Hz. Ömer (634-644) — İslam devletini büyüttü, Hicri takvimi kurdu. 3. Hz. Osman (644-656) — Kur'an nüshalarını standartlaştırdı. 4. Hz. Ali (656-661) — Hz. Peygamber'in amcaoğlu ve damadı. Tümü cennetle müjdelenmiş sahabedendir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/dort_halife_kimdir.json",
+    "semantic_description": "dört halife kimdir hulefai raşidin Ebu Bekir Ömer Osman Ali ilk halife"
+  },
+  {
+    "id": "hz_ebubekir_kimdir",
+    "type": "religious_knowledge",
+    "topic": "hz_ebubekir_kimdir",
+    "aliases": [
+      "Hz. Ebu Bekir Kimdir?",
+      "İlk halife"
+    ],
+    "triggers": [
+      "ebu bekir kimdir",
+      "hz ebu bekir",
+      "ilk halife",
+      "sıddık lakabı",
+      "ebubekir"
+    ],
+    "keywords": [
+      "Ebu Bekir",
+      "Sıddık",
+      "ilk halife"
+    ],
+    "answer_tr": "Hz. Ebu Bekir, Hz. Peygamber'in en yakın dostu ve kayınpederi, İslam'ın ilk halifesidir (632-634). Lakabı 'Sıddık'tır (çok doğrulayan). Ridde savaşlarını yönetti, Kur'an'ı kitap hâline getirtti. Cennetle müjdelenen 10 sahabeden biridir.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/hz_ebubekir_kimdir.json",
+    "semantic_description": "Hz. Ebu Bekir kimdir ilk halife Sıddık lakabı"
+  },
+  {
+    "id": "hz_omer_kimdir",
+    "type": "religious_knowledge",
+    "topic": "hz_omer_kimdir",
+    "aliases": [
+      "Hz. Ömer Kimdir?",
+      "İkinci halife",
+      "Faruk"
+    ],
+    "triggers": [
+      "hz ömer kimdir",
+      "ömer kimdir",
+      "ikinci halife",
+      "faruk lakabı"
+    ],
+    "keywords": [
+      "Hz. Ömer",
+      "Faruk",
+      "ikinci halife"
+    ],
+    "answer_tr": "Hz. Ömer, İslam'ın ikinci halifesidir (634-644). Lakabı 'Faruk'tur (hak ile batılı ayıran). Adil ve güçlü yönetimiyle İslam devletini büyüttü; Mısır, Suriye, İran toprakları fethedildi. Hicri takvimi kurdu. Fakirlere bizzat yardım eder, gece sokak sokak dolaşırdı.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/hz_omer_kimdir.json",
+    "semantic_description": "Hz. Ömer kimdir ikinci halife Faruk lakabı adalet"
+  },
+  {
+    "id": "hz_osman_kimdir",
+    "type": "religious_knowledge",
+    "topic": "hz_osman_kimdir",
+    "aliases": [
+      "Hz. Osman Kimdir?",
+      "Üçüncü halife",
+      "Zinnureyn"
+    ],
+    "triggers": [
+      "hz osman kimdir",
+      "osman kimdir",
+      "üçüncü halife",
+      "zinnureyn lakabı",
+      "kuran nüsha"
+    ],
+    "keywords": [
+      "Hz. Osman",
+      "Zinnureyn",
+      "üçüncü halife"
+    ],
+    "answer_tr": "Hz. Osman, İslam'ın üçüncü halifesidir (644-656). Hz. Peygamber'in iki kızıyla evlendiği için 'Zinnureyn' (iki nur sahibi) lakabını aldı. En önemli hizmeti Kur'an nüshalarını standartlaştırıp çoğaltmasıdır. Cömertliği ve hayası ile tanınırdı.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/hz_osman_kimdir.json",
+    "semantic_description": "Hz. Osman kimdir üçüncü halife Zinnureyn Kur'an nüsha"
+  },
+  {
+    "id": "hz_ali_kimdir",
+    "type": "religious_knowledge",
+    "topic": "hz_ali_kimdir",
+    "aliases": [
+      "Hz. Ali Kimdir?",
+      "Dördüncü halife"
+    ],
+    "triggers": [
+      "hz ali kimdir",
+      "ali kimdir",
+      "dördüncü halife",
+      "ilmin kapısı",
+      "hz fatıma eşi"
+    ],
+    "keywords": [
+      "Hz. Ali",
+      "dördüncü halife",
+      "ilmin kapısı"
+    ],
+    "answer_tr": "Hz. Ali, İslam'ın dördüncü halifesidir (656-661). Hz. Peygamber'in amcaoğlu ve damadıdır; Hz. Fatıma ile evliydi. 'İlmin kapısı' olarak anılır. İlim ve cesareti ile tanınırdı. Hasan ve Hüseyin'in babasıdır.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/hz_ali_kimdir.json",
+    "semantic_description": "Hz. Ali kimdir dördüncü halife ilmin kapısı Hz. Fatıma"
+  },
+  {
+    "id": "sahabeler_kimdir",
+    "type": "religious_knowledge",
+    "topic": "sahabeler_kimdir",
+    "aliases": [
+      "Sahabeler Kimdir?",
+      "Ashab-ı Kiram",
+      "Sahabi ne demek"
+    ],
+    "triggers": [
+      "sahabe kimdir",
+      "sahabeler",
+      "ashabi kiram",
+      "sahabi ne demek",
+      "aşere-i mübeşşere",
+      "ilk müslümanlar",
+      "ashabın özellikleri"
+    ],
+    "keywords": [
+      "sahabe",
+      "ashab-ı kiram",
+      "aşere-i mübeşşere"
+    ],
+    "answer_tr": "Sahabi, Hz. Muhammed'i iman hâlinde gören ve iman üzere vefat eden kişidir. Ashab-ı Kiram, dini bizzat Peygamber'den öğrendikleri için en güvenilir nesildir. Aşere-i Mübeşşere, cennetle müjdelenen 10 sahabidir (4 Halife dahil). Sahabeye dil uzatmak Ehl-i Sünnet'e göre büyük hatadır.",
+    "source_note": "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır.",
+    "requires_ayah": false,
+    "response_file": "server/data/ilmihal/sahabeler_kimdir.json",
+    "semantic_description": "sahabe kimdir ne demek ashab-ı kiram aşere-i mübeşşere ilk Müslümanlar"
   }
 ]

@@ -81,18 +81,26 @@ class SemanticTopicMatcher {
         return b.score - a.score;
       }
 
-      // Tiebreaker: prefer entries where primary token comes first
+      // Tiebreaker: count how many query tokens appear in the entry ID
       const aIdLower = (a.entryId || '').toLowerCase();
       const bIdLower = (b.entryId || '').toLowerCase();
-      const primaryToken = queryTokens[0];
+      const STOP_TOKENS_TB = new Set(['nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok', 'ne', 'bir', 'bu', 'ile']);
+      const meaningfulTokens = queryTokens.filter(t => !STOP_TOKENS_TB.has(t) && t.length > 2);
 
+      const aCoverage = meaningfulTokens.filter(t => aIdLower.includes(t)).length;
+      const bCoverage = meaningfulTokens.filter(t => bIdLower.includes(t)).length;
+
+      if (bCoverage !== aCoverage) return bCoverage - aCoverage;  // more coverage wins
+
+      // Final tiebreaker: primary token starts the ID
+      const primaryToken = queryTokens[0];
       const aStartsWithPrimary = aIdLower.startsWith(primaryToken);
       const bStartsWithPrimary = bIdLower.startsWith(primaryToken);
 
       if (aStartsWithPrimary && !bStartsWithPrimary) return -1;
       if (!aStartsWithPrimary && bStartsWithPrimary) return 1;
 
-      // Second tiebreaker: fewer underscores (simpler entry)
+      // Last resort: fewer underscores (simpler entry)
       const aUnderscores = (a.entryId || '').split('_').length;
       const bUnderscores = (b.entryId || '').split('_').length;
       return aUnderscores - bUnderscores;
@@ -207,10 +215,15 @@ class SemanticTopicMatcher {
     // RULE 2: Keywords array match (specific keywords only)
     // =========================================
     if (entry.keywords && Array.isArray(entry.keywords)) {
+      // Generic question words — never use as sole match signal
+      const STOP_TOKENS = new Set(['nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'mi', 'mu', 'var', 'yok', 'ne', 'bir', 'bu', 'ile']);
+
       // Check for EXACT keyword match (not substring)
+      // Require the matching token to be a meaningful (non-stop) word
       const exactKeywordMatch = entry.keywords.some(kw => {
         const kwLower = kw.toLowerCase();
         return queryTokens.some(qt => {
+          if (STOP_TOKENS.has(qt)) return false;  // skip generic tokens
           // Only match if keyword starts with token or token starts with keyword
           return kwLower === qt || kwLower.startsWith(qt + ' ') || (qt.length > 3 && kwLower.includes(qt));
         });
