@@ -537,7 +537,6 @@ async function handleChatModuleRequest(req, res, module = "chat") {
     const response = await buildChatResponse(message, history, {
       module,
       source_screen: sourceScreen,
-      forceIlmihalKnowledge: Boolean(ilmihalKnowledgeHit),
     });
     const decisionMeta = response.decision_meta || {};
     const isDebug = isDebugChatEngineEnabled();

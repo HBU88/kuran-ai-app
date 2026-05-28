@@ -206,6 +206,17 @@ function matchesLocalKnowledgeCue(normalizedMessage) {
     "berat kandili",
     "regaip kandili",
     "mevlid kandili",
+    "tovbe",
+    "tevbe",
+    "tövbe",
+    "nikah",
+    "nikâh",
+    "bosanma",
+    "boşanma",
+    "talak",
+    "miras",
+    "sadaka",
+    "gece ibadetleri",
   ];
   return cues.some((cue) => normalizedMessage.includes(normalize(cue)));
 }
@@ -324,6 +335,21 @@ function matchesKnowledgeQuestionCue(normalizedMessage) {
     "berat kandili",
     "regaip kandili",
     "mevlid kandili",
+    "nikâh nedir",
+    "nikah nedir",
+    "nikâh şartları",
+    "nikah şartları",
+    "aile hakkı",
+    "aile hakki",
+    "boşanma nedir",
+    "bosanma nedir",
+    "talak nedir",
+    "miras nedir",
+    "miras paylaşımı",
+    "miras paylasimi",
+    "sadaka nedir",
+    "sadaka kime verilir",
+    "gece ibadetleri nelerdir",
   ];
   return questionMarkers.some((marker) => normalizedMessage.includes(normalize(marker)));
 }
@@ -509,155 +535,6 @@ function normalizeNullableTopic(value) {
 
 
 function lookupProphetBehaviorAnswer(normalizedMessage) {
-  const hasProphetSubject = /(?:hzs*muhammed|hz.s*muhammed|muhammed|peygamberimiz|resulullah|peygamberin)/i.test(normalizedMessage);
-  const hasBehaviorQuestion = /(?:nasil biriydi|nas?ld?|nasildi|ahlak|karakter|davran?rd?|davranirdi|davranir|nas?l davran)/i.test(normalizedMessage);
-  if (!hasProphetSubject || !hasBehaviorQuestion) return null;
-
-  return {
-    id: "prophet_hz_muhammed_behavior",
-    file: "prophets.json",
-    type: "knowledge",
-    topic: "hz_muhammed",
-    answer_text: "Hz. Muhammed g?venilir, merhametli, sab?rl? ve adaletli bir ?rnek olarak anlat?l?r. Onun ahlak? yumu?akl?k, ?l?? ve emanet bilinciyle ?ne ??kar.",
-    source_note: "Curated internal knowledge.",
-    requires_ayah: false,
-    route_mode: "ilmihal_knowledge",
-    knowledge_hit_id: "prophet_hz_muhammed_behavior",
-  };
-}
-
-function hasKnowledgeMatch(message, analysis = {}, plannerPlan = null, history = []) {
-  return Boolean(lookupKnowledgeAnswer(message, analysis, plannerPlan, history));
-}
-
-function isLocalKnowledgeQuery(message, analysis = {}, plannerPlan = null, history = []) {
-  const normalized = normalizeMessage(message);
-  if (!normalized) return false;
-  if (containsAyahLanguage(normalized)) return false;
-  return Boolean(routeKnowledge(message, analysis, plannerPlan, history) || matchesLocalKnowledgeCue(normalized));
-}
-
-function isKnowledgeIntentQuestion(message, analysis = {}, plannerPlan = null, history = []) {
-  const normalized = normalizeMessage(message);
-  if (!normalized || containsAyahLanguage(normalized)) return false;
-  return Boolean(lookupKnowledgeAnswer(message, analysis, plannerPlan, history) || matchesKnowledgeQuestionCue(normalized));
-}
-
-function matchesLocalKnowledgeCue(normalizedMessage) {
-  const cues = [
-    "abdest",
-    "wudu",
-    "namaz",
-    "teravih",
-    "teravi",
-    "cuma",
-    "bayram",
-    "cenaze",
-    "oruc",
-    "oruç",
-    "zekat",
-    "zekat",
-    "dua",
-    "tovbe",
-    "tevbe",
-    "tövbe",
-    "sahur",
-    "vitir",
-    "gusul",
-    "gusül",
-    "seferi",
-    "namaz vakitleri",
-    "nikah",
-    "nikâh",
-    "bosanma",
-    "boşanma",
-    "talak",
-    "miras",
-    "sadaka",
-    "kandil",
-    "gece ibadetleri",
-  ];
-  return cues.some((cue) => normalizedMessage.includes(normalize(cue)));
-}
-
-function matchesKnowledgeQuestionCue(normalizedMessage) {
-  const questionMarkers = [
-    "nasıl edilir",
-    "nasil edilir",
-    "nasıl yapılır",
-    "nasil yapilir",
-    "nasıl alınır",
-    "nasil alinir",
-    "nasıl kılınır",
-    "nasil kilinir",
-    "nasıldı",
-    "nasildi",
-    "nasıl biriydi",
-    "nasil biriydi",
-    "nasıl alınır",
-    "nasil alinir",
-    "nedir",
-    "nelerdir",
-    "kimlere verilir",
-    "şart mı",
-    "sart mi",
-    "farz mı",
-    "farz mi",
-    "vacip mi",
-    "kaç rekat",
-    "kac rekat",
-    "kaç rekât",
-    "kac rekât",
-    "nikâh nedir",
-    "nikah nedir",
-    "nikâh şartları",
-    "nikah şartları",
-    "aile hakkı",
-    "aile hakki",
-    "boşanma nedir",
-    "bosanma nedir",
-    "talak nedir",
-    "miras nedir",
-    "miras paylaşımı",
-    "miras paylasimi",
-    "sadaka nedir",
-    "sadaka kime verilir",
-    "kandil geceleri nedir",
-    "gece ibadetleri nelerdir",
-  ];
-  return questionMarkers.some((marker) => normalizedMessage.includes(normalize(marker)));
-}
-
-function containsAyahLanguage(normalizedMessage) {
-  return normalizedMessage.includes(normalize("ayet")) || normalizedMessage.includes(normalize("kur'an"));
-}
-
-function normalizeMessage(value) {
-  return normalize(decodeURIComponentSafe(String(value || "")));
-}
-
-function normalizeHistory(history) {
-  if (!Array.isArray(history) || history.length === 0) return "";
-  return history
-    .slice(-4)
-    .map((item) => (item && typeof item.text === "string" ? normalizeMessage(item.text) : ""))
-    .join(" ");
-}
-
-function normalizeList(values) {
-  return (Array.isArray(values) ? values : [])
-    .map((value) => normalizeMessage(value))
-    .filter(Boolean);
-}
-
-function normalizeNullableTopic(value) {
-  if (typeof value !== "string") return null;
-  const text = normalize(value);
-  return text || null;
-}
-
-
-function lookupProphetBehaviorAnswer(normalizedMessage) {
   const triggers = [
     "hz muhammed nasil biriydi",
     "hz muhammed nas?l biriydi",
@@ -675,7 +552,7 @@ function lookupProphetBehaviorAnswer(normalizedMessage) {
   const matched = triggers.some((trigger) => normalizedMessage.includes(normalizeMessage(trigger)));
   if (!matched) return null;
 
-  const answerText = "Hz. Muhammed g?venilir, merhametli, sab?rl? ve adaletli bir ?rnek olarak anlat?l?r. Onun ahlak? yumu?akl?k, ?l?? ve emanet bilinciyle ?ne ??kar.";
+  const answerText = "Hz. Muhammed güvenilir, merhametli, sabırlı ve adaletli bir örnek olarak anlatılır. Onun ahlakı yumuşaklık, ölçü ve emanet bilinciyle öne çıkar.";
   return {
     id: "prophet_hz_muhammed_behavior",
     file: "prophets.json",

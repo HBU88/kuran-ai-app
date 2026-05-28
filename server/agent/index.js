@@ -771,7 +771,7 @@ async function buildChatResponse(message, history = [], options = {}) {
     !normalize(message).includes(normalize("ayet"));
   const forceKnowledgeOnlyReply =
     !explicitAyahRequest &&
-    normalize(message).includes(normalize("tÃ¶vbe nasÄ±l edilir"));
+    normalize(message).includes(normalize("tövbe nasıl edilir"));
   const finalResponseType = (knowledgeDrivenAnswer || knowledgeOnlyResponse)
     || forceKnowledgeOnlyReply
     ? "direct_answer"
@@ -982,7 +982,7 @@ function shouldAttachAyahForGeneralQuestion(analysis, rankedAyahs) {
     return true;
   }
 
-  const strongThemes = new Set(["dua", "zikir", "sabÄ±r", "tevekkÃ¼l", "korku", "imtihan"]);
+  const strongThemes = new Set(["dua", "zikir", "sabır", "tevekkül", "korku", "imtihan"]);
   return strongThemes.has(normalizeThemeKey(analysis.primary_theme));
 }
 
@@ -1056,17 +1056,17 @@ function looksLikeGeneralIslamicQuestion(message, analysis) {
   if (analysis.intent === "general_islamic_question") return true;
   const normalizedMessage = normalize(message);
   const signals = [
-    "sevap mÄ±",
+    "sevap mı",
     "sevap mi",
     "gerekli mi",
-    "farz mÄ±",
+    "farz mı",
     "farz mi",
     "ne demek",
     "nedir",
-    "neden Ã¶nemli",
+    "neden önemli",
     "olur mu",
-    "kaÃ§",
-    "rekÃ¢t",
+    "kaç",
+    "rekât",
     "rekat",
   ];
   return signals.some((signal) => normalizedMessage.includes(normalize(signal)));
@@ -1075,17 +1075,17 @@ function looksLikeGeneralIslamicQuestion(message, analysis) {
 function looksLikeFactualPracticeQuestion(message) {
   const normalizedMessage = normalize(message);
   const factualSignals = [
-    "kaÃ§ rekÃ¢t",
-    "kaÃ§ rekat",
-    "kaÃ§",
-    "rekÃ¢t",
+    "kaç rekât",
+    "kaç rekat",
+    "kaç",
+    "rekât",
     "rekat",
-    "nasÄ±l kÄ±lÄ±nÄ±r",
-    "kaÃ§ farz",
-    "kaÃ§ sÃ¼nnet",
-    "kaÃ§ sunnet",
+    "nasıl kılınır",
+    "kaç farz",
+    "kaç sünnet",
+    "kaç sunnet",
   ];
-  const practiceSignals = ["namaz", "abdest", "oruÃ§", "ezan"];
+  const practiceSignals = ["namaz", "abdest", "oruç", "ezan"];
   return (
     factualSignals.some((signal) => normalizedMessage.includes(normalize(signal))) &&
     practiceSignals.some((signal) => normalizedMessage.includes(normalize(signal)))
@@ -1217,17 +1217,17 @@ function isExplicitAyahRequest(message, analysis, subIntent, plannerResult) {
   const normalizedMessage = normalize(message);
   const explicitTopic = resolveExplicitTopic(message);
   const quranTopicSignals = [
-    "kuran'da ne geÃ§iyor",
+    "kuran'da ne geçiyor",
     "kuranda ne geciyor",
     "kuran'da ne var",
     "kuranda ne var",
-    "kuran'dan bir ÅŸey sÃ¶yle",
+    "kuran'dan bir şey söyle",
     "kurandan bir sey soyle",
-    "ayet gÃ¶ster",
+    "ayet göster",
     "ayet goster",
-    "ayet paylaÅŸ",
+    "ayet paylaş",
     "ayet paylas",
-    "ayet Ã¶ner",
+    "ayet öner",
     "ayet oner",
     "ayet isterim",
   ];
@@ -1350,15 +1350,15 @@ function isSimpleCasualConversation(message) {
   const casualSignals = [
     "selam",
     "merhaba",
-    "nasÄ±lsÄ±n",
+    "nasılsın",
     "nasilsin",
     "iyi misin",
     "ne haber",
-    "ne yapÄ±yorsun",
+    "ne yapıyorsun",
     "ne yapiyorsun",
-    "gÃ¼naydÄ±n",
+    "günaydın",
     "gunaydin",
-    "iyi akÅŸamlar",
+    "iyi akşamlar",
     "iyi aksamlar",
   ];
   const strongerSignals = [
@@ -1366,22 +1366,22 @@ function isSimpleCasualConversation(message) {
     "dua",
     "zikir",
     "namaz",
-    "sabÄ±r",
+    "sabır",
     "sabir",
-    "tevekkÃ¼l",
+    "tevekkül",
     "tevekkul",
-    "tÃ¶vbe",
+    "tövbe",
     "tovbe",
     "korkuyorum",
-    "yalnÄ±z",
+    "yalnız",
     "yalniz",
-    "iyi deÄŸilim",
+    "iyi değilim",
     "iyi degilim",
-    "hastayÄ±m",
+    "hastayım",
     "hastayim",
-    "iÃ§im daralÄ±yor",
+    "içim daralıyor",
     "icim daraliyor",
-    "ne yapacaÄŸÄ±mÄ± bilmiyorum",
+    "ne yapacağımı bilmiyorum",
     "ne yapacagimi bilmiyorum",
   ];
 
