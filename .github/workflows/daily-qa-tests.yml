@@ -104,15 +104,12 @@ jobs:
 
           # Commit only if there are changes
           if ! git diff --cached --quiet; then
-            git commit -m "📊 Daily QA Report: Avg ${AVG_SCORE}% | Errors: ${ERROR_COUNT}
-
-Automated daily test run results with generated question variations.
-- Generated fresh questions across all topics
-- Tested semantic matching accuracy
-- Analyzed performance metrics
-- Generated improvement recommendations
-
-Co-Authored-By: QA Bot <qa@hakai.local>"
+            git commit -m "📊 Daily QA Report: Avg ${AVG_SCORE}% | Errors: ${ERROR_COUNT}" \
+              -m "Automated daily test run results with generated question variations." \
+              -m "- Generated fresh questions across all topics" \
+              -m "- Tested semantic matching accuracy" \
+              -m "- Analyzed performance metrics" \
+              -m "- Generated improvement recommendations"
             git push
           else
             echo "No changes to commit"
