@@ -9,6 +9,7 @@ import '../models/prayer_time_model.dart';
 import '../sources/remote/diyanet_auth_service.dart';
 import '../sources/remote/diyanet_place_service.dart';
 import '../sources/remote/diyanet_prayer_service.dart';
+import '../sources/remote/nominatim_service.dart';
 import '../sources/remote/prayer_api_service.dart';
 
 class PrayerRepository {
@@ -18,10 +19,12 @@ class PrayerRepository {
     DiyanetAuthService? authService,
     DiyanetPlaceService? placeService,
     DiyanetPrayerService? prayerService,
+    NominatimService? nominatimService,
     int defaultCityId = _defaultFallbackCityId,
   })  : _authService = authService ?? DiyanetAuthService(),
         _placeService = placeService ?? DiyanetPlaceService(),
         _prayerService = prayerService ?? DiyanetPrayerService(),
+        _nominatimService = nominatimService ?? NominatimService(),
         _legacyProvider = legacyProvider,
         _defaultCityId = defaultCityId;
 
@@ -33,6 +36,7 @@ class PrayerRepository {
   final DiyanetAuthService _authService;
   final DiyanetPlaceService _placeService;
   final DiyanetPrayerService _prayerService;
+  final NominatimService _nominatimService;
   final PrayerProvider _legacyProvider;
   final int _defaultCityId;
   String? _accessToken;
@@ -298,6 +302,139 @@ class PrayerRepository {
 
   Future<DiyanetCity> getCityDetail(int cityId) async {
     return _placeService.getCityDetail(await _getAccessToken(), cityId);
+  }
+
+  /// Reverse-geocode [latitude]/[longitude] → Diyanet country/state/city.
+  ///
+  /// Returns null if:
+  ///  - Nominatim is unreachable or returns no city
+  ///  - No Diyanet country/state/city name matches well enough
+  Future<DiyanetAutoDetectResult?> autoDetectFromCoordinates(
+    double latitude,
+    double longitude,
+  ) async {
+    final address =
+        await _nominatimService.reverseGeocode(latitude, longitude);
+    debugPrint(
+      'HAKAI_PRAYER_AUTODETECT nominatim=$address',
+    );
+    if (address == null) return null;
+
+    final token = await _getAccessToken();
+
+    // ---- Find country ----
+    final countries = await _placeService.getCountries(token);
+    DiyanetCountry? matchedCountry;
+    if (address.countryCode == 'tr') {
+      // Fast path — Turkey is almost always the target
+      matchedCountry =
+          _findBestNameMatch(countries, 'Turkey', getName: (c) => c.name) ??
+          _findBestNameMatch(countries, 'Türkiye', getName: (c) => c.name) ??
+          _findBestNameMatch(countries, address.countryCode, getName: (c) => c.name);
+    } else {
+      matchedCountry = _findBestNameMatch(
+        countries,
+        address.countryCode,
+        getName: (c) => c.name,
+      );
+    }
+    if (matchedCountry == null) {
+      debugPrint('HAKAI_PRAYER_AUTODETECT no country match');
+      return null;
+    }
+
+    // ---- Find state / province ----
+    final states = await _placeService.getStates(token, matchedCountry.id);
+    final matchedState = _findBestNameMatch(states, address.state, getName: (s) => s.name);
+    if (matchedState == null) {
+      debugPrint('HAKAI_PRAYER_AUTODETECT no state match for "${address.state}"');
+      return null;
+    }
+
+    // ---- Find city ----
+    final cities = await _placeService.getCities(token, matchedState.id);
+    final matchedCity = _findBestNameMatch(cities, address.city, getName: (c) => c.name);
+    if (matchedCity == null) {
+      // Fall back to first city in the matched state (state capital)
+      if (cities.isEmpty) {
+        debugPrint('HAKAI_PRAYER_AUTODETECT no cities in state');
+        return null;
+      }
+      debugPrint(
+        'HAKAI_PRAYER_AUTODETECT city "${address.city}" not found, using ${cities.first.name}',
+      );
+      return DiyanetAutoDetectResult(
+        country: matchedCountry,
+        state: matchedState,
+        city: cities.first,
+        isExactCityMatch: false,
+      );
+    }
+
+    debugPrint(
+      'HAKAI_PRAYER_AUTODETECT matched ${matchedCountry.name} / ${matchedState.name} / ${matchedCity.name}',
+    );
+    return DiyanetAutoDetectResult(
+      country: matchedCountry,
+      state: matchedState,
+      city: matchedCity,
+      isExactCityMatch: true,
+    );
+  }
+
+  /// Fuzzy name match — normalizes Turkish chars and compares.
+  /// Returns the best match from [items] for [query], or null if no close match.
+  T? _findBestNameMatch<T>(
+    List<T> items,
+    String query, {
+    required String Function(T) getName,
+  }) {
+    if (items.isEmpty || query.isEmpty) return null;
+
+    final normalizedQuery = _normalizeName(query);
+
+    // 1. Exact normalized match
+    for (final item in items) {
+      if (_normalizeName(getName(item)) == normalizedQuery) return item;
+    }
+
+    // 2. Starts-with match
+    for (final item in items) {
+      final n = _normalizeName(getName(item));
+      if (n.startsWith(normalizedQuery) || normalizedQuery.startsWith(n)) {
+        return item;
+      }
+    }
+
+    // 3. Contains match (for e.g. "İstanbul" ↔ "Istanbul ili")
+    for (final item in items) {
+      final n = _normalizeName(getName(item));
+      if (n.contains(normalizedQuery) || normalizedQuery.contains(n)) {
+        return item;
+      }
+    }
+
+    return null;
+  }
+
+  String _normalizeName(String value) {
+    return value
+        .trim()
+        .toLowerCase()
+        .replaceAll('ı', 'i')
+        .replaceAll('İ', 'i')
+        .replaceAll('ğ', 'g')
+        .replaceAll('Ğ', 'g')
+        .replaceAll('ü', 'u')
+        .replaceAll('Ü', 'u')
+        .replaceAll('ş', 's')
+        .replaceAll('Ş', 's')
+        .replaceAll('ö', 'o')
+        .replaceAll('Ö', 'o')
+        .replaceAll('ç', 'c')
+        .replaceAll('Ç', 'c')
+        // strip common suffixes (ili, ili merkezi, province, etc.)
+        .replaceAll(RegExp(r'\s+(ili|province|eyaleti|merkezi)$'), '');
   }
 
   Future<String> _getAccessToken() async {
@@ -749,4 +886,22 @@ class _DiyanetTimezoneInfo {
 
   final num greenwichMeanTimeZone;
   final String source;
+}
+
+/// Result of a successful GPS-based auto-detection.
+class DiyanetAutoDetectResult {
+  const DiyanetAutoDetectResult({
+    required this.country,
+    required this.state,
+    required this.city,
+    required this.isExactCityMatch,
+  });
+
+  final DiyanetCountry country;
+  final DiyanetState state;
+  final DiyanetCity city;
+
+  /// True if a Diyanet city name matched the Nominatim city.
+  /// False if we fell back to the state's first city.
+  final bool isExactCityMatch;
 }

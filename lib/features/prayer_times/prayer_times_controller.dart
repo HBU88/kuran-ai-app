@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../data/models/place_model.dart';
 import '../../data/models/prayer_time_model.dart';
@@ -52,6 +53,8 @@ class PrayerTimesController extends ChangeNotifier {
   int? selectedCityId;
   String selectedCityName = '';
   String selectedLocationLabel = '';
+  bool autoDetecting = false;
+  String? autoDetectError;
 
   bool get canSaveLocation {
     return selectedCountryId != null &&
@@ -248,6 +251,82 @@ class PrayerTimesController extends ChangeNotifier {
     notificationsEnabled = enabled;
     await _repository.setNotificationsEnabled(enabled);
     notifyListeners();
+  }
+
+  /// GPS-based auto-location.
+  ///
+  /// 1. Requests location permission (prompts user if needed).
+  /// 2. Gets current GPS position.
+  /// 3. Reverse-geocodes via Nominatim → Diyanet country/state/city.
+  /// 4. Saves + loads prayer times for the detected city.
+  ///
+  /// Sets [autoDetecting] while running and [autoDetectError] on failure.
+  Future<void> autoDetectLocation() async {
+    autoDetecting = true;
+    autoDetectError = null;
+    notifyListeners();
+
+    try {
+      // --- Permission ---
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        autoDetectError = 'Konum servisleri kapalı. Lütfen açın.';
+        return;
+      }
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          autoDetectError = 'Konum izni reddedildi.';
+          return;
+        }
+      }
+      if (permission == LocationPermission.deniedForever) {
+        autoDetectError =
+            'Konum izni kalıcı olarak reddedildi. Ayarlardan izin verin.';
+        return;
+      }
+
+      // --- Position ---
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.low, // city-level is enough
+          timeLimit: Duration(seconds: 15),
+        ),
+      );
+
+      // --- Diyanet match ---
+      final result = await _repository.autoDetectFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+
+      if (result == null) {
+        autoDetectError =
+            'Konumunuz için şehir bulunamadı. Lütfen manuel seçin.';
+        return;
+      }
+
+      // --- Save & load ---
+      await _repository.setSelectedLocation(
+        countryId: result.country.id,
+        countryName: result.country.name,
+        stateId: result.state.id,
+        stateName: result.state.name,
+        cityId: result.city.id,
+        cityName: result.city.name,
+      );
+      _syncSelectedLocationFromRepository();
+      await load(refreshPlaces: true);
+    } on LocationServiceDisabledException {
+      autoDetectError = 'Konum servisleri kapalı. Lütfen açın.';
+    } catch (e) {
+      autoDetectError = 'Konum alınamadı: ${e.toString().split('\n').first}';
+    } finally {
+      autoDetecting = false;
+      notifyListeners();
+    }
   }
 
   void refreshClock() {
