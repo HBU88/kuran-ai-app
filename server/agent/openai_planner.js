@@ -410,9 +410,103 @@ function getPlannerDebugMeta() {
   return { ...lastPlannerMeta };
 }
 
+/**
+ * Ilmihal KB-miss fallback — calls OpenAI to answer a religious question directly.
+ *
+ * Safety rules baked into the system prompt:
+ *  - Only Hanafi/Diyanet mainstream perspective
+ *  - Returns confidence='uncertain' when unsure → caller must show clarification
+ *  - Never issues fatwas or fabricates rulings
+ *  - Wrong answer is worse than no answer → strict uncertainty handling
+ *
+ * Returns { answer, confidence, topic_detected } or null on any failure.
+ * confidence: 'high' | 'medium' | 'uncertain'
+ */
+async function askOpenAIIlmihalFallback(message, history = []) {
+  if (!isOpenAIPlannerEnabled()) return null;
+  const client = getOpenAIClient();
+  if (!client) return null;
+
+  let response;
+  try {
+    response = await client.responses.create({
+      model: process.env.OPENAI_ILMIHAL_MODEL || "gpt-4o",
+      instructions: [
+        "Sen HAKAI uygulamasının Türkçe ilmihal asistanısın.",
+        "Kullanıcıya pratik ilmihal soruları için kısa, güvenilir Türkçe cevap verirsin.",
+        "KESİN KURALLAR:",
+        "1. Yalnızca Hanefi mezhebine dayalı Diyanet ana çerçevesini kullan.",
+        "2. Emin olmadığında veya konu hassas/tartışmalı ise confidence='uncertain' döndür, asla tahmin yürütme.",
+        "3. Fetva verme; kesin hüküm gerektiren durumlarda Diyanet veya bir din görevlisine yönlendir.",
+        "4. Cevabı 2-4 cümleyle sınırla; kısa ve pratik ol.",
+        "5. Yanlış cevap vermek cevap vermemekten çok daha kötüdür — şüpheli durumlarda uncertain döndür.",
+        "6. Sadece geçerli JSON döndür, başka hiçbir şey yazma.",
+      ].join(" "),
+      input: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "input_text",
+              text: [
+                `Kullanıcı sorusu: ${message}`,
+                history.length > 0
+                  ? `Son konuşma bağlamı: ${JSON.stringify(sanitizeHistory(history))}`
+                  : "",
+              ]
+                .filter(Boolean)
+                .join("\n"),
+            },
+          ],
+        },
+      ],
+      text: {
+        format: {
+          type: "json_schema",
+          name: "ilmihal_answer",
+          strict: true,
+          schema: {
+            type: "object",
+            additionalProperties: false,
+            properties: {
+              answer: { type: "string" },
+              confidence: { type: "string", enum: ["high", "medium", "uncertain"] },
+              topic_detected: { type: "string" },
+            },
+            required: ["answer", "confidence", "topic_detected"],
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.warn("[ILMIHAL_FALLBACK] OpenAI call failed:", error?.message || String(error));
+    return null;
+  }
+
+  const rawText = extractPlannerText(response);
+  if (!rawText) return null;
+
+  let parsed;
+  try {
+    parsed = JSON.parse(rawText);
+  } catch {
+    return null;
+  }
+
+  if (!parsed || typeof parsed.answer !== "string" || !parsed.confidence) return null;
+  if (!["high", "medium", "uncertain"].includes(parsed.confidence)) return null;
+
+  return {
+    answer: parsed.answer.trim(),
+    confidence: parsed.confidence,
+    topic_detected: typeof parsed.topic_detected === "string" ? parsed.topic_detected.trim() : "",
+  };
+}
+
 module.exports = {
   getOpenAIClient,
   isOpenAIPlannerEnabled,
   planChatWithOpenAI,
+  askOpenAIIlmihalFallback,
   getPlannerDebugMeta,
 };

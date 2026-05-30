@@ -34,7 +34,7 @@ const {
   lookupKnowledgeAnswer,
 } = require("./knowledge_base");
 const { routeKnowledge } = require("./knowledge_router");
-const { getPlannerDebugMeta, planChatWithOpenAI } = require("./openai_planner");
+const { getPlannerDebugMeta, planChatWithOpenAI, askOpenAIIlmihalFallback } = require("./openai_planner");
 const { buildAssistantText } = require("./response_composer");
 const { applySafetyGuard } = require("./safety_guard");
 const { loadAyahDataset } = require("../utils/load_ayah_dataset");
@@ -513,12 +513,45 @@ function buildIlmihalClarificationResponse(message, history, baseAnalysis, timin
   });
 }
 
-function buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preRouteStage = null, sourceScreen = null) {
+async function buildIlmihalModuleResponse(message, history, baseAnalysis, timing, preRouteStage = null, sourceScreen = null) {
   const knowledgeResult = timing.measureSync("knowledge_router_ms", () =>
     lookupKnowledgeAnswer(message, baseAnalysis, null, history)
   );
 
   if (!knowledgeResult) {
+    // Try OpenAI fallback — only serve if model is confident (high or medium)
+    const openaiResult = await timing.measureAsync("openai_ilmihal_fallback_ms", () =>
+      askOpenAIIlmihalFallback(message, history)
+    );
+
+    if (openaiResult && openaiResult.confidence !== "uncertain") {
+      const analysis = { ...baseAnalysis, response_type: "direct_answer" };
+      const assistantText = openaiResult.answer;
+      const responsePreview = isDebugChatEngineEnabled() ? assistantText.slice(0, 800) : null;
+      const decisionMeta = buildDecisionMeta(
+        [],
+        { responseType: "direct_answer", ayahUsed: false, selectedAyah: null, topAyahIds: [] },
+        false,
+        "ilmihal_openai_fallback",
+        null,
+        timing.snapshot(),
+        "openai_fallback",
+        "ilmihal",
+        responsePreview,
+        null,
+        sourceScreen
+      );
+      return applySafetyGuard({
+        ...analysis,
+        response_type: "direct_answer",
+        ayah_used: false,
+        top_ayah_ids: [],
+        selected_ayah: null,
+        decision_meta: decisionMeta,
+        assistant_text: assistantText,
+      });
+    }
+
     return buildIlmihalClarificationResponse(message, history, baseAnalysis, timing, sourceScreen);
   }
 
@@ -649,7 +682,7 @@ async function buildChatResponse(message, history = [], options = {}) {
     const baseAnalysis = timing.measureSync("context_resolver_ms", () =>
       analyzeUserMessageFallback(message, history)
     );
-    return buildIlmihalModuleResponse(
+    return await buildIlmihalModuleResponse(
       message,
       history,
       baseAnalysis,
@@ -663,7 +696,7 @@ async function buildChatResponse(message, history = [], options = {}) {
     analyzeUserMessageFallback(message, history)
   );
   if (moduleMode === "ilmihal") {
-    return buildIlmihalModuleResponse(message, history, baseAnalysis, timing, null, options.source_screen || null);
+    return await buildIlmihalModuleResponse(message, history, baseAnalysis, timing, null, options.source_screen || null);
   }
   if (moduleMode === "ayah" && isIlmihalModuleQuestion(message, baseAnalysis, history)) {
     return buildModuleRedirectResponse("ayah", message, baseAnalysis, timing, "ilmihal");

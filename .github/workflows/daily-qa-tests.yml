@@ -2,8 +2,8 @@ name: Daily QA Tests - Generated Questions
 
 on:
   schedule:
-    # Run at 2 AM UTC daily
-    - cron: '0 2 * * *'
+    # Run at 2 AM, 10 AM, and 6 PM UTC (3x daily)
+    - cron: '0 2,10,18 * * *'
   workflow_dispatch:
 
 jobs:
@@ -75,6 +75,18 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
+      - name: Validate KB coverage (find missing topics)
+        working-directory: server
+        timeout-minutes: 5
+        if: always()
+        run: node knowledge-base-validator.js
+
+      - name: Expand KB with missing topics (static content library)
+        working-directory: server
+        timeout-minutes: 5
+        if: always()
+        run: node knowledge-base-expander.js
+
       - name: Prepare commit data
         if: always()
         working-directory: server
@@ -100,7 +112,11 @@ jobs:
           git add test_results/analysis_*.json 2>/dev/null || true
           git add test_results/analysis_*.txt 2>/dev/null || true
           git add test_results/recommendations_*.json 2>/dev/null || true
+          git add test_results/missing-questions.json 2>/dev/null || true
+          git add test_results/kb-coverage-report.md 2>/dev/null || true
           git add generated_questions_*.json 2>/dev/null || true
+          # Add any newly generated KB entries from auto-expansion
+          git add data/ilmihal/*.json 2>/dev/null || true
 
           # Commit only if there are changes
           if ! git diff --cached --quiet; then
