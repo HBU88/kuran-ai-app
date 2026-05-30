@@ -5,7 +5,19 @@ DateTime getEffectiveNowFromPrayerData({
 }) {
   final utcNow = DateTime.now().toUtc();
   final offsetMinutes = (greenwichMeanTimeZone * 60).round();
-  return utcNow.add(Duration(minutes: offsetMinutes));
+  final shifted = utcNow.add(Duration(minutes: offsetMinutes));
+  // Prayer DateTimes are built as plain (non-UTC) DateTime objects.
+  // effectiveNow must also be plain so isAfter() compares wall-clock
+  // values directly, without Dart silently converting UTC ↔ local.
+  return DateTime(
+    shifted.year,
+    shifted.month,
+    shifted.day,
+    shifted.hour,
+    shifted.minute,
+    shifted.second,
+    shifted.millisecond,
+  );
 }
 
 class PrayerTimeModel {
