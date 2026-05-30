@@ -99,6 +99,13 @@ app.get("/health", (req, res) => {
     pid: process.pid,
     started_at: STARTED_AT,
     cwd: process.cwd(),
+    // Credential-safe readiness flags for CI and monitoring
+    openai_configured: Boolean(process.env.OPENAI_API_KEY),
+    diyanet_configured: Boolean(
+      process.env.DIYANET_API_USERNAME && process.env.DIYANET_API_PASSWORD
+    ),
+    openai_planner_enabled:
+      String(process.env.HAKAI_OPENAI_PLANNER_ENABLED || "true").trim().toLowerCase() !== "false",
   });
 });
 
@@ -500,21 +507,26 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       ilmihalDebugLogger.logSemanticMatchStart(message);
 
       if (ilmihalKnowledgeHit) {
-        // KB hit: log matched entry details
+        // KB hit: log matched entry details (use actual field names from routeKnowledge)
+        const rawMatchScore = ilmihalKnowledgeHit.match_score
+          ?? ilmihalKnowledgeHit.semantic_match_score
+          ?? (ilmihalKnowledgeHit.knowledge_hit_id ? 1 : 0);
+        // Normalize: some resolvers return integer 95 instead of float 0.95
+        const matchScore = typeof rawMatchScore === 'number' && rawMatchScore > 1 ? rawMatchScore / 100 : rawMatchScore;
         ilmihalDebugLogger.logKnowledgeBaseHit({
-          id: ilmihalKnowledgeHit.id || ilmihalKnowledgeHit.knowledge_hit_id,
-          expectedTopic: ilmihalKnowledgeHit.topic || ilmihalKnowledgeHit.expectedTopic,
-          label: ilmihalKnowledgeHit.title || ilmihalKnowledgeHit.label,
-          matchScore: ilmihalKnowledgeHit.matchScore,
-          routingScore: ilmihalKnowledgeHit.routingScore,
-          confidence: ilmihalKnowledgeHit.confidence,
-          answer: ilmihalKnowledgeHit.answer_text || ilmihalKnowledgeHit.answer,
+          id: ilmihalKnowledgeHit.knowledge_hit_id || ilmihalKnowledgeHit.id,
+          expectedTopic: ilmihalKnowledgeHit.topic,
+          label: ilmihalKnowledgeHit.matched_title || ilmihalKnowledgeHit.matched_by,
+          matchScore,
+          routingScore: ilmihalKnowledgeHit.semantic_match_score ?? matchScore,
+          confidence: ilmihalKnowledgeHit.semantic_confidence ?? ilmihalKnowledgeHit.confidence ?? null,
+          answer: ilmihalKnowledgeHit.answer_text,
         });
         ilmihalDebugLogger.logRoutingDecision(
-          ilmihalKnowledgeHit.topic || ilmihalKnowledgeHit.expectedTopic,
-          ilmihalKnowledgeHit.title || ilmihalKnowledgeHit.label,
-          ilmihalKnowledgeHit.matchScore || 0,
-          ilmihalKnowledgeHit.confidence || 0
+          ilmihalKnowledgeHit.topic || ilmihalKnowledgeHit.knowledge_hit_id,
+          ilmihalKnowledgeHit.matched_title || ilmihalKnowledgeHit.topic,
+          matchScore,
+          ilmihalKnowledgeHit.semantic_match_score ?? matchScore
         );
       } else {
         // KB miss: log it and record for future KB expansion

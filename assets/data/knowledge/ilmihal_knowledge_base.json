@@ -4689,5 +4689,651 @@
     "requires_ayah": false,
     "response_file": "server/data/ilmihal/sahabeler_kimdir.json",
     "semantic_description": "sahabe kimdir ne demek ashab-ı kiram aşere-i mübeşşere ilk Müslümanlar"
+  },
+  {
+    "id": "hz_adem_kimdir",
+    "type": "siyer",
+    "topic": "hz_adem_kimdir",
+    "aliases": [
+      "hz adem",
+      "adem peygamber",
+      "ilk insan"
+    ],
+    "triggers": [
+      "adem kim",
+      "hz adem kimdir",
+      "adem peygamber kimdir"
+    ],
+    "keywords": [
+      "hz adem kimdir",
+      "ilk insan kim",
+      "adem peygamber",
+      "insanlığın atası",
+      "adem havva"
+    ],
+    "answer_tr": "Hz. Adem, Allah'ın topraktan yarattığı ilk insan ve ilk peygamberdir. Eşi Hz. Havva ile cennette yaşadı; yasak meyveden sonra tövbe ederek yeryüzüne indirildi. Kuran'da adı 25 yerde geçmekte olup insanlığın atasıdır.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Adem, Allah tarafından topraktan yaratılan ilk insan ve ilk peygamberdir. Eşi Hz. Havva ile birlikte cennette yaratılmış, yeryüzüne gönderilmiştir."
+  },
+  {
+    "id": "hz_idris_kimdir",
+    "type": "siyer",
+    "topic": "hz_idris_kimdir",
+    "aliases": [
+      "hz idris",
+      "idris peygamber"
+    ],
+    "triggers": [
+      "idris kim",
+      "hz idris kimdir",
+      "idris peygamber kimdir"
+    ],
+    "keywords": [
+      "hz idris kimdir",
+      "idris peygamber",
+      "idris kim"
+    ],
+    "answer_tr": "Hz. İdris, Kuran'da adı geçen peygamberlerden biridir. Sabırlı ve doğru kişi olarak tanımlanmış, Allah onu yüce bir makama yükseltmiştir (Meryem 19/57). Bazı İslam âlimleri onu yazının ve ilmin öncüsü olarak değerlendirir.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. İdris, Kuran'da adı geçen peygamberlerden biri olup ilim ve hikmeti ile tanınır. Allah onu yüce bir makama yükseltmiştir."
+  },
+  {
+    "id": "hz_nuh_kimdir",
+    "type": "siyer",
+    "topic": "hz_nuh_kimdir",
+    "aliases": [
+      "hz nuh",
+      "nuh peygamber",
+      "nuh tufanı"
+    ],
+    "triggers": [
+      "nuh kim",
+      "hz nuh kimdir",
+      "nuh peygamber kimdir"
+    ],
+    "keywords": [
+      "hz nuh kimdir",
+      "nuh peygamber",
+      "nuh tufanı",
+      "nuh gemisi",
+      "ulul azm peygamber"
+    ],
+    "answer_tr": "Hz. Nuh, kavmine 950 yıl İslam'ı tebliğ eden ve Nuh Tufanı'nda büyük gemi yaparak inananları kurtaran peygamberdir. Ulü'l-azm peygamberlerin ikincisidir. Kuran'da 43 yerde adı geçer, Nuh suresi ona adanmıştır.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Nuh, kavmine 950 yıl İslam'ı tebliğ eden ve tufandan önce büyük bir gemi inşa eden peygamberdir. Ulü'l-azm peygamberlerden biridir."
+  },
+  {
+    "id": "hz_hud_kimdir",
+    "type": "siyer",
+    "topic": "hz_hud_kimdir",
+    "aliases": [
+      "hz hud",
+      "hud peygamber",
+      "ad kavmi"
+    ],
+    "triggers": [
+      "hud kim",
+      "hz hud kimdir",
+      "hud peygamber kimdir"
+    ],
+    "keywords": [
+      "hz hud kimdir",
+      "hud peygamber",
+      "ad kavmi peygamberi",
+      "hud kim"
+    ],
+    "answer_tr": "Hz. Hud, Yemen'deki Âd kavmine gönderilmiş peygamberdir. Tevhidi tebliğ etti; kavmi onu yalanladığında Allah şiddetli bir fırtınayla Âd'ı helak etti. Kuran'da 7 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Hud, Kuran'da Âd kavmine gönderilen peygamberdir. Kavmi onu reddedince Allah onları şiddetli bir fırtınayla helak etti."
+  },
+  {
+    "id": "hz_salih_kimdir",
+    "type": "siyer",
+    "topic": "hz_salih_kimdir",
+    "aliases": [
+      "hz salih",
+      "salih peygamber",
+      "semud kavmi",
+      "develi peygamber"
+    ],
+    "triggers": [
+      "salih kim",
+      "hz salih kimdir",
+      "salih peygamber kimdir"
+    ],
+    "keywords": [
+      "hz salih kimdir",
+      "salih peygamber",
+      "semud kavmi",
+      "salih devesi",
+      "salih kim"
+    ],
+    "answer_tr": "Hz. Salih, Semud kavmine gönderilmiş peygamberdir. Mucize olarak bir dişi deve verildi; kavmi buna rağmen deveyi kesince Allah onları korkunç bir sesle helak etti. Kuran'da 9 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Salih, Semud kavmine gönderilen peygamberdir. Mucize olarak bir dişi deve verilmiş, kavmi deveyi kesince helak olmuştur."
+  },
+  {
+    "id": "hz_ibrahim_kimdir",
+    "type": "siyer",
+    "topic": "hz_ibrahim_kimdir",
+    "aliases": [
+      "hz ibrahim",
+      "ibrahim peygamber",
+      "halilullah",
+      "ibrahim khalil"
+    ],
+    "triggers": [
+      "ibrahim kim",
+      "hz ibrahim kimdir",
+      "ibrahim peygamber kimdir"
+    ],
+    "keywords": [
+      "hz ibrahim kimdir",
+      "ibrahim peygamber",
+      "halilullah kim",
+      "kabe yi kim insa etti",
+      "ibrahim kim",
+      "ibrahim aleyhisselam"
+    ],
+    "answer_tr": "Hz. İbrahim, Allah'ın dostu (Halilullah) unvanıyla bilinen büyük peygamberdir. Putları kırdı, ateşe atıldı; Allah onu korudu. Oğlu Hz. İsmail ile Kâbe'yi inşa etti. Ulü'l-azm peygamberlerden olup Hz. İsmail ve Hz. İshak'ın babasıdır.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. İbrahim, Allah'ın dostu (Halilullah) olarak bilinen, tek Allah inancını tebliğ eden ve Kâbe'yi inşa eden büyük peygamberdir. Ulü'l-azm peygamberlerdendir."
+  },
+  {
+    "id": "hz_lut_kimdir",
+    "type": "siyer",
+    "topic": "hz_lut_kimdir",
+    "aliases": [
+      "hz lut",
+      "lut peygamber",
+      "sodom kavmi"
+    ],
+    "triggers": [
+      "lut kim",
+      "hz lut kimdir",
+      "lut peygamber kimdir"
+    ],
+    "keywords": [
+      "hz lut kimdir",
+      "lut peygamber",
+      "lut kavmi",
+      "sodom peygamberi",
+      "lut kim"
+    ],
+    "answer_tr": "Hz. Lut, Hz. İbrahim'in yeğeni ve Sodom bölgesi halkına gönderilmiş peygamberdir. Ahlaksızlığa batmış kavmini uyardı; iman etmeyenleri Allah taş yağmuruyla helak etti. Hz. Lut ve az sayıda mümin kurtuldu.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Lut, Hz. İbrahim'in yeğeni ve Sodom (Lut kavmi) halkına gönderilen peygamberdir. Kavmi ahlaksızlıkla yok edilmiştir."
+  },
+  {
+    "id": "hz_ismail_kimdir",
+    "type": "siyer",
+    "topic": "hz_ismail_kimdir",
+    "aliases": [
+      "hz ismail",
+      "ismail peygamber",
+      "zebihullah"
+    ],
+    "triggers": [
+      "ismail kim",
+      "hz ismail kimdir",
+      "ismail peygamber kimdir"
+    ],
+    "keywords": [
+      "hz ismail kimdir",
+      "ismail peygamber",
+      "zebihullah kim",
+      "ismail kim",
+      "kabenin inşası"
+    ],
+    "answer_tr": "Hz. İsmail, Hz. İbrahim'in oğlu ve Zebihullah unvanıyla anılan peygamberdir. Babası tarafından kurban edilmek istendi; Allah koç göndererek onu kurtardı. Babası ile Kâbe'yi inşa etti. Hz. Muhammed'in atasıdır.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. İsmail, Hz. İbrahim'in ilk oğlu ve Zebihullah (kurban edilmek istenen) unvanıyla bilinen peygamberdir. Babası ile birlikte Kâbe'yi inşa etmiştir."
+  },
+  {
+    "id": "hz_ishak_kimdir",
+    "type": "siyer",
+    "topic": "hz_ishak_kimdir",
+    "aliases": [
+      "hz ishak",
+      "ishak peygamber"
+    ],
+    "triggers": [
+      "ishak kim",
+      "hz ishak kimdir",
+      "ishak peygamber kimdir"
+    ],
+    "keywords": [
+      "hz ishak kimdir",
+      "ishak peygamber",
+      "ishak kim",
+      "ibrahim oglu ishak"
+    ],
+    "answer_tr": "Hz. İshak, Hz. İbrahim ile Hz. Sare'nin oğlu ve peygamberdir. Hz. Yakup'un babasıdır; İsrailoğulları peygamberlerinin atasıdır. Kuran'da adı 17 yerde geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. İshak, Hz. İbrahim'in eşi Hz. Sare'den doğan ikinci oğlu ve peygamberdir. Hz. Yakup'un babasıdır."
+  },
+  {
+    "id": "hz_yakup_kimdir",
+    "type": "siyer",
+    "topic": "hz_yakup_kimdir",
+    "aliases": [
+      "hz yakup",
+      "yakup peygamber",
+      "israil peygamber",
+      "israel"
+    ],
+    "triggers": [
+      "yakup kim",
+      "hz yakup kimdir",
+      "yakup peygamber kimdir"
+    ],
+    "keywords": [
+      "hz yakup kimdir",
+      "yakup peygamber",
+      "israil kim",
+      "yusuf un babasi",
+      "yakup kim"
+    ],
+    "answer_tr": "Hz. Yakup, Hz. İshak'ın oğlu, Hz. Yusuf'un babasıdır. 'İsrail' adıyla da bilinir; İsrailoğullarının atasıdır. On iki oğlu olup her biri bir kabilenin atasıdır. Kuran'da 16 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Yakup, Hz. İshak'ın oğlu, Hz. Yusuf'un babasıdır. 'İsrail' adıyla da anılır; İsrailoğullarının atası ve peygamberdir."
+  },
+  {
+    "id": "hz_yusuf_kimdir",
+    "type": "siyer",
+    "topic": "hz_yusuf_kimdir",
+    "aliases": [
+      "hz yusuf",
+      "yusuf peygamber",
+      "yusuf suresinin peygamberi"
+    ],
+    "triggers": [
+      "yusuf kim",
+      "hz yusuf kimdir",
+      "yusuf peygamber kimdir"
+    ],
+    "keywords": [
+      "hz yusuf kimdir",
+      "yusuf peygamber",
+      "yusuf kuyuya atıldı",
+      "rüya yorumu peygamber",
+      "yusuf kim"
+    ],
+    "answer_tr": "Hz. Yusuf, Hz. Yakup'un oğlu ve rüya yorumculuğuyla tanınan peygamberdir. Kardeşleri tarafından kuyuya atıldı, Mısır'da köle satıldı, hapse girdi; Firavunun rüyasını yorumlayarak Mısır'ın maliye bakanı oldu. Kuran'da Yusuf suresi (12) tamamen ona ayrılmıştır.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Yusuf, Hz. Yakup'un oğlu ve rüya yorumculuğuyla tanınan peygamberdir. Kardeşleri tarafından kuyuya atılmış, Mısır'da vezir olmuştur."
+  },
+  {
+    "id": "hz_suayb_kimdir",
+    "type": "siyer",
+    "topic": "hz_suayb_kimdir",
+    "aliases": [
+      "hz suayb",
+      "suayb peygamber",
+      "medyen kavmi"
+    ],
+    "triggers": [
+      "suayb kim",
+      "hz suayb kimdir",
+      "suayb peygamber kimdir"
+    ],
+    "keywords": [
+      "hz suayb kimdir",
+      "suayb peygamber",
+      "medyen peygamberi",
+      "musa nın kayınbabası",
+      "suayb kim"
+    ],
+    "answer_tr": "Hz. Şuayb, Medyen halkına gönderilmiş peygamberdir. Dürüst ticaret ve adalet tebliğ etti. Hz. Musa'nın kayınbabası olarak bilinir. Kavmi reddedince Allah onları helak etti. Kuran'da 11 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Şuayb, Medyen ve Eyke halkına gönderilen peygamberdir. Ticaret ahlakı ve dürüstlüğü tebliğ etmiştir. Hz. Musa'nın kayınbabası olarak bilinir."
+  },
+  {
+    "id": "hz_musa_kimdir",
+    "type": "siyer",
+    "topic": "hz_musa_kimdir",
+    "aliases": [
+      "hz musa",
+      "musa peygamber",
+      "kelimullah",
+      "tevrat peygamberi"
+    ],
+    "triggers": [
+      "musa kim",
+      "hz musa kimdir",
+      "musa peygamber kimdir"
+    ],
+    "keywords": [
+      "hz musa kimdir",
+      "musa peygamber",
+      "kelimullah kim",
+      "kizildeniz yarılması",
+      "tevrat peygamberi",
+      "musa kim",
+      "musa firavun"
+    ],
+    "answer_tr": "Hz. Musa, İsrailoğullarına gönderilen ve Allah ile konuşma şerefine eren (Kelimullah) peygamberdir. Firavuna karşı mücadele etti, Kızıldeniz yarıldı, Tevrat'ı aldı. Ulü'l-azm peygamberlerden olup Kuran'da en çok adı geçen peygamberdir (136 kez).",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Musa, İsrailoğullarına gönderilen ve Tevrat'ı alan peygamberdir. Firavun'a karşı mücadelesi ve Kızıldeniz'i yarması ile tanınır. Kelimullah (Allah ile konuşan) unvanına sahiptir."
+  },
+  {
+    "id": "hz_harun_kimdir",
+    "type": "siyer",
+    "topic": "hz_harun_kimdir",
+    "aliases": [
+      "hz harun",
+      "harun peygamber",
+      "musa nin kardesi"
+    ],
+    "triggers": [
+      "harun kim",
+      "hz harun kimdir",
+      "harun peygamber kimdir"
+    ],
+    "keywords": [
+      "hz harun kimdir",
+      "harun peygamber",
+      "musa nın kardeşi",
+      "harun kim"
+    ],
+    "answer_tr": "Hz. Harun, Hz. Musa'nın ağabeyi ve peygamber yardımcısıdır. Hz. Musa'nın tebliğinde sözcüsü ve destekçisi oldu. Tûr'a çıkışında kavme imam oldu. Kuran'da 20 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Harun, Hz. Musa'nın ağabeyi ve yardımcısı olarak peygamber tayin edilen kişidir. Hz. Musa'nın tebliğinde destekçisi olmuştur."
+  },
+  {
+    "id": "hz_eyyub_kimdir",
+    "type": "siyer",
+    "topic": "hz_eyyub_kimdir",
+    "aliases": [
+      "hz eyyub",
+      "eyyub peygamber",
+      "sabır peygamberi",
+      "eyup"
+    ],
+    "triggers": [
+      "eyyub kim",
+      "hz eyyub kimdir",
+      "eyyub peygamber kimdir"
+    ],
+    "keywords": [
+      "hz eyyub kimdir",
+      "eyyub peygamber",
+      "sabır peygamberi",
+      "eyyup kim",
+      "eyyub hastalığı"
+    ],
+    "answer_tr": "Hz. Eyyub, mal, sağlık ve evlat kaybı gibi ağır sınavlar karşısında gösterdiği sabırla tanınan peygamberdir. Uzun hastalığının ardından Allah ona şifa verdi ve her şeyini iade etti. Sabır ve şükrün sembolüdür. Kuran'da 4 yerde geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Eyyub, sabır ve şükrün sembolü olarak bilinen peygamberdir. Hastalık, fakirlik ve kayıplar karşısında gösterdiği sabır ile meşhurdur."
+  },
+  {
+    "id": "hz_yunus_kimdir",
+    "type": "siyer",
+    "topic": "hz_yunus_kimdir",
+    "aliases": [
+      "hz yunus",
+      "yunus peygamber",
+      "balık yutan peygamber",
+      "zülnun"
+    ],
+    "triggers": [
+      "yunus kim",
+      "hz yunus kimdir",
+      "yunus peygamber kimdir"
+    ],
+    "keywords": [
+      "hz yunus kimdir",
+      "yunus peygamber",
+      "balik yutan peygamber",
+      "zulnun kim",
+      "yunus kim",
+      "ninova peygamberi"
+    ],
+    "answer_tr": "Hz. Yunus, Ninova halkına gönderilmiş ve büyük bir balığın karnında kalan peygamberdir. Zünnûn (balık sahibi) olarak anılır. Balığın içinde Allah'a tövbe etmiş, kavmine dönmüş; kavmi tövbe ederek azaptan kurtulmuştur.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Yunus, Ninova halkına gönderilen ve balığın karnında kalan peygamberdir. Zünnûn (balık sahibi) olarak da anılır."
+  },
+  {
+    "id": "hz_ilyas_kimdir",
+    "type": "siyer",
+    "topic": "hz_ilyas_kimdir",
+    "aliases": [
+      "hz ilyas",
+      "ilyas peygamber"
+    ],
+    "triggers": [
+      "ilyas kim",
+      "hz ilyas kimdir",
+      "ilyas peygamber kimdir"
+    ],
+    "keywords": [
+      "hz ilyas kimdir",
+      "ilyas peygamber",
+      "ilyas kim"
+    ],
+    "answer_tr": "Hz. İlyas, İsrailoğullarına gönderilmiş ve kavminin Baal putuna tapmasına karşı mücadele etmiş peygamberdir. Tevhidi tebliğ etti. Kuran'da 2 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. İlyas, İsrailoğullarına gönderilmiş ve Baal putuna tapınmaya karşı mücadele eden peygamberdir."
+  },
+  {
+    "id": "hz_elyesa_kimdir",
+    "type": "siyer",
+    "topic": "hz_elyesa_kimdir",
+    "aliases": [
+      "hz elyesa",
+      "elyesa peygamber"
+    ],
+    "triggers": [
+      "elyesa kim",
+      "hz elyesa kimdir",
+      "elyesa peygamber kimdir"
+    ],
+    "keywords": [
+      "hz elyesa kimdir",
+      "elyesa peygamber",
+      "elyesa kim"
+    ],
+    "answer_tr": "Hz. Elyesa, Hz. İlyas'ın halefi ve İsrailoğullarına gönderilmiş peygamberdir. Kuran'da En'am 86 ve Sad 48'de adı geçer; üstün kullar arasında zikredilir.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Elyesa, Hz. İlyas'tan sonra İsrailoğullarına gönderilmiş peygamberdir. Kuran'da iki yerde adı geçer."
+  },
+  {
+    "id": "hz_zulkifl_kimdir",
+    "type": "siyer",
+    "topic": "hz_zulkifl_kimdir",
+    "aliases": [
+      "hz zulkifl",
+      "zulkifl peygamber"
+    ],
+    "triggers": [
+      "zulkifl kim",
+      "hz zulkifl kimdir",
+      "zulkifl peygamber kimdir"
+    ],
+    "keywords": [
+      "hz zulkifl kimdir",
+      "zulkifl peygamber",
+      "zulkifl kim"
+    ],
+    "answer_tr": "Hz. Zülkifl, Kuran'da Enbiya suresi 85-86 ve Sad suresi 48'de adı geçen peygamberdir. Sabırlı ve iyi bir kul olarak nitelendirilmiştir. Kimliği hakkında alimlerin çeşitli görüşleri mevcuttur.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Zülkifl, Kuran'da adı geçen, sabırlı ve iyi bir kul olarak nitelendirilen peygamberdir."
+  },
+  {
+    "id": "hz_davud_kimdir",
+    "type": "siyer",
+    "topic": "hz_davud_kimdir",
+    "aliases": [
+      "hz davud",
+      "davud peygamber",
+      "zebur peygamberi",
+      "davut"
+    ],
+    "triggers": [
+      "davud kim",
+      "hz davud kimdir",
+      "davud peygamber kimdir"
+    ],
+    "keywords": [
+      "hz davud kimdir",
+      "davud peygamber",
+      "zebur kime indi",
+      "davut kim",
+      "zebur peygamberi"
+    ],
+    "answer_tr": "Hz. Davud, İsrailoğullarına gönderilmiş peygamber ve kraldır. Zebur kendisine indi; demir işledi, güzel sesiyle dağlar ve kuşlar tespih etti. Calut'u öldürerek başa geçti. Kuran'da 16 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Davud, İsrailoğullarına gönderilen, Zebur'u alan, hem peygamber hem kral olan ve demiri işleyebilen seçkin bir peygamberdir."
+  },
+  {
+    "id": "hz_suleyman_kimdir",
+    "type": "siyer",
+    "topic": "hz_suleyman_kimdir",
+    "aliases": [
+      "hz suleyman",
+      "suleyman peygamber",
+      "süleyman peygamber",
+      "suleyman aleyhisselam"
+    ],
+    "triggers": [
+      "suleyman kim",
+      "hz suleyman kimdir",
+      "suleyman peygamber kimdir"
+    ],
+    "keywords": [
+      "hz suleyman kimdir",
+      "suleyman peygamber",
+      "hayvanlara hükmeden peygamber",
+      "suleyman cin",
+      "suleyman kim",
+      "suleyman belkis"
+    ],
+    "answer_tr": "Hz. Süleyman, Hz. Davud'un oğlu, peygamber ve kraldır. Rüzgara, cinlere, kuşlara ve hayvanlara hükmetme gücü verildi. Kuşların dilini anlardı. Sebe Melikesi Belkıs'ı İslam'a davet etti. Kuran'da 17 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Süleyman, Hz. Davud'un oğlu, hem peygamber hem kral olan ve rüzgara, hayvanlara, cinlere hükmetme gücü verilen eşsiz bir peygamberdir."
+  },
+  {
+    "id": "hz_zekeriya_kimdir",
+    "type": "siyer",
+    "topic": "hz_zekeriya_kimdir",
+    "aliases": [
+      "hz zekeriya",
+      "zekeriya peygamber",
+      "yahya nın babası"
+    ],
+    "triggers": [
+      "zekeriya kim",
+      "hz zekeriya kimdir",
+      "zekeriya peygamber kimdir"
+    ],
+    "keywords": [
+      "hz zekeriya kimdir",
+      "zekeriya peygamber",
+      "zekeriya kim",
+      "yahya nın babası kim"
+    ],
+    "answer_tr": "Hz. Zekeriya, Beyt-i Makdis'te hizmet eden peygamberdir. Hz. Meryem'in bakımını üstlendi. İleri yaşına karşın Allah'tan çocuk diledi; Allah ona Hz. Yahya'yı müjdeledi. Kuran'da 7 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Zekeriya, Hz. Yahya'nın babası ve Beyt-i Makdis'te ibadet hizmeti gören peygamberdir. İleri yaşta çocuk sahibi olmayı Allah'tan dilemesi ile meşhurdur."
+  },
+  {
+    "id": "hz_yahya_kimdir",
+    "type": "siyer",
+    "topic": "hz_yahya_kimdir",
+    "aliases": [
+      "hz yahya",
+      "yahya peygamber",
+      "vaftizci yahya"
+    ],
+    "triggers": [
+      "yahya kim",
+      "hz yahya kimdir",
+      "yahya peygamber kimdir"
+    ],
+    "keywords": [
+      "hz yahya kimdir",
+      "yahya peygamber",
+      "zekeriya oglu",
+      "yahya kim"
+    ],
+    "answer_tr": "Hz. Yahya, Hz. Zekeriya'nın mucize oğlu ve peygamberdir. Hz. İsa'yı hak peygamber olarak tasdik etti. Hakkı cesurca söyledi; şehit edildi. Kuran'da 5 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. Yahya, Hz. Zekeriya'nın oğlu ve Hz. İsa'yı müjdeleyen peygamberdir. Temiz ahlakı, zühdü ve cesareti ile tanınır."
+  },
+  {
+    "id": "hz_isa_kimdir",
+    "type": "siyer",
+    "topic": "hz_isa_kimdir",
+    "aliases": [
+      "hz isa",
+      "isa peygamber",
+      "incil peygamberi",
+      "ruhullah",
+      "meryem oglu"
+    ],
+    "triggers": [
+      "isa kim",
+      "hz isa kimdir",
+      "isa peygamber kimdir"
+    ],
+    "keywords": [
+      "hz isa kimdir",
+      "isa peygamber",
+      "incil peygamberi",
+      "ruhullah kim",
+      "meryem oglu isa",
+      "isa kim"
+    ],
+    "answer_tr": "Hz. İsa, Hz. Meryem'den babasız doğan ve İncil'in kendisine indirildiği peygamberdir. İslam'a göre Allah'ın kulu ve elçisidir. Mucizeler gösterdi; Allah onu çarmıhtan kurtarıp yükseltti. Ulü'l-azm peygamberlerdendir. Kuran'da 25 yerde adı geçer.",
+    "source_note": "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi.",
+    "requires_ayah": false,
+    "response_file": null,
+    "semantic_description": "Hz. İsa, Hz. Meryem'den babasız olarak doğan, İncil'in kendisine indirildiği ve Ulü'l-azm peygamberlerden olan Hz. İsa'dır. Müslümanlara göre Allah'ın kulu ve elçisidir, Allah'ın oğlu değildir."
   }
 ]

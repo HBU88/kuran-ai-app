@@ -5,6 +5,9 @@ const { matchSemanticTopic } = require("./semantic_topic_matcher");
 const { compareQuestions, getSynonyms, extractSemanticTokens, calculateSemanticSimilarity } = require("./turkish_nlp_utils");
 
 const ILMIHAL_PATH = path.join(__dirname, "..", "..", "assets", "data", "knowledge", "ilmihal_knowledge_base.json");
+// Server-side detailed KB (server/data/ilmihal/*.json) — used when semantic matcher
+// returns an id that doesn't exist in the client-side ilmihal_knowledge_base.json
+const ILMIHAL_DATA_PATH = path.join(__dirname, "..", "data", "ilmihal");
 
 let cachedIlmihal = null;
 
@@ -355,6 +358,7 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
 
   const semanticMatch = matchSemanticTopic(normalizedMessage, entries);
   if (semanticMatch) {
+    // 1) Try client-side ilmihal_knowledge_base.json first
     const hit = entries.find((entry) => topicKey(entry.topic || entry.id || "") === topicKey(semanticMatch.topic_id));
     if (hit) {
       return {
@@ -372,6 +376,42 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
         semantic_matched_topic: semanticMatch.topic_id,
         matched_by: semanticMatch.matched_by || "semantic",
       };
+    }
+
+    // 2) Fallback: load directly from server/data/ilmihal/{id}.json
+    //    This covers entries that exist in the server KB but not in the client-side JSON.
+    try {
+      const serverFilePath = path.join(ILMIHAL_DATA_PATH, `${semanticMatch.topic_id}.json`);
+      if (fs.existsSync(serverFilePath)) {
+        const serverEntry = JSON.parse(fs.readFileSync(serverFilePath, "utf8"));
+        // Build answer text from server KB fields
+        const answerParts = [];
+        if (serverEntry.summary) answerParts.push(serverEntry.summary);
+        if (Array.isArray(serverEntry.step_by_step) && serverEntry.step_by_step.length > 0) {
+          answerParts.push(serverEntry.step_by_step.join(" "));
+        }
+        const answerText = answerParts.join("\n\n") || serverEntry.title || "";
+        if (answerText) {
+          return {
+            id: serverEntry.id || semanticMatch.topic_id,
+            file: `ilmihal/${semanticMatch.topic_id}.json`,
+            type: serverEntry.category || "worship_practice",
+            topic: serverEntry.id || semanticMatch.topic_id,
+            answer_text: answerText,
+            source_note: (serverEntry.source_notes || [])[0] || "Diyanet-based curated internal knowledge.",
+            requires_ayah: false,
+            route_mode: "ilmihal_knowledge",
+            knowledge_hit_id: serverEntry.id || semanticMatch.topic_id,
+            matched_title: serverEntry.title || null,
+            semantic_match_score: semanticMatch.score,
+            semantic_confidence: semanticMatch.confidence,
+            semantic_matched_topic: semanticMatch.topic_id,
+            matched_by: semanticMatch.matched_by || "semantic",
+          };
+        }
+      }
+    } catch (err) {
+      console.warn(`[ROUTER] Server KB fallback failed for "${semanticMatch.topic_id}":`, err.message);
     }
   }
 

@@ -475,7 +475,7 @@ function buildModuleRedirectResponse(module, message, baseAnalysis, timing, targ
   });
 }
 
-function buildIlmihalClarificationResponse(message, history, baseAnalysis, timing, sourceScreen = null) {
+function buildIlmihalClarificationResponse(message, history, baseAnalysis, timing, sourceScreen = null, openaiCalled = false) {
   const assistantText =
     "Dinî Bilgiler bölümünde sana daha doğru bir yanıt verebilmem için sorunu biraz daha netleştirebilir misin?";
   const analysis = {
@@ -499,7 +499,8 @@ function buildIlmihalClarificationResponse(message, history, baseAnalysis, timin
     "ilmihal",
     responsePreview,
     null,
-    sourceScreen
+    sourceScreen,
+    openaiCalled
   );
 
   return applySafetyGuard({
@@ -539,7 +540,8 @@ async function buildIlmihalModuleResponse(message, history, baseAnalysis, timing
         "ilmihal",
         responsePreview,
         null,
-        sourceScreen
+        sourceScreen,
+        true  // openai_called
       );
       return applySafetyGuard({
         ...analysis,
@@ -552,7 +554,8 @@ async function buildIlmihalModuleResponse(message, history, baseAnalysis, timing
       });
     }
 
-    return buildIlmihalClarificationResponse(message, history, baseAnalysis, timing, sourceScreen);
+    // OpenAI was attempted but returned 'uncertain' (or failed) — show clarification
+    return buildIlmihalClarificationResponse(message, history, baseAnalysis, timing, sourceScreen, true);
   }
 
   const subIntent = resolveSubIntent(message, baseAnalysis, null);
@@ -587,7 +590,8 @@ async function buildIlmihalModuleResponse(message, history, baseAnalysis, timing
     "ilmihal",
     responsePreview,
     null,
-    sourceScreen
+    sourceScreen,
+    false  // openai_called
   );
 
   return applySafetyGuard({
@@ -892,7 +896,8 @@ function buildDecisionMeta(
   module = "chat",
   responsePreview = null,
   preRouteStage = null,
-  sourceScreen = null
+  sourceScreen = null,
+  openaiCalled = false
 ) {
   const top = Array.isArray(rankedAyahs) && rankedAyahs.length > 0 ? rankedAyahs[0] : null;
   const topDebug = top?.debug || {};
@@ -946,6 +951,15 @@ function buildDecisionMeta(
     semantic_score: typeof topDebug.semantic_score === "number" ? topDebug.semantic_score : 0,
     selected_ayah_id: consistencyGuard.selectedAyah ? consistencyGuard.selectedAyah.id : null,
     timing_ms: normalizeTimingBreakdown(timingMs),
+    // Audit tracing fields (audit-plan Madde 2)
+    response_source: (() => {
+      if (routeMode === "ilmihal_openai_fallback") return "openai";
+      if (routeMode === "ilmihal_clarification") return "fallback_clarification";
+      if (knowledgeResult?.knowledge_hit_id || knowledgeResult?.topic) return "local_knowledge";
+      return "fallback_clarification";
+    })(),
+    openai_called: openaiCalled,
+    usage_gate_applied: false,
     ...(responsePreview ? { response_preview: responsePreview.slice(0, 800) } : {}),
   };
 }

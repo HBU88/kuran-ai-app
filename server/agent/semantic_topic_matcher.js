@@ -201,8 +201,10 @@ class SemanticTopicMatcher {
         };
       }
 
-      // Primary token in title (but not generic terms)
-      if (titleLower.includes(primaryToken) && primaryToken !== 'nedir' && primaryToken.length > 2) {
+      // Primary token in title — use word boundary to avoid substring false positives
+      // e.g. "musa" must NOT match "musallat", "ali" must NOT match "alim"
+      const titleWordBoundary = new RegExp(`\\b${primaryToken}\\b`);
+      if (titleWordBoundary.test(titleLower) && primaryToken !== 'nedir' && primaryToken.length > 2) {
         return {
           entryId: entry.id,
           score: 0.95,
@@ -224,8 +226,10 @@ class SemanticTopicMatcher {
         const kwLower = kw.toLowerCase();
         return queryTokens.some(qt => {
           if (STOP_TOKENS.has(qt)) return false;  // skip generic tokens
-          // Only match if keyword starts with token or token starts with keyword
-          return kwLower === qt || kwLower.startsWith(qt + ' ') || (qt.length > 3 && kwLower.includes(qt));
+          if (kwLower === qt || kwLower.startsWith(qt + ' ')) return true;
+          // Word-boundary substring check — prevents "musa" matching "musallat"
+          if (qt.length > 3) return new RegExp(`\\b${qt}\\b`).test(kwLower);
+          return false;
         });
       });
 
@@ -242,9 +246,15 @@ class SemanticTopicMatcher {
     // RULE 3: Semantic descriptions match
     // =========================================
     if (entry.manual_semantic_descriptions && Array.isArray(entry.manual_semantic_descriptions)) {
+      // Apply same stop-word guard as Rule 2 — generic question words must not drive a match
+      const STOP_TOKENS_R3 = new Set(['nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok',
+                                       'ne', 'bir', 'bu', 'ile', 'kim', 'kime', 'nasil', 've', 'de', 'da']);
       const semanticMatch = entry.manual_semantic_descriptions.some(desc => {
         const descLower = desc.toLowerCase();
-        return queryTokens.some(qt => descLower.includes(qt));
+        return queryTokens.some(qt => {
+          if (STOP_TOKENS_R3.has(qt) || qt.length <= 2) return false;  // skip generic/short tokens
+          return descLower.includes(qt);
+        });
       });
 
       if (semanticMatch) {
@@ -419,10 +429,22 @@ class SemanticTopicMatcher {
 }
 
 /**
+ * Module-level singleton — loads the 179 KB files once per process.
+ * Prevents re-reading from disk on every matchSemanticTopic() call.
+ */
+let _matcherInstance = null;
+function getMatcherInstance() {
+  if (!_matcherInstance) {
+    _matcherInstance = new SemanticTopicMatcher(path.join(__dirname, '../data/ilmihal'));
+  }
+  return _matcherInstance;
+}
+
+/**
  * Main export function - maintains backwards compatibility
  */
 function matchSemanticTopic(query, entries = []) {
-  const matcher = new SemanticTopicMatcher(path.join(__dirname, '../data/ilmihal'));
+  const matcher = getMatcherInstance();
   const match = matcher.findBestMatch(query);
 
   if (match.score < 0.75) {
