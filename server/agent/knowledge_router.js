@@ -891,7 +891,13 @@ function resolveWomenStateTopic(message, normalizedMessage) {
   ) {
     return "ozur_kani_namaz";
   }
-  if (includesLoose(normalizedMessage, "hayız nedir") || includesLoose(normalizedMessage, "adet nedir") || includesLoose(normalizedMessage, "regl nedir")) {
+  if (
+    includesLoose(normalizedMessage, "hayız nedir") ||
+    // "adet nedir" must match as a whole word — "şehadet nedir" normalises to "sehadet nedir"
+    // which contains "adet nedir" as a substring, causing a false-positive.
+    /(?:^|\s)adet nedir/.test(normalizeLoose(normalizedMessage)) ||
+    includesLoose(normalizedMessage, "regl nedir")
+  ) {
     return "hayiz_nedir";
   }
   if (includesLoose(normalizedMessage, "nifas nedir") || includesLoose(normalizedMessage, "lohusalık nedir") || includesLoose(normalizedMessage, "lohusalik nedir")) {

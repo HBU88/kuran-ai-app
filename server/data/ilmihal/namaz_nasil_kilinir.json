@@ -2,47 +2,72 @@
   "id": "namaz_nasil_kilinir",
   "title": "Namaz Nasıl Kılınır?",
   "category": "worship_practice",
-  "summary": "Namazın kaç rekat olduğu, kılınan namaza göre değişir; genel namaz akışı burada özetlenir.",
+  "summary": "Namaz; niyet, tekbir, kıyam, rükû, secde ve ka'de adımlarıyla kılınan bir ibadettir. Sabah 2, öğle 4, ikindi 4, akşam 3, yatsı 4 rekâttır.",
   "keywords": [
     "namaz nasıl kılınır",
-    "namaza nasıl başlanır",
-    "rekât nasıl kılınır",
-    "namaz",
-    "namaz kaç rekat",
-    "namaz rekat"
+    "namaz kılmak",
+    "namaz adımları",
+    "namazın rükünleri",
+    "namaz tarifleri",
+    "ilk defa namaz",
+    "namazı öğrenmek",
+    "rekât nedir"
   ],
   "step_by_step": [
-    "Abdest alınır ve kıbleye dönülür.",
-    "Niyet edilir ve iftitah tekbiri alınır.",
-    "Sübhaneke okunur, Eûzü besmele çekilir.",
-    "Fatiha ve zammı sure okunur.",
-    "Rükûda Sübhâne rabbiyel azîm denir.",
-    "Secdede Sübhâne rabbiyel a'lâ denir.",
-    "İki secde yapılır ve ikinci rekâta kalkılır.",
-    "Son oturuşta Tahiyyat, Salli-Barik ve Rabbena duaları okunur.",
-    "Sağa ve sola selam verilir."
+    "1. Niyet: Hangi namazı kılacağını kalbinde belirle.",
+    "2. İftitah Tekbiri: Eller kulak hizasına kaldırılarak 'Allahu Ekber' denir ve eller bağlanır.",
+    "3. Kıyam: Subhaneke, Eûzü-Besmele, Fatiha ve zam sure okunur.",
+    "4. Rükû: 'Allahu Ekber' diyerek eğilinir, 'Sübhane Rabbiye'l-Azîm' üç defa okunur.",
+    "5. Kıyama dönüş: 'Semi'allahu limen hamideh' denir.",
+    "6. Birinci Secde: 'Allahu Ekber' diyerek secdeye gidilir, 'Sübhane Rabbiye'l-A'lâ' üç defa okunur.",
+    "7. Kısa oturuş (celse) yapılır.",
+    "8. İkinci Secde yapılır.",
+    "9. Çift rekâtlarda ka'dede Ettehiyyatü okunur.",
+    "10. Son ka'dede Ettehiyyatü, Allahümme salli, Allahümme barik okunarak her iki yana selam verilir."
   ],
-  "farzlar": [],
-  "vacipler": [],
-  "sunnetler": [],
+  "farzlar": [
+    "Niyet etmek",
+    "İftitah tekbiri almak",
+    "Kıyam (ayakta durmak)",
+    "Kıraat (Fatiha okumak)",
+    "Rükûa gitmek",
+    "İki secde yapmak",
+    "Son oturuşu yapmak",
+    "Selam vermek"
+  ],
+  "vacipler": [
+    "Her rekâtta Fatiha okumak",
+    "İlk iki rekâtta Fatiha'ya zam sure okumak"
+  ],
+  "sunnetler": [
+    "Tekbir alırken elleri kulak hizasına kaldırmak",
+    "Subhaneke duasını okumak"
+  ],
   "attention_points": [
-    "Namazın özünde huşu, düzen ve devamlılık vardır.",
-    "Rekât sayısı namaza göre değişebilir.",
-    "Namazın kaç rekat olduğu, kılınan namaza göre değişir."
+    "Namaz kılmadan önce abdest almak farzdır.",
+    "Avret yerlerini örtmek farzdır.",
+    "Kıbleye yönelmek farzdır.",
+    "Vaktin girmiş olması gerekir."
   ],
   "common_mistakes": [
-    "Kıraat sırasını karıştırmak.",
-    "Rükû ve secdede tesbihleri unutmak.",
-    "Son oturuşu eksik bırakmak."
+    "Secde yaparken burnun yere değmemesi.",
+    "Rükûda yeterince eğilmemek.",
+    "Namazda acele edip rükünleri tam yapmamak."
   ],
   "related_questions": [
-    "Namaz nasıl kılınır?",
-    "Namaza nasıl başlanır?",
-    "Rekât nasıl kılınır?"
+    "Abdest nasıl alınır?",
+    "Namaz vakitleri ne zaman?",
+    "Namaz kaç rekâttır?"
   ],
   "source_notes": [
-    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
   ],
-  "answer_tr": "Namazın kaç rekat olduğu, kılınan namaza göre değişir; genel namaz akışı burada özetlenir.",
-  "semantic_description": "namazin kac rekat oldugu kilinan namaza gore degisir genel namaz akisi burada ozetlenir namaz nasil kilinir namaz kac rekat namaz rekat"
+  "manual_semantic_descriptions": [
+    "namaz nasıl kılınır adım adım",
+    "namazın rükünleri nelerdir",
+    "namaz kılmayı öğrenmek",
+    "ilk defa namaz kılmak",
+    "namazda ne okunur"
+  ],
+  "_auto_generated": false
 }

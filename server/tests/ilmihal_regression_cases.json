@@ -518,5 +518,68 @@
       "secde"
     ],
     "tags": ["namaz"]
+  },
+  {
+    "id": "kelime_i_sehadet_test",
+    "query": "kelime-i şehadet nedir",
+    "expected_knowledge_hit_id": "kelime_i_sehadet",
+    "expected_text_contains": ["eşhedü", "Allah", "Muhammed"],
+    "tags": ["temel_iman"]
+  },
+  {
+    "id": "sehadet_getirmek_test",
+    "query": "şehadet getirmek ne demek",
+    "expected_knowledge_hit_id": "kelime_i_sehadet",
+    "expected_text_contains": ["Allah", "Muhammed"],
+    "tags": ["temel_iman"]
+  },
+  {
+    "id": "islamin_sartlari_test",
+    "query": "islamın şartları nelerdir",
+    "expected_knowledge_hit_id": "islamin_sartlari",
+    "expected_text_contains": ["Kelime-i Şehadet", "Namaz", "Oruç"],
+    "tags": ["temel_iman"]
+  },
+  {
+    "id": "bes_sart_test",
+    "query": "İslam'ın beş şartı nedir",
+    "expected_knowledge_hit_id": "islamin_sartlari",
+    "expected_text_contains": ["Namaz", "Oruç", "Zekât"],
+    "tags": ["temel_iman"]
+  },
+  {
+    "id": "kelime_i_tevhid_test",
+    "query": "kelime-i tevhid nedir",
+    "expected_knowledge_hit_id": "kelime_i_tevhid",
+    "expected_text_contains": ["lâ ilâhe illallah", "Muhammed"],
+    "tags": ["temel_iman"]
+  },
+  {
+    "id": "namaz_nasil_kilinir_test",
+    "query": "namaz nasıl kılınır",
+    "expected_knowledge_hit_id": "namaz_nasil_kilinir",
+    "expected_text_contains": ["niyet", "rükû", "secde"],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "ezan_metni_test",
+    "query": "ezan metni nedir",
+    "expected_knowledge_hit_id": "ezan_metni",
+    "expected_text_contains": ["Allahu Ekber", "hayye"],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "kunut_duasi_test",
+    "query": "kunut duası nedir",
+    "expected_knowledge_hit_id": "kunut_duasi",
+    "expected_text_contains": ["vitir", "Allahümme"],
+    "tags": ["namaz"]
+  },
+  {
+    "id": "tahiyyat_duasi_test",
+    "query": "ettehiyyatü duası nedir",
+    "expected_knowledge_hit_id": "tahiyyat_duasi",
+    "expected_text_contains": ["Ettehiyyatü", "selam"],
+    "tags": ["namaz"]
   }
 ]

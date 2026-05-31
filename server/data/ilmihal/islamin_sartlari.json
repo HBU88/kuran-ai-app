@@ -1,47 +1,54 @@
 {
   "id": "islamin_sartlari",
-  "title": "İslam'ın Beş Şartı",
+  "title": "İslam'ın Şartları Nelerdir?",
   "category": "religious_knowledge",
-  "summary": "İslam'ın beş şartı: Kelime-i Şehadet, Namaz, Oruç, Zekat ve Hac.",
+  "summary": "İslam'ın beş şartı: Kelime-i Şehadet, Namaz, Oruç, Zekât ve Hac.",
   "keywords": [
     "islamın şartları",
-    "islam'ın şartları",
+    "islam şartları",
     "beş şart",
-    "islam beş esas",
+    "5 şart",
+    "dinin şartları",
+    "müslümanın görevleri",
     "islam sütunları"
   ],
   "step_by_step": [
-    "1. Kelime-i Şehadet: \"Lailaheillallah Muhammedürrasulullah\" demek.",
-    "2. Namaz: Günde beş vakit kılmak.",
-    "3. Oruç: Ramazanda oruç tutmak.",
-    "4. Zekat: Nisab miktarında mala sahipse zekat vermek.",
-    "5. Hac: Güç yetenlerin ömürde bir kez hacca gitmesi."
+    "1. Kelime-i Şehadet: Allah'ın birliğine ve Hz. Muhammed'in peygamberliğine şahitlik etmek.",
+    "2. Namaz: Günde beş vakit namaz kılmak — sabah, öğle, ikindi, akşam, yatsı.",
+    "3. Oruç: Ramazan ayında her gün oruç tutmak.",
+    "4. Zekât: Nisap miktarına ulaşan malın kırkta birini yoksullara vermek.",
+    "5. Hac: Gücü yeten Müslümanın ömründe bir kez Mekke'ye gidip hac ibadetini yerine getirmesi."
   ],
   "farzlar": [
-    "Bu beş şartı yerine getirmek"
+    "Bu beş şartın tamamı farzdır."
   ],
   "vacipler": [],
   "sunnetler": [],
   "attention_points": [
-    "Bunlar imanın değil uygulamanın temel şartlarıdır."
+    "Beş şart İslam'ın temelidir; biri terk edilirse kişi büyük günah işlemiş olur.",
+    "Hac, yalnızca maddi ve bedensel gücü olan Müslümanlara farzdır.",
+    "Zekât, nisap miktarını aşan ve üzerinden bir yıl geçen mala uygulanır."
   ],
   "common_mistakes": [
-    "Haccı unutarak İslam'ın dört şartı olduğunu sanmak."
+    "Hac'ı gücü yetmesine rağmen ertelemek.",
+    "Zekâtı tam hesaplamadan vermek veya hiç vermemek."
   ],
   "related_questions": [
-    "İmanın şartları nedir?",
-    "Namaz nedir?",
+    "Kelime-i şehadet nedir?",
+    "Namaz kaç vakittir?",
+    "Oruç kimlere farzdır?",
+    "Zekât nedir?",
     "Hac nedir?"
   ],
   "source_notes": [
-    "Diyanet ve TDV ilmihal üslubuyla hazırlanmıştır."
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
   ],
   "manual_semantic_descriptions": [
-    "islamın şartları",
-    "islam'ın şartları",
-    "beş şart",
-    "islam beş esas",
-    "islam sütunları"
+    "islamın beş şartı nelerdir",
+    "müslümanın temel görevleri",
+    "dinin direkleri",
+    "islam sütunları nelerdir",
+    "şehadet namaz oruç zekat hac"
   ],
   "_auto_generated": false
 }
