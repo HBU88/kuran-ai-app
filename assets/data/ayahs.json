@@ -22,7 +22,7 @@
     "ayah": 6,
     "ayahNumber": 6,
     "text_ar": "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-    "text_tr": "Evet, zorlukla beraber bir kolaylık vardır.",
+    "text_tr": "Gerçekten zorlukla beraber bir kolaylık vardır.",
     "tags": [
       "umut",
       "sabır"
@@ -474,10 +474,10 @@
   },
   {
     "id": 30,
-    "surah": "Fussilet",
-    "surahNumber": 41,
-    "ayah": 30,
-    "ayahNumber": 30,
+    "surah": "Ahkâf",
+    "surahNumber": 46,
+    "ayah": 13,
+    "ayahNumber": 13,
     "text_ar": "إِنَّ الَّذِينَ قَالُوا رَبُّنَا اللَّهُ ثُمَّ اسْتَقَامُوا فَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ",
     "text_tr": "Rabbimiz Allah'tır deyip dosdoğru olanlara korku yoktur, onlar üzülmeyeceklerdir.",
     "tags": [
