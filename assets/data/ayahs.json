@@ -1051,5 +1051,267 @@
     ],
     "short_explanation": "Her eylem bir iz bırakır; bu gerçek insanı sorumluluk bilinciyle yaşamaya ve hesabı düşünmeye çağırır.",
     "notes": "Her eylem bir iz bırakır; bu gerçek insanı sorumluluk bilinciyle yaşamaya ve hesabı düşünmeye çağırır."
+  },
+  {
+    "id": 66,
+    "surah": "Tâhâ",
+    "surahNumber": 20,
+    "ayah": 20,
+    "ayahNumber": 20,
+    "text_ar": "فَأَلْقَاهَا فَإِذَا هِيَ حَيَّةٌ تَسْعَى",
+    "text_tr": "Musa asasını attı; bir de baktı ki hızla sürünen bir yılan.",
+    "tags": [
+      "mucizeler",
+      "Hz. Musa",
+      "peygamberler"
+    ],
+    "short_explanation": "Allah'ın kudretinin somut göstergesi: sıradan bir asa, emriyle mucizeye dönüştü.",
+    "notes": "Allah'ın kudretinin somut göstergesi: sıradan bir asa, emriyle mucizeye dönüştü."
+  },
+  {
+    "id": 67,
+    "surah": "Şuarâ",
+    "surahNumber": 26,
+    "ayah": 63,
+    "ayahNumber": 63,
+    "text_ar": "فَأَوْحَيْنَا إِلَى مُوسَى أَنِ اضْرِبْ بِعَصَاكَ الْبَحْرَ فَانْفَلَقَ فَكَانَ كُلُّ فِرْقٍ كَالطَّوْدِ الْعَظِيمِ",
+    "text_tr": "Musa'ya: Asanla denize vur! diye vahyettik. Deniz yarıldı; her parça kocaman bir dağ gibiydi.",
+    "tags": [
+      "mucizeler",
+      "Hz. Musa",
+      "peygamberler",
+      "tevekkül"
+    ],
+    "short_explanation": "Denizin yarılması: kurtuluşun en beklenmedik yoldan, Allah'ın emriyle geleceğini gösterir.",
+    "notes": "Denizin yarılması: kurtuluşun en beklenmedik yoldan, Allah'ın emriyle geleceğini gösterir."
+  },
+  {
+    "id": 68,
+    "surah": "Enbiyâ",
+    "surahNumber": 21,
+    "ayah": 69,
+    "ayahNumber": 69,
+    "text_ar": "قُلْنَا يَا نَارُ كُونِي بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ",
+    "text_tr": "Dedik ki: Ey ateş! İbrahim'e karşı serin ve selametli ol.",
+    "tags": [
+      "mucizeler",
+      "Hz. İbrahim",
+      "peygamberler",
+      "tevekkül"
+    ],
+    "short_explanation": "Ateşin yakmadığı mucizesi, Allah'ın kulunu her koşulda koruduğunun ve her şeye hükmettiğinin kanıtıdır.",
+    "notes": "Ateşin yakmadığı mucizesi, Allah'ın kulunu her koşulda koruduğunun ve her şeye hükmettiğinin kanıtıdır."
+  },
+  {
+    "id": 69,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 49,
+    "ayahNumber": 49,
+    "text_ar": "وَأُبْرِئُ الْأَكْمَهَ وَالْأَبْرَصَ وَأُحْيِ الْمَوْتَى بِإِذْنِ اللَّهِ",
+    "text_tr": "Doğuştan körleri ve alacalıları iyileştiririm, Allah'ın izniyle ölüleri diriltirim.",
+    "tags": [
+      "mucizeler",
+      "Hz. İsa",
+      "peygamberler",
+      "şifa"
+    ],
+    "short_explanation": "Hz. İsa'nın şifa ve diriltme mucizeleri her biri 'Allah'ın izniyle' gerçekleşir; asıl kudret sahibi Allah'tır.",
+    "notes": "Hz. İsa'nın şifa ve diriltme mucizeleri her biri 'Allah'ın izniyle' gerçekleşir; asıl kudret sahibi Allah'tır."
+  },
+  {
+    "id": 70,
+    "surah": "Meryem",
+    "surahNumber": 19,
+    "ayah": 30,
+    "ayahNumber": 30,
+    "text_ar": "قَالَ إِنِّي عَبْدُ اللَّهِ آتَانِيَ الْكِتَابَ وَجَعَلَنِي نَبِيًّا",
+    "text_tr": "Dedi ki: Ben Allah'ın kuluyum. Bana kitap verdi ve beni peygamber kıldı.",
+    "tags": [
+      "mucizeler",
+      "Hz. İsa",
+      "peygamberler"
+    ],
+    "short_explanation": "Hz. İsa beşikte konuştu; ilk sözü 'Ben Allah'ın kuluyum' oldu — hem mucize hem de tevhidin ilanıdır.",
+    "notes": "Hz. İsa beşikte konuştu; ilk sözü 'Ben Allah'ın kuluyum' oldu — hem mucize hem de tevhidin ilanıdır."
+  },
+  {
+    "id": 71,
+    "surah": "Enbiyâ",
+    "surahNumber": 21,
+    "ayah": 81,
+    "ayahNumber": 81,
+    "text_ar": "وَلِسُلَيْمَانَ الرِّيحَ عَاصِفَةً تَجْرِي بِأَمْرِهِ",
+    "text_tr": "Süleyman'a da şiddetli esen rüzgarı boyun eğdirdik; emriyle akıp giderdi.",
+    "tags": [
+      "mucizeler",
+      "Hz. Süleyman",
+      "peygamberler"
+    ],
+    "short_explanation": "Rüzgarın Hz. Süleyman'a boyun eğmesi, Allah'ın dilediği kuluna doğaüstü güç verebileceğinin kanıtıdır.",
+    "notes": "Rüzgarın Hz. Süleyman'a boyun eğmesi, Allah'ın dilediği kuluna doğaüstü güç verebileceğinin kanıtıdır."
+  },
+  {
+    "id": 72,
+    "surah": "Sebe",
+    "surahNumber": 34,
+    "ayah": 10,
+    "ayahNumber": 10,
+    "text_ar": "يَا جِبَالُ أَوِّبِي مَعَهُ وَالطَّيْرَ وَأَلَنَّا لَهُ الْحَدِيدَ",
+    "text_tr": "Ey dağlar ve kuşlar, onunla birlikte tesbihat yapın! Demir, Davud için yumuşatıldı.",
+    "tags": [
+      "mucizeler",
+      "Hz. Davud",
+      "peygamberler"
+    ],
+    "short_explanation": "Hz. Davud'a verilen mucizeler: dağlar ve kuşlar tesbih eder, sert demir elde hamur gibi yumuşar.",
+    "notes": "Hz. Davud'a verilen mucizeler: dağlar ve kuşlar tesbih eder, sert demir elde hamur gibi yumuşar."
+  },
+  {
+    "id": 73,
+    "surah": "Meryem",
+    "surahNumber": 19,
+    "ayah": 7,
+    "ayahNumber": 7,
+    "text_ar": "يَا زَكَرِيَّا إِنَّا نُبَشِّرُكَ بِغُلَامٍ اسْمُهُ يَحْيَى لَمْ نَجْعَلْ لَهُ مِنْ قَبْلُ سَمِيًّا",
+    "text_tr": "Zekeriyya, adı Yahya olan bir oğul müjdeliyoruz sana; daha önce ona adaş kılmamıştık.",
+    "tags": [
+      "mucizeler",
+      "Hz. Zekeriyya",
+      "peygamberler",
+      "umut"
+    ],
+    "short_explanation": "İhtiyarlıkta ve kısır bir eşle çocuk sahibi olma: imkânsız görünenin Allah katında mümkün olduğunun müjdesidir.",
+    "notes": "İhtiyarlıkta ve kısır bir eşle çocuk sahibi olma: imkânsız görünenin Allah katında mümkün olduğunun müjdesidir."
+  },
+  {
+    "id": 74,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 37,
+    "ayahNumber": 37,
+    "text_ar": "كُلَّمَا دَخَلَ عَلَيْهَا زَكَرِيَّا الْمِحْرَابَ وَجَدَ عِنْدَهَا رِزْقًا قَالَ يَا مَرْيَمُ أَنَّى لَكِ هَذَا قَالَتْ هُوَ مِنْ عِنْدِ اللَّهِ",
+    "text_tr": "Zekeriyya mihrapta yanına her girdiğinde onun yanında bir rızık bulurdu. 'Meryem, bu sana nereden?' dedi. 'O Allah katındandır' dedi.",
+    "tags": [
+      "mucizeler",
+      "Hz. Meryem",
+      "peygamberler",
+      "tevekkül"
+    ],
+    "short_explanation": "Hz. Meryem'e gelen olağanüstü rızık: Allah'ın sevgili kullarını dünyada da nasıl gözettiğinin bir yansımasıdır.",
+    "notes": "Hz. Meryem'e gelen olağanüstü rızık: Allah'ın sevgili kullarını dünyada da nasıl gözettiğinin bir yansımasıdır."
+  },
+  {
+    "id": 75,
+    "surah": "İsrâ",
+    "surahNumber": 17,
+    "ayah": 88,
+    "ayahNumber": 88,
+    "text_ar": "قُلْ لَئِنِ اجْتَمَعَتِ الْإِنْسُ وَالْجِنُّ عَلَى أَنْ يَأْتُوا بِمِثْلِ هَذَا الْقُرْآنِ لَا يَأْتُونَ بِمِثْلِهِ وَلَوْ كَانَ بَعْضُهُمْ لِبَعْضٍ ظَهِيرًا",
+    "text_tr": "De ki: Eğer insanlar ve cinler bu Kur'an'ın bir benzerini getirmek için bir araya gelseler, birbirlerine yardımcı da olsalar benzerini getiremezler.",
+    "tags": [
+      "mucizeler",
+      "Kur'an",
+      "Hz. Muhammed"
+    ],
+    "short_explanation": "Kur'an'ın kendisi en büyük mucizedir; tüm insanlığın ve cinlerin ortak gücü onun bir benzerini ortaya koyamaz.",
+    "notes": "Kur'an'ın kendisi en büyük mucizedir; tüm insanlığın ve cinlerin ortak gücü onun bir benzerini ortaya koyamaz."
+  },
+  {
+    "id": 76,
+    "surah": "İsrâ",
+    "surahNumber": 17,
+    "ayah": 1,
+    "ayahNumber": 1,
+    "text_ar": "سُبْحَانَ الَّذِي أَسْرَى بِعَبْدِهِ لَيْلًا مِنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى الَّذِي بَارَكْنَا حَوْلَهُ",
+    "text_tr": "Bir gece kulunu Mescid-i Haram'dan, çevresini mübarek kıldığımız Mescid-i Aksa'ya yürüten Allah'ın şanı ne yücedir.",
+    "tags": [
+      "mucizeler",
+      "Hz. Muhammed",
+      "İsra ve Mirac"
+    ],
+    "short_explanation": "İsrâ mucizesi: Hz. Muhammed'in bir gecede kutsal mekânlara yolculuğu, Allah'ın ona verdiği şerefin ifadesidir.",
+    "notes": "İsrâ mucizesi: Hz. Muhammed'in bir gecede kutsal mekânlara yolculuğu, Allah'ın ona verdiği şerefin ifadesidir."
+  },
+  {
+    "id": 77,
+    "surah": "Kamer",
+    "surahNumber": 54,
+    "ayah": 1,
+    "ayahNumber": 1,
+    "text_ar": "اقْتَرَبَتِ السَّاعَةُ وَانْشَقَّ الْقَمَرُ",
+    "text_tr": "Kıyamet yaklaştı ve ay yarıldı.",
+    "tags": [
+      "mucizeler",
+      "Hz. Muhammed",
+      "ahiret"
+    ],
+    "short_explanation": "Ayın yarılması mucizesi: Allah'ın gücünün bir işareti olarak Hz. Muhammed döneminde gerçekleşti.",
+    "notes": "Ayın yarılması mucizesi: Allah'ın gücünün bir işareti olarak Hz. Muhammed döneminde gerçekleşti."
+  },
+  {
+    "id": 78,
+    "surah": "Enbiyâ",
+    "surahNumber": 21,
+    "ayah": 30,
+    "ayahNumber": 30,
+    "text_ar": "وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ",
+    "text_tr": "Her canlı şeyi sudan yarattık.",
+    "tags": [
+      "mucizeler",
+      "yaratılış",
+      "tefekkür"
+    ],
+    "short_explanation": "Suyun hayatın temeli olduğu gerçeği, modern bilimin teyit ettiği bir hakikati asırlar öncesinden haber verir.",
+    "notes": "Suyun hayatın temeli olduğu gerçeği, modern bilimin teyit ettiği bir hakikati asırlar öncesinden haber verir."
+  },
+  {
+    "id": 79,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 190,
+    "ayahNumber": 190,
+    "text_ar": "إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ لَآيَاتٍ لِأُولِي الْأَلْبَابِ",
+    "text_tr": "Göklerin ve yerin yaratılışında, gece ile gündüzün birbiri ardınca gelip geçmesinde akıl sahipleri için ibretler vardır.",
+    "tags": [
+      "mucizeler",
+      "yaratılış",
+      "tefekkür"
+    ],
+    "short_explanation": "Kâinat başlı başına bir mucizedir; bakmayı ve düşünmeyi bilen için her detay Allah'ın varlığına işaret eder.",
+    "notes": "Kâinat başlı başına bir mucizedir; bakmayı ve düşünmeyi bilen için her detay Allah'ın varlığına işaret eder."
+  },
+  {
+    "id": 80,
+    "surah": "Tîn",
+    "surahNumber": 95,
+    "ayah": 4,
+    "ayahNumber": 4,
+    "text_ar": "لَقَدْ خَلَقْنَا الْإِنْسَانَ فِي أَحْسَنِ تَقْوِيمٍ",
+    "text_tr": "Biz insanı en güzel biçimde yarattık.",
+    "tags": [
+      "mucizeler",
+      "yaratılış",
+      "şükür"
+    ],
+    "short_explanation": "İnsanın fiziksel, zihinsel ve ruhsal yapısı Allah'ın en güzel yaratışının somut eseridir.",
+    "notes": "İnsanın fiziksel, zihinsel ve ruhsal yapısı Allah'ın en güzel yaratışının somut eseridir."
+  },
+  {
+    "id": 81,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 59,
+    "ayahNumber": 59,
+    "text_ar": "إِنَّ مَثَلَ عِيسَى عِنْدَ اللَّهِ كَمَثَلِ آدَمَ خَلَقَهُ مِنْ تُرَابٍ ثُمَّ قَالَ لَهُ كُنْ فَيَكُونُ",
+    "text_tr": "Allah katında İsa'nın durumu, Âdem'in durumu gibidir. Onu topraktan yarattı; sonra 'Ol!' dedi ve oldu.",
+    "tags": [
+      "mucizeler",
+      "Hz. Âdem",
+      "Hz. İsa",
+      "yaratılış"
+    ],
+    "short_explanation": "Allah'ın 'Kün!' emri hem ilk insanın hem de Hz. İsa'nın yaratılışını açıklar; sıradan sebeplerin ötesindedir.",
+    "notes": "Allah'ın 'Kün!' emri hem ilk insanın hem de Hz. İsa'nın yaratılışını açıklar; sıradan sebeplerin ötesindedir."
   }
 ]
