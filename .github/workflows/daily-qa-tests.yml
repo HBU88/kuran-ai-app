@@ -45,6 +45,8 @@ jobs:
       - name: Start backend server
         working-directory: server
         timeout-minutes: 5
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           npm start > server.log 2>&1 &
           echo $! > server.pid
