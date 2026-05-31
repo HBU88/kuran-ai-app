@@ -24,6 +24,7 @@ const {
 } = require("./security");
 const ilmihalDebugLogger          = require("./ilmihal-debug-logger");
 const { logKBMiss, getMissStats } = require("./kb-miss-logger");
+const { checkQuota, consumeQuota } = require("./quota_tracker");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -546,6 +547,35 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       }
     }
 
+    // ── Quota guard (ilmihal KB-miss OpenAI path only) ───────────────────────
+    // KB hits are always free. Only KB-miss calls that fall through to OpenAI
+    // are counted against the device's monthly free allowance.
+    const ilmihalIsKbMiss =
+      module === "ilmihal" &&
+      !ilmihalKnowledgeHit &&
+      !isPureGreetingMessage(message);
+    const ilmihalDeviceId = ilmihalIsKbMiss
+      ? (typeof req.headers["x-device-id"] === "string"
+          ? req.headers["x-device-id"].trim().slice(0, 128)
+          : null)
+      : null;
+
+    if (ilmihalIsKbMiss) {
+      const quota = checkQuota(ilmihalDeviceId);
+      if (!quota.allowed) {
+        return sendUtf8Json(res, 402, {
+          ok: false,
+          quota_exceeded: true,
+          remaining: 0,
+          used: quota.used,
+          limit: quota.limit,
+          upgrade_url: "https://hakai.app/upgrade",
+          error: "Aylık ücretsiz soru limitinize ulaştınız.",
+        });
+      }
+    }
+    // ── End quota guard ──────────────────────────────────────────────────────
+
     const response = await buildChatResponse(message, history, {
       module,
       source_screen: sourceScreen,
@@ -664,6 +694,11 @@ async function handleChatModuleRequest(req, res, module = "chat") {
         response.assistant_text || '',
         responseType
       );
+    }
+
+    // Consume one quota unit for ilmihal KB-miss OpenAI calls on success
+    if (ilmihalIsKbMiss) {
+      consumeQuota(ilmihalDeviceId);
     }
 
     return sendUtf8Json(res, 200, moduleResponse);

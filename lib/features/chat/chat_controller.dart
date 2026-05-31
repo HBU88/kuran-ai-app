@@ -139,11 +139,17 @@ class ChatController extends ChangeNotifier {
       }
       errorMessage = error.toString();
       debugErrorMessage = error.toString();
+      // Quota exceeded: show a dedicated message instead of a generic error.
+      final displayText = error.isQuotaExceeded
+          ? 'Bu ay ücretsiz soru hakkınızı kullandınız. '
+              'Yakında premium üyelik seçenekleri eklenecek.'
+          // TODO(sprint3-paywall): Replace with upgrade bottom sheet when IAP is live.
+          : AppConstants.connectionFallbackMessage;
       _messages.add(
         ChatMessageModel(
           id: _nextId(),
           role: 'assistant',
-          text: AppConstants.connectionFallbackMessage,
+          text: displayText,
           createdAt: DateTime.now(),
           sourceUserText: message,
           technicalError: error.toString(),

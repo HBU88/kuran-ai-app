@@ -6,18 +6,22 @@ import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
 import '../../../features/chat/chat_mode.dart';
+import '../../services/device_id_service.dart';
 
 class ChatAgentService {
   ChatAgentService({
     http.Client? client,
     String baseUrl = AppConstants.backendApiBaseUrl,
     this.requestTimeout = const Duration(seconds: 45),
+    DeviceIdService? deviceIdService,
   })  : _client = client ?? http.Client(),
-        _baseUrl = _resolveBaseUrl(baseUrl);
+        _baseUrl = _resolveBaseUrl(baseUrl),
+        _deviceIdService = deviceIdService ?? DeviceIdService();
 
   final http.Client _client;
   final String _baseUrl;
   final Duration requestTimeout;
+  final DeviceIdService _deviceIdService;
 
   static String _resolveBaseUrl(String configuredBaseUrl) {
     final value = configuredBaseUrl.trim();
@@ -52,15 +56,27 @@ class ChatAgentService {
       sourceScreen: sourceScreen,
       message: message,
     );
+
+    // Attach device ID for ilmihal mode so the server can track per-device quota.
+    final Map<String, String> headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+    if (mode == ChatMode.ilmihal) {
+      try {
+        final deviceId = await _deviceIdService.getDeviceId();
+        headers['X-Device-Id'] = deviceId;
+      } catch (_) {
+        // Device ID unavailable: proceed without it; server allows gracefully.
+      }
+    }
+
     http.Response response;
     try {
       response = await _client
           .post(
             target,
-            headers: const {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: jsonEncode(requestBody),
           )
           .timeout(requestTimeout);
@@ -87,6 +103,21 @@ class ChatAgentService {
       );
     }
     final decodedBody = utf8.decode(response.bodyBytes);
+
+    // 402: quota exceeded — throw a typed exception so the UI can show an
+    // upgrade prompt instead of a generic connection error.
+    if (response.statusCode == 402) {
+      final quotaBody = _tryDecodeJson(decodedBody);
+      final isQuotaExceeded = quotaBody?['quota_exceeded'] == true;
+      throw ChatAgentException(
+        AppConstants.connectionFallbackMessage,
+        statusCode: 402,
+        responseBody: decodedBody,
+        parsedErrorMessage: quotaBody?['error']?.toString(),
+        isQuotaExceeded: isQuotaExceeded,
+        isTransient: false,
+      );
+    }
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
       final parsedError = _readParsedError(decodedBody);
@@ -120,6 +151,14 @@ class ChatAgentService {
     } catch (_) {
       return null;
     }
+    return null;
+  }
+
+  Map<String, dynamic>? _tryDecodeJson(String body) {
+    try {
+      final decoded = jsonDecode(body);
+      if (decoded is Map<String, dynamic>) return decoded;
+    } catch (_) {}
     return null;
   }
 
@@ -160,6 +199,7 @@ class ChatAgentException implements Exception {
     this.isNetworkError = false,
     this.isTransient = false,
     this.isConfigurationError = false,
+    this.isQuotaExceeded = false,
   });
 
   final String message;
@@ -171,8 +211,11 @@ class ChatAgentException implements Exception {
   final bool isNetworkError;
   final bool isTransient;
   final bool isConfigurationError;
+  /// True when the server returned 402 with quota_exceeded: true.
+  final bool isQuotaExceeded;
 
-  bool get showRetryAction => isTimeout || isNetworkError || isTransient;
+  bool get showRetryAction =>
+      !isQuotaExceeded && (isTimeout || isNetworkError || isTransient);
 
   @override
   String toString() {
