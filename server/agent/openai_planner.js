@@ -430,7 +430,7 @@ async function askOpenAIIlmihalFallback(message, history = []) {
   let response;
   try {
     response = await client.responses.create({
-      model: process.env.OPENAI_ILMIHAL_MODEL || "gpt-4o",
+      model: process.env.OPENAI_ILMIHAL_MODEL || "gpt-4o-mini",
       instructions: [
         "Sen HAKAI uygulamasının Türkçe ilmihal asistanısın.",
         "Kullanıcıya pratik ilmihal soruları için kısa, güvenilir Türkçe cevap verirsin.",
