@@ -13,16 +13,16 @@ class SupportService extends ChangeNotifier {
 
   static const smallProductId = 'support_small';
   static const mediumProductId = 'support_medium';
-  static const special199ProductId = 'support_special_199';
-  static const special299ProductId = 'support_special_299';
-  static const special499ProductId = 'support_special_499';
+  static const ozelProductId = 'support_ozel';
+  static const buyukProductId = 'support_buyuk';
+  static const plusProductId = 'support_plus';
 
   static const productIds = <String>{
     smallProductId,
     mediumProductId,
-    special199ProductId,
-    special299ProductId,
-    special499ProductId,
+    ozelProductId,
+    buyukProductId,
+    plusProductId,
   };
 
   final InAppPurchase _inAppPurchase;
@@ -69,8 +69,7 @@ class SupportService extends ChangeNotifier {
       }
 
       // TODO: Create matching consumable IAP products in App Store Connect:
-      // support_small, support_medium, support_special_199,
-      // support_special_299, support_special_499.
+      // support_small, support_medium, support_ozel, support_buyuk, support_plus.
       final response = await _inAppPurchase.queryProductDetails(productIds);
       if (response.error != null || response.productDetails.isEmpty) {
         _products = const [];
@@ -177,9 +176,9 @@ int _supportProductOrder(String productId) {
   return switch (productId) {
     SupportService.smallProductId => 0,
     SupportService.mediumProductId => 1,
-    SupportService.special199ProductId => 2,
-    SupportService.special299ProductId => 3,
-    SupportService.special499ProductId => 4,
+    SupportService.ozelProductId => 2,
+    SupportService.buyukProductId => 3,
+    SupportService.plusProductId => 4,
     _ => 5,
   };
 }

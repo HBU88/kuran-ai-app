@@ -90,10 +90,27 @@ npm --prefix server run test:auth
 npm --prefix server run test:security
 ```
 
-## Bilinen Sorunlar (Mayıs 2026)
-- **İlmihal routing bozuk:** "Alkol günah mı?" sorusu Bayram namazı cevabı döndürebiliyor.
-- **Kök neden (tahmini):** Usage limit / premium değişiklikleri, /chat vs /ilmihal-chat routing, ChatMode.ilmihal / source_screen mapping değişiklikleri sonrası regresyon.
-- Detaylı audit planı: `docs/audit-plan.md`
+## Sprint Durumu (Mayıs 2026)
+- ✅ **Sprint 1** — 7 kritik KB entry eklendi (kelime-i şehadet, İslam'ın şartları, namaz nasıl kılınır, ezan, kunut, tahiyyat, kelime-i tevhid). Şehadet/adet false-positive kelime sınırı düzeltmesi. 19/19 regresyon testi geçiyor.
+- ✅ **Sprint 2** — `askOpenAIIlmihalFallback` gpt-4o → gpt-4o-mini geçişi (17x maliyet düşüşü, ~$0.0001/soru).
+- ✅ **Sprint 3** — Cihaz bazlı aylık kota altyapısı (`server/quota_tracker.js`). Şu an `HAKAI_USAGE_LIMITS_ENABLED=false` (kapalı). IAP test geçtikten sonra açılacak.
+
+## Kota Sistemi
+- **Dosya:** `server/quota_tracker.js`
+- **Varsayılan limit:** 20 KB-miss OpenAI çağrısı/cihaz/ay
+- **Açmak için:** Render'da `HAKAI_USAGE_LIMITS_ENABLED=true` + `HAKAI_FREE_QUOTA_LIMIT=20`
+- **KB hit'leri:** Her zaman ücretsiz, kotadan sayılmaz
+- **402 yanıtı:** `{ ok: false, quota_exceeded: true, remaining: 0, limit: 20 }`
+- Flutter: `X-Device-Id` header otomatik gönderiliyor, 402 → Türkçe kota mesajı
+
+## Monetizasyon — Bekleyen Adımlar
+- App Store Connect'te IAP ürünleri oluşturulacak (5 bağış + 1 abonelik)
+- Sandbox test kullanıcıları ile IAP akışı test edilecek
+- IAP canlıya geçtikten sonra `HAKAI_USAGE_LIMITS_ENABLED=true` Render'a eklenecek
+- TODO(sprint3-paywall): `chat_controller.dart`'taki kota mesajı → upgrade bottom sheet
+
+## Bilinen Sorunlar
+_(Tümü çözüldü — güncelleme gerekirse buraya ekle)_
 
 ## Çalışma Kuralları
 1. **Önce oku, sonra yaz.** Değişiklik yapmadan önce ilgili dosyaları tam oku.

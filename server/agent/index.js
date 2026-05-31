@@ -702,7 +702,12 @@ async function buildChatResponse(message, history = [], options = {}) {
   if (moduleMode === "ilmihal") {
     return await buildIlmihalModuleResponse(message, history, baseAnalysis, timing, null, options.source_screen || null);
   }
-  if (moduleMode === "ayah" && isIlmihalModuleQuestion(message, baseAnalysis, history)) {
+  // In ayah mode, only redirect to ilmihal for purely factual fiqh questions
+  // (e.g. "sabah namazı kaç rekattır?"). Do NOT redirect broad Islamic topic questions
+  // (sabır, iman, tövbe, etc.) — those are valid ayah subjects and should stay in ayah mode.
+  // isIlmihalModuleQuestion() was matching too broadly via hasKnowledgeMatch(), causing
+  // every ayah-mode question to redirect to ilmihal.
+  if (moduleMode === "ayah" && isPrayerRakatsQuestion(message)) {
     return buildModuleRedirectResponse("ayah", message, baseAnalysis, timing, "ilmihal");
   }
   const localFastPathPlan = timing.measureSync("context_resolver_ms", () =>
