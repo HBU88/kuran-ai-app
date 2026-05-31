@@ -644,5 +644,412 @@
     ],
     "short_explanation": "Küçük iyilikler küçümsenmez; Allah katında hiçbir hayır kaybolmaz.",
     "notes": "Küçük iyilikler küçümsenmez; Allah katında hiçbir hayır kaybolmaz."
+  },
+  {
+    "id": 41,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 134,
+    "ayahNumber": 134,
+    "text_ar": "الَّذِينَ يُنْفِقُونَ فِي السَّرَّاءِ وَالضَّرَّاءِ وَالْكَاظِمِينَ الْغَيْظَ وَالْعَافِينَ عَنِ النَّاسِ وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ",
+    "text_tr": "Onlar bollukta ve darlıkta infak edenler, öfkelerini yenenler ve insanları affedenlerdir. Allah iyilik yapanları sever.",
+    "tags": [
+      "öfke",
+      "affetmek",
+      "irade",
+      "iyilikler"
+    ],
+    "short_explanation": "Öfkeyi yutmak ve bağışlamak, müminin içsel gücünü ve olgunluğunu gösterir.",
+    "notes": "Öfkeyi yutmak ve bağışlamak, müminin içsel gücünü ve olgunluğunu gösterir."
+  },
+  {
+    "id": 42,
+    "surah": "Yûsuf",
+    "surahNumber": 12,
+    "ayah": 86,
+    "ayahNumber": 86,
+    "text_ar": "قَالَ إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ وَأَعْلَمُ مِنَ اللَّهِ مَا لَا تَعْلَمُونَ",
+    "text_tr": "Dedi ki: Ben ancak sıkıntımı ve hüznümü Allah'a arzederim; Allah'tan sizin bilmediklerinizi bilirim.",
+    "tags": [
+      "hüzün",
+      "dua",
+      "tevekkül",
+      "yalnızlık"
+    ],
+    "short_explanation": "Derin acı içindeki Hz. Yakub, şikayetini insanlara değil Allah'a taşır; bu teslimiyet kalbi korur.",
+    "notes": "Derin acı içindeki Hz. Yakub, şikayetini insanlara değil Allah'a taşır; bu teslimiyet kalbi korur."
+  },
+  {
+    "id": 43,
+    "surah": "Lokmân",
+    "surahNumber": 31,
+    "ayah": 18,
+    "ayahNumber": 18,
+    "text_ar": "وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِي الْأَرْضِ مَرَحًا إِنَّ اللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍ فَخُورٍ",
+    "text_tr": "İnsanlara yanağını şişirme ve yeryüzünde böbürlenerek yürüme; Allah kibirlenip öğünen kimseyi sevmez.",
+    "tags": [
+      "kibir",
+      "kötülükler"
+    ],
+    "short_explanation": "Kibir kalbi Allah'tan ve insanlardan uzaklaştırır; mütevazılık ise sevdiren bir ahlaktır.",
+    "notes": "Kibir kalbi Allah'tan ve insanlardan uzaklaştırır; mütevazılık ise sevdiren bir ahlaktır."
+  },
+  {
+    "id": 44,
+    "surah": "Nisâ",
+    "surahNumber": 4,
+    "ayah": 31,
+    "ayahNumber": 31,
+    "text_ar": "إِنْ تَجْتَنِبُوا كَبَائِرَ مَا تُنْهَوْنَ عَنْهُ نُكَفِّرْ عَنْكُمْ سَيِّئَاتِكُمْ",
+    "text_tr": "Size yasaklanan büyük günahlardan kaçınırsanız, küçük günahlarınızı örteriz.",
+    "tags": [
+      "günahlar",
+      "tövbe",
+      "bağışlanma"
+    ],
+    "short_explanation": "Büyük günahlardan uzak durmak, Allah'ın rahmetiyle küçük hataların affedilmesine vesile olur.",
+    "notes": "Büyük günahlardan uzak durmak, Allah'ın rahmetiyle küçük hataların affedilmesine vesile olur."
+  },
+  {
+    "id": 45,
+    "surah": "İsrâ",
+    "surahNumber": 17,
+    "ayah": 32,
+    "ayahNumber": 32,
+    "text_ar": "وَلَا تَقْرَبُوا الزِّنَا إِنَّهُ كَانَ فَاحِشَةً وَسَاءَ سَبِيلًا",
+    "text_tr": "Zinaya yaklaşmayın; çünkü o bir hayasızlıktır ve çok kötü bir yoldur.",
+    "tags": [
+      "haramlar",
+      "kötülükler"
+    ],
+    "short_explanation": "İslam, zinadan uzak durmayı yalnızca eylemi değil ona götüren yolu da kapsayacak biçimde emreder.",
+    "notes": "İslam, zinadan uzak durmayı yalnızca eylemi değil ona götüren yolu da kapsayacak biçimde emreder."
+  },
+  {
+    "id": 46,
+    "surah": "A'râf",
+    "surahNumber": 7,
+    "ayah": 33,
+    "ayahNumber": 33,
+    "text_ar": "قُلْ إِنَّمَا حَرَّمَ رَبِّيَ الْفَوَاحِشَ مَا ظَهَرَ مِنْهَا وَمَا بَطَنَ وَالْإِثْمَ وَالْبَغْيَ بِغَيْرِ الْحَقِّ",
+    "text_tr": "De ki: Rabbim ancak fuhşu —açığını da gizlisini de—, günahı ve haksız yere isyanı yasaklamıştır.",
+    "tags": [
+      "haramlar",
+      "günahlar",
+      "kötülükler"
+    ],
+    "short_explanation": "Allah'ın yasaklarının özeti: açık ve gizli çirkinlikler, her türlü günah ve haksız saldırganlık.",
+    "notes": "Allah'ın yasaklarının özeti: açık ve gizli çirkinlikler, her türlü günah ve haksız saldırganlık."
+  },
+  {
+    "id": 47,
+    "surah": "Hucurât",
+    "surahNumber": 49,
+    "ayah": 12,
+    "ayahNumber": 12,
+    "text_ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا اجْتَنِبُوا كَثِيرًا مِنَ الظَّنِّ إِنَّ بَعْضَ الظَّنِّ إِثْمٌ وَلَا تَجَسَّسُوا وَلَا يَغْتَبْ بَعْضُكُمْ بَعْضًا",
+    "text_tr": "Ey iman edenler! Zannın çoğundan kaçının; zira bir kısım zan günahtır. Birbirinizi araştırmayın ve birbirinizin gıybetini yapmayın.",
+    "tags": [
+      "gıybet",
+      "kötülükler",
+      "günahlar"
+    ],
+    "short_explanation": "Gıybet ve suizan, toplumsal güveni çürüten ve kalbi kirleten iki ağır hatadır.",
+    "notes": "Gıybet ve suizan, toplumsal güveni çürüten ve kalbi kirleten iki ağır hatadır."
+  },
+  {
+    "id": 48,
+    "surah": "Hucurât",
+    "surahNumber": 49,
+    "ayah": 13,
+    "ayahNumber": 13,
+    "text_ar": "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ",
+    "text_tr": "Ey insanlar! Biz sizi bir erkek ve bir dişiden yarattık; birbirinizle tanışasınız diye milletlere ve kabilelere ayırdık. Allah katında en değerliniz en çok takva sahibi olanınızdır.",
+    "tags": [
+      "merhamet",
+      "eşitlik",
+      "iyilikler"
+    ],
+    "short_explanation": "Farklılıklar ayrılık için değil, tanışmak ve anlaşmak içindir; asıl değer takvadadır.",
+    "notes": "Farklılıklar ayrılık için değil, tanışmak ve anlaşmak içindir; asıl değer takvadadır."
+  },
+  {
+    "id": 49,
+    "surah": "Bakara",
+    "surahNumber": 2,
+    "ayah": 195,
+    "ayahNumber": 195,
+    "text_ar": "وَأَنْفِقُوا فِي سَبِيلِ اللَّهِ وَلَا تُلْقُوا بِأَيْدِيكُمْ إِلَى التَّهْلُكَةِ وَأَحْسِنُوا إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ",
+    "text_tr": "Allah yolunda harcayın; kendinizi tehlikeye atmayın ve iyilik yapın. Allah iyilik yapanları sever.",
+    "tags": [
+      "iyilikler",
+      "infak",
+      "merhamet"
+    ],
+    "short_explanation": "İyiliği hayata dökmek yalnızca niyet değil, somut bir adımdır; Allah bunu sever ve mükâfatlandırır.",
+    "notes": "İyiliği hayata dökmek yalnızca niyet değil, somut bir adımdır; Allah bunu sever ve mükâfatlandırır."
+  },
+  {
+    "id": 50,
+    "surah": "Bakara",
+    "surahNumber": 2,
+    "ayah": 261,
+    "ayahNumber": 261,
+    "text_ar": "مَثَلُ الَّذِينَ يُنْفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنْبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنْبُلَةٍ مِائَةُ حَبَّةٍ وَاللَّهُ يُضَاعِفُ لِمَنْ يَشَاءُ",
+    "text_tr": "Allah yolunda mallarını harcayanların örneği, her başağında yüz tane olan yedi başak bitiren bir tohum gibidir. Allah dilediğine kat kat verir.",
+    "tags": [
+      "infak",
+      "cömertlik",
+      "iyilikler",
+      "umut"
+    ],
+    "short_explanation": "Vermek insanı yoksultmaz; Allah katında kat kat geri döner. Bu ayet cömertliğe güçlü bir teşvik içerir.",
+    "notes": "Vermek insanı yoksultmaz; Allah katında kat kat geri döner. Bu ayet cömertliğe güçlü bir teşvik içerir."
+  },
+  {
+    "id": 51,
+    "surah": "Nisâ",
+    "surahNumber": 4,
+    "ayah": 135,
+    "ayahNumber": 135,
+    "text_ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا قَوَّامِينَ بِالْقِسْطِ شُهَدَاءَ لِلَّهِ وَلَوْ عَلَى أَنْفُسِكُمْ",
+    "text_tr": "Ey iman edenler! Kendiniz aleyhine de olsa Allah için hakkı titizlikle ayakta tutan şahitler olun.",
+    "tags": [
+      "adalet",
+      "zulüm",
+      "doğruluk",
+      "irade"
+    ],
+    "short_explanation": "Gerçek adalet, başkaları için değil bizzat kendi aleyhimize de dürüstçe tanıklık etmektir.",
+    "notes": "Gerçek adalet, başkaları için değil bizzat kendi aleyhimize de dürüstçe tanıklık etmektir."
+  },
+  {
+    "id": 52,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 185,
+    "ayahNumber": 185,
+    "text_ar": "كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ وَإِنَّمَا تُوَفَّوْنَ أُجُورَكُمْ يَوْمَ الْقِيَامَةِ فَمَنْ زُحْزِحَ عَنِ النَّارِ وَأُدْخِلَ الْجَنَّةَ فَقَدْ فَازَ",
+    "text_tr": "Her can ölümü tadacaktır. Mükâfatlarınız kıyamet günü eksiksiz ödenecektir. Ateşten uzaklaştırılıp cennete sokulan gerçekten kurtuluşa ermiştir.",
+    "tags": [
+      "ölüm",
+      "ahiret",
+      "tevekkül"
+    ],
+    "short_explanation": "Ölümü hatırlamak kalbi dünyaya bağımlılıktan arındırır ve asıl hedefi yeniden hatırlatır.",
+    "notes": "Ölümü hatırlamak kalbi dünyaya bağımlılıktan arındırır ve asıl hedefi yeniden hatırlatır."
+  },
+  {
+    "id": 53,
+    "surah": "Bakara",
+    "surahNumber": 2,
+    "ayah": 201,
+    "ayahNumber": 201,
+    "text_ar": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+    "text_tr": "Rabbimiz! Bize dünyada da iyilik ver, ahirette de iyilik ver ve bizi cehennem azabından koru.",
+    "tags": [
+      "ahiret",
+      "dua",
+      "umut"
+    ],
+    "short_explanation": "Kur'an'ın öğrettiği bu dua, dünyanın ve ahiretin iyiliğini birlikte istemenin dengeli bir ifadesidir.",
+    "notes": "Kur'an'ın öğrettiği bu dua, dünyanın ve ahiretin iyiliğini birlikte istemenin dengeli bir ifadesidir."
+  },
+  {
+    "id": 54,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 135,
+    "ayahNumber": 135,
+    "text_ar": "وَالَّذِينَ إِذَا فَعَلُوا فَاحِشَةً أَوْ ظَلَمُوا أَنْفُسَهُمْ ذَكَرُوا اللَّهَ فَاسْتَغْفَرُوا لِذُنُوبِهِمْ وَمَنْ يَغْفِرُ الذُّنُوبَ إِلَّا اللَّهُ",
+    "text_tr": "Çirkin bir iş yaptıklarında ya da kendilerine zulüm ettiklerinde Allah'ı anarlar, günahlarının bağışlanmasını dilerler. Günahları Allah'tan başka kim bağışlayabilir?",
+    "tags": [
+      "tövbe",
+      "istiğfar",
+      "pişmanlık",
+      "günahlar",
+      "umut"
+    ],
+    "short_explanation": "Günah işlediğinde Allah'a dönmek aczin değil, tövbenin ne olduğunu bilen bir kalbin işaretidir.",
+    "notes": "Günah işlediğinde Allah'a dönmek aczin değil, tövbenin ne olduğunu bilen bir kalbin işaretidir."
+  },
+  {
+    "id": 55,
+    "surah": "Zilzâl",
+    "surahNumber": 99,
+    "ayah": 8,
+    "ayahNumber": 8,
+    "text_ar": "وَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ",
+    "text_tr": "Kim zerre kadar kötülük işlerse onu görür.",
+    "tags": [
+      "kötülükler",
+      "ahiret",
+      "günahlar"
+    ],
+    "short_explanation": "Her kötülük, ne kadar küçük olursa olsun hesap gününde karşımıza çıkar; bu bilinç insanı dürüst tutar.",
+    "notes": "Her kötülük, ne kadar küçük olursa olsun hesap gününde karşımıza çıkar; bu bilinç insanı dürüst tutar."
+  },
+  {
+    "id": 56,
+    "surah": "Yûnus",
+    "surahNumber": 10,
+    "ayah": 58,
+    "ayahNumber": 58,
+    "text_ar": "قُلْ بِفَضْلِ اللَّهِ وَبِرَحْمَتِهِ فَبِذَلِكَ فَلْيَفْرَحُوا هُوَ خَيْرٌ مِمَّا يَجْمَعُونَ",
+    "text_tr": "De ki: Allah'ın lütfuyla ve rahmetiyle sevinsinler; bu, onların biriktirdiklerinden daha hayırlıdır.",
+    "tags": [
+      "sevinç",
+      "şükür",
+      "umut"
+    ],
+    "short_explanation": "Gerçek neşenin kaynağı maddi birikim değil, Allah'ın rahmet ve lütfunun farkında olmaktır.",
+    "notes": "Gerçek neşenin kaynağı maddi birikim değil, Allah'ın rahmet ve lütfunun farkında olmaktır."
+  },
+  {
+    "id": 57,
+    "surah": "Nisâ",
+    "surahNumber": 4,
+    "ayah": 58,
+    "ayahNumber": 58,
+    "text_ar": "إِنَّ اللَّهَ يَأْمُرُكُمْ أَنْ تُؤَدُّوا الْأَمَانَاتِ إِلَى أَهْلِهَا وَإِذَا حَكَمْتُمْ بَيْنَ النَّاسِ أَنْ تَحْكُمُوا بِالْعَدْلِ",
+    "text_tr": "Allah size emanetleri ehline vermenizi ve insanlar arasında hükmettiğinizde adaletle hükmetmenizi emreder.",
+    "tags": [
+      "emanet",
+      "adalet",
+      "doğruluk",
+      "iyilikler"
+    ],
+    "short_explanation": "Emanet yalnızca mal değil; söz, görev ve sorumluluktur. Adaletten ayrılmadan yerine getirmek ibadettir.",
+    "notes": "Emanet yalnızca mal değil; söz, görev ve sorumluluktur. Adaletten ayrılmadan yerine getirmek ibadettir."
+  },
+  {
+    "id": 58,
+    "surah": "Ahzâb",
+    "surahNumber": 33,
+    "ayah": 70,
+    "ayahNumber": 70,
+    "text_ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَقُولُوا قَوْلًا سَدِيدًا",
+    "text_tr": "Ey iman edenler! Allah'tan korkun ve doğru söz söyleyin.",
+    "tags": [
+      "doğruluk",
+      "iyilikler"
+    ],
+    "short_explanation": "Doğru ve yerinde söz söylemek hem Allah'a karşı sorumluluğun hem de insanlara saygının bir gereğidir.",
+    "notes": "Doğru ve yerinde söz söylemek hem Allah'a karşı sorumluluğun hem de insanlara saygının bir gereğidir."
+  },
+  {
+    "id": 59,
+    "surah": "Felak",
+    "surahNumber": 113,
+    "ayah": 5,
+    "ayahNumber": 5,
+    "text_ar": "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+    "text_tr": "Haset ettiği zaman hasetçinin şerrinden (Allah'a sığınırım).",
+    "tags": [
+      "haset",
+      "kötülükler",
+      "korunma"
+    ],
+    "short_explanation": "Haset kişiyi hem manevi hem bedensel yorar; Allah'a sığınmak bu duygunun zararından korunmanın yoludur.",
+    "notes": "Haset kişiyi hem manevi hem bedensel yorar; Allah'a sığınmak bu duygunun zararından korunmanın yoludur."
+  },
+  {
+    "id": 60,
+    "surah": "Şuarâ",
+    "surahNumber": 26,
+    "ayah": 80,
+    "ayahNumber": 80,
+    "text_ar": "وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ",
+    "text_tr": "Hastalandığımda bana şifa veren O'dur.",
+    "tags": [
+      "hastalık",
+      "şifa",
+      "dua",
+      "tevekkül",
+      "umut"
+    ],
+    "short_explanation": "Hz. İbrahim'in sözü: Şifa Allah'tandır; tıbbi çaba ve dua birlikte anlam kazanır.",
+    "notes": "Hz. İbrahim'in sözü: Şifa Allah'tandır; tıbbi çaba ve dua birlikte anlam kazanır."
+  },
+  {
+    "id": 61,
+    "surah": "Kalem",
+    "surahNumber": 68,
+    "ayah": 4,
+    "ayahNumber": 4,
+    "text_ar": "وَإِنَّكَ لَعَلَى خُلُقٍ عَظِيمٍ",
+    "text_tr": "Şüphesiz sen yüce bir ahlak üzeresin.",
+    "tags": [
+      "güzel ahlak",
+      "iyilikler"
+    ],
+    "short_explanation": "Peygamber'e yönelik bu ayet, güzel ahlakın inancın en somut yansıması olduğunu hatırlatır.",
+    "notes": "Peygamber'e yönelik bu ayet, güzel ahlakın inancın en somut yansıması olduğunu hatırlatır."
+  },
+  {
+    "id": 62,
+    "surah": "Nahl",
+    "surahNumber": 16,
+    "ayah": 97,
+    "ayahNumber": 97,
+    "text_ar": "مَنْ عَمِلَ صَالِحًا مِنْ ذَكَرٍ أَوْ أُنْثَى وَهُوَ مُؤْمِنٌ فَلَنُحْيِيَنَّهُ حَيَاةً طَيِّبَةً",
+    "text_tr": "Erkek ya da kadın, mümin olarak salih amel işleyen herkesi güzel bir hayatla yaşatırız.",
+    "tags": [
+      "iyilikler",
+      "umut",
+      "irade"
+    ],
+    "short_explanation": "İman ve salih amel, cinsiyetten bağımsız olarak herkese Allah'ın vaat ettiği güzel bir hayatın anahtarıdır.",
+    "notes": "İman ve salih amel, cinsiyetten bağımsız olarak herkese Allah'ın vaat ettiği güzel bir hayatın anahtarıdır."
+  },
+  {
+    "id": 63,
+    "surah": "Âl-i İmrân",
+    "surahNumber": 3,
+    "ayah": 102,
+    "ayahNumber": 102,
+    "text_ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ وَلَا تَمُوتُنَّ إِلَّا وَأَنْتُمْ مُسْلِمُونَ",
+    "text_tr": "Ey iman edenler! Allah'tan gereği gibi korkun ve yalnızca Müslüman olarak ölün.",
+    "tags": [
+      "takva",
+      "ölüm",
+      "irade"
+    ],
+    "short_explanation": "Takva anlık bir karar değil; ömür boyu sürdürülen ve son nefese dek korunan bir yaşam biçimidir.",
+    "notes": "Takva anlık bir karar değil; ömür boyu sürdürülen ve son nefese dek korunan bir yaşam biçimidir."
+  },
+  {
+    "id": 64,
+    "surah": "Şûrâ",
+    "surahNumber": 42,
+    "ayah": 40,
+    "ayahNumber": 40,
+    "text_ar": "وَجَزَاءُ سَيِّئَةٍ سَيِّئَةٌ مِثْلُهَا فَمَنْ عَفَا وَأَصْلَحَ فَأَجْرُهُ عَلَى اللَّهِ",
+    "text_tr": "Kötülüğün karşılığı misli bir kötülüktür; fakat kim affeder ve barışı sağlarsa, onun mükâfatı Allah'a aittir.",
+    "tags": [
+      "affetmek",
+      "zulüm",
+      "sabır",
+      "umut"
+    ],
+    "short_explanation": "Affetmek hakkından vazgeçmek değil, daha yükseğe çıkmak ve mükâfatı Allah'a bırakmaktır.",
+    "notes": "Affetmek hakkından vazgeçmek değil, daha yükseğe çıkmak ve mükâfatı Allah'a bırakmaktır."
+  },
+  {
+    "id": 65,
+    "surah": "Müddessir",
+    "surahNumber": 74,
+    "ayah": 38,
+    "ayahNumber": 38,
+    "text_ar": "كُلُّ نَفْسٍ بِمَا كَسَبَتْ رَهِينَةٌ",
+    "text_tr": "Her kişi kazandıklarıyla rehin gibi bağlıdır.",
+    "tags": [
+      "ahiret",
+      "günahlar",
+      "hesap",
+      "irade"
+    ],
+    "short_explanation": "Her eylem bir iz bırakır; bu gerçek insanı sorumluluk bilinciyle yaşamaya ve hesabı düşünmeye çağırır.",
+    "notes": "Her eylem bir iz bırakır; bu gerçek insanı sorumluluk bilinciyle yaşamaya ve hesabı düşünmeye çağırır."
   }
 ]
