@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-05-31T19:15:26.680Z",
+  "dry_run": false,
+  "iterations": [
+    {
+      "iteration": 1,
+      "failing_count": 1,
+      "fixes": [
+        {
+          "test_id": "ayet_07",
+          "fixes": [
+            {
+              "check_type": "answer_contains",
+              "action": "manual",
+              "reason": "KB isabeti yok, cevap içeriği hatalı → KB entry keyword veya OpenAI fallback incelenmeli"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "finished_at": "2026-05-31T19:15:32.264Z",
+  "final_status": "has_failures"
+}
