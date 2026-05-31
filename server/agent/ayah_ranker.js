@@ -105,6 +105,103 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 62, ayahNumber: 8 },
     { surahNumber: 21, ayahNumber: 35 },
   ],
+  // ── Yeni duygusal temalar ──────────────────────────────────────────────
+  [normalizeThemeKey("öfke")]: [
+    { surahNumber: 3, ayahNumber: 134 },  // Âl-i İmrân – öfkesini yutar
+    { surahNumber: 42, ayahNumber: 40 },  // Şûrâ – affetmek / sabır
+  ],
+  [normalizeThemeKey("hüzün")]: [
+    { surahNumber: 12, ayahNumber: 86 },  // Yûsuf – Hz. Yakub hüznü
+    { surahNumber: 94, ayahNumber: 5 },   // İnşirah – zorlukla kolaylık
+  ],
+  [normalizeThemeKey("sevinç")]: [
+    { surahNumber: 10, ayahNumber: 58 },  // Yûnus – Allah'ın nimetiyle sevin
+    { surahNumber: 16, ayahNumber: 97 },  // Nahl – güzel hayat
+  ],
+  [normalizeThemeKey("haset")]: [
+    { surahNumber: 113, ayahNumber: 5 }, // Felak – hasetçinin şerrinden
+  ],
+  [normalizeThemeKey("kibir")]: [
+    { surahNumber: 31, ayahNumber: 18 }, // Lokmân – kibirle yürüme
+  ],
+  // ── Ahlaki konular ──────────────────────────────────────────────────────
+  [normalizeThemeKey("haramlar")]: [
+    { surahNumber: 17, ayahNumber: 32 }, // İsrâ – zinaya yaklaşmayın
+    { surahNumber: 7, ayahNumber: 33 },  // A'râf – haram kılınan şeyler
+  ],
+  [normalizeThemeKey("iyilikler")]: [
+    { surahNumber: 2, ayahNumber: 261 }, // Bakara – infak/cömertlik
+    { surahNumber: 3, ayahNumber: 134 }, // Âl-i İmrân – affeden/iyilik eden
+    { surahNumber: 49, ayahNumber: 13 }, // Hucurât – tanışıp iyilik edin
+  ],
+  [normalizeThemeKey("kötülükler")]: [
+    { surahNumber: 99, ayahNumber: 8 },  // Zilzâl – kötülük zerresi
+    { surahNumber: 17, ayahNumber: 32 }, // İsrâ
+    { surahNumber: 7, ayahNumber: 33 },  // A'râf
+  ],
+  [normalizeThemeKey("gıybet")]: [
+    { surahNumber: 49, ayahNumber: 12 }, // Hucurât – gıybet etmeyin
+  ],
+  [normalizeThemeKey("infak")]: [
+    { surahNumber: 2, ayahNumber: 261 }, // Bakara – infak benzetmesi
+    { surahNumber: 2, ayahNumber: 195 }, // Bakara – Allah yolunda harcayın
+  ],
+  [normalizeThemeKey("emanet")]: [
+    { surahNumber: 4, ayahNumber: 58 },  // Nisâ – emaneti ehline verin
+  ],
+  [normalizeThemeKey("doğruluk")]: [
+    { surahNumber: 33, ayahNumber: 70 }, // Ahzâb – doğru söyleyin
+    { surahNumber: 4, ayahNumber: 135 }, // Nisâ – adaleti ayakta tutun
+  ],
+  // ── Ahiret / ölüm / hesap ───────────────────────────────────────────────
+  [normalizeThemeKey("ahiret")]: [
+    { surahNumber: 3, ayahNumber: 185 }, // Âl-i İmrân – her can ölümü tadacak
+    { surahNumber: 99, ayahNumber: 8 },  // Zilzâl – hesap
+    { surahNumber: 74, ayahNumber: 38 }, // Müddessir – herkes rehin
+    { surahNumber: 2, ayahNumber: 201 }, // Bakara – ahiret duası
+  ],
+  [normalizeThemeKey("ölüm")]: [
+    { surahNumber: 3, ayahNumber: 185 }, // Âl-i İmrân – her can ölümü tadacak
+    { surahNumber: 3, ayahNumber: 102 }, // Âl-i İmrân – ölmeden önce
+    { surahNumber: 74, ayahNumber: 38 }, // Müddessir
+  ],
+  // ── Mucizeler / peygamberler / yaratılış ────────────────────────────────
+  [normalizeThemeKey("mucizeler")]: [
+    { surahNumber: 21, ayahNumber: 30 }, // Enbiyâ – yaratılış
+    { surahNumber: 3, ayahNumber: 190 }, // Âl-i İmrân – tefekkür
+    { surahNumber: 17, ayahNumber: 88 }, // İsrâ – Kur'an mucizesi
+  ],
+  [normalizeThemeKey("hz. musa")]: [
+    { surahNumber: 20, ayahNumber: 20 }, // Tâhâ – asa
+    { surahNumber: 26, ayahNumber: 63 }, // Şuarâ – denizin yarılması
+  ],
+  [normalizeThemeKey("hz. ibrahim")]: [
+    { surahNumber: 21, ayahNumber: 69 }, // Enbiyâ – ateş serin olsun
+  ],
+  [normalizeThemeKey("hz. isa")]: [
+    { surahNumber: 3, ayahNumber: 49 },  // Âl-i İmrân – mucizeleri
+    { surahNumber: 19, ayahNumber: 30 }, // Meryem – beşikte konuştu
+  ],
+  [normalizeThemeKey("hz. süleyman")]: [
+    { surahNumber: 21, ayahNumber: 81 }, // Enbiyâ – rüzgar emri
+  ],
+  [normalizeThemeKey("hz. davud")]: [
+    { surahNumber: 34, ayahNumber: 10 }, // Sebe – dağlar ve kuşlar
+  ],
+  [normalizeThemeKey("hz. zekeriyya")]: [
+    { surahNumber: 19, ayahNumber: 7 },  // Meryem – müjde
+  ],
+  [normalizeThemeKey("hz. meryem")]: [
+    { surahNumber: 3, ayahNumber: 37 },  // Âl-i İmrân – rızık
+  ],
+  [normalizeThemeKey("isra ve mirac")]: [
+    { surahNumber: 17, ayahNumber: 1 },  // İsrâ – gece yolculuğu
+  ],
+  [normalizeThemeKey("yaratılış")]: [
+    { surahNumber: 21, ayahNumber: 30 }, // Enbiyâ – her şeyi sudan
+    { surahNumber: 3, ayahNumber: 190 }, // Âl-i İmrân – göklerin ve yerin yaratılışı
+    { surahNumber: 95, ayahNumber: 4 },  // Tîn – en güzel biçimde
+  ],
   [normalizeThemeKey("sabır_sıkıntı")]: [
     { surahNumber: 2, ayahNumber: 153 },
     { surahNumber: 2, ayahNumber: 155 },
@@ -300,6 +397,194 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
     topic: normalizeThemeKey("sabır"),
     list: ["sabır", "sabir", "sebat", "sabredenler"],
   },
+  // ── Yeni duygusal temalar ───────────────────────────────────────────────
+  {
+    topic: normalizeThemeKey("öfke"),
+    list: [
+      "öfke", "ofke", "öfkeli", "ofkeli", "kızgın", "kizgin",
+      "sinirli", "hiddet", "öfkemi kontrol", "kızıyorum",
+      "kızdım", "sinirleniyorum", "çok kızgın", "cok kizgin",
+      "öfke ile", "öfkeden", "sinirden",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hüzün"),
+    list: [
+      "hüzün", "huzun", "hüzünlü", "huzunlu", "üzgün", "uzgun",
+      "üzülüyorum", "uzuluyorum", "hüzün içindeyim", "huzun icindeyim",
+      "ağlıyorum", "agliyorum", "üzüldüm", "uzuldum",
+      "kederli", "mahzun", "keder içindeyim",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("sevinç"),
+    list: [
+      "sevinçliyim", "sevincim", "mutluyum", "sevinç", "sevinc",
+      "sevindim", "mutlu oldum", "neşelendim", "neşe", "nese",
+      "coşku", "coskunluk", "mutluluk", "sevindirici",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("haset"),
+    list: [
+      "haset", "kıskançlık", "kiskanclık", "kıskanç", "kiskanc",
+      "kıskanıyorum", "kiskaniorum", "çekemiyorum", "cekemiyorum",
+      "haset ediyorum", "hasetçilik",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("kibir"),
+    list: [
+      "kibir", "kibirli", "gurur", "mağrur", "magrur",
+      "büyüklük taslıyor", "buyukluk tasliyor",
+      "büyüklük taslamak", "kendini beğenmiş", "kendini begenmis",
+      "kibirleniyorum", "kendini üstün görüyor",
+    ],
+  },
+  // ── Ahlaki konular ──────────────────────────────────────────────────────
+  {
+    topic: normalizeThemeKey("haramlar"),
+    list: [
+      "haram", "haramdan uzak", "haramlardan kaçınmak",
+      "haramdan kacınmak", "yasak", "haram işledim",
+      "harama girdim", "haram yaptım", "haram kaçınmak",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("iyilikler"),
+    list: [
+      "iyilik", "iyilik yap", "iyilik yapmak", "hayır işi",
+      "hayır yapmak", "iyilikler", "hayırsever", "hayirsever",
+      "iyilik etmek", "güzel amel", "hayır amel",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("gıybet"),
+    list: [
+      "gıybet", "giybet", "dedikodu", "arkasından konuşmak",
+      "gıybet ediyor", "giybet ediyor", "gıybet ettim",
+      "giybet ettim", "arkasından söylüyorum",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("infak"),
+    list: [
+      "infak", "sadaka", "zekat", "sadaka vermek",
+      "yoksullara yardım", "yoksullara yardim", "bağış",
+      "bagis", "cömertlik", "comertlik", "infak etmek",
+      "hayır parası", "hayir parasi",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("emanet"),
+    list: [
+      "emanet", "emanete ihanet", "emanet verilen",
+      "güven ihlali", "guven ihlali", "emaneti korumak",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("doğruluk"),
+    list: [
+      "doğruluk", "dogruluk", "dürüstlük", "durustluk",
+      "dürüst", "durust", "sadakat", "doğru sözlü",
+      "dogru sozlu", "yalan söylemem", "doğru olmak", "dogru olmak",
+    ],
+  },
+  // ── Ahiret / ölüm / hesap ───────────────────────────────────────────────
+  {
+    topic: normalizeThemeKey("ahiret"),
+    list: [
+      "ahiret", "öbür dünya", "obur dunya", "mahşer",
+      "mahser", "cennet", "cehennem", "öldükten sonra",
+      "oldukten sonra", "ahirette", "hesap günü", "hesap gunu",
+      "kıyamet", "kiyamet", "son gün", "son gun",
+      "kıyamet günü", "kiyamet gunu",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("ölüm"),
+    list: [
+      "ölüm", "olum", "vefat", "öldükten sonra ne olacak",
+      "oldukten sonra ne olacak", "hayatın sonu", "hayatin sonu",
+      "ölmek üzere", "olmek uzere", "ölüm gerçeği",
+    ],
+  },
+  // ── Mucizeler / peygamberler / yaratılış ────────────────────────────────
+  {
+    topic: normalizeThemeKey("mucizeler"),
+    list: [
+      "mucize", "mucizeler", "peygamber mucizesi",
+      "mucizeyi", "mucizesini", "keramet",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz. musa"),
+    list: [
+      "hz musa", "hz. musa", "musa peygamber", "asa mucizesi",
+      "denizi yardı", "denizi yardi", "firavun", "kızıldeniz",
+      "kizildeniz", "tih çölü",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz. ibrahim"),
+    list: [
+      "hz ibrahim", "hz. ibrahim", "ibrahim peygamber",
+      "ateşe atılma", "atese atilma", "nemrut",
+      "ibrahim ateş", "ateşten kurtarıldı",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz. isa"),
+    list: [
+      "hz isa", "hz. isa", "isa peygamber", "meryem oğlu",
+      "meryem oglu", "isa mucizesi",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz. süleyman"),
+    list: [
+      "hz süleyman", "hz. süleyman", "hz. suleyman",
+      "süleyman peygamber", "suleyman peygamber",
+      "rüzgar süleyman", "ruzgar suleyman",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz. davud"),
+    list: [
+      "hz davud", "hz. davud", "davud peygamber",
+      "davut peygamber", "hz. davut",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz. zekeriyya"),
+    list: [
+      "hz zekeriyya", "hz. zekeriyya", "zekeriyya peygamber",
+      "zekeriyya", "zekeriya", "yaşlılıkta çocuk",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("hz. meryem"),
+    list: [
+      "hz meryem", "hz. meryem", "meryem annemiz",
+      "meryem anne", "meryem validemiz",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("isra ve mirac"),
+    list: [
+      "isra mirac", "isra ve mirac", "miraç gecesi",
+      "miracı", "isra gecesi", "miracını", "mirac",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("yaratılış"),
+    list: [
+      "yaratılış", "yaratilis", "evrenin yaratılışı",
+      "evrenin yaratilisi", "kainat", "büyük patlama",
+      "buyuk patlama", "tefekkür", "tefekur",
+      "kainatı düşünmek", "evreni düşünmek",
+    ],
+  },
 ];
 
 const CURATED_OVERRIDE_SIGNAL_KEYS = {
@@ -316,6 +601,33 @@ const CURATED_OVERRIDE_SIGNAL_KEYS = {
   [normalizeThemeKey("umut_sonrasi_zorluk")]: ["umut", "ümit", "umit", "zor zamanlarda", "zor zamanlardan sonra", "kolaylık", "kolaylik", "ferahlık", "ferahlik", "çıkış", "cikis", "darda kaldım", "darda kaldim"],
   [normalizeThemeKey("umut")]: ["umut", "ümit", "umit", "motive", "motivasyon", "moral", "teselli"],
   [normalizeThemeKey("sabır")]: ["sabır", "sabir", "sebat", "sabredenler"],
+  // ── Yeni duygusal temalar ─────────────────────────────────────────────
+  [normalizeThemeKey("öfke")]: ["öfke", "ofke", "öfkeli", "kızgın", "sinirli", "hiddet"],
+  [normalizeThemeKey("hüzün")]: ["hüzün", "huzun", "üzgün", "kederli", "mahzun"],
+  [normalizeThemeKey("sevinç")]: ["sevinç", "sevinc", "mutluluk", "neşe", "sevindim"],
+  [normalizeThemeKey("haset")]: ["haset", "kıskançlık", "kıskanç"],
+  [normalizeThemeKey("kibir")]: ["kibir", "kibirli", "gurur", "mağrur"],
+  // ── Ahlaki konular ────────────────────────────────────────────────────
+  [normalizeThemeKey("haramlar")]: ["haram", "haramdan", "yasak"],
+  [normalizeThemeKey("iyilikler")]: ["iyilik", "hayır işi", "iyilik yapmak"],
+  [normalizeThemeKey("gıybet")]: ["gıybet", "giybet", "dedikodu"],
+  [normalizeThemeKey("infak")]: ["infak", "sadaka", "zekat", "cömertlik"],
+  [normalizeThemeKey("emanet")]: ["emanet"],
+  [normalizeThemeKey("doğruluk")]: ["doğruluk", "dogruluk", "dürüstlük"],
+  // ── Ahiret / ölüm ─────────────────────────────────────────────────────
+  [normalizeThemeKey("ahiret")]: ["ahiret", "kıyamet", "kiyamet", "mahşer"],
+  [normalizeThemeKey("ölüm")]: ["ölüm", "olum", "vefat", "öldükten sonra"],
+  // ── Mucizeler / peygamberler ──────────────────────────────────────────
+  [normalizeThemeKey("mucizeler")]: ["mucize", "mucizeler"],
+  [normalizeThemeKey("hz. musa")]: ["hz musa", "hz. musa", "musa peygamber", "firavun", "denizi yardı"],
+  [normalizeThemeKey("hz. ibrahim")]: ["hz ibrahim", "hz. ibrahim", "ibrahim peygamber", "ateşe atılma"],
+  [normalizeThemeKey("hz. isa")]: ["hz isa", "hz. isa", "isa peygamber", "meryem oğlu"],
+  [normalizeThemeKey("hz. süleyman")]: ["hz süleyman", "hz. süleyman", "süleyman peygamber"],
+  [normalizeThemeKey("hz. davud")]: ["hz davud", "hz. davud", "davud peygamber"],
+  [normalizeThemeKey("hz. zekeriyya")]: ["hz zekeriyya", "hz. zekeriyya", "zekeriyya"],
+  [normalizeThemeKey("hz. meryem")]: ["hz meryem", "hz. meryem", "meryem annemiz"],
+  [normalizeThemeKey("isra ve mirac")]: ["isra mirac", "isra ve mirac", "miraç", "mirac"],
+  [normalizeThemeKey("yaratılış")]: ["yaratılış", "yaratilis", "evrenin yaratılışı", "kainat", "tefekkür"],
 };
 
 function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
@@ -1035,6 +1347,41 @@ function datasetTagsForTheme(theme) {
     [normalizeThemeKey("korku")]: ["korku", "havf", "tehdit", "endişe"],
     [normalizeThemeKey("sabır_sıkıntı")]: ["sabır", "dayanmak", "zorluk", "imtihan"],
     [normalizeThemeKey("umut_sonrasi_zorluk")]: ["umut", "ferahlık", "kolaylık", "çıkış"],
+    // ── Yeni duygusal temalar ─────────────────────────────────────────────
+    [normalizeThemeKey("öfke")]: ["öfke", "affetmek", "irade"],
+    [normalizeThemeKey("hüzün")]: ["hüzün", "sabır", "umut"],
+    [normalizeThemeKey("sevinç")]: ["sevinç", "şükür", "umut"],
+    [normalizeThemeKey("haset")]: ["haset", "kötülükler", "korunma"],
+    [normalizeThemeKey("kibir")]: ["kibir", "kötülükler", "irade"],
+    // ── Ahlaki temalar ────────────────────────────────────────────────────
+    [normalizeThemeKey("haramlar")]: ["haramlar", "kötülükler", "günahlar"],
+    [normalizeThemeKey("iyilikler")]: ["iyilikler", "merhamet", "cömertlik"],
+    [normalizeThemeKey("kötülükler")]: ["kötülükler", "günahlar", "haramlar"],
+    [normalizeThemeKey("gıybet")]: ["gıybet", "kötülükler"],
+    [normalizeThemeKey("emanet")]: ["emanet", "adalet", "doğruluk"],
+    [normalizeThemeKey("doğruluk")]: ["doğruluk", "iyilikler", "emanet"],
+    [normalizeThemeKey("infak")]: ["infak", "cömertlik", "iyilikler"],
+    [normalizeThemeKey("cömertlik")]: ["cömertlik", "infak", "iyilikler"],
+    [normalizeThemeKey("merhamet")]: ["merhamet", "iyilikler", "affetmek"],
+    [normalizeThemeKey("takva")]: ["takva", "irade", "iyilikler"],
+    [normalizeThemeKey("günahlar")]: ["günahlar", "tövbe", "bağışlanma"],
+    // ── Ahiret / ölüm ─────────────────────────────────────────────────────
+    [normalizeThemeKey("ahiret")]: ["ahiret", "ölüm", "hesap"],
+    [normalizeThemeKey("ölüm")]: ["ölüm", "ahiret", "tevekkül"],
+    [normalizeThemeKey("hesap")]: ["hesap", "ahiret", "günahlar"],
+    // ── Mucizeler / peygamberler / yaratılış ─────────────────────────────
+    [normalizeThemeKey("mucizeler")]: ["mucizeler", "peygamberler", "yaratılış"],
+    [normalizeThemeKey("peygamberler")]: ["peygamberler", "mucizeler"],
+    [normalizeThemeKey("yaratılış")]: ["yaratılış", "mucizeler", "tefekkür"],
+    [normalizeThemeKey("tefekkür")]: ["tefekkür", "yaratılış", "mucizeler"],
+    [normalizeThemeKey("hz. musa")]: ["Hz. Musa", "mucizeler", "peygamberler"],
+    [normalizeThemeKey("hz. ibrahim")]: ["Hz. İbrahim", "mucizeler", "peygamberler"],
+    [normalizeThemeKey("hz. isa")]: ["Hz. İsa", "mucizeler", "peygamberler"],
+    [normalizeThemeKey("hz. süleyman")]: ["Hz. Süleyman", "mucizeler", "peygamberler"],
+    [normalizeThemeKey("hz. davud")]: ["Hz. Davud", "mucizeler", "peygamberler"],
+    [normalizeThemeKey("hz. zekeriyya")]: ["Hz. Zekeriyya", "mucizeler", "peygamberler"],
+    [normalizeThemeKey("hz. meryem")]: ["Hz. Meryem", "mucizeler", "peygamberler"],
+    [normalizeThemeKey("isra ve mirac")]: ["İsra ve Mirac", "mucizeler", "Hz. Muhammed"],
   };
   return aliases[normalizedTheme] || [theme, "umut"];
 }

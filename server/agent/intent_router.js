@@ -344,6 +344,139 @@ function analyzeUserMessageFallback(message, history = []) {
     umut: 3,
   });
 
+  // ── Yeni duygusal temalar ───────────────────────────────────────────────
+  score(["öfke", "öfkeli", "kızgın", "sinirli", "hiddet", "öfkemi kontrol", "kızıyorum", "kızdım", "sinirleniyorum"], {
+    öfke: 12,
+    irade: 7,
+    affetmek: 5,
+  });
+  score(["hüzün", "hüzünlü", "üzgün", "üzülüyorum", "hüzün içindeyim", "ağlıyorum", "üzüldüm", "kederli", "mahzun"], {
+    hüzün: 12,
+    sabır: 6,
+    umut: 4,
+  });
+  score(["sevinçliyim", "mutluyum", "sevinç", "sevindim", "mutlu oldum", "neşelendim", "neşe", "coşku"], {
+    sevinç: 12,
+    şükür: 8,
+    umut: 3,
+  });
+  score(["haset", "kıskançlık", "kıskanç", "kıskanıyorum", "çekemiyorum", "çekemez", "haset ediyorum"], {
+    haset: 12,
+    "nefs mücadelesi": 6,
+    irade: 4,
+  });
+  score(["kibir", "kibirli", "gurur", "mağrur", "büyüklük taslıyor", "büyüklük taslamak", "kendini beğenmiş", "kibirleniyorum"], {
+    kibir: 12,
+    irade: 6,
+    "nefs mücadelesi": 5,
+  });
+
+  // ── Ahlaki konular ──────────────────────────────────────────────────────
+  score(["haram", "haramdan uzak", "haramlardan kaçınmak", "yasak", "haram işledim", "harama girdim"], {
+    haramlar: 12,
+    irade: 6,
+    tövbe: 4,
+  });
+  score(["iyilik", "iyilik yap", "hayır işi", "hayır yapmak", "iyilik yapmak", "iyilikler", "hayırsever"], {
+    iyilikler: 12,
+    merhamet: 6,
+    cömertlik: 4,
+  });
+  score(["kötülük", "kötülükten uzak", "kötülük yapma", "fenalık", "şer", "kötü işler"], {
+    kötülükler: 12,
+    irade: 6,
+    tövbe: 4,
+  });
+  score(["gıybet", "dedikodu", "arkasından konuşmak", "gıybet ediyor", "gıybet ettim"], {
+    gıybet: 12,
+    kötülükler: 7,
+    "nefs mücadelesi": 4,
+  });
+  score(["emanet", "emanete ihanet", "emanet verilen", "güven ihlali"], {
+    emanet: 12,
+    adalet: 6,
+    doğruluk: 5,
+  });
+  score(["doğruluk", "dürüstlük", "dürüst", "sadakat", "doğru sözlü", "yalan söylemem", "doğru olmak"], {
+    doğruluk: 12,
+    iyilikler: 6,
+    irade: 4,
+  });
+  score(["infak", "sadaka", "zekat", "sadaka vermek", "yoksullara yardım", "bağış", "cömertlik", "infak etmek", "hayır parası"], {
+    infak: 12,
+    cömertlik: 8,
+    iyilikler: 5,
+  });
+
+  // ── Ahiret / ölüm / hesap ───────────────────────────────────────────────
+  score(["ahiret", "öbür dünya", "mahşer", "cennet", "cehennem", "öldükten sonra", "ahirette"], {
+    ahiret: 12,
+    ölüm: 6,
+    hesap: 5,
+  });
+  score(["kıyamet", "kıyamet günü", "hesap günü", "son gün", "kıyamet kopmadan önce"], {
+    ahiret: 12,
+    hesap: 8,
+    ölüm: 5,
+  });
+  score(["ölüm", "vefat", "ölümlü", "hayatın sonu", "öldükten sonra ne olacak", "ölmek üzere"], {
+    ölüm: 12,
+    ahiret: 7,
+    tevekkül: 4,
+  });
+
+  // ── Mucizeler / peygamberler ────────────────────────────────────────────
+  score(["mucize", "mucizeler", "peygamber mucizesi", "keramet"], {
+    mucizeler: 12,
+    peygamberler: 7,
+    yaratılış: 3,
+  });
+  score(["hz musa", "hz. musa", "musa peygamber", "asa mucizesi", "denizi yardı", "firavun"], {
+    mucizeler: 14,
+    "hz. musa": 12,
+    peygamberler: 6,
+  });
+  score(["hz ibrahim", "hz. ibrahim", "ibrahim peygamber", "ateşe atılma", "nemrut"], {
+    mucizeler: 14,
+    "hz. ibrahim": 12,
+    peygamberler: 6,
+  });
+  score(["hz isa", "hz. isa", "isa peygamber", "meryem oğlu"], {
+    mucizeler: 14,
+    "hz. isa": 12,
+    peygamberler: 6,
+  });
+  score(["hz süleyman", "hz. süleyman", "süleyman peygamber", "süleyman"], {
+    mucizeler: 12,
+    "hz. süleyman": 12,
+    peygamberler: 6,
+  });
+  score(["hz davud", "hz. davud", "davud peygamber", "davud"], {
+    mucizeler: 12,
+    "hz. davud": 12,
+    peygamberler: 6,
+  });
+  score(["hz zekeriyya", "hz. zekeriyya", "zekeriyya peygamber", "zekeriyya"], {
+    mucizeler: 12,
+    "hz. zekeriyya": 12,
+    peygamberler: 6,
+  });
+  score(["hz meryem", "hz. meryem", "meryem", "meryem annemiz"], {
+    mucizeler: 12,
+    "hz. meryem": 12,
+    peygamberler: 6,
+  });
+  score(["isra mirac", "isra ve mirac", "miraç gecesi", "miracı", "isra gecesi"], {
+    mucizeler: 14,
+    "isra ve mirac": 12,
+    peygamberler: 6,
+  });
+  score(["yaratılış", "evrenin yaratılışı", "kainat", "büyük patlama", "tefekkür", "kainatı düşünmek"], {
+    yaratılış: 12,
+    mucizeler: 8,
+    tefekkür: 7,
+  });
+
   if (contextDependent && contextTopic) {
     const topicTheme = themeForContextTopic(contextTopic);
     scores.set(topicTheme, (scores.get(topicTheme) || 0) + 14);
@@ -369,6 +502,17 @@ function analyzeUserMessageFallback(message, history = []) {
     isDirectTopicQuestion(normalized, contextTopic)
   ) {
     intent = "general_islamic_question";
+  }
+
+  // Mucize / peygamber / yaratılış sorguları bilgi sorusudur; duygusal destek sistemi
+  // bu ayetleri anti-pattern olarak işaretleyip filtreler — intent'i ayah_request'e zorla.
+  const INFORMATIONAL_THEMES = new Set([
+    "mucizeler", "peygamberler", "yaratılış", "tefekkür",
+    "hz. musa", "hz. ibrahim", "hz. isa", "hz. süleyman",
+    "hz. davud", "hz. zekeriyya", "hz. meryem", "isra ve mirac",
+  ]);
+  if (INFORMATIONAL_THEMES.has(primary) || secondary.some((t) => INFORMATIONAL_THEMES.has(t))) {
+    intent = "ayah_request";
   }
 
   if (intent === "ayah_request" && explicitTopic) {
