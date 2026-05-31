@@ -133,7 +133,7 @@ jobs:
 
       - name: Upload test artifacts
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: qa-test-results
           path: server/test_results/
@@ -141,7 +141,7 @@ jobs:
 
       - name: Upload generated questions
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: generated-questions
           path: server/generated_questions_*.json
