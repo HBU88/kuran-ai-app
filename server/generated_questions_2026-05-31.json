@@ -1,0 +1,159 @@
+{
+  "timestamp": "2026-05-31T05:48:24.778Z",
+  "date": "2026-05-31",
+  "topics": {
+    "kurban": {
+      "label": "Kurban (Sacrifice)",
+      "expectedTopic": "kurban_kime_vaciptir",
+      "count": 12,
+      "questions": [
+        "kesmek kimlere gerekir?",
+        "bayram kimlere gerekir?",
+        "bayram nedir?",
+        "kesme kimlere vaciptir?",
+        "kesme nasıl yapılır?",
+        "kesme kimlere gerekir?",
+        "kurban nedir?",
+        "Kim kurban kesmeli?",
+        "hayvan kimlere gerekir?",
+        "kesme ne demek?",
+        "bayram nasıl yapılır?",
+        "Kim hayvan kesmeli?"
+      ]
+    },
+    "selam": {
+      "label": "Selam (Greeting)",
+      "expectedTopic": "selamlasma_adabi",
+      "count": 12,
+      "questions": [
+        "İslam'da selamlaşma önemli midir?",
+        "selamlaşma ne demek?",
+        "selamıı dönmek vacip midir?",
+        "İslam'da selam önemli midir?",
+        "selamlamak almak gerekir mi?",
+        "selamlaşma nedir?",
+        "selamılaşma nedir?",
+        "selamlamak vermek nasıl yapılır?",
+        "selamlaşmaı dönmek vacip midir?",
+        "selam almak gerekir mi?",
+        "selamı vermek nasıl yapılır?",
+        "selamlaşmalaşma nedir?"
+      ]
+    },
+    "namaz": {
+      "label": "Namaz (Prayer)",
+      "expectedTopic": "namaz_kac_rekat",
+      "count": 12,
+      "questions": [
+        "Günde kaç namaz kılmak gerekir?",
+        "rekat kaç rekat?",
+        "rekat vakitleri nedir?",
+        "salat vakitleri nedir?",
+        "namaz kaç rekat?",
+        "Günde kaç rekat kılmak gerekir?",
+        "salat ne zaman kılınır?",
+        "salat nedir?",
+        "salat kaç rekat?",
+        "ibadet ne zaman kılınır?",
+        "ibadet kılmanın faydaları nedir?",
+        "ibadet nedir?"
+      ]
+    },
+    "abdest": {
+      "label": "Abdest (Ablution)",
+      "expectedTopic": "abdest_howto",
+      "count": 12,
+      "questions": [
+        "temizlenme nedir?",
+        "taharet alma adımları nedir?",
+        "abdestsiz yapılacak işler nelerdir?",
+        "tahareti bozan şeyler nelerdir?",
+        "temizlenmeın şartları nedir?",
+        "abdest alma ne zaman gerekir?",
+        "temizlenmesiz yapılacak işler nelerdir?",
+        "taharetsiz yapılacak işler nelerdir?",
+        "wudu nasıl alınır?",
+        "abdest alma adımları nedir?",
+        "abdest almadan {keyword} kılınır mı?",
+        "wudusiz yapılacak işler nelerdir?"
+      ]
+    },
+    "oruc": {
+      "label": "Oruç (Fasting)",
+      "expectedTopic": "oruc_nedir",
+      "count": 12,
+      "questions": [
+        "oruç kesmek ne demektir?",
+        "tutma ne zaman yapılır?",
+        "siyam kesmek ne demektir?",
+        "fast nedir?",
+        "oruç ne demek?",
+        "oruç ne zaman yapılır?",
+        "fast boyanlar nelerdir?",
+        "oruçın faydaları nelerdir?",
+        "oruç nedir?",
+        "oruç tutarken nelere dikkat edilir?",
+        "fast tutarken nelere dikkat edilir?",
+        "siyam nedir?"
+      ]
+    },
+    "zekat": {
+      "label": "Zekât (Alms)",
+      "expectedTopic": "zekat_nedir",
+      "count": 12,
+      "questions": [
+        "zekât kimlere farzdır?",
+        "maliye kimlere verilir?",
+        "vergi kimlere farzdır?",
+        "zekât nedir?",
+        "zekât kimlere verilir?",
+        "vergi ne kadar verilir?",
+        "zekâtın şartları nelerdir?",
+        "zekat ne zaman verilir?",
+        "vergiın şartları nelerdir?",
+        "zekatın şartları nelerdir?",
+        "zekât vermemek nasidir?",
+        "zekât ne demek?"
+      ]
+    },
+    "hac": {
+      "label": "Hac (Pilgrimage)",
+      "expectedTopic": "hac_kimlere_farzdır",
+      "count": 12,
+      "questions": [
+        "kutsal kimlere farzdır?",
+        "kutsalın şartları nederdir?",
+        "hac kimlere farzdır?",
+        "ziyaret kimlere farzdır?",
+        "hac yapmak için neler gerekir?",
+        "ziyaret yapmak için neler gerekir?",
+        "kutsal ve umre arasındaki fark nedir?",
+        "hacın şartları nederdir?",
+        "umreın şartları nederdir?",
+        "Kim kutsal yapmalıdır?",
+        "umre nedir?",
+        "ziyaretın şartları nederdir?"
+      ]
+    },
+    "dua": {
+      "label": "Dua (Supplication)",
+      "expectedTopic": "dua_nedir",
+      "count": 12,
+      "questions": [
+        "yakarmak nasıl yapılır?",
+        "duâ ne zaman yapılır?",
+        "dua ettmenin faydaları nelerdir?",
+        "ibadet ne demek?",
+        "İstediğimiz şey için duâ ettik mi kabul olur mu?",
+        "dua nedir?",
+        "yakarmaka neler sorabiliriz?",
+        "duaa neler sorabiliriz?",
+        "duâ ettmenin faydaları nelerdir?",
+        "dua nasıl yapılır?",
+        "İstediğimiz şey için ibadet ettik mi kabul olur mu?",
+        "dua ne demek?"
+      ]
+    }
+  },
+  "totalQuestions": 96
+}

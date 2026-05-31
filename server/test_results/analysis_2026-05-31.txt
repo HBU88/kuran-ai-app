@@ -1,0 +1,42 @@
+
+🔍 QUESTION ANALYSIS REPORT
+📅 Date: 2026-05-31
+═══════════════════════════════════════════════════════
+
+📊 OVERALL METRICS
+─────────────────────────────────────────────────────
+  Tests: 0/96
+  Avg Score: 0%
+  Avg Response: 1ms
+  Errors: 96
+  Critical Issues: 0
+
+✅ HIGH PERFORMING TOPICS (>80% accuracy)
+─────────────────────────────────────────────────────
+  No topics with >80% accuracy
+
+⚠️  LOW PERFORMING TOPICS (<70% accuracy)
+─────────────────────────────────────────────────────
+  • Kurban (Sacrifice): 0.0% (score: 0%)
+  • Selam (Greeting): 0.0% (score: 0%)
+  • Namaz (Prayer): 0.0% (score: 0%)
+  • Abdest (Ablution): 0.0% (score: 0%)
+  • Oruç (Fasting): 0.0% (score: 0%)
+  • Zekât (Alms): 0.0% (score: 0%)
+  • Hac (Pilgrimage): 0.0% (score: 0%)
+  • Dua (Supplication): 0.0% (score: 0%)
+
+📋 LOW CONFIDENCE QUESTIONS (score < 70%)
+─────────────────────────────────────────────────────
+  No low confidence questions
+
+🐢 SLOW RESPONSES (>2000ms)
+─────────────────────────────────────────────────────
+  No slow responses detected
+
+💡 RECOMMENDATIONS
+─────────────────────────────────────────────────────
+  🟡 1. Topics with accuracy < 70%: Kurban (Sacrifice) (0.0%), Selam (Greeting) (0.0%), Namaz (Prayer) (0.0%), Abdest (Ablution) (0.0%), Oruç (Fasting) (0.0%), Zekât (Alms) (0.0%), Hac (Pilgrimage) (0.0%), Dua (Supplication) (0.0%)
+     → Review semantic descriptions and add synonym mappings
+
+═══════════════════════════════════════════════════════
