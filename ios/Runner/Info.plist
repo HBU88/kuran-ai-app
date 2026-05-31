@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>HAKAI, Kıble yönünü ve namaz vakitlerini bulunduğun konuma göre hesaplamak için konumunu kullanır.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>HAKAI, Kıble yönünü ve namaz vakitlerini bulunduğun konuma göre hesaplamak için konumunu kullanır.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
