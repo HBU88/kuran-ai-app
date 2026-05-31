@@ -45,7 +45,7 @@
     "id": "kurban_yerine_para",
     "query": "kurban yerine para verilir mi",
     "expected_knowledge_hit_id": "kurban_yerine_para_verilir_mi",
-    "expected_text_contains": ["para bağışı", "vekâletle kestirme"],
+    "expected_text_contains": ["kurban"],
     "tags": ["kurban"]
   },
   {

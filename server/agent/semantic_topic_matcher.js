@@ -217,8 +217,15 @@ class SemanticTopicMatcher {
     // RULE 2: Keywords array match (specific keywords only)
     // =========================================
     if (entry.keywords && Array.isArray(entry.keywords)) {
-      // Generic question words — never use as sole match signal
-      const STOP_TOKENS = new Set(['nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'mi', 'mu', 'var', 'yok', 'ne', 'bir', 'bu', 'ile']);
+      // Generic question/qualifier words — never use as sole match signal
+      // "caiz", "haram", "helal", "gunah", "kullanmak" are Islamic predicates,
+      // not topic identifiers — e.g. "hologram kullanmak caiz mi" must NOT
+      // match "kredi_karti_kullanmak_caiz_mi" just because of shared "caiz".
+      const STOP_TOKENS = new Set([
+        'nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok',
+        'ne', 'bir', 'bu', 'ile', 'caiz', 'haram', 'helal', 'gunah',
+        'kullanmak', 'yapmak', 'etmek', 'olmak', 'vermek',
+      ]);
 
       // Check for EXACT keyword match (not substring)
       // Require the matching token to be a meaningful (non-stop) word
@@ -247,8 +254,11 @@ class SemanticTopicMatcher {
     // =========================================
     if (entry.manual_semantic_descriptions && Array.isArray(entry.manual_semantic_descriptions)) {
       // Apply same stop-word guard as Rule 2 — generic question words must not drive a match
-      const STOP_TOKENS_R3 = new Set(['nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok',
-                                       'ne', 'bir', 'bu', 'ile', 'kim', 'kime', 'nasil', 've', 'de', 'da']);
+      const STOP_TOKENS_R3 = new Set([
+        'nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok',
+        'ne', 'bir', 'bu', 'ile', 'kim', 'kime', 've', 'de', 'da',
+        'caiz', 'haram', 'helal', 'gunah', 'kullanmak', 'yapmak', 'etmek', 'olmak',
+      ]);
       const semanticMatch = entry.manual_semantic_descriptions.some(desc => {
         const descLower = desc.toLowerCase();
         return queryTokens.some(qt => {
