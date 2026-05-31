@@ -163,8 +163,22 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     if (serverHit) return serverHit;
   }
 
+  // say_nedir — "Sa'y" title normalizes to "sa y" (apostrophe→space), keyword "say nedir" won't substring-match
+  if (
+    includesLoose(normalizedMessage, "say nedir") ||
+    normalizedMessage.includes(normalizeLoose("sa y nedir")) ||
+    includesLoose(normalizedMessage, "safa merve say") ||
+    (includesLoose(normalizedMessage, "safa") && includesLoose(normalizedMessage, "merve") &&
+     (includesLoose(normalizedMessage, "nedir") || includesLoose(normalizedMessage, "nasil")))
+  ) {
+    const sayHit = buildServerSideHit("say_nedir");
+    if (sayHit) return sayHit;
+  }
+
   const zekatFitreTopic = resolveZekatFitreTopic(normalizedMessage);
   if (zekatFitreTopic) {
+    // resolveZekatFitreTopic may return a full hit object (from buildServerSideHit inside it)
+    if (typeof zekatFitreTopic === "object") return zekatFitreTopic;
     const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(zekatFitreTopic));
     if (hit) {
       return {
@@ -179,6 +193,9 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
         knowledge_hit_id: hit.id || null,
       };
     }
+    // Fallback: entry is in server-side KB but not in flat client-side KB
+    const zekatServerHit = buildServerSideHit(zekatFitreTopic);
+    if (zekatServerHit) return zekatServerHit;
   }
 
   const abdestTopic = resolveAbdestTopic(message, normalizedMessage);
@@ -220,6 +237,11 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
         matchScore: kurbanMatch.match_score,
       });
     }
+    // Fallback: entry is in server-side KB but not in flat client-side KB
+    if (kurbanMatch.topic) {
+      const kurbanServerHit = buildServerSideHit(kurbanMatch.topic);
+      if (kurbanServerHit) return kurbanServerHit;
+    }
   }
 
   const hacUmreTopic = resolveHacUmreTopic(message, normalizedMessage);
@@ -238,6 +260,9 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
         knowledge_hit_id: hit.id || null,
       };
     }
+    // Fallback: entry is in server-side KB but not in flat client-side KB
+    const hacServerHit = buildServerSideHit(hacUmreTopic);
+    if (hacServerHit) return hacServerHit;
   }
 
   const teyemmumMeshTopic = resolveTeyemmumMeshTopic(message, normalizedMessage);
@@ -294,6 +319,16 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     }
   }
 
+  // namaz_niyeti — must be BEFORE resolveNamazScenarioTopic which broadly catches "namaz"+"nasıl"
+  if (
+    includesLoose(normalizedMessage, "namaz niyeti") ||
+    (includesLoose(normalizedMessage, "namaz") && includesLoose(normalizedMessage, "niyet") &&
+     (includesLoose(normalizedMessage, "nasil") || includesLoose(normalizedMessage, "yapilir")))
+  ) {
+    const namazNiyetiHit = buildServerSideHit("namaz_niyeti");
+    if (namazNiyetiHit) return namazNiyetiHit;
+  }
+
   const namazScenarioTopic = resolveNamazScenarioTopic(message, normalizedMessage);
   if (namazScenarioTopic) {
     const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(namazScenarioTopic));
@@ -312,6 +347,15 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     }
   }
 
+  // oruc_kefaret — must be BEFORE resolveDailyPracticeTopic which has a broad "kefaret" catch-all
+  if (
+    (includesLoose(normalizedMessage, "oruc") || includesLoose(normalizedMessage, "oruç")) &&
+    includesLoose(normalizedMessage, "kefaret")
+  ) {
+    const orucKefaretHit = buildServerSideHit("oruc_kefaret");
+    if (orucKefaretHit) return orucKefaretHit;
+  }
+
   const dailyPracticeTopic = resolveDailyPracticeTopic(message, normalizedMessage);
   if (dailyPracticeTopic) {
     const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(dailyPracticeTopic));
@@ -328,6 +372,18 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
         knowledge_hit_id: hit.id || null,
       };
     }
+  }
+
+  // oruc_ve_hastalar — must be BEFORE genericSupportPrompt which catches "hastalık"
+  if (
+    includesLoose(normalizedMessage, "hastalikta oruc") ||
+    includesLoose(normalizedMessage, "hastada oruc") ||
+    includesLoose(normalizedMessage, "hasta oruc tutabilir mi") ||
+    includesLoose(normalizedMessage, "hastalıkta oruç") ||
+    (includesLoose(normalizedMessage, "hasta") && (includesLoose(normalizedMessage, "oruc") || includesLoose(normalizedMessage, "oruç")))
+  ) {
+    const orucHastaHit = buildServerSideHit("oruc_ve_hastalar");
+    if (orucHastaHit) return orucHastaHit;
   }
 
   const genericSupportPrompt =
@@ -362,7 +418,9 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
     !includesLoose(normalizedMessage, "gece korkusu") &&
     !includesLoose(normalizedMessage, "kötü rüya") &&
     !includesLoose(normalizedMessage, "kotu ruya") &&
-    !includesLoose(normalizedMessage, "namaz")
+    !includesLoose(normalizedMessage, "namaz") &&
+    !includesLoose(normalizedMessage, "oruc") &&
+    !includesLoose(normalizedMessage, "oruç")
   ) {
     return null;
   }
@@ -651,6 +709,26 @@ function resolveZekatFitreTopic(normalizedMessage) {
     if (serverHit) return serverHit;
     return "zekat_kimlere_farzdir"; // flat KB fallback
   }
+  // Zekat hesaplama — must be before generic "zekat" catch-all
+  if (
+    includesLoose(normalizedMessage, "zekat hesaplama") ||
+    includesLoose(normalizedMessage, "zekat nasil hesaplanir") ||
+    includesLoose(normalizedMessage, "zekat nasıl hesaplanır") ||
+    includesLoose(normalizedMessage, "zekat miktari") ||
+    includesLoose(normalizedMessage, "zekat miktarı") ||
+    includesLoose(normalizedMessage, "yuzde kac zekat") ||
+    includesLoose(normalizedMessage, "yüzde kaç zekat")
+  ) {
+    return "zekat_hesaplama";
+  }
+  // Zekat ve sadaka farkı — must be before generic "zekat" catch-all
+  if (
+    includesLoose(normalizedMessage, "zekat") &&
+    includesLoose(normalizedMessage, "sadaka") &&
+    (includesLoose(normalizedMessage, "fark") || includesLoose(normalizedMessage, "ayirt") || includesLoose(normalizedMessage, "ne fark"))
+  ) {
+    return "zekat_ve_sadaka_farki";
+  }
   if (includesLoose(normalizedMessage, "zekat nedir") || includesLoose(normalizedMessage, "zekÃ¢t nedir")) {
     return "zekat_nedir";
   }
@@ -772,6 +850,8 @@ function resolveKurbanTopic(message, normalizedMessage) {
     return topicMatch("kurban_eti_kimlere_verilir", "intent_phrase", 90);
   }
   if (
+    // "kurbanlık hayvan" prefix matches both the title and the specific question
+    includesLoose(normalizedMessage, "kurbanlık hayvan") ||
     includesLoose(normalizedMessage, "kurbanlık hayvan nasıl olmalı") ||
     includesLoose(normalizedMessage, "kusurlu hayvan kurban olur mu") ||
     includesLoose(normalizedMessage, "yaş şartı") ||
@@ -823,10 +903,10 @@ function resolveHacUmreTopic(message, normalizedMessage) {
   const hasUmre = includesLoose(normalizedMessage, "umre") || raw.includes("umre");
 
   if (
-    includesLoose(normalizedMessage, "hac ile umre farki") ||
-    includesLoose(normalizedMessage, "hac ve umre farki") ||
-    raw.includes("hac ile umre farki") ||
-    raw.includes("hac ve umre farki")
+    includesLoose(normalizedMessage, "hac ile umre fark") ||
+    includesLoose(normalizedMessage, "hac ve umre fark") ||
+    // normalizeLoose preserves Turkish chars (farkı≠farki), so use the shorter prefix "fark"
+    (normalizedMessage.includes("hac") && normalizedMessage.includes("umre") && normalizedMessage.includes("fark"))
   ) {
     return "hac_ile_umre_farki";
   }
@@ -935,7 +1015,10 @@ function resolveWomenStateTopic(message, normalizedMessage) {
   }
   if (
     includesLoose(normalizedMessage, "adetliyken kuran okunur mu") ||
+    // "Kur'an" normalizes to "kur an" (apostrophe→space), so check for the split form too
+    (includesLoose(normalizedMessage, "adetliyken") && includesLoose(normalizedMessage, "okunur")) ||
     includesLoose(normalizedMessage, "hayız halinde kuran okunur mu") ||
+    (includesLoose(normalizedMessage, "hayiz halinde") && includesLoose(normalizedMessage, "okunur")) ||
     raw.includes("adetliyken kuran okunur mu")
   ) {
     return "adetliyken_kuran_okunur_mu";

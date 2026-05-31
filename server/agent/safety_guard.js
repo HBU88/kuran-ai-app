@@ -31,7 +31,9 @@ function containsHostileOrViolentContent(text) {
   // Solution:
   //   For the ASCII fallback "oldur", require it to NOT be preceded by a consonant
   //   that makes it part of a different root (e.g. "d" in "doldur").
-  const narrativeSuffixes = ["ünce", "ünmek", "ülür", "ülmek", "üldü", "üyor", "ünden", "üyle"];
+  // "dü/düler/düm" covers simple past active forms: öldürdü, öldürdüler, öldürdüm
+  // These are historical-narrative past-tense, NOT imperative commands.
+  const narrativeSuffixes = ["ünce", "ünmek", "ülür", "ülmek", "üldü", "üyor", "ünden", "üyle", "dü", "düler", "düm", "dük", "dün"];
 
   function containsKillVerb(text) {
     if (text.includes("öldür")) return true;

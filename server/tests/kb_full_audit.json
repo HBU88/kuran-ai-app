@@ -1,0 +1,60 @@
+{
+  "total": 209,
+  "passed": 199,
+  "failed": 9,
+  "safety_blocks": 1,
+  "failures": [
+    {
+      "id": "adetliyken_kuran_okunur_mu",
+      "title": "Adetliyken Kur'an Okunur mu?",
+      "got": "hayiz_halinde_namaz_oruc"
+    },
+    {
+      "id": "hac_ile_umre_farki",
+      "title": "Hac ile Umre Farkı Nedir?",
+      "got": "hac_nedir"
+    },
+    {
+      "id": "kurbanlik_hayvan_sartlari",
+      "title": "Kurbanlık Hayvan Şartları",
+      "got": "(none)"
+    },
+    {
+      "id": "namaz_niyeti",
+      "title": "Namaz Niyeti Nasıl Yapılır?",
+      "got": "namaz_nasil_kilinir"
+    },
+    {
+      "id": "oruc_kefaret",
+      "title": "Oruç Kefareti",
+      "got": "kefaret_nedir"
+    },
+    {
+      "id": "oruc_ve_hastalar",
+      "title": "Hastalıkta Oruç",
+      "got": "(none)"
+    },
+    {
+      "id": "say_nedir",
+      "title": "Sa'y Nedir?",
+      "got": "(none)"
+    },
+    {
+      "id": "zekat_hesaplama",
+      "title": "Zekat Hesaplama",
+      "got": "zekat_nedir"
+    },
+    {
+      "id": "zekat_ve_sadaka_farki",
+      "title": "Zekat ve Sadaka Farkı",
+      "got": "zekat_nedir"
+    }
+  ],
+  "safety": [
+    {
+      "id": "hz_davud_kimdir",
+      "title": "Hz. Davud Kimdir?",
+      "hit": "hz_davud_kimdir"
+    }
+  ]
+}
