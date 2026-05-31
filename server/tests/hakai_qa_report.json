@@ -1,0 +1,1599 @@
+{
+  "generated_at": "2026-05-31T16:45:19.098Z",
+  "suite_version": "1.0",
+  "total": 50,
+  "passed": 50,
+  "failed": 0,
+  "errors": 0,
+  "pass_rate": "100%",
+  "filter": null,
+  "results": [
+    {
+      "id": "namaz_01",
+      "category": "namaz",
+      "question": "Namazın farzları nelerdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 48,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"namaz_farzlari\" (beklenen: \"namaz_farzlari\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains",
+          "pass": true,
+          "detail": "aranan: \"farz\" | cevap: \"Namazın farzları dış şartlar ve iç farzlar olarak birlikte düşünülür.\n\nAdım adım:\n- Abdest, kıble ve niyet hazırlanır.\n-\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "namaz_farzlari",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Namazın farzları dış şartlar ve iç farzlar olarak birlikte düşünülür.\n\nAdım adım:\n- Abdest, kıble ve niyet hazırlanır.\n- Kıraat, rükû, secde ve son oturuş sırayla yerine getirilir.\n- Namazın farz ve v",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_02",
+      "category": "namaz",
+      "question": "Sabah namazı kaç rekât?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 14,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"rekat\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "sabah_namazi",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Sabah namazı 4 rekattır: 2 sünnet + 2 farz.",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_03",
+      "category": "namaz",
+      "question": "Öğle namazı kaç rekât kılınır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 62,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"rekat\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "bayram_namazi_kac_rekat",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Öğle namazı 10 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet.",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_04",
+      "category": "namaz",
+      "question": "Cuma namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 8,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"cuma_namazi_nedir\" (beklenen prefix: \"cuma_namazi\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "cuma_namazi_nedir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Cuma namazı, cuma günü öğle vaktinde cemaatle ve hutbe ile kılınan önemli bir namazdır.\n\nAdım adım:\n- Cuma günü öğle vaktinde cemaatle kılınır.\n- Hutbe ile birlikte yürütülür.\n- Haftalık toplu ibadet ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_05",
+      "category": "namaz",
+      "question": "Bayram namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 7,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"bayram_namazi_nasil_kilinir\" (beklenen prefix: \"bayram_namazi\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "bayram_namazi_nasil_kilinir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Bayram namazı iki rekât olarak ilave tekbirlerle kılınır.\n\nAdım adım:\n- İlk rekâtta iftitah tekbiri ve ilave tekbirler alınır.\n- Fatiha ve zammı sure okunur.\n- İkinci rekâtta da ilave tekbirler alınır",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_06",
+      "category": "namaz",
+      "question": "Cenaze namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 13,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"cenaze_namazi\" (beklenen prefix: \"cenaze_namazi\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "cenaze_namazi",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Cenaze namazı, vefat eden Müslüman için kılınan kısa ve dua ağırlıklı bir ibadettir.\n\nAdım adım:\n- Cenaze namazı, vefat eden Müslüman için topluca yapılan kısa bir duadır.\n- Niyet edilir ve tekbirlerl",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_07",
+      "category": "namaz",
+      "question": "Vitir namazı vacip midir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 4,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"vacip\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "vitir_vacip",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Vitir vaciptir; diğer mezheplerde farklı değerlendirmeler vardır.",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_08",
+      "category": "namaz",
+      "question": "Teravih namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 35,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"teravih_namazi\" (beklenen prefix: \"teravih\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "teravih_namazi",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Teravih, Ramazan ayında yatsı namazından sonra cemaatle kılınan sünnet namazdır.\n\nAdım adım:\n- Teravih, Ramazan ayına özel bir sünnettir.\n- Yatsı namazının ardından kılınır.\n- Hanefîlere göre 20, bazı",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_09",
+      "category": "namaz",
+      "question": "Namaz kimlere farzdır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 23,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"farz\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "namaz_kimlere_farzdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Namaz; akıl sağlığı yerinde olan, ergenlik çağına ulaşmış her Müslümana farzdır.\n\nAdım adım:\n- Müslüman olmak: Namaz yalnızca Müslümanlara farzdır.\n- Akıl sağlığı: Akıl hastalarına farz değildir.\n- Er",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "namaz_10",
+      "category": "namaz",
+      "question": "Sefer halinde namaz kısaltılır mı?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 14,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"sefer\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "yolculukta_namaz_nasil_kilinir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Yolculukta seferî olan kişi dört rekâtlı farzları iki rekât kılar; vakit girince mümkün olan temiz yerde namazı eda eder.\n\nAdım adım:\n- Seferî olup olmadığını değerlendir.\n- Vakit girince temiz ve güv",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "abdest_01",
+      "category": "abdest",
+      "question": "Abdest nasıl alınır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 7,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"abdest_howto\" (beklenen: \"abdest_howto\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "abdest_howto",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Abdest, namaz ve bazı ibadetler için alınan temizliktir. Niyet, yıkama ve mesh adımlarıyla yapılır.\n\nAdım adım:\n- Niyet edilir ve besmele çekilir.\n- Eller bileklere kadar üç defa yıkanır.\n- Ağza üç de",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "abdest_02",
+      "category": "abdest",
+      "question": "Abdesti bozan şeyler nelerdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 7,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"abdest_bozanlar\" (beklenen: \"abdest_bozanlar\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "abdest_bozanlar",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Abdesti bozan başlıca durumlar: bedenin arka veya ön tarafından bir şey çıkması, bayılma/derin uyku ve kan akması.\n\nAdım adım:\n- Ön veya arka avret bölgesinden bir şey çıkması (idrar, dışkı, gaz, meni",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "abdest_03",
+      "category": "abdest",
+      "question": "Teyemmüm ne zaman yapılır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 23,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"teyemmüm\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "teyemmum_nedir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Teyemmüm, su bulunmadığında veya su kullanılamadığında yapılan temizlik kolaylığıdır.\n\nAdım adım:\n- Su bulunmadığında veya su kullanılamadığında teyemmüm düşünülür.\n- Temiz toprak cinsinden bir şeyle ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "abdest_04",
+      "category": "abdest",
+      "question": "Gusül abdesti nasıl alınır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 19,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"gusül\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "gusul_howto",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Gusül, büyük hadesten temizlenmek için alınan boy abdestidir. Ağza, buruna ve tüm bedene su ulaştırmak esastır.\n\nAdım adım:\n- Niyet edilir ve besmele çekilir.\n- Eller yıkanır, edep yerleri temizlenir.",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "abdest_05",
+      "category": "abdest",
+      "question": "Mestler üzerine mesh caiz midir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 12,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"mesh\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "mest_uzerine_mesh",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Mest üzerine mesh, abdestli giyilmiş mestin üst kısmını ıslak elle meshetme kolaylığıdır.\n\nAdım adım:\n- Mest üzerine mesh, abdestli giyilmiş mestin üst kısmını ıslak elle meshetmektir.\n- Kolaylık sağl",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "oruc_01",
+      "category": "oruc",
+      "question": "Orucu bozan şeyler nelerdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 21,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"oruç\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "orucu_bozanlar",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Orucu bozan durumlar açık ve bilerek yapılan eylemlerle ilgilidir.\n\nAdım adım:\n- Oruç için niyet edilir.\n- İmsaktan iftara kadar yeme, içme ve orucu bozan şeylerden uzak durulur.\n- Kaza ve fidye gerek",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "oruc_02",
+      "category": "oruc",
+      "question": "Ramazan orucu kimlere farzdır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 9,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"oruc_kimlere_farzdir\" (beklenen prefix: \"oruc_kimlere\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "oruc_kimlere_farzdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Oruç; Müslüman, akıllı ve ergenlik çağına gelmiş kişilere farzdır.\n\nAdım adım:\n- Müslüman olmak şarttır.\n- Akıl sağlığı yerinde olmak şarttır.\n- Ergenlik çağına (bülûğa) ulaşmış olmak şarttır.\n- Oruç ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "oruc_03",
+      "category": "oruc",
+      "question": "Fidye nedir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 21,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"fidye\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "oruc_fidyesi",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Oruç fidyesi, tutmaya gücü yetmeyen bazı kimselerin her gün için verdiği bedeldir.\n\nAdım adım:\n- Oruç tutamama durumu değerlendirilir.\n- Yaşlılık veya kronik hastalık gibi kalıcı engel olup olmadığına",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "oruc_04",
+      "category": "oruc",
+      "question": "Kaza orucu nedir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 22,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"kaza\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "kaza_kader_nedir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Kader, Allah'ın her şeyi ezelde bilmesi ve takdir etmesidir. Kaza ise bu takdirin zamanı gelince gerçekleşmesidir. İslam'ın altı iman esasından biridir.\n\nAdım adım:\n- Kader: Allah'ın her şeyi ezelde b",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "zekat_01",
+      "category": "zekat_hac",
+      "question": "Zekat kimlere farzdır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 28,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"zekat_kimlere_farzdir\" (beklenen prefix: \"zekat_kimlere\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "zekat_kimlere_farzdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Zekat; Müslüman, hür, akıllı, ergen ve nisab miktarı mala sahip olan kişiye farzdır.\n\nAdım adım:\n- Müslüman olmak şarttır.\n- Aklı yerinde ve ergen olmak şarttır.\n- Nisab miktarında (belirli değerin üz",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "zekat_02",
+      "category": "zekat_hac",
+      "question": "Haccın farzları nelerdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 9,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"haccin_farzlari\" (beklenen: \"haccin_farzlari\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "no_wrong_kb",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"haccin_farzlari\" (yanlış olmamalı: \"namaz_farzlari\")"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "haccin_farzlari",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Haccın temel farzları ihram, Arafat vakfesi ve ziyaret tavafıdır.\n\nAdım adım:\n- İhrama girilir.\n- Arafat vakfesi yapılır.\n- Ziyaret tavafı yapılır.\n\nDikkat edilmesi gerekenler:\n- Bu üç temel unsur hac",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "zekat_03",
+      "category": "zekat_hac",
+      "question": "Hac kimlere farzdır?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 8,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"hac_kimlere_farzdır\" (beklenen prefix: \"hac_kimlere\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "hac_kimlere_farzdır",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Hac, Müslüman, akıllı, ergen, hür, maddi ve bedeni imkâna sahip ve yol güvenliği bulunan kimseye farzdır.\n\nAdım adım:\n- İhrama girilir.\n- Arafat vakfesi yapılır.\n- Ziyaret tavafı yapılır.\n\nDikkat edil",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "zekat_04",
+      "category": "zekat_hac",
+      "question": "Kurban kimlere vaciptir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 9,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"kurban_kime_vaciptir\" (beklenen: \"kurban_kime_vaciptir\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "kurban_kime_vaciptir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Hanefî görüşe göre kurban; Müslüman, akıllı, ergen, nisap miktarı mala sahip ve mukim yani yolcu olmayan kimse için vacip olur.\n\nAdım adım:\n- Müslüman, akıllı ve ergen olmak şartı değerlendirilir.\n- N",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "akide_01",
+      "category": "akide",
+      "question": "İmanın şartları nelerdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 23,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"imanin_sartlari\" (beklenen prefix: \"imanin_sartlari\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "imanin_sartlari",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "İmanın altı şartı: Allah'a, meleklere, kitaplara, peygamberlere, ahirete ve kadere iman.\n\nAdım adım:\n- 1. Allah'a iman: O'nun varlığına, birliğine, sıfatlarına inanmak.\n- 2. Meleklere iman: Allah'ın n",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "akide_02",
+      "category": "akide",
+      "question": "İslam'ın şartları nelerdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 24,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"islamin_sartlari\" (beklenen prefix: \"islamin_sartlari\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "islamin_sartlari",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "İslam'ın beş şartı: Kelime-i Şehadet, Namaz, Oruç, Zekât ve Hac.\n\nAdım adım:\n- 1. Kelime-i Şehadet: Allah'ın birliğine ve Hz. Muhammed'in peygamberliğine şahitlik etmek.\n- 2. Namaz: Günde beş vakit na",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "question_passthrough"
+      }
+    },
+    {
+      "id": "akide_03",
+      "category": "akide",
+      "question": "Kelime-i şehadet nedir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 25,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"kelime_i_sehadet\" (beklenen prefix: \"kelime_i_sehadet\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "kelime_i_sehadet",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Kelime-i Şehadet, İslam'a girişin ve imanın özet ifadesidir: 'Eşhedü en lâ ilâhe illallah ve eşhedü enne Muhammeden abdühû ve rasûlüh.'\n\nAdım adım:\n- Kelime-i Şehadet Arapça okunuşu: 'Eşhedü en lâ ilâ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "akide_04",
+      "category": "akide",
+      "question": "Sünnet nedir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 23,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"sunnet_nedir\" (beklenen: \"sunnet_nedir\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "no_wrong_kb",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"sunnet_nedir\" (yanlış olmamalı: \"sabah_namazi\")"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "sunnet_nedir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Sünnet, Hz. Peygamber'in (s.a.v.) söz, fiil ve takrirlerinin bütününü ifade eder. İslam'ın iki temel kaynağından biri olan sünnet, Kur'an-ı Kerim'in açıklayıcısı ve tamamlayıcısıdır.\n\nDikkat edilmesi ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "akide_05",
+      "category": "akide",
+      "question": "Kader nedir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 21,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"kader\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "kaza_kader_nedir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Kader, Allah'ın her şeyi ezelde bilmesi ve takdir etmesidir. Kaza ise bu takdirin zamanı gelince gerçekleşmesidir. İslam'ın altı iman esasından biridir.\n\nAdım adım:\n- Kader: Allah'ın her şeyi ezelde b",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "akide_06",
+      "category": "akide",
+      "question": "Ahiret hayatı nedir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 21,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"ahiret\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "cehennem_nedir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Cehennem, ahirette inkârcılar ve günahkârlar için hazırlanmış azap yurdudur. Kur'an'da yedi tabakası olduğu ve içindeki azabın şiddeti anlatılmaktadır.\n\nAdım adım:\n- Cehennem, inkârcılar ve günahkârla",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "peygamber_01",
+      "category": "peygamberler",
+      "question": "Hz. Musa kimdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 22,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"hz_musa_kimdir\" (beklenen: \"hz_musa_kimdir\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains",
+          "pass": true,
+          "detail": "aranan: \"Musa\" | cevap: \"Hz. Musa, İsrailoğullarına gönderilen ve Tevrat'ı alan peygamberdir. Firavun'a karşı mücadelesi ve Kızıldeniz'i yarması \""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "hz_musa_kimdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Hz. Musa, İsrailoğullarına gönderilen ve Tevrat'ı alan peygamberdir. Firavun'a karşı mücadelesi ve Kızıldeniz'i yarması ile tanınır. Kelimullah (Allah ile konuşan) unvanına sahiptir.\n\nAdım adım:\n- Hz.",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "peygamber_02",
+      "category": "peygamberler",
+      "question": "Musa kim?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 21,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"hz_musa_kimdir\" (beklenen: \"hz_musa_kimdir\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "hz_musa_kimdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Hz. Musa, İsrailoğullarına gönderilen ve Tevrat'ı alan peygamberdir. Firavun'a karşı mücadelesi ve Kızıldeniz'i yarması ile tanınır. Kelimullah (Allah ile konuşan) unvanına sahiptir.\n\nAdım adım:\n- Hz.",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "peygamber_03",
+      "category": "peygamberler",
+      "question": "Hz. İbrahim kimdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 21,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"İbrahim\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "hz_ibrahim_kimdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Hz. İbrahim, Allah'ın dostu (Halilullah) olarak bilinen, tek Allah inancını tebliğ eden ve Kâbe'yi inşa eden büyük peygamberdir. Ulü'l-azm peygamberlerdendir.\n\nAdım adım:\n- Hz. İbrahim, putperest bir ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "peygamber_04",
+      "category": "peygamberler",
+      "question": "Hz. İsa kimdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 21,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"İsa\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "hz_isa_kimdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Hz. İsa, Hz. Meryem'den babasız olarak doğan, İncil'in kendisine indirildiği ve Ulü'l-azm peygamberlerden olan Hz. İsa'dır. Müslümanlara göre Allah'ın kulu ve elçisidir, Allah'ın oğlu değildir.\n\nAdım ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "peygamber_05",
+      "category": "peygamberler",
+      "question": "Dört halife kimlerdir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 23,
+      "checks": [
+        {
+          "type": "kb_hit_prefix",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"dort_halife_kimdir\" (beklenen prefix: \"dort_halife\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"Ebu Bekir\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "dort_halife_kimdir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Dört Halife, Hz. Muhammed'den sonra İslam devletini yöneten Hz. Ebu Bekir, Hz. Ömer, Hz. Osman ve Hz. Ali'dir. Bu döneme 'Hulefa-i Raşidin' (Doğru Yolda Giden Halifeler) denir.\n\nAdım adım:\n- 1. Hz. Eb",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "haram_01",
+      "category": "helal_haram",
+      "question": "Alkol günah mı?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 13,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"alkol_gunah_mi\" (beklenen: \"alkol_gunah_mi\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "alkol_gunah_mi",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "İslam'da alkol (içki) haram olarak nitelendirilmiştir. Kur'an-ı Kerim ve hadisler, sarhoş edici her içeceği yasaklamaktadır. Alkolü terk etmek isteyen kişiye sabır, dua ve gerekirse profesyonel destek",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "haram_02",
+      "category": "helal_haram",
+      "question": "İçki içmek haram mı?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 15,
+      "checks": [
+        {
+          "type": "kb_hit",
+          "pass": true,
+          "detail": "knowledge_hit_id=\"alkol_gunah_mi\" (beklenen: \"alkol_gunah_mi\")"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "alkol_gunah_mi",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "İslam'da alkol (içki) haram olarak nitelendirilmiştir. Kur'an-ı Kerim ve hadisler, sarhoş edici her içeceği yasaklamaktadır. Alkolü terk etmek isteyen kişiye sabır, dua ve gerekirse profesyonel destek",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "haram_03",
+      "category": "helal_haram",
+      "question": "Faiz haram mı?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 20,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"faiz\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "faiz_nedir",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Faiz, sakınılması gereken bir konudur; faizli kredi ve banka faizi gibi konularda dikkatli değerlendirme gerekir.\n\nAdım adım:\n- Faizli işlem olup olmadığına dikkat edilir.\n- Borç ve sözleşme ayrıntıla",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "haram_04",
+      "category": "helal_haram",
+      "question": "Kumar oynamak haram mı?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 22,
+      "checks": [
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains_any",
+          "pass": true,
+          "detail": "eşleşen: \"kumar\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": "bahis_kumar_haram_mi",
+        "redirect_module": null,
+        "ayah_used": false,
+        "answer_preview": "Bahis ve kumar, emek dışı kazanç arayışı ve kayıp döngüsü doğurabildiği için sakınılması gereken alanlardandır.\n\nAdım adım:\n- Bu alışkanlığın maddi ve manevi etkisini fark et.\n- Gerekiyorsa oyunu ve u",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_01",
+      "category": "ayet_modulu",
+      "question": "Sabır ile ilgili ayet",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 18,
+      "checks": [
+        {
+          "type": "no_redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"undefined\", metinde yönlendirme=false"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "ayah_returned",
+          "pass": true,
+          "detail": "ayah_used=true, selected_ayah=true"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "quran_guidance",
+        "knowledge_hit_id": null,
+        "redirect_module": null,
+        "ayah_used": true,
+        "answer_preview": "Şu ayet bu konuda doğrudan yol gösterir:\n\nBakara 2:153: \"Ey iman edenler! Sabır ve namazla yardım dileyin. Şüphesiz Allah sabredenlerle beraberdir.\"",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_02",
+      "category": "ayet_modulu",
+      "question": "İman hakkında ayet",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 1818,
+      "checks": [
+        {
+          "type": "no_redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"undefined\", metinde yönlendirme=false"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "ayah_returned",
+          "pass": true,
+          "detail": "ayah_used=true, selected_ayah=true"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "quran_guidance",
+        "knowledge_hit_id": null,
+        "redirect_module": null,
+        "ayah_used": true,
+        "answer_preview": "Şu ayet bu konuda doğrudan yol gösterir:\n\nİnşirah 94:5: \"Şüphesiz zorlukla beraber bir kolaylık vardır.\"",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_03",
+      "category": "ayet_modulu",
+      "question": "Korku ve endişe için ayet",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 23,
+      "checks": [
+        {
+          "type": "no_redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"undefined\", metinde yönlendirme=false"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "quran_guidance",
+        "knowledge_hit_id": null,
+        "redirect_module": null,
+        "ayah_used": true,
+        "answer_preview": "Şu ayet bu konuda doğrudan yol gösterir:\n\nİnşirah 94:5: \"Şüphesiz zorlukla beraber bir kolaylık vardır.\"",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_04",
+      "category": "ayet_modulu",
+      "question": "Tövbe hakkında ayet",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 12,
+      "checks": [
+        {
+          "type": "no_redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"undefined\", metinde yönlendirme=false"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "quran_guidance",
+        "knowledge_hit_id": null,
+        "redirect_module": null,
+        "ayah_used": true,
+        "answer_preview": "Şu ayet bu konuda doğrudan yol gösterir:\n\nZümer 39:53: \"Allah'ın rahmetinden ümit kesmeyin. Şüphesiz Allah bütün günahları bağışlar.\"\n\nNot: Bu paylaşım genel bilgilendirme ve manevi destek amaçlıdır; ",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_05",
+      "category": "ayet_modulu",
+      "question": "Yalnızlık için ayet",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 23,
+      "checks": [
+        {
+          "type": "no_redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"undefined\", metinde yönlendirme=false"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "quran_guidance",
+        "knowledge_hit_id": null,
+        "redirect_module": null,
+        "ayah_used": true,
+        "answer_preview": "Şu ayet bu konuda doğrudan yol gösterir:\n\nBakara 2:186: \"Kullarım sana beni sorduklarında bilsinler ki ben onlara yakınım.\"",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_06",
+      "category": "ayet_modulu",
+      "question": "Umut veren bir ayet",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 25,
+      "checks": [
+        {
+          "type": "no_redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"undefined\", metinde yönlendirme=false"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "quran_guidance",
+        "knowledge_hit_id": null,
+        "redirect_module": null,
+        "ayah_used": true,
+        "answer_preview": "Şu ayet bu konuda doğrudan yol gösterir:\n\nİnşirah 94:5: \"Şüphesiz zorlukla beraber bir kolaylık vardır.\"",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_07",
+      "category": "ayet_modulu",
+      "question": "Muhammed",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 74,
+      "checks": [
+        {
+          "type": "no_redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"undefined\", metinde yönlendirme=false"
+        },
+        {
+          "type": "no_safety_block",
+          "pass": true,
+          "detail": "güvenlik filtresi yok ✓"
+        },
+        {
+          "type": "answer_contains",
+          "pass": true,
+          "detail": "aranan: \"suresinden\" | cevap: \"Muhammed suresinden bir ayet:\n\nMuhammed 47:7: \"Allah'ın dinine yardım ederseniz, Allah da size yardım eder ve ayaklarını\""
+        }
+      ],
+      "response_meta": {
+        "route_mode": "quran_guidance",
+        "knowledge_hit_id": null,
+        "redirect_module": null,
+        "ayah_used": true,
+        "answer_preview": "Muhammed suresinden bir ayet:\n\nMuhammed 47:7: \"Allah'ın dinine yardım ederseniz, Allah da size yardım eder ve ayaklarınızı sağlamlaştırır.\"",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "ayet_08",
+      "category": "ayet_modulu",
+      "question": "Sabah namazı kaç rekât?",
+      "module": "ayah",
+      "status": "pass",
+      "durationMs": 7,
+      "checks": [
+        {
+          "type": "redirect_to_ilmihal",
+          "pass": true,
+          "detail": "redirect_module=\"ilmihal\", metinde yönlendirme=true"
+        }
+      ],
+      "response_meta": {
+        "route_mode": "ilmihal_knowledge",
+        "knowledge_hit_id": null,
+        "redirect_module": "ilmihal",
+        "ayah_used": false,
+        "answer_preview": "Bu soru ilmihal rehberi bölümüne daha uygundur. Dinî Bilgiler bölümünde daha pratik ve ölçülü biçimde ele alınabilir.",
+        "openai_called": false
+      },
+      "topic_guard": {
+        "supported": true,
+        "reason": "supported_signal_match"
+      }
+    },
+    {
+      "id": "kisitlama_01",
+      "category": "konu_kisitlama",
+      "question": "Hava durumu nasıl olacak?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 0,
+      "checks": [
+        {
+          "type": "topic_rejected",
+          "pass": true,
+          "detail": "topic_guard → supported=false, reason=out_of_scope_pattern"
+        }
+      ],
+      "response_meta": null,
+      "topic_guard": {
+        "supported": false,
+        "reason": "out_of_scope_pattern"
+      }
+    },
+    {
+      "id": "kisitlama_02",
+      "category": "konu_kisitlama",
+      "question": "Borsa yatırımı için hangi hisseyi almalıyım?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 0,
+      "checks": [
+        {
+          "type": "topic_rejected",
+          "pass": true,
+          "detail": "topic_guard → supported=false, reason=out_of_scope_pattern"
+        }
+      ],
+      "response_meta": null,
+      "topic_guard": {
+        "supported": false,
+        "reason": "out_of_scope_pattern"
+      }
+    },
+    {
+      "id": "kisitlama_03",
+      "category": "konu_kisitlama",
+      "question": "Hangi siyasi partiyi seçmeliyim?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 0,
+      "checks": [
+        {
+          "type": "topic_rejected",
+          "pass": true,
+          "detail": "topic_guard → supported=false, reason=out_of_scope_pattern"
+        }
+      ],
+      "response_meta": null,
+      "topic_guard": {
+        "supported": false,
+        "reason": "out_of_scope_pattern"
+      }
+    },
+    {
+      "id": "kisitlama_04",
+      "category": "konu_kisitlama",
+      "question": "Python programlama nasıl öğrenilir?",
+      "module": "ilmihal",
+      "status": "pass",
+      "durationMs": 0,
+      "checks": [
+        {
+          "type": "topic_rejected",
+          "pass": true,
+          "detail": "topic_guard → supported=false, reason=out_of_scope_pattern"
+        }
+      ],
+      "response_meta": null,
+      "topic_guard": {
+        "supported": false,
+        "reason": "out_of_scope_pattern"
+      }
+    }
+  ]
+}

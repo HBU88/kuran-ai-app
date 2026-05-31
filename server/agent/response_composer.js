@@ -38,6 +38,7 @@ function buildAssistantText(analysis, ayah, message, routing = {}) {
       selected_ayah: ayah,
       messageAnalysis: analysis,
       recent_assistant_texts: routing.recent_assistant_texts || [],
+      message,
     });
   } else if (shouldUseGeneralIslamicAnswer(message, routing)) {
     text = buildGeneralIslamicAnswer(message, routing);
@@ -112,10 +113,31 @@ function composeAssistantText({
   selected_ayah,
   messageAnalysis,
   recent_assistant_texts = [],
+  message = "",
 }) {
+  // When the user's query is just a surah/prophet name (≤3 words, no "ayet"/"hakkında"),
+  // and the selected verse is from that very surah, use a surah-specific intro
+  // instead of a tag-driven emotional framing ("Umut tarafını hatırlatan…").
+  if (selected_ayah && message) {
+    const surahNameTr = String(selected_ayah.surahNameTr || selected_ayah.surah || "").trim();
+    const rawMsg = String(message).trim();
+    const msgNorm = normalize(rawMsg);
+    const surahNorm = normalize(surahNameTr);
+    const isSurahNameQuery =
+      surahNameTr &&
+      rawMsg.split(/\s+/).length <= 3 &&
+      msgNorm.includes(surahNorm) &&
+      !msgNorm.includes(normalize("ayet")) &&
+      !msgNorm.includes(normalize("hakkında")) &&
+      !msgNorm.includes(normalize("ile ilgili"));
+    if (isSurahNameQuery) {
+      return `${surahNameTr} suresinden bir ayet:\n\n${formatAyah(selected_ayah)}`;
+    }
+  }
+
   switch (response_type) {
     case "direct_ayah":
-      return composeDirectAyah(selected_ayah, recent_assistant_texts);
+      return composeDirectAyah(selected_ayah, recent_assistant_texts, { message });
     case "supportive_ayah":
       return composeSupportiveAyah(selected_ayah, messageAnalysis, recent_assistant_texts);
     case "explanation_with_ayah":
@@ -299,9 +321,28 @@ function appendSection(parts, title, items) {
   parts.push(`${title}:\n- ${normalizedItems.join("\n- ")}`);
 }
 
-function composeDirectAyah(selectedAyah, recentAssistantTexts = []) {
+function composeDirectAyah(selectedAyah, recentAssistantTexts = [], options = {}) {
   if (!selectedAyah) {
     return "Şu an uygun bir ayet seçemedim; istersen durumunu biraz daha açık yazabilirsin.";
+  }
+
+  // When the user's query is just a surah/prophet name (1-3 words, no action verb),
+  // use a surah-specific intro instead of the generic tag-based framing.
+  const surahNameTr = String(selectedAyah.surahNameTr || selectedAyah.surah || "").trim();
+  const rawMsg = String(options.message || "").trim();
+  if (surahNameTr && rawMsg) {
+    const msgTokens = rawMsg.split(/\s+/);
+    const msgNorm = normalize(rawMsg);
+    const surahNorm = normalize(surahNameTr);
+    const isSurahNameQuery =
+      msgTokens.length <= 3 &&
+      msgNorm.includes(surahNorm) &&
+      !msgNorm.includes(normalize("ayet")) &&
+      !msgNorm.includes(normalize("hakkında")) &&
+      !msgNorm.includes(normalize("ile ilgili"));
+    if (isSurahNameQuery) {
+      return `${surahNameTr} suresinden bir ayet:\n\n${formatAyah(selectedAyah)}`;
+    }
   }
 
   const leadIn = pickLeadIn({

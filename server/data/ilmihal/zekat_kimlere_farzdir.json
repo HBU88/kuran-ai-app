@@ -7,7 +7,11 @@
     "zekat kimlere farz",
     "zekat zorunlu",
     "zekat farzdır",
-    "zekat mükellefi"
+    "zekat mükellefi",
+    "zekat kimlere farzdır",
+    "zekat kimlere farzdir",
+    "zekata kim öder",
+    "zekat kimlere vacip"
   ],
   "step_by_step": [
     "Müslüman olmak şarttır.",
@@ -37,7 +41,9 @@
     "zekat kimlere farz",
     "zekat zorunlu",
     "zekat farzdır",
-    "zekat mükellefi"
+    "zekat mükellefi",
+    "zekat kimlere farzdır kimlere farz değildir",
+    "zekat verme yükümlülüğü şartları"
   ],
   "_auto_generated": false
 }

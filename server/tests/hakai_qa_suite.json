@@ -1,0 +1,520 @@
+{
+  "version": "1.0",
+  "description": "HAKAI 50-soru deterministik dini QA test suite",
+  "categories": {
+    "namaz": 10,
+    "abdest": 5,
+    "oruc": 4,
+    "zekat_hac": 4,
+    "akide": 6,
+    "peygamberler": 5,
+    "helal_haram": 4,
+    "ayet_modulu": 8,
+    "konu_kisitlama": 4
+  },
+  "tests": [
+    {
+      "id": "namaz_01",
+      "category": "namaz",
+      "question": "Namazın farzları nelerdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "namaz_farzlari" },
+        { "type": "no_safety_block" },
+        { "type": "answer_contains", "text": "farz" }
+      ]
+    },
+    {
+      "id": "namaz_02",
+      "category": "namaz",
+      "question": "Sabah namazı kaç rekât?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["rekât", "rekat", "2", "iki"] }
+      ]
+    },
+    {
+      "id": "namaz_03",
+      "category": "namaz",
+      "question": "Öğle namazı kaç rekât kılınır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["rekât", "rekat", "4", "dört"] }
+      ]
+    },
+    {
+      "id": "namaz_04",
+      "category": "namaz",
+      "question": "Cuma namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "cuma_namazi" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "namaz_05",
+      "category": "namaz",
+      "question": "Bayram namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "bayram_namazi" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "namaz_06",
+      "category": "namaz",
+      "question": "Cenaze namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "cenaze_namazi" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "namaz_07",
+      "category": "namaz",
+      "question": "Vitir namazı vacip midir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["vacip", "vitir"] }
+      ]
+    },
+    {
+      "id": "namaz_08",
+      "category": "namaz",
+      "question": "Teravih namazı nasıl kılınır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "teravih" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "namaz_09",
+      "category": "namaz",
+      "question": "Namaz kimlere farzdır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["farz", "müslüman", "akıl"] }
+      ]
+    },
+    {
+      "id": "namaz_10",
+      "category": "namaz",
+      "question": "Sefer halinde namaz kısaltılır mı?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["sefer", "kasr", "kısaltılır"] }
+      ]
+    },
+    {
+      "id": "abdest_01",
+      "category": "abdest",
+      "question": "Abdest nasıl alınır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "abdest_howto" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "abdest_02",
+      "category": "abdest",
+      "question": "Abdesti bozan şeyler nelerdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "abdest_bozanlar" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "abdest_03",
+      "category": "abdest",
+      "question": "Teyemmüm ne zaman yapılır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["teyemmüm", "su", "bulunamadığında"] }
+      ]
+    },
+    {
+      "id": "abdest_04",
+      "category": "abdest",
+      "question": "Gusül abdesti nasıl alınır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["gusül", "boy abdesti", "cünüp"] }
+      ]
+    },
+    {
+      "id": "abdest_05",
+      "category": "abdest",
+      "question": "Mestler üzerine mesh caiz midir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["mesh", "mest", "caiz"] }
+      ]
+    },
+    {
+      "id": "oruc_01",
+      "category": "oruc",
+      "question": "Orucu bozan şeyler nelerdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["oruç", "bozar", "yemek", "içmek"] }
+      ]
+    },
+    {
+      "id": "oruc_02",
+      "category": "oruc",
+      "question": "Ramazan orucu kimlere farzdır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "oruc_kimlere" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "oruc_03",
+      "category": "oruc",
+      "question": "Fidye nedir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["fidye", "oruç", "yaşlı"] }
+      ]
+    },
+    {
+      "id": "oruc_04",
+      "category": "oruc",
+      "question": "Kaza orucu nedir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["kaza", "oruç", "tutan"] }
+      ]
+    },
+    {
+      "id": "zekat_01",
+      "category": "zekat_hac",
+      "question": "Zekat kimlere farzdır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "zekat_kimlere" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "zekat_02",
+      "category": "zekat_hac",
+      "question": "Haccın farzları nelerdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "haccin_farzlari" },
+        { "type": "no_safety_block" },
+        { "type": "no_wrong_kb", "wrong_kb": "namaz_farzlari" }
+      ]
+    },
+    {
+      "id": "zekat_03",
+      "category": "zekat_hac",
+      "question": "Hac kimlere farzdır?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "hac_kimlere" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "zekat_04",
+      "category": "zekat_hac",
+      "question": "Kurban kimlere vaciptir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "kurban_kime_vaciptir" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "akide_01",
+      "category": "akide",
+      "question": "İmanın şartları nelerdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "imanin_sartlari" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "akide_02",
+      "category": "akide",
+      "question": "İslam'ın şartları nelerdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "islamin_sartlari" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "akide_03",
+      "category": "akide",
+      "question": "Kelime-i şehadet nedir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "kelime_i_sehadet" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "akide_04",
+      "category": "akide",
+      "question": "Sünnet nedir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "sunnet_nedir" },
+        { "type": "no_safety_block" },
+        { "type": "no_wrong_kb", "wrong_kb": "sabah_namazi" }
+      ]
+    },
+    {
+      "id": "akide_05",
+      "category": "akide",
+      "question": "Kader nedir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["kader", "Allah", "takdir"] }
+      ]
+    },
+    {
+      "id": "akide_06",
+      "category": "akide",
+      "question": "Ahiret hayatı nedir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["ahiret", "ölüm", "cennet", "cehennem"] }
+      ]
+    },
+    {
+      "id": "peygamber_01",
+      "category": "peygamberler",
+      "question": "Hz. Musa kimdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "hz_musa_kimdir" },
+        { "type": "no_safety_block" },
+        { "type": "answer_contains", "text": "Musa" }
+      ]
+    },
+    {
+      "id": "peygamber_02",
+      "category": "peygamberler",
+      "question": "Musa kim?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "hz_musa_kimdir" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "peygamber_03",
+      "category": "peygamberler",
+      "question": "Hz. İbrahim kimdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["İbrahim", "peygamber", "Halilullah"] }
+      ]
+    },
+    {
+      "id": "peygamber_04",
+      "category": "peygamberler",
+      "question": "Hz. İsa kimdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["İsa", "peygamber", "Meryem"] }
+      ]
+    },
+    {
+      "id": "peygamber_05",
+      "category": "peygamberler",
+      "question": "Dört halife kimlerdir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit_prefix", "prefix": "dort_halife" },
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["Ebu Bekir", "Ömer", "Osman", "Ali"] }
+      ]
+    },
+    {
+      "id": "haram_01",
+      "category": "helal_haram",
+      "question": "Alkol günah mı?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "alkol_gunah_mi" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "haram_02",
+      "category": "helal_haram",
+      "question": "İçki içmek haram mı?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "kb_hit", "expected_kb": "alkol_gunah_mi" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "haram_03",
+      "category": "helal_haram",
+      "question": "Faiz haram mı?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["faiz", "haram", "riba"] }
+      ]
+    },
+    {
+      "id": "haram_04",
+      "category": "helal_haram",
+      "question": "Kumar oynamak haram mı?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "no_safety_block" },
+        { "type": "answer_contains_any", "texts": ["kumar", "haram", "yasak"] }
+      ]
+    },
+    {
+      "id": "ayet_01",
+      "category": "ayet_modulu",
+      "question": "Sabır ile ilgili ayet",
+      "module": "ayah",
+      "checks": [
+        { "type": "no_redirect_to_ilmihal" },
+        { "type": "no_safety_block" },
+        { "type": "ayah_returned" }
+      ]
+    },
+    {
+      "id": "ayet_02",
+      "category": "ayet_modulu",
+      "question": "İman hakkında ayet",
+      "module": "ayah",
+      "checks": [
+        { "type": "no_redirect_to_ilmihal" },
+        { "type": "no_safety_block" },
+        { "type": "ayah_returned" }
+      ]
+    },
+    {
+      "id": "ayet_03",
+      "category": "ayet_modulu",
+      "question": "Korku ve endişe için ayet",
+      "module": "ayah",
+      "checks": [
+        { "type": "no_redirect_to_ilmihal" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "ayet_04",
+      "category": "ayet_modulu",
+      "question": "Tövbe hakkında ayet",
+      "module": "ayah",
+      "checks": [
+        { "type": "no_redirect_to_ilmihal" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "ayet_05",
+      "category": "ayet_modulu",
+      "question": "Yalnızlık için ayet",
+      "module": "ayah",
+      "checks": [
+        { "type": "no_redirect_to_ilmihal" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "ayet_06",
+      "category": "ayet_modulu",
+      "question": "Umut veren bir ayet",
+      "module": "ayah",
+      "checks": [
+        { "type": "no_redirect_to_ilmihal" },
+        { "type": "no_safety_block" }
+      ]
+    },
+    {
+      "id": "ayet_07",
+      "category": "ayet_modulu",
+      "question": "Muhammed",
+      "module": "ayah",
+      "checks": [
+        { "type": "no_redirect_to_ilmihal" },
+        { "type": "no_safety_block" },
+        { "type": "answer_contains", "text": "suresinden" }
+      ]
+    },
+    {
+      "id": "ayet_08",
+      "category": "ayet_modulu",
+      "question": "Sabah namazı kaç rekât?",
+      "module": "ayah",
+      "checks": [
+        { "type": "redirect_to_ilmihal" }
+      ]
+    },
+    {
+      "id": "kisitlama_01",
+      "category": "konu_kisitlama",
+      "question": "Hava durumu nasıl olacak?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "topic_rejected" }
+      ]
+    },
+    {
+      "id": "kisitlama_02",
+      "category": "konu_kisitlama",
+      "question": "Borsa yatırımı için hangi hisseyi almalıyım?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "topic_rejected" }
+      ]
+    },
+    {
+      "id": "kisitlama_03",
+      "category": "konu_kisitlama",
+      "question": "Hangi siyasi partiyi seçmeliyim?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "topic_rejected" }
+      ]
+    },
+    {
+      "id": "kisitlama_04",
+      "category": "konu_kisitlama",
+      "question": "Python programlama nasıl öğrenilir?",
+      "module": "ilmihal",
+      "checks": [
+        { "type": "topic_rejected" }
+      ]
+    }
+  ]
+}

@@ -25,6 +25,7 @@ const {
 const ilmihalDebugLogger          = require("./ilmihal-debug-logger");
 const { logKBMiss, getMissStats } = require("./kb-miss-logger");
 const { checkQuota, consumeQuota } = require("./quota_tracker");
+const { checkTopicSupport, getTopicRejectionResponse } = require("./agent/topic_guard");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -417,6 +418,13 @@ async function handleChatModuleRequest(req, res, module = "chat") {
       return sendUtf8Json(res, 400, errorResponse);
     }
     const history = sanitizeHistory(req.body?.history);
+
+    // Topic guard — kapsam dışı sorular kibarca reddedilir
+    const topicCheck = checkTopicSupport(message);
+    if (!topicCheck.supported) {
+      const rejection = getTopicRejectionResponse();
+      return sendUtf8Json(res, 200, rejection);
+    }
 
     // Debug logging for ilmihal-chat
     if (module === "ilmihal") {

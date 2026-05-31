@@ -24,9 +24,39 @@ function guardAssistantText(text) {
 
 function containsHostileOrViolentContent(text) {
   const normalized = normalizeText(text);
-  const patterns = [
-    "öldür",
-    "oldur",
+
+  // Broad substring check causes false positives:
+  //   - "öldürünce" (historical narrative) in Hz. Musa biography
+  //   - "doldur" (to fill) contains "oldur" substring — different root entirely
+  // Solution:
+  //   For the ASCII fallback "oldur", require it to NOT be preceded by a consonant
+  //   that makes it part of a different root (e.g. "d" in "doldur").
+  const narrativeSuffixes = ["ünce", "ünmek", "ülür", "ülmek", "üldü", "üyor", "ünden", "üyle"];
+
+  function containsKillVerb(text) {
+    if (text.includes("öldür")) return true;
+    // ASCII fallback: find "oldur" but skip if preceded by another letter
+    // ("doldur" → 'd' before 'oldur' → false positive for doldur, kondur, etc.)
+    let pos = text.indexOf("oldur");
+    while (pos >= 0) {
+      const charBefore = pos > 0 ? text[pos - 1] : "";
+      const isLetter = /[a-zçğışöüâîû]/.test(charBefore);
+      if (!isLetter) return true; // "oldur" at word start or after space/punct
+      pos = text.indexOf("oldur", pos + 1);
+    }
+    return false;
+  }
+
+  const hasOldur = containsKillVerb(normalized);
+  const isNarrativeOldur = hasOldur && narrativeSuffixes.some((suffix) =>
+    normalized.includes("öldür" + suffix) || normalized.includes("oldur" + suffix)
+  );
+  // Block only if "öldür" is NOT in a pure narrative past-tense form
+  if (hasOldur && !isNarrativeOldur) {
+    return true;
+  }
+
+  const otherPatterns = [
     "nefret et",
     "saldır",
     "saldir",
@@ -35,7 +65,7 @@ function containsHostileOrViolentContent(text) {
     "soykırım",
     "soykirim",
   ];
-  return patterns.some((pattern) => normalized.includes(pattern));
+  return otherPatterns.some((pattern) => normalized.includes(pattern));
 }
 
 function needsSensitiveDisclaimer(text) {

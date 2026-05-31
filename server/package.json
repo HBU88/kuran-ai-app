@@ -23,7 +23,9 @@
     "detect:collisions": "node semantic-collision-detector.js",
     "validate:coverage": "node coverage-validator.js",
     "test:qa-suite": "node qa-test-suite-generator.js",
-    "qa:pre-launch": "node qa-pre-launch-orchestrator.js"
+    "qa:pre-launch": "node qa-pre-launch-orchestrator.js",
+    "test:hakai-qa": "node tests/hakai_qa_runner.mjs",
+    "autofix": "node tests/auto_fix_agent.mjs"
   },
   "dependencies": {
     "body-parser": "^2.2.2",

@@ -37,6 +37,41 @@ function resolveKandilSpecialTopic(normalizedMessage) {
   return null;
 }
 
+/**
+ * server/data/ilmihal/{entryId}.json dosyasından doğrudan yükle.
+ * Explicit router kurallarının flat KB'de bulunmayan entry'leri döndürmesini sağlar.
+ */
+function buildServerSideHit(entryId) {
+  try {
+    const filePath = path.join(ILMIHAL_DATA_PATH, `${entryId}.json`);
+    if (!fs.existsSync(filePath)) return null;
+    const serverEntry = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    const answerParts = [];
+    if (serverEntry.summary) answerParts.push(serverEntry.summary);
+    if (Array.isArray(serverEntry.step_by_step) && serverEntry.step_by_step.length > 0) {
+      answerParts.push(serverEntry.step_by_step.join(" "));
+    }
+    const answerText = answerParts.join("\n\n") || serverEntry.title || "";
+    if (!answerText) return null;
+    return {
+      id: serverEntry.id || entryId,
+      file: `ilmihal/${entryId}.json`,
+      type: serverEntry.category || "worship_practice",
+      topic: serverEntry.id || entryId,
+      answer_text: answerText,
+      source_note: (serverEntry.source_notes || [])[0] || "Diyanet-based curated internal knowledge.",
+      requires_ayah: false,
+      route_mode: "ilmihal_knowledge",
+      knowledge_hit_id: serverEntry.id || entryId,
+      matched_title: serverEntry.title || null,
+      matched_by: "explicit_router_rule",
+    };
+  } catch (err) {
+    console.warn(`[ROUTER] buildServerSideHit failed for "${entryId}":`, err.message);
+    return null;
+  }
+}
+
 function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []) {
   const normalizedMessage = normalizeLoose(message);
   const normalizedHistory = buildHistoryContext(history);
@@ -115,6 +150,17 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
         knowledge_hit_id: hit.id || null,
       };
     }
+  }
+
+  // Oruç "kimlere farzdır" soruları — "ramazan_nedir" catch-all'dan önce yakala
+  if (
+    (includesLoose(normalizedMessage, "oruc") || includesLoose(normalizedMessage, "oruç") || includesLoose(normalizedMessage, "ramazan")) &&
+    (includesLoose(normalizedMessage, "kimlere farz") || includesLoose(normalizedMessage, "kimlere farzdir") ||
+     includesLoose(normalizedMessage, "kimlere zorunlu") || includesLoose(normalizedMessage, "kim tutmali") ||
+     (includesLoose(normalizedMessage, "kimlere") && (includesLoose(normalizedMessage, "farz") || includesLoose(normalizedMessage, "zorunlu"))))
+  ) {
+    const serverHit = buildServerSideHit("oruc_kimlere_farzdir");
+    if (serverHit) return serverHit;
   }
 
   const zekatFitreTopic = resolveZekatFitreTopic(normalizedMessage);
@@ -594,6 +640,17 @@ function resolveZekatFitreTopic(normalizedMessage) {
   if (includesLoose(normalizedMessage, "fitre")) {
     return "fitre_nedir";
   }
+  // "kimlere farzdır/farz" sorularını genel "zekat_nedir" catch-all'dan önce yakala
+  if (
+    includesLoose(normalizedMessage, "zekat kimlere farzdir") ||
+    includesLoose(normalizedMessage, "zekat kimlere farz") ||
+    includesLoose(normalizedMessage, "zekata kim") ||
+    (includesLoose(normalizedMessage, "zekat") && includesLoose(normalizedMessage, "kimlere"))
+  ) {
+    const serverHit = buildServerSideHit("zekat_kimlere_farzdir");
+    if (serverHit) return serverHit;
+    return "zekat_kimlere_farzdir"; // flat KB fallback
+  }
   if (includesLoose(normalizedMessage, "zekat nedir") || includesLoose(normalizedMessage, "zekÃ¢t nedir")) {
     return "zekat_nedir";
   }
@@ -1032,6 +1089,26 @@ function resolvePrayerFollowupTopic(message, normalizedMessage, history = []) {
 function resolveNamazScenarioTopic(message, normalizedMessage) {
   const normalized = normalizeRawText(message);
 
+  // "Namazın farzları nelerdir?" — must resolve before semantic matcher picks haccin_farzlari
+  if (
+    includesLoose(normalizedMessage, "namazin farzlari") ||
+    includesLoose(normalizedMessage, "namaz farzlari") ||
+    includesLoose(normalizedMessage, "namazın farzları") ||
+    includesLoose(normalizedMessage, "namaz farzları") ||
+    includesLoose(normalizedMessage, "namazin dis farzlari") ||
+    includesLoose(normalizedMessage, "namazin ic farzlari") ||
+    (
+      normalizedMessage.includes("namaz") &&
+      normalizedMessage.includes("farz") &&
+      !normalizedMessage.includes("hac") &&
+      !normalizedMessage.includes("kimlere") &&
+      !normalizedMessage.includes("kac") &&
+      !normalizedMessage.includes("kaç")
+    )
+  ) {
+    return "namaz_farzlari";
+  }
+
   if (
     includesLoose(normalizedMessage, "namaz kaçırınca") ||
     includesLoose(normalizedMessage, "namaz kacirinca") ||
@@ -1097,7 +1174,10 @@ function resolveNamazScenarioTopic(message, normalizedMessage) {
     includesLoose(normalizedMessage, "yolculukta namaz") ||
     includesLoose(normalizedMessage, "seferi namaz") ||
     includesLoose(normalizedMessage, "seferî namaz") ||
-    includesLoose(normalizedMessage, "seferi namaz nasil")
+    includesLoose(normalizedMessage, "seferi namaz nasil") ||
+    includesLoose(normalizedMessage, "sefer halinde namaz") ||
+    includesLoose(normalizedMessage, "sefer halinde namaz kisaltilir") ||
+    (includesLoose(normalizedMessage, "sefer") && includesLoose(normalizedMessage, "namaz") && includesLoose(normalizedMessage, "kisaltilir"))
   ) {
     return "yolculukta_namaz_nasil_kilinir";
   }

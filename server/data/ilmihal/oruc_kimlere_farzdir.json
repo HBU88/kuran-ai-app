@@ -7,7 +7,12 @@
     "oruç kimlere farz",
     "oruç zorunlu",
     "oruç farzdır",
-    "oruç tutma zorunluluğu"
+    "oruç tutma zorunluluğu",
+    "ramazan orucu kimlere farzdır",
+    "ramazan orucu kimlere farzdir",
+    "oruc kimlere farz",
+    "oruc farzdir",
+    "oruç kimlere farzdır"
   ],
   "step_by_step": [
     "Müslüman olmak şarttır.",
@@ -36,7 +41,10 @@
     "oruç kimlere farz",
     "oruç zorunlu",
     "oruç farzdır",
-    "oruç tutma zorunluluğu"
+    "oruç tutma zorunluluğu",
+    "ramazan orucu kimlere farzdır",
+    "ramazan orucu kimlere farzdir",
+    "oruç kimlere farzdır kimlere farz değildir"
   ],
   "_auto_generated": false
 }
