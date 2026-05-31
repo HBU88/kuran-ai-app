@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-31T05:48:26.449Z",
+  "timestamp": "2026-05-31T06:10:53.823Z",
   "date": "2026-05-31",
   "summary": {
     "totalTests": 96,
@@ -50,7 +50,7 @@
       "label": "Oruç (Fasting)",
       "accuracy": "0.0",
       "avgScore": 0,
-      "avgResponseTime": 0,
+      "avgResponseTime": 1,
       "highConfidence": 0,
       "mediumConfidence": 0,
       "lowConfidence": 0

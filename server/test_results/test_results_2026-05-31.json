@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-31T05:48:26.449Z",
+  "timestamp": "2026-05-31T06:10:53.823Z",
   "backend_url": "http://localhost:3000",
   "generated_questions_date": "2026-05-31",
   "totalQuestions": 96,
@@ -16,7 +16,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 8,
+          "responseTime": 9,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -28,7 +28,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 2,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -88,7 +88,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 2,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -112,7 +112,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -148,7 +148,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 2,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -191,7 +191,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 2,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -203,7 +203,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -215,7 +215,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 2,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -239,7 +239,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -251,7 +251,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -263,7 +263,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -275,7 +275,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -390,7 +390,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -414,7 +414,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -474,7 +474,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -529,7 +529,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -541,7 +541,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -553,7 +553,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -565,7 +565,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -577,7 +577,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -625,7 +625,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -668,7 +668,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -740,7 +740,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -752,7 +752,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -776,7 +776,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -788,7 +788,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -813,7 +813,7 @@
         "correctTopic": 0,
         "wrongTopic": 0,
         "avgMatchScore": "0.0",
-        "avgResponseTime": "0",
+        "avgResponseTime": "1",
         "highConfidence": 0,
         "mediumConfidence": 0,
         "lowConfidence": 0
@@ -867,7 +867,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -879,7 +879,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -891,7 +891,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -903,7 +903,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -915,7 +915,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1006,7 +1006,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1018,7 +1018,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1030,7 +1030,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1054,7 +1054,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1114,7 +1114,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1126,7 +1126,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1181,7 +1181,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1217,7 +1217,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1229,7 +1229,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1241,7 +1241,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1253,7 +1253,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 0,
+          "responseTime": 1,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1265,7 +1265,7 @@
           "actualTopic": null,
           "matchScore": 0,
           "confidence": "error",
-          "responseTime": 1,
+          "responseTime": 0,
           "status": "failed",
           "error": "connect ECONNREFUSED ::1:3000",
           "isCorrectTopic": false
@@ -1321,7 +1321,7 @@
     "mediumConfidence": 0,
     "lowConfidence": 0,
     "errors": 96,
-    "duration_sec": "9.72"
+    "duration_sec": "9.73"
   },
   "criticalIssues": [],
   "testResults": [
@@ -1332,7 +1332,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 8,
+      "responseTime": 9,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1344,7 +1344,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 2,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1404,7 +1404,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 2,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1428,7 +1428,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1464,7 +1464,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 2,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1488,7 +1488,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 2,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1500,7 +1500,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1512,7 +1512,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 2,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1536,7 +1536,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1548,7 +1548,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1560,7 +1560,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1572,7 +1572,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1668,7 +1668,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1692,7 +1692,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1752,7 +1752,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1788,7 +1788,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1800,7 +1800,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1812,7 +1812,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1824,7 +1824,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1836,7 +1836,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1884,7 +1884,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1908,7 +1908,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1980,7 +1980,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -1992,7 +1992,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2016,7 +2016,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2028,7 +2028,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2088,7 +2088,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2100,7 +2100,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2112,7 +2112,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2124,7 +2124,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2136,7 +2136,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2208,7 +2208,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2220,7 +2220,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2232,7 +2232,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2256,7 +2256,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2316,7 +2316,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2328,7 +2328,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2364,7 +2364,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2400,7 +2400,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2412,7 +2412,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2424,7 +2424,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2436,7 +2436,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 0,
+      "responseTime": 1,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2448,7 +2448,7 @@
       "actualTopic": null,
       "matchScore": 0,
       "confidence": "error",
-      "responseTime": 1,
+      "responseTime": 0,
       "status": "failed",
       "error": "connect ECONNREFUSED ::1:3000",
       "isCorrectTopic": false
@@ -2478,5 +2478,5 @@
       "isCorrectTopic": false
     }
   ],
-  "duration_ms": 9717
+  "duration_ms": 9735
 }
