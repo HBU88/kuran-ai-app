@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T09:00:06.800Z",
+  "generated_at": "2026-06-01T09:54:41.346Z",
   "suite_version": "1.0",
   "total": 50,
   "passed": 49,
@@ -14,7 +14,7 @@
       "question": "Namazın farzları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 93,
+      "durationMs": 135,
       "checks": [
         {
           "type": "kb_hit",
@@ -51,7 +51,7 @@
       "question": "Sabah namazı kaç rekât?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 54,
+      "durationMs": 89,
       "checks": [
         {
           "type": "no_safety_block",
@@ -83,7 +83,7 @@
       "question": "Öğle namazı kaç rekât kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 80,
+      "durationMs": 130,
       "checks": [
         {
           "type": "no_safety_block",
@@ -115,7 +115,7 @@
       "question": "Cuma namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 35,
+      "durationMs": 53,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -133,7 +133,7 @@
         "knowledge_hit_id": "cuma_namazi_nedir",
         "redirect_module": null,
         "ayah_used": false,
-        "answer_preview": "Cuma namazı, cuma günü öğle vaktinde cemaatle ve hutbe ile kılınan önemli bir namazdır.\n\nAdım adım:\n- Cuma günü öğle vaktinde cemaatle kılınır.\n- Hutbe ile birlikte yürütülür.\n- Haftalık toplu ibadet ",
+        "answer_preview": "Cuma namazı, cuma günü öğle vaktinde cemaatle ve hutbe ile kılınan farz bir namazdır. İki rekâttır. Hz. Peygamber'in sünneti olarak birinci rekâtta A'la (87), ikinci rekâtta Gaşiye (88) suresi okunur.",
         "openai_called": false
       },
       "topic_guard": {
@@ -147,7 +147,7 @@
       "question": "Bayram namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 29,
+      "durationMs": 48,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -165,7 +165,7 @@
         "knowledge_hit_id": "bayram_namazi_nasil_kilinir",
         "redirect_module": null,
         "ayah_used": false,
-        "answer_preview": "Bayram namazı iki rekât olarak ilave tekbirlerle kılınır.\n\nAdım adım:\n- İlk rekâtta iftitah tekbiri ve ilave tekbirler alınır.\n- Fatiha ve zammı sure okunur.\n- İkinci rekâtta da ilave tekbirler alınır",
+        "answer_preview": "Bayram namazı iki rekât olup her rekâtta üçer ilave tekbir (zevaid) içerir. Ezan ve kamet okunmaz. Sünnet olarak birinci rekâtta A'la, ikinci rekâtta Gaşiye suresi okunur. Hutbe namazdan sonra okunur.",
         "openai_called": false
       },
       "topic_guard": {
@@ -179,7 +179,7 @@
       "question": "Cenaze namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 57,
+      "durationMs": 83,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -211,7 +211,7 @@
       "question": "Vitir namazı vacip midir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 23,
+      "durationMs": 37,
       "checks": [
         {
           "type": "no_safety_block",
@@ -243,7 +243,7 @@
       "question": "Teravih namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 108,
+      "durationMs": 164,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -275,7 +275,7 @@
       "question": "Namaz kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 105,
+      "durationMs": 140,
       "checks": [
         {
           "type": "no_safety_block",
@@ -307,7 +307,7 @@
       "question": "Sefer halinde namaz kısaltılır mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 43,
+      "durationMs": 74,
       "checks": [
         {
           "type": "no_safety_block",
@@ -339,7 +339,7 @@
       "question": "Abdest nasıl alınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 31,
+      "durationMs": 52,
       "checks": [
         {
           "type": "kb_hit",
@@ -371,7 +371,7 @@
       "question": "Abdesti bozan şeyler nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 29,
+      "durationMs": 48,
       "checks": [
         {
           "type": "kb_hit",
@@ -403,7 +403,7 @@
       "question": "Teyemmüm ne zaman yapılır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 103,
+      "durationMs": 150,
       "checks": [
         {
           "type": "no_safety_block",
@@ -435,7 +435,7 @@
       "question": "Gusül abdesti nasıl alınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 73,
+      "durationMs": 136,
       "checks": [
         {
           "type": "no_safety_block",
@@ -467,7 +467,7 @@
       "question": "Mestler üzerine mesh caiz midir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 47,
+      "durationMs": 48,
       "checks": [
         {
           "type": "no_safety_block",
@@ -499,7 +499,7 @@
       "question": "Orucu bozan şeyler nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 79,
+      "durationMs": 80,
       "checks": [
         {
           "type": "no_safety_block",
@@ -563,7 +563,7 @@
       "question": "Fidye nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 77,
+      "durationMs": 76,
       "checks": [
         {
           "type": "no_safety_block",
@@ -595,7 +595,7 @@
       "question": "Kaza orucu nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 79,
+      "durationMs": 81,
       "checks": [
         {
           "type": "no_safety_block",
@@ -627,7 +627,7 @@
       "question": "Zekat kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 37,
+      "durationMs": 38,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -659,7 +659,7 @@
       "question": "Haccın farzları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 38,
+      "durationMs": 37,
       "checks": [
         {
           "type": "kb_hit",
@@ -696,7 +696,7 @@
       "question": "Hac kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 35,
+      "durationMs": 37,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -760,7 +760,7 @@
       "question": "İmanın şartları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 92,
+      "durationMs": 97,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -792,7 +792,7 @@
       "question": "İslam'ın şartları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 86,
+      "durationMs": 93,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -893,7 +893,7 @@
       "question": "Kader nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 78,
+      "durationMs": 81,
       "checks": [
         {
           "type": "no_safety_block",
@@ -925,7 +925,7 @@
       "question": "Ahiret hayatı nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 102,
+      "durationMs": 107,
       "checks": [
         {
           "type": "no_safety_block",
@@ -957,7 +957,7 @@
       "question": "Hz. Musa kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 82,
+      "durationMs": 84,
       "checks": [
         {
           "type": "kb_hit",
@@ -994,7 +994,7 @@
       "question": "Musa kim?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 78,
+      "durationMs": 79,
       "checks": [
         {
           "type": "kb_hit",
@@ -1026,7 +1026,7 @@
       "question": "Hz. İbrahim kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 75,
+      "durationMs": 76,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1058,7 +1058,7 @@
       "question": "Hz. İsa kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 79,
+      "durationMs": 77,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1090,7 +1090,7 @@
       "question": "Dört halife kimlerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 79,
+      "durationMs": 80,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -1127,7 +1127,7 @@
       "question": "Alkol günah mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 49,
+      "durationMs": 47,
       "checks": [
         {
           "type": "kb_hit",
@@ -1191,7 +1191,7 @@
       "question": "Faiz haram mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 72,
+      "durationMs": 71,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1255,7 +1255,7 @@
       "question": "Sabır ile ilgili ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 67,
+      "durationMs": 69,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1292,7 +1292,7 @@
       "question": "İman hakkında ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 119,
+      "durationMs": 118,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1329,7 +1329,7 @@
       "question": "Korku ve endişe için ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 79,
+      "durationMs": 80,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1393,7 +1393,7 @@
       "question": "Yalnızlık için ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 90,
+      "durationMs": 91,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1425,7 +1425,7 @@
       "question": "Umut veren bir ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 98,
+      "durationMs": 93,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1457,7 +1457,7 @@
       "question": "Muhammed",
       "module": "ayah",
       "status": "fail",
-      "durationMs": 633,
+      "durationMs": 634,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1494,7 +1494,7 @@
       "question": "Sabah namazı kaç rekât?",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 31,
+      "durationMs": 30,
       "checks": [
         {
           "type": "redirect_to_ilmihal",
