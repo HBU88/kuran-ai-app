@@ -37,5 +37,41 @@
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "entry_type": "condition",
+  "entry_subtypes": [
+    "physiological_state"
+  ],
+  "semantic_domain": "physiological_states",
+  "entry_purpose": {
+    "primary_objective": "İstihaze (özür kanı) halinin tanımı ve hayız/nifastan farkını açıklamak",
+    "target_queries": [
+      "istihaze nedir",
+      "özür kanı",
+      "sürekli kanama dini hüküm"
+    ],
+    "must_include": [
+      "tanım",
+      "hayız/nifastan farkı",
+      "ibadete engel olmadığı"
+    ],
+    "must_NOT_include": [
+      "genel namaz/oruç tanımı"
+    ],
+    "authorized_modifiers": [
+      "açıklığı artırmak",
+      "fark/karşılaştırma eklemek"
+    ],
+    "forbidden_modifications": [
+      "core hüküm beyanını zayıflatmak"
+    ]
+  },
+  "NOT_for_queries": [
+    "namaz nedir",
+    "oruç nedir"
+  ],
+  "conflicting_entries": [
+    "hayiz_nedir",
+    "nifas_nedir"
   ]
 }

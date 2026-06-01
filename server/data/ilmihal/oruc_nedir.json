@@ -35,5 +35,45 @@
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "entry_type": "definition",
+  "entry_subtypes": [
+    "worship_definition"
+  ],
+  "semantic_domain": "worship",
+  "entry_purpose": {
+    "primary_objective": "Orucun tanımı ve İslam'daki yerini açıklamak",
+    "target_queries": [
+      "oruç nedir",
+      "oruç ne demek",
+      "siyam nedir"
+    ],
+    "must_include": [
+      "Ramazan orucunun farziyeti",
+      "imsak-iftar arası tanımı"
+    ],
+    "must_NOT_include": [
+      "oruç tutulamayacak durumlar — ayrı entry'lerde",
+      "fidye/kaza ayrıntıları — ayrı entry'lerde"
+    ],
+    "authorized_modifiers": [
+      "tanımı netleştirmek",
+      "Kur'ani referans eklemek"
+    ],
+    "forbidden_modifications": [
+      "core definition'ı silmek",
+      "farziyeti zayıflatmak",
+      "negation pattern eklemek"
+    ]
+  },
+  "NOT_for_queries": [
+    "hayız",
+    "nifas",
+    "oruç tutulmaz"
+  ],
+  "conflicting_entries": [
+    "adetliyken_oruc_kazasi",
+    "oruc_fidyesi",
+    "oruc_kazasi"
   ]
 }

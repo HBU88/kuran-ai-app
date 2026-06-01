@@ -41,5 +41,45 @@
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "entry_type": "condition",
+  "entry_subtypes": [
+    "physiological_state",
+    "worship_restriction"
+  ],
+  "semantic_domain": "physiological_states",
+  "entry_purpose": {
+    "primary_objective": "Hayız (adet) halinin tanımı ve dini hükümlerini açıklamak",
+    "target_queries": [
+      "hayız nedir",
+      "adet hali",
+      "menstrüasyon dini hüküm"
+    ],
+    "must_include": [
+      "tanım",
+      "süre",
+      "ibadet ve temizlik hükümleri"
+    ],
+    "must_NOT_include": [
+      "namazın/orucun genel tanımı"
+    ],
+    "authorized_modifiers": [
+      "açıklığı artırmak",
+      "kaynak eklemek"
+    ],
+    "forbidden_modifications": [
+      "core hükmü zayıflatmak",
+      "genel ibadet tanımı eklemek"
+    ]
+  },
+  "NOT_for_queries": [
+    "namaz nedir",
+    "oruç nedir"
+  ],
+  "conflicting_entries": [
+    "namaz_nedir",
+    "oruc_nedir",
+    "nifas_nedir",
+    "istihaze_nedir"
   ]
 }

@@ -41,5 +41,48 @@
   "source_notes": [
     "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi kaynaklı."
   ],
-  "_auto_generated": false
+  "_auto_generated": false,
+  "entry_type": "biography",
+  "entry_subtypes": [
+    "prophet",
+    "ulu-l azm",
+    "father_of_prophets"
+  ],
+  "semantic_domain": "people_and_prophets",
+  "entry_purpose": {
+    "primary_objective": "Hz. İbrahim peygamberin kim olduğunu, hayatı ve önemini açıklamak",
+    "target_queries": [
+      "Hz. İbrahim kim",
+      "Hz. İbrahim kimdir",
+      "İbrahim Peygamber",
+      "Halilullah"
+    ],
+    "must_include": [
+      "peygamberlik kimliği",
+      "ulu-l azm peygamberlerden olduğu",
+      "Halilullah lakabı"
+    ],
+    "must_NOT_include": [
+      "Kurban Bayramı namazının nasıl kılındığı — ayrı entry",
+      "Hac ritüellerinin detayı — ayrı entry"
+    ],
+    "authorized_modifiers": [
+      "biyografik detay eklemek",
+      "referans eklemek"
+    ],
+    "forbidden_modifications": [
+      "peygamberlik kimliğini değiştirmek",
+      "isim/lakap silmek"
+    ]
+  },
+  "NOT_for_queries": [
+    "bayram namazı nasıl kılınır",
+    "kurban kesimi nasıl yapılır",
+    "hac nasıl yapılır"
+  ],
+  "conflicting_entries": [
+    "bayram_namazi_nedir",
+    "bayram_namazi_nasil_kilinir",
+    "kurban_nedir"
+  ]
 }

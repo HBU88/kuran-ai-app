@@ -31,5 +31,45 @@
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "entry_type": "definition",
+  "entry_subtypes": [
+    "worship_definition",
+    "finance"
+  ],
+  "semantic_domain": "finance_and_trade",
+  "entry_purpose": {
+    "primary_objective": "Zekatın tanımı, farziyeti ve İslam'daki yerini açıklamak",
+    "target_queries": [
+      "zekat nedir",
+      "zekat ne demek"
+    ],
+    "must_include": [
+      "farz olduğu",
+      "temel tanım",
+      "amaç (mal temizleme)"
+    ],
+    "must_NOT_include": [
+      "nisap miktarı detayları — zekat_nisap_nedir entry'sinde",
+      "kime verileceği — zekat_kime_verilir entry'sinde"
+    ],
+    "authorized_modifiers": [
+      "tanımı netleştirmek",
+      "referans eklemek"
+    ],
+    "forbidden_modifications": [
+      "core definition'ı değiştirmek",
+      "farziyeti zayıflatmak"
+    ]
+  },
+  "NOT_for_queries": [
+    "kimlere verilir",
+    "nisap",
+    "fitre"
+  ],
+  "conflicting_entries": [
+    "zekat_nisap_nedir",
+    "zekat_kime_verilir",
+    "fitre_nedir"
   ]
 }

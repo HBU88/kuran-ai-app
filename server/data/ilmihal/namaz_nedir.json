@@ -56,5 +56,50 @@
   "source_notes": [
     "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
   ],
-  "_auto_generated": false
+  "_auto_generated": false,
+  "entry_type": "definition",
+  "entry_subtypes": [
+    "worship_definition"
+  ],
+  "semantic_domain": "worship",
+  "entry_purpose": {
+    "primary_objective": "Namaz ibadetinin tanımını ve İslam'daki yerini açıklamak",
+    "target_queries": [
+      "namaz nedir",
+      "namaz ne demek",
+      "namazın tanımı",
+      "salat nedir"
+    ],
+    "must_include": [
+      "beş vakit farz olduğu",
+      "İslam'ın beş şartından olduğu",
+      "temel tanım"
+    ],
+    "must_NOT_include": [
+      "namaz kılınamayacak özel durumlar (hayız, nifas vb.) — ayrı entry'lerde",
+      "namazın nasıl kılındığının adım adım anlatımı — namaz_nasil_kilinir entry'sinde"
+    ],
+    "authorized_modifiers": [
+      "tanımı netleştirmek",
+      "tarihsel/Kur'ani referans eklemek",
+      "kelime anahtarlarını zenginleştirmek"
+    ],
+    "forbidden_modifications": [
+      "core definition'ı silmek veya değiştirmek",
+      "negation pattern eklemek",
+      "farziyet ifadesini zayıflatmak"
+    ]
+  },
+  "NOT_for_queries": [
+    "hayız",
+    "nifas",
+    "istihaze",
+    "kılınmaz",
+    "nasıl kılınır"
+  ],
+  "conflicting_entries": [
+    "namaz_nasil_kilinir",
+    "hayiz_nedir",
+    "nifas_nedir"
+  ]
 }

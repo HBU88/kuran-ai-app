@@ -39,5 +39,46 @@
   ],
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
+  ],
+  "entry_type": "condition",
+  "entry_subtypes": [
+    "physiological_state",
+    "worship_restriction"
+  ],
+  "semantic_domain": "physiological_states",
+  "entry_purpose": {
+    "primary_objective": "Lohusalık (nifas) halinin tanımı ve dini hükümlerini açıklamak",
+    "target_queries": [
+      "nifas nedir",
+      "lohusalık",
+      "doğum sonrası dini durum"
+    ],
+    "must_include": [
+      "lohusalık tanımı",
+      "süre",
+      "temizlik ve ibadet hükümleri"
+    ],
+    "must_NOT_include": [
+      "namazın genel tanımı",
+      "orucun genel tanımı"
+    ],
+    "authorized_modifiers": [
+      "açıklığı artırmak",
+      "kaynak/referans eklemek"
+    ],
+    "forbidden_modifications": [
+      "genel namaz/oruç tanımı eklemek",
+      "core hüküm beyanını zayıflatmak"
+    ]
+  },
+  "NOT_for_queries": [
+    "namaz nedir",
+    "oruç nedir"
+  ],
+  "conflicting_entries": [
+    "namaz_nedir",
+    "oruc_nedir",
+    "hayiz_nedir",
+    "istihaze_nedir"
   ]
 }
