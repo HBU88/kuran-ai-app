@@ -15,11 +15,13 @@
 
 const fs = require('fs');
 const path = require('path');
+const { NegationDetector } = require('./negation_detector');
 
 class SemanticTopicMatcher {
   constructor(kbPath = path.join(__dirname, '../data/ilmihal')) {
     this.kbPath = kbPath;
     this.kb = this.loadKnowledgeBase();
+    this.negationDetector = new NegationDetector();
     console.log(`[MATCHER] Loaded ${this.kb.length} KB entries`);
   }
 
@@ -313,38 +315,26 @@ class SemanticTopicMatcher {
   }
 
   /**
-   * Check if entry has keywords that conflict with search term
-   * Returns true if entry explicitly says the token is NOT applicable
+   * Check if entry has keywords that conflict with search term.
+   * Delegates to NegationDetector (Guardrail #1) for sentence-level,
+   * weighted negation analysis. Returns true ONLY when the keyword
+   * appears EXCLUSIVELY in strong-negation context — partial matches
+   * fall through and may still get a (penalised) score from Rule 5.
    */
   hasConflictingKeywords(token, contentText) {
-    if (!token || token.length < 2) {
-      return false;
-    }
+    if (!token || token.length < 2) return false;
+    return this.negationDetector.shouldExclude(contentText, token);
+  }
 
-    // Patterns that indicate the token is NOT applicable
-    const conflictPatterns = [
-      `${token} kılınmaz`,       // prayer NOT performed
-      `${token} tutulmaz`,        // fast NOT observed
-      `${token} yapılamaz`,       // cannot be done
-      `${token} yapılmaz`,        // not performed
-      `${token} olmaz`,           // NOT allowed
-      `${token} caiz değildir`,   // not permissible
-      `${token} haram`,           // forbidden
-      `${token} yasaktır`,        // prohibited
-      `${token} engeli`,          // prevents
-      `adet.* ${token}`,          // condition... prayer
-      `nifas.* ${token}`,         // postpartum... prayer
-      `istihaze.* ${token}`       // abnormal bleeding... prayer
-    ];
-
-    for (const pattern of conflictPatterns) {
-      const regex = new RegExp(pattern, 'i');
-      if (regex.test(contentText)) {
-        return true;
-      }
-    }
-
-    return false;
+  /**
+   * Get the soft negation penalty for an entry. Used by callers that want
+   * to apply a weighted penalty instead of hard-excluding. Returns a value
+   * in [-0.60, 0]. Not currently used by scoreEntry (which hard-excludes),
+   * but exposed so future tiers (e.g. fuzzy_tfidf) can blend it in.
+   */
+  getNegationPenalty(token, contentText) {
+    if (!token || token.length < 2) return 0;
+    return this.negationDetector.detect(contentText, token).totalPenalty;
   }
 
   /**
