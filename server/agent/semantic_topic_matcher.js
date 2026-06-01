@@ -253,28 +253,65 @@ class SemanticTopicMatcher {
 
     // =========================================
     // RULE 3: Semantic descriptions match
+    //
+    // Why this is strict:
+    //   Before tightening, this rule fired on ANY single non-stop token of
+    //   length > 2 appearing in ANY semantic description. Result: generic
+    //   Islamic vocabulary like "dini" (which appears in almost every
+    //   entry's description) caused unrelated queries — e.g. "sosyal
+    //   medyada yorum yapmanın dini hükmü?" — to lock onto hayiz_nedir
+    //   with score 0.85, bypassing the OpenAI KB-miss fallback entirely.
+    //
+    // Two changes:
+    //   (a) Expanded stop list with common Islamic/generic terms so they
+    //       can never be the sole match signal.
+    //   (b) Require at least 2 distinct meaningful tokens to be found in
+    //       the SAME semantic description. A single shared word is too
+    //       weak a signal at the 0.85 score level.
     // =========================================
     if (entry.manual_semantic_descriptions && Array.isArray(entry.manual_semantic_descriptions)) {
-      // Apply same stop-word guard as Rule 2 — generic question words must not drive a match
       const STOP_TOKENS_R3 = new Set([
-        'nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok',
-        'ne', 'bir', 'bu', 'ile', 'kim', 'kime', 've', 'de', 'da',
-        'caiz', 'haram', 'helal', 'gunah', 'kullanmak', 'yapmak', 'etmek', 'olmak',
+        // structural / question words
+        'nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'midir', 'mudur',
+        'var', 'yok', 'ne', 'bir', 'bu', 'ile', 'kim', 'kime', 've', 'de', 'da',
+        // Islamic predicates / verbs that recur across most entries
+        'caiz', 'haram', 'helal', 'gunah', 'farz', 'vacip', 'sunnet', 'mustahap',
+        'kullanmak', 'yapmak', 'etmek', 'olmak', 'vermek', 'almak', 'bilmek',
+        // generic Islamic/religious nouns that recur across most entries
+        'dini', 'din', 'hukum', 'hukmu', 'hukmun', 'kural', 'kurali', 'kurallari',
+        'ibadet', 'ibadetler', 'islam', 'islami', 'inanc', 'inanis',
+        'musluman', 'muslumanlar', 'kisi', 'kisinin', 'durum', 'durumda', 'durumu',
+        'sekil', 'sekilde', 'konu', 'konuda', 'konusu', 'soru', 'sorulan',
       ]);
-      const semanticMatch = entry.manual_semantic_descriptions.some(desc => {
-        const descLower = desc.toLowerCase();
-        return queryTokens.some(qt => {
-          if (STOP_TOKENS_R3.has(qt) || qt.length <= 2) return false;  // skip generic/short tokens
-          return descLower.includes(qt);
-        });
-      });
 
-      if (semanticMatch) {
-        return {
-          entryId: entry.id,
-          score: 0.85,
-          matchType: 'semantic_description'
-        };
+      const meaningfulQueryTokens = queryTokens.filter(
+        qt => qt.length > 2 && !STOP_TOKENS_R3.has(qt)
+      );
+
+      // If the user gave us essentially no specific signal, skip Rule 3.
+      if (meaningfulQueryTokens.length < 2) {
+        // fall through to Rule 4/5
+      } else {
+        const REQUIRED_MATCHES = 2;
+        const matched = entry.manual_semantic_descriptions.some(desc => {
+          const descLower = desc.toLowerCase();
+          let hits = 0;
+          for (const qt of meaningfulQueryTokens) {
+            if (descLower.includes(qt)) {
+              hits += 1;
+              if (hits >= REQUIRED_MATCHES) return true;
+            }
+          }
+          return false;
+        });
+
+        if (matched) {
+          return {
+            entryId: entry.id,
+            score: 0.85,
+            matchType: 'semantic_description'
+          };
+        }
       }
     }
 

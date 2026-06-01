@@ -87,6 +87,25 @@ for (const test of testCases) {
   }
 }
 
+// KB-miss tests: queries unlikely to be in KB MUST return NULL so the
+// OpenAI fallback gets invoked. Pre-fix, Rule 3 used to match these
+// to whichever entry happened to contain a generic Islamic word.
+console.log(`\n📝 KB-miss path: queries with no specific KB entry MUST return null`);
+const kbMissQueries = [
+  'sosyal medyada yorum yapmanın dini hükmü nedir?',
+  'yapay zekanın dini hükmü nedir?',
+];
+for (const q of kbMissQueries) {
+  const r = matcher.findBestMatch(q);
+  if (r.entryId === null || r.score < 0.75) {
+    console.log(`   ✅ "${q}" → KB-miss (score ${r.score.toFixed(2)})`);
+    passed++;
+  } else {
+    console.log(`   ❌ "${q}" matched ${r.entryId} (${r.score.toFixed(2)}) — should have been KB-miss!`);
+    failed++;
+  }
+}
+
 // Critical test: verify "namaz nedir?" does NOT route to "nifas"
 console.log(`\n📝 Critical Test: Verify "namaz nedir?" does NOT route to "nifas"`);
 const criticalResult = matcher.findBestMatch('namaz nedir?');
