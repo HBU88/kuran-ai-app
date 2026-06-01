@@ -89,6 +89,23 @@ process.on("unhandledRejection", (error) => {
 // and clientKeyFromRequest now prefers Cloudflare's CF-Connecting-IP, which
 // CF rewrites on every request and the client cannot spoof.
 app.set("trust proxy", 1);
+app.disable("x-powered-by");
+
+// Helmet: HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy,
+// and a tight CSP. We're an API-only backend (no HTML rendering), so the
+// CSP can be the strictest defaults — nothing is meant to render inline.
+const helmet = require("helmet");
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: false,
+    directives: {
+      defaultSrc: ["'none'"],
+      frameAncestors: ["'none'"],
+    },
+  },
+  crossOriginEmbedderPolicy: false, // we serve JSON only; CORS is the gate
+  crossOriginResourcePolicy: { policy: "same-site" },
+}));
 
 app.use(createCorsMiddleware());
 app.use(express.json({ limit: process.env.HAKAI_JSON_BODY_LIMIT || "32kb" }));
