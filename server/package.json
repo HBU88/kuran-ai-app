@@ -25,7 +25,9 @@
     "test:qa-suite": "node qa-test-suite-generator.js",
     "qa:pre-launch": "node qa-pre-launch-orchestrator.js",
     "test:hakai-qa": "node tests/hakai_qa_runner.mjs",
-    "autofix": "node tests/auto_fix_agent.mjs"
+    "autofix": "node tests/auto_fix_agent.mjs",
+    "test:guardrails": "node tests/negation_detector_test.mjs && node tests/entry_type_schema_test.mjs && node tests/atomic_kb_updater_test.mjs && node tests/quran_validator_test.mjs",
+    "migrate:entry-markers": "node scripts/migrate_entry_markers.mjs"
   },
   "dependencies": {
     "body-parser": "^2.2.2",

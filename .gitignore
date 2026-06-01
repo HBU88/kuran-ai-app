@@ -90,3 +90,7 @@ build/
 tmp/
 .cache/
 test_artifacts/
+
+# KB backup files written by migration scripts / AtomicKBUpdater
+server/data/_kb_backups/
+server/data/ilmihal/*.bak.*
