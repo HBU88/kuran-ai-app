@@ -1,32 +1,77 @@
 {
   "id": "bayram_namazi_nasil_kilinir",
-  "title": "Bayram Namazı Nasıl Kılınır?",
+  "title": "Bayram Namazı Nasıl Kılınır? Adım Adım Tarif",
   "category": "worship_practice",
-  "summary": "Bayram namazı iki rekât olarak ilave tekbirlerle kılınır.",
+  "summary": "Bayram namazı iki rekât olup her rekâtta üçer ilave tekbir (zevaid) içerir. Ezan ve kamet okunmaz. Sünnet olarak birinci rekâtta A'la, ikinci rekâtta Gaşiye suresi okunur. Hutbe namazdan sonra okunur.",
   "keywords": [
     "bayram namazı nasıl kılınır",
-    "bayram namazı nasıl kilinir"
+    "bayram namazı kılmak",
+    "bayram namazı adım adım",
+    "bayram namazı tarifi",
+    "bayram namazı ilave tekbirler",
+    "bayram tekbirleri nasıl alınır",
+    "ramazan bayramı namazı",
+    "kurban bayramı namazı",
+    "eid namazı nasıl kılınır"
   ],
   "step_by_step": [
-    "İlk rekâtta iftitah tekbiri ve ilave tekbirler alınır.",
-    "Fatiha ve zammı sure okunur.",
-    "İkinci rekâtta da ilave tekbirler alınır.",
-    "Namaz selamla tamamlanır."
+    "Bayram namazı cemaatle kılınır; ezan ve kamet okunmaz.",
+    "BİRİNCİ REKÂT:",
+    "  1. İftitah tekbiri: 'Allahu Ekber' denerek namaza girilir, eller bağlanır.",
+    "  2. Sübhaneke sessizce okunur.",
+    "  3. Birinci ilave tekbir: 'Allahu Ekber' denilir, eller kulak hizasına kaldırılıp sarkıtılır.",
+    "     → Tekbirler arası tehlil: 'Allahu Ekber, Allahu Ekber, lâ ilâhe illallahu vallahu Ekber, Allahu Ekber ve lillahil hamd.' sessizce okunur.",
+    "  4. İkinci ilave tekbir: aynı şekilde, ardından tehlil.",
+    "  5. Üçüncü ilave tekbir: 'Allahu Ekber' denildikten sonra eller BAĞLANIR.",
+    "  6. Eûzü-Besmele, Fatiha ve A'la suresi (87. sure) okunur.",
+    "  7. Rükû ve iki secde normal yapılır.",
+    "İKİNCİ REKÂT:",
+    "  1. Fatiha ve Gaşiye suresi (88. sure) okunur.",
+    "  2. Birinci ilave tekbir: 'Allahu Ekber' denerek eller kaldırılıp sarkıtılır.",
+    "     → Tekbirler arası tehlil okunur.",
+    "  3. İkinci ilave tekbir: aynı şekilde.",
+    "  4. Üçüncü ilave tekbir: ardından eller sarkık hâlde rükûya gidilir (bu tekbir rükû tekbiridir).",
+    "  5. Rükû: 'Sübhane Rabbiyel Azîm' 3 kez.",
+    "  6. İki secde normal yapılır.",
+    "  7. Son oturuş: Ettehiyyatü, Salli-Barik okunur, iki yana selam verilir.",
+    "HUTBE: Namazdan sonra imam iki hutbe okur; cemaat dinler."
   ],
-  "farzlar": [],
-  "vacipler": [],
-  "sunnetler": [],
+  "farzlar": [
+    "Her rekâtta Fatiha okunması farzdır.",
+    "İki rekât kılmak farz ya da vaciptir (mezheplere göre farklı)."
+  ],
+  "vacipler": [
+    "Altı ilave tekbir (her rekâtta üç) vaciptir.",
+    "İlk iki rekâtta Fatiha'ya ek sure okunması vaciptir."
+  ],
+  "sunnetler": [
+    "Birinci rekâtta A'la, ikinci rekâtta Gaşiye okumak sünnet.",
+    "Tekbirler arası tehlil okumak sünnet.",
+    "Bayram gecesi ve sabahı tekbir getirmek sünnet."
+  ],
   "attention_points": [
-    "İlave tekbirler bayram namazının ayırt edici yönüdür."
+    "Bayram hutbesi namazdan SONRA okunur (Cuma'nın aksine).",
+    "Bayram namazında ezan ve kamet yoktur.",
+    "İlave tekbir sayısı: birinci rekâtta iftitahtan sonra 3, ikinci rekâtta rükûdan önce 3."
   ],
   "common_mistakes": [
-    "Rekât ve vacipleri karıştırmak.",
-    "Huşuyu ve sıralamayı ihmal etmek."
+    "İlave tekbirler arası elleri bağlamak (tekbirler arası eller sarkık durur).",
+    "İkinci rekâttaki ilave tekbirleri rükûdan sonra almak.",
+    "Hutbeyi namazdan önce beklemeye çalışmak."
   ],
   "related_questions": [
-    "Bayram namazı nasıl kılınır?"
+    "Bayram namazı kaç rekâttır?",
+    "Bayram namazında hangi sureler okunur?",
+    "Cuma namazı nasıl kılınır?"
   ],
   "source_notes": [
-    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
-  ]
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
+  ],
+  "manual_semantic_descriptions": [
+    "bayram namazı nasıl kılınır adım adım tarif",
+    "bayram namazı ilave tekbirler zevaid nasıl alınır",
+    "eid namazı kılmak Türkçe",
+    "bayram namazı birinci ikinci rekât tarif"
+  ],
+  "_auto_generated": false
 }

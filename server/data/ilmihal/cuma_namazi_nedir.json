@@ -1,33 +1,73 @@
 {
   "id": "cuma_namazi_nedir",
-  "title": "Cuma Namazı Nedir?",
+  "title": "Cuma Namazı Nedir? Rekâtları, Okunan Sureler ve Hükmü",
   "category": "worship_practice",
-  "summary": "Cuma namazı, cuma günü öğle vaktinde cemaatle ve hutbe ile kılınan önemli bir namazdır.",
+  "summary": "Cuma namazı, cuma günü öğle vaktinde cemaatle ve hutbe ile kılınan farz bir namazdır. İki rekâttır. Hz. Peygamber'in sünneti olarak birinci rekâtta A'la (87), ikinci rekâtta Gaşiye (88) suresi okunur.",
   "keywords": [
     "cuma namazı nedir",
-    "cuma namazı"
+    "cuma namazı",
+    "cuma namazı kaç rekât",
+    "cuma namazı hükmü",
+    "cuma namazı farz mı",
+    "cuma namazı rekâtları",
+    "cuma namazı sureleri",
+    "cuma namazında ne okunur",
+    "cuma namazı önce kaç rekât sünnet kılınır",
+    "cuma namazı hutbe"
   ],
   "step_by_step": [
-    "Cuma günü öğle vaktinde cemaatle kılınır.",
-    "Hutbe ile birlikte yürütülür.",
-    "Haftalık toplu ibadet bilinci taşır."
+    "Cuma namazı, Cuma günü öğle vaktinde cemaatle kılınan 2 rekâtlık farzdır.",
+    "CUMA NAMAZININ REKÂTLARINın TERTİBİ (Hanefi):",
+    "  1. İlk sünnet: 4 rekât (öğle namazının ilk sünnetiyle aynı hüküm)",
+    "  2. Farz: 2 rekât (cemaatle, hutbeden sonra)",
+    "  3. Son sünnet: 4 rekât",
+    "  4. Vaktin sünneti olarak ek 2 rekât daha kılmak müstehaptır.",
+    "FARZ 2 REKÂTTA OKUNANLAR:",
+    "  - Her rekâtta Fatiha okunur (farz).",
+    "  - Sünnet sure seçimi 1: birinci rekâtta A'la suresi (87), ikinci rekâtta Gaşiye suresi (88).",
+    "  - Sünnet sure seçimi 2: birinci rekâtta Cuma suresi (62), ikinci rekâtta Münafikun suresi (63).",
+    "  - Son oturuşta Ettehiyyatü, Salli-Barik okunur ve selam verilir.",
+    "HUTBE: Farz namazdan önce imam iki hutbe okur. Hutbede Fatiha, kısa ayetler, salavat ve cemaat için dua bulunur. Cemaat hutbeyi sessizce dinler.",
+    "Cuma namazı öğle namazının yerini tutar; cuma kılan ayrıca öğle kılmaz."
   ],
-  "farzlar": [],
-  "vacipler": [],
-  "sunnetler": [],
+  "farzlar": [
+    "Cuma namazı farz-ı ayındır; özürsüz terk etmek büyük günahtır.",
+    "Her rekâtta Fatiha okunması farzdır.",
+    "Cemaatle kılınması şarttır (en az 3 kişi, mezheplere göre farklı)."
+  ],
+  "vacipler": [
+    "Her iki rekâtta zammı sure (ek sure) okunması vaciptir.",
+    "Hutbeyi dinlemek vaciptir."
+  ],
+  "sunnetler": [
+    "Birinci rekâtta A'la, ikinci rekâtta Gaşiye okumak sünnet.",
+    "Cuma günü Kehf suresini okumak sünnet/müstehap.",
+    "Cuma namazına gusüllü ve erken gelmek sünnettir.",
+    "Cuma günü çokça salavat getirmek müstehaptır."
+  ],
   "attention_points": [
-    "Cuma namazı cemaat ve hutbe yönüyle öne çıkar."
+    "Cuma namazı yalnızca erkekler, mukim olanlar ve sağlıklı kişilere farzdır.",
+    "Hutbe namazdan önce okunur; bu Cuma'ya özgüdür.",
+    "Cuma namazı kılındıktan sonra ayrıca öğle namazı kılınmaz."
   ],
   "common_mistakes": [
-    "Rekât ve vacipleri karıştırmak.",
-    "Huşuyu ve sıralamayı ihmal etmek."
+    "Cuma'da mutlaka Cuma suresi okunması gerektiğini sanmak.",
+    "Cuma namazı kıldıktan sonra öğle namazını da kılmaya çalışmak.",
+    "Hutbe devam ederken cami içinde namaz kılmaya devam etmek."
   ],
   "related_questions": [
-    "Cuma namazı nedir?",
-    "Cuma namazı kaç rekâttır?",
-    "Cuma namazı kimlere farzdır?"
+    "Cuma namazında hangi sureler okunur?",
+    "Cuma namazı kimlere farzdır?",
+    "Namazda hangi sureler okunur?"
   ],
   "source_notes": [
-    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
-  ]
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
+  ],
+  "manual_semantic_descriptions": [
+    "cuma namazı nedir hükmü ve rekâtları",
+    "cuma namazında hangi sure okunur",
+    "cuma namazı farz rekâtları ve sünnetleri",
+    "cuma namazı hutbe ile nasıl kılınır"
+  ],
+  "_auto_generated": false
 }

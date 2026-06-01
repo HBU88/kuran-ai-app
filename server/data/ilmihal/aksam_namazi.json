@@ -1,0 +1,68 @@
+{
+  "id": "aksam_namazi",
+  "title": "Akşam Namazı — Rekâtları, Okunan Sureler ve Dualar",
+  "category": "worship_practice",
+  "summary": "Akşam namazı 3 rekât sünnet ve 3 rekât farzdan oluşur (Hanefi'de sünnet yok; 3 rekât farz + 2 rekât sünnet). Hz. Peygamber akşam namazında kısa sureler okurdu; Kafirun, İhlas, Felak, Nas gibi sureler tavsiye edilir.",
+  "keywords": [
+    "akşam namazı",
+    "aksam namazi",
+    "akşam namazı nasıl kılınır",
+    "akşam namazı kaç rekât",
+    "akşam namazında hangi sure okunur",
+    "akşam namazı sureleri",
+    "akşam namazında ne okunur",
+    "akşam namazı duaları",
+    "akşam namazı sünnet mi farz mı",
+    "akşam namazı vakti"
+  ],
+  "step_by_step": [
+    "Akşam namazı Hanefi'de: 3 rekât farz + 2 rekât sünnet (veya önce 4 rekât nafile, ardından 3 farz + 2 sünnet).",
+    "FARZ (3 rekât):",
+    "  - Birinci rekât: Sübhaneke → Fatiha → Kısa sure (örn. Kafirun/109 veya İhlas/112)",
+    "  - İkinci rekât: Fatiha → Kısa sure (örn. İhlas/112 veya Felak/113)",
+    "  - Birinci oturuş: Ettehiyyatü",
+    "  - Üçüncü rekât: Yalnızca Fatiha (zammı sure okunmaz)",
+    "  - Son oturuş: Ettehiyyatü, Salli-Barik, Rabbena → Selam",
+    "SÜNNET (2 rekât): Farzdan sonra kılınır; kısa sureler okunur.",
+    "OKUNAN SURELER: Hz. Peygamber akşam namazında kısa sureler okurdu.",
+    "  - Kafirun (109), İhlas (112), Felak (113), Nas (114) en uygun surelerdir.",
+    "  - Tekvir (81), İnfitar (82), İnşirak (94), Tin (95) gibi sureler de okunabilir.",
+    "OKUNAN DUALAR (sırasıyla): Sübhaneke → Fatiha → Kısa sure → Rükûda: Sübhane Rabbiyel Azîm → Kavmede: Rabbena lekel hamd → Secdede: Sübhane Rabbiyel A'lâ → Oturuşlarda: Ettehiyyatü, [son oturuşta] Salli-Barik, Rabbena."
+  ],
+  "farzlar": [
+    "Akşam namazının farzı 3 rekâttır.",
+    "Her rekâtta Fatiha okunması farzdır."
+  ],
+  "vacipler": [
+    "İlk iki rekâtta Fatiha'ya ek sure (zammı sure) okunması vaciptir.",
+    "Üçüncü rekâtta yalnızca Fatiha okunur."
+  ],
+  "sunnetler": [
+    "Akşam namazında kısa sureler okumak sünnettir.",
+    "Hz. Peygamber akşam namazında Kafirun ve İhlas surelerini okurdu (rivayet)."
+  ],
+  "attention_points": [
+    "Akşam namazının sünnetini önce mi sonra mı kılacağı konusunda mezhepler arasında fark var.",
+    "Üçüncü rekâtta zammı sure okunmaz; yalnızca Fatiha yeterlidir.",
+    "Akşam namazının vakti güneş batımından şafak (kızıllık) kaybolana kadardır."
+  ],
+  "common_mistakes": [
+    "Üçüncü rekâtta da zammı sure okumaya çalışmak.",
+    "Birinci oturuşta Salli-Barik okumak (yalnızca son oturuşa aittir).",
+    "Vaktin dar olmasına dikkat etmemek."
+  ],
+  "related_questions": [
+    "Namazda hangi sureler okunur?",
+    "Namaz nasıl kılınır?",
+    "Namaz vakitleri nelerdir?"
+  ],
+  "source_notes": [
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
+  ],
+  "manual_semantic_descriptions": [
+    "akşam namazı nasıl kılınır rekâtları",
+    "akşam namazında okunan sureler ve dualar",
+    "akşam namazında hangi sure okunur kısa sureler"
+  ],
+  "_auto_generated": false
+}

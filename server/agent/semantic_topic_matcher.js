@@ -86,7 +86,12 @@ class SemanticTopicMatcher {
       // Tiebreaker: count how many query tokens appear in the entry ID
       const aIdLower = (a.entryId || '').toLowerCase();
       const bIdLower = (b.entryId || '').toLowerCase();
-      const STOP_TOKENS_TB = new Set(['nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok', 'ne', 'bir', 'bu', 'ile']);
+      // "okunur" / "okunurmu" are generic verbs — never meaningful for ID matching
+      // e.g. "rükuda ne okunur?" should NOT prefer adetliyken_kuran_okunur_mu
+      const STOP_TOKENS_TB = new Set(['nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok',
+        'ne', 'bir', 'bu', 'ile', 'okunur', 'okunurmu', 'yapilir', 'edilir', 'olur',
+        'hangi', 'nerede', 'zaman', 'kadar', 'sonra', 'once', 'gore',
+        'demek', 'anlami', 'anlam']);
       const meaningfulTokens = queryTokens.filter(t => !STOP_TOKENS_TB.has(t) && t.length > 2);
 
       const aCoverage = meaningfulTokens.filter(t => aIdLower.includes(t)).length;
@@ -227,6 +232,12 @@ class SemanticTopicMatcher {
         'nedir', 'nelerdir', 'kimdir', 'nasil', 'mi', 'mu', 'var', 'yok',
         'ne', 'bir', 'bu', 'ile', 'caiz', 'haram', 'helal', 'gunah',
         'kullanmak', 'yapmak', 'etmek', 'olmak', 'vermek',
+        // Generic verbs / question words that appear in many entries' keywords
+        // and cause false keyword_match wins
+        'okunur', 'okunurmu', 'yapilir', 'edilir', 'hangi', 'nerede',
+        // "demek" appears in almost every entry's "X ne demek" keyword phrase
+        // — it's as generic as "nedir" and must never be the sole match signal
+        'demek', 'anlami', 'anlam',
       ]);
 
       // Check for EXACT keyword match (not substring)

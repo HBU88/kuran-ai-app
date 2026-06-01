@@ -1,0 +1,73 @@
+{
+  "id": "namazda_okunan_sureler",
+  "title": "Namazda Hangi Sureler Okunur? Her Vaktin Sure Seçimi",
+  "category": "worship_practice",
+  "summary": "Namazda her rekâtta Fatiha okunması farz, ilk iki rekâtta ek sure (zammı sure) okunması vaciptir. Vakitlere göre Hz. Peygamber'in sünnetinde farklı uzunlukta sureler tercih edilmiştir.",
+  "keywords": [
+    "namazda hangi sureler okunur",
+    "namazda hangi sure okunur",
+    "namazda sure seçimi",
+    "zammi sure nedir",
+    "zammı sure nedir",
+    "sabah namazında hangi sure okunur",
+    "öğle namazında hangi sure okunur",
+    "ikindi namazında hangi sure okunur",
+    "akşam namazında hangi sure okunur",
+    "yatsı namazında hangi sure okunur",
+    "namazda fatiha",
+    "namazda sure",
+    "namazda hangi dua okunur",
+    "rekatta ne okunur"
+  ],
+  "step_by_step": [
+    "FATİHA: Her rekâtta Fatiha okunması farzdır. Fatiha olmadan namaz geçersizdir.",
+    "ZAMMI SURE: İlk iki rekâtta Fatiha'nın ardından en az bir ayet (tercihen tam bir kısa sure veya uzun sureden birkaç ayet) okumak vaciptir.",
+    "SABAH NAMAZI: Hz. Peygamber sabah namazında uzun sureler okurdu (Kaf, Vakıa, Mürselat, Tekvir, İnfitar gibi). Sabah namazında 20-30 ayetlik sureler sünnettir.",
+    "ÖĞLE NAMAZI: Hz. Peygamber öğle namazında orta uzunlukta sureler okurdu. A'la (87), Gaşiye (88), Tarık (86), Bürûc (85) gibi orta sureler uygundur.",
+    "İKİNDİ NAMAZI: Öğle ile benzer; orta-kısa sureler. Asr (103), Kafirun (109), İhlas (112) gibi kısa sureler de okunabilir.",
+    "AKŞAM NAMAZI: Hz. Peygamber akşam namazında kısa sureler okurdu. Kafirun (109), İhlas (112), Felak (113), Nas (114) akşam için idealdir.",
+    "YATSI NAMAZI: Orta uzunluktaki sureler tercih edilir. Mülk (67), İnşirak (94), Zilzal (99) gibi sureler uygun olur.",
+    "ÖZEL: Cuma namazında A'la (87) + Gaşiye (88) veya Cuma (62) + Münafikun (63) sünnettir. Bayram namazında A'la (87) + Gaşiye (88) sünnettir.",
+    "Belirli bir rekâtta hangi surenin okunacağı konusunda zorunluluk yoktur; sünnet olan uzunluklara dikkat etmek yeterlidir."
+  ],
+  "farzlar": [
+    "Her rekâtta Fatiha okumak farzdır.",
+    "Cemaatle namazda imam Fatiha'yı okur; Hanefi'de cemaat okumaz."
+  ],
+  "vacipler": [
+    "İlk iki rekâtta zammı sure (Fatiha'ya ek sure) okumak vaciptir.",
+    "Son iki rekâtta yalnızca Fatiha yeterlidir (zammı sure vacip değildir)."
+  ],
+  "sunnetler": [
+    "Sabah namazında uzun sure okumak.",
+    "Akşam namazında kısa sure okumak.",
+    "Cuma ve bayram namazında belirli sureleri okumak (A'la, Gaşiye).",
+    "Aynı namazın iki rekâtında ikinci rekâtın suresini birinciden kısa tutmak."
+  ],
+  "attention_points": [
+    "Zammı sure yalnızca ilk iki rekâtta okunur; üçüncü ve dördüncü rekâtlarda yalnızca Fatiha okunur.",
+    "Hangi sureyi okuyacağını bilmeyenler her rekâtta İhlas okuyabilir; bu yeterlidir.",
+    "Ezberlenmiş herhangi bir sure veya uzun sure parçası zammı sure olarak geçerlidir."
+  ],
+  "common_mistakes": [
+    "Her rekâtta zammı sure okumak zorunlu sanmak (son iki rekâtta değil).",
+    "Fatiha'yı okumadan rekâtı tamamlamak.",
+    "Akşam namazında çok uzun sure okuyarak diğer cemaati zora sokmak."
+  ],
+  "related_questions": [
+    "Namaz nasıl kılınır?",
+    "Cuma namazında hangi sureler okunur?",
+    "Bayram namazında hangi sureler okunur?"
+  ],
+  "source_notes": [
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
+  ],
+  "manual_semantic_descriptions": [
+    "namazda hangi sureler okunur",
+    "namazda sure seçimi her vakit",
+    "zammi sure nedir namazda ek sure",
+    "sabah öğle ikindi akşam yatsı namazı sure",
+    "fatiha ve zammı sure zorunluluğu"
+  ],
+  "_auto_generated": false
+}

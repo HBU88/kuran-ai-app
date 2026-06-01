@@ -1,39 +1,69 @@
 {
   "id": "sabah_namazi",
-  "title": "Sabah Namazı",
+  "title": "Sabah Namazı — Rekâtları, Okunan Sureler ve Dualar",
   "category": "worship_practice",
-  "summary": "Sabah namazı 2 rekât sünnet ve 2 rekât farzdan oluşur.",
+  "summary": "Sabah namazı 2 rekât sünnet ve 2 rekât farzdan oluşur. Her rekâtta Fatiha okunur; ilk iki rekâtta ek sure (zammı sure) okunması vaciptir. Sabah namazında uzun surelerin okunması Hz. Peygamber'in sünnetidir.",
   "keywords": [
     "sabah namazı",
     "sabah namazı nasıl kılınır",
-    "sabah namazı kaç rekât"
+    "sabah namazı kaç rekât",
+    "sabah namazında hangi sure okunur",
+    "sabah namazında hangi dua okunur",
+    "sabah namazı duaları",
+    "sabah namazı sureleri",
+    "sabah namazı sünnet",
+    "sabah namazı farz",
+    "fecr namazı"
   ],
   "step_by_step": [
-    "Sabah namazının önce 2 rekât sünneti kılınır.",
-    "Ardından 2 rekât farzı kılınır.",
-    "İlk rekâtta Fatiha ve zammı sure okunur.",
-    "İkinci rekâtta da aynı düzen sürdürülür.",
-    "Son oturuşta Tahiyyat, Salli-Barik ve Rabbena duaları okunur.",
-    "Selam verilerek namaz tamamlanır."
+    "Sabah namazı toplam 4 rekâttır: önce 2 rekât sünnet, ardından 2 rekât farz kılınır.",
+    "SÜNNET (2 rekât):",
+    "  - Niyet: 'Sabah namazının sünnetini kılmaya niyet ettim.'",
+    "  - Birinci rekât: Sübhaneke → Fatiha → Zammı sure (örn. Kâfirûn/109)",
+    "  - İkinci rekât: Fatiha → Zammı sure (örn. İhlas/112) → Oturuş: Ettehiyyatü, Salli-Barik → Selam",
+    "FARZ (2 rekât):",
+    "  - Niyet: 'Sabah namazının farzını kılmaya niyet ettim.'",
+    "  - Birinci rekât: Sübhaneke → Fatiha → Zammı sure (uzun sure tercih edilir: Vakıa, Mülk, A'la vb.)",
+    "  - İkinci rekât: Fatiha → Zammı sure → Oturuş: Ettehiyyatü, Salli-Barik, Rabbena duası → Selam",
+    "OKUNAN SURELER: Hz. Peygamber sabah namazında uzun sureleri severdi. Kaf (50), Vakıa (56), Mürselat (77), Tekvir (81), A'la (87) gibi sureler uygundur.",
+    "OKUNAN DUALAR (sırasıyla): Sübhaneke → Fatiha → Zammı sure → [Rükûda] Sübhane Rabbiyel Azîm → [Kavmede] Rabbena lekel hamd → [Secdede] Sübhane Rabbiyel A'lâ → [Oturuşta] Ettehiyyatü → Salli-Barik → Rabbena."
   ],
   "farzlar": [
-    "Sabah namazının farzı 2 rekâttır."
+    "Sabah namazının farzı 2 rekâttır.",
+    "Her rekâtta Fatiha okunması farzdır."
   ],
-  "vacipler": [],
-  "sunnetler": [],
+  "vacipler": [
+    "İlk iki rekâtta Fatiha'ya ek sure (zammı sure) okunması vaciptir."
+  ],
+  "sunnetler": [
+    "Sabah namazından önce 2 rekât sünnet kılmak sünnet-i müekkededir.",
+    "Sabah namazında uzun sureler okumak sünnettir.",
+    "Sabah namazının sünnetini kısa tutmak ve iki kısa sure okumak da sünnettir."
+  ],
   "attention_points": [
     "Sünnet ile farz ayrı niyetle kılınır.",
-    "Vakit girdikten sonra kılınması gerekir."
+    "Vakti girdikten (ikinci fecirden) sonra kılınması gerekir.",
+    "Güneş doğmadan önce tamamlanmalıdır.",
+    "Sabah namazının sünneti kılınamadıysa, güneş doğduktan yaklaşık 45 dakika sonra (kerahet vakti çıkınca) kaza edilebilir."
   ],
   "common_mistakes": [
     "Sünneti farzla karıştırmak.",
-    "Son oturuşu unutmak."
+    "Sabah namazında kısa surelerle yetinip sünnet uzunluğunu terk etmek.",
+    "Vaktin çıkmasına yakın sünnet kılmaya çalışıp farzı geçirmek."
   ],
   "related_questions": [
-    "Sabah namazı nasıl kılınır?",
-    "Sabah namazı kaç rekâttır?"
+    "Namazda hangi sureler okunur?",
+    "Namaz nasıl kılınır?",
+    "Namaz vakitleri nelerdir?"
   ],
   "source_notes": [
-    "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
-  ]
+    "Diyanet İşleri Başkanlığı ve TDV İslam Ansiklopedisi esas alınmıştır."
+  ],
+  "manual_semantic_descriptions": [
+    "sabah namazı nasıl kılınır rekâtları",
+    "sabah namazında okunan sureler ve dualar",
+    "sabah namazı sünnet ve farz rekâtları",
+    "sabah namazında hangi sure okunur uzun sure"
+  ],
+  "_auto_generated": false
 }
