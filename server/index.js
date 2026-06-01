@@ -82,6 +82,14 @@ process.on("unhandledRejection", (error) => {
   console.error("Startup error:", error && error.stack ? error.stack : error);
 });
 
+// Trust the immediate upstream proxy (Render edge, sitting behind Cloudflare).
+// Without this, req.ip resolves to the Render edge IP and an attacker can
+// spoof X-Forwarded-For to rotate the rate-limit key (effectively bypassing
+// it). With trust proxy = 1 we honour exactly one hop of forwarded headers —
+// and clientKeyFromRequest now prefers Cloudflare's CF-Connecting-IP, which
+// CF rewrites on every request and the client cannot spoof.
+app.set("trust proxy", 1);
+
 app.use(createCorsMiddleware());
 app.use(express.json({ limit: process.env.HAKAI_JSON_BODY_LIMIT || "32kb" }));
 app.use((req, res, next) => {

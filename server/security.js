@@ -34,8 +34,22 @@ function createCorsMiddleware(options = {}) {
 }
 
 function clientKeyFromRequest(req) {
-  const forwardedFor = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim();
-  return forwardedFor || req.ip || req.socket?.remoteAddress || "unknown";
+  // Preference order (most-trusted to least):
+  //   1. cf-connecting-ip — Cloudflare REWRITES this on every request with
+  //      the real client IP. The client cannot forge it through Cloudflare;
+  //      any client-supplied value is overwritten at the CF edge.
+  //   2. req.ip — Express's trust-proxy-aware client IP. Requires
+  //      app.set("trust proxy", N) to be configured correctly upstream.
+  //   3. raw socket address — last-resort fallback for tests / direct hits.
+  //
+  // We INTENTIONALLY no longer read X-Forwarded-For directly: the previous
+  // version read the first XFF entry unconditionally, which let an attacker
+  // rotate the rate-limit key (and thus bypass the limiter entirely) by
+  // sending arbitrary XFF headers. The trust-proxy configuration in
+  // index.js controls whether req.ip walks XFF; we don't need to.
+  const cfIp = String(req.headers["cf-connecting-ip"] || "").trim();
+  if (cfIp) return cfIp;
+  return req.ip || req.socket?.remoteAddress || "unknown";
 }
 
 function createRateLimiter(options = {}) {
