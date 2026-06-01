@@ -1251,11 +1251,14 @@ function resolveExplicitTopic(message) {
 function plannerAyahTopicConstraint(message, analysis, plannerResult) {
   if (plannerResult?.needs_ayah !== true) return null;
 
+  // Intentionally exclude analysis.primary_theme: it defaults to "umut" for any
+  // unrecognised query (e.g. "bana bir ayet ver"), which would force the "umut"
+  // curated cluster (İnşirah 94:5, score 10000) for completely generic requests.
+  // Strong signals are sufficient: explicit message keyword > planner ayah_topic > context topic.
   return (
     resolveExplicitTopic(message) ||
     canonicalTopic(plannerResult?.ayah_topic) ||
-    canonicalTopic(analysis?.context_topic) ||
-    canonicalTopic(analysis?.primary_theme)
+    canonicalTopic(analysis?.context_topic)
   );
 }
 
