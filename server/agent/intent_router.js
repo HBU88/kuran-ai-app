@@ -286,7 +286,7 @@ function analyzeUserMessageFallback(message, history = []) {
     sabır: 6,
     umut: 4,
   });
-  score(["içim daralıyor", "bunaldım", "bunalıyorum", "panik", "kaygı"], {
+  score(["içim daralıyor", "bunaldım", "bunalıyorum", "panik", "kaygı", "endişe", "endişeli", "endişeleniyorum"], {
     kaygı: 10,
     tevekkül: 7,
     çaresizlik: 5,
@@ -337,6 +337,16 @@ function analyzeUserMessageFallback(message, history = []) {
     tevekkül: 12,
     umut: 5,
     sabır: 3,
+  });
+  score(["iman", "inanç", "inanmak", "imanımı güçlendir", "imanım güçlensin", "imanımı artır", "iman güçlendirmek", "imanımı kaybediyorum", "imanım zayıflıyor", "imanım sarsıldı", "iman nedir", "iman etmek"], {
+    iman: 14,
+    tevekkül: 5,
+    ibadet: 3,
+  });
+  score(["affetmek", "affetmek ile", "affetmek hakkında", "bağışlamak", "bağışla biri", "başkasını affetmek", "affetmeli miyim", "affedemiyorum"], {
+    affetmek: 14,
+    merhamet: 8,
+    sabır: 5,
   });
   score(["tövbe", "tovbe", "istiğfar"], {
     tövbe: 12,

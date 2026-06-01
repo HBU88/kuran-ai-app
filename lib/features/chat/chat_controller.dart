@@ -34,6 +34,7 @@ class ChatController extends ChangeNotifier {
   bool loading = false;
   bool runningSmokeTest = false;
   bool slowResponse = false;
+  bool quotaJustExceeded = false;
   String? errorMessage;
   String? debugErrorMessage;
   int freeAnswersRemaining = ReligiousChatLimitService.freeAnswerLimit;
@@ -60,6 +61,12 @@ class ChatController extends ChangeNotifier {
     paidAnswersRemaining = 0;
     usageStateLoaded = true;
     notifyListeners();
+  }
+
+  /// Kota aşım bayrağını tüket (bottom sheet gösterildikten sonra çağrılır).
+  void consumeQuotaExceeded() {
+    quotaJustExceeded = false;
+    // notifyListeners çağırmıyoruz — UI güncellemesi gerekmiyor.
   }
 
   void clearConversation() {
@@ -139,11 +146,11 @@ class ChatController extends ChangeNotifier {
       }
       errorMessage = error.toString();
       debugErrorMessage = error.toString();
-      // Quota exceeded: show a dedicated message instead of a generic error.
+      if (error.isQuotaExceeded) {
+        quotaJustExceeded = true;
+      }
       final displayText = error.isQuotaExceeded
-          ? 'Bu ay ücretsiz soru hakkınızı kullandınız. '
-              'Yakında premium üyelik seçenekleri eklenecek.'
-          // TODO(sprint3-paywall): Replace with upgrade bottom sheet when IAP is live.
+          ? 'Bu ay ücretsiz soru hakkınızı kullandınız.'
           : AppConstants.connectionFallbackMessage;
       _messages.add(
         ChatMessageModel(

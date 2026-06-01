@@ -1313,5 +1313,41 @@
     ],
     "short_explanation": "Allah'ın 'Kün!' emri hem ilk insanın hem de Hz. İsa'nın yaratılışını açıklar; sıradan sebeplerin ötesindedir.",
     "notes": "Allah'ın 'Kün!' emri hem ilk insanın hem de Hz. İsa'nın yaratılışını açıklar; sıradan sebeplerin ötesindedir."
+  },
+  {
+    "id": 82,
+    "surah": "Hucurât",
+    "surahNumber": 49,
+    "ayah": 15,
+    "ayahNumber": 15,
+    "text_ar": "إِنَّمَا الْمُؤْمِنُونَ الَّذِينَ آمَنُوا بِاللَّهِ وَرَسُولِهِ ثُمَّ لَمْ يَرْتَابُوا وَجَاهَدُوا بِأَمْوَالِهِمْ وَأَنْفُسِهِمْ فِي سَبِيلِ اللَّهِ أُولَٰئِكَ هُمُ الصَّادِقُونَ",
+    "text_tr": "Gerçek müminler ancak Allah'a ve Resûlüne iman edip sonra hiç şüpheye düşmeyenler ve mallarıyla, canlarıyla Allah yolunda cihad edenlerdir. İşte doğrular bunlardır.",
+    "tags": [
+      "iman",
+      "ibadet",
+      "sebat",
+      "doğruluk"
+    ],
+    "short_explanation": "Gerçek imanın ölçüsü şüphesizlik ve samimiyettir; söylemle değil, özle ispatlanır.",
+    "notes": "Gerçek imanın ölçüsü şüphesizlik ve samimiyettir; söylemle değil, özle ispatlanır.",
+    "surahNameTr": "Hucurât"
+  },
+  {
+    "id": 83,
+    "surah": "Bakara",
+    "surahNumber": 2,
+    "ayah": 285,
+    "ayahNumber": 285,
+    "text_ar": "آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ",
+    "text_tr": "Peygamber, Rabb'inden kendisine indirilene iman etti; müminler de hepsi Allah'a, meleklerine, kitaplarına ve peygamberlerine iman etti.",
+    "tags": [
+      "iman",
+      "Kur'an",
+      "peygamberler",
+      "tevekkül"
+    ],
+    "short_explanation": "Peygamber ve müminler Allah'a, meleklere, kitaplara ve peygamberlere iman eder; imanın altı şartına işaret eden temel ayet.",
+    "notes": "Peygamber ve müminler Allah'a, meleklere, kitaplara ve peygamberlere iman eder; imanın altı şartına işaret eden temel ayet.",
+    "surahNameTr": "Bakara"
   }
 ]

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/constants/app_routes.dart';
 import '../../data/models/chat_message_model.dart';
 import '../../data/models/recommended_resource.dart';
 import '../../data/services/habit_tracking_service.dart';
@@ -58,12 +59,47 @@ class _ChatViewState extends State<_ChatView> {
   final _textController = TextEditingController();
   final _scrollController = ScrollController();
   final Set<String> _loggedAssistantMessageIds = <String>{};
+  ChatController? _chatController;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _chatController = context.read<ChatController>()
+        ..addListener(_onControllerChanged);
+    });
+  }
 
   @override
   void dispose() {
+    _chatController?.removeListener(_onControllerChanged);
     _textController.dispose();
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _onControllerChanged() {
+    final controller = _chatController;
+    if (controller == null || !mounted) return;
+    if (controller.quotaJustExceeded) {
+      controller.consumeQuotaExceeded();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _showQuotaExceededSheet();
+      });
+    }
+  }
+
+  void _showQuotaExceededSheet() {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (_) => const _QuotaExceededSheet(),
+    );
   }
 
   Future<void> _confirmAndClearChat(BuildContext context) async {
@@ -629,6 +665,61 @@ class _ChatComposer extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ── Kota aşım bottom sheet ───────────────────────────────────────────────────
+
+class _QuotaExceededSheet extends StatelessWidget {
+  const _QuotaExceededSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 28, 24, 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Icon(
+              Icons.auto_awesome_outlined,
+              size: 40,
+              color: AppColors.primaryAccent,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Aylık ücretsiz hakkın doldu',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Her ay 20 ücretsiz soru hakkı verilmektedir. '
+              'HAKAI\'yi destekleyerek katkıda bulunabilirsin.',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 28),
+            FilledButton.icon(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, AppRoutes.support);
+              },
+              icon: const Icon(Icons.favorite_border_rounded),
+              label: const Text('Destekçi Ol'),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Kapat'),
             ),
           ],
         ),

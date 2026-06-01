@@ -564,12 +564,37 @@ class PrayerRepository {
     final month = hijri['month'];
     String? monthName;
     if (month is Map) {
-      monthName = _readString(_toStringKeyedMap(month), const ['tr', 'en']);
+      final monthMap = _toStringKeyedMap(month);
+      // Türkçe isim varsa önce onu al; yoksa numara üzerinden Türkçe isim dene
+      final rawName = _readString(monthMap, const ['tr', 'en']);
+      final monthNumber = int.tryParse(monthMap['number']?.toString() ?? '');
+      monthName = _hijriMonthTr(monthNumber) ?? rawName;
     }
     return [day, monthName, year]
         .whereType<String>()
         .where((part) => part.isNotEmpty)
         .join(' ');
+  }
+
+  /// Hicri ay numarasından (1–12) Türkçe ay adı döndürür.
+  static String? _hijriMonthTr(int? number) {
+    const months = [
+      null,           // 0 — geçersiz
+      'Muharrem',     // 1
+      'Safer',        // 2
+      'Rebiülevvel',  // 3
+      'Rebiülahir',   // 4
+      'Cemaziyelevvel', // 5
+      'Cemaziyelahir',  // 6
+      'Recep',        // 7
+      'Şaban',        // 8
+      'Ramazan',      // 9
+      'Şevval',       // 10
+      'Zilkade',      // 11
+      'Zilhicce',     // 12
+    ];
+    if (number == null || number < 1 || number > 12) return null;
+    return months[number];
   }
 
   void _logPrayerRequest({
@@ -769,9 +794,19 @@ class PrayerRepository {
     final hijri = payload['hijri'] ?? root['hijri'];
     if (hijri is Map) {
       final hijriMap = _toStringKeyedMap(hijri);
+      final monthRaw = hijriMap['month'];
+      String? monthName;
+      if (monthRaw is Map) {
+        final monthMap = _toStringKeyedMap(monthRaw);
+        final monthNumber = int.tryParse(monthMap['number']?.toString() ?? '');
+        monthName = _hijriMonthTr(monthNumber) ??
+            _readString(monthMap, const ['tr', 'en']);
+      } else {
+        monthName = _readString(hijriMap, const ['month', 'monthName']);
+      }
       return [
         _readString(hijriMap, const ['day']),
-        _readString(hijriMap, const ['month', 'monthName']),
+        monthName,
         _readString(hijriMap, const ['year']),
       ].whereType<String>().where((part) => part.isNotEmpty).join(' ');
     }

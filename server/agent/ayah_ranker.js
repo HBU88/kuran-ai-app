@@ -64,16 +64,15 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 12, ayahNumber: 87 },
   ],
   [normalizeThemeKey("korku")]: [
-    { surahNumber: 3, ayahNumber: 173 },
-    { surahNumber: 3, ayahNumber: 175 },
-    { surahNumber: 9, ayahNumber: 51 },
-    { surahNumber: 65, ayahNumber: 2 },
+    { surahNumber: 3, ayahNumber: 173 },  // Âl-i İmrân – Allah bize yeter
+    { surahNumber: 9, ayahNumber: 51 },   // Tevbe – Allah'ın yazdığından başkası erişmez
+    { surahNumber: 13, ayahNumber: 28 },  // Ra'd – kalpler ancak Allah'ı anmakla huzur bulur
+    { surahNumber: 65, ayahNumber: 3 },   // Talâk – Allah'a tevekkül edene Allah yeter
   ],
   [normalizeThemeKey("kaygı")]: [
-    { surahNumber: 28, ayahNumber: 7 },
-    { surahNumber: 94, ayahNumber: 5 },
-    { surahNumber: 94, ayahNumber: 6 },
-    { surahNumber: 13, ayahNumber: 28 },
+    { surahNumber: 13, ayahNumber: 28 },  // Ra'd – kalpler ancak Allah'ı anmakla huzur bulur
+    { surahNumber: 2, ayahNumber: 286 },  // Bakara – Allah kimseye gücünün üstünde yük yüklemez
+    { surahNumber: 65, ayahNumber: 3 },   // Talâk – Allah'a tevekkül edene Allah yeter
   ],
   [normalizeThemeKey("şifa")]: [
     { surahNumber: 26, ayahNumber: 80 },
@@ -202,6 +201,12 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 3, ayahNumber: 190 }, // Âl-i İmrân – göklerin ve yerin yaratılışı
     { surahNumber: 95, ayahNumber: 4 },  // Tîn – en güzel biçimde
   ],
+  [normalizeThemeKey("iman")]: [
+    { surahNumber: 49, ayahNumber: 15 }, // Hucurât – gerçek müminler şüpheye düşmeyenler
+    { surahNumber: 2, ayahNumber: 285 }, // Bakara – Peygamber ve müminler iman etti
+    { surahNumber: 3, ayahNumber: 102 }, // Âl-i İmrân – Allah'tan gereği gibi korkun
+    { surahNumber: 13, ayahNumber: 28 }, // Ra'd – kalpler Allah'ı anmakla huzur bulur
+  ],
   [normalizeThemeKey("sabır_sıkıntı")]: [
     { surahNumber: 2, ayahNumber: 153 },
     { surahNumber: 2, ayahNumber: 155 },
@@ -315,6 +320,12 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
     topic: normalizeThemeKey("ölüm korkusu"),
     list: ["ölüm korkusu", "olum korkusu", "ölmekten korkuyorum", "olmekten korkuyorum", "kabir", "vefat", "ölümden korkuyorum", "olumden korkuyorum"],
   },
+  // Korku matcher ÖNCE gelir: "korku ve endişe" gibi ifadelerde korku kümesini döndürmek için.
+  // "endişe" yalnız kullanılırsa kaygı matcher'ı devreye girer (aşağıda).
+  {
+    topic: normalizeThemeKey("korku"),
+    list: ["korku", "korkuyorum", "çok korkuyorum", "cok korkuyorum", "ölüm korkusu", "olum korkusu", "ölümden korkuyorum", "olumden korkuyorum"],
+  },
   {
     topic: normalizeThemeKey("kaygı"),
     list: [
@@ -334,6 +345,11 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "gelecek için endişeliyim",
       "endişe",
       "endise",
+      "endişeliyim",
+      "endiseli",
+      "endişeli",
+      "endişeleniyorum",
+      "endiseleniyorum",
     ],
   },
   {
@@ -356,10 +372,6 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "daralıyorum",
       "daraliyorum",
     ],
-  },
-  {
-    topic: normalizeThemeKey("korku"),
-    list: ["korku", "korkuyorum", "çok korkuyorum", "cok korkuyorum", "ölüm korkusu", "olum korkusu", "ölümden korkuyorum", "olumden korkuyorum", "endişe", "endise"],
   },
   {
     topic: normalizeThemeKey("sabır_sıkıntı"),
@@ -585,6 +597,24 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "kainatı düşünmek", "evreni düşünmek",
     ],
   },
+  {
+    topic: normalizeThemeKey("iman"),
+    list: [
+      "iman",
+      "imanımı güçlendir",
+      "imanımı artır",
+      "iman güçlendirmek",
+      "iman hakkında",
+      "inanmak",
+      "inanç",
+      "imanımı kaybediyorum",
+      "imanım zayıflıyor",
+      "imanım sarsıldı",
+      "imanı güçlü",
+      "iman nedir",
+      "iman etmek",
+    ],
+  },
 ];
 
 const CURATED_OVERRIDE_SIGNAL_KEYS = {
@@ -628,6 +658,7 @@ const CURATED_OVERRIDE_SIGNAL_KEYS = {
   [normalizeThemeKey("hz. meryem")]: ["hz meryem", "hz. meryem", "meryem annemiz"],
   [normalizeThemeKey("isra ve mirac")]: ["isra mirac", "isra ve mirac", "miraç", "mirac"],
   [normalizeThemeKey("yaratılış")]: ["yaratılış", "yaratilis", "evrenin yaratılışı", "kainat", "tefekkür"],
+  [normalizeThemeKey("iman")]: ["iman", "inanç", "inanmak", "imanımı güçlendir", "imanım"],
 };
 
 function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
@@ -1577,13 +1608,15 @@ function resolveCuratedOverrideTopic(messageAnalysis, currentMessage, explicitTo
     }
   }
 
+  // Only use planner-derived or message-content-derived topics.
+  // Intentionally exclude messageAnalysis.primary_theme and .emotion because
+  // these can default to "umut" for any unrecognized query, causing İnşirah 94:5
+  // to appear as a forced curated result for unrelated messages like "bana bir ayet ver".
   const candidates = [
     topicConstraint,
     explicitTopic,
     preferredTopic,
     messageAnalysis?.context_topic,
-    messageAnalysis?.primary_theme,
-    messageAnalysis?.emotion,
   ];
 
   for (const candidate of candidates) {

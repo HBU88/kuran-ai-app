@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/utils/notification_helper.dart';
 import '../../data/services/habit_tracking_service.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/loading_view.dart';
@@ -42,18 +41,24 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
               const SizedBox(height: 18),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Bildirimleri aç'),
-                subtitle: const Text('MVP için tercih yerel olarak saklanır.'),
+                title: const Text('Namaz vakti bildirimleri'),
+                subtitle: const Text(
+                  'Her vakitten 10 dakika önce hatırlatma alın.',
+                ),
                 value: controller.notificationsEnabled,
                 onChanged: (value) async {
                   await controller.setNotificationsEnabled(value);
-                  if (!context.mounted) {
-                    return;
-                  }
-                  if (value) {
-                    final notificationHelper =
-                        context.read<NotificationHelper>();
-                    await notificationHelper.showPrayerTogglePreview();
+                  if (!context.mounted) return;
+                  if (controller.notificationPermissionDenied) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Bildirim izni reddedildi. '
+                          'Ayarlar → Bildirimler\'den izin verin.',
+                        ),
+                        duration: Duration(seconds: 4),
+                      ),
+                    );
                   }
                 },
               ),
@@ -364,15 +369,6 @@ class _PrayerTimesContent extends StatelessWidget {
                 times.hijriDateFormatted,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              const SizedBox(height: 6),
-              Text(
-                'Location: ${controller.selectedCountryName} / ${controller.selectedStateName} / ${controller.selectedCityName}',
-              ),
-              Text(
-                'Gregorian: ${DateFormat('dd.MM.yyyy').format(times.gregorianDate)}',
-              ),
-              Text('Hijri: ${times.hijriDateFormatted}'),
-              Text('Source: ${times.source}'),
               const SizedBox(height: 12),
               for (final entry in times.prayers.entries)
                 Padding(

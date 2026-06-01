@@ -3,14 +3,16 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../core/utils/notification_helper.dart';
 import '../../data/models/place_model.dart';
 import '../../data/models/prayer_time_model.dart';
 import '../../data/repositories/prayer_repository.dart';
 
 class PrayerTimesController extends ChangeNotifier {
-  PrayerTimesController(this._repository);
+  PrayerTimesController(this._repository, this._notificationHelper);
 
   final PrayerRepository _repository;
+  final NotificationHelper _notificationHelper;
 
   Timer? _clockTimer;
 
@@ -26,6 +28,7 @@ class PrayerTimesController extends ChangeNotifier {
   int? debugNewCitySelectedId;
   String debugNewCitySelectedName = '';
   bool notificationsEnabled = false;
+  bool notificationPermissionDenied = false;
   bool loading = false;
   bool countriesLoading = false;
   bool statesLoading = false;
@@ -95,6 +98,7 @@ class PrayerTimesController extends ChangeNotifier {
       prayerTimes = model.recompute(now);
       _refreshDebugState(prayerTimes, effectiveNowOverride: now);
       _startClockTimer();
+      await _scheduleNotificationsIfEnabled();
     } catch (error) {
       prayerTimes = null;
       errorMessage = 'Namaz vakitleri alınamadı. Lütfen tekrar deneyin.';
@@ -247,10 +251,53 @@ class PrayerTimesController extends ChangeNotifier {
     }
   }
 
+  /// Bildirimleri açar/kapatır.
+  ///
+  /// [enabled] = true → izin ister; verilirse bildirimler zamanlanır.
+  /// [enabled] = false → tüm bildirimler iptal edilir.
+  ///
+  /// İzin reddedilirse [notificationPermissionDenied] = true ayarlanır
+  /// ve bildirimler açılmaz.
   Future<void> setNotificationsEnabled(bool enabled) async {
-    notificationsEnabled = enabled;
-    await _repository.setNotificationsEnabled(enabled);
+    if (enabled) {
+      final granted = await _notificationHelper.requestPermission();
+      if (!granted) {
+        notificationPermissionDenied = true;
+        notificationsEnabled = false;
+        notifyListeners();
+        return;
+      }
+      notificationPermissionDenied = false;
+      notificationsEnabled = true;
+      await _repository.setNotificationsEnabled(true);
+      await _scheduleNotificationsIfEnabled();
+      await _notificationHelper.showPrayerTogglePreview();
+    } else {
+      notificationPermissionDenied = false;
+      notificationsEnabled = false;
+      await _repository.setNotificationsEnabled(false);
+      try {
+        await _notificationHelper.cancelAllPrayerNotifications();
+      } catch (e) {
+        debugPrint('HAKAI_NOTIF cancel_failed=$e');
+      }
+    }
     notifyListeners();
+  }
+
+  /// Bildirimler açıksa ve vakitler yüklüyse bugünkü bildirimleri zamanlar.
+  Future<void> _scheduleNotificationsIfEnabled() async {
+    if (!notificationsEnabled) return;
+    final times = prayerTimes;
+    if (times == null) return;
+    try {
+      await _notificationHelper.schedulePrayerNotifications(
+        times.prayers,
+        city,
+      );
+    } catch (e) {
+      debugPrint('HAKAI_NOTIF schedule_failed=$e');
+    }
   }
 
   /// GPS-based auto-location.

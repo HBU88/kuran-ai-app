@@ -26,6 +26,7 @@ const THEMES = [
   "aile",
   "rızık",
   "imtihan",
+  "iman",
 ];
 
 const GENERIC_THEMES = new Set(["umut", "tevekkül"]);
@@ -248,6 +249,21 @@ const TOPIC_PATTERNS = [
   {
     topic: "ibadet",
     phrases: ["oruç", "sure", "ibadet"],
+  },
+  {
+    topic: "iman",
+    phrases: [
+      "iman",
+      "inanç",
+      "inanmak",
+      "imanımı güçlendir",
+      "imanım güçlensin",
+      "imanım zayıflıyor",
+      "imanım sarsıldı",
+      "imanımı kaybediyorum",
+      "iman nedir",
+      "iman etmek",
+    ],
   },
 ];
 

@@ -369,6 +369,56 @@ const TEST_CASES = [
     expectedTags: ["mucizeler", "Hz. Muhammed"],
     expectedSurahNumbers: [54], // Kamer 54:1
   },
+  // ── KATEGORI 6: Regresyon – korku/endişe matcher sırası (3 vaka) ──────────
+  // Bug: "endişe" keyword kaygı matcher'ına girip İnşirah 94:5 döndürüyordu.
+  // Fix: korku matcher önce gelir; kaygı matcher endişe'yi karşılar ama korku kümesini değil.
+  {
+    id: 51,
+    category: "Regresyon – korku ve endişe İnşirah değil",
+    message: "korku ve endişe için ayet",
+    // Beklenen: 3:173 (tevekkül,umut,korku) veya 9:51 (tevekkül,korku) veya 13:28 (korku,umut)
+    // Beklenmez: İnşirah 94 (umut,sabır — korku/tevekkül etiketi yok)
+    expectedTags: ["korku", "tevekkül"],
+  },
+  {
+    id: 52,
+    category: "Regresyon – endişe tek başına kaygı kümesini döndürür",
+    message: "çok endişeliyim",
+    // Beklenen: 13:28 (korku,umut,yalnızlık,zikir) veya 2:286 (umut,sabır) veya 65:3 (tevekkül,umut,korku)
+    expectedTags: ["korku", "umut", "tevekkül", "zikir"],
+  },
+  {
+    id: 53,
+    category: "Regresyon – kaygı kelimesiyle huzur ayeti",
+    message: "Çok kaygılanıyorum, huzur için ayet",
+    expectedTags: ["korku", "umut", "tevekkül", "zikir"],
+  },
+  // ── Regresyon – iman ve genel istek ──────────────────────────────────────────
+  {
+    id: 54,
+    category: "Regresyon – iman hakkında ayet",
+    message: "iman hakkında ayet",
+    expectedTags: ["iman"],
+    // Should return Hucurât 49:15 or Bakara 2:285, NOT İnşirah 94:5 (umut/sabır/sebat)
+    notExpectedSurahNumbers: [94],
+  },
+  {
+    id: 55,
+    category: "Regresyon – imanımı güçlendir",
+    message: "imanımı güçlendir",
+    expectedTags: ["iman"],
+    notExpectedSurahNumbers: [94],
+  },
+  {
+    id: 56,
+    category: "Regresyon – genel ayet isteği özel konusuz",
+    message: "bana bir ayet ver",
+    // Generic request: should NOT return İnşirah 94:5 as forced override
+    // Any meaningful ayah is OK, just not a score-10000 override on "umut" default
+    expectedTags: ["umut", "sabır", "tevekkül", "dua", "iman", "tövbe", "yalnızlık"],
+    notExpectedSurahNumbers: [], // No surah restriction — just verify an ayah is returned
+    minScore: 1,
+  },
 ];
 
 // ── Test çalıştırıcı ─────────────────────────────────────────────────────────
@@ -396,10 +446,18 @@ function runTestCase(tc) {
     Array.isArray(tc.expectedSurahNumbers) &&
     tc.expectedSurahNumbers.includes(topAyah.surahNumber);
 
-  const pass = tagMatch || surahMatch;
+  // notExpectedSurahNumbers: fail if the returned ayah is from a banned surah
+  const notExpectedFail =
+    Array.isArray(tc.notExpectedSurahNumbers) &&
+    tc.notExpectedSurahNumbers.length > 0 &&
+    tc.notExpectedSurahNumbers.includes(topAyah.surahNumber);
+
+  const pass = (tagMatch || surahMatch) && !notExpectedFail;
   const reason = pass
     ? null
-    : `Beklenen etiket [${tc.expectedTags.join(", ")}]${tc.expectedSurahNumbers ? ` veya sure [${tc.expectedSurahNumbers.join(", ")}]` : ""} — dönen: ${topAyah.surah} ${topAyah.surahNumber}:${topAyah.ayahNumber} tags=[${topTags.join(", ")}]`;
+    : notExpectedFail
+      ? `Yasak sure ${topAyah.surahNumber} döndü — ${topAyah.surah} ${topAyah.surahNumber}:${topAyah.ayahNumber} tags=[${topTags.join(", ")}]`
+      : `Beklenen etiket [${tc.expectedTags.join(", ")}]${tc.expectedSurahNumbers ? ` veya sure [${tc.expectedSurahNumbers.join(", ")}]` : ""} — dönen: ${topAyah.surah} ${topAyah.surahNumber}:${topAyah.ayahNumber} tags=[${topTags.join(", ")}]`;
 
   return { pass, reason, topAyah, analysis };
 }

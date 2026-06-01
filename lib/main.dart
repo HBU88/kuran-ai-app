@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz_data;
+import 'package:timezone/timezone.dart' as tz;
 
 import 'app.dart';
 import 'core/constants/app_constants.dart';
@@ -27,6 +30,16 @@ import 'features/situation_ayah/situation_ayah_controller.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   debugPrint(AppConstants.startupApiBaseUrlLogLine);
+
+  // Timezone verilerini başlat (bildirim zamanlama için zorunlu)
+  try {
+    tz_data.initializeTimeZones();
+    final String tzName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(tzName));
+    debugPrint('HAKAI_STARTUP timezone_set=$tzName');
+  } catch (e) {
+    debugPrint('HAKAI_STARTUP timezone_init_failed=$e');
+  }
 
   final preferences = await SharedPreferences.getInstance();
   final localSource = LocalAyahSource();
@@ -86,7 +99,10 @@ Future<void> main() async {
           ),
         ),
         ChangeNotifierProvider(
-          create: (_) => PrayerTimesController(prayerRepository)..load(),
+          create: (_) => PrayerTimesController(
+            prayerRepository,
+            notificationHelper,
+          )..load(),
         ),
         ChangeNotifierProvider(
           create: (_) => MemorizationController(memorizationRepository)..load(),
