@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T09:54:41.346Z",
+  "generated_at": "2026-06-01T11:32:48.629Z",
   "suite_version": "1.0",
   "total": 50,
   "passed": 49,
@@ -14,7 +14,7 @@
       "question": "Namazın farzları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 135,
+      "durationMs": 88,
       "checks": [
         {
           "type": "kb_hit",
@@ -51,7 +51,7 @@
       "question": "Sabah namazı kaç rekât?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 89,
+      "durationMs": 57,
       "checks": [
         {
           "type": "no_safety_block",
@@ -83,7 +83,7 @@
       "question": "Öğle namazı kaç rekât kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 130,
+      "durationMs": 81,
       "checks": [
         {
           "type": "no_safety_block",
@@ -115,7 +115,7 @@
       "question": "Cuma namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 53,
+      "durationMs": 35,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -147,7 +147,7 @@
       "question": "Bayram namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 48,
+      "durationMs": 29,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -179,7 +179,7 @@
       "question": "Cenaze namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 83,
+      "durationMs": 50,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -243,7 +243,7 @@
       "question": "Teravih namazı nasıl kılınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 164,
+      "durationMs": 105,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -275,7 +275,7 @@
       "question": "Namaz kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 140,
+      "durationMs": 86,
       "checks": [
         {
           "type": "no_safety_block",
@@ -307,7 +307,7 @@
       "question": "Sefer halinde namaz kısaltılır mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 74,
+      "durationMs": 43,
       "checks": [
         {
           "type": "no_safety_block",
@@ -339,7 +339,7 @@
       "question": "Abdest nasıl alınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 52,
+      "durationMs": 31,
       "checks": [
         {
           "type": "kb_hit",
@@ -371,7 +371,7 @@
       "question": "Abdesti bozan şeyler nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 48,
+      "durationMs": 29,
       "checks": [
         {
           "type": "kb_hit",
@@ -403,7 +403,7 @@
       "question": "Teyemmüm ne zaman yapılır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 150,
+      "durationMs": 94,
       "checks": [
         {
           "type": "no_safety_block",
@@ -435,7 +435,7 @@
       "question": "Gusül abdesti nasıl alınır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 136,
+      "durationMs": 83,
       "checks": [
         {
           "type": "no_safety_block",
@@ -467,7 +467,7 @@
       "question": "Mestler üzerine mesh caiz midir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 48,
+      "durationMs": 46,
       "checks": [
         {
           "type": "no_safety_block",
@@ -499,7 +499,7 @@
       "question": "Orucu bozan şeyler nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 80,
+      "durationMs": 83,
       "checks": [
         {
           "type": "no_safety_block",
@@ -531,7 +531,7 @@
       "question": "Ramazan orucu kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 34,
+      "durationMs": 33,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -696,7 +696,7 @@
       "question": "Hac kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 37,
+      "durationMs": 36,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -728,7 +728,7 @@
       "question": "Kurban kimlere vaciptir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 38,
+      "durationMs": 37,
       "checks": [
         {
           "type": "kb_hit",
@@ -760,7 +760,7 @@
       "question": "İmanın şartları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 97,
+      "durationMs": 96,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -792,7 +792,7 @@
       "question": "İslam'ın şartları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 93,
+      "durationMs": 89,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -824,7 +824,7 @@
       "question": "Kelime-i şehadet nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 85,
+      "durationMs": 84,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -893,7 +893,7 @@
       "question": "Kader nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 81,
+      "durationMs": 78,
       "checks": [
         {
           "type": "no_safety_block",
@@ -925,7 +925,7 @@
       "question": "Ahiret hayatı nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 107,
+      "durationMs": 102,
       "checks": [
         {
           "type": "no_safety_block",
@@ -957,7 +957,7 @@
       "question": "Hz. Musa kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 84,
+      "durationMs": 82,
       "checks": [
         {
           "type": "kb_hit",
@@ -994,7 +994,7 @@
       "question": "Musa kim?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 79,
+      "durationMs": 77,
       "checks": [
         {
           "type": "kb_hit",
@@ -1058,7 +1058,7 @@
       "question": "Hz. İsa kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 77,
+      "durationMs": 76,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1159,7 +1159,7 @@
       "question": "İçki içmek haram mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 59,
+      "durationMs": 58,
       "checks": [
         {
           "type": "kb_hit",
@@ -1223,7 +1223,7 @@
       "question": "Kumar oynamak haram mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 81,
+      "durationMs": 80,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1255,7 +1255,7 @@
       "question": "Sabır ile ilgili ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 69,
+      "durationMs": 67,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1292,7 +1292,7 @@
       "question": "İman hakkında ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 118,
+      "durationMs": 117,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1329,7 +1329,7 @@
       "question": "Korku ve endişe için ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 80,
+      "durationMs": 79,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1361,7 +1361,7 @@
       "question": "Tövbe hakkında ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 51,
+      "durationMs": 50,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1393,7 +1393,7 @@
       "question": "Yalnızlık için ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 91,
+      "durationMs": 90,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1457,7 +1457,7 @@
       "question": "Muhammed",
       "module": "ayah",
       "status": "fail",
-      "durationMs": 634,
+      "durationMs": 621,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
