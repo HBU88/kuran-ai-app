@@ -221,6 +221,23 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 39, ayahNumber: 53 },
     { surahNumber: 13, ayahNumber: 28 },
   ],
+  // ── Kul hakkı / evlilik / helal-haram ───────────────────────────────────
+  [normalizeThemeKey("kul hakki")]: [
+    { surahNumber: 83, ayahNumber: 1 },
+    { surahNumber: 2,  ayahNumber: 188 },
+    { surahNumber: 4,  ayahNumber: 29 },
+    { surahNumber: 11, ayahNumber: 85 },
+  ],
+  [normalizeThemeKey("evlilik")]: [
+    { surahNumber: 30, ayahNumber: 21 },
+    { surahNumber: 4,  ayahNumber: 19 },
+    { surahNumber: 2,  ayahNumber: 187 },
+  ],
+  [normalizeThemeKey("helal")]: [
+    { surahNumber: 2,  ayahNumber: 168 },
+    { surahNumber: 2,  ayahNumber: 173 },
+    { surahNumber: 5,  ayahNumber: 87 },
+  ],
 };
 
 const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
@@ -293,6 +310,50 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "geçinemiyorum",
       "para yetmiyor",
       "maddi yük",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("kul hakki"),
+    list: [
+      "kul hakkı",
+      "kul hakkını",
+      "birisinin hakkını",
+      "başkasının hakkı",
+      "hakkını yemek",
+      "hak yemek",
+      "kul hakkı nedir",
+      "kul hakkı yemek",
+      "insanların hakkı",
+      "ölçüde hile",
+      "tartıda hile",
+      "emanete hıyanet",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("evlilik"),
+    list: [
+      "evlilik",
+      "evlenmek",
+      "nikah",
+      "karı koca",
+      "evlilikle ilgili ayet",
+      "evlilik hakkında ayet",
+      "eşe nasıl davranmalı",
+      "eşime nasıl",
+      "eşimle",
+    ],
+  },
+  {
+    topic: normalizeThemeKey("helal"),
+    list: [
+      "helal",
+      "haram",
+      "helal haram",
+      "helal kazanç",
+      "haramdan kaçınmak",
+      "helal nedir",
+      "haram nedir",
+      "helal hakkında ayet",
     ],
   },
   {
@@ -659,6 +720,10 @@ const CURATED_OVERRIDE_SIGNAL_KEYS = {
   [normalizeThemeKey("isra ve mirac")]: ["isra mirac", "isra ve mirac", "miraç", "mirac"],
   [normalizeThemeKey("yaratılış")]: ["yaratılış", "yaratilis", "evrenin yaratılışı", "kainat", "tefekkür"],
   [normalizeThemeKey("iman")]: ["iman", "inanç", "inanmak", "imanımı güçlendir", "imanım"],
+  // ── Kul hakkı / evlilik / helal-haram ──────────────────────────────────
+  [normalizeThemeKey("kul hakki")]: ["kul hakkı", "hakkını yemek", "başkasının hakkı", "ölçüde hile", "tartıda hile", "kul hakkı nedir"],
+  [normalizeThemeKey("evlilik")]: ["evlilik", "nikah", "karı koca", "evlenmek", "eşime", "eşimle"],
+  [normalizeThemeKey("helal")]: ["helal", "haram", "helal haram", "helal kazanç", "haramdan kaçınmak"],
 };
 
 function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {

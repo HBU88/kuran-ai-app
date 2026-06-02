@@ -27,6 +27,9 @@ const THEMES = [
   "rızık",
   "imtihan",
   "iman",
+  "kul hakki",
+  "evlilik",
+  "helal",
 ];
 
 const GENERIC_THEMES = new Set(["umut", "tevekkül"]);
@@ -265,6 +268,9 @@ const TOPIC_PATTERNS = [
       "iman etmek",
     ],
   },
+  { topic: "kul hakki",  phrases: ["kul hakkı", "hakkını yemek", "başkasının hakkı", "ölçüde hile"] },
+  { topic: "evlilik",    phrases: ["evlilik", "nikah", "evlenmek", "eşime", "eşimle", "karı koca"] },
+  { topic: "helal",      phrases: ["helal", "haram", "helal haram", "helal kazanç"] },
 ];
 
 const MOJIBAKE_REPLACEMENTS = [

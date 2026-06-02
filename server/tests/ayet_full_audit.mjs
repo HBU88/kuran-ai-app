@@ -419,6 +419,36 @@ const TEST_CASES = [
     notExpectedSurahNumbers: [], // No surah restriction — just verify an ayah is returned
     minScore: 1,
   },
+  // ── KATEGORI 7: Regresyon – kul hakkı / evlilik / helal-haram ────────────
+  {
+    id: 57,
+    category: "Regresyon – kul hakkı (Bakara 2:186 artık gelmemeli)",
+    message: "kul hakkı",
+    expectedTags: ["kul hakkı", "adalet"],
+    notExpectedSurahNumbers: [94], // İnşirah (umut/dua kümesi) gelmemeli
+  },
+  {
+    id: 58,
+    category: "Regresyon – kul hakkı nedir",
+    message: "kul hakkı nedir",
+    expectedTags: ["kul hakkı", "adalet"],
+    expectedSurahNumbers: [83, 2, 4, 11], // Mutaffifîn, Bakara 2:188, Nisâ 4:29, Hûd 11:85
+    notExpectedSurahNumbers: [94],
+  },
+  {
+    id: 59,
+    category: "Regresyon – evlilik ayeti",
+    message: "evlilik hakkında ayet",
+    expectedTags: ["evlilik", "aile"],
+    notExpectedSurahNumbers: [94],
+  },
+  {
+    id: 60,
+    category: "Regresyon – helal haram",
+    message: "helal haram hakkında ayet",
+    expectedTags: ["helal", "haramlar"],
+    notExpectedSurahNumbers: [94],
+  },
 ];
 
 // ── Test çalıştırıcı ─────────────────────────────────────────────────────────

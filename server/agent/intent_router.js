@@ -417,6 +417,18 @@ function analyzeUserMessageFallback(message, history = []) {
     cömertlik: 8,
     iyilikler: 5,
   });
+  score(["kul hakkı", "hakkını yemek", "birisinin hakkını", "başkasının hakkı",
+         "ölçüde hile", "insanların hakkı", "kul hakkı nedir", "tartıda hile", "emanete hıyanet"], {
+    "kul hakki": 14, adalet: 8, zulüm: 5,
+  });
+  score(["evlilik", "evlenmek", "nikah", "karı koca",
+         "eşime nasıl", "evlilikle ilgili", "eşe nasıl davranmalı", "evlilik hakkında ayet"], {
+    evlilik: 14, aile: 8, merhamet: 4,
+  });
+  score(["helal", "haram", "helal haram", "helal kazanç",
+         "haramdan kaçınmak", "helal nedir", "haram nedir", "helal hakkında ayet"], {
+    helal: 14, "haramlar": 8, takva: 4,
+  });
 
   // ── Ahiret / ölüm / hesap ───────────────────────────────────────────────
   score(["ahiret", "öbür dünya", "mahşer", "cennet", "cehennem", "öldükten sonra", "ahirette"], {

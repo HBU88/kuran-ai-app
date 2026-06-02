@@ -11,11 +11,11 @@ class SupportService extends ChangeNotifier {
   })  : _inAppPurchase = inAppPurchase ?? InAppPurchase.instance,
         _verifyPurchase = verifyPurchase;
 
-  static const smallProductId = 'support_small';
-  static const mediumProductId = 'support_medium';
-  static const ozelProductId = 'support_ozel';
-  static const buyukProductId = 'support_buyuk';
-  static const plusProductId = 'support_plus';
+  static const smallProductId  = 'com.hakai.app.support_small';
+  static const mediumProductId = 'com.hakai.app.support_medium';
+  static const ozelProductId   = 'com.hakai.app.support_ozel';
+  static const buyukProductId  = 'com.hakai.app.support_buyuk';
+  static const plusProductId   = 'com.hakai.app.support_plus';
 
   static const productIds = <String>{
     smallProductId,
