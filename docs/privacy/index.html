@@ -10,55 +10,44 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --accent:       #1B6B3A;
-      --accent-light: #E8F5EE;
-      --border:       #E2E8E4;
-      --text-1:       #111B15;
-      --text-2:       #3D5246;
-      --text-3:       #6B7F72;
-      --surface:      #F8FAF9;
-      --radius:       12px;
+      --accent: #1B6B3A; --accent-light: #E8F5EE; --border: #E2E8E4;
+      --text-1: #111B15; --text-2: #3D5246; --text-3: #6B7F72;
+      --surface: #F8FAF9; --radius: 12px;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', system-ui, sans-serif; background: #fff; color: var(--text-1); line-height: 1.75; }
-    nav {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(255,255,255,0.93); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 clamp(1.25rem, 5vw, 3rem); height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.93); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 clamp(1.25rem,5vw,3rem); height: 56px; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); text-decoration: none; letter-spacing: 0.1em; }
     .nav-right { display: flex; align-items: center; gap: 12px; }
     .lang-toggle { display: flex; gap: 6px; }
-    .lang-btn { font-size: 0.75rem; font-weight: 500; padding: 3px 10px; border-radius: 99px; border: 1px solid var(--border); background: transparent; cursor: pointer; color: var(--text-3); transition: all 0.15s; }
+    .lang-btn { font-size: .75rem; font-weight: 500; padding: 3px 10px; border-radius: 99px; border: 1px solid var(--border); background: transparent; cursor: pointer; color: var(--text-3); transition: all .15s; }
     .lang-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .nav-back { font-size: 0.83rem; color: var(--text-3); text-decoration: none; }
+    .nav-back { font-size: .83rem; color: var(--text-3); text-decoration: none; }
     .nav-back:hover { color: var(--accent); }
-    .wrapper { max-width: 780px; margin: 0 auto; padding: 3.5rem clamp(1.25rem, 5vw, 2.5rem) 5rem; }
+    .wrapper { max-width: 780px; margin: 0 auto; padding: 3.5rem clamp(1.25rem,5vw,2.5rem) 5rem; }
     .doc-header { margin-bottom: 2.5rem; padding-bottom: 1.75rem; border-bottom: 2px solid var(--accent-light); }
-    .doc-header h1 { font-size: clamp(1.7rem, 4vw, 2.2rem); font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
-    .doc-meta { font-size: 0.82rem; color: var(--text-3); }
+    .doc-header h1 { font-size: clamp(1.7rem,4vw,2.2rem); font-weight: 700; color: var(--accent); margin-bottom: .4rem; }
+    .doc-meta { font-size: .82rem; color: var(--text-3); }
     .doc-meta span { margin-right: 1.5rem; }
     section { margin-bottom: 2.5rem; }
-    h2 { font-size: 1.08rem; font-weight: 600; color: var(--accent); margin-bottom: 0.75rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--border); }
-    p { margin-bottom: 0.75rem; color: var(--text-2); font-size: 0.95rem; }
-    ul { padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--text-2); font-size: 0.95rem; }
-    li { margin-bottom: 0.35rem; }
-    .info-box { background: var(--accent-light); border-left: 4px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.25rem; margin: 1rem 0 1.5rem; font-size: 0.93rem; color: var(--text-1); }
+    h2 { font-size: 1.08rem; font-weight: 600; color: var(--accent); margin-bottom: .75rem; padding-bottom: .35rem; border-bottom: 1px solid var(--border); }
+    p { margin-bottom: .75rem; color: var(--text-2); font-size: .95rem; }
+    ul { padding-left: 1.5rem; margin-bottom: .75rem; color: var(--text-2); font-size: .95rem; }
+    li { margin-bottom: .35rem; }
+    .info-box { background: var(--accent-light); border-left: 4px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.25rem; margin: 1rem 0 1.5rem; font-size: .93rem; color: var(--text-1); }
     .info-box strong { color: var(--accent); }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .88rem; }
     th { background: var(--accent); color: #fff; font-weight: 600; text-align: left; padding: 10px 14px; }
     td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text-2); vertical-align: top; }
     tr:nth-child(even) td { background: var(--surface); }
     tr:last-child td { border-bottom: none; }
-    .badge { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: var(--accent-light); color: var(--accent); white-space: nowrap; }
+    .badge { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: var(--accent-light); color: var(--accent); white-space: nowrap; }
+    .badge.yes { background: #FEF3C7; color: #92400E; }
     .badge.no { background: #FEE2E2; color: #991B1B; }
     .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-top: 1rem; }
-    .contact-card p { margin-bottom: 0.3rem; }
+    .contact-card p { margin-bottom: .3rem; }
     .contact-card a { color: var(--accent); text-decoration: none; font-weight: 500; }
-    .contact-card a:hover { text-decoration: underline; }
-    footer { border-top: 1px solid var(--border); padding: 1.5rem clamp(1.25rem, 5vw, 3rem); text-align: center; font-size: 0.8rem; color: var(--text-3); }
+    footer { border-top: 1px solid var(--border); padding: 1.5rem clamp(1.25rem,5vw,3rem); text-align: center; font-size: .8rem; color: var(--text-3); }
     footer a { color: inherit; }
     [data-lang] { display: none; }
     body.lang-en [data-lang="en"] { display: block; }
@@ -66,7 +55,6 @@
   </style>
 </head>
 <body class="lang-en">
-
 <nav>
   <a href="../index.html" class="nav-logo">HAKAI</a>
   <div class="nav-right">
@@ -77,7 +65,6 @@
     <a href="../index.html" class="nav-back">← Home</a>
   </div>
 </nav>
-
 <main class="wrapper">
 
   <!-- ══ ENGLISH ══════════════════════════════════════════════════ -->
@@ -91,87 +78,145 @@
     </div>
 
     <div class="info-box">
-      <strong>Summary:</strong> HAKAI does not require account registration. Location is used only
-      on-device for prayer times and Qibla direction. Chat messages are processed to generate AI
-      responses and are not stored on our servers.
+      <strong>Summary:</strong> HAKAI collects your name, email address, and location to provide
+      personalized Islamic guidance services. Your data is stored securely and is never sold to
+      third parties. You may request deletion of your data at any time.
     </div>
 
     <section>
       <h2>1. Introduction</h2>
-      <p>HAKAI ("we", "our", "the app") is an iOS application developed by Burak Uckun that provides
-      Islamic guidance services including religious Q&amp;A (ilmihal), Quranic verse recommendations,
-      daily prayer times, and a Qibla compass.</p>
-      <p>This Privacy Policy explains what information is collected when you use HAKAI and how it is
-      handled. By using the app, you agree to the practices described here.</p>
+      <p>HAKAI ("we", "our", "the app") is an iOS application developed by Burak Uckun that
+      provides Islamic guidance services including religious Q&amp;A (ilmihal), Quranic verse
+      recommendations, daily prayer times, and a Qibla compass.</p>
+      <p>This Privacy Policy describes what personal information we collect, how we use it,
+      and the rights you have over your data. By using HAKAI, you agree to the practices
+      described in this policy.</p>
     </section>
 
     <section>
       <h2>2. Information We Collect</h2>
       <table>
-        <thead><tr><th>Data Type</th><th>Purpose</th><th>Storage</th></tr></thead>
+        <thead>
+          <tr><th>Data Type</th><th>Purpose</th><th>Storage</th></tr>
+        </thead>
         <tbody>
-          <tr><td>Location (latitude/longitude)</td><td>Prayer times &amp; Qibla direction</td><td><span class="badge">On-device only</span></td></tr>
-          <tr><td>Chat messages</td><td>AI response generation (OpenAI API)</td><td><span class="badge no">Not stored on our servers</span></td></tr>
-          <tr><td>Anonymous device identifier</td><td>Monthly usage quota tracking</td><td><span class="badge">Server — anonymous</span></td></tr>
-          <tr><td>App preferences</td><td>Notification &amp; language settings</td><td><span class="badge">On-device (UserDefaults)</span></td></tr>
+          <tr>
+            <td><strong>First &amp; Last Name</strong></td>
+            <td>User account creation and personalization</td>
+            <td><span class="badge yes">Stored on server</span></td>
+          </tr>
+          <tr>
+            <td><strong>Email Address</strong></td>
+            <td>Account authentication, password recovery, service notifications</td>
+            <td><span class="badge yes">Stored on server</span></td>
+          </tr>
+          <tr>
+            <td><strong>Location (latitude/longitude)</strong></td>
+            <td>Prayer times &amp; Qibla direction calculation</td>
+            <td><span class="badge">On-device &amp; server</span></td>
+          </tr>
+          <tr>
+            <td><strong>Chat messages</strong></td>
+            <td>AI response generation (OpenAI API); service improvement</td>
+            <td><span class="badge yes">Processed by OpenAI</span></td>
+          </tr>
+          <tr>
+            <td><strong>Anonymous device identifier</strong></td>
+            <td>Monthly usage quota tracking</td>
+            <td><span class="badge">Server — anonymous</span></td>
+          </tr>
+          <tr>
+            <td><strong>App preferences</strong></td>
+            <td>Notification &amp; language settings</td>
+            <td><span class="badge">On-device (UserDefaults)</span></td>
+          </tr>
         </tbody>
       </table>
-      <p>We do <strong>not</strong> collect names, email addresses, phone numbers, payment details, or any personally identifiable information.</p>
     </section>
 
     <section>
       <h2>3. How We Use Your Information</h2>
       <ul>
-        <li><strong>Location</strong> — solely to calculate prayer times and Qibla direction on your device. Never transmitted to our servers.</li>
-        <li><strong>Chat messages</strong> — forwarded to OpenAI's API to generate responses. Not logged or stored by HAKAI.</li>
-        <li><strong>Anonymous device ID</strong> — used to enforce a monthly free usage quota. Contains no personal information.</li>
-        <li><strong>App preferences</strong> — stored locally to remember your notification and display settings.</li>
+        <li><strong>Name &amp; Email</strong> — to create and manage your account, authenticate you securely, and send service-related notifications (e.g. password reset). We do not send unsolicited marketing emails without your explicit consent.</li>
+        <li><strong>Location</strong> — to calculate accurate prayer times and Qibla direction. Location may be stored server-side to remember your city preference across sessions.</li>
+        <li><strong>Chat messages</strong> — forwarded to OpenAI's API to generate AI responses. Messages are not used to build advertising profiles.</li>
+        <li><strong>Device ID</strong> — to enforce a monthly free usage quota per device. Contains no personal information.</li>
+        <li><strong>App preferences</strong> — stored locally to persist your notification and display settings.</li>
       </ul>
     </section>
 
     <section>
       <h2>4. Data Storage &amp; Security</h2>
-      <p>All network communication uses <strong>HTTPS / TLS 1.2–1.3</strong>. Authentication tokens
-      are stored in the iOS <strong>Keychain</strong>. On-device data is protected by iOS
-      <strong>Data Protection (AES-256)</strong>.</p>
-      <p>The anonymous device identifier stored on our server contains no personal information and
-      is reset automatically each calendar month.</p>
+      <p>All network communication uses <strong>HTTPS / TLS 1.2–1.3</strong>. Passwords are hashed
+      and never stored in plain text. Authentication tokens are stored in the iOS <strong>Keychain</strong>.
+      On-device data is protected by iOS <strong>Data Protection (AES-256)</strong>.</p>
+      <p>Personal data (name and email) is stored on our backend server hosted on <strong>Render</strong>
+      (infrastructure located in the United States). We apply appropriate technical and organizational
+      measures to protect your data against unauthorized access, loss, or disclosure.</p>
     </section>
 
     <section>
-      <h2>5. Third-Party Services</h2>
+      <h2>5. Data Sharing</h2>
+      <p>We do <strong>not sell</strong> your personal data. We share data only with the following
+      service providers, solely to operate the app:</p>
       <ul>
-        <li><strong>OpenAI API</strong> — Chat content is forwarded to OpenAI to generate responses.
+        <li><strong>OpenAI API</strong> — chat content is forwarded to generate AI responses.
         See <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI Privacy Policy</a>.</li>
-        <li><strong>Diyanet API</strong> — Prayer times are fetched using a city name only; no location coordinates are transmitted.</li>
-        <li><strong>Apple StoreKit</strong> — In-app support purchases are handled entirely by Apple. HAKAI never receives or stores payment information.</li>
+        <li><strong>Diyanet İşleri Başkanlığı API</strong> — prayer times are fetched using a city name only.</li>
+        <li><strong>Render (hosting)</strong> — our backend infrastructure provider. Your data resides on Render's servers under their data processing agreement.</li>
+        <li><strong>Apple StoreKit</strong> — in-app support purchases are handled entirely by Apple. HAKAI never receives or stores your payment information.</li>
       </ul>
+      <p>We may disclose your data if required by law or to protect our legal rights, but we will
+      notify you where legally permitted to do so.</p>
     </section>
 
     <section>
-      <h2>6. Children's Privacy</h2>
-      <p>HAKAI is not directed at children under 13. We do not knowingly collect personal information
-      from children under 13. If we become aware of such collection, we will delete it promptly.</p>
+      <h2>6. Data Retention</h2>
+      <p>We retain your personal data for as long as your account is active or as needed to provide
+      services. If you request account deletion, we will permanently delete your name, email, and
+      associated data within <strong>30 days</strong>, except where retention is required by law.</p>
     </section>
 
     <section>
-      <h2>7. Your Rights</h2>
+      <h2>7. Children's Privacy</h2>
+      <p>HAKAI is not directed at children under 13. We do not knowingly collect personal
+      information from children under 13. If we become aware of such collection, we will
+      delete it promptly. Parents or guardians who believe their child has provided personal
+      information should contact us at the address below.</p>
+    </section>
+
+    <section>
+      <h2>8. Your Rights</h2>
+      <p>Depending on your country of residence, you may have the following rights regarding
+      your personal data:</p>
       <ul>
-        <li><strong>Location access</strong> — revoke anytime in iOS Settings → Privacy → Location Services → HAKAI.</li>
-        <li><strong>Device ID deletion</strong> — request removal by contacting us at the email below.</li>
-        <li><strong>Data access</strong> — request information about data associated with your device ID.</li>
+        <li><strong>Access</strong> — request a copy of the personal data we hold about you.</li>
+        <li><strong>Correction</strong> — request correction of inaccurate or incomplete data.</li>
+        <li><strong>Deletion</strong> — request permanent deletion of your account and personal data.</li>
+        <li><strong>Portability</strong> — request your data in a machine-readable format.</li>
+        <li><strong>Objection</strong> — object to processing of your data for certain purposes.</li>
+        <li><strong>Location access</strong> — revoke location permission anytime in iOS Settings → Privacy → Location Services → HAKAI.</li>
       </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:support@myhakai.com">support@myhakai.com</a>.
+      We will respond within 30 days.</p>
     </section>
 
     <section>
-      <h2>8. Changes to This Policy</h2>
-      <p>We may update this policy from time to time. Significant changes will be announced via an
-      in-app notification or by updating the effective date above. Continued use after changes
-      constitutes acceptance.</p>
+      <h2>9. International Transfers</h2>
+      <p>Your data may be transferred to and processed in the United States (Render infrastructure,
+      OpenAI). By using HAKAI, you consent to this transfer. We ensure appropriate safeguards are
+      in place in accordance with applicable data protection laws.</p>
     </section>
 
     <section>
-      <h2>9. Contact Us</h2>
+      <h2>10. Changes to This Policy</h2>
+      <p>We may update this policy from time to time. Significant changes will be announced via
+      an in-app notification and by updating the effective date above. Continued use of the app
+      after changes constitutes acceptance of the revised policy.</p>
+    </section>
+
+    <section>
+      <h2>11. Contact Us</h2>
       <div class="contact-card">
         <p><strong>App:</strong> HAKAI</p>
         <p><strong>Developer:</strong> Burak Uckun</p>
@@ -192,77 +237,135 @@
     </div>
 
     <div class="info-box">
-      <strong>Özet:</strong> HAKAI hesap kaydı gerektirmez. Konum yalnızca namaz vakitleri ve
-      kıble için cihazınızda kullanılır. Sohbet mesajları yapay zeka yanıtı için işlenir,
-      sunucularımızda saklanmaz.
+      <strong>Özet:</strong> HAKAI, kişiselleştirilmiş İslami rehberlik hizmetleri sunmak amacıyla
+      adınızı, e-posta adresinizi ve konum bilginizi toplamaktadır. Verileriniz güvenli biçimde
+      saklanır ve üçüncü taraflara satılmaz. Dilediğiniz zaman verilerinizin silinmesini talep
+      edebilirsiniz.
     </div>
 
     <section>
       <h2>1. Giriş</h2>
-      <p>HAKAI, Burak Uckun tarafından geliştirilen; ilmihal soruları, Ayet Rehberi, namaz vakitleri
-      ve kıble pusulası hizmetleri sunan bir iOS uygulamasıdır.</p>
-      <p>Bu Gizlilik Politikası, uygulamayı kullandığınızda hangi verilerin işlendiğini açıklamaktadır.</p>
+      <p>HAKAI, Burak Uckun tarafından geliştirilen; ilmihal soruları, Ayet Rehberi, namaz
+      vakitleri ve kıble pusulası hizmetleri sunan bir iOS uygulamasıdır.</p>
+      <p>Bu Gizlilik Politikası, hangi kişisel bilgilerin toplandığını, nasıl kullanıldığını
+      ve haklarınızı açıklamaktadır. Uygulamayı kullanarak bu politikayı kabul etmiş olursunuz.</p>
     </section>
 
     <section>
       <h2>2. Toplanan Veriler</h2>
       <table>
-        <thead><tr><th>Veri Türü</th><th>Amaç</th><th>Saklama</th></tr></thead>
+        <thead>
+          <tr><th>Veri Türü</th><th>Amaç</th><th>Saklama</th></tr>
+        </thead>
         <tbody>
-          <tr><td>Konum (enlem/boylam)</td><td>Namaz vakitleri ve kıble</td><td><span class="badge">Yalnızca cihazda</span></td></tr>
-          <tr><td>Sohbet mesajları</td><td>Yapay zeka yanıtı (OpenAI API)</td><td><span class="badge no">Sunucuda saklanmaz</span></td></tr>
-          <tr><td>Anonim cihaz kimliği</td><td>Aylık kullanım kotası</td><td><span class="badge">Sunucu — anonim</span></td></tr>
-          <tr><td>Uygulama tercihleri</td><td>Bildirim ve dil ayarları</td><td><span class="badge">Cihazda</span></td></tr>
+          <tr>
+            <td><strong>Ad ve Soyad</strong></td>
+            <td>Hesap oluşturma ve kişiselleştirme</td>
+            <td><span class="badge yes">Sunucuda saklanır</span></td>
+          </tr>
+          <tr>
+            <td><strong>E-posta Adresi</strong></td>
+            <td>Kimlik doğrulama, şifre sıfırlama, hizmet bildirimleri</td>
+            <td><span class="badge yes">Sunucuda saklanır</span></td>
+          </tr>
+          <tr>
+            <td><strong>Konum (enlem/boylam)</strong></td>
+            <td>Namaz vakitleri ve kıble yönü hesaplama</td>
+            <td><span class="badge">Cihaz ve sunucu</span></td>
+          </tr>
+          <tr>
+            <td><strong>Sohbet mesajları</strong></td>
+            <td>Yapay zeka yanıtı üretme (OpenAI API)</td>
+            <td><span class="badge yes">OpenAI tarafından işlenir</span></td>
+          </tr>
+          <tr>
+            <td><strong>Anonim cihaz kimliği</strong></td>
+            <td>Aylık kullanım kotası takibi</td>
+            <td><span class="badge">Sunucu — anonim</span></td>
+          </tr>
+          <tr>
+            <td><strong>Uygulama tercihleri</strong></td>
+            <td>Bildirim ve dil ayarları</td>
+            <td><span class="badge">Cihazda</span></td>
+          </tr>
         </tbody>
       </table>
-      <p>Ad, e-posta, telefon, ödeme bilgisi veya kişisel hesap bilgisi <strong>toplanmaz</strong>.</p>
     </section>
 
     <section>
       <h2>3. Verilerin Kullanımı</h2>
       <ul>
-        <li><strong>Konum</strong> — cihazda namaz vakti ve kıble için; sunucuya iletilmez.</li>
-        <li><strong>Sohbet mesajları</strong> — OpenAI'ya iletilir; HAKAI tarafından saklanmaz.</li>
-        <li><strong>Anonim cihaz kimliği</strong> — aylık kota takibi; kişisel bilgi içermez.</li>
-        <li><strong>Tercihler</strong> — ayarlarınızı hatırlamak için cihazda saklanır.</li>
+        <li><strong>Ad ve E-posta</strong> — hesabınızı oluşturmak ve yönetmek, güvenli kimlik doğrulama yapmak ve hizmetle ilgili bildirimler (şifre sıfırlama vb.) göndermek için kullanılır. Açık izniniz olmadan pazarlama e-postası gönderilmez.</li>
+        <li><strong>Konum</strong> — doğru namaz vakti ve kıble yönü hesabı için kullanılır. Şehir tercihiniz oturumlar arasında saklanabilir.</li>
+        <li><strong>Sohbet mesajları</strong> — yapay zeka yanıtı üretmek için OpenAI API'ye iletilir. Reklam profili oluşturmak amacıyla kullanılmaz.</li>
+        <li><strong>Cihaz kimliği</strong> — cihaz başına aylık ücretsiz kullanım kotasını uygulamak için kullanılır; kişisel bilgi içermez.</li>
+        <li><strong>Tercihler</strong> — bildirim ve görüntü ayarlarınızı hatırlamak için cihazda saklanır.</li>
       </ul>
     </section>
 
     <section>
       <h2>4. Veri Güvenliği</h2>
-      <p>Ağ iletişimi <strong>HTTPS/TLS 1.2–1.3</strong> ile şifrelenir. Token'lar iOS
+      <p>Tüm ağ iletişimi <strong>HTTPS/TLS 1.2–1.3</strong> ile şifrelenir. Şifreler hash'lenmiş
+      biçimde saklanır; hiçbir zaman düz metin olarak tutulmaz. Kimlik doğrulama token'ları iOS
       <strong>Keychain</strong>'de, cihaz verileri <strong>AES-256</strong> ile korunur.</p>
+      <p>Kişisel veriler (ad ve e-posta) ABD'de (<strong>Render</strong> altyapısı) barındırılan
+      backend sunucumuzda saklanmaktadır. Yetkisiz erişime, kayba veya ifşaya karşı gerekli teknik
+      ve organizasyonel önlemler alınmaktadır.</p>
     </section>
 
     <section>
-      <h2>5. Üçüncü Taraf Hizmetler</h2>
+      <h2>5. Veri Paylaşımı</h2>
+      <p>Kişisel verilerinizi <strong>satmıyoruz</strong>. Aşağıdaki hizmet sağlayıcılarıyla
+      yalnızca uygulamayı işletmek amacıyla veri paylaşılır:</p>
       <ul>
-        <li><strong>OpenAI API</strong> — Sohbet içerikleri yanıt için OpenAI'ya iletilir. <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI Gizlilik Politikası</a></li>
-        <li><strong>Diyanet API</strong> — Yalnızca şehir adı iletilir; konum koordinatı gönderilmez.</li>
-        <li><strong>Apple StoreKit</strong> — Ödemeler tamamen Apple tarafından işlenir; ödeme bilgisine erişmiyoruz.</li>
+        <li><strong>OpenAI API</strong> — sohbet içerikleri yanıt üretmek için iletilir.</li>
+        <li><strong>Diyanet İşleri Başkanlığı API</strong> — namaz vakitleri için yalnızca şehir adı iletilir.</li>
+        <li><strong>Render (hosting)</strong> — backend altyapı sağlayıcısı. Verileriniz veri işleme sözleşmesi kapsamında Render sunucularında yer alır.</li>
+        <li><strong>Apple StoreKit</strong> — uygulama içi alımlar tamamen Apple tarafından işlenir; ödeme bilgisine erişmiyoruz.</li>
       </ul>
     </section>
 
     <section>
-      <h2>6. Çocukların Gizliliği</h2>
-      <p>13 yaş altı kullanıcılara yönelik değiliz ve bilerek bu yaş grubundan veri toplamıyoruz.</p>
+      <h2>6. Veri Saklama Süresi</h2>
+      <p>Kişisel verileriniz hesabınız aktif olduğu sürece veya hizmetlerin sunulması için gerektiği
+      kadar saklanır. Hesap silme talebiniz halinde ad, e-posta ve ilişkili verileriniz
+      <strong>30 gün</strong> içinde kalıcı olarak silinir.</p>
     </section>
 
     <section>
-      <h2>7. Kullanıcı Hakları</h2>
+      <h2>7. Çocukların Gizliliği</h2>
+      <p>HAKAI, 13 yaş altı çocuklara yönelik değildir ve bilerek bu yaş grubundan kişisel veri
+      toplamayız. Çocuğunuzun veri paylaştığını düşünüyorsanız lütfen bizimle iletişime geçin.</p>
+    </section>
+
+    <section>
+      <h2>8. Kullanıcı Hakları</h2>
       <ul>
-        <li>Konum iznini iOS Ayarlar → Gizlilik → Konum Servisleri'nden iptal edebilirsiniz.</li>
-        <li>Anonim cihaz kimliğinizin silinmesini e-posta ile talep edebilirsiniz.</li>
+        <li><strong>Erişim</strong> — hakkınızdaki kişisel verilerin bir kopyasını talep etme.</li>
+        <li><strong>Düzeltme</strong> — yanlış veya eksik verilerin düzeltilmesini talep etme.</li>
+        <li><strong>Silme</strong> — hesabınızın ve kişisel verilerinizin kalıcı olarak silinmesini talep etme.</li>
+        <li><strong>Taşınabilirlik</strong> — verilerinizi makine tarafından okunabilir formatta talep etme.</li>
+        <li><strong>Konum iptali</strong> — iOS Ayarlar → Gizlilik → Konum Servisleri → HAKAI bölümünden istediğiniz zaman konum iznini iptal etme.</li>
       </ul>
+      <p>Bu hakları kullanmak için <a href="mailto:support@myhakai.com">support@myhakai.com</a>
+      adresine e-posta gönderin. 30 gün içinde yanıt vereceğiz.</p>
     </section>
 
     <section>
-      <h2>8. Değişiklikler</h2>
-      <p>Politika güncellenirse uygulama içi bildirim veya bu sayfadaki tarih güncellemesiyle duyurulur.</p>
+      <h2>9. Uluslararası Veri Transferi</h2>
+      <p>Verileriniz ABD'deki sunucularda işlenebilir (Render altyapısı, OpenAI). Uygulamayı
+      kullanarak bu transferi kabul etmiş olursunuz. İlgili veri koruma mevzuatına uygun
+      güvenceler sağlanmaktadır.</p>
     </section>
 
     <section>
-      <h2>9. İletişim</h2>
+      <h2>10. Değişiklikler</h2>
+      <p>Bu politika zaman zaman güncellenebilir. Önemli değişiklikler uygulama içi bildirim
+      ve bu sayfadaki tarih güncellemesiyle duyurulur.</p>
+    </section>
+
+    <section>
+      <h2>11. İletişim</h2>
       <div class="contact-card">
         <p><strong>Uygulama:</strong> HAKAI</p>
         <p><strong>Geliştirici:</strong> Burak Uckun</p>
@@ -273,13 +376,7 @@
   </div><!-- /tr -->
 
 </main>
-
-<footer>
-  &copy; 2026 HAKAI &nbsp;|&nbsp;
-  <a href="../index.html">Home</a> &nbsp;|&nbsp;
-  <a href="../support/index.html">Support</a>
-</footer>
-
+<footer>&copy; 2026 HAKAI &nbsp;|&nbsp; <a href="../index.html">Home</a> &nbsp;|&nbsp; <a href="../support/index.html">Support</a></footer>
 <script>
   function setLang(lang) {
     document.body.className = 'lang-' + lang;
