@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T07:31:48.677Z",
+  "generated_at": "2026-06-03T10:57:42.052Z",
   "suite_version": "1.0",
   "total": 50,
   "passed": 49,
@@ -211,7 +211,7 @@
       "question": "Vitir namazı vacip midir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 23,
+      "durationMs": 25,
       "checks": [
         {
           "type": "no_safety_block",
@@ -275,7 +275,7 @@
       "question": "Namaz kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 84,
+      "durationMs": 83,
       "checks": [
         {
           "type": "no_safety_block",
@@ -403,7 +403,7 @@
       "question": "Teyemmüm ne zaman yapılır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 94,
+      "durationMs": 85,
       "checks": [
         {
           "type": "no_safety_block",
@@ -467,7 +467,7 @@
       "question": "Mestler üzerine mesh caiz midir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 44,
+      "durationMs": 45,
       "checks": [
         {
           "type": "no_safety_block",
@@ -499,7 +499,7 @@
       "question": "Orucu bozan şeyler nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 80,
+      "durationMs": 83,
       "checks": [
         {
           "type": "no_safety_block",
@@ -563,7 +563,7 @@
       "question": "Fidye nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 76,
+      "durationMs": 77,
       "checks": [
         {
           "type": "no_safety_block",
@@ -595,7 +595,7 @@
       "question": "Kaza orucu nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 80,
+      "durationMs": 82,
       "checks": [
         {
           "type": "no_safety_block",
@@ -696,7 +696,7 @@
       "question": "Hac kimlere farzdır?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 38,
+      "durationMs": 37,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -728,7 +728,7 @@
       "question": "Kurban kimlere vaciptir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 38,
+      "durationMs": 39,
       "checks": [
         {
           "type": "kb_hit",
@@ -760,7 +760,7 @@
       "question": "İmanın şartları nelerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 84,
+      "durationMs": 90,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -824,7 +824,7 @@
       "question": "Kelime-i şehadet nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 84,
+      "durationMs": 87,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -856,7 +856,7 @@
       "question": "Sünnet nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 98,
+      "durationMs": 84,
       "checks": [
         {
           "type": "kb_hit",
@@ -893,7 +893,7 @@
       "question": "Kader nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 86,
+      "durationMs": 79,
       "checks": [
         {
           "type": "no_safety_block",
@@ -925,7 +925,7 @@
       "question": "Ahiret hayatı nedir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 85,
+      "durationMs": 95,
       "checks": [
         {
           "type": "no_safety_block",
@@ -957,7 +957,7 @@
       "question": "Hz. Musa kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 80,
+      "durationMs": 84,
       "checks": [
         {
           "type": "kb_hit",
@@ -994,7 +994,7 @@
       "question": "Musa kim?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 78,
+      "durationMs": 85,
       "checks": [
         {
           "type": "kb_hit",
@@ -1026,7 +1026,7 @@
       "question": "Hz. İbrahim kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 76,
+      "durationMs": 79,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1058,7 +1058,7 @@
       "question": "Hz. İsa kimdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 77,
+      "durationMs": 78,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1090,7 +1090,7 @@
       "question": "Dört halife kimlerdir?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 80,
+      "durationMs": 82,
       "checks": [
         {
           "type": "kb_hit_prefix",
@@ -1191,7 +1191,7 @@
       "question": "Faiz haram mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 70,
+      "durationMs": 74,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1223,7 +1223,7 @@
       "question": "Kumar oynamak haram mı?",
       "module": "ilmihal",
       "status": "pass",
-      "durationMs": 78,
+      "durationMs": 79,
       "checks": [
         {
           "type": "no_safety_block",
@@ -1292,7 +1292,7 @@
       "question": "İman hakkında ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 119,
+      "durationMs": 124,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1329,7 +1329,7 @@
       "question": "Korku ve endişe için ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 81,
+      "durationMs": 80,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1361,7 +1361,7 @@
       "question": "Tövbe hakkında ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 51,
+      "durationMs": 55,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1393,7 +1393,7 @@
       "question": "Yalnızlık için ayet",
       "module": "ayah",
       "status": "pass",
-      "durationMs": 91,
+      "durationMs": 93,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
@@ -1457,7 +1457,7 @@
       "question": "Muhammed",
       "module": "ayah",
       "status": "fail",
-      "durationMs": 708,
+      "durationMs": 721,
       "checks": [
         {
           "type": "no_redirect_to_ilmihal",
