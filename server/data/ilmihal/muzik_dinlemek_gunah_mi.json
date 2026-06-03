@@ -46,5 +46,10 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Müziğin içeriği, dinleyende oluşturduğu etki ve kişiyi hangi yöne götürdüğü önemlidir; insanı olumsuzluğa sürükleyen içeriklerden uzak durmak daha uygundur.",
-  "semantic_description": "müzik dinlemek günah mı muzik dinlemek gunah mi şarkı dinlemek günah mı sorularına sakin ve pratik cevap verir müziğin içeriği dinleyende oluşturduğu etki ve kişiyi hangi yöne götürdüğü önemlidir insanı olumsuzluğa sürükleyen içeriklerden uzak durmak daha uygundur"
+  "semantic_description": "müzik dinlemek günah mı muzik dinlemek gunah mi şarkı dinlemek günah mı sorularına sakin ve pratik cevap verir müziğin içeriği dinleyende oluşturduğu etki ve kişiyi hangi yöne götürdüğü önemlidir insanı olumsuzluğa sürükleyen içeriklerden uzak durmak daha uygundur",
+  "emotion_tags": [
+    "guilt",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

@@ -44,5 +44,11 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Kaynağı tam net olmayan kazançlarda ihtiyatlı davranmak, şüpheyi azaltmak ve mümkünse helal alternatifi tercih etmek gerekir.",
-  "semantic_description": "şüpheli kazanç ne yapılır supheli kazanc ne yapilir şüpheli gelir sorularına sakin ve pratik cevap verir kaynağı tam net olmayan kazançlarda ihtiyatlı davranmak şüpheyi azaltmak ve mümkünse helal alternatifi tercih etmek gerekir"
+  "semantic_description": "şüpheli kazanç ne yapılır supheli kazanc ne yapilir şüpheli gelir sorularına sakin ve pratik cevap verir kaynağı tam net olmayan kazançlarda ihtiyatlı davranmak şüpheyi azaltmak ve mümkünse helal alternatifi tercih etmek gerekir",
+  "emotion_tags": [
+    "guilt",
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

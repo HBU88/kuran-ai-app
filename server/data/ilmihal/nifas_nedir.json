@@ -80,5 +80,10 @@
     "oruc_nedir",
     "hayiz_nedir",
     "istihaze_nedir"
-  ]
+  ],
+  "emotion_tags": [
+    "guidance",
+    "patience"
+  ],
+  "category_type": "genel"
 }

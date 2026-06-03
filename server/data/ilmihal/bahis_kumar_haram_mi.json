@@ -44,5 +44,10 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Bahis ve kumar, emek dışı kazanç arayışı ve kayıp döngüsü doğurabildiği için sakınılması gereken alanlardandır.",
-  "semantic_description": "bahis oynamak haram mı bahis kumar haram mı kumar oynamak günah mı sorularına sakin ve pratik cevap verir bahis ve kumar emek dışı kazanç arayışı ve kayıp döngüsü doğurabildiği için sakınılması gereken alanlardandır"
+  "semantic_description": "bahis oynamak haram mı bahis kumar haram mı kumar oynamak günah mı sorularına sakin ve pratik cevap verir bahis ve kumar emek dışı kazanç arayışı ve kayıp döngüsü doğurabildiği için sakınılması gereken alanlardandır",
+  "emotion_tags": [
+    "guilt",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

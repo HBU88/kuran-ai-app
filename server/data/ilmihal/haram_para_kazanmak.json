@@ -47,5 +47,11 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Haram para kazandım ne yapmalıyım? Haram kazançtan uzaklaşma, helal kazanca yönelme, telafi ve tövbe."
+  "semantic_description": "Haram para kazandım ne yapmalıyım? Haram kazançtan uzaklaşma, helal kazanca yönelme, telafi ve tövbe.",
+  "emotion_tags": [
+    "guilt",
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

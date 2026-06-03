@@ -860,6 +860,10 @@ app.get("/debug/resolve", async (req, res) => {
   }
 });
 
+// ── Ayet Rehberi (Emotion-based KB routing) ───────────────────────────────────
+const ayetRehberiRoutes = require("./routes/ayet-rehberi");
+app.use("/ayet-rehberi", ayetRehberiRoutes);
+
 app.use((error, req, res, next) => {
   if (error && error.type === "entity.too.large") {
     return sendUtf8Json(res, 413, { ok: false, error: "request body is too large" });

@@ -101,5 +101,11 @@
     "namaz_nasil_kilinir",
     "hayiz_nedir",
     "nifas_nedir"
-  ]
+  ],
+  "emotion_tags": [
+    "peace",
+    "spiritual_connection",
+    "hope"
+  ],
+  "category_type": "ibadet"
 }

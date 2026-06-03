@@ -46,5 +46,11 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Yalan söylemek günah mı? Doğruyu söylemek, gerektiğinde susmak, zararsız bir dil kullanmak ve yalandan uzak durmak."
+  "semantic_description": "Yalan söylemek günah mı? Doğruyu söylemek, gerektiğinde susmak, zararsız bir dil kullanmak ve yalandan uzak durmak.",
+  "emotion_tags": [
+    "guilt",
+    "guidance",
+    "justice"
+  ],
+  "category_type": "ahlak"
 }

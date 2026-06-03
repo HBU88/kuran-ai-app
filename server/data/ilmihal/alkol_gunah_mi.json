@@ -64,5 +64,11 @@
     "Kur'an-ı Kerim Maide Suresi 90-91. ayetler; Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "İslam'da alkol (içki) haramdır. Kur'an-ı Kerim'de sarhoş edici içecekler açıkça yasaklanmıştır (Maide 90-91). Az ya da çok, her sarhoş edici içecek aynı hükme tabidir. Alkolü bırakmak isteyen kişiye sabır, dua ve gerekirse sağlık desteği önerilir.",
-  "semantic_description": "alkol içki haram günah alkol içmek günah mı içki içmek caiz mi sorularına sakin ve net cevap verir İslam'da alkol haramdır Maide suresi sarhoş edici her içecek yasaklanmıştır az da olsa alkol haramdır bırakmak için dua sabır ve destek önerilir"
+  "semantic_description": "alkol içki haram günah alkol içmek günah mı içki içmek caiz mi sorularına sakin ve net cevap verir İslam'da alkol haramdır Maide suresi sarhoş edici her içecek yasaklanmıştır az da olsa alkol haramdır bırakmak için dua sabır ve destek önerilir",
+  "emotion_tags": [
+    "guilt",
+    "guidance",
+    "repentance"
+  ],
+  "category_type": "ahlak"
 }

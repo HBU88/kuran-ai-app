@@ -46,5 +46,10 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Kredi kartında ödeme düzeni, gecikme şartları ve faiz riski belirleyicidir; kullanırken sözleşmeyi dikkatle okumak ve ölçülü davranmak gerekir.",
-  "semantic_description": "kredi kartı kullanmak caiz mi kredi karti kullanmak caiz mi kredi kartı ile alışveriş sorularına sakin ve pratik cevap verir kredi kartında ödeme düzeni gecikme şartları ve faiz riski belirleyicidir kullanırken sözleşmeyi dikkatle okumak ve ölçülü davranmak gerekir"
+  "semantic_description": "kredi kartı kullanmak caiz mi kredi karti kullanmak caiz mi kredi kartı ile alışveriş sorularına sakin ve pratik cevap verir kredi kartında ödeme düzeni gecikme şartları ve faiz riski belirleyicidir kullanırken sözleşmeyi dikkatle okumak ve ölçülü davranmak gerekir",
+  "emotion_tags": [
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

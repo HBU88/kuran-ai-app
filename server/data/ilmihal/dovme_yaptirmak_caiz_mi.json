@@ -46,5 +46,10 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Kalıcı dövme konusunda sağlık, temizlik ve dinî hassasiyetler birlikte düşünülür; karar verirken acele edilmemeli ve gerektiğinde güvenilir bir âlime danışılmalıdır.",
-  "semantic_description": "dövme yaptırmak caiz mi dovme yaptirmak caiz mi kalıcı dövme sorularına sakin ve pratik cevap verir kalıcı dövme konusunda sağlık temizlik ve dinî hassasiyetler birlikte düşünülür karar verirken acele edilmemeli ve gerektiğinde güvenilir bir âlime danışılmalıdır"
+  "semantic_description": "dövme yaptırmak caiz mi dovme yaptirmak caiz mi kalıcı dövme sorularına sakin ve pratik cevap verir kalıcı dövme konusunda sağlık temizlik ve dinî hassasiyetler birlikte düşünülür karar verirken acele edilmemeli ve gerektiğinde güvenilir bir âlime danışılmalıdır",
+  "emotion_tags": [
+    "guilt",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

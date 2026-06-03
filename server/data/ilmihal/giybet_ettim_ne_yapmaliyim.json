@@ -47,5 +47,11 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Gıybet ettim ne yapmalıyım? Arkadan konuşmayı bırakmak, tövbe etmek, helalleşmek ve dili korumak."
+  "semantic_description": "Gıybet ettim ne yapmalıyım? Arkadan konuşmayı bırakmak, tövbe etmek, helalleşmek ve dili korumak.",
+  "emotion_tags": [
+    "guilt",
+    "repentance",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

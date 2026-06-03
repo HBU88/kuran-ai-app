@@ -46,5 +46,10 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Sigara sağlığa zarar veren, israfa yol açabilen ve kişiyi zayıf düşürebilen bir alışkanlıktır; bırakma süreci adım adım ve destekle yürütülmelidir.",
-  "semantic_description": "sigara haram mı sigara içmek günah mı sigara bırakma sorularına sakin ve pratik cevap verir sigara sağlığa zarar veren israfa yol açabilen ve kişiyi zayıf düşürebilen bir alışkanlıktır bırakma süreci adım adım ve destekle yürütülmelidir"
+  "semantic_description": "sigara haram mı sigara içmek günah mı sigara bırakma sorularına sakin ve pratik cevap verir sigara sağlığa zarar veren israfa yol açabilen ve kişiyi zayıf düşürebilen bir alışkanlıktır bırakma süreci adım adım ve destekle yürütülmelidir",
+  "emotion_tags": [
+    "guilt",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

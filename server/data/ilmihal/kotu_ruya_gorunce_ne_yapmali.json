@@ -44,5 +44,12 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Kötü rüya görünce Allah'a sığınmak, kısa bir dua okumak, rüyayı gereksiz yere büyütmemek ve huzuru korumak tavsiye edilir.",
-  "semantic_description": "kötü rüya görünce ne yapılır kotu ruya gorunce ne yapmali kabus görünce ne yapılır sorularına sakin ve güven verici cevap verir kötü rüya görünce Allah a sığınmak kısa bir dua okumak rüyayı gereksiz yere büyütmemek ve huzuru korumak tavsiye edilir"
+  "semantic_description": "kötü rüya görünce ne yapılır kotu ruya gorunce ne yapmali kabus görünce ne yapılır sorularına sakin ve güven verici cevap verir kötü rüya görünce Allah a sığınmak kısa bir dua okumak rüyayı gereksiz yere büyütmemek ve huzuru korumak tavsiye edilir",
+  "emotion_tags": [
+    "fear",
+    "anxiety",
+    "guidance",
+    "peace"
+  ],
+  "category_type": "korku_kaygi"
 }

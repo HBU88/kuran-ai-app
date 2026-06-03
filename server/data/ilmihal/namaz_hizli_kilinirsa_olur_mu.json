@@ -36,5 +36,9 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "namaz hızlı kılınırsa olur mu acele namaz hızlı namaz kılmak huşu farz ve vacipler tam ise namaz geçerli olabilir ama huşu zedelenir namazda huşu ta'dil-i erkân"
+  "semantic_description": "namaz hızlı kılınırsa olur mu acele namaz hızlı namaz kılmak huşu farz ve vacipler tam ise namaz geçerli olabilir ama huşu zedelenir namazda huşu ta'dil-i erkân",
+  "emotion_tags": [
+    "guidance"
+  ],
+  "category_type": "ibadet"
 }

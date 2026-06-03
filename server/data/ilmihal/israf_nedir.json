@@ -28,5 +28,10 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "answer_tr": "İsraf, gereksiz harcama yapmak ve yeme, para, zaman ile imkânlarda ölçüyü aşmaktır."
+  "answer_tr": "İsraf, gereksiz harcama yapmak ve yeme, para, zaman ile imkânlarda ölçüyü aşmaktır.",
+  "emotion_tags": [
+    "guilt",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

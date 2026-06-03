@@ -36,5 +36,10 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "oturarak namaz kılınır mı ayakta durmaya gücü yetmeyen kişi farz namazı oturarak kılabilir gücü yettiğinde ayakta kılmak esastır hasta kişi nasıl namaz kılar oturarak namaz"
+  "semantic_description": "oturarak namaz kılınır mı ayakta durmaya gücü yetmeyen kişi farz namazı oturarak kılabilir gücü yettiğinde ayakta kılmak esastır hasta kişi nasıl namaz kılar oturarak namaz",
+  "emotion_tags": [
+    "guidance",
+    "patience"
+  ],
+  "category_type": "genel"
 }

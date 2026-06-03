@@ -44,5 +44,12 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Büyüye karşı korunmada korunma duaları, düzenli ibadet ve güvenilir kaynaklara yönelmek esastır; korku üreten yöntemlerden uzak durulmalıdır.",
-  "semantic_description": "büyüden korunma duası büyüden korunma buyuden korunma duası sorularına pratik koruyucu adımlar verir büyüye karşı korunmada korunma duaları düzenli ibadet ve güvenilir kaynaklara yönelmek esastır korku üreten yöntemlerden uzak durulmalıdır"
+  "semantic_description": "büyüden korunma duası büyüden korunma buyuden korunma duası sorularına pratik koruyucu adımlar verir büyüye karşı korunmada korunma duaları düzenli ibadet ve güvenilir kaynaklara yönelmek esastır korku üreten yöntemlerden uzak durulmalıdır",
+  "emotion_tags": [
+    "fear",
+    "anxiety",
+    "guidance",
+    "peace"
+  ],
+  "category_type": "korku_kaygi"
 }

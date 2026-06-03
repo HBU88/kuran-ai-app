@@ -44,5 +44,11 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Nazarla ilgili konuşmalarda korku ve abartıdan kaçınılır; koruma ve şifa Allah'tandır, kişi dua ve dengeli bir güven içinde yaşar.",
-  "semantic_description": "nazar var mı göz değmesi olur mu nazar gerçek mi sorularına sakin ve ölçülü cevap verir nazarla ilgili konuşmalarda korku ve abartıdan kaçınılır koruma ve şifa Allah tandır kişi dua ve dengeli bir güven içinde yaşar"
+  "semantic_description": "nazar var mı göz değmesi olur mu nazar gerçek mi sorularına sakin ve ölçülü cevap verir nazarla ilgili konuşmalarda korku ve abartıdan kaçınılır koruma ve şifa Allah tandır kişi dua ve dengeli bir güven içinde yaşar",
+  "emotion_tags": [
+    "fear",
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "korku_kaygi"
 }

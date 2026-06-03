@@ -46,5 +46,10 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Cin konusu gayb alanına girer; kesin teşhis ve korku dili yerine sükûnet, dua ve güvenilir rehberlik esastır.",
-  "semantic_description": "cin var mı cinler gerçek mi cin hakkında ne denir sorularına sakin ve ölçülü cevap verir cin konusu gayb alanına girer kesin teşhis ve korku dili yerine sükûnet dua ve güvenilir rehberlik esastır"
+  "semantic_description": "cin var mı cinler gerçek mi cin hakkında ne denir sorularına sakin ve ölçülü cevap verir cin konusu gayb alanına girer kesin teşhis ve korku dili yerine sükûnet dua ve güvenilir rehberlik esastır",
+  "emotion_tags": [
+    "fear",
+    "guidance"
+  ],
+  "category_type": "korku_kaygi"
 }

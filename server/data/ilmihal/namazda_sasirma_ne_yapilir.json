@@ -36,5 +36,9 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "namazda şaşırma ne yapılır namazda şaşırınca ne yapılır rekat sayısını unutursam sehiv secdesi hanefî mezhebine göre namazda şaşırınca güçlü görülen tarafa göre devam edilir gerekirse sehiv secdesi yapılır"
+  "semantic_description": "namazda şaşırma ne yapılır namazda şaşırınca ne yapılır rekat sayısını unutursam sehiv secdesi hanefî mezhebine göre namazda şaşırınca güçlü görülen tarafa göre devam edilir gerekirse sehiv secdesi yapılır",
+  "emotion_tags": [
+    "guidance"
+  ],
+  "category_type": "ibadet"
 }

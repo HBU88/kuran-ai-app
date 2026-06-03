@@ -44,5 +44,12 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Gece korkusu çoğu zaman stres, yorgunluk, uyku düzensizliği ve benzeri sebeplerle artabilir; sık oluyorsa değerlendirme gerekir.",
-  "semantic_description": "gece korkusu neden olur gece neden korkarım gece uyanıp korkuyorum sorularına dengeli bir açıklama verir gece korkusu çoğu zaman stres yorgunluk uyku düzensizliği ve benzeri sebeplerle artabilir sık oluyorsa değerlendirme gerekir"
+  "semantic_description": "gece korkusu neden olur gece neden korkarım gece uyanıp korkuyorum sorularına dengeli bir açıklama verir gece korkusu çoğu zaman stres yorgunluk uyku düzensizliği ve benzeri sebeplerle artabilir sık oluyorsa değerlendirme gerekir",
+  "emotion_tags": [
+    "fear",
+    "anxiety",
+    "guidance",
+    "peace"
+  ],
+  "category_type": "korku_kaygi"
 }

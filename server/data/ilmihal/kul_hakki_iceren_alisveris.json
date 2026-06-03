@@ -44,5 +44,11 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Alışverişte aldatma, eksik bilgilendirme, kusuru gizleme veya zarar verme varsa kul hakkı doğabilir; düzeltme ve helalleşme önemlidir.",
-  "semantic_description": "alışverişte kul hakkı olur mu kul hakkı içeren alışveriş alışverişte aldatma sorularına sakin ve pratik cevap verir alışverişte aldatma eksik bilgilendirme kusuru gizleme veya zarar verme varsa kul hakkı doğabilir düzeltme ve helalleşme önemlidir"
+  "semantic_description": "alışverişte kul hakkı olur mu kul hakkı içeren alışveriş alışverişte aldatma sorularına sakin ve pratik cevap verir alışverişte aldatma eksik bilgilendirme kusuru gizleme veya zarar verme varsa kul hakkı doğabilir düzeltme ve helalleşme önemlidir",
+  "emotion_tags": [
+    "guilt",
+    "justice",
+    "conscience"
+  ],
+  "category_type": "ahlak"
 }

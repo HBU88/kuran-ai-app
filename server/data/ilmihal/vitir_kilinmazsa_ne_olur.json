@@ -36,5 +36,10 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "vitir kılınmazsa ne olur vitir kaçırılırsa ne yapilir vitir kazası vitir vacip hanefî mezhebine göre vitir vaciptir kılınmazsa borç kalır ve hatırlanınca kaza edilmesi gerekir"
+  "semantic_description": "vitir kılınmazsa ne olur vitir kaçırılırsa ne yapilir vitir kazası vitir vacip hanefî mezhebine göre vitir vaciptir kılınmazsa borç kalır ve hatırlanınca kaza edilmesi gerekir",
+  "emotion_tags": [
+    "guidance",
+    "guilt"
+  ],
+  "category_type": "ibadet"
 }

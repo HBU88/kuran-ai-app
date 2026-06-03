@@ -36,5 +36,9 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "cem edilerek namaz kılınır mı namazları birleştirmek cem etmek namaz cem hanefî mezhebine göre farz namazlar normalde cem edilmez günlük hayatta her namaz kendi vaktinde kılınır hacdaki bazı yerler istisnadır"
+  "semantic_description": "cem edilerek namaz kılınır mı namazları birleştirmek cem etmek namaz cem hanefî mezhebine göre farz namazlar normalde cem edilmez günlük hayatta her namaz kendi vaktinde kılınır hacdaki bazı yerler istisnadır",
+  "emotion_tags": [
+    "guidance"
+  ],
+  "category_type": "genel"
 }

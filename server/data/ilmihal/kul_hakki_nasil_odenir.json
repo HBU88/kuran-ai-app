@@ -46,5 +46,12 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Kul hakkı nasıl ödenir? Helalleşme, zararı telafi etme, hak sahibine ulaşma ve mümkün olan en kısa sürede ödeme."
+  "semantic_description": "Kul hakkı nasıl ödenir? Helalleşme, zararı telafi etme, hak sahibine ulaşma ve mümkün olan en kısa sürede ödeme.",
+  "emotion_tags": [
+    "guilt",
+    "justice",
+    "repentance",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

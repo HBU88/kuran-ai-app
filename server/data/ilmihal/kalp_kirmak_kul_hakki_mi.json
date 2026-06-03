@@ -47,5 +47,11 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Kalp kırmak kul hakkı mı? Özür dilemek, gönül almak ve kişiyi inciten sözleri telafi etmekle ilgili pratik cevap."
+  "semantic_description": "Kalp kırmak kul hakkı mı? Özür dilemek, gönül almak ve kişiyi inciten sözleri telafi etmekle ilgili pratik cevap.",
+  "emotion_tags": [
+    "guilt",
+    "justice",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

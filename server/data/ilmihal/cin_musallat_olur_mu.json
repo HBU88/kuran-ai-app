@@ -44,5 +44,11 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Bir şikâyeti doğrudan musallata bağlamak doğru değildir; önce sakinlik, dua, güvenilir dinî rehberlik ve gerekirse sağlık desteği gerekir.",
-  "semantic_description": "cin musallat olur mu musallat oldugu düşüncesi üstümde cin var mı sorularına sakin ve ölçülü cevap verir bir şikâyeti doğrudan musallata bağlamak doğru değildir önce sakinlik dua güvenilir dinî rehberlik ve gerekirse sağlık desteği gerekir"
+  "semantic_description": "cin musallat olur mu musallat oldugu düşüncesi üstümde cin var mı sorularına sakin ve ölçülü cevap verir bir şikâyeti doğrudan musallata bağlamak doğru değildir önce sakinlik dua güvenilir dinî rehberlik ve gerekirse sağlık desteği gerekir",
+  "emotion_tags": [
+    "fear",
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "korku_kaygi"
 }

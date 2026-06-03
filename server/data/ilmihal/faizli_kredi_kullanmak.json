@@ -47,5 +47,11 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Faizli kredi kullanmak caiz mi? Faizli kredi, alternatifleri değerlendirme, faizsiz yol arama ve dikkatli hareket etme."
+  "semantic_description": "Faizli kredi kullanmak caiz mi? Faizli kredi, alternatifleri değerlendirme, faizsiz yol arama ve dikkatli hareket etme.",
+  "emotion_tags": [
+    "guilt",
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

@@ -44,5 +44,11 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Büyü iddiaları istismara açık olabilir; kesin teşhis vermeden, korkuyu büyütmeden ve güvenilir rehberlik arayarak hareket etmek gerekir.",
-  "semantic_description": "büyü var mı büyü gerçek mi sihir korku dua sorularına sakin ve ölçülü cevap verir büyü iddiaları istismara açık olabilir kesin teşhis vermeden korkuyu büyütmeden ve güvenilir rehberlik arayarak hareket etmek gerekir"
+  "semantic_description": "büyü var mı büyü gerçek mi sihir korku dua sorularına sakin ve ölçülü cevap verir büyü iddiaları istismara açık olabilir kesin teşhis vermeden korkuyu büyütmeden ve güvenilir rehberlik arayarak hareket etmek gerekir",
+  "emotion_tags": [
+    "fear",
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "korku_kaygi"
 }

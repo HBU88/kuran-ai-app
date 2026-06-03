@@ -84,5 +84,12 @@
     "bayram_namazi_nedir",
     "bayram_namazi_nasil_kilinir",
     "kurban_nedir"
-  ]
+  ],
+  "emotion_tags": [
+    "hope",
+    "patience",
+    "faith",
+    "guidance"
+  ],
+  "category_type": "kisas_enbiya"
 }

@@ -73,5 +73,10 @@
   "conflicting_entries": [
     "hayiz_nedir",
     "nifas_nedir"
-  ]
+  ],
+  "emotion_tags": [
+    "guidance",
+    "patience"
+  ],
+  "category_type": "genel"
 }

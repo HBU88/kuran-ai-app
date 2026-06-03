@@ -47,5 +47,11 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Aynı günahı tekrar işlemek tövbeyi bozar mı? Tekrar tövbe, ümitsizliğe kapılmama, tetikleyen ortamdan uzaklaşma ve manevi destek."
+  "semantic_description": "Aynı günahı tekrar işlemek tövbeyi bozar mı? Tekrar tövbe, ümitsizliğe kapılmama, tetikleyen ortamdan uzaklaşma ve manevi destek.",
+  "emotion_tags": [
+    "guilt",
+    "repentance",
+    "hope"
+  ],
+  "category_type": "tovbe_istigfar"
 }

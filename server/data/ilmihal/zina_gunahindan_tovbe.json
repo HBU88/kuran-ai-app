@@ -47,5 +47,12 @@
   "farzlar": [],
   "vacipler": [],
   "sunnetler": [],
-  "semantic_description": "Zina günahından tövbe nasıl yapılır? Günahı bırakma, samimi dönüş, temiz çevre kurma ve ümitsizliğe kapılmama."
+  "semantic_description": "Zina günahından tövbe nasıl yapılır? Günahı bırakma, samimi dönüş, temiz çevre kurma ve ümitsizliğe kapılmama.",
+  "emotion_tags": [
+    "guilt",
+    "repentance",
+    "hope",
+    "forgiveness"
+  ],
+  "category_type": "tovbe_istigfar"
 }

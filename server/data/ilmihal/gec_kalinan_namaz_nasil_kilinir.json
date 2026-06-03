@@ -37,5 +37,10 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "geç kalınan namaz nasıl kılınır vakti geçen namaz kaza namazı nasıl kılınır kaza niyeti hanefî mezhebine göre vakti geçen namaz kaza niyetiyle kılınır mümkün olan ilk zamanda yerine getirilmesi gerekir"
+  "semantic_description": "geç kalınan namaz nasıl kılınır vakti geçen namaz kaza namazı nasıl kılınır kaza niyeti hanefî mezhebine göre vakti geçen namaz kaza niyetiyle kılınır mümkün olan ilk zamanda yerine getirilmesi gerekir",
+  "emotion_tags": [
+    "guilt",
+    "guidance"
+  ],
+  "category_type": "genel"
 }

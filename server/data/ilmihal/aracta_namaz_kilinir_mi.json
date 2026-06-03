@@ -36,5 +36,9 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "araçta namaz kılınır mı arabada namaz kılınır mı otobüste namaz asıl olan namazı durup kıbleye yönelerek kılmaktır zorunlu bir durumda araçta kılma değerlendirilir araçta namaz"
+  "semantic_description": "araçta namaz kılınır mı arabada namaz kılınır mı otobüste namaz asıl olan namazı durup kıbleye yönelerek kılmaktır zorunlu bir durumda araçta kılma değerlendirilir araçta namaz",
+  "emotion_tags": [
+    "guidance"
+  ],
+  "category_type": "genel"
 }

@@ -27,5 +27,9 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "bayram namazı 2 rekattır bayram namazı kaç rekat bayram namazı kaç rekât bayram namazı nasıl kılınır"
+  "semantic_description": "bayram namazı 2 rekattır bayram namazı kaç rekat bayram namazı kaç rekât bayram namazı nasıl kılınır",
+  "emotion_tags": [
+    "guidance"
+  ],
+  "category_type": "ibadet"
 }

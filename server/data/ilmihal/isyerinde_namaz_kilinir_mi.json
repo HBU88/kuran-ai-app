@@ -36,5 +36,9 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "işyerinde namaz kılınır mı iş yerinde namaz ofiste namaz kılınır mı çalışırken namaz temiz bir alan ve vakit bulunduğunda işyerinde namaz kılınabilir kıbleye yönelmek ve farzları korumak esastır"
+  "semantic_description": "işyerinde namaz kılınır mı iş yerinde namaz ofiste namaz kılınır mı çalışırken namaz temiz bir alan ve vakit bulunduğunda işyerinde namaz kılınabilir kıbleye yönelmek ve farzları korumak esastır",
+  "emotion_tags": [
+    "guidance"
+  ],
+  "category_type": "genel"
 }

@@ -44,5 +44,12 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Korku geldiğinde sükûnet, dua, nefes ve günlük düzeni korumak faydalıdır; korku sıklaşıyorsa profesyonel destek düşünülmelidir.",
-  "semantic_description": "korku gelince ne yapmalı korku geldiğinde ne yapılır aniden korkuyorum sorularına sakin ve pratik yönlendirme verir korku geldiğinde sükûnet dua nefes ve günlük düzeni korumak faydalıdır korku sıklaşıyorsa profesyonel destek düşünülmelidir"
+  "semantic_description": "korku gelince ne yapmalı korku geldiğinde ne yapılır aniden korkuyorum sorularına sakin ve pratik yönlendirme verir korku geldiğinde sükûnet dua nefes ve günlük düzeni korumak faydalıdır korku sıklaşıyorsa profesyonel destek düşünülmelidir",
+  "emotion_tags": [
+    "fear",
+    "anxiety",
+    "guidance",
+    "peace"
+  ],
+  "category_type": "korku_kaygi"
 }

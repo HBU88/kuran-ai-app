@@ -50,5 +50,10 @@
     "yolculukta namaz kısaltılır mı",
     "sefer namazı kaçtır",
     "yolculukta namaz nasıl kılınır"
-  ]
+  ],
+  "emotion_tags": [
+    "guidance",
+    "patience"
+  ],
+  "category_type": "genel"
 }

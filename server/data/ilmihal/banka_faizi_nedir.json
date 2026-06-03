@@ -42,5 +42,11 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Banka faizi, borç veya mevduat ilişkisine eklenen artış anlamına gelir; faizli işlemlerden sakınmak, şartları dikkatle değerlendirmek gerekir.",
-  "semantic_description": "banka faizi nedir banka faizi faiz nedir sorularına sakin ve pratik cevap verir banka faizi borç veya mevduat ilişkisine eklenen artış anlamına gelir faizli işlemlerden sakınmak şartları dikkatle değerlendirmek gerekir"
+  "semantic_description": "banka faizi nedir banka faizi faiz nedir sorularına sakin ve pratik cevap verir banka faizi borç veya mevduat ilişkisine eklenen artış anlamına gelir faizli işlemlerden sakınmak şartları dikkatle değerlendirmek gerekir",
+  "emotion_tags": [
+    "guilt",
+    "anxiety",
+    "guidance"
+  ],
+  "category_type": "ahlak"
 }

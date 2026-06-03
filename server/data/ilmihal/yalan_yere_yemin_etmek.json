@@ -44,5 +44,11 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Yalan yere yemin etmek ağır bir yanlışlıktır; kişi vakit kaybetmeden yanlışından dönmeli, mümkünse helalleşmeli ve tövbe etmelidir.",
-  "semantic_description": "yalan yere yemin etmek günah mı yalan yere yemin etmek yalan yemin sorularına sakin ve pratik cevap verir yalan yere yemin etmek ağır bir yanlışlıktır kişi vakit kaybetmeden yanlışından dönmeli mümkünse helalleşmeli ve tövbe etmelidir"
+  "semantic_description": "yalan yere yemin etmek günah mı yalan yere yemin etmek yalan yemin sorularına sakin ve pratik cevap verir yalan yere yemin etmek ağır bir yanlışlıktır kişi vakit kaybetmeden yanlışından dönmeli mümkünse helalleşmeli ve tövbe etmelidir",
+  "emotion_tags": [
+    "guilt",
+    "guidance",
+    "justice"
+  ],
+  "category_type": "ahlak"
 }

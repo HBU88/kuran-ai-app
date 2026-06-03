@@ -46,5 +46,12 @@
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
   "answer_tr": "Vesvese her zaman tek bir sebebe bağlanmaz; kişi onu büyütmeden dua, zikir ve sakin bir düzenle ele almalı, gerekirse güvenilir rehberlik ve profesyonel destek aramalıdır.",
-  "semantic_description": "vesvese şeytandan mı aklıma kötü düşünceler geliyor sürekli şüpheye düşüyorum ve intrusive thoughts için sakinleştirici dini yaklaşım sunar vesvese her zaman tek bir sebebe bağlanmaz kişi onu büyütmeden dua zikir ve sakin bir düzenle ele almalı gerekirse güvenilir rehberlik ve profesyonel destek aramalıdır"
+  "semantic_description": "vesvese şeytandan mı aklıma kötü düşünceler geliyor sürekli şüpheye düşüyorum ve intrusive thoughts için sakinleştirici dini yaklaşım sunar vesvese her zaman tek bir sebebe bağlanmaz kişi onu büyütmeden dua zikir ve sakin bir düzenle ele almalı gerekirse güvenilir rehberlik ve profesyonel destek aramalıdır",
+  "emotion_tags": [
+    "anxiety",
+    "fear",
+    "guidance",
+    "peace"
+  ],
+  "category_type": "korku_kaygi"
 }

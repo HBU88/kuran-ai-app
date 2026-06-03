@@ -71,5 +71,10 @@
     "zekat_nisap_nedir",
     "zekat_kime_verilir",
     "fitre_nedir"
-  ]
+  ],
+  "emotion_tags": [
+    "gratitude",
+    "guidance"
+  ],
+  "category_type": "ibadet"
 }

@@ -27,5 +27,9 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "cuma namazının farzı 2 rekattır sünnetlerle birlikte kılınır cuma namazı kaç rekat cuma namazı kaç rekât cuma namazı kaç rekattır"
+  "semantic_description": "cuma namazının farzı 2 rekattır sünnetlerle birlikte kılınır cuma namazı kaç rekat cuma namazı kaç rekât cuma namazı kaç rekattır",
+  "emotion_tags": [
+    "guidance"
+  ],
+  "category_type": "ibadet"
 }

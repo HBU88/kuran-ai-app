@@ -36,5 +36,10 @@
   "source_notes": [
     "Diyanet ve TDV ilmihal üslubuyla hazırlanmış kısa özet."
   ],
-  "semantic_description": "namaz kaçırınca ne yapılır kaçırılan namaz mümkün olan en kısa sürede kaza edilir bilerek terk edildiyse tövbe edilir namaz kaçırdım ne yapmalıyım kaçırılan namaz kaza namazı kaza namazı"
+  "semantic_description": "namaz kaçırınca ne yapılır kaçırılan namaz mümkün olan en kısa sürede kaza edilir bilerek terk edildiyse tövbe edilir namaz kaçırdım ne yapmalıyım kaçırılan namaz kaza namazı kaza namazı",
+  "emotion_tags": [
+    "guilt",
+    "guidance"
+  ],
+  "category_type": "ibadet"
 }
