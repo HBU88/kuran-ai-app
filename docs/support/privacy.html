@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gizlilik Politikası — HAKAI</title>
+  <meta name="description" content="HAKAI uygulamasının gizlilik politikası ve kişisel veri işleme bilgilendirmesi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #FFFFFF;
+      --surface: #F8FAF9;
+      --border:  #E2E8E4;
+      --accent:  #1B6B3A;
+      --accent-light: #E8F5EE;
+      --text-1:  #111B15;
+      --text-2:  #3D5246;
+      --text-3:  #6B7F72;
+      --radius:  12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-1);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); text-decoration: none; letter-spacing: 0.1em; }
+    .nav-back { font-size: 0.83rem; color: var(--text-3); text-decoration: none; }
+    .nav-back:hover { color: var(--accent); }
+
+    /* LAYOUT */
+    .wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3.5rem clamp(1.25rem, 5vw, 2.5rem) 5rem;
+    }
+
+    /* HEADER */
+    .doc-header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 2px solid var(--accent-light); }
+    .doc-header h1 { font-size: clamp(1.7rem, 4vw, 2.2rem); font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+    .doc-meta { font-size: 0.82rem; color: var(--text-3); }
+    .doc-meta span { margin-right: 1.5rem; }
+
+    /* SECTIONS */
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    p { margin-bottom: 0.75rem; color: var(--text-2); font-size: 0.95rem; }
+
+    ul, ol {
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-2);
+      font-size: 0.95rem;
+    }
+    li { margin-bottom: 0.35rem; }
+
+    /* INFO BOXES */
+    .info-box {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.93rem;
+      color: var(--text-1);
+    }
+    .info-box strong { color: var(--accent); }
+
+    /* DATA TABLE */
+    .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+    .data-table th {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+    }
+    .data-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-2);
+      vertical-align: top;
+    }
+    .data-table tr:nth-child(even) td { background: var(--surface); }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: var(--accent-light);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .badge.red { background: #FEE2E2; color: #991B1B; }
+
+    /* CONTACT */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    .contact-card p { margin-bottom: 0.3rem; }
+    .contact-card a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem clamp(1.25rem, 5vw, 3rem);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-3);
+    }
+
+    @media (max-width: 600px) {
+      .data-table thead { display: none; }
+      .data-table td { display: block; padding: 6px 10px; }
+      .data-table td::before {
+        content: attr(data-label) ": ";
+        font-weight: 600;
+        color: var(--text-1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">HAKAI</a>
+  <a href="../index.html" class="nav-back">← Ana Sayfa</a>
+</nav>
+
+<main class="wrapper">
+
+  <div class="doc-header">
+    <h1>Gizlilik Politikası</h1>
+    <p class="doc-meta">
+      <span>Son güncelleme: 3 Haziran 2026</span>
+      <span>Geçerlilik: HAKAI iOS Uygulaması</span>
+    </p>
+  </div>
+
+  <div class="info-box">
+    <strong>Özet:</strong> HAKAI, kişisel hesap oluşturmaz. Konum verisi yalnızca namaz vakitleri ve kıble yönü için cihazınızda kullanılır. Sohbet mesajlarınız yapay zeka yanıtı üretmek amacıyla işlenir ve saklanmaz.
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <h2>1. Uygulama Hakkında</h2>
+    <p>
+      HAKAI ("biz", "uygulama"), Burak Uckun tarafından geliştirilen, Türkçe dini rehberlik hizmetleri sunan
+      bir iOS mobil uygulamasıdır. Uygulama; ilmihal soruları, Kuran ayet rehberi, namaz vakitleri ve kıble pusulası
+      işlevlerini kapsamaktadır.
+    </p>
+    <p>
+      Bu Gizlilik Politikası, uygulamayı kullandığınızda hangi verilerin işlendiğini ve bu verilerin nasıl
+      korunduğunu açıklamaktadır.
+    </p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2. Toplanan Veriler</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Veri Türü</th>
+          <th>Amaç</th>
+          <th>Saklama</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Veri">Konum verisi (enlem/boylam)</td>
+          <td data-label="Amaç">Namaz vakitleri ve kıble yönü hesaplama</td>
+          <td data-label="Saklama"><span class="badge">Cihazda, anlık</span></td>
+        </tr>
+        <tr>
+          <td data-label="Veri">Sohbet mesajları</td>
+          <td data-label="Amaç">Yapay zeka yanıtı üretmek (OpenAI API)</td>
+          <td data-label="Saklama"><span class="badge red">Sunucularda saklanmaz</span></td>
+        </tr>
+        <tr>
+          <td data-label="Veri">Anonim cihaz kimliği</td>
+          <td data-label="Amaç">Aylık kullanım kotası takibi</td>
+          <td data-label="Saklama"><span class="badge">Sunucuda, anonim</span></td>
+        </tr>
+        <tr>
+          <td data-label="Veri">Uygulama tercihleri</td>
+          <td data-label="Amaç">Bildirim ve dil ayarları</td>
+          <td data-label="Saklama"><span class="badge">Cihazda (UserDefaults)</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Uygulama; ad, e-posta, telefon numarası, ödeme bilgisi veya herhangi bir kişisel hesap
+      bilgisi <strong>toplamaz</strong>.
+    </p>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3. Konum Verisinin Kullanımı</h2>
+    <p>
+      Namaz vakitleri ve kıble pusulası işlevleri için konum izniniz talep edilir.
+      Konum verisi <strong>yalnızca cihazınızda</strong> işlenir; sunucularımıza gönderilmez ve depolanmaz.
+    </p>
+    <p>
+      Konum iznini iOS Ayarlar → Gizlilik → Konum Servisleri → HAKAI bölümünden dilediğiniz zaman
+      kısıtlayabilir veya devre dışı bırakabilirsiniz. İzin verilmemesi durumunda namaz vakti ve kıble
+      özellikleri çalışmaz; diğer özellikler etkilenmez.
+    </p>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4. Yapay Zeka ve Sohbet Verileri</h2>
+    <p>
+      İlmihal ve ayet rehberi sohbetleriniz, yanıt üretmek amacıyla OpenAI API üzerinden işlenmektedir.
+      Mesajlarınız OpenAI'nın sunucularına iletilir; bu iletim <strong>HAKAI sunucularında saklanmaz</strong>.
+    </p>
+    <p>
+      OpenAI'nın veri işleme politikası için:
+      <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">openai.com/policies/privacy-policy</a>
+    </p>
+    <div class="info-box">
+      <strong>Önemli:</strong> Dini içerikli sorularınızı anonimleştirerek iletmenizi öneririz. Kişisel bilgilerinizi
+      sohbet mesajlarına eklemeyin.
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5. Üçüncü Taraf Hizmetler</h2>
+    <ul>
+      <li><strong>OpenAI API</strong> — Yapay zeka yanıtları için. Mesaj içerikleri OpenAI'ya iletilir.</li>
+      <li><strong>Diyanet İşleri Başkanlığı API</strong> — Namaz vakitleri için. Konum verisi iletilmez; yalnızca şehir bilgisi kullanılır.</li>
+      <li><strong>Apple App Store / StoreKit</strong> — Uygulama içi destek satın alımları için. Ödeme bilgileri tamamen Apple tarafından işlenir; HAKAI ödeme bilgilerinize erişemez.</li>
+    </ul>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <h2>6. Veri Güvenliği</h2>
+    <p>
+      Uygulama ile sunucu arasındaki tüm iletişim <strong>HTTPS/TLS</strong> ile şifrelenmektedir.
+      Cihazda depolanan veriler iOS'un standart <strong>Data Protection (AES-256)</strong> mekanizmasıyla
+      korunmaktadır. Kimlik doğrulama token'ları Apple Keychain'de güvenli biçimde saklanmaktadır.
+    </p>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <h2>7. Çocukların Gizliliği</h2>
+    <p>
+      HAKAI, 13 yaşın altındaki çocuklara yönelik olarak tasarlanmamıştır ve bu kullanıcılardan
+      bilerek kişisel veri toplamaz. 13 yaş altı bir kullanıcıya ait veri topladığımızı fark edersek,
+      söz konusu veriyi derhal sileriz.
+    </p>
+  </section>
+
+  <!-- 8 -->
+  <section>
+    <h2>8. Kullanıcı Hakları</h2>
+    <p>Aşağıdaki haklara sahipsiniz:</p>
+    <ul>
+      <li><strong>Erişim:</strong> Hakkınızda hangi verilerin işlendiğini öğrenme hakkı.</li>
+      <li><strong>Silme:</strong> Anonim cihaz kimliğinizin sunuculardan silinmesini talep etme hakkı.</li>
+      <li><strong>Konum iptali:</strong> iOS Ayarlar üzerinden konum iznini her zaman geri alma hakkı.</li>
+    </ul>
+    <p>Talepleriniz için aşağıdaki iletişim bilgilerini kullanabilirsiniz.</p>
+  </section>
+
+  <!-- 9 -->
+  <section>
+    <h2>9. Politika Değişiklikleri</h2>
+    <p>
+      Bu politika zaman zaman güncellenebilir. Önemli değişiklikler uygulama içi bildirim veya bu sayfa
+      üzerinden duyurulacaktır. Güncel versiyonu kontrol etmek için sayfanın üst kısmındaki tarihe bakabilirsiniz.
+    </p>
+  </section>
+
+  <!-- 10 -->
+  <section>
+    <h2>10. İletişim</h2>
+    <p>Gizlilik politikasına ilişkin sorularınız için:</p>
+    <div class="contact-card">
+      <p><strong>Uygulama:</strong> HAKAI</p>
+      <p><strong>Geliştirici:</strong> Burak Uckun</p>
+      <p><strong>E-posta:</strong> <a href="mailto:support@myhakai.com">support@myhakai.com</a></p>
+      <p><strong>Web:</strong> <a href="https://hbu88.github.io/kuran-ai-app/" target="_blank">hbu88.github.io/kuran-ai-app</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 HAKAI — Tüm hakları saklıdır. &nbsp;|&nbsp;
+  <a href="../index.html" style="color: inherit;">Ana Sayfa</a> &nbsp;|&nbsp;
+  <a href="index.html" style="color: inherit;">Destek</a>
+</footer>
+
+</body>
+</html>
