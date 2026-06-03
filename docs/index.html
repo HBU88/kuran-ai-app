@@ -134,7 +134,7 @@
       line-height: 1;
     }
 
-    .hero-title span { color: var(--accent); }
+    .hero-title span { color: var(--accent); letter-spacing: 0.1em; }
 
     .hero-arabic {
       font-family: 'Noto Serif', serif;
@@ -195,56 +195,48 @@
 
     .btn-ghost:hover { border-color: var(--accent-soft); color: var(--accent-soft); }
 
-    /* PHONE MOCKUPS */
-    .hero-phones {
+    /* SCREENSHOTS */
+    .screenshots-row {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       justify-content: center;
       align-items: flex-end;
       flex-wrap: wrap;
     }
 
-    .phone-frame {
-      width: clamp(120px, 20vw, 155px);
-      aspect-ratio: 9/19.5;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      overflow: hidden;
+    .screenshot-wrap {
+      position: relative;
       flex-shrink: 0;
     }
 
-    .phone-frame.center {
-      transform: translateY(-20px);
-      width: clamp(140px, 24vw, 180px);
+    .screenshot-wrap.center { transform: translateY(-22px); }
+
+    .screenshot-frame {
+      border-radius: 36px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 0 0 6px var(--card);
+      display: block;
     }
 
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-      padding: 14px 10px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      background: linear-gradient(160deg, var(--bg-grad-s), var(--bg));
+    .screenshot-frame img {
+      display: block;
+      width: clamp(130px, 18vw, 165px);
+      height: auto;
+      object-fit: cover;
     }
 
-    .pb { height: 4px; border-radius: 3px; background: var(--divider); }
-    .pb.ac { background: var(--accent); width: 55%; }
-    .pb.as { background: rgba(44,241,140,0.35); width: 38%; }
-    .pb.w80 { width: 80%; } .pb.w70 { width: 70%; }
-    .pb.w60 { width: 60%; } .pb.w50 { width: 50%; }
-    .pb.w40 { width: 40%; }
-
-    .bubble {
-      border-radius: 9px;
-      padding: 7px 9px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .screenshot-wrap.center .screenshot-frame img {
+      width: clamp(155px, 22vw, 195px);
     }
-    .bubble.u { background: #173326; align-self: flex-end; width: 65%; }
-    .bubble.a { background: var(--surface); width: 75%; }
+
+    .screenshot-label {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-3);
+      margin-top: 10px;
+      letter-spacing: 0.05em;
+    }
 
     /* SECTIONS */
     section { padding: 5rem clamp(1.25rem, 6vw, 4rem); }
@@ -503,7 +495,9 @@
     }
 
     @media (max-width: 520px) {
-      .phone-frame.center { transform: none; }
+      .screenshot-wrap.center { transform: none; }
+      .screenshot-frame img { width: clamp(100px, 28vw, 130px); }
+      .screenshot-wrap.center .screenshot-frame img { width: clamp(115px, 32vw, 150px); }
     }
   </style>
 </head>
@@ -520,7 +514,7 @@
 
   <div class="hero-eyebrow">Yapay Zeka Destekli</div>
 
-  <h1 class="hero-title">HA<span>KA</span>İ</h1>
+  <h1 class="hero-title">HAK<span>AI</span></h1>
 
   <p class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
 
@@ -539,85 +533,28 @@
     <a href="#features" class="btn-ghost">Özellikleri Keşfet ↓</a>
   </div>
 
-  <!-- Phone mockups -->
-  <div class="hero-phones" aria-hidden="true">
+  <!-- App Screenshots -->
+  <div class="screenshots-row" aria-label="Uygulama ekran görüntüleri">
 
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <div class="pb w50"></div>
-        <div class="pb ac"></div>
-        <div class="pb w40"></div>
-        <div style="height:6px"></div>
-        <div class="bubble u">
-          <div class="pb w80"></div>
-          <div class="pb w60"></div>
-        </div>
-        <div class="bubble a">
-          <div class="pb w80"></div>
-          <div class="pb w60"></div>
-          <div class="pb w70"></div>
-        </div>
-        <div class="bubble u"><div class="pb w55"></div></div>
-        <div class="bubble a">
-          <div class="pb as w70"></div>
-          <div class="pb w80"></div>
-          <div class="pb w50"></div>
-          <div class="pb w70"></div>
-        </div>
+    <div class="screenshot-wrap">
+      <div class="screenshot-frame">
+        <img src="screenshots/home.png" alt="Ayet Rehberi ana ekranı" loading="lazy" />
       </div>
+      <p class="screenshot-label">Ayet Rehberi</p>
     </div>
 
-    <div class="phone-frame center">
-      <div class="phone-screen" style="align-items:center;justify-content:center;gap:14px;padding:20px 14px;">
-        <div style="width:52px;height:52px;border-radius:14px;background:rgba(44,241,140,0.1);border:1px solid rgba(44,241,140,0.25);display:flex;align-items:center;justify-content:center;font-size:1.6rem;">🕌</div>
-        <div style="width:100%;display:flex;flex-direction:column;gap:5px;">
-          <div class="pb ac" style="height:5px;width:88%"></div>
-          <div class="pb w75"></div>
-          <div class="pb w60"></div>
-        </div>
-        <div style="width:100%;background:rgba(44,241,140,0.06);border:1px solid rgba(44,241,140,0.14);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:5px;">
-          <div class="pb as" style="width:78%"></div>
-          <div class="pb w92"></div>
-          <div class="pb w70"></div>
-          <div class="pb w82"></div>
-        </div>
-        <div style="width:90%;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-          <div style="background:var(--card);border:1px solid var(--divider);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:4px;">
-            <div class="pb w70"></div><div class="pb as w55"></div>
-          </div>
-          <div style="background:var(--card);border:1px solid var(--divider);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:4px;">
-            <div class="pb w60"></div><div class="pb as w75"></div>
-          </div>
-        </div>
+    <div class="screenshot-wrap center">
+      <div class="screenshot-frame">
+        <img src="screenshots/ayet_rehberi.png" alt="Ayet detay ekranı" loading="lazy" />
       </div>
+      <p class="screenshot-label">Günlük Ayet</p>
     </div>
 
-    <div class="phone-frame">
-      <div class="phone-screen" style="gap:8px;">
-        <div class="pb w60"></div>
-        <div style="margin-top:4px;display:flex;flex-direction:column;gap:6px;">
-          <div style="background:var(--surface-soft);border-radius:8px;padding:8px 8px;display:flex;flex-direction:column;gap:3px;">
-            <div class="pb ac" style="height:3px;width:55%"></div>
-            <div class="pb" style="height:2px;width:75%"></div>
-          </div>
-          <div style="background:var(--surface-soft);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:3px;">
-            <div class="pb" style="height:3px;width:65%"></div>
-            <div class="pb" style="height:2px;width:50%"></div>
-          </div>
-          <div style="background:var(--surface-soft);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:3px;">
-            <div class="pb" style="height:3px;width:70%"></div>
-            <div class="pb" style="height:2px;width:80%"></div>
-          </div>
-          <div style="background:var(--surface-soft);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:3px;">
-            <div class="pb" style="height:3px;width:60%"></div>
-            <div class="pb" style="height:2px;width:55%"></div>
-          </div>
-          <div style="background:var(--surface-soft);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:3px;">
-            <div class="pb" style="height:3px;width:75%"></div>
-            <div class="pb" style="height:2px;width:65%"></div>
-          </div>
-        </div>
+    <div class="screenshot-wrap">
+      <div class="screenshot-frame">
+        <img src="screenshots/chat.png" alt="Sohbet ekranı" loading="lazy" />
       </div>
+      <p class="screenshot-label">Rehberlik</p>
     </div>
 
   </div>
