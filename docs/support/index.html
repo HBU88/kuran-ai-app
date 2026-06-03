@@ -4,19 +4,78 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HAKAI - Destek</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #f5f5f5; }
-    .container { background: white; padding: 30px; border-radius: 10px; }
-    h1 { color: #667eea; }
-    a { color: #667eea; text-decoration: none; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #1e3c72;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    h3 {
+      color: #1e3c72;
+      font-size: 18px;
+      margin-top: 25px;
+      margin-bottom: 12px;
+    }
+    p {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+    a {
+      color: #2a5298;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #eee;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>HAKAI Desteği</h1>
-    <p>Email: <a href="mailto:support@myhakai.com">support@myhakai.com</a></p>
+    
+    <h3>📧 Email</h3>
+    <p>Sorularınız veya geri bildirimleriniz için bizimle iletişime geçin:</p>
+    <p><a href="mailto:support@myhakai.com">support@myhakai.com</a></p>
+    
+    <h3>🐙 GitHub</h3>
+    <p>Teknik sorunlar veya önerileriniz için GitHub üzerinden issue açabilirsiniz:</p>
     <p><a href="https://github.com/HBU88/kuran-ai-app/issues">GitHub Issues</a></p>
-    <p><a href="/">Ana Sayfa</a></p>
+    
+    <h3>ℹ️ Hakkında</h3>
+    <p>HAKAI, dini bilgilerin doğru ve güvenilir kaynaklardan sunulması için tasarlanmıştır. Uygulamada kullanılan tüm bilgiler Diyanet İşleri Başkanlığı kaynakları ve İslami ilminden derlenmiştir.</p>
+    
+    <div class="back-link">
+      <p><a href="/">← HAKAI'ye Dön</a></p>
+    </div>
   </div>
 </body>
 </html>
