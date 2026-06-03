@@ -94,3 +94,19 @@ test_artifacts/
 # KB backup files written by migration scripts / AtomicKBUpdater
 server/data/_kb_backups/
 server/data/ilmihal/*.bak.*
+
+# Obsidian vault
+.obsidian/
+*.canvas
+*.base
+
+# Personal notes / session files
+[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
+
+# Claude Code prompt docs (local planning only)
+CLAUDE_CODE_PROMPT_*.md
+
+# Office documents (generated artifacts, not source)
+*.docx
+*.xlsx
+*.pptx
