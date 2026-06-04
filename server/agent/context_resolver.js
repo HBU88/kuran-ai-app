@@ -30,6 +30,8 @@ const THEMES = [
   "kul hakki",
   "evlilik",
   "helal",
+  "ahiret",
+  "ölüm",
 ];
 
 const GENERIC_THEMES = new Set(["umut", "tevekkül"]);
@@ -271,6 +273,28 @@ const TOPIC_PATTERNS = [
   { topic: "kul hakki",  phrases: ["kul hakkı", "hakkını yemek", "başkasının hakkı", "ölçüde hile"] },
   { topic: "evlilik",    phrases: ["evlilik", "nikah", "evlenmek", "eşime", "eşimle", "karı koca"] },
   { topic: "helal",      phrases: ["helal", "haram", "helal haram", "helal kazanç"] },
+  {
+    topic: "ahiret",
+    phrases: [
+      "ahiret", "öbür dünya", "obur dunya",
+      "kıyamet", "kiyamet", "mahşer", "mahser",
+      "öldükten sonra", "olduktan sonra",
+      "ahirette", "hesap günü", "hesap gunu",
+      "cennet ve cehennem", "son gün",
+      "ahiret hakkında", "ahiret için",
+      "ölüm ve ahiret", "olum ve ahiret",
+      "ölüm ve ahiret hakkında", "olum ve ahiret hakkinda",
+    ],
+  },
+  {
+    topic: "ölüm",
+    phrases: [
+      "ölüm hakkında", "olum hakkinda",
+      "ölüm gerçeği", "olum gercegi",
+      "hayatın sonu", "hayatin sonu",
+      "vefat", "öldükten sonra ne olacak",
+    ],
+  },
 ];
 
 const MOJIBAKE_REPLACEMENTS = [

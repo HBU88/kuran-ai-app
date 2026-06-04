@@ -383,6 +383,10 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "haksızlığa uğradım",
       "haksizliga ugradim",
       "adalet istiyorum",
+      // ── İhanet / güven ihlali ───────────────────────────────────────────
+      "ihanet", "ihane", "ihane etti", "ihanet etti", "beni ihanet",
+      "arkadaşım beni", "arkadaşımdan ihanet", "güvenimle oynadı",
+      "güvenime ihanet", "güveni kötüye", "güveni suistimal",
     ],
   },
   {
@@ -464,6 +468,10 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "zor zamanlarda sabir",
       "birini kaybettim",
       "yas",
+      // ── Aile / ilişki sorunları ──────────────────────────────────────────
+      "aile kavgası", "aile kavgasi", "aile sorunu", "aile sorunu yaşıyorum",
+      "aile içi kavga", "eşimle kavga", "eşimle tartışıyoruz",
+      "kavga ettik", "tartışıyoruz", "aile huzuru", "aile problemi",
     ],
   },
   {
