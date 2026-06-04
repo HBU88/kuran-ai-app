@@ -1765,18 +1765,22 @@ function selectCuratedTopicTopResults(sourceAyahs, topicConstraint, usedAyahIdSe
 
   const ayahIndex = getSourceAyahIndex(sourceAyahs);
 
-  return cluster
-    .map((reference, index) => {
-      const ayah = ayahIndex.get(ayahKey(reference.surahNumber, reference.ayahNumber));
-      if (!ayah) return null;
-      return {
-        ...ayah,
-        final_score: 10000 - index * 100,
-        ranker_source: "override",
-      };
-    })
-    .filter(Boolean)
-    .slice(0, 3);
+  // Kümedeki tüm mevcut ayetleri sırayla bul
+  const allEntries = cluster
+    .map((reference) => ayahIndex.get(ayahKey(reference.surahNumber, reference.ayahNumber)))
+    .filter(Boolean);
+
+  if (allEntries.length === 0) return [];
+
+  // Daha önce gösterilmemiş ayetleri öne al; tümü gösterildiyse kümeyi baştan döndür
+  const unused = allEntries.filter((ayah) => !(usedAyahIdSet instanceof Set ? usedAyahIdSet.has(ayah.id) : false));
+  const candidates = unused.length > 0 ? unused : allEntries;
+
+  return candidates.slice(0, 3).map((ayah, index) => ({
+    ...ayah,
+    final_score: 10000 - index * 100,
+    ranker_source: "override",
+  }));
 }
 
 function shouldForceCuratedTopicSelection(message, explicitTopic, explicitAyahRequest) {
