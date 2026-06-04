@@ -109,6 +109,12 @@ npm --prefix server run test:security
 - IAP canlıya geçtikten sonra `HAKAI_USAGE_LIMITS_ENABLED=true` Render'a eklenecek
 - ✅ ~~TODO(sprint3-paywall)~~: 402 → `_QuotaExceededSheet` bottom sheet `chat_screen.dart`'ta implemente edildi ve bağlandı
 
+## Yasal / Web
+- **Gizlilik Politikası (web):** https://www.myhakai.com/privacy/
+- **Gizlilik Politikası (uygulama içi):** `legal_info_screens.dart → PrivacyPolicyScreen`
+- **App Store Connect Privacy Policy URL:** https://www.myhakai.com/privacy/
+- Kullanım Koşulları ekranı: `TermsOfUseScreen` — in-app, web sürümü şimdilik beklemede
+
 ## Bilinen Sorunlar
 _(Tümü çözüldü — güncelleme gerekirse buraya ekle)_
 
