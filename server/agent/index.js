@@ -713,13 +713,41 @@ async function buildChatResponse(message, history = [], options = {}) {
   const localFastPathPlan = timing.measureSync("context_resolver_ms", () =>
     resolveLocalFastPathPlan(message, history, baseAnalysis, { module: moduleMode })
   );
+  // ── Ayah modunda OpenAI devre dışı ─────────────────────────────────────────
+  // "ayah" modunda OpenAI planner hiçbir zaman çağrılmaz.
+  // localFastPathPlan null ise: "ayet" kelimesi geçiyorsa genel plan üret,
+  // aksi hâlde ilmihal moduna yönlendir.
+  const ayahModeGenericPlan = (moduleMode === "ayah" && !localFastPathPlan) ? (() => {
+    const hasAyetKeyword =
+      normalize(message).includes(normalize("ayet")) ||
+      isExplicitAyahRequest(message, baseAnalysis, null, null);
+    if (!hasAyetKeyword) return null;
+    return {
+      intent: "ayah_request",
+      sub_intent: "ayah_request",
+      needs_ayah: true,
+      needs_knowledge: false,
+      knowledge_topic: null,
+      ayah_topic: canonicalTopic(message) || null,
+      response_type: "direct_ayah",
+      reasoning_note: "local fast path: genel ayet talebi (openai yok)",
+      planner_source: "local_fast_path",
+    };
+  })() : null;
+
+  if (moduleMode === "ayah" && !localFastPathPlan && !ayahModeGenericPlan) {
+    // Ayet veya duygusal sinyal yok → ilmihal yönlendirmesi
+    return buildModuleRedirectResponse("ayah", message, baseAnalysis, timing, "ilmihal");
+  }
   const plannerResult = localFastPathPlan
     ? localFastPathPlan
-    : await timing.measureAsync("intent_planner_ms", () => planChatWithOpenAI(message, history));
+    : ayahModeGenericPlan
+      ? ayahModeGenericPlan
+      : await timing.measureAsync("intent_planner_ms", () => planChatWithOpenAI(message, history));
   const mergedAnalysis = timing.measureSync("context_resolver_ms", () =>
     mergePlannerIntoAnalysis(baseAnalysis, plannerResult, message)
   );
-  const plannerDebugMeta = localFastPathPlan
+  const plannerDebugMeta = (localFastPathPlan || ayahModeGenericPlan)
     ? { planner_source: "local_fast_path" }
     : getPlannerDebugMeta();
   const shouldForceStructuredAyahIntent = timing.measureSync("context_resolver_ms", () =>
