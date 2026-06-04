@@ -915,6 +915,7 @@ async function buildChatResponse(message, history = [], options = {}) {
     selected_ayah: consistencyGuard.selectedAyah,
     decision_meta: decisionMeta,
     assistant_text: assistantText,
+    engine_version: "2.0.0",
   });
 }
 
