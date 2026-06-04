@@ -89,6 +89,22 @@ const TOPIC_PATTERNS = [
       "pismanim",
     ],
   },
+  {
+    topic: "aile",
+    phrases: [
+      "aile",
+      "çocuk",
+      "çocuğum",
+      "çocuklarım",
+      "evlat",
+      "evladım",
+      "oğlum",
+      "kızım",
+      "nesil",
+      "zürriyetim",
+      "zürriyetimiz",
+    ],
+  },
   { topic: "dua", phrases: ["dua", "niyaz", "yakarma"] },
   {
     topic: "sabır",
@@ -452,7 +468,7 @@ function inferContextTopic(message, history = []) {
 function recoverLastExplicitTopic(history) {
   if (!Array.isArray(history)) return null;
 
-  const explicitTopics = ["namaz", "dua", "zikir", "sabır", "tevekkül", "tövbe", "umut", "hz_muhammed", "şifa", "adalet", "rızık", "yalnızlık", "kaygı"];
+  const explicitTopics = ["namaz", "dua", "zikir", "sabır", "tevekkül", "tövbe", "umut", "hz_muhammed", "şifa", "adalet", "rızık", "yalnızlık", "kaygı", "aile"];
 
   for (let i = history.length - 1; i >= 0; i -= 1) {
     const msg = history[i];

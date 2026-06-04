@@ -33,11 +33,11 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 42, ayahNumber: 43 },
   ],
   [normalizeThemeKey("hz_muhammed")]: [
-    { surahNumber: 33, ayahNumber: 21 },
-    { surahNumber: 68, ayahNumber: 4 },
-    { surahNumber: 21, ayahNumber: 107 },
-    { surahNumber: 48, ayahNumber: 29 },
-    { surahNumber: 47, ayahNumber: 7 },
+    { surahNumber: 47, ayahNumber: 7 },   // Muhammed – Allah'a yardım edene Allah yardım eder
+    { surahNumber: 33, ayahNumber: 21 },  // Ahzâb – güzel örnek
+    { surahNumber: 68, ayahNumber: 4 },   // Kalem – büyük ahlak üzeresin
+    { surahNumber: 21, ayahNumber: 107 }, // Enbiya – âlemlere rahmet
+    { surahNumber: 48, ayahNumber: 29 },  // Fetih – Muhammed Allah'ın Resulü
   ],
   [normalizeThemeKey("yalnızlık")]: [
     { surahNumber: 2, ayahNumber: 186 },
@@ -56,6 +56,7 @@ const CURATED_TOPIC_CLUSTERS = {
   [normalizeThemeKey("umut")]: [
     { surahNumber: 94, ayahNumber: 5 },
     { surahNumber: 94, ayahNumber: 6 },
+    { surahNumber: 15, ayahNumber: 49 },  // Hicr – Allah çok bağışlayan, çok merhamet edendir
     { surahNumber: 39, ayahNumber: 53 },
     { surahNumber: 65, ayahNumber: 3 },
     { surahNumber: 13, ayahNumber: 28 },
@@ -244,6 +245,13 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 16, ayahNumber: 18 }, // Nahl – nimetleri sayamazsınız
     { surahNumber: 10, ayahNumber: 58 }, // Yûnus – Allah'ın lütfuyla sevinsinler
     { surahNumber: 57, ayahNumber: 23 }, // Hadîd – ölçülü şükür ve sabır
+  ],
+  // ── Aile / Çocuk / Nesil ────────────────────────────────────────────────────
+  [normalizeThemeKey("aile")]: [
+    { surahNumber: 25, ayahNumber: 74 }, // Furkan – eş ve çocuklar için göz aydınlığı duası
+    { surahNumber: 14, ayahNumber: 40 }, // İbrahim – nesil için namaz duası
+    { surahNumber: 46, ayahNumber: 15 }, // Ahkâf – anne-baba ve nesil şükür duası
+    { surahNumber: 30, ayahNumber: 21 }, // Rum – eşler arasında sevgi ve merhamet
   ],
 };
 
@@ -773,6 +781,8 @@ const CURATED_OVERRIDE_SIGNAL_KEYS = {
   [normalizeThemeKey("kul hakki")]: ["kul hakkı", "hakkını yemek", "başkasının hakkı", "ölçüde hile", "tartıda hile", "kul hakkı nedir"],
   [normalizeThemeKey("evlilik")]: ["evlilik", "nikah", "karı koca", "evlenmek", "eşime", "eşimle"],
   [normalizeThemeKey("helal")]: ["helal", "haram", "helal haram", "helal kazanç", "haramdan kaçınmak"],
+  // ── Aile / Çocuk / Nesil ────────────────────────────────────────────────
+  [normalizeThemeKey("aile")]: ["aile", "çocuk", "çocuğum", "çocuklarım", "evlat", "evladım", "oğlum", "kızım", "nesil", "zürriyetim"],
 };
 
 function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {

@@ -1607,5 +1607,82 @@
     "short_explanation": "Müminlere Allah'ın helal kıldıklarını kendiliğinden haram saymayı yasaklayan, denge ve ölçülülüğü öğütleyen ayet.",
     "notes": "Aşırı züht ya da aşırı serbestlik yerine İslam'ın orta yolunu vurgular.",
     "surahNameTr": "Mâide"
+  },
+  {
+    "id": 98,
+    "surah": "Hicr",
+    "surahNumber": 15,
+    "ayah": 49,
+    "ayahNumber": 49,
+    "text_ar": "نَبِّئْ عِبَادِي أَنِّي أَنَا الْغَفُورُ الرَّحِيمُ",
+    "text_tr": "Kullarıma haber ver: Şüphesiz ben, çok bağışlayanın, çok merhamet edeninm ta kendisiyim.",
+    "tags": [
+      "umut",
+      "rahmet",
+      "bağışlanma",
+      "Allah'ın rahmeti",
+      "merhamet"
+    ],
+    "short_explanation": "Allah'ın sonsuz rahmeti ve bağışı, umudu canlı tutar.",
+    "notes": "Allah'ın sonsuz rahmeti ve bağışı, umudu canlı tutar.",
+    "surahNameTr": "Hicr"
+  },
+  {
+    "id": 99,
+    "surah": "İbrahim",
+    "surahNumber": 14,
+    "ayah": 40,
+    "ayahNumber": 40,
+    "text_ar": "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي ۚ رَبَّنَا وَتَقَبَّلْ دُعَاءِ",
+    "text_tr": "Rabbim! Beni ve neslimden gelenleri namazı dosdoğru kılanlardan eyle. Rabbimiz, duamı kabul et.",
+    "tags": [
+      "dua",
+      "aile",
+      "namaz",
+      "nesil",
+      "çocuk"
+    ],
+    "short_explanation": "Hz. İbrahim'in kendisi ve nesli için namaz ile dua etmesi.",
+    "notes": "Hz. İbrahim'in kendisi ve nesli için namaz ile dua etmesi.",
+    "surahNameTr": "İbrahim"
+  },
+  {
+    "id": 100,
+    "surah": "Ahkâf",
+    "surahNumber": 46,
+    "ayah": 15,
+    "ayahNumber": 15,
+    "text_ar": "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَصْلِحْ لِي فِي ذُرِّيَّتِي",
+    "text_tr": "Rabbim! Bana ve anne-babama verdiğin nimete şükretmemi, razı olacağın salih amel işlememi sağla; soyumdan gelenleri de benim için ıslah et.",
+    "tags": [
+      "dua",
+      "aile",
+      "şükür",
+      "anne-baba",
+      "çocuk",
+      "nesil"
+    ],
+    "short_explanation": "Anne-baba, şükür ve nesil için dua — kırk yaşını dolduranın duası.",
+    "notes": "Anne-baba, şükür ve nesil için dua — kırk yaşını dolduranın duası.",
+    "surahNameTr": "Ahkâf"
+  },
+  {
+    "id": 101,
+    "surah": "Furkan",
+    "surahNumber": 25,
+    "ayah": 74,
+    "ayahNumber": 74,
+    "text_ar": "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+    "text_tr": "Rabbimiz! Bize eşlerimizden ve çocuklarımızdan göz aydınlığı bağışla; bizi Allah'a karşı gelmekten sakınanların önderi eyle.",
+    "tags": [
+      "dua",
+      "aile",
+      "çocuk",
+      "eş",
+      "nesil"
+    ],
+    "short_explanation": "Eşler ve çocuklar için göz aydınlığı dileyen evrensel aile duası.",
+    "notes": "Eşler ve çocuklar için göz aydınlığı dileyen evrensel aile duası.",
+    "surahNameTr": "Furkan"
   }
 ]
