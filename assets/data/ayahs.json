@@ -110,7 +110,9 @@
     "tags": [
       "umut",
       "sabır",
-      "sebat"
+      "sebat",
+      "kaygı",
+      "tevekkül"
     ],
     "short_explanation": "Bu ayet, insanın taşıma gücünün Allah tarafından bilindiğini hatırlatır.",
     "notes": "Bu ayet, insanın taşıma gücünün Allah tarafından bilindiğini hatırlatır."
@@ -1684,5 +1686,57 @@
     "short_explanation": "Eşler ve çocuklar için göz aydınlığı dileyen evrensel aile duası.",
     "notes": "Eşler ve çocuklar için göz aydınlığı dileyen evrensel aile duası.",
     "surahNameTr": "Furkan"
+  },
+  {
+    "id": 102,
+    "surah": "İsrâ",
+    "surahNumber": 17,
+    "ayah": 82,
+    "ayahNumber": 82,
+    "text_ar": "وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ ۙ وَلَا يَزِيدُ الظَّالِمِينَ إِلَّا خَسَارًا",
+    "text_tr": "Biz Kur'an'dan, müminler için şifa ve rahmet olan şeyler indiriyoruz. Zalimlerin ise yalnızca zararını artırır.",
+    "tags": ["şifa","hastalık","rahmet","Kur'an","müminler"],
+    "short_explanation": "Kur'an'ın şifa ve rahmet kaynağı olduğunu bildiren ayet.",
+    "notes": "Hastalık ve sıkıntıda Kur'an'a sığınmanın delili.",
+    "surahNameTr": "İsrâ"
+  },
+  {
+    "id": 103,
+    "surah": "Bakara",
+    "surahNumber": 2,
+    "ayah": 152,
+    "ayahNumber": 152,
+    "text_ar": "فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ",
+    "text_tr": "Öyleyse beni anın ki ben de sizi anayım. Bana şükredin; sakın bana nankörlük etmeyin.",
+    "tags": ["zikir","Allah'ı anma","şükür","dua","manevi sükunet"],
+    "short_explanation": "Zikrin karşılıklı bağı: Allah'ı ananı Allah anar.",
+    "notes": "Zikrin özü ve şükürle ilişkisi.",
+    "surahNameTr": "Bakara"
+  },
+  {
+    "id": 104,
+    "surah": "Şems",
+    "surahNumber": 91,
+    "ayah": 9,
+    "ayahNumber": 9,
+    "text_ar": "قَدْ أَفْلَحَ مَن زَكَّاهَا",
+    "text_tr": "Nefsini temizleyen muhakkak kurtuluşa ermiştir.",
+    "tags": ["nefs mücadelesi","irade","arınma","kurtuluş","tezkiye"],
+    "short_explanation": "Nefsi temizlemenin kurtuluşun anahtarı olduğunu bildiren kısa ve güçlü ayet.",
+    "notes": "Şems Suresi — nefs ve tezkiye.",
+    "surahNameTr": "Şems"
+  },
+  {
+    "id": 105,
+    "surah": "Ra'd",
+    "surahNumber": 13,
+    "ayah": 11,
+    "ayahNumber": 11,
+    "text_ar": "إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ",
+    "text_tr": "Şüphesiz Allah, bir topluluğun durumunu, onlar kendi nefislerindeki olanı değiştirmedikçe değiştirmez.",
+    "tags": ["nefs mücadelesi","irade","değişim","sorumluluk","iç dönüşüm"],
+    "short_explanation": "Değişimin içten başlaması gerektiğini bildiren prensip ayeti.",
+    "notes": "İç dönüşüm olmadan dış koşulların iyileşmeyeceğini öğütler.",
+    "surahNameTr": "Ra'd"
   }
 ]

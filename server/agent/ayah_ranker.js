@@ -21,6 +21,24 @@ const SEMANTIC_OVERRIDE_USE_CASES = {
 const SEMANTIC_ENRICHMENT_INDEX = loadSemanticEnrichmentIndex();
 const SOURCE_AYAH_INDEX_CACHE = new WeakMap();
 
+const RANKING_WEIGHTS = {
+  primary_theme: 100,
+  secondary_theme_base: 45,
+  secondary_theme_decay: 8,
+  emotion: {
+    loneliness: 24,
+    fear: 22,
+    repentance: 22,
+    illness: 16,
+    distress: 14,
+  },
+  severity_high: { umut: 16, sabir: 12, tevekkul: 8 },
+  explicit_topic_bonus: 140,
+  explicit_topic_penalty: -90,
+  context_topic_fallback: 35,
+  text_search_divisor: 6,
+};
+
 const CURATED_TOPIC_CLUSTERS = {
   [normalizeThemeKey("sabır")]: [
     { surahNumber: 2, ayahNumber: 153 },
@@ -245,6 +263,17 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 16, ayahNumber: 18 }, // Nahl – nimetleri sayamazsınız
     { surahNumber: 10, ayahNumber: 58 }, // Yûnus – Allah'ın lütfuyla sevinsinler
     { surahNumber: 57, ayahNumber: 23 }, // Hadîd – ölçülü şükür ve sabır
+  ],
+  // ── Nefs mücadelesi / Arınma ────────────────────────────────────────────────
+  [normalizeThemeKey("nefs mücadelesi")]: [
+    { surahNumber: 91, ayahNumber: 9 },   // Şems – nefsini temizleyen kurtuluşa erer
+    { surahNumber: 13, ayahNumber: 11 },  // Ra'd – iç değişim olmadan dış değişim olmaz
+    { surahNumber: 2,  ayahNumber: 286 }, // Bakara – Allah kimseye gücünün üstünde yük yüklemez
+  ],
+  // ── Zikir / Allah'ı anmak ───────────────────────────────────────────────────
+  [normalizeThemeKey("zikir")]: [
+    { surahNumber: 13, ayahNumber: 28 },  // Ra'd – kalpler ancak Allah'ı anmakla huzur bulur
+    { surahNumber: 2,  ayahNumber: 152 }, // Bakara – Beni zikredin ki ben de sizi anayım
   ],
   // ── Aile / Çocuk / Nesil ────────────────────────────────────────────────────
   [normalizeThemeKey("aile")]: [
@@ -783,6 +812,8 @@ const CURATED_OVERRIDE_SIGNAL_KEYS = {
   [normalizeThemeKey("helal")]: ["helal", "haram", "helal haram", "helal kazanç", "haramdan kaçınmak"],
   // ── Aile / Çocuk / Nesil ────────────────────────────────────────────────
   [normalizeThemeKey("aile")]: ["aile", "çocuk", "çocuğum", "çocuklarım", "evlat", "evladım", "oğlum", "kızım", "nesil", "zürriyetim"],
+  [normalizeThemeKey("nefs mücadelesi")]: ["nefs", "nefis", "nefsi", "kendimi kontrol", "irade", "arınmak", "tezkiye", "kendimi değiştir"],
+  [normalizeThemeKey("zikir")]: ["zikir", "zikredin", "tesbih", "tesbihat", "Allah'ı anmak", "zikretmek"],
 };
 
 function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
@@ -1254,9 +1285,9 @@ function emotionBoost(emotion, tags, searchable) {
 function severityBoost(severity, tags) {
   if (severity !== "high") return 0;
   let score = 0;
-  if (tags.includes("umut")) score += 16;
-  if (tags.includes("sabÄ±r")) score += 12;
-  if (tags.includes("tevekkÃ¼l")) score += 8;
+  if (tags.includes("umut")) score += RANKING_WEIGHTS.severity_high.umut;
+  if (tags.includes("sabır")) score += RANKING_WEIGHTS.severity_high.sabir;
+  if (tags.includes("tevekkül")) score += RANKING_WEIGHTS.severity_high.tevekkul;
   return score;
 }
 
@@ -1621,8 +1652,8 @@ function explicitTopicScore(explicitTopic, tags, searchable) {
     candidates.some((item) => normalizedTags.includes(item)) ||
     candidates.some((item) => text.includes(item));
 
-  if (matched) return { bonus: 140, penalty: 0, matched: true };
-  return { bonus: 0, penalty: -90, matched: false };
+  if (matched) return { bonus: RANKING_WEIGHTS.explicit_topic_bonus, penalty: 0, matched: true };
+  return { bonus: 0, penalty: RANKING_WEIGHTS.explicit_topic_penalty, matched: false };
 }
 
 function resolveTopicConstraint(value) {
