@@ -32,6 +32,20 @@ const THEMES = [
   "helal",
   "ahiret",
   "ölüm",
+  "öfke",
+  "hüzün",
+  "sevinç",
+  "haset",
+  "kibir",
+  "haramlar",
+  "iyilikler",
+  "gıybet",
+  "infak",
+  "emanet",
+  "doğruluk",
+  "adalet",
+  "mucizeler",
+  "yaratılış",
 ];
 
 const GENERIC_THEMES = new Set(["umut", "tevekkül"]);
@@ -149,7 +163,6 @@ const TOPIC_PATTERNS = [
       "muhammed peygamber",
       "hz muhammed",
       "hz. muhammed",
-      "peygamber",
       "peygamberimiz",
       "resulullah insanlara nasıl davranırdı",
       "peygamberimizin ahlakı nasıldı",
@@ -183,13 +196,23 @@ const TOPIC_PATTERNS = [
     phrases: ["yalnız", "yalnızlık", "yalniz", "yalnizlik", "kimsem yok", "kimsesiz", "Allah benden uzak mı", "Allah bana yakın mı", "Allah beni duyar mı", "uzak hissediyorum", "manevi boşluk", "kalbim soğudu"],
   },
   {
+    topic: "ölüm korkusu",
+    phrases: [
+      "ölüm korkusu",
+      "olum korkusu",
+      "ölmekten korkuyorum",
+      "olmekten korkuyorum",
+      "ölümden korkuyorum",
+      "olumden korkuyorum",
+      "ölmekten",
+    ],
+  },
+  {
     topic: "korku",
     phrases: [
       "çok korkuyorum",
       "korkuyorum",
       "korku",
-      "ölüm korkusu",
-      "olum korkusu",
     ],
   },
   {

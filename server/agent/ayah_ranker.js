@@ -88,6 +88,12 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 13, ayahNumber: 28 },  // Ra'd – kalpler ancak Allah'ı anmakla huzur bulur
     { surahNumber: 65, ayahNumber: 3 },   // Talâk – Allah'a tevekkül edene Allah yeter
   ],
+  [normalizeThemeKey("tevekkül")]: [
+    { surahNumber: 65, ayahNumber: 3 },   // Talâk – Allah'a tevekkül edene Allah yeter
+    { surahNumber: 9, ayahNumber: 51 },   // Tevbe – Allah'ın yazdığından başkası erişmez
+    { surahNumber: 3, ayahNumber: 173 },  // Âl-i İmrân – Allah bize yeter
+    { surahNumber: 13, ayahNumber: 28 },  // Ra'd – kalpler ancak Allah'ı anmakla huzur bulur
+  ],
   [normalizeThemeKey("kaygı")]: [
     { surahNumber: 13, ayahNumber: 28 },  // Ra'd – kalpler ancak Allah'ı anmakla huzur bulur
     { surahNumber: 2, ayahNumber: 286 },  // Bakara – Allah kimseye gücünün üstünde yük yüklemez
@@ -309,6 +315,14 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
     ],
   },
   {
+    topic: normalizeThemeKey("gıybet"),
+    list: [
+      "gıybet", "giybet", "dedikodu", "arkasından konuşmak",
+      "gıybet ediyor", "giybet ediyor", "gıybet ettim",
+      "giybet ettim", "arkasından söylüyorum",
+    ],
+  },
+  {
     topic: normalizeThemeKey("tövbe"),
     list: [
       "tövbe",
@@ -333,7 +347,7 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "resulullah",
       "resul",
       "rasul",
-      "peygamber",
+      "peygamber efendimiz",
     ],
   },
   {
@@ -508,7 +522,7 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       // ── Aile / ilişki sorunları ──────────────────────────────────────────
       "aile kavgası", "aile kavgasi", "aile sorunu", "aile sorunu yaşıyorum",
       "aile içi kavga", "eşimle kavga", "eşimle tartışıyoruz",
-      "kavga ettik", "tartışıyoruz", "aile huzuru", "aile problemi",
+      "kavga ettik", "tartışıyoruz", "aile problemi",
     ],
   },
   {
@@ -526,6 +540,14 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
   {
     topic: normalizeThemeKey("sabır"),
     list: ["sabır", "sabir", "sebat", "sabredenler"],
+  },
+  {
+    topic: normalizeThemeKey("tevekkül"),
+    list: [
+      "tevekkül", "tevekkul", "allah'a güven", "allaha güven",
+      "allah a güven", "sana güveniyorum", "güvenmek istiyorum",
+      "rabbime güveniyorum", "allah'a dayanmak",
+    ],
   },
   // ── Şükür / Nimet ──────────────────────────────────────────────────────────
   {
@@ -598,6 +620,7 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "haram", "haramdan uzak", "haramlardan kaçınmak",
       "haramdan kacınmak", "yasak", "haram işledim",
       "harama girdim", "haram yaptım", "haram kaçınmak",
+      "zina", "zinaya", "zinadan",
     ],
   },
   {
@@ -606,14 +629,7 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "iyilik", "iyilik yap", "iyilik yapmak", "hayır işi",
       "hayır yapmak", "iyilikler", "hayırsever", "hayirsever",
       "iyilik etmek", "güzel amel", "hayır amel",
-    ],
-  },
-  {
-    topic: normalizeThemeKey("gıybet"),
-    list: [
-      "gıybet", "giybet", "dedikodu", "arkasından konuşmak",
-      "gıybet ediyor", "giybet ediyor", "gıybet ettim",
-      "giybet ettim", "arkasından söylüyorum",
+      "hayır işle", "hayır işlemek", "sevap", "iyilik sevabı",
     ],
   },
   {
@@ -878,11 +894,16 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
       messageAnalysis.primary_theme,
       tags,
       searchable,
-      100
+      RANKING_WEIGHTS.primary_theme
     );
     let secondaryThemeScore = 0;
     for (const [index, theme] of (messageAnalysis.secondary_themes || []).entries()) {
-      secondaryThemeScore += scoreTheme(theme, tags, searchable, 45 - index * 8);
+      secondaryThemeScore += scoreTheme(
+        theme,
+        tags,
+        searchable,
+        RANKING_WEIGHTS.secondary_theme_base - index * RANKING_WEIGHTS.secondary_theme_decay
+      );
     }
 
     const emotionScore = emotionBoost(messageAnalysis.emotion, tags, searchable);
@@ -943,6 +964,20 @@ function rankAyahs(messageAnalysis, sourceAyahs, options = {}) {
       score,
       debug: {
         ayah_id: ayah.id,
+        score_breakdown: {
+          primary_theme: primaryThemeScore,
+          secondary_themes: secondaryThemeScore,
+          emotion: emotionScore,
+          severity: severityScore,
+          context_topic: contextScore,
+          explicit_topic: explicitTopicMeta.bonus + explicitTopicMeta.penalty,
+          semantic: semanticMeta.semantic_score,
+          emotional_profile: emotionalBoostMeta.total_score,
+          loneliness: lonelinessBoostMeta.boost + lonelinessBoostMeta.penalty,
+          compatibility_penalty: compatibilityMeta.penalty,
+          repetition_penalty: repetitionPenalty,
+          diversity_bonus: diversityBonus,
+        },
         primary_theme_score: primaryThemeScore,
         secondary_theme_score: secondaryThemeScore,
         emotion_score: emotionScore,
@@ -1261,7 +1296,7 @@ function scoreTheme(theme, tags, searchable, weight) {
       score += weight - index * 10;
     }
     if (searchable.includes(normalize(alias))) {
-      score += Math.round(weight / 6);
+      score += Math.round(weight / RANKING_WEIGHTS.text_search_divisor);
     }
   }
   return score;
@@ -1270,14 +1305,14 @@ function scoreTheme(theme, tags, searchable, weight) {
 function emotionBoost(emotion, tags, searchable) {
   if (!emotion) return 0;
   const normalizedEmotion = normalize(emotion);
-  if (normalizedEmotion.includes("yalnÄ±z") && tags.includes("yalnÄ±zlÄ±k")) return 24;
-  if (normalizedEmotion.includes("kork") && tags.includes("korku")) return 22;
-  if (normalizedEmotion.includes("piÅŸman") && tags.includes("tÃ¶vbe")) return 22;
-  if (normalizedEmotion.includes("hast") && (tags.includes("sabÄ±r") || tags.includes("umut"))) {
-    return 16;
+  if (normalizedEmotion.includes("yalnız") && tags.includes("yalnızlık")) return RANKING_WEIGHTS.emotion.loneliness;
+  if (normalizedEmotion.includes("kork") && tags.includes("korku")) return RANKING_WEIGHTS.emotion.fear;
+  if (normalizedEmotion.includes("pişman") && tags.includes("tövbe")) return RANKING_WEIGHTS.emotion.repentance;
+  if (normalizedEmotion.includes("hast") && (tags.includes("sabır") || tags.includes("umut"))) {
+    return RANKING_WEIGHTS.emotion.illness;
   }
-  if (normalizedEmotion.includes("bunalm") && searchable.includes(normalize("kolaylÄ±k"))) {
-    return 14;
+  if (normalizedEmotion.includes("bunalm") && searchable.includes(normalize("kolaylık"))) {
+    return RANKING_WEIGHTS.emotion.distress;
   }
   return 0;
 }
@@ -1473,7 +1508,7 @@ function contextTopicBoost(contextTopic, tags, searchable) {
   if (topic.includes("zikir") || topic.includes("allah")) {
     let score = 0;
     if (searchable.includes(normalize("zikir"))) score += 180;
-    if (searchable.includes(normalize("Allah'Ä± anmak"))) score += 220;
+    if (searchable.includes(normalize("Allah'ı anmak"))) score += 220;
     if (searchable.includes(normalize("Allah")) && searchable.includes(normalize("anmak"))) {
       score += 180;
     }
@@ -1483,7 +1518,7 @@ function contextTopicBoost(contextTopic, tags, searchable) {
   if (topic.includes("dua")) {
     let score = 0;
     if (searchable.includes(normalize("dua"))) score += 80;
-    if (searchable.includes(normalize("yakÄ±n"))) score += 24;
+    if (searchable.includes(normalize("yakın"))) score += 24;
     return score;
   }
   if (topic.includes("namaz")) {
@@ -1492,7 +1527,7 @@ function contextTopicBoost(contextTopic, tags, searchable) {
     if (searchable.includes(normalize("salat")) || searchable.includes(normalize("salah"))) {
       score += 120;
     }
-    if (searchable.includes(normalize("secde")) || searchable.includes(normalize("rÃ¼ku"))) {
+    if (searchable.includes(normalize("secde")) || searchable.includes(normalize("rüku"))) {
       score += 40;
     }
     return score;
@@ -1500,7 +1535,7 @@ function contextTopicBoost(contextTopic, tags, searchable) {
   if (topic.includes("ibadet")) {
     return tags.includes("ibadet") || tags.includes("namaz") ? 24 : 0;
   }
-  return scoreTheme(themeForContextTopic(contextTopic), tags, searchable, 35);
+  return scoreTheme(themeForContextTopic(contextTopic), tags, searchable, RANKING_WEIGHTS.context_topic_fallback);
 }
 
 function datasetTagsForTheme(theme) {
