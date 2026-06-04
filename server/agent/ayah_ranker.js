@@ -238,6 +238,13 @@ const CURATED_TOPIC_CLUSTERS = {
     { surahNumber: 2,  ayahNumber: 173 },
     { surahNumber: 5,  ayahNumber: 87 },
   ],
+  // ── Şükür / Nimet ──────────────────────────────────────────────────────────
+  [normalizeThemeKey("şükür")]: [
+    { surahNumber: 14, ayahNumber: 7 },  // İbrahim – şükrederseniz artırırım
+    { surahNumber: 16, ayahNumber: 18 }, // Nahl – nimetleri sayamazsınız
+    { surahNumber: 10, ayahNumber: 58 }, // Yûnus – Allah'ın lütfuyla sevinsinler
+    { surahNumber: 57, ayahNumber: 23 }, // Hadîd – ölçülü şükür ve sabır
+  ],
 };
 
 const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
@@ -310,6 +317,11 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "geçinemiyorum",
       "para yetmiyor",
       "maddi yük",
+      "işimi kaybettim",
+      "işsiz kaldım",
+      "işsizim",
+      "işten çıkarıldım",
+      "işimi kaybettim ne yapmalıyım",
     ],
   },
   {
@@ -470,6 +482,26 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
     topic: normalizeThemeKey("sabır"),
     list: ["sabır", "sabir", "sebat", "sabredenler"],
   },
+  // ── Şükür / Nimet ──────────────────────────────────────────────────────────
+  {
+    topic: normalizeThemeKey("şükür"),
+    list: [
+      "şükür hakkında", "şükür için ayet", "şükür ayet", "şükür konusunda",
+      "şükran", "minnetarım", "minnettar", "şükretmek",
+      "nimet için ayet", "nimet hakkında ayet", "nimet şükrü",
+      "hem mutlu hem de minnetarım", "mutlu ve minnetarım",
+      "şükür ve sevinç", "şükür nasıl edilir",
+    ],
+  },
+  // ── Karamsarlık / Umutsuzluk — umut_sonrasi_zorluk cluster ────────────────
+  {
+    topic: normalizeThemeKey("umut_sonrasi_zorluk"),
+    list: [
+      "karamsarlık", "karamsarım", "karamsarlık için ayet",
+      "umutsuzluk", "umutsuzum", "ümit kesmek", "ümidimi kestim",
+      "her şey bitti", "çıkış yok", "cikis yok",
+    ],
+  },
   // ── Yeni duygusal temalar ───────────────────────────────────────────────
   {
     topic: normalizeThemeKey("öfke"),
@@ -572,6 +604,9 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "oldukten sonra", "ahirette", "hesap günü", "hesap gunu",
       "kıyamet", "kiyamet", "son gün", "son gun",
       "kıyamet günü", "kiyamet gunu",
+      "ölüm ve ahiret", "olum ve ahiret",
+      "ahiret hakkında", "ahiret için ayet",
+      "ölüm ve ahiret hakkında", "olum ve ahiret hakkinda",
     ],
   },
   {
@@ -580,6 +615,8 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
       "ölüm", "olum", "vefat", "öldükten sonra ne olacak",
       "oldukten sonra ne olacak", "hayatın sonu", "hayatin sonu",
       "ölmek üzere", "olmek uzere", "ölüm gerçeği",
+      "ölüm hakkında", "ölüm hakkında ayet",
+      "ölüm ve ahiret", "olum ve ahiret",
     ],
   },
   // ── Mucizeler / peygamberler / yaratılış ────────────────────────────────
@@ -681,7 +718,7 @@ const CURATED_OVERRIDE_MESSAGE_MATCHERS = [
 const CURATED_OVERRIDE_SIGNAL_KEYS = {
   [normalizeThemeKey("tövbe")]: ["tövbe", "tevbe", "günah", "gunah", "pişman", "pisman", "affeder", "bağışlar", "bagislar", "bağışlan", "bagislan"],
   [normalizeThemeKey("hz_muhammed")]: ["muhammed", "muhammed peygamber", "hz muhammed", "peygamberimiz", "resulullah", "resul", "rasul", "peygamber"],
-  [normalizeThemeKey("rızık")]: ["rızık", "rizik", "geçim", "gecim", "iş bulamıyorum", "is bulamiyorum", "maddi sıkıntı", "maddi sikinti", "geçim derdi", "gecim derdi"],
+  [normalizeThemeKey("rızık")]: ["rızık", "rizik", "geçim", "gecim", "iş bulamıyorum", "is bulamiyorum", "maddi sıkıntı", "maddi sikinti", "geçim derdi", "gecim derdi", "işimi kaybettim", "işsiz kaldım", "işsizim", "işten çıkarıldım"],
   [normalizeThemeKey("adalet")]: ["adalet", "zulüm", "zulum", "haksızlık", "haksizlik", "hakkım yeniyor", "hakkim yeniyor", "zulüm görüyorum", "zulum goruyorum", "haksızlığa uğradım", "haksizliga ugradim", "adalet istiyorum"],
   [normalizeThemeKey("şifa")]: ["hasta", "hastalık", "hastalik", "şifa", "sifa", "hastayım", "hastayim", "iyileş", "iyiles", "çok hastayım", "hastanedeyim", "iyileşmek istiyorum", "acı çekiyorum"],
   [normalizeThemeKey("ölüm korkusu")]: ["ölüm korkusu", "olum korkusu", "ölmekten korkuyorum", "olmekten korkuyorum", "kabir", "vefat", "ölümden korkuyorum", "olumden korkuyorum"],
@@ -706,8 +743,12 @@ const CURATED_OVERRIDE_SIGNAL_KEYS = {
   [normalizeThemeKey("emanet")]: ["emanet"],
   [normalizeThemeKey("doğruluk")]: ["doğruluk", "dogruluk", "dürüstlük"],
   // ── Ahiret / ölüm ─────────────────────────────────────────────────────
-  [normalizeThemeKey("ahiret")]: ["ahiret", "kıyamet", "kiyamet", "mahşer"],
-  [normalizeThemeKey("ölüm")]: ["ölüm", "olum", "vefat", "öldükten sonra"],
+  [normalizeThemeKey("ahiret")]: ["ahiret", "kıyamet", "kiyamet", "mahşer", "ölüm ve ahiret", "ahiret hakkında"],
+  [normalizeThemeKey("ölüm")]: ["ölüm", "olum", "vefat", "öldükten sonra", "ölüm hakkında", "ölüm ve ahiret"],
+  // ── Şükür / Nimet ────────────────────────────────────────────────────────
+  [normalizeThemeKey("şükür")]: ["şükür", "şükran", "minnetarım", "minnettar", "nimet şükrü"],
+  // ── Karamsarlık (umut_sonrasi_zorluk) ────────────────────────────────────
+  [normalizeThemeKey("umut_sonrasi_zorluk")]: ["umut", "ümit", "umit", "zor zamanlarda", "zor zamanlardan sonra", "kolaylık", "kolaylik", "ferahlık", "ferahlik", "çıkış", "cikis", "darda kaldım", "darda kaldim", "karamsarlık", "karamsarım", "umutsuzluk", "umutsuzum"],
   // ── Mucizeler / peygamberler ──────────────────────────────────────────
   [normalizeThemeKey("mucizeler")]: ["mucize", "mucizeler"],
   [normalizeThemeKey("hz. musa")]: ["hz musa", "hz. musa", "musa peygamber", "firavun", "denizi yardı"],
