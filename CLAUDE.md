@@ -107,7 +107,7 @@ npm --prefix server run test:security
 - App Store Connect'te IAP ürünleri oluşturulacak (5 bağış + 1 abonelik)
 - Sandbox test kullanıcıları ile IAP akışı test edilecek
 - IAP canlıya geçtikten sonra `HAKAI_USAGE_LIMITS_ENABLED=true` Render'a eklenecek
-- TODO(sprint3-paywall): `chat_controller.dart`'taki kota mesajı → upgrade bottom sheet
+- ✅ ~~TODO(sprint3-paywall)~~: 402 → `_QuotaExceededSheet` bottom sheet `chat_screen.dart`'ta implemente edildi ve bağlandı
 
 ## Bilinen Sorunlar
 _(Tümü çözüldü — güncelleme gerekirse buraya ekle)_
