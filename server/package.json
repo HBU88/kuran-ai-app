@@ -9,6 +9,7 @@
     "test:auth": "node tests/auth_regression.mjs",
     "test:security": "node tests/security_regression.mjs",
     "test:religious-qa": "node tests/religious_qa_regression.cjs",
+    "test:ilmihal-critical": "node tests/ilmihal_critical_regression.cjs",
     "test:chat": "node tests/chat_response_validator.mjs",
     "test:ilmihal-regression": "node scripts/ilmihal/test_ilmihal_regression.mjs",
     "generate:questions": "node question-generator.js",

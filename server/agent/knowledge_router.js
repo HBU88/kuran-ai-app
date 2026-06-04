@@ -23,6 +23,192 @@ function loadIlmihalKnowledge() {
   return cachedIlmihal;
 }
 
+// =====================================================================
+// Namaz rekât bilgisi — deterministik (Hanefî / Diyanet esaslı)
+//
+// Per-prayer JSON dosyaları tutarsız (ogle/ikindi/yatsi/vitir yok).
+// Bu tablo, "X namazı kaç rekat" ve "namaz kaç rekat → yatsı" gibi
+// takip sorularına kesin ve doğru cevabı garanti eder.
+// =====================================================================
+// NOT: Asıl rekât cevap metni response_composer.js'teki tablodan üretilir.
+// Buradaki metinler yalnızca yedek olup composer ile BİREBİR aynı sayıları
+// içerir (tek doğru kaynak ilkesi — çelişkili rekât sayısı olmamalı).
+const PRAYER_REKAT_TABLE = {
+  sabah: {
+    title: "Sabah Namazı Kaç Rekâttır?",
+    text: "Sabah namazı 4 rekattır: 2 sünnet + 2 farz.",
+  },
+  ogle: {
+    title: "Öğle Namazı Kaç Rekâttır?",
+    text: "Öğle namazı 10 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet.",
+  },
+  ikindi: {
+    title: "İkindi Namazı Kaç Rekâttır?",
+    text: "İkindi namazı 8 rekattır: 4 sünnet + 4 farz.",
+  },
+  aksam: {
+    title: "Akşam Namazı Kaç Rekâttır?",
+    text: "Akşam namazı 5 rekattır: 3 farz + 2 sünnet.",
+  },
+  yatsi: {
+    title: "Yatsı Namazı Kaç Rekâttır?",
+    text: "Yatsı namazı 13 rekattır: 4 ilk sünnet + 4 farz + 2 son sünnet + 3 vitir.",
+  },
+  vitir: {
+    title: "Vitir Namazı Kaç Rekâttır?",
+    text: "Vitir namazı 3 rekattır.",
+  },
+};
+
+// Bu namazların ayrıntılı server-side dosyaları mevcut; tabloya gerek yok.
+const PRAYER_SERVERSIDE_REKAT_IDS = {
+  cuma: "cuma_namazi_kac_rekat",
+  bayram: "bayram_namazi_kac_rekat",
+  teravih: "teravih_namazi",
+  cenaze: "cenaze_namazi",
+};
+
+/**
+ * Bir metinden namaz adını tespit eder. normalize() mojibake'yi onarır ve
+ * Türkçe karakterleri korur (öğle, akşam, yatsı, gusül vb.).
+ * Spesifik isimler (cenaze/bayram/cuma/teravih/vitir) önce kontrol edilir.
+ */
+function detectPrayerName(text) {
+  const norm = normalize(text);
+  if (!norm) return null;
+  if (norm.includes("cenaze")) return "cenaze";
+  if (norm.includes("bayram")) return "bayram";
+  if (norm.includes("cuma") && !norm.includes("cumartesi")) return "cuma";
+  if (norm.includes("teravih") || norm.includes("teravi")) return "teravih";
+  if (norm.includes("vitir") || norm.includes("vitr")) return "vitir";
+  if (norm.includes("sabah") || norm.includes("fecr")) return "sabah";
+  if (norm.includes("öğle") || norm.includes("ogle") || norm.includes("oğle") || norm.includes("öğlen") || norm.includes("oglen")) return "ogle";
+  if (norm.includes("ikindi")) return "ikindi";
+  if (norm.includes("akşam") || norm.includes("aksam")) return "aksam";
+  if (norm.includes("yatsı") || norm.includes("yatsi")) return "yatsi";
+  return null;
+}
+
+function buildSynthesizedRekatHit(prayerId) {
+  if (PRAYER_SERVERSIDE_REKAT_IDS[prayerId]) {
+    const serverHit = buildServerSideHit(PRAYER_SERVERSIDE_REKAT_IDS[prayerId]);
+    if (serverHit) return serverHit;
+  }
+  const info = PRAYER_REKAT_TABLE[prayerId];
+  if (!info) return null;
+  return {
+    id: `${prayerId}_namazi_kac_rekat`,
+    file: "knowledge_router:rekat_table",
+    type: "worship_practice",
+    topic: `${prayerId}_namazi_kac_rekat`,
+    answer_text: info.text,
+    source_note: "Diyanet İşleri Başkanlığı esas alınmıştır (Hanefî mezhebi).",
+    requires_ayah: false,
+    route_mode: "ilmihal_knowledge",
+    knowledge_hit_id: `${prayerId}_namazi_kac_rekat`,
+    matched_title: info.title,
+    matched_by: "prayer_rekat_resolver",
+  };
+}
+
+/** History'de daha önce bir "kaç rekat / hangi namaz" sorusu geçmiş mi? */
+function historyHasRekatContext(history) {
+  if (!Array.isArray(history)) return false;
+  for (const item of history) {
+    if (!item || typeof item !== "object") continue;
+    const text = typeof item.text === "string" ? item.text : typeof item.content === "string" ? item.content : "";
+    if (!text) continue;
+    const n = normalize(text);
+    if (n.includes("rekat") || n.includes("kaç rekat") || n.includes("kac rekat") || n.includes("hangi namaz")) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Namaz rekât sorularını ve takip sorularını çözer.
+ *  1) "yatsı namazı kaç rekat"  → doğrudan o namazın rekât bilgisi
+ *  2) "namaz kaç rekat" → "yatsı"  → history'de rekât bağlamı varsa takip
+ *  3) "namaz kaç rekat" (isim yok) → tüm rekâtları listeleyen namaz_nasil_kilinir
+ */
+function resolvePrayerRekatHit(message, normalizedMessage, history = []) {
+  const norm = normalize(message);
+  if (!norm) return null;
+
+  const hasCountCue = norm.includes("rekat") || norm.includes("kac rekat") || norm.includes("kaç rekat");
+  const mentionsNamaz = norm.includes("namaz");
+  const isHowto = norm.includes("nasıl") || norm.includes("nasil");
+  const hasQualifier = /vacip|farz|sünnet|sunnet|sure|dua|vakit|vakti|ne zaman|kimlere/.test(norm);
+
+  const prayerInMessage = detectPrayerName(message);
+
+  // 1) Mevcut mesajda namaz adı + rekât ipucu
+  if (prayerInMessage && hasCountCue && !isHowto) {
+    const hit = buildSynthesizedRekatHit(prayerInMessage);
+    if (hit) return hit;
+  }
+
+  // 2) Kısa takip mesajı (yalnızca namaz adı), önceki turda rekât sorusu varsa
+  const compact = String(message || "").trim();
+  const isShortFollowup = compact.length <= 24 && !hasQualifier && !isHowto;
+  if (
+    prayerInMessage &&
+    isShortFollowup &&
+    Array.isArray(history) &&
+    history.length > 0 &&
+    historyHasRekatContext(history)
+  ) {
+    const hit = buildSynthesizedRekatHit(prayerInMessage);
+    if (hit) return hit;
+  }
+
+  // 3) Genel "namaz kaç rekat" — tüm rekâtları listeleyen entry
+  if (!prayerInMessage && mentionsNamaz && hasCountCue && !isHowto && !hasQualifier) {
+    const hit = buildServerSideHit("namaz_nasil_kilinir");
+    if (hit) return hit;
+  }
+
+  return null;
+}
+
+/**
+ * "X'i bozan / X ne ile bozulur / X bozulur" sorularını deterministik
+ * olarak doğru *_bozanlar entry'sine yönlendirir. Semantik matcher'ın
+ * id_prefix_match ile yanlış (örn. oruc_fidyesi) eşleşmesini engeller.
+ */
+function resolveBrokenStateTopic(normalizedMessage) {
+  const breakCue =
+    includesLoose(normalizedMessage, "bozan") ||
+    includesLoose(normalizedMessage, "bozulur") ||
+    includesLoose(normalizedMessage, "bozar") ||
+    includesLoose(normalizedMessage, "bozuluyor") ||
+    includesLoose(normalizedMessage, "bozuldu") ||
+    includesLoose(normalizedMessage, "ne ile bozul") ||
+    includesLoose(normalizedMessage, "neyle bozul") ||
+    includesLoose(normalizedMessage, "ne zaman bozul") ||
+    includesLoose(normalizedMessage, "neler bozar") ||
+    includesLoose(normalizedMessage, "bozma");
+  if (!breakCue) return null;
+
+  const negated = includesLoose(normalizedMessage, "bozmayan") || includesLoose(normalizedMessage, "bozmaz");
+
+  const isOruc =
+    includesLoose(normalizedMessage, "oruc") ||
+    includesLoose(normalizedMessage, "oruç") ||
+    includesLoose(normalizedMessage, "orucu") ||
+    includesLoose(normalizedMessage, "ramazan");
+  const isAbdest = includesLoose(normalizedMessage, "abdest");
+  const isTeyemmum = includesLoose(normalizedMessage, "teyemmum") || includesLoose(normalizedMessage, "teyemmüm");
+  const isNamaz = includesLoose(normalizedMessage, "namaz");
+
+  if (isOruc) return negated ? "orucu_bozmayanlar" : "orucu_bozanlar";
+  if (isAbdest) return "abdest_bozanlar";
+  if (isTeyemmum) return "teyemmumu_bozanlar";
+  if (isNamaz) return "namazi_bozanlar";
+  return null;
+}
+
 function resolveKandilSpecialTopic(normalizedMessage) {
   if (
     includesLoose(normalizedMessage, "mirac kandili") ||
@@ -83,6 +269,34 @@ function routeKnowledge(message, analysis = {}, plannerPlan = null, history = []
   const kandilSpecialTopic = resolveKandilSpecialTopic(normalizedMessage);
   if (kandilSpecialTopic) {
     const hit = entries.find((entry) => topicKey(entry.topic || "") === topicKey(kandilSpecialTopic));
+    if (hit) {
+      return {
+        id: hit.id || null,
+        file: "ilmihal_knowledge_base.json",
+        type: hit.type || "worship_practice",
+        topic: hit.topic || null,
+        answer_text: hit.answer_tr || "",
+        source_note: hit.source_note || "Diyanet-based curated internal knowledge.",
+        requires_ayah: hit.requires_ayah === true,
+        route_mode: "ilmihal_knowledge",
+        knowledge_hit_id: hit.id || null,
+      };
+    }
+  }
+
+  // Namaz rekât soruları + takip soruları (yatsı, öğle vb.) — deterministik.
+  // recoverTopicFromRawHistory'nin mojibake/assistant-clarification hatalarını bypass eder.
+  const prayerRekatHit = resolvePrayerRekatHit(message, normalizedMessage, history);
+  if (prayerRekatHit) {
+    return prayerRekatHit;
+  }
+
+  // "X bozulur / X'i bozan" → doğru *_bozanlar entry'si (oruc_fidyesi yanlış eşleşmesini önler).
+  const brokenStateTopic = resolveBrokenStateTopic(normalizedMessage);
+  if (brokenStateTopic) {
+    const serverHit = buildServerSideHit(brokenStateTopic);
+    if (serverHit) return serverHit;
+    const hit = entries.find((entry) => topicKey(entry.topic || entry.id || "") === topicKey(brokenStateTopic));
     if (hit) {
       return {
         id: hit.id || null,
@@ -1719,24 +1933,30 @@ function recoverTopicFromRawHistory(history) {
   for (let i = history.length - 1; i >= 0; i -= 1) {
     const item = history[i];
     if (!item || typeof item !== "object") continue;
+    // Asistanın "Hangi namazı soruyorsunuz? Sabah, öğle, ikindi..." gibi tüm
+    // namaz adlarını listeleyen netleştirme mesajlarını atla — yoksa "sabah"
+    // ilk eşleşir ve kullanıcının asıl cevabı (örn. "yatsı") gölgelenir.
+    const role = String(item.role || item.sender || item.author || "").toLowerCase();
+    if (role && /assistant|bot|system|model/.test(role)) continue;
     const text = typeof item.text === "string" ? item.text : typeof item.content === "string" ? item.content : "";
     if (!text) continue;
-    const raw = normalizeRawText(text);
+    // normalize() mojibake'yi onarır ve Türkçe karakterleri korur.
+    const raw = normalize(text);
     if (!raw) continue;
     if (raw.includes("abdest")) return "abdest";
-    if (raw.includes("gusÃ¼l") || raw.includes("gusul")) return "gusul_abdesti";
+    if (raw.includes("gusül") || raw.includes("gusul")) return "gusul_abdesti";
     if (raw.includes("seferi")) return "seferi_namazi";
-    if (raw.includes("oruc") || raw.includes("oruÃ§")) return "oruc";
+    if (raw.includes("oruc") || raw.includes("oruç")) return "oruc";
     if (raw.includes("teravih") || raw.includes("teravi")) return "teravih_namazi";
-    if (raw.includes("cuma")) return "cuma_namazi_kac_rekat";
+    if (raw.includes("cuma") && !raw.includes("cumartesi")) return "cuma_namazi_kac_rekat";
     if (raw.includes("bayram")) return "bayram_namazi_kac_rekat";
     if (raw.includes("cenaze")) return "cenaze_namazi";
     if (raw.includes("vitir")) return "vitir_namazi";
     if (raw.includes("sabah")) return "sabah_namazi";
-    if (raw.includes("Ã¶ÄŸle") || raw.includes("ogle")) return "ogle_namazi";
+    if (raw.includes("öğle") || raw.includes("ogle")) return "ogle_namazi";
     if (raw.includes("ikindi")) return "ikindi_namazi";
-    if (raw.includes("akÅŸam") || raw.includes("aksam")) return "aksam_namazi";
-    if (raw.includes("yatsÄ±") || raw.includes("yatsi")) return "yatsi_namazi";
+    if (raw.includes("akşam") || raw.includes("aksam")) return "aksam_namazi";
+    if (raw.includes("yatsı") || raw.includes("yatsi")) return "yatsi_namazi";
   }
   return null;
 }
