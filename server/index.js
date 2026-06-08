@@ -131,6 +131,9 @@ app.get("/health", (req, res) => {
     diyanet_configured: Boolean(
       process.env.DIYANET_API_USERNAME && process.env.DIYANET_API_PASSWORD
     ),
+    supabase_configured: Boolean(
+      process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
+    ),
     openai_planner_enabled:
       String(process.env.HAKAI_OPENAI_PLANNER_ENABLED || "true").trim().toLowerCase() !== "false",
   });
