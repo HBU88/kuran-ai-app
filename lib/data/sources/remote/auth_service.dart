@@ -12,7 +12,7 @@ class AuthService {
   AuthService({
     http.Client? client,
     String baseUrl = AppConstants.backendApiBaseUrl,
-    this.requestTimeout = const Duration(seconds: 12),
+    this.requestTimeout = const Duration(seconds: 30),
   })  : _client = client ?? http.Client(),
         _baseUrl = _resolveBaseUrl(baseUrl);
 

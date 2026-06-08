@@ -2,6 +2,88 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 
+// ---------------------------------------------------------------------------
+// SupabaseUserStore — kalıcı kullanıcı deposu (deploy'da silinmez)
+// SUPABASE_URL ve SUPABASE_SERVICE_ROLE_KEY env değişkenleri varsa otomatik seçilir.
+// ---------------------------------------------------------------------------
+class SupabaseUserStore {
+  constructor() {
+    const { createClient } = require("@supabase/supabase-js");
+    this.client = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_ROLE_KEY,
+      { auth: { persistSession: false } }
+    );
+    this.table = "hakai_users";
+  }
+
+  async findByEmail(email) {
+    const { data, error } = await this.client
+      .from(this.table)
+      .select("*")
+      .eq("email", normalizeEmail(email))
+      .maybeSingle();
+    if (error) throw error;
+    return data || null;
+  }
+
+  async findById(id) {
+    const { data, error } = await this.client
+      .from(this.table)
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) throw error;
+    return data || null;
+  }
+
+  async create(user) {
+    const { data, error } = await this.client
+      .from(this.table)
+      .insert(user)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  }
+
+  async updateById(id, updater) {
+    const current = await this.findById(id);
+    if (!current) return null;
+    const updated = await updater({ ...current });
+    const { data, error } = await this.client
+      .from(this.table)
+      .update(updated)
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  }
+
+  async deleteById(id) {
+    const { error, count } = await this.client
+      .from(this.table)
+      .delete({ count: "exact" })
+      .eq("id", id);
+    if (error) throw error;
+    return (count || 0) > 0;
+  }
+
+  async _readUsers() {
+    const { data, error } = await this.client.from(this.table).select("*");
+    if (error) throw error;
+    return data || [];
+  }
+}
+
+function _createDefaultUserStore(storePath) {
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return new SupabaseUserStore();
+  }
+  return new JsonUserStore(storePath);
+}
+
 const DEFAULT_TOKEN_TTL_SECONDS = 60 * 60 * 24 * 7;
 const DEFAULT_PASSWORD_RESET_TOKEN_TTL_SECONDS = 30 * 60;
 const DEFAULT_USER_STORE_PATH = path.join(__dirname, ".data", "users.json");
@@ -83,7 +165,7 @@ class JsonUserStore {
 
 class AuthService {
   constructor(options = {}) {
-    this.store = options.store || new JsonUserStore(options.storePath);
+    this.store = options.store || _createDefaultUserStore(options.storePath);
     this.passwordResetMailer = options.passwordResetMailer || new PasswordResetMailer();
     this.jwtSecret =
       options.jwtSecret ||

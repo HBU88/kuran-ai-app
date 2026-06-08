@@ -31,6 +31,7 @@
     "migrate:entry-markers": "node scripts/migrate_entry_markers.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.107.0",
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
